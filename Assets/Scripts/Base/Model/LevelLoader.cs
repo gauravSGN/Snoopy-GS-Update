@@ -9,6 +9,8 @@ public class LevelLoader : MonoBehaviour
     public BubbleFactory factory;
     public GameConfig config;
 
+    private const float COS_30_DEGREES = 0.8660254038f;
+
     protected void Start()
     {
         using (var reader = new StringReader(levelData.text))
@@ -27,8 +29,8 @@ public class LevelLoader : MonoBehaviour
     {
         var offset = (1 + (y & 1)) * config.bubbleSize / 2.0f;
         var leftEdge = -config.bubblesPerRow * config.bubbleSize / 2.0f;
-        var topEdge = Camera.main.orthographicSize + config.bubbleSize / 2.0f;
-        return new Vector3(leftEdge + x * config.bubbleSize + offset, topEdge - y * config.bubbleSize);
+        var topEdge = Camera.main.orthographicSize + config.bubbleSize * COS_30_DEGREES / 2.0f;
+        return new Vector3(leftEdge + x * config.bubbleSize + offset, topEdge - y * config.bubbleSize * COS_30_DEGREES);
     }
 
     private void CreateLevel(LevelData level)
