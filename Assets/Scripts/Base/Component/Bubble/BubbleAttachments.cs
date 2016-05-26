@@ -43,6 +43,9 @@ public class BubbleAttachments : MonoBehaviour
         if (bubbles.Contains(other))
         {
             var index = bubbles.IndexOf(other);
+
+            Destroy(joints[index]);
+
             bubbles.RemoveAt(index);
             joints.RemoveAt(index);
 
@@ -75,6 +78,12 @@ public class BubbleAttachments : MonoBehaviour
     private void PoppedHandler()
     {
         Model.OnPopped -= PoppedHandler;
+
+        while (bubbles.Count > 0)
+        {
+            Detach(bubbles[0]);
+        }
+
         Destroy(gameObject);
     }
 }
