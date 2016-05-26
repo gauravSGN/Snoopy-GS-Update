@@ -51,7 +51,7 @@ public class BubbleAttachments : MonoBehaviour
     private void SetupRelativeJoint(RelativeJoint2D joint, GameObject other)
     {
         joint.connectedBody = other.GetComponent<Rigidbody2D>();
-        joint.correctionScale = 0.15f;
+        joint.correctionScale = 0.05f;
         joint.autoConfigureOffset = false;
 
         var angle = BubbleHelper.FindClosestSnapAngle(other, gameObject);
