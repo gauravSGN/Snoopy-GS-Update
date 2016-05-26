@@ -24,11 +24,14 @@ public class Bubble
         var bubbleList = new List<Bubble>();
         CheckForMatches(bubbleList);
 
-        foreach (var bubble in bubbleList)
+        if (bubbleList.Count >= 3)
         {
-            if (bubble.OnPopped != null)
+            foreach (var bubble in bubbleList)
             {
-                bubble.OnPopped();
+                if (bubble.OnPopped != null)
+                {
+                    bubble.OnPopped();
+                }
             }
         }
     }
