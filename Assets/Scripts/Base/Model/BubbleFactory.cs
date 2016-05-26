@@ -14,11 +14,21 @@ public class BubbleFactory : ScriptableObject
     public List<BubbleInfo> bubbles;
 
     private Dictionary<BubbleType, BubbleInfo> lookup;
+    private List<Bubble> graph = new List<Bubble>();
 
     public GameObject CreateBubbleByType(BubbleType type)
     {
         var info = GetBubbleInfoByType(type);
-        return Instantiate(info.prefab);
+        var instance = Instantiate(info.prefab);
+
+        var model = new Bubble
+        {
+            type = type,
+        };
+
+        instance.SendMessage("SetModel", model);
+
+        return instance;
     }
 
     private BubbleInfo GetBubbleInfoByType(BubbleType type)

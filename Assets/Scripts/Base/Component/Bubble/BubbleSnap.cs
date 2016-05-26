@@ -19,6 +19,8 @@ public class BubbleSnap : MonoBehaviour
 
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             Destroy(this);
+
+            GetComponent<BubbleAttachments>().Model.CheckForMatches();
         }
     }
 

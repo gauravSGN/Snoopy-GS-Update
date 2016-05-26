@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class BubbleAttachments : MonoBehaviour
 {
+    public Bubble Model { get; private set; }
+
     private List<GameObject> bubbles = new List<GameObject>();
     private List<Joint2D> joints = new List<Joint2D>();
 
@@ -28,6 +30,11 @@ public class BubbleAttachments : MonoBehaviour
         {
             bubbles.Add(other);
             joints.Add(joint);
+
+            if (Model != null)
+            {
+                Model.AddConnection(other.GetComponent<BubbleAttachments>().Model);
+            }
         }
     }
 
@@ -48,6 +55,12 @@ public class BubbleAttachments : MonoBehaviour
         return bubbles.Contains(other) ? joints[bubbles.IndexOf(other)] : null;
     }
 
+    public void SetModel(Bubble model)
+    {
+        Model = model;
+        model.OnPopped += PoppedHandler;
+    }
+
     private void SetupRelativeJoint(RelativeJoint2D joint, GameObject other)
     {
         joint.connectedBody = other.GetComponent<Rigidbody2D>();
@@ -57,5 +70,11 @@ public class BubbleAttachments : MonoBehaviour
         var angle = BubbleHelper.FindClosestSnapAngle(other, gameObject);
         joint.angularOffset = 0.0f;
         joint.linearOffset = new Vector2(Mathf.Cos(angle) * 0.3f, Mathf.Sin(angle) * 0.3f);
+    }
+
+    private void PoppedHandler()
+    {
+        Model.OnPopped -= PoppedHandler;
+        Destroy(gameObject);
     }
 }
