@@ -23,9 +23,7 @@ public class BubbleLauncher : MonoBehaviour
 
             if (hit != null)
             {
-                var clickVector = (hit.point - (Vector2)launchOrigin.transform.position).normalized * launchSpeed;
-                var rigidBody = nextBubble.GetComponent<Rigidbody2D>();
-                rigidBody.velocity = clickVector;
+                FireBubbleAt(hit.point);
 
                 nextBubble = null;
                 StartCoroutine(ReadyNextBubble());
@@ -41,6 +39,15 @@ public class BubbleLauncher : MonoBehaviour
         instance.GetComponent<Rigidbody2D>().gravityScale = 0.0f;
 
         return instance;
+    }
+
+    private void FireBubbleAt(Vector2 point)
+    {
+        var direction = (point - (Vector2)launchOrigin.transform.position).normalized * launchSpeed;
+        var rigidBody = nextBubble.GetComponent<Rigidbody2D>();
+
+        nextBubble.AddComponent<BubbleSnap>();
+        rigidBody.velocity = direction;
     }
 
     private IEnumerator ReadyNextBubble()
