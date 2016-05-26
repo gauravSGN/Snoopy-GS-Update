@@ -3,8 +3,6 @@ using System.Collections;
 
 public class BubbleSnap : MonoBehaviour
 {
-    private const float PI_OVER_3 = Mathf.PI / 3.0f;
-
     protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Bubble")
@@ -26,9 +24,7 @@ public class BubbleSnap : MonoBehaviour
 
     private void AdjustToGrid(GameObject bubble)
     {
-        var delta = transform.position - bubble.transform.position;
-        var angle = Mathf.Atan2(delta.y, delta.x);
-        angle = Mathf.Round(angle / PI_OVER_3) * PI_OVER_3;
+        var angle = BubbleHelper.FindClosestSnapAngle(gameObject, bubble);
 
         transform.position = bubble.transform.position + 0.3f * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle));
     }

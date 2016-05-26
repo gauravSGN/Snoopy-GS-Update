@@ -15,9 +15,9 @@ public class BubbleAttachments : MonoBehaviour
         {
             joint = gameObject.AddComponent<RelativeJoint2D>();
 
-            joint.connectedBody = other.GetComponent<Rigidbody2D>();
-
+            SetupRelativeJoint(joint as RelativeJoint2D, other);
             Attach(other, joint);
+
             otherAttachments.Attach(gameObject, joint);
         }
     }
@@ -46,5 +46,16 @@ public class BubbleAttachments : MonoBehaviour
     public Joint2D GetAttachmentFor(GameObject other)
     {
         return bubbles.Contains(other) ? joints[bubbles.IndexOf(other)] : null;
+    }
+
+    private void SetupRelativeJoint(RelativeJoint2D joint, GameObject other)
+    {
+        joint.connectedBody = other.GetComponent<Rigidbody2D>();
+        joint.correctionScale = 0.15f;
+        joint.autoConfigureOffset = false;
+
+        var angle = BubbleHelper.FindClosestSnapAngle(other, gameObject);
+        joint.angularOffset = 0.0f;
+        joint.linearOffset = new Vector2(Mathf.Cos(angle) * 0.3f, Mathf.Sin(angle) * 0.3f);
     }
 }
