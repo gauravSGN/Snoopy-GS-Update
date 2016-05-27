@@ -28,10 +28,10 @@ public class LevelLoader : MonoBehaviour
 
     private Vector3 GetBubbleLocation(int x, int y)
     {
-        var offset = (1 + (y & 1)) * config.bubbleSize / 2.0f;
-        var leftEdge = -config.bubblesPerRow * config.bubbleSize / 2.0f;
-        var topEdge = Camera.main.orthographicSize + config.bubbleSize * COS_30_DEGREES * 0.5f;
-        return new Vector3(leftEdge + x * config.bubbleSize + offset, topEdge - y * config.bubbleSize * COS_30_DEGREES);
+        var offset = (1 + (y & 1)) * config.bubbles.size / 2.0f;
+        var leftEdge = -config.bubbles.numPerRow * config.bubbles.size / 2.0f;
+        var topEdge = Camera.main.orthographicSize + config.bubbles.size * COS_30_DEGREES * 0.5f;
+        return new Vector3(leftEdge + x * config.bubbles.size + offset, topEdge - y * config.bubbles.size * COS_30_DEGREES);
     }
 
     private void CreateLevel(LevelData level)
@@ -43,7 +43,7 @@ public class LevelLoader : MonoBehaviour
         {
             maxY = Mathf.Max(maxY, bubble.y);
         }
-        gameView.transform.position = new Vector3(0.0f, -(config.bubbleSize * COS_30_DEGREES) * Mathf.Max(0.0f, maxY - 8));
+        gameView.transform.position = new Vector3(0.0f, -(config.bubbles.size * COS_30_DEGREES) * Mathf.Max(0.0f, maxY - 8));
 
         foreach (var bubble in level.bubbles)
         {

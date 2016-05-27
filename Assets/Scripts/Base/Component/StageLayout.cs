@@ -20,7 +20,7 @@ public class StageLayout : MonoBehaviour
 
     private void SetCameraSize()
     {
-        gameCamera.orthographicSize = (config.bubblesPerRow / gameCamera.aspect * config.bubbleSize) / 2.0f;
+        gameCamera.orthographicSize = (config.bubbles.numPerRow / gameCamera.aspect * config.bubbles.size) / 2.0f;
     }
 
     private void ScaleBackgroundToCamera()
@@ -36,7 +36,7 @@ public class StageLayout : MonoBehaviour
 
     private void SetWallLocation(BoxCollider2D wall, float direction)
     {
-        float x = direction * ((config.bubblesPerRow / 2 * config.bubbleSize) + wall.size.x / 2.0f);
+        float x = direction * ((config.bubbles.numPerRow / 2 * config.bubbles.size) + wall.size.x / 2.0f);
         wall.transform.position = new Vector3(x, 0.0f);
         wall.size = new Vector2(wall.size.x, gameCamera.orthographicSize * 2.0f);
     }
