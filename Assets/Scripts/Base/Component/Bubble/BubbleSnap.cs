@@ -20,6 +20,7 @@ public class BubbleSnap : MonoBehaviour
             var rigidBody = GetComponent<Rigidbody2D>();
             rigidBody.velocity = Vector2.zero;
             rigidBody.gravityScale = 1.0f;
+            rigidBody.isKinematic = true;
 
             Destroy(this);
 

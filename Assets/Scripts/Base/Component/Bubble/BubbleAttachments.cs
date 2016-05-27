@@ -6,22 +6,11 @@ public class BubbleAttachments : MonoBehaviour
     public Bubble Model { get; private set; }
 
     private List<GameObject> bubbles = new List<GameObject>();
-    private List<Joint2D> joints = new List<Joint2D>();
 
     public void Attach(GameObject other)
     {
-        var otherAttachments = other.GetComponent<BubbleAttachments>();
-        var joint = otherAttachments.GetAttachmentFor(gameObject);
-
-        if (joint == null)
-        {
-            joint = gameObject.AddComponent<RelativeJoint2D>();
-
-            SetupRelativeJoint(joint as RelativeJoint2D, other);
-            Attach(other, joint);
-
-            otherAttachments.Attach(gameObject, joint);
-        }
+        bubbles.Add(other);
+        Model.AddConnection(other.GetComponent<BubbleAttachments>().Model);
     }
 
     public void Attach(GameObject other, Joint2D joint)
@@ -29,12 +18,8 @@ public class BubbleAttachments : MonoBehaviour
         if (!bubbles.Contains(other))
         {
             bubbles.Add(other);
-            joints.Add(joint);
 
-            if (Model != null)
-            {
-                Model.AddConnection(other.GetComponent<BubbleAttachments>().Model);
-            }
+            Model.AddConnection(other.GetComponent<BubbleAttachments>().Model);
         }
     }
 
@@ -42,42 +27,31 @@ public class BubbleAttachments : MonoBehaviour
     {
         if (bubbles.Contains(other))
         {
-            var index = bubbles.IndexOf(other);
+            bubbles.Remove(other);
 
-            Destroy(joints[index]);
-
-            bubbles.RemoveAt(index);
-            joints.RemoveAt(index);
+            Model.RemoveConnection(other.GetComponent<BubbleAttachments>().Model);
 
             other.GetComponent<BubbleAttachments>().Detach(gameObject);
         }
     }
 
-    public Joint2D GetAttachmentFor(GameObject other)
-    {
-        return bubbles.Contains(other) ? joints[bubbles.IndexOf(other)] : null;
-    }
-
     public void SetModel(Bubble model)
     {
         Model = model;
+
         model.OnPopped += PoppedHandler;
+        model.OnDisconnected += DisconnectedHandler;
     }
 
-    private void SetupRelativeJoint(RelativeJoint2D joint, GameObject other)
+    private void RemoveHandlers()
     {
-        joint.connectedBody = other.GetComponent<Rigidbody2D>();
-        joint.correctionScale = 0.05f;
-        joint.autoConfigureOffset = false;
-
-        var angle = BubbleHelper.FindClosestSnapAngle(other, gameObject);
-        joint.angularOffset = 0.0f;
-        joint.linearOffset = new Vector2(Mathf.Cos(angle) * 0.3f, Mathf.Sin(angle) * 0.3f);
+        Model.OnPopped -= PoppedHandler;
+        Model.OnDisconnected -= DisconnectedHandler;
     }
 
     private void PoppedHandler()
     {
-        Model.OnPopped -= PoppedHandler;
+        RemoveHandlers();
 
         while (bubbles.Count > 0)
         {
@@ -85,5 +59,20 @@ public class BubbleAttachments : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    private void DisconnectedHandler()
+    {
+        RemoveHandlers();
+
+        while (bubbles.Count > 0)
+        {
+            Detach(bubbles[0]);
+        }
+
+        var rigidBody = GetComponent<Rigidbody2D>();
+
+        rigidBody.isKinematic = false;
+        rigidBody.AddForce(new Vector2(Random.Range(-1.0f, 1.0f), 0.0f));
     }
 }

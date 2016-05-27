@@ -14,7 +14,6 @@ public class BubbleFactory : ScriptableObject
     public List<BubbleInfo> bubbles;
 
     private Dictionary<BubbleType, BubbleInfo> lookup;
-    private List<Bubble> graph = new List<Bubble>();
 
     public GameObject CreateBubbleByType(BubbleType type)
     {

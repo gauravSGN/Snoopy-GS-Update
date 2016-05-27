@@ -36,7 +36,6 @@ public class BubbleLauncher : MonoBehaviour
         var instance = factory.CreateBubbleByType((BubbleType)Random.Range(0, 4));
 
         instance.transform.position = launchOrigin.transform.position;
-        instance.GetComponent<Rigidbody2D>().gravityScale = 0.0f;
 
         return instance;
     }
@@ -47,7 +46,9 @@ public class BubbleLauncher : MonoBehaviour
         var rigidBody = nextBubble.GetComponent<Rigidbody2D>();
 
         nextBubble.AddComponent<BubbleSnap>();
+        rigidBody.isKinematic = false;
         rigidBody.velocity = direction;
+        rigidBody.gravityScale = 0.0f;
     }
 
     private IEnumerator ReadyNextBubble()

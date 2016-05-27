@@ -42,6 +42,11 @@ public class LevelLoader : MonoBehaviour
             var instance = factory.CreateBubbleByType((BubbleType)(bubble.typeID % 4));
             instance.transform.position = GetBubbleLocation(bubble.x, bubble.y);
             bubbleMap[bubble.y << 4 | bubble.x] = instance;
+
+            if (bubble.y == 1)
+            {
+                instance.GetComponent<BubbleAttachments>().Model.IsRoot = true;
+            }
         }
 
         AttachBubbles(bubbleMap);
