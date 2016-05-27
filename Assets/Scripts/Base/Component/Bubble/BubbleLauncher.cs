@@ -35,7 +35,8 @@ public class BubbleLauncher : MonoBehaviour
     {
         var instance = factory.CreateBubbleByType((BubbleType)Random.Range(0, 4));
 
-        instance.transform.position = launchOrigin.transform.position;
+        instance.transform.parent = launchOrigin.transform;
+        instance.transform.localPosition = Vector3.zero;
 
         return instance;
     }
@@ -45,6 +46,7 @@ public class BubbleLauncher : MonoBehaviour
         var direction = (point - (Vector2)launchOrigin.transform.position).normalized * launchSpeed;
         var rigidBody = nextBubble.GetComponent<Rigidbody2D>();
 
+        nextBubble.transform.parent = null;
         nextBubble.AddComponent<BubbleSnap>();
         rigidBody.isKinematic = false;
         rigidBody.velocity = direction;

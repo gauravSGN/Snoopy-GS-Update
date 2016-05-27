@@ -5,34 +5,9 @@ public class BubbleAttachments : MonoBehaviour
 {
     public Bubble Model { get; private set; }
 
-    private List<GameObject> bubbles = new List<GameObject>();
-
     public void Attach(GameObject other)
     {
-        bubbles.Add(other);
         Model.AddConnection(other.GetComponent<BubbleAttachments>().Model);
-    }
-
-    public void Attach(GameObject other, Joint2D joint)
-    {
-        if (!bubbles.Contains(other))
-        {
-            bubbles.Add(other);
-
-            Model.AddConnection(other.GetComponent<BubbleAttachments>().Model);
-        }
-    }
-
-    public void Detach(GameObject other)
-    {
-        if (bubbles.Contains(other))
-        {
-            bubbles.Remove(other);
-
-            Model.RemoveConnection(other.GetComponent<BubbleAttachments>().Model);
-
-            other.GetComponent<BubbleAttachments>().Detach(gameObject);
-        }
     }
 
     public void SetModel(Bubble model)
@@ -53,26 +28,18 @@ public class BubbleAttachments : MonoBehaviour
     {
         RemoveHandlers();
 
-        while (bubbles.Count > 0)
-        {
-            Detach(bubbles[0]);
-        }
-
-        Destroy(gameObject);
+        transform.position = new Vector3(-1000.0f, -1000.0f);
+        Destroy(gameObject, 0.1f);
     }
 
     private void DisconnectedHandler()
     {
         RemoveHandlers();
 
-        while (bubbles.Count > 0)
-        {
-            Detach(bubbles[0]);
-        }
-
         var rigidBody = GetComponent<Rigidbody2D>();
+        gameObject.layer = 8;
 
         rigidBody.isKinematic = false;
-        rigidBody.AddForce(new Vector2(Random.Range(-1.0f, 1.0f), 0.0f));
+        rigidBody.AddForce(new Vector2(Random.Range(-3.0f, 3.0f), 0.0f));
     }
 }

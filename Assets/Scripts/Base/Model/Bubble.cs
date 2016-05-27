@@ -31,6 +31,14 @@ public class Bubble
         }
     }
 
+    public void RemoveAllConnections()
+    {
+        while (connections.Count > 0)
+        {
+            RemoveConnection(connections[0]);
+        }
+    }
+
     public void CheckForMatches()
     {
         var bubbleList = new List<Bubble>();
@@ -42,6 +50,8 @@ public class Bubble
         {
             foreach (var bubble in bubbleList)
             {
+                bubble.RemoveAllConnections();
+
                 if (bubble.OnPopped != null)
                 {
                     bubble.OnPopped();
@@ -96,6 +106,8 @@ public class Bubble
 
     private static void MakeBubbleFall(Bubble bubble)
     {
+        bubble.RemoveAllConnections();
+
         if (bubble.OnDisconnected != null)
         {
             bubble.OnDisconnected();
