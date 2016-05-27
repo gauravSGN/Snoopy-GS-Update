@@ -25,11 +25,11 @@ public class LevelLoader : MonoBehaviour
         return (LevelData)serializer.Deserialize(reader);
     }
 
-    private Vector3 GetBubbleLocation(int x, int y)
+    private Vector3 GetBubbleLocation(int x, int y, int maxY)
     {
         var offset = (1 + (y & 1)) * config.bubbleSize / 2.0f;
         var leftEdge = -config.bubblesPerRow * config.bubbleSize / 2.0f;
-        var topEdge = Camera.main.orthographicSize + config.bubbleSize * COS_30_DEGREES / 2.0f;
+        var topEdge = Camera.main.orthographicSize + config.bubbleSize * COS_30_DEGREES * ((maxY - 8) + 0.5f);
         return new Vector3(leftEdge + x * config.bubbleSize + offset, topEdge - y * config.bubbleSize * COS_30_DEGREES);
     }
 
@@ -37,10 +37,16 @@ public class LevelLoader : MonoBehaviour
     {
         var bubbleMap = new Dictionary<int, GameObject>();
 
+        int maxY = 0;
+        foreach (var bubble in level.bubbles)
+        {
+            maxY = Mathf.Max(maxY, bubble.y);
+        }
+
         foreach (var bubble in level.bubbles)
         {
             var instance = factory.CreateBubbleByType((BubbleType)(bubble.typeID % 4));
-            instance.transform.position = GetBubbleLocation(bubble.x, bubble.y);
+            instance.transform.position = GetBubbleLocation(bubble.x, bubble.y, maxY);
             bubbleMap[bubble.y << 4 | bubble.x] = instance;
 
             if (bubble.y == 1)
