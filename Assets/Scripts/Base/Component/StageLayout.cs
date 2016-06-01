@@ -9,7 +9,7 @@ public class StageLayout : MonoBehaviour
     public BoxCollider2D leftWall;
     public BoxCollider2D rightWall;
 
-    protected void Start()
+    protected void OnEnable()
     {
         SetCameraSize();
         ScaleBackgroundToCamera();

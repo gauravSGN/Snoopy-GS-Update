@@ -5,7 +5,8 @@ using System.Xml.Serialization;
 
 public class LevelLoader : MonoBehaviour
 {
-    public TextAsset levelData;
+    public LevelData LevelData { get; private set; }
+
     public BubbleFactory factory;
     public GameConfig config;
     public GameObject gameView;
@@ -15,13 +16,14 @@ public class LevelLoader : MonoBehaviour
     private float topEdge;
     private int maxY;
 
-    protected void Start()
+    public void LoadLevel(TextAsset levelData)
     {
         rowDistance = config.bubbles.size * COS_30_DEGREES;
 
         using (var reader = new StringReader(levelData.text))
         {
-            CreateLevel(ParseLevelData(reader));
+            LevelData = ParseLevelData(reader);
+            CreateLevel(LevelData);
         }
     }
 

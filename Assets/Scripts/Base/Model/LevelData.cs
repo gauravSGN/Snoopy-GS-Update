@@ -17,6 +17,9 @@ public class LevelData
         public int typeID;
     }
 
+    [XmlAttribute("remainingBubble")]
+    public int remainingBubble;
+
     [XmlElement("Bubble")]
     public List<BubbleData> bubbles;
 }
