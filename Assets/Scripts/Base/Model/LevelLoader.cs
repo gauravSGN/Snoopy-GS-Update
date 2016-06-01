@@ -13,6 +13,7 @@ public class LevelLoader : MonoBehaviour
     private const float COS_30_DEGREES = 0.8660254038f;
     private float rowDistance;
     private float topEdge;
+    private int maxY;
 
     protected void Start()
     {
@@ -32,7 +33,7 @@ public class LevelLoader : MonoBehaviour
 
     private Vector3 GetBubbleLocation(int x, int y)
     {
-        var offset = (1 + (y & 1)) * config.bubbles.size / 2.0f;
+        var offset = (2 - ((maxY + y) & 1)) * config.bubbles.size / 2.0f;
         var leftEdge = -config.bubbles.numPerRow * config.bubbles.size / 2.0f;
         return new Vector3(leftEdge + x * config.bubbles.size + offset, topEdge - y * rowDistance);
     }
@@ -40,7 +41,7 @@ public class LevelLoader : MonoBehaviour
     private void CreateLevel(LevelData level)
     {
         var bubbleMap = new Dictionary<int, GameObject>();
-        int maxY = 0;
+        maxY = 0;
 
         foreach (var bubble in level.bubbles)
         {
@@ -48,10 +49,11 @@ public class LevelLoader : MonoBehaviour
         }
 
         gameView.transform.position = new Vector3(0.0f, -rowDistance * Mathf.Max(0.0f, maxY - 8));
-        topEdge = Camera.main.orthographicSize + (0.5f * (((maxY % 2) == 0) ? rowDistance : -rowDistance));
+        topEdge = Camera.main.orthographicSize + (0.5f * rowDistance);
 
         foreach (var bubble in level.bubbles)
         {
+            bubble.y = (maxY + 1) - bubble.y;
             bubbleMap[bubble.y << 4 | bubble.x] = createBubbleAndSetPosition((BubbleType)(bubble.typeID % 4), bubble.x, bubble.y);
         }
 
@@ -61,7 +63,7 @@ public class LevelLoader : MonoBehaviour
     private void AttachBubbles(Dictionary<int, GameObject> bubbleMap)
     {
         var neighbors = new int[6];
-        var maxBubblesForOddRow = config.bubbles.numPerRow - 1;
+        var maxBubblesForOddRow = config.bubbles.numPerRow - ((maxY & 1) ^ 1);
         var ceilingBubbleMap = new Dictionary<int, GameObject>();
 
         for (int ceilingX = 0; ceilingX < maxBubblesForOddRow; ceilingX++)
