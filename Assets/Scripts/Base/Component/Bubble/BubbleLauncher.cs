@@ -3,9 +3,9 @@ using System.Collections;
 
 public class BubbleLauncher : MonoBehaviour
 {
-    public BubbleFactory factory;
     public GameObject launchOrigin;
     public float launchSpeed;
+    public Level level;
 
     private GameObject nextBubble;
 
@@ -33,7 +33,7 @@ public class BubbleLauncher : MonoBehaviour
 
     private GameObject CreateNextBubble()
     {
-        var instance = factory.CreateBubbleByType((BubbleType)Random.Range(0, 4));
+        var instance = level.bubbleFactory.CreateBubbleByType(level.LevelState.bubbleQueue.GetNext());
 
         instance.transform.parent = launchOrigin.transform;
         instance.transform.localPosition = Vector3.zero;

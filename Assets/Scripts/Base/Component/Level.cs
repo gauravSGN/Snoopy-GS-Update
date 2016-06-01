@@ -7,6 +7,7 @@ public class Level : MonoBehaviour
 
     public TextAsset levelData;
     public LevelLoader loader;
+    public BubbleFactory bubbleFactory;
 
     private LevelState levelState = new LevelState();
 

@@ -191,9 +191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3108aae6f13a247bcb8a86a3e79e4540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  factory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
   launchOrigin: {fileID: 1885201033}
   launchSpeed: 5
+  level: {fileID: 1197956594}
 --- !u!4 &443704580
 Transform:
   m_ObjectHideFlags: 0
@@ -605,6 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData: {fileID: 4900000, guid: 3a846805aa3244f5ba8e9e018d12b389, type: 3}
   loader: {fileID: 1499581533}
+  bubbleFactory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
 --- !u!1 &1394572483
 GameObject:
   m_ObjectHideFlags: 0
