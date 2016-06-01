@@ -51,6 +51,8 @@ public class BubbleLauncher : MonoBehaviour
         rigidBody.isKinematic = false;
         rigidBody.velocity = direction;
         rigidBody.gravityScale = 0.0f;
+
+        EventDispatcher.Instance.Dispatch(new BubbleFiredEvent());
     }
 
     private IEnumerator ReadyNextBubble()

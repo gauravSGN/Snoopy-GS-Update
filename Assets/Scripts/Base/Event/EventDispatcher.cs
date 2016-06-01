@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class EventDispatcher : MonoBehaviour
 {
-    public EventDispatcher Instance { get { return instance; } }
+    public static EventDispatcher Instance { get { return instance; } }
 
     private static EventDispatcher instance;
 

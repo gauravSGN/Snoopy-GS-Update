@@ -16,5 +16,13 @@ public class Level : MonoBehaviour
 
         levelState.remainingBubbles = loader.LevelData.remainingBubble;
         levelState.NotifyListeners();
+
+        EventDispatcher.Instance.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
+    }
+
+    private void OnBubbleFired(BubbleFiredEvent gameEvent)
+    {
+        levelState.remainingBubbles--;
+        levelState.NotifyListeners();
     }
 }
