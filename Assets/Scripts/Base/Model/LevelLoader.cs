@@ -107,7 +107,7 @@ public class LevelLoader : MonoBehaviour
 
     private void GetNeighbors(int x, int y, int[] neighbors)
     {
-        var offset = (y & 1) * 2 - 1;
+        var offset = 1 - ((maxY + y) & 1) * 2;
 
         neighbors[0] = ((y - 1) << 4) | (x + offset);
         neighbors[1] = ((y - 1) << 4) | x;
