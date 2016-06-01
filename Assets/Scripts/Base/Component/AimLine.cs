@@ -50,7 +50,7 @@ public class AimLine : MonoBehaviour
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             var hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-            if (hit != null)
+            if (hit.collider != null)
             {
                 aimTarget = hit.point;
             }
@@ -80,7 +80,7 @@ public class AimLine : MonoBehaviour
         {
             var hit = Physics2D.Raycast(points[index], direction, distance, LayerMask.GetMask(new string[] { "Game Objects", "Boundary" }));
 
-            if ((hit != null) && (hit.collider != null))
+            if (hit.collider != null)
             {
                 if (hit.collider.gameObject.tag == "Bubble")
                 {

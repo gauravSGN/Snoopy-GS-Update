@@ -21,7 +21,7 @@ public class BubbleLauncher : MonoBehaviour
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             var hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-            if (hit != null)
+            if (hit.collider != null)
             {
                 FireBubbleAt(hit.point);
 
