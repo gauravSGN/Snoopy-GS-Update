@@ -24,12 +24,23 @@ public class BubbleQueue
 
     public BubbleType Peek(int index)
     {
-        while (queued.Count < index)
+        while (queued.Count <= index)
         {
             queued.Add(GenerateElement());
         }
 
         return queued[index];
+    }
+
+    public void RotateQueue(int depth)
+    {
+        if (depth > 0)
+        {
+            Peek(depth - 1);
+            var first = GetNext();
+
+            queued.Insert(depth - 1, first);
+        }
     }
 
     private BubbleType GenerateElement()

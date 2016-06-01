@@ -1,22 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BubbleLauncher : MonoBehaviour
 {
-    public GameObject launchOrigin;
+    public GameObject[] locations;
     public float launchSpeed;
     public Level level;
 
-    private GameObject nextBubble;
+    private GameObject[] nextBubbles;
+
+    public void CycleQueue()
+    {
+        CycleLocalQueue();
+        level.LevelState.bubbleQueue.RotateQueue(nextBubbles.Length);
+    }
 
     protected void Start()
     {
-        nextBubble = CreateNextBubble();
+        nextBubbles = new GameObject[locations.Length];
+
+        CreateBubbles();
     }
 
     protected void OnMouseUp()
     {
-        if (nextBubble != null)
+        if (nextBubbles[0] != null)
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             var hit = Physics2D.Raycast(ray.origin, ray.direction);
@@ -24,41 +33,74 @@ public class BubbleLauncher : MonoBehaviour
             if (hit.collider != null)
             {
                 FireBubbleAt(hit.point);
-
-                nextBubble = null;
                 StartCoroutine(ReadyNextBubble());
             }
         }
     }
 
-    private GameObject CreateNextBubble()
+    private void CreateBubbles()
     {
-        var instance = level.bubbleFactory.CreateBubbleByType(level.LevelState.bubbleQueue.GetNext());
-
-        instance.transform.parent = launchOrigin.transform;
-        instance.transform.localPosition = Vector3.zero;
-
-        return instance;
+        for (var index = 0; index < nextBubbles.Length; index++)
+        {
+            if (nextBubbles[index] == null)
+            {
+                nextBubbles[index] = level.bubbleFactory.CreateBubbleByType(level.LevelState.bubbleQueue.Peek(index));
+                MoveBubbleToLocation(index);
+            }
+        }
     }
 
     private void FireBubbleAt(Vector2 point)
     {
-        var direction = (point - (Vector2)launchOrigin.transform.position).normalized * launchSpeed;
-        var rigidBody = nextBubble.GetComponent<Rigidbody2D>();
+        var direction = (point - (Vector2)locations[0].transform.position).normalized * launchSpeed;
+        var rigidBody = nextBubbles[0].GetComponent<Rigidbody2D>();
 
-        nextBubble.transform.parent = null;
-        nextBubble.AddComponent<BubbleSnap>();
+        nextBubbles[0].transform.parent = null;
+        nextBubbles[0].AddComponent<BubbleSnap>();
+
         rigidBody.isKinematic = false;
         rigidBody.velocity = direction;
         rigidBody.gravityScale = 0.0f;
 
         EventDispatcher.Instance.Dispatch(new BubbleFiredEvent());
+
+        nextBubbles[0] = null;
     }
 
     private IEnumerator ReadyNextBubble()
     {
         yield return new WaitForSeconds(0.5f);
 
-        nextBubble = CreateNextBubble();
+        level.LevelState.bubbleQueue.GetNext();
+
+        CycleLocalQueue();
+        CreateBubbles();
+    }
+
+    private void MoveBubbleToLocation(int index)
+    {
+        nextBubbles[index].transform.parent = locations[index].transform;
+        nextBubbles[index].transform.localPosition = Vector3.zero;
+    }
+
+    private void CycleLocalQueue()
+    {
+        var lastIndex = nextBubbles.Length - 1;
+        var first = nextBubbles[0];
+
+        for (var index = 0; index < lastIndex; index++)
+        {
+            nextBubbles[index] = nextBubbles[index + 1];
+            if (nextBubbles[index] != null)
+            {
+                MoveBubbleToLocation(index);
+            }
+        }
+
+        nextBubbles[lastIndex] = first;
+        if (first != null)
+        {
+            MoveBubbleToLocation(lastIndex);
+        }
     }
 }
