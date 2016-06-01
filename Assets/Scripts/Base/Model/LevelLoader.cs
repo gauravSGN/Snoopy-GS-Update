@@ -11,9 +11,13 @@ public class LevelLoader : MonoBehaviour
     public GameObject gameView;
 
     private const float COS_30_DEGREES = 0.8660254038f;
+    private float rowDistance;
+    private float topEdge;
 
     protected void Start()
     {
+        rowDistance = config.bubbles.size * COS_30_DEGREES;
+
         using (var reader = new StringReader(levelData.text))
         {
             CreateLevel(ParseLevelData(reader));
@@ -30,31 +34,25 @@ public class LevelLoader : MonoBehaviour
     {
         var offset = (1 + (y & 1)) * config.bubbles.size / 2.0f;
         var leftEdge = -config.bubbles.numPerRow * config.bubbles.size / 2.0f;
-        var topEdge = Camera.main.orthographicSize + config.bubbles.size * COS_30_DEGREES * 0.5f;
-        return new Vector3(leftEdge + x * config.bubbles.size + offset, topEdge - y * config.bubbles.size * COS_30_DEGREES);
+        return new Vector3(leftEdge + x * config.bubbles.size + offset, topEdge - y * rowDistance);
     }
 
     private void CreateLevel(LevelData level)
     {
         var bubbleMap = new Dictionary<int, GameObject>();
-
         int maxY = 0;
+
         foreach (var bubble in level.bubbles)
         {
             maxY = Mathf.Max(maxY, bubble.y);
         }
-        gameView.transform.position = new Vector3(0.0f, -(config.bubbles.size * COS_30_DEGREES) * Mathf.Max(0.0f, maxY - 8));
+
+        gameView.transform.position = new Vector3(0.0f, -rowDistance * Mathf.Max(0.0f, maxY - 8));
+        topEdge = Camera.main.orthographicSize + (0.5f * (((maxY % 2) == 0) ? rowDistance : -rowDistance));
 
         foreach (var bubble in level.bubbles)
         {
-            var instance = factory.CreateBubbleByType((BubbleType)(bubble.typeID % 4));
-            instance.transform.position = GetBubbleLocation(bubble.x, bubble.y);
-            bubbleMap[bubble.y << 4 | bubble.x] = instance;
-
-            if (bubble.y == 1)
-            {
-                instance.GetComponent<BubbleAttachments>().Model.IsRoot = true;
-            }
+            bubbleMap[bubble.y << 4 | bubble.x] = createBubbleAndSetPosition((BubbleType)(bubble.typeID % 4), bubble.x, bubble.y);
         }
 
         AttachBubbles(bubbleMap);
@@ -63,30 +61,44 @@ public class LevelLoader : MonoBehaviour
     private void AttachBubbles(Dictionary<int, GameObject> bubbleMap)
     {
         var neighbors = new int[6];
+        var maxBubblesForOddRow = config.bubbles.numPerRow - 1;
+        var ceilingBubbleMap = new Dictionary<int, GameObject>();
+
+        for (int ceilingX = 0; ceilingX < maxBubblesForOddRow; ceilingX++)
+        {
+            ceilingBubbleMap[ceilingX] = createBubbleAndSetPosition(BubbleType.Ceiling, ceilingX, 0, true);
+        }
 
         foreach (var pair in bubbleMap)
         {
             int x = pair.Key & 0xf;
             int y = pair.Key >> 4;
 
-            if (y == 1)
-            {
-                var anchor = pair.Value.AddComponent<FixedJoint2D>();
-            }
-
             GetNeighbors(x, y, neighbors);
 
             foreach (var neighbor in neighbors)
             {
-                if (neighbor >= 0)
+                if (neighbor >= 0 && bubbleMap.ContainsKey(neighbor))
                 {
-                    if (bubbleMap.ContainsKey(neighbor))
-                    {
-                        pair.Value.GetComponent<BubbleAttachments>().Attach(bubbleMap[neighbor]);
-                    }
+                    pair.Value.GetComponent<BubbleAttachments>().Attach(bubbleMap[neighbor]);
                 }
             }
+
+            if (y == 1)
+            {
+                pair.Value.GetComponent<BubbleAttachments>().Attach(ceilingBubbleMap [Mathf.Min(x, maxBubblesForOddRow - 1)]);
+            }
         }
+    }
+
+    private GameObject createBubbleAndSetPosition(BubbleType type, int x, int y, bool isRoot = false)
+    {
+        var instance = factory.CreateBubbleByType(type);
+
+        instance.transform.position = GetBubbleLocation(x, y);
+        instance.GetComponent<BubbleAttachments>().Model.IsRoot = isRoot;
+
+        return instance;
     }
 
     private void GetNeighbors(int x, int y, int[] neighbors)
