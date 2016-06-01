@@ -196,6 +196,7 @@ MonoBehaviour:
   - {fileID: 2053311205}
   launchSpeed: 5
   level: {fileID: 1197956594}
+  aimLine: {fileID: 443704581}
 --- !u!4 &443704580
 Transform:
   m_ObjectHideFlags: 0

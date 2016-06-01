@@ -12,13 +12,8 @@ MonoBehaviour:
   m_Name: BubbleFactory
   m_EditorClassIdentifier: 
   bubbles:
-  - type: 0
-    prefab: {fileID: 152662, guid: 73a2070f6e6234e77a1b8d4e1a66e674, type: 2}
-  - type: 1
-    prefab: {fileID: 131708, guid: 8cf9f71ff7b1f4711a9fd305f2c53e79, type: 2}
-  - type: 2
-    prefab: {fileID: 167048, guid: 41453b7ed99fc400ba079719243b501b, type: 2}
-  - type: 3
-    prefab: {fileID: 187632, guid: ddc37cf96bf20458482e23ccc688f4ed, type: 2}
-  - type: -1
-    prefab: {fileID: 145018, guid: 319f12374266e473ab6dcb2aafed0f57, type: 2}
+  - {fileID: 11400000, guid: be130d48e9be24ff4a8c1176ae69a944, type: 2}
+  - {fileID: 11400000, guid: 7c6149681589a497cbcbd26fcb1dd493, type: 2}
+  - {fileID: 11400000, guid: 8a3bc49885f4a4a48b5824b77dc3c8d1, type: 2}
+  - {fileID: 11400000, guid: eb440004b2644438aa41b97954b44c35, type: 2}
+  - {fileID: 11400000, guid: 439d4e38d9ab242df9848e588c6e7e0e, type: 2}

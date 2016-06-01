@@ -3,6 +3,17 @@ using System.Collections.Generic;
 
 public class AimLine : MonoBehaviour
 {
+    public Color Color
+    {
+        set
+        {
+            if (meshRenderer != null)
+            {
+                meshRenderer.material.color = value;
+            }
+        }
+    }
+
     public GameObject launchOrigin;
     public GameConfig config;
     public Texture2D texture;
@@ -19,11 +30,10 @@ public class AimLine : MonoBehaviour
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
 
-    protected void Start()
+    protected void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.material.mainTexture = texture;
-        meshRenderer.material.color = Color.red;
 
         meshFilter = GetComponent<MeshFilter>();
         meshFilter.mesh = new Mesh();

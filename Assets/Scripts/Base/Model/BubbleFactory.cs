@@ -4,33 +4,11 @@ using System.Collections.Generic;
 
 public class BubbleFactory : ScriptableObject
 {
-    [Serializable]
-    public class BubbleInfo
-    {
-        public BubbleType type;
-        public GameObject prefab;
-    }
+    public List<BubbleDefinition> bubbles;
 
-    public List<BubbleInfo> bubbles;
+    private Dictionary<BubbleType, BubbleDefinition> lookup;
 
-    private Dictionary<BubbleType, BubbleInfo> lookup;
-
-    public GameObject CreateBubbleByType(BubbleType type)
-    {
-        var info = GetBubbleInfoByType(type);
-        var instance = Instantiate(info.prefab);
-
-        var model = new Bubble
-        {
-            type = type,
-        };
-
-        instance.SendMessage("SetModel", model);
-
-        return instance;
-    }
-
-    private BubbleInfo GetBubbleInfoByType(BubbleType type)
+    public BubbleDefinition GetBubbleDefinitionByType(BubbleType type)
     {
         if (lookup == null)
         {
@@ -40,9 +18,25 @@ public class BubbleFactory : ScriptableObject
         return lookup[type];
     }
 
+    public GameObject CreateBubbleByType(BubbleType type)
+    {
+        var definition = GetBubbleDefinitionByType(type);
+        var instance = Instantiate(definition.prefab);
+
+        var model = new Bubble
+        {
+            type = type,
+            definition = definition,
+        };
+
+        instance.SendMessage("SetModel", model);
+
+        return instance;
+    }
+
     private void CreateLookupTable()
     {
-        lookup = new Dictionary<BubbleType, BubbleInfo>();
+        lookup = new Dictionary<BubbleType, BubbleDefinition>();
 
         foreach (var info in bubbles)
         {

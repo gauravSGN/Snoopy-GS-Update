@@ -7,6 +7,7 @@ public class BubbleLauncher : MonoBehaviour
     public GameObject[] locations;
     public float launchSpeed;
     public Level level;
+    public AimLine aimLine;
 
     private GameObject[] nextBubbles;
 
@@ -21,6 +22,7 @@ public class BubbleLauncher : MonoBehaviour
         nextBubbles = new GameObject[locations.Length];
 
         CreateBubbles();
+        SetAimLineColor();
     }
 
     protected void OnMouseUp()
@@ -102,5 +104,12 @@ public class BubbleLauncher : MonoBehaviour
         {
             MoveBubbleToLocation(lastIndex);
         }
+
+        SetAimLineColor();
+    }
+
+    private void SetAimLineColor()
+    {
+        aimLine.Color = nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.baseColor;
     }
 }

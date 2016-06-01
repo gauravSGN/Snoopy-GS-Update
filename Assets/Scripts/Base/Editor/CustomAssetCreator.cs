@@ -11,6 +11,12 @@ public class CustomAssetCreator
         CreateAThing<BubbleFactory>();
     }
 
+    [MenuItem("Assets/Create/Bubble Definition")]
+    public static void CreateBubbleDefinition()
+    {
+        CreateAThing<BubbleDefinition>();
+    }
+
     [MenuItem("Assets/Create/Game Config")]
     public static void CreateGameConfig()
     {

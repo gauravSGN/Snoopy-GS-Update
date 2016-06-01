@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1d598c8f1285471d9ba9720ea457449, type: 3}
+  m_Name: YellowBubbleDefinition
+  m_EditorClassIdentifier: 
+  type: 1
+  baseColor: {r: 0.94482756, g: 1, b: 0, a: 1}
+  prefab: {fileID: 131708, guid: 8cf9f71ff7b1f4711a9fd305f2c53e79, type: 2}

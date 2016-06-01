@@ -11,6 +11,7 @@ public class Bubble
 
     public bool IsRoot { get; set; }
     public BubbleType type;
+    public BubbleDefinition definition;
     public List<Bubble> connections = new List<Bubble>();
 
     public void AddConnection(Bubble bubble)
