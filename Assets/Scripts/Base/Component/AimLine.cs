@@ -83,28 +83,28 @@ public class AimLine : MonoBehaviour
         int index = 0;
         var distance = length - config.bubbles.size;
         var direction = (Vector3)(aimTarget - origin).normalized;
+        var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale / 2.0f;
+        var layerMask = LayerMask.GetMask(new string[] { "Game Objects", "Boundary" });
 
         points.Add(origin + config.bubbles.size * direction);
 
         while (distance > 0.0f)
         {
-            var hit = Physics2D.Raycast(points[index], direction, distance, LayerMask.GetMask(new string[] { "Game Objects", "Boundary" }));
+            var hit = Physics2D.CircleCast(points[index], shooterRadius, direction, distance, layerMask);
 
             if (hit.collider != null)
             {
+                var span = hit.distance - shooterRadius * 0.05f;
+                points.Add(points[index] + span * direction);
+
                 if (hit.collider.gameObject.tag == "Bubble")
                 {
-                    points.Add(hit.point);
                     break;
                 }
-                else
-                {
-                    var span = hit.distance - config.bubbles.size * config.bubbles.shotColliderScale;
-                    points.Add(points[index] + span * direction);
-                    index++;
-                    distance = wallBounceDistance;
-                    direction = new Vector2(-direction.x, direction.y);
-                }
+
+                index++;
+                distance = wallBounceDistance;
+                direction = new Vector2(-direction.x, direction.y);
             }
             else
             {
