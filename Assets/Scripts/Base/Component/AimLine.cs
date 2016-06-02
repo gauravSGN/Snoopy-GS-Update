@@ -25,7 +25,7 @@ public class AimLine : MonoBehaviour
 
     private bool aiming = false;
     private Vector3 aimTarget;
-    private List<Vector3> points;
+    private List<Vector3> points = new List<Vector3>();
 
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
@@ -41,7 +41,7 @@ public class AimLine : MonoBehaviour
 
     protected void Update()
     {
-        if (aiming)
+        if (aiming && meshRenderer.enabled)
         {
             RebuildMesh();
         }
@@ -60,13 +60,14 @@ public class AimLine : MonoBehaviour
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             var hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-            if (hit.collider != null)
+            meshRenderer.enabled = (hit.collider != null) && (hit.collider.gameObject == gameObject);
+
+            if (meshRenderer.enabled)
             {
                 aimTarget = hit.point;
-            }
 
-            GeneratePoints();
-            RebuildMesh();
+                GeneratePoints();
+            }
         }
     }
 
@@ -77,16 +78,17 @@ public class AimLine : MonoBehaviour
 
     private void GeneratePoints()
     {
-        points = new List<Vector3>();
+        points.Clear();
 
         Vector3 origin = launchOrigin.transform.position;
         int index = 0;
         var distance = length - config.bubbles.size;
-        var direction = (Vector3)(aimTarget - origin).normalized;
+        var direction = (aimTarget - origin).normalized;
         var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale / 2.0f;
         var layerMask = LayerMask.GetMask(new string[] { "Game Objects", "Boundary" });
+        int reflections = 1;
 
-        points.Add(origin + config.bubbles.size * direction);
+        points.Add(origin + config.bubbles.size * direction * 2.0f);
 
         while (distance > 0.0f)
         {
@@ -94,23 +96,28 @@ public class AimLine : MonoBehaviour
 
             if (hit.collider != null)
             {
-                var span = hit.distance - shooterRadius * 0.05f;
-                points.Add(points[index] + span * direction);
-
-                if (hit.collider.gameObject.tag == "Bubble")
+                // Make sure we're not trying to go backwards
+                if (Vector3.Dot(direction, ((Vector3)hit.point - points[index])) < 0.0f)
                 {
                     break;
                 }
 
+                distance = hit.distance - shooterRadius * 0.05f;
+            }
+
+            points.Add(points[index] + distance * direction);
+
+            if ((hit.collider != null) && (hit.collider.gameObject.tag != "Bubble") && (reflections > 0))
+            {
+                --reflections;
                 index++;
                 distance = wallBounceDistance;
                 direction = new Vector2(-direction.x, direction.y);
+
+                continue;
             }
-            else
-            {
-                points.Add(points[index] + distance * direction);
-                break;
-            }
+
+            break;
         }
 
         points[0] = origin;
@@ -118,16 +125,49 @@ public class AimLine : MonoBehaviour
 
     private void RebuildMesh()
     {
-        var origin = launchOrigin.transform.position - launchOrigin.transform.localPosition;
-        float offset = ((moveSpeed * Time.realtimeSinceStartup) % 1.0f) * dotSpacing;
-        var halfSize = lineWidth / 2.0f;
-        var count = points.Count - 1;
-
         var vertices = new List<Vector3>();
         var triangles = new List<int>();
         var uvs = new List<Vector2>();
 
+        var halfSize = lineWidth / 2.0f;
         int vertexOffset = 0;
+
+        foreach (var point in GetPointsOnAimLine())
+        {
+            vertices.Add(new Vector3(point.x - halfSize, point.y + halfSize, 11.0f));
+            vertices.Add(new Vector3(point.x + halfSize, point.y + halfSize, 11.0f));
+            vertices.Add(new Vector3(point.x - halfSize, point.y - halfSize, 11.0f));
+            vertices.Add(new Vector3(point.x + halfSize, point.y - halfSize, 11.0f));
+
+            triangles.Add(vertexOffset + 0);
+            triangles.Add(vertexOffset + 1);
+            triangles.Add(vertexOffset + 2);
+
+            triangles.Add(vertexOffset + 1);
+            triangles.Add(vertexOffset + 3);
+            triangles.Add(vertexOffset + 2);
+
+            uvs.Add(new Vector2(0.0f, 0.0f));
+            uvs.Add(new Vector2(1.0f, 0.0f));
+            uvs.Add(new Vector2(0.0f, 1.0f));
+            uvs.Add(new Vector2(1.0f, 1.0f));
+
+            vertexOffset += 4;
+        }
+
+        meshFilter.mesh = new Mesh
+        {
+            vertices = vertices.ToArray(),
+            triangles = triangles.ToArray(),
+            uv = uvs.ToArray(),
+        };
+    }
+
+    private IEnumerable<Vector2> GetPointsOnAimLine()
+    {
+        var origin = launchOrigin.transform.position - launchOrigin.transform.localPosition;
+        float offset = ((moveSpeed * Time.realtimeSinceStartup) % 1.0f) * dotSpacing;
+        var count = points.Count - 1;
 
         for (var index = 0; index < count; index++)
         {
@@ -141,41 +181,15 @@ public class AimLine : MonoBehaviour
 
             do
             {
-                vertices.Add(new Vector3(x - halfSize, y + halfSize, 11.0f));
-                vertices.Add(new Vector3(x + halfSize, y + halfSize, 11.0f));
-                vertices.Add(new Vector3(x - halfSize, y - halfSize, 11.0f));
-                vertices.Add(new Vector3(x + halfSize, y - halfSize, 11.0f));
-
-                triangles.Add(vertexOffset + 0);
-                triangles.Add(vertexOffset + 1);
-                triangles.Add(vertexOffset + 2);
-
-                triangles.Add(vertexOffset + 1);
-                triangles.Add(vertexOffset + 3);
-                triangles.Add(vertexOffset + 2);
-
-                uvs.Add(new Vector2(0.0f, 0.0f));
-                uvs.Add(new Vector2(1.0f, 0.0f));
-                uvs.Add(new Vector2(0.0f, 1.0f));
-                uvs.Add(new Vector2(1.0f, 1.0f));
+                yield return new Vector2(x, y);
 
                 x += direction.x * dotSpacing;
                 y += direction.y * dotSpacing;
 
                 segmentLength -= dotSpacing;
-
-                vertexOffset += 4;
             } while (segmentLength >= 0.0f);
 
             offset = -segmentLength;
         }
-
-        var mesh = new Mesh();
-
-        mesh.vertices = vertices.ToArray();
-        mesh.triangles = triangles.ToArray();
-        mesh.uv = uvs.ToArray();
-
-        meshFilter.mesh = mesh;
     }
 }

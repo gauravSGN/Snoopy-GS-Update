@@ -20,8 +20,12 @@ public class LevelStateTextUpdater : MonoBehaviour
     {
         var type = levelState.GetType();
         var field = type.GetField(fieldName);
-        var value = field.GetValue(levelState).ToString();
 
-        text.text = string.Format(format, value);
+        if (field != null)
+        {
+            var value = field.GetValue(levelState).ToString();
+
+            text.text = string.Format(format, value);
+        }
     }
 }
