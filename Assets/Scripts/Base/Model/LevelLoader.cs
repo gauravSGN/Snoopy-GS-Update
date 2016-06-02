@@ -56,7 +56,7 @@ public class LevelLoader : MonoBehaviour
         foreach (var bubble in level.bubbles)
         {
             bubble.y = (maxY + 1) - bubble.y;
-            bubbleMap[bubble.y << 4 | bubble.x] = createBubbleAndSetPosition((BubbleType)(bubble.typeID % 4), bubble.x, bubble.y);
+            bubbleMap[bubble.y << 4 | bubble.x] = createBubbleAndSetPosition((BubbleType)(bubble.typeID % 5), bubble.x, bubble.y);
         }
 
         AttachBubbles(bubbleMap);
