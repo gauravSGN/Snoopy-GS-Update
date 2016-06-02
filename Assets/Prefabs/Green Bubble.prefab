@@ -11,6 +11,7 @@ GameObject:
   - 50: {fileID: 5021674}
   - 58: {fileID: 5807608}
   - 114: {fileID: 11435030}
+  - 114: {fileID: 11408426}
   m_Layer: 10
   m_Name: Green Bubble
   m_TagString: Bubble
@@ -43,6 +44,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 480218}
   m_RootOrder: 0
@@ -55,6 +57,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 402778}
   m_Father: {fileID: 0}
@@ -90,6 +93,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.125
+--- !u!114 &11408426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff8fef3eec99488f91a5ad8bbec26d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11435030
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -17,10 +17,7 @@ public class EventDispatcher : MonoBehaviour
 
     public void OnDestroy()
     {
-        if (instance == this)
-        {
-            instance = null;
-        }
+        handlers.Clear();
     }
 
     public void AddEventHandler<T>(Action<T> handler) where T : IGameEvent
