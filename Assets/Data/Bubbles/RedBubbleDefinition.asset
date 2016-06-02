@@ -14,3 +14,4 @@ MonoBehaviour:
   type: 2
   baseColor: {r: 1, g: 0, b: 0, a: 1}
   prefab: {fileID: 167048, guid: 41453b7ed99fc400ba079719243b501b, type: 2}
+  score: 10
