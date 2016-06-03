@@ -27,16 +27,10 @@ public class BubbleLauncher : MonoBehaviour
 
     protected void OnMouseUp()
     {
-        if (nextBubbles[0] != null)
+        if (nextBubbles[0] != null && aimLine.Aiming)
         {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            var hit = Physics2D.Raycast(ray.origin, ray.direction);
-
-            if (hit.collider != null)
-            {
-                FireBubbleAt(hit.point);
-                StartCoroutine(ReadyNextBubble());
-            }
+            FireBubbleAt(aimLine.Target);
+            StartCoroutine(ReadyNextBubble());
         }
     }
 
