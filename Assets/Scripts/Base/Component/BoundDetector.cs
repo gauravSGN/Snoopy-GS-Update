@@ -1,24 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class LowerBoundDetector : MonoBehaviour
+public class BoundDetector : MonoBehaviour
 {
+    private const float CEILING = 0.0f;
+
     public GameObject gameView;
     public float panSpeed;
+
+    public enum Direction
+    {
+        up = -1,
+        down = 1,
+    };
+    public Direction direction; 
 
     public int bubbleCount = 0;
     private List<GameObject> bubbles = new List<GameObject>();
 
     protected void Update()
     {
-        if ((bubbleCount == 0) && (gameView != null))
+        if ((gameView != null) &&
+           (((direction == Direction.down) && (bubbleCount == 0)) ||
+            ((direction == Direction.up) && (bubbleCount > 1))))
         {
-            var transform = gameView.transform;
+            moveGameView();
+        }
+    }
 
-            if (transform.position.y < 0.0f)
-            {
-                transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * panSpeed);
-            }
+    private void moveGameView()
+    {
+        var transform = gameView.transform;
+
+        if ((transform.position.y < CEILING))
+        {
+            var yTransform = (transform.position.y + ((Time.deltaTime * panSpeed) * (int)direction));
+            transform.position = new Vector3(transform.position.x, yTransform);
         }
     }
 
