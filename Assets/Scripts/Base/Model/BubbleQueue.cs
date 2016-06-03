@@ -1,8 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
 
 public class BubbleQueue
 {
+    public const int MAX_QUEUE_SIZE = 4;
+    public static readonly BubbleType[] LAUNCHER_BUBBLE_TYPES =
+    {
+        BubbleType.Blue,
+        BubbleType.Yellow,
+        BubbleType.Red,
+        BubbleType.Green,
+    };
+
     private List<BubbleType> queued = new List<BubbleType>();
 
     public BubbleType GetNext()
@@ -24,6 +33,8 @@ public class BubbleQueue
 
     public BubbleType Peek(int index)
     {
+        VerifyIndex(index);
+
         while (queued.Count <= index)
         {
             queued.Add(GenerateElement());
@@ -32,19 +43,26 @@ public class BubbleQueue
         return queued[index];
     }
 
-    public void RotateQueue(int depth)
+    public void Rotate(int index)
     {
-        if (depth > 0)
-        {
-            Peek(depth - 1);
-            var first = GetNext();
+        VerifyIndex(index);
 
-            queued.Insert(depth - 1, first);
-        }
+        Peek(index);
+        var first = GetNext();
+
+        queued.Insert(index, first);
     }
 
     private BubbleType GenerateElement()
     {
-        return (BubbleType)Random.Range(0, 4);
+        return LAUNCHER_BUBBLE_TYPES[UnityEngine.Random.Range(0, LAUNCHER_BUBBLE_TYPES.Length)];
+    }
+
+    private void VerifyIndex(int index)
+    {
+        if ((index < 0) || (index > (MAX_QUEUE_SIZE - 1)))
+        {
+            throw new IndexOutOfRangeException(index.ToString());
+        }
     }
 }

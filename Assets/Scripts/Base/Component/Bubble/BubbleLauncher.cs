@@ -14,7 +14,7 @@ public class BubbleLauncher : MonoBehaviour
     public void CycleQueue()
     {
         CycleLocalQueue();
-        level.LevelState.bubbleQueue.RotateQueue(nextBubbles.Length);
+        level.LevelState.bubbleQueue.Rotate(nextBubbles.Length);
     }
 
     protected void Start()
