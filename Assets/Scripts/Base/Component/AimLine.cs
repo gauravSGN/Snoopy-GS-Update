@@ -3,6 +3,21 @@ using System.Collections.Generic;
 
 public class AimLine : MonoBehaviour
 {
+    public GameObject launchOrigin;
+    public GameConfig config;
+    public Texture2D texture;
+    public float length;
+    public float lineWidth;
+    public float dotSpacing;
+    public float moveSpeed;
+    public float wallBounceDistance;
+
+    private Vector3 aimTarget;
+    private List<Vector3> points = new List<Vector3>();
+
+    private MeshRenderer meshRenderer;
+    private MeshFilter meshFilter;
+
     public Color Color
     {
         set
@@ -14,21 +29,21 @@ public class AimLine : MonoBehaviour
         }
     }
 
-    public GameObject launchOrigin;
-    public GameConfig config;
-    public Texture2D texture;
-    public float length;
-    public float lineWidth;
-    public float dotSpacing;
-    public float moveSpeed;
-    public float wallBounceDistance;
+    public bool Aiming
+    {
+        get
+        {
+            return meshRenderer.enabled;
+        }
+    }
 
-    private bool aiming = false;
-    private Vector3 aimTarget;
-    private List<Vector3> points = new List<Vector3>();
-
-    private MeshRenderer meshRenderer;
-    private MeshFilter meshFilter;
+    public Vector3 Target
+    {
+        get
+        {
+            return aimTarget;
+        }
+    }
 
     protected void Awake()
     {
@@ -41,7 +56,7 @@ public class AimLine : MonoBehaviour
 
     protected void Update()
     {
-        if (aiming && meshRenderer.enabled)
+        if (meshRenderer.enabled)
         {
             RebuildMesh();
         }
@@ -49,31 +64,28 @@ public class AimLine : MonoBehaviour
 
     protected void OnMouseDown()
     {
-        meshRenderer.enabled = aiming = true;
+        meshRenderer.enabled = true;
         OnMouseDrag();
     }
 
     protected void OnMouseDrag()
     {
-        if (aiming)
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+        meshRenderer.enabled = (hit.collider != null) && (hit.collider.gameObject == gameObject);
+
+        if (meshRenderer.enabled)
         {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            var hit = Physics2D.Raycast(ray.origin, ray.direction);
+            aimTarget = hit.point;
 
-            meshRenderer.enabled = (hit.collider != null) && (hit.collider.gameObject == gameObject);
-
-            if (meshRenderer.enabled)
-            {
-                aimTarget = hit.point;
-
-                GeneratePoints();
-            }
+            GeneratePoints();
         }
     }
 
     protected void OnMouseUp()
     {
-        meshRenderer.enabled = aiming = false;
+        meshRenderer.enabled = false;
     }
 
     private void GeneratePoints()
