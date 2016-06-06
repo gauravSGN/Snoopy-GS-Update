@@ -1,6 +1,6 @@
 ﻿namespace FSM
 {
-	public interface StateLifeTime 
+	public interface StateLifeCycle 
 	{
 		void OnEnter();
 		void Tick(float deltaT);

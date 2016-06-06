@@ -2,7 +2,7 @@
 
 namespace FSM 
 {
-	public abstract class Transition : MonoBehaviour, StateLifeTime 
+	public abstract class Transition : MonoBehaviour, StateLifeCycle 
 	{
 		public State nextState;
 		public Color color = Color.white;

@@ -2,7 +2,7 @@
 
 namespace FSM
 {
-	public abstract class StateComponent : MonoBehaviour, StateLifeTime 
+	public abstract class StateComponent : MonoBehaviour, StateLifeCycle 
 	{
 		public virtual void OnEnter(){}
 
