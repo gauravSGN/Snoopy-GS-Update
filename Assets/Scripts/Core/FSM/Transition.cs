@@ -2,7 +2,7 @@
 
 namespace FSM 
 {
-	public abstract class Transition : MonoBehaviour 
+	public abstract class Transition : MonoBehaviour, StateLifeTime 
 	{
 		public State nextState;
 		public Color color = Color.white;
@@ -22,6 +22,12 @@ namespace FSM
 				Debug.LogError ("Transition to nowhere on state: " + gameObject.name);
 			}
 		}
+
+		public virtual void OnEnter(){}
+
+		public virtual void Tick(float deltaT){}
+
+		public virtual void OnExit() {}
 
 		public virtual void HandleMessage(string message) {}
 

@@ -5,7 +5,7 @@ namespace FSM {
 	public class TouchInputTransition : Transition {
 		private bool isReady = false;
 		
-		void Update () {
+		public override void Tick(float dt) {
 			isReady = Input.touchCount > 0;		
 		}
 

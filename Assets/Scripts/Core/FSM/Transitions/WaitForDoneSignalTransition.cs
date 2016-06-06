@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace FSM {
-	public class WaitForDoneSignalTransition : Transition, StateLifeTime {
+namespace FSM
+{
+	public class WaitForDoneSignalTransition : Transition
+	{
 		private bool done = false;
 
-		public void OnEnter() {
+		public void OnEnter()
+		{
 			done = false;
 		}
-		public void Tick(float deltaT) {}
-		public void OnExit() {}
 
-		public override bool IsReady () {
+		public override bool IsReady()
+		{
 			return done;
 		}
-		
-		public void SetDone(){
+
+		public void SetDone()
+		{
 			done = true;
 		}
 	}

@@ -7,7 +7,7 @@ namespace FSM {
 
 		private bool ready;
 
-		void OnEnable(){
+		public override void OnEnter(){
 			ready = false;
 		}
 
