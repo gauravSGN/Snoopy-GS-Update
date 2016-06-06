@@ -48,6 +48,10 @@ namespace FSM
 			{
 				components[i].OnEnter();
 			}
+			for(int i = 0; i < outTransitions.Length; ++i)
+			{
+				outTransitions[i].OnEnter();
+			}
 		}
 
 		public void Tick(float deltaT)
@@ -56,6 +60,10 @@ namespace FSM
 			{
 				components[i].Tick(deltaT);
 			}
+			for(int i = 0; i < outTransitions.Length; ++i)
+			{
+				outTransitions[i].Tick(deltaT);
+			}
 		}
 
 		public void OnExit()
@@ -63,6 +71,10 @@ namespace FSM
 			for(int i = 0; i < components.Count; ++i)
 			{
 				components[i].OnExit();
+			}
+			for(int i = 0; i < outTransitions.Length; ++i)
+			{
+				outTransitions[i].OnExit();
 			}
 		}
 
