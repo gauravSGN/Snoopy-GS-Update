@@ -1,5 +1,5 @@
 ﻿namespace Core {
-	public struct Tuple<T1, T2> {
+	public class Tuple<T1, T2> {
 		private T1 item1;
 		private T2 item2;
 
