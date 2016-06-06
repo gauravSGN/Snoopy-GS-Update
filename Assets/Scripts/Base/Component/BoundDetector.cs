@@ -7,22 +7,22 @@ public class BoundDetector : MonoBehaviour
 
     public GameObject gameView;
     public float panSpeed;
+    public int bubbleCount = 0;
+    public Direction direction;
 
     public enum Direction
     {
-        up = -1,
-        down = 1,
+        Up = -1,
+        Down = 1,
     };
-    public Direction direction; 
 
-    public int bubbleCount = 0;
     private List<GameObject> bubbles = new List<GameObject>();
 
     protected void Update()
     {
         if ((gameView != null) &&
-           (((direction == Direction.down) && (bubbleCount == 0)) ||
-            ((direction == Direction.up) && (bubbleCount > 1))))
+           (((direction == Direction.Down) && (bubbleCount == 0)) ||
+            ((direction == Direction.Up) && (bubbleCount > 1))))
         {
             moveGameView();
         }
