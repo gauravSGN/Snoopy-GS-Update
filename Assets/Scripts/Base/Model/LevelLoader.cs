@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using System.Reflection;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -16,14 +17,51 @@ public class LevelLoader : MonoBehaviour
     private float topEdge;
     private int maxY;
 
-    public void LoadLevel(TextAsset levelData)
+    public Dictionary<BubbleType, int> LoadLevel(TextAsset levelData)
     {
         rowDistance = config.bubbles.size * COS_30_DEGREES;
+        Dictionary<BubbleType, int> bubbleTypeCount;
 
         using (var reader = new StringReader(levelData.text))
         {
             LevelData = ParseLevelData(reader);
-            CreateLevel(LevelData);
+            bubbleTypeCount = CreateLevel(LevelData);
+            SetupLanterns();
+        }
+
+        return bubbleTypeCount;
+    }
+
+    private void SetupLanterns()
+    {
+        var lanterns = new Dictionary<string, string>();
+        lanterns["bombFill"] = "Red Lantern";
+        lanterns["horzFill"] = "Blue Lantern";
+        lanterns["snakeFill"] = "Green Lantern";
+        lanterns["fireFill"] = "Yellow Lantern";
+
+        foreach(KeyValuePair<string, string> entry in lanterns)
+        {
+            var lantern = gameView.transform.FindChild("Lanterns").FindChild(entry.Value).gameObject;
+            float lanternFillValue = 0;
+
+            switch (entry.Key)
+            {
+                case "bombFill":
+                    lanternFillValue = LevelData.bombFill;
+                    break;
+                case "horzFill":
+                    lanternFillValue = LevelData.horzFill;
+                    break;
+                case "snakeFill":
+                    lanternFillValue = LevelData.snakeFill;
+                    break;
+                case "fireFill":
+                    lanternFillValue = LevelData.fireFill;
+                    break;
+            }
+
+            lantern.GetComponent<Lantern>().Setup((int)(lanternFillValue == 0 ? 0 : 1 / lanternFillValue));
         }
     }
 
@@ -40,7 +78,7 @@ public class LevelLoader : MonoBehaviour
         return new Vector3(leftEdge + x * config.bubbles.size + offset, topEdge - y * rowDistance);
     }
 
-    private void CreateLevel(LevelData level)
+    private Dictionary<BubbleType, int> CreateLevel(LevelData level)
     {
         var bubbleMap = new Dictionary<int, GameObject>();
         maxY = 0;
@@ -53,13 +91,19 @@ public class LevelLoader : MonoBehaviour
         gameView.transform.position = new Vector3(0.0f, -rowDistance * Mathf.Max(0.0f, maxY - 8));
         topEdge = Camera.main.orthographicSize + (0.5f * rowDistance);
 
+        var bubbleTypeCount = new Dictionary<BubbleType, int>();
+
         foreach (var bubble in level.bubbles)
         {
             bubble.y = (maxY + 1) - bubble.y;
+            var bubbleType = (BubbleType)(bubble.typeID % 5);
+            bubbleTypeCount[bubbleType] = bubbleTypeCount.ContainsKey(bubbleType) ? bubbleTypeCount[bubbleType] + 1 : 1;
             bubbleMap[bubble.y << 4 | bubble.x] = createBubbleAndSetPosition((BubbleType)(bubble.typeID % 5), bubble.x, bubble.y);
         }
 
         AttachBubbles(bubbleMap);
+
+        return bubbleTypeCount;
     }
 
     private void AttachBubbles(Dictionary<int, GameObject> bubbleMap)

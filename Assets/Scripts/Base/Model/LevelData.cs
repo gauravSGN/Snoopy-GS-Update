@@ -22,4 +22,16 @@ public class LevelData
 
     [XmlElement("Bubble")]
     public List<BubbleData> bubbles;
+
+    [XmlAttribute("bombFill")]
+    public float bombFill;
+
+    [XmlAttribute("horzFill")]
+    public float horzFill;
+
+    [XmlAttribute("snakeFill")]
+    public float snakeFill;
+
+    [XmlAttribute("fireFill")]
+    public float fireFill;
 }

@@ -58,7 +58,7 @@ public class BubbleLauncher : MonoBehaviour
         rigidBody.velocity = direction;
         rigidBody.gravityScale = 0.0f;
 
-        EventDispatcher.Instance.Dispatch(new BubbleFiredEvent());
+        EventDispatcher.Instance.Dispatch(new BubbleFiredEvent(nextBubbles[0]));
 
         nextBubbles[0] = null;
     }

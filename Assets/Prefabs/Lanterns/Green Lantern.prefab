@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &191032
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,13 +40,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 441662}
+  - 114: {fileID: 11495858}
   m_Layer: 0
   m_Name: Green Lantern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &411840
 Transform:
   m_ObjectHideFlags: 1
@@ -67,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197960}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.565, y: -1.241, z: 0}
+  m_LocalPosition: {x: 1.25, y: -1.25, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -88,6 +89,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 441662}
   m_RootOrder: 1
+--- !u!114 &11495858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d82e1519baa234b629af1bdcb0fab2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glow: {fileID: 144122}
+  bubbleType: 3
+  level: {fileID: 0}
+  max: 0
 --- !u!212 &21246828
 SpriteRenderer:
   m_ObjectHideFlags: 1
