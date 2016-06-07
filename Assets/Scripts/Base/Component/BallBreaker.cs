@@ -5,6 +5,17 @@ public class BallBreaker : MonoBehaviour
 {
     protected void OnTriggerEnter2D(Collider2D collider)
     {
-        Destroy(collider.gameObject);
+        BubbleDeath death = collider.gameObject.GetComponent<BubbleDeath>();
+        if(death)
+        {
+            Debug.Log("Starting death");
+            //Debug.Break();
+            StartCoroutine(death.TriggerDeathEffects());
+        }
+        else
+        {
+            Debug.Log("No death behaviour found");
+            Destroy(collider.gameObject);
+        }
     }
 }
