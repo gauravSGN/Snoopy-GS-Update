@@ -23,6 +23,8 @@ public class BubbleLauncher : MonoBehaviour
 
         CreateBubbles();
         SetAimLineColor();
+
+        EventDispatcher.Instance.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
     protected void OnMouseUp()
@@ -30,7 +32,6 @@ public class BubbleLauncher : MonoBehaviour
         if (nextBubbles[0] != null && aimLine.Aiming)
         {
             FireBubbleAt(aimLine.Target);
-            StartCoroutine(ReadyNextBubble());
         }
     }
 
@@ -58,15 +59,15 @@ public class BubbleLauncher : MonoBehaviour
         rigidBody.velocity = direction;
         rigidBody.gravityScale = 0.0f;
 
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
         EventDispatcher.Instance.Dispatch(new BubbleFiredEvent());
 
         nextBubbles[0] = null;
     }
 
-    private IEnumerator ReadyNextBubble()
+    private void ReadyNextBubble()
     {
-        yield return new WaitForSeconds(0.5f);
-
         level.LevelState.bubbleQueue.GetNext();
 
         CycleLocalQueue();
@@ -105,5 +106,11 @@ public class BubbleLauncher : MonoBehaviour
     private void SetAimLineColor()
     {
         aimLine.Color = nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.baseColor;
+    }
+
+    private void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)
+    {
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        ReadyNextBubble();
     }
 }

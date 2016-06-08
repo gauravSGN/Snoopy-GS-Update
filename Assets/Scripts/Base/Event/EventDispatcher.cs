@@ -20,7 +20,7 @@ public class EventDispatcher : MonoBehaviour
         handlers.Clear();
     }
 
-    public void AddEventHandler<T>(Action<T> handler) where T : IGameEvent
+    public void AddEventHandler<T>(Action<T> handler) where T : GameEvent
     {
         var eventType = typeof(T);
         List<object> handlerList;
@@ -38,7 +38,7 @@ public class EventDispatcher : MonoBehaviour
         handlerList.Add(handler);
     }
 
-    public void RemoveEventHandler<T>(Action<T> handler) where T : IGameEvent
+    public void RemoveEventHandler<T>(Action<T> handler) where T : GameEvent
     {
         var eventType = typeof(T);
 
@@ -53,7 +53,7 @@ public class EventDispatcher : MonoBehaviour
         }
     }
 
-    public void Dispatch<T>(T gameEvent) where T : IGameEvent
+    public void Dispatch<T>(T gameEvent) where T : GameEvent
     {
         var eventType = typeof(T);
 

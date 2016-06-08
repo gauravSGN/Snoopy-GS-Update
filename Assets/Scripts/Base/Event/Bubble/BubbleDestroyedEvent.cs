@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BubbleDestroyedEvent : IGameEvent
+public class BubbleDestroyedEvent : GameEvent
 {
     public int score;
 

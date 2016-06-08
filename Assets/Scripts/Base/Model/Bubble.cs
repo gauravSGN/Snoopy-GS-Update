@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class Bubble
 {
@@ -53,13 +54,32 @@ public class Bubble
             {
                 bubble.RemoveAllConnections();
 
-                if (bubble.OnPopped != null)
+                EventDispatcher.Instance.Dispatch(new BubbleReactionEvent()
                 {
-                    bubble.OnPopped();
-                }
+                    priority = 1,
+                    action = bubble.PopBubble
+                });
             }
 
             CheckForFallingBubbles(detachList);
+        }
+    }
+
+    public void PopBubble()
+    {
+        if (OnPopped != null)
+        {
+            OnPopped();
+        }
+    }
+
+    public void MakeBubbleFall()
+    {
+        RemoveAllConnections();
+
+        if (OnDisconnected != null)
+        {
+            OnDisconnected();
         }
     }
 
@@ -100,18 +120,12 @@ public class Bubble
         {
             if (!pair.Value)
             {
-                MakeBubbleFall(pair.Key);
+                EventDispatcher.Instance.Dispatch(new BubbleReactionEvent()
+                {
+                    priority = 2,
+                    action = pair.Key.MakeBubbleFall
+                });
             }
-        }
-    }
-
-    private static void MakeBubbleFall(Bubble bubble)
-    {
-        bubble.RemoveAllConnections();
-
-        if (bubble.OnDisconnected != null)
-        {
-            bubble.OnDisconnected();
         }
     }
 

@@ -18,14 +18,17 @@ public class LevelStateTextUpdater : MonoBehaviour
 
     private void UpdateState(LevelState levelState)
     {
-        var type = levelState.GetType();
-        var field = type.GetField(fieldName);
-
-        if (field != null)
+        if (text != null)
         {
-            var value = field.GetValue(levelState).ToString();
+            var type = levelState.GetType();
+            var field = type.GetField(fieldName);
 
-            text.text = string.Format(format, value);
+            if (field != null)
+            {
+                var value = field.GetValue(levelState).ToString();
+
+                text.text = string.Format(format, value);
+            }
         }
     }
 }
