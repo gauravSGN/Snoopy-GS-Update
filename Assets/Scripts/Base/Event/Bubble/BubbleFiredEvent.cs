@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BubbleFiredEvent : IGameEvent
+public class BubbleFiredEvent : GameEvent
 {
     public GameObject bubble;
 

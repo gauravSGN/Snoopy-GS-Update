@@ -32,8 +32,8 @@ public class Level : MonoBehaviour
 
     private void OnBubbleDestroyed(BubbleDestroyedEvent gameEvent)
     {
-        LevelState.score += gameEvent.score;
+        levelState.score += gameEvent.score;
         levelState.typeTotals[gameEvent.bubble.GetComponent<BubbleAttachments>().Model.definition.type]--;
-        LevelState.NotifyListeners();
+        levelState.NotifyListeners();
     }
 }
