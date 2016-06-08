@@ -13,7 +13,7 @@ public class Level : MonoBehaviour
 
     protected void Start()
     {
-        loader.LoadLevel(levelData);
+        levelState.typeTotals = loader.LoadLevel(levelData);
 
         levelState.score = 0;
         levelState.remainingBubbles = loader.LevelData.remainingBubble;
@@ -26,12 +26,14 @@ public class Level : MonoBehaviour
     private void OnBubbleFired(BubbleFiredEvent gameEvent)
     {
         levelState.remainingBubbles--;
+        levelState.typeTotals[gameEvent.bubble.GetComponent<BubbleAttachments>().Model.definition.type]++;
         levelState.NotifyListeners();
     }
 
     private void OnBubbleDestroyed(BubbleDestroyedEvent gameEvent)
     {
         levelState.score += gameEvent.score;
+        levelState.typeTotals[gameEvent.bubble.GetComponent<BubbleAttachments>().Model.definition.type]--;
         levelState.NotifyListeners();
     }
 }

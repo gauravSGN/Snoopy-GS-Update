@@ -60,8 +60,7 @@ public class BubbleLauncher : MonoBehaviour
         rigidBody.gravityScale = 0.0f;
 
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
-
-        EventDispatcher.Instance.Dispatch(new BubbleFiredEvent());
+        EventDispatcher.Instance.Dispatch(new BubbleFiredEvent(nextBubbles[0]));
 
         nextBubbles[0] = null;
     }
