@@ -9,6 +9,7 @@ public class EventDispatcher : MonoBehaviour
     private static EventDispatcher instance;
 
     private Dictionary<Type, List<object>> handlers = new Dictionary<Type, List<object>>();
+    private Dictionary<Type, List<object>> pools = new Dictionary<Type, List<object>>();
 
     public void OnEnable()
     {
@@ -65,6 +66,39 @@ public class EventDispatcher : MonoBehaviour
             {
                 (handler as Action<T>).Invoke(gameEvent);
             }
+        }
+    }
+
+    public T GetPooledEvent<T>() where T : GameEvent
+    {
+        var eventType = typeof(T);
+        T gameEvent;
+
+        if (pools.ContainsKey(eventType) && (pools[eventType].Count > 0))
+        {
+            gameEvent = (T)pools[eventType][0];
+            pools[eventType].RemoveAt(0);
+        }
+        else
+        {
+            gameEvent = (T)Activator.CreateInstance(eventType);
+        }
+
+        return gameEvent;
+    }
+
+    public void AddPooledEvent<T>(T gameEvent) where T : GameEvent
+    {
+        var eventType = typeof(T);
+
+        if (!pools.ContainsKey(eventType))
+        {
+            pools[eventType] = new List<object>();
+        }
+
+        if (!pools[eventType].Contains(gameEvent))
+        {
+            pools[eventType].Add(gameEvent);
         }
     }
 }

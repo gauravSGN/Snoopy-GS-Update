@@ -53,12 +53,7 @@ public class Bubble
             foreach (var bubble in bubbleList)
             {
                 bubble.RemoveAllConnections();
-
-                EventDispatcher.Instance.Dispatch(new BubbleReactionEvent()
-                {
-                    priority = ReactionPriority.Pop,
-                    action = bubble.PopBubble
-                });
+                BubbleReactionEvent.Dispatch(ReactionPriority.Pop, bubble.PopBubble);
             }
 
             CheckForFallingBubbles(detachList);
@@ -120,11 +115,7 @@ public class Bubble
         {
             if (!pair.Value)
             {
-                EventDispatcher.Instance.Dispatch(new BubbleReactionEvent()
-                {
-                    priority = ReactionPriority.Cull,
-                    action = pair.Key.MakeBubbleFall
-                });
+                BubbleReactionEvent.Dispatch(ReactionPriority.Cull, pair.Key.MakeBubbleFall);
             }
         }
     }
