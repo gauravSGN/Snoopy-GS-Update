@@ -983,6 +983,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1197956593}
   - 114: {fileID: 1197956594}
+  - 114: {fileID: 1197956595}
   m_Layer: 0
   m_Name: Game View
   m_TagString: Untagged
@@ -1022,6 +1023,17 @@ MonoBehaviour:
   levelData: {fileID: 4900000, guid: 1838bc040b78f4c9594a57f7546ddffe, type: 3}
   loader: {fileID: 1499581533}
   bubbleFactory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
+--- !u!114 &1197956595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1197956592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a24c2819c2fdc48799de3505a696b34e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1356401753
 Prefab:
   m_ObjectHideFlags: 0

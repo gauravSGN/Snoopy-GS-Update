@@ -5,11 +5,12 @@ using System.Collections.Generic;
 
 public class ReactionLogic : MonoBehaviour
 {
-    private Dictionary<int, List<Action>> currentActions = null;
-    private Dictionary<int, List<Action>> futureActions = new Dictionary<int, List<Action>>();
+    private Dictionary<ReactionPriority, List<Action>> currentActions;
+    private Dictionary<ReactionPriority, List<Action>> futureActions;
 
     protected void Start()
     {
+        RotateOrReset();
         EventDispatcher.Instance.AddEventHandler<BubbleSettledEvent>(OnBubbleSettled);
         EventDispatcher.Instance.AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
     }
@@ -27,7 +28,7 @@ public class ReactionLogic : MonoBehaviour
     private void OnBubbleSettled(BubbleSettledEvent gameEvent)
     {
         ProcessReactions();
-        Reset();
+        RotateOrReset();
 
         var levelState = GetComponent<Level>().LevelState;
 
@@ -50,8 +51,7 @@ public class ReactionLogic : MonoBehaviour
                 break;
             }
 
-            currentActions = futureActions;
-            futureActions = new Dictionary<int, List<Action>>();
+            RotateOrReset(false);
 
             foreach (var actionList in currentActions)
             {
@@ -63,9 +63,9 @@ public class ReactionLogic : MonoBehaviour
         }
     }
 
-    private void Reset()
+    private void RotateOrReset(bool reset = true)
     {
-        currentActions = null;
-        futureActions = new Dictionary<int, List<Action>>();
+        currentActions = reset ? null : futureActions;
+        futureActions = new Dictionary<ReactionPriority, List<Action>>();
     }
 }
