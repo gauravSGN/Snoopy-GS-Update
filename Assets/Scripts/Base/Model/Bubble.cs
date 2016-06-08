@@ -56,7 +56,7 @@ public class Bubble
 
                 EventDispatcher.Instance.Dispatch(new BubbleReactionEvent()
                 {
-                    priority = 1,
+                    priority = ReactionPriority.Pop,
                     action = bubble.PopBubble
                 });
             }
@@ -122,7 +122,7 @@ public class Bubble
             {
                 EventDispatcher.Instance.Dispatch(new BubbleReactionEvent()
                 {
-                    priority = 2,
+                    priority = ReactionPriority.Cull,
                     action = pair.Key.MakeBubbleFall
                 });
             }

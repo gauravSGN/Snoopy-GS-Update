@@ -3,6 +3,6 @@ using System;
 
 public class BubbleReactionEvent : GameEvent
 {
-    public int priority;
+    public ReactionPriority priority;
     public Action action;
 }
