@@ -1,7 +1,6 @@
 Library
 Temp
 obj
-.vscode/launch.json
 *.csproj
 *.unityproj
 *.sln
