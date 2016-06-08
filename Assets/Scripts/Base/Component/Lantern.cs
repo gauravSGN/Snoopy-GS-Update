@@ -32,7 +32,7 @@ public class Lantern : MonoBehaviour
 
     private void UpdateState(LevelState levelState)
     {
-        if (current < max && glow != null)
+        if ((current < max) && (glow != null))
         {
             var currentBubbleCount = levelState.typeTotals[bubbleType];
 
