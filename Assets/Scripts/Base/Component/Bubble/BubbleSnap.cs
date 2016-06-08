@@ -38,7 +38,6 @@ public class BubbleSnap : MonoBehaviour
             Destroy(this);
 
             GetComponent<BubbleAttachments>().Model.CheckForMatches();
-
             EventDispatcher.Instance.Dispatch(new BubbleSettledEvent() { shooter = gameObject });
         }
     }

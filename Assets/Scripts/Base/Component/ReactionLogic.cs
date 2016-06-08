@@ -22,8 +22,6 @@ public class ReactionLogic : MonoBehaviour
         }
 
         futureActions[gameEvent.priority].Add(gameEvent.action);
-
-        Debug.LogFormat("OnBubbleReactionEvent: {0}", futureActions.Count.ToString());
     }
 
     private void OnBubbleSettled(BubbleSettledEvent gameEvent)
@@ -49,7 +47,6 @@ public class ReactionLogic : MonoBehaviour
         {
             if ((currentActions != null) && futureActions.Count == 0)
             {
-                Debug.Log("break");
                 break;
             }
 
@@ -60,7 +57,6 @@ public class ReactionLogic : MonoBehaviour
             {
                 for (var index = 0; index < actionList.Value.Count; index++)
                 {
-                    Debug.Log("Invoke!");
                     actionList.Value[index].Invoke();
                 }
             }
