@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 490898}
   - 114: {fileID: 11439188}
+  - 61: {fileID: 6139210}
   m_Layer: 0
   m_Name: Red Lantern
   m_TagString: Untagged
@@ -89,6 +90,20 @@ Transform:
   - {fileID: 455648}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &6139210
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117738}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1.6, y: 1.75}
 --- !u!114 &11439188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,7 +118,11 @@ MonoBehaviour:
   glow: {fileID: 136616}
   bubbleType: 2
   level: {fileID: 0}
+  launcher: {fileID: 0}
   max: 0
+  current: 0
+  progress: 0
+  lastBubbleCount: 0
 --- !u!212 &21227274
 SpriteRenderer:
   m_ObjectHideFlags: 1

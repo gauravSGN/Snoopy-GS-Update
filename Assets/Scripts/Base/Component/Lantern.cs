@@ -6,6 +6,7 @@ public class Lantern : MonoBehaviour
     public GameObject glow;
     public BubbleType bubbleType;
     public Level level;
+    public GameObject launcher;
 
     private int max = 0;
     private int current = 0;
@@ -23,11 +24,12 @@ public class Lantern : MonoBehaviour
         }
     }
 
-    public void Reset()
+    protected void OnMouseUp()
     {
-        glow.SetActive(false);
-        progress = 0;
-        current++;
+        if (progress == 1)
+        {
+            Reset();
+        }
     }
 
     private void UpdateState(LevelState levelState)
@@ -49,5 +51,12 @@ public class Lantern : MonoBehaviour
                 glow.SetActive(true);
             }
         }
+    }
+
+    private void Reset()
+    {
+        glow.SetActive(false);
+        progress = 0;
+        current++;
     }
 }
