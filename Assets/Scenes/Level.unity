@@ -155,7 +155,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 142751818}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Lanterns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,6 +330,22 @@ Prefab:
       propertyPath: launcher
       value: 
       objectReference: {fileID: 443704577}
+    - target: {fileID: 117738, guid: 9a8d15a22785041b697226eea112b369, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 136616, guid: 9a8d15a22785041b697226eea112b369, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 194972, guid: 9a8d15a22785041b697226eea112b369, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 117738, guid: 9a8d15a22785041b697226eea112b369, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9a8d15a22785041b697226eea112b369, type: 2}
   m_IsPrefabParent: 0
@@ -359,7 +375,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 358632397}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.74, z: -9}
+  m_LocalPosition: {x: 0, y: 0.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -689,6 +705,22 @@ Prefab:
       propertyPath: launcher
       value: 
       objectReference: {fileID: 443704577}
+    - target: {fileID: 197960, guid: 283efdc4a919d4b53a09b69271a0a29f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 144122, guid: 283efdc4a919d4b53a09b69271a0a29f, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 191032, guid: 283efdc4a919d4b53a09b69271a0a29f, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 197960, guid: 283efdc4a919d4b53a09b69271a0a29f, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 283efdc4a919d4b53a09b69271a0a29f, type: 2}
   m_IsPrefabParent: 0
@@ -936,6 +968,22 @@ Prefab:
       propertyPath: launcher
       value: 
       objectReference: {fileID: 443704577}
+    - target: {fileID: 133016, guid: 4a2d437662f12427a80ec31361a5074f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 171312, guid: 4a2d437662f12427a80ec31361a5074f, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 117162, guid: 4a2d437662f12427a80ec31361a5074f, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 133016, guid: 4a2d437662f12427a80ec31361a5074f, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4a2d437662f12427a80ec31361a5074f, type: 2}
   m_IsPrefabParent: 0
@@ -1093,6 +1141,22 @@ Prefab:
       propertyPath: launcher
       value: 
       objectReference: {fileID: 443704577}
+    - target: {fileID: 162226, guid: 1e879796341f4400c863deed7fbc0826, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 176902, guid: 1e879796341f4400c863deed7fbc0826, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 183988, guid: 1e879796341f4400c863deed7fbc0826, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 162226, guid: 1e879796341f4400c863deed7fbc0826, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e879796341f4400c863deed7fbc0826, type: 2}
   m_IsPrefabParent: 0
