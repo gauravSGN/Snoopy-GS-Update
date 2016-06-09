@@ -2,11 +2,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public class ReactionLogic : MonoBehaviour
 {
+    public float percentageOfFrameTime = 0.1f;
+
     private Dictionary<ReactionPriority, List<Action>> currentActions;
     private Dictionary<ReactionPriority, List<Action>> futureActions;
+    private Stopwatch stopwatch = new Stopwatch();
+    private long maximumProcessingTimeInMilliseconds;
 
     protected void Start()
     {
@@ -29,7 +34,7 @@ public class ReactionLogic : MonoBehaviour
 
     private void OnBubbleSettled(BubbleSettledEvent gameEvent)
     {
-        ProcessReactions();
+        StartCoroutine(ProcessReactions());
         RotateOrReset();
 
         var levelState = GetComponent<Level>().LevelState;
@@ -44,7 +49,7 @@ public class ReactionLogic : MonoBehaviour
         }
     }
 
-    private void ProcessReactions()
+    private IEnumerator ProcessReactions()
     {
         while (true)
         {
@@ -55,11 +60,19 @@ public class ReactionLogic : MonoBehaviour
 
             RotateOrReset(false);
 
+            RestartTimer();
+
             foreach (var actionList in currentActions)
             {
                 for (var index = 0; index < actionList.Value.Count; index++)
                 {
                     actionList.Value[index].Invoke();
+
+                    if (stopwatch.ElapsedMilliseconds >= maximumProcessingTimeInMilliseconds)
+                    {
+                        yield return null;
+                        RestartTimer();
+                    }
                 }
             }
         }
@@ -69,5 +82,12 @@ public class ReactionLogic : MonoBehaviour
     {
         currentActions = reset ? null : futureActions;
         futureActions = new Dictionary<ReactionPriority, List<Action>>();
+    }
+
+    private void RestartTimer()
+    {
+        maximumProcessingTimeInMilliseconds = (long)((Time.smoothDeltaTime * 1000f) * percentageOfFrameTime);
+        stopwatch.Reset();
+        stopwatch.Start();
     }
 }
