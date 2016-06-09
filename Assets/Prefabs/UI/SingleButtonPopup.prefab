@@ -10,8 +10,8 @@ GameObject:
   - 224: {fileID: 22470864}
   - 222: {fileID: 22244706}
   - 114: {fileID: 11495438}
-  m_Layer: 5
-  m_Name: Text
+  m_Layer: 31
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ GameObject:
   - 224: {fileID: 22483462}
   - 222: {fileID: 22237366}
   - 114: {fileID: 11475926}
-  m_Layer: 5
+  m_Layer: 31
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - 224: {fileID: 22448532}
   - 222: {fileID: 22245110}
   - 114: {fileID: 11420126}
-  m_Layer: 5
+  m_Layer: 31
   m_Name: SingleButtonPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,8 +62,8 @@ GameObject:
   - 222: {fileID: 22229336}
   - 114: {fileID: 11419512}
   - 114: {fileID: 11468992}
-  m_Layer: 5
-  m_Name: PlayButton
+  m_Layer: 31
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ GameObject:
   - 222: {fileID: 22250314}
   - 114: {fileID: 11489822}
   - 114: {fileID: 11471326}
-  m_Layer: 5
+  m_Layer: 31
   m_Name: CancelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
