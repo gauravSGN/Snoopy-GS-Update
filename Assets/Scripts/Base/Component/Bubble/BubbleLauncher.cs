@@ -4,12 +4,15 @@ using System.Collections.Generic;
 
 public class BubbleLauncher : MonoBehaviour
 {
+    public delegate GameObject ModifyShot(GameObject gameObject);
+
     public GameObject[] locations;
     public float launchSpeed;
     public Level level;
     public AimLine aimLine;
 
     private GameObject[] nextBubbles;
+    private List<ModifyShot> shotModifiers;
 
     public void CycleQueue()
     {
@@ -20,6 +23,7 @@ public class BubbleLauncher : MonoBehaviour
     protected void Start()
     {
         nextBubbles = new GameObject[locations.Length];
+        shotModifiers = ResetShotModifiers();
 
         CreateBubbles();
         SetAimLineColor();
@@ -53,7 +57,11 @@ public class BubbleLauncher : MonoBehaviour
         var rigidBody = nextBubbles[0].GetComponent<Rigidbody2D>();
 
         nextBubbles[0].transform.parent = null;
-        nextBubbles[0].AddComponent<BubbleSnap>();
+
+        foreach (var modifier in shotModifiers)
+        {
+            modifier(nextBubbles[0]);
+        }
 
         rigidBody.isKinematic = false;
         rigidBody.velocity = direction;
@@ -63,6 +71,7 @@ public class BubbleLauncher : MonoBehaviour
         EventDispatcher.Instance.Dispatch(new BubbleFiredEvent(nextBubbles[0]));
 
         nextBubbles[0] = null;
+        shotModifiers = ResetShotModifiers();
     }
 
     private void ReadyNextBubble()
@@ -111,5 +120,16 @@ public class BubbleLauncher : MonoBehaviour
     {
         gameObject.GetComponent<BoxCollider2D>().enabled = true;
         ReadyNextBubble();
+    }
+
+    private List<ModifyShot> ResetShotModifiers()
+    {
+        return new List<ModifyShot>(){AddBubbleSnap};
+    }
+
+    private GameObject AddBubbleSnap(GameObject gameObject)
+    {
+        gameObject.AddComponent<BubbleSnap>();
+        return gameObject;
     }
 }
