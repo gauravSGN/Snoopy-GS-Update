@@ -36,6 +36,7 @@ public class Lantern : MonoBehaviour
     public void AddExplosion(GameObject bubble)
     {
         bubble.AddComponent<BubbleExplode>();
+        bubble.GetComponent<BubbleAttachments>().Model.type = BubbleType.Steel;
     }
 
     private void UpdateState(LevelState levelState)

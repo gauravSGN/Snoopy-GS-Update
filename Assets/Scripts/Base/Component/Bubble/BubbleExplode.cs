@@ -16,14 +16,12 @@ public class BubbleExplode : MonoBehaviour
     {
         if (collision.collider.tag == "Bubble")
         {
-            Debug.Log("Am I getting fired");
             BubbleReactionEvent.Dispatch(ReactionPriority.Explode, this.Explode);
         }
     }
 
     public void Explode()
     {
-        Debug.Log(sizeMultiplier.ToString());
         foreach (var hit in Physics2D.CircleCastAll(transform.position, BUBBLE_SPACING * sizeMultiplier, Vector2.up, 0.0f))
         {
             if (hit.collider.gameObject.tag == "Bubble")
