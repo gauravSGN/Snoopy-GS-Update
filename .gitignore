@@ -6,4 +6,4 @@ obj
 *.sln
 *.userprefs
 *build*
-*.vscode/
+*.vscode/*
