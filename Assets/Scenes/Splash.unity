@@ -171,7 +171,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 2129657073}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1 &220103970
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,10 +406,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 154278, guid: 4deabe78d58444ac38f9261bb6a4cbd5, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4deabe78d58444ac38f9261bb6a4cbd5, type: 2}
   m_IsPrefabParent: 0
@@ -428,6 +424,7 @@ GameObject:
   - 4: {fileID: 768292219}
   - 114: {fileID: 768292221}
   - 114: {fileID: 768292220}
+  - 114: {fileID: 768292222}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -446,8 +443,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 2129657073}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!114 &768292220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +477,17 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
+--- !u!114 &768292222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 768292218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7c1d583ad5c453e86f1baa51bef486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2129657072
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +516,6 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 220103971}
-  - {fileID: 768292219}
   - {fileID: 11738682}
   m_Father: {fileID: 0}
   m_RootOrder: 1
