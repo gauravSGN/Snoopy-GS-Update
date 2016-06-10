@@ -28,8 +28,14 @@ public class Lantern : MonoBehaviour
     {
         if (progress == 1)
         {
+            launcher.GetComponent<BubbleLauncher>().AddShotModifier(AddExplosion);
             Reset();
         }
+    }
+
+    public void AddExplosion(GameObject bubble)
+    {
+        bubble.AddComponent<BubbleExplode>();
     }
 
     private void UpdateState(LevelState levelState)

@@ -9,4 +9,5 @@ public enum BubbleType
     Red = 2,
     Green = 3,
     Steel = 4,
+    Exploding = 5,
 }

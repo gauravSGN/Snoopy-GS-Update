@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class BubbleAttachments : MonoBehaviour
 {
@@ -17,6 +18,17 @@ public class BubbleAttachments : MonoBehaviour
         model.OnDisconnected += DisconnectedHandler;
     }
 
+    public void MarkForDestruction()
+    {
+        StartCoroutine(SpecialDestroy());
+    }
+
+    public IEnumerator<YieldInstruction> SpecialDestroy()
+    {
+        yield return null;
+        Destroy(gameObject);
+    }
+
     private void RemoveHandlers()
     {
         Model.OnPopped -= PoppedHandler;
@@ -28,7 +40,7 @@ public class BubbleAttachments : MonoBehaviour
         RemoveHandlers();
 
         transform.position = new Vector3(-1000.0f, -1000.0f);
-        Destroy(gameObject, 0.1f);
+        MarkForDestruction();
     }
 
     private void DisconnectedHandler()

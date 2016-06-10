@@ -16,7 +16,7 @@ public class BoundDetector : MonoBehaviour
         Down = 1,
     };
 
-    private List<GameObject> bubbles = new List<GameObject>();
+    public List<GameObject> bubbles = new List<GameObject>();
 
     protected void Update()
     {

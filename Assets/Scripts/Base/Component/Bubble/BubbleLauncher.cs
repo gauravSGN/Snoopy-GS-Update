@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class BubbleLauncher : MonoBehaviour
 {
-    public delegate GameObject ModifyShot(GameObject gameObject);
+    public delegate void ModifyShot(GameObject bubble);
 
     public GameObject[] locations;
     public float launchSpeed;
@@ -18,6 +18,11 @@ public class BubbleLauncher : MonoBehaviour
     {
         CycleLocalQueue();
         level.LevelState.bubbleQueue.Rotate(nextBubbles.Length);
+    }
+
+    public void AddShotModifier(ModifyShot modifier)
+    {
+        shotModifiers.Add(modifier);
     }
 
     protected void Start()
@@ -53,15 +58,14 @@ public class BubbleLauncher : MonoBehaviour
 
     private void FireBubbleAt(Vector2 point)
     {
-        var direction = (point - (Vector2)locations[0].transform.position).normalized * launchSpeed;
-        var rigidBody = nextBubbles[0].GetComponent<Rigidbody2D>();
-
-        nextBubbles[0].transform.parent = null;
-
         foreach (var modifier in shotModifiers)
         {
             modifier(nextBubbles[0]);
         }
+
+        var direction = (point - (Vector2)locations[0].transform.position).normalized * launchSpeed;
+        var rigidBody = nextBubbles[0].GetComponent<Rigidbody2D>();
+        nextBubbles[0].transform.parent = null;
 
         rigidBody.isKinematic = false;
         rigidBody.velocity = direction;
@@ -127,9 +131,8 @@ public class BubbleLauncher : MonoBehaviour
         return new List<ModifyShot>(){AddBubbleSnap};
     }
 
-    private GameObject AddBubbleSnap(GameObject gameObject)
+    private void AddBubbleSnap(GameObject bubble)
     {
-        gameObject.AddComponent<BubbleSnap>();
-        return gameObject;
+        bubble.AddComponent<BubbleSnap>();
     }
 }
