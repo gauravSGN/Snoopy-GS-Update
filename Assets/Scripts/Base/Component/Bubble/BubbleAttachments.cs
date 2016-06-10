@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public class BubbleAttachments : MonoBehaviour
 {
+    public const int UPDATES_BEFORE_DESTRUCTION = 2;
+    public const int DO_NOT_DESTRUCT = -1;
+
     public Bubble Model { get; private set; }
+
+    private int updatesTilDestruction = -1;
 
     public void Attach(GameObject other)
     {
@@ -20,13 +24,23 @@ public class BubbleAttachments : MonoBehaviour
 
     public void MarkForDestruction()
     {
-        StartCoroutine(SpecialDestroy());
+        updatesTilDestruction = UPDATES_BEFORE_DESTRUCTION;
     }
 
-    public IEnumerator<YieldInstruction> SpecialDestroy()
+    protected void FixedUpdate()
     {
-        yield return null;
-        Destroy(gameObject);
+        if (updatesTilDestruction != DO_NOT_DESTRUCT)
+        {
+            if (updatesTilDestruction > 0)
+            {
+                updatesTilDestruction--;
+            }
+            else
+            {
+                RemoveHandlers();
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void RemoveHandlers()

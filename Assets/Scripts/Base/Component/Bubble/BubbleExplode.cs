@@ -7,14 +7,19 @@ public class BubbleExplode : MonoBehaviour
 
     public int sizeMultiplier = 2;
 
+    public void Start()
+    {
+        EventDispatcher.Instance.AddEventHandler<BubbleSettlingEvent>(OnSettling);
+    }
+
     public void Setup(int explosionSize)
     {
         sizeMultiplier = explosionSize;
     }
 
-    protected void OnCollisionEnter2D(Collision2D collision)
+    public void OnSettling(GameEvent gameEvent)
     {
-        if (collision.collider.tag == "Bubble")
+        if (Physics2D.CircleCastAll(transform.position, BUBBLE_SPACING * sizeMultiplier, Vector2.up, 0.0f).Length > 0)
         {
             BubbleReactionEvent.Dispatch(ReactionPriority.Explode, this.Explode);
         }
@@ -22,6 +27,8 @@ public class BubbleExplode : MonoBehaviour
 
     public void Explode()
     {
+        EventDispatcher.Instance.RemoveEventHandler<BubbleSettlingEvent>(OnSettling);
+
         foreach (var hit in Physics2D.CircleCastAll(transform.position, BUBBLE_SPACING * sizeMultiplier, Vector2.up, 0.0f))
         {
             if (hit.collider.gameObject.tag == "Bubble")

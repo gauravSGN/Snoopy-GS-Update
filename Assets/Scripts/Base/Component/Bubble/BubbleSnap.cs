@@ -36,6 +36,7 @@ public class BubbleSnap : MonoBehaviour
             collider.radius /= RADIUS_FACTOR;
 
             Destroy(this);
+            EventDispatcher.Instance.Dispatch(new BubbleSettlingEvent());
 
             GetComponent<BubbleAttachments>().Model.CheckForMatches();
             EventDispatcher.Instance.Dispatch(new BubbleSettledEvent() { shooter = gameObject });
