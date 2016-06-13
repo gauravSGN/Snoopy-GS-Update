@@ -43,11 +43,9 @@ public class SoundAfterMatch : MonoBehaviour
 
     bool ConditionMet()
     {
-        bool conditionMet = false;
+        bool equalToConditionMet = ((condition == ThreshholdCondition.EqualTo) && (counter == bubbleMatchThreshold));
+        bool greaterThanOrEqualToConditionMet = ((condition == ThreshholdCondition.GreaterThanOrEqualTo) && (counter >= bubbleMatchThreshold));
 
-        conditionMet = conditionMet || ((condition == ThreshholdCondition.EqualTo) && (counter == bubbleMatchThreshold));
-        conditionMet = conditionMet || ((condition == ThreshholdCondition.GreaterThanOrEqualTo) && (counter >= bubbleMatchThreshold));
-
-        return conditionMet;
+        return equalToConditionMet || greaterThanOrEqualToConditionMet;
     }
 }
