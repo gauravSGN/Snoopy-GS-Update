@@ -12,7 +12,7 @@ public class BubbleQueue
         BubbleType.Green,
     };
 
-    private List<BubbleType> queued = new List<BubbleType>();
+    private readonly List<BubbleType> queued = new List<BubbleType>();
 
     public BubbleType GetNext()
     {

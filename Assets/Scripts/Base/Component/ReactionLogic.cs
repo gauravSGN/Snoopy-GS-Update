@@ -11,10 +11,10 @@ public class ReactionLogic : MonoBehaviour
     public string mapSceneName;
     public float percentageOfFrameTime = 0.1f;
 
+    private long maximumProcessingTimeInTicks;
+    private readonly Stopwatch stopwatch = new Stopwatch();
     private SortedDictionary<ReactionPriority, List<Action>> currentActions;
     private SortedDictionary<ReactionPriority, List<Action>> futureActions;
-    private Stopwatch stopwatch = new Stopwatch();
-    private long maximumProcessingTimeInTicks;
 
     protected void Start()
     {
@@ -38,7 +38,7 @@ public class ReactionLogic : MonoBehaviour
         StartCoroutine(ProcessReactions());
         RotateOrReset();
 
-        var levelState = GetComponent<Level>().LevelState;
+        var levelState = GetComponent<Level>().levelState;
 
         if (levelState.remainingBubbles <= 0)
         {
@@ -55,7 +55,7 @@ public class ReactionLogic : MonoBehaviour
     {
         while (true)
         {
-            if ((currentActions != null) && futureActions.Count == 0)
+            if ((currentActions != null) && (futureActions.Count == 0))
             {
                 break;
             }

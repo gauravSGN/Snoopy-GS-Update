@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class BubbleQueueTests
 {
     private BubbleQueue bubbleQueue;
-    private int[] invalidIndexes =
+    private readonly int[] invalidIndexes =
     {
         -1,
         -1000,

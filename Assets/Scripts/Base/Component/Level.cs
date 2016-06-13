@@ -2,12 +2,11 @@
 
 public class Level : MonoBehaviour
 {
-    public LevelState LevelState { get { return levelState; } }
+    public readonly LevelState levelState = new LevelState();
 
     public TextAsset levelData;
     public LevelLoader loader;
     public BubbleFactory bubbleFactory;
-    private LevelState levelState = new LevelState();
 
     protected void Start()
     {

@@ -8,8 +8,8 @@ public class EventDispatcher : MonoBehaviour
 
     private static EventDispatcher instance;
 
-    private Dictionary<Type, List<object>> handlers = new Dictionary<Type, List<object>>();
-    private Dictionary<Type, List<object>> pools = new Dictionary<Type, List<object>>();
+    private readonly Dictionary<Type, List<object>> handlers = new Dictionary<Type, List<object>>();
+    private readonly Dictionary<Type, List<object>> pools = new Dictionary<Type, List<object>>();
 
     public void OnEnable()
     {
