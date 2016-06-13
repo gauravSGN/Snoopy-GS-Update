@@ -1,4 +1,3 @@
-using UnityEngine;
 using System;
 
 public class BubbleReactionEvent : GameEvent
@@ -13,6 +12,6 @@ public class BubbleReactionEvent : GameEvent
         gameEvent.priority = priority;
         gameEvent.action = action;
 
-        EventDispatcher.Instance.Dispatch(gameEvent);
+        EventDispatcher.Instance.DispatchPooled(gameEvent);
     }
 }

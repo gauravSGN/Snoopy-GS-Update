@@ -11,7 +11,7 @@ public class ReactionLogic : MonoBehaviour
     private Dictionary<ReactionPriority, List<Action>> currentActions;
     private Dictionary<ReactionPriority, List<Action>> futureActions;
     private Stopwatch stopwatch = new Stopwatch();
-    private long maximumProcessingTimeInMilliseconds;
+    private long maximumProcessingTimeInTicks;
 
     protected void Start()
     {
@@ -28,8 +28,6 @@ public class ReactionLogic : MonoBehaviour
         }
 
         futureActions[gameEvent.priority].Add(gameEvent.action);
-
-        EventDispatcher.Instance.AddPooledEvent<BubbleReactionEvent>(gameEvent);
     }
 
     private void OnBubbleSettled(BubbleSettledEvent gameEvent)
@@ -68,7 +66,7 @@ public class ReactionLogic : MonoBehaviour
                 {
                     actionList.Value[index].Invoke();
 
-                    if (stopwatch.ElapsedMilliseconds >= maximumProcessingTimeInMilliseconds)
+                    if (stopwatch.ElapsedTicks >= maximumProcessingTimeInTicks)
                     {
                         yield return null;
                         RestartTimer();
@@ -86,7 +84,7 @@ public class ReactionLogic : MonoBehaviour
 
     private void RestartTimer()
     {
-        maximumProcessingTimeInMilliseconds = (long)((Time.smoothDeltaTime * 1000f) * percentageOfFrameTime);
+        maximumProcessingTimeInTicks = (long)(Time.smoothDeltaTime * percentageOfFrameTime * Stopwatch.Frequency);
         stopwatch.Reset();
         stopwatch.Start();
     }

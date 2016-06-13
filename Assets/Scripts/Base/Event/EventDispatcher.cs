@@ -23,20 +23,7 @@ public class EventDispatcher : MonoBehaviour
 
     public void AddEventHandler<T>(Action<T> handler) where T : GameEvent
     {
-        var eventType = typeof(T);
-        List<object> handlerList;
-
-        if (handlers.ContainsKey(eventType))
-        {
-            handlerList = handlers[eventType];
-        }
-        else
-        {
-            handlerList = new List<object>();
-            handlers.Add(eventType, handlerList);
-        }
-
-        handlerList.Add(handler);
+        DictionaryInsert(handlers, typeof(T), handler);
     }
 
     public void RemoveEventHandler<T>(Action<T> handler) where T : GameEvent
@@ -69,6 +56,12 @@ public class EventDispatcher : MonoBehaviour
         }
     }
 
+    public void DispatchPooled<T>(T gameEvent) where T : GameEvent
+    {
+        Dispatch(gameEvent);
+        AddPooledEvent(gameEvent);
+    }
+
     public T GetPooledEvent<T>() where T : GameEvent
     {
         var eventType = typeof(T);
@@ -89,16 +82,20 @@ public class EventDispatcher : MonoBehaviour
 
     public void AddPooledEvent<T>(T gameEvent) where T : GameEvent
     {
-        var eventType = typeof(T);
+        DictionaryInsert(pools, typeof(T), gameEvent);
+    }
 
-        if (!pools.ContainsKey(eventType))
+    private void DictionaryInsert<K, V>(Dictionary<K, List<V>> dictionary, K key, V item)
+    {
+        if (!dictionary.ContainsKey(key))
         {
-            pools[eventType] = new List<object>();
+            dictionary.Add(key, new List<V>());
         }
 
-        if (!pools[eventType].Contains(gameEvent))
+        var list = dictionary[key];
+        if (!list.Contains(item))
         {
-            pools[eventType].Add(gameEvent);
+            list.Add(item);
         }
     }
 }
