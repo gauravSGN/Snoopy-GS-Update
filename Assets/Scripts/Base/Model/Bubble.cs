@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System;
 
 public class Bubble
 {
@@ -52,6 +50,7 @@ public class Bubble
         {
             foreach (var bubble in bubbleList)
             {
+                detachList.Remove(bubble);
                 bubble.RemoveAllConnections();
                 BubbleReactionEvent.Dispatch(ReactionPriority.Pop, bubble.PopBubble);
             }

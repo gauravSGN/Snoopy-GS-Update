@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Level : MonoBehaviour
 {
@@ -12,6 +11,12 @@ public class Level : MonoBehaviour
 
     protected void Start()
     {
+        if (GlobalState.Instance && GlobalState.Instance.nextLevelData)
+        {
+            levelData = GlobalState.Instance.nextLevelData;
+            GlobalState.Instance.nextLevelData = null;
+        }
+
         levelState.typeTotals = loader.LoadLevel(levelData);
 
         levelState.score = 0;
