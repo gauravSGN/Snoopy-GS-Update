@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public enum BubbleType
+﻿public enum BubbleType
 {
     Ceiling = -1,
     Blue = 0,
