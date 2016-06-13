@@ -28,8 +28,6 @@ public class ReactionLogic : MonoBehaviour
         }
 
         futureActions[gameEvent.priority].Add(gameEvent.action);
-
-        EventDispatcher.Instance.AddPooledEvent<BubbleReactionEvent>(gameEvent);
     }
 
     private void OnBubbleSettled(BubbleSettledEvent gameEvent)
