@@ -11,8 +11,8 @@ public class ReactionLogic : MonoBehaviour
     public string mapSceneName;
     public float percentageOfFrameTime = 0.1f;
 
-    private Dictionary<ReactionPriority, List<Action>> currentActions;
-    private Dictionary<ReactionPriority, List<Action>> futureActions;
+    private SortedDictionary<ReactionPriority, List<Action>> currentActions;
+    private SortedDictionary<ReactionPriority, List<Action>> futureActions;
     private Stopwatch stopwatch = new Stopwatch();
     private long maximumProcessingTimeInTicks;
 
@@ -66,7 +66,7 @@ public class ReactionLogic : MonoBehaviour
 
             foreach (var actionList in currentActions)
             {
-                for (var index = 0; index < actionList.Value.Count; index++)
+                for (int index = 0, maxIndex = actionList.Value.Count; index < maxIndex; index++)
                 {
                     actionList.Value[index].Invoke();
 
@@ -83,7 +83,7 @@ public class ReactionLogic : MonoBehaviour
     private void RotateOrReset(bool reset = true)
     {
         currentActions = reset ? null : futureActions;
-        futureActions = new Dictionary<ReactionPriority, List<Action>>();
+        futureActions = new SortedDictionary<ReactionPriority, List<Action>>();
     }
 
     private void RestartTimer()

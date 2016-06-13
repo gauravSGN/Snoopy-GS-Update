@@ -14,13 +14,13 @@ public class SoundAfterMatch : MonoBehaviour
         GreaterThanOrEqualTo
     }
 
-    private AudioSource audio;
+    private AudioSource audioSource;
     private System.Random rnd = new System.Random();
     private int counter = 0;
 
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         EventDispatcher.Instance.AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
         EventDispatcher.Instance.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
@@ -35,7 +35,7 @@ public class SoundAfterMatch : MonoBehaviour
     {
         if (ConditionMet() && (UnityEngine.Random.value <= chanceToPlay))
         {
-            audio.PlayOneShot(sounds[rnd.Next(sounds.Length)], 0.7f);
+            audioSource.PlayOneShot(sounds[rnd.Next(sounds.Length)], 0.7f);
         }
 
         counter = 0;
