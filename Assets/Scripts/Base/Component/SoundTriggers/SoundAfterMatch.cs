@@ -34,13 +34,21 @@ public class SoundAfterMatch : MonoBehaviour
 
     void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)
     {
-        if ((((condition == ThreshholdCondition.EqualTo) && (counter == bubbleMatchThreshold)) ||
-             ((condition == ThreshholdCondition.GreaterThanOrEqualTo) && (counter >= bubbleMatchThreshold))) &&
-            (UnityEngine.Random.value <= chanceToPlay))
+        if (ConditionMet() && (UnityEngine.Random.value <= chanceToPlay))
         {
             audio.PlayOneShot(sounds[rnd.Next(sounds.Length)], 0.7f);
         }
 
         counter = 0;
+    }
+
+    bool ConditionMet()
+    {
+        bool conditionMet = false;
+
+        conditionMet = conditionMet || ((condition == ThreshholdCondition.EqualTo) && (counter == bubbleMatchThreshold));
+        conditionMet = conditionMet || ((condition == ThreshholdCondition.GreaterThanOrEqualTo) && (counter >= bubbleMatchThreshold));
+
+        return conditionMet;
     }
 }
