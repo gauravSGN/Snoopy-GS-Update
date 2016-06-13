@@ -379,7 +379,7 @@ GameObject:
   - 4: {fileID: 397422953}
   - 61: {fileID: 397422955}
   - 114: {fileID: 397422954}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Maximum Ball Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24c2819c2fdc48799de3505a696b34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  percentageOfFrameTime: 0.1
+  percentageOfFrameTime: 0.25
 --- !u!1001 &1356401753
 Prefab:
   m_ObjectHideFlags: 0
@@ -1290,7 +1290,7 @@ GameObject:
   - 4: {fileID: 1512320683}
   - 61: {fileID: 1512320684}
   - 114: {fileID: 1512320685}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Minimum Ball Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,7 +7,6 @@ public class BoundDetector : MonoBehaviour
 
     public GameObject gameView;
     public float panSpeed;
-    public int bubbleCount;
     public Direction direction;
 
     public enum Direction
@@ -20,8 +19,8 @@ public class BoundDetector : MonoBehaviour
 
     protected void Update()
     {
-        var movingUp = (direction == Direction.Down) && (bubbleCount == 0);
-        var movingDown = (direction == Direction.Up) && (bubbleCount > 1);
+        var movingDown = (direction == Direction.Down) && (bubbles.Count == 0);
+        var movingUp = (direction == Direction.Up) && (bubbles.Count > 0);
 
         if ((gameView != null) && (movingUp || movingDown))
         {
@@ -45,7 +44,6 @@ public class BoundDetector : MonoBehaviour
         if ((collider.gameObject.tag == "Bubble") && !bubbles.Contains(collider.gameObject))
         {
             bubbles.Add(collider.gameObject);
-            bubbleCount++;
         }
     }
 
@@ -54,7 +52,6 @@ public class BoundDetector : MonoBehaviour
         if ((collider.gameObject.tag == "Bubble") && bubbles.Contains(collider.gameObject))
         {
             bubbles.Remove(collider.gameObject);
-            bubbleCount--;
         }
     }
 }

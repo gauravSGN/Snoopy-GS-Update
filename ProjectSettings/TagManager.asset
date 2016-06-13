@@ -15,10 +15,10 @@ TagManager:
   - 
   - 
   - Falling Objects
-  - Boundary
+  - Walls
   - Game Objects
   - Culling Boundary
-  - 
+  - Gameview Boundary
   - 
   - 
   - 

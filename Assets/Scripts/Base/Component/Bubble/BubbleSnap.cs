@@ -6,12 +6,15 @@ public class BubbleSnap : MonoBehaviour
 {
     private const float BUBBLE_SPACING = 0.25f;
     private const float RADIUS_FACTOR = 0.5f;
+    private const string ATTACHED_LAYER = "Game Objects";
+    private const string TRAVELING_LAYER = "Default";
 
     private Rigidbody2D rigidBody;
     private new CircleCollider2D collider;
 
     protected void Start()
     {
+        gameObject.layer = LayerMask.NameToLayer(TRAVELING_LAYER);
         rigidBody = GetComponent<Rigidbody2D>();
         collider = GetComponent<CircleCollider2D>();
 
@@ -34,6 +37,7 @@ public class BubbleSnap : MonoBehaviour
             rigidBody.isKinematic = true;
 
             collider.radius /= RADIUS_FACTOR;
+            gameObject.layer = LayerMask.NameToLayer(ATTACHED_LAYER);
 
             Destroy(this);
             EventDispatcher.Instance.Dispatch(new BubbleSettlingEvent());
