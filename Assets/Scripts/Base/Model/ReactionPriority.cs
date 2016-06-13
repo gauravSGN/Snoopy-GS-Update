@@ -1,6 +1,3 @@
-using UnityEngine;
-using System.Collections;
-
 public enum ReactionPriority
 {
     Explode = 9,

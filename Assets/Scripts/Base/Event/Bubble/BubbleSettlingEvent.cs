@@ -1,6 +1,3 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class BubbleSettlingEvent : GameEvent
+﻿public class BubbleSettlingEvent : GameEvent
 {
 }
