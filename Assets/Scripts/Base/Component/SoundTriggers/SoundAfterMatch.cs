@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class AfterMatch : MonoBehaviour
+public class SoundAfterMatch : MonoBehaviour
 {
     public AudioClip[] sounds;
     public ThreshholdCondition condition;
