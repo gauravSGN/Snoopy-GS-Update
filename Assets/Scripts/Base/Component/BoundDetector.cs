@@ -7,7 +7,7 @@ public class BoundDetector : MonoBehaviour
 
     public GameObject gameView;
     public float panSpeed;
-    public int bubbleCount = 0;
+    public int bubbleCount;
     public Direction direction;
 
     public enum Direction
@@ -20,9 +20,10 @@ public class BoundDetector : MonoBehaviour
 
     protected void Update()
     {
-        if ((gameView != null) &&
-           (((direction == Direction.Down) && (bubbleCount == 0)) ||
-            ((direction == Direction.Up) && (bubbleCount > 1))))
+        var movingUp = (direction == Direction.Down) && (bubbleCount == 0);
+        var movingDown = (direction == Direction.Up) && (bubbleCount > 1);
+
+        if ((gameView != null) && (movingUp || movingDown))
         {
             moveGameView();
         }
@@ -32,7 +33,7 @@ public class BoundDetector : MonoBehaviour
     {
         var transform = gameView.transform;
 
-        if ((transform.position.y < CEILING))
+        if ((transform.position.y < CEILING) || (direction == Direction.Up))
         {
             var yTransform = (transform.position.y + ((Time.deltaTime * panSpeed) * (int)direction));
             transform.position = new Vector3(transform.position.x, yTransform);

@@ -8,7 +8,6 @@ public class Level : MonoBehaviour
     public TextAsset levelData;
     public LevelLoader loader;
     public BubbleFactory bubbleFactory;
-
     private LevelState levelState = new LevelState();
 
     protected void Start()
@@ -25,15 +24,15 @@ public class Level : MonoBehaviour
 
     private void OnBubbleFired(BubbleFiredEvent gameEvent)
     {
+        levelState.UpdateTypeTotals(gameEvent.bubble.GetComponent<BubbleAttachments>().Model.type, 1);
         levelState.remainingBubbles--;
-        levelState.typeTotals[gameEvent.bubble.GetComponent<BubbleAttachments>().Model.definition.type]++;
         levelState.NotifyListeners();
     }
 
     private void OnBubbleDestroyed(BubbleDestroyedEvent gameEvent)
     {
+        levelState.UpdateTypeTotals(gameEvent.bubble.GetComponent<BubbleAttachments>().Model.type, -1);
         levelState.score += gameEvent.score;
-        levelState.typeTotals[gameEvent.bubble.GetComponent<BubbleAttachments>().Model.definition.type]--;
         levelState.NotifyListeners();
     }
 }
