@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Observable
 {
-    private List<object> listeners = new List<object>();
+    private readonly List<object> listeners = new List<object>();
 
     public void AddListener(object action)
     {
