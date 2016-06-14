@@ -142,6 +142,13 @@ public class LevelLoader : MonoBehaviour
                 pair.Value.GetComponent<BubbleAttachments>().Attach(ceilingBubbleMap [Mathf.Min(x, maxBubblesForOddRow - 1)]);
             }
         }
+
+        foreach (var pair in ceilingBubbleMap)
+        {
+            var model = pair.Value.GetComponent<BubbleAttachments>().Model;
+            model.DistanceFromRoot = 0;
+            model.PropagateRootDistance();
+        }
     }
 
     private void ComputeRootDistances(Dictionary<int, GameObject> bubbleMap)
