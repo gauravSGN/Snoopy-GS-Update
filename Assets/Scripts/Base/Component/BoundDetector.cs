@@ -5,17 +5,23 @@ public class BoundDetector : MonoBehaviour
 {
     private const float CEILING = 0.0f;
 
-    public GameObject gameView;
-    public float panSpeed;
-    public Direction direction;
+    [SerializeField]
+    private GameObject gameView;
 
-    public enum Direction
+    [SerializeField]
+    private float panSpeed;
+
+    [SerializeField]
+    private Direction direction;
+
+    [SerializeField]
+    private List<GameObject> bubbles = new List<GameObject>();
+
+    private enum Direction
     {
         Up = -1,
         Down = 1,
     };
-
-    public List<GameObject> bubbles = new List<GameObject>();
 
     protected void Update()
     {

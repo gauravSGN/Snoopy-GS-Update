@@ -1,13 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class Level : MonoBehaviour
 {
     public readonly LevelState levelState = new LevelState();
-
-    public TextAsset levelData;
-    public LevelLoader loader;
     public BubbleFactory bubbleFactory;
+
+    [SerializeField]
+    private TextAsset levelData;
+
+    [SerializeField]
+    private LevelLoader loader;
 
     protected void Start()
     {

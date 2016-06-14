@@ -3,14 +3,29 @@ using System.Collections.Generic;
 
 public class AimLine : MonoBehaviour
 {
-    public GameObject launchOrigin;
-    public GameConfig config;
-    public Texture2D texture;
-    public float length;
-    public float lineWidth;
-    public float dotSpacing;
-    public float moveSpeed;
-    public float wallBounceDistance;
+    [SerializeField]
+    private GameObject launchOrigin;
+
+    [SerializeField]
+    private GameConfig config;
+
+    [SerializeField]
+    private Texture2D texture;
+
+    [SerializeField]
+    private float length;
+
+    [SerializeField]
+    private float lineWidth;
+
+    [SerializeField]
+    private float dotSpacing;
+
+    [SerializeField]
+    private float moveSpeed;
+
+    [SerializeField]
+    private float wallBounceDistance;
 
     private Vector3 aimTarget;
     private readonly List<Vector3> points = new List<Vector3>();
@@ -103,7 +118,6 @@ public class AimLine : MonoBehaviour
         var direction = (aimTarget - origin).normalized;
         var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale / 2.0f;
         var layerMask = (1 << (int)Layers.GameObjects | 1 << (int)Layers.Walls);
-
         int reflections = 1;
 
         points.Add(origin + config.bubbles.size * direction * 2.0f);

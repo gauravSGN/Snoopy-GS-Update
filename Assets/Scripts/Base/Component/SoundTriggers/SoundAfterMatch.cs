@@ -3,18 +3,25 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class SoundAfterMatch : MonoBehaviour
 {
-    public AudioClip[] sounds;
-    public ThreshholdCondition condition;
-    public int bubbleMatchThreshold;
-    public float chanceToPlay;
+    [SerializeField]
+    private AudioClip[] sounds;
 
-    public enum ThreshholdCondition
+    [SerializeField]
+    private ThreshholdCondition condition;
+
+    [SerializeField]
+    private int bubbleMatchThreshold;
+
+    [SerializeField]
+    private float chanceToPlay;
+
+    private enum ThreshholdCondition
     {
         EqualTo,
         GreaterThanOrEqualTo
     }
 
-    private AudioSource audioSource;
+    private new AudioSource audioSource;
     private System.Random rnd = new System.Random();
     private int counter = 0;
 

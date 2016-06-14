@@ -5,10 +5,17 @@ public class BubbleLauncher : MonoBehaviour
 {
     public delegate void ModifyShot(GameObject bubble);
 
-    public GameObject[] locations;
-    public float launchSpeed;
-    public Level level;
-    public AimLine aimLine;
+    [SerializeField]
+    private GameObject[] locations;
+
+    [SerializeField]
+    private float launchSpeed;
+
+    [SerializeField]
+    private Level level;
+
+    [SerializeField]
+    private AimLine aimLine;
 
     private GameObject[] nextBubbles;
     private List<ModifyShot> shotModifiers;

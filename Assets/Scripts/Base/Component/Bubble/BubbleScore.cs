@@ -2,18 +2,18 @@
 
 public class BubbleScore : MonoBehaviour
 {
-    public Bubble Model { get; private set; }
+    private Bubble model;
 
-    public void SetModel(Bubble model)
+    public void SetModel(Bubble bubbleModel)
     {
-        Model = model;
+        model = bubbleModel;
     }
 
     public void OnDestroy()
     {
-        if (Model != null)
+        if (model != null)
         {
-            EventDispatcher.Instance.Dispatch(new BubbleDestroyedEvent(Model.definition.score, gameObject));
+            EventDispatcher.Instance.Dispatch(new BubbleDestroyedEvent(model.definition.score, gameObject));
         }
     }
 }

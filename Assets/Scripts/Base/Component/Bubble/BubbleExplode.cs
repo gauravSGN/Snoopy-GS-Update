@@ -4,7 +4,8 @@ public class BubbleExplode : MonoBehaviour
 {
     private const float BUBBLE_SPACING = 0.225f;
 
-    public int sizeMultiplier = 2;
+    [SerializeField]
+    private int sizeMultiplier = 2;
 
     public void Start()
     {

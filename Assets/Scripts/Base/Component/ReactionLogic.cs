@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using System;
@@ -8,7 +8,8 @@ using System.Diagnostics;
 
 public class ReactionLogic : MonoBehaviour
 {
-    public float percentageOfFrameTime = 0.1f;
+    [SerializeField]
+    private float percentageOfFrameTime = 0.1f;
 
     private long maximumProcessingTimeInTicks;
     private readonly Stopwatch stopwatch = new Stopwatch();
