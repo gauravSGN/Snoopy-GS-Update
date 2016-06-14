@@ -25,8 +25,8 @@ public class Level : MonoBehaviour
         levelState.remainingBubbles = loader.LevelData.remainingBubble;
         levelState.NotifyListeners();
 
-        EventDispatcher.Instance.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
-        EventDispatcher.Instance.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
     }
 
     private void OnBubbleFired(BubbleFiredEvent gameEvent)
