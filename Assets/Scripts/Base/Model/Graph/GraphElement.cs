@@ -41,15 +41,12 @@ namespace Graph
             ResetDistanceFromRoot();
         }
 
-        public virtual void Connect(T node)
+        public void Connect(T node)
         {
             if (!neighbors.Contains(node))
             {
                 neighbors.Add(node);
                 node.Connect((T)this);
-
-                // Keep this list sorted for faster root searches
-                neighbors.Sort((a, b) => a.distanceFromRoot.CompareTo(b.distanceFromRoot));
             }
         }
 
@@ -73,6 +70,11 @@ namespace Graph
         public virtual void RemoveFromGraph()
         {
             DisconnectAll();
+        }
+
+        public void SortNeighbors()
+        {
+            neighbors.Sort((a, b) => a.distanceFromRoot.CompareTo(b.distanceFromRoot));
         }
 
         public void MinimizeDistanceFromRoot()

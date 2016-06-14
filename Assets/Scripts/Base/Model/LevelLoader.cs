@@ -103,6 +103,11 @@ public class LevelLoader : MonoBehaviour
         AttachBubbles(bubbleMap);
         ComputeRootDistances(bubbleMap);
 
+        foreach (var pair in bubbleMap)
+        {
+            pair.Value.GetComponent<BubbleAttachments>().Model.SortNeighbors();
+        }
+
         return bubbleTypeCount;
     }
 

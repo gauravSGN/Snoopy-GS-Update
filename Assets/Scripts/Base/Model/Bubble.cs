@@ -14,15 +14,6 @@ public class Bubble : GraphElement<Bubble>
     public BubbleType type;
     public BubbleDefinition definition;
 
-    override public void Connect(Bubble node)
-    {
-        base.Connect(node);
-
-        ResetDistanceFromRoot();
-        MinimizeDistanceFromRoot();
-        PropagateRootDistance();
-    }
-
     override public void RemoveFromGraph()
     {
         base.RemoveFromGraph();
