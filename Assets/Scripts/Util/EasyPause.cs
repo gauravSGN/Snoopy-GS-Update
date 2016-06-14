@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -7,14 +6,14 @@ using UnityEditor;
 
 
 public class EasyPause : MonoBehaviour {
-	public KeyCode pauseKey;
+    public KeyCode pauseKey;
 #if UNITY_EDITOR
-	void Update()
-	{
-		if(Input.GetKeyDown(pauseKey))
-		{
-			EditorApplication.isPaused = true;
-		}
-	}
+    void Update()
+    {
+        if(Input.GetKeyDown(pauseKey))
+        {
+            EditorApplication.isPaused = true;
+        }
+    }
 #endif
 }
