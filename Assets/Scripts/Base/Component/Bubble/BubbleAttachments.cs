@@ -52,7 +52,7 @@ public class BubbleAttachments : MonoBehaviour
         Model.OnDisconnected -= DisconnectedHandler;
     }
 
-    private void PoppedHandler()
+    private void PoppedHandler(Bubble bubble)
     {
         RemoveHandlers();
 
@@ -60,7 +60,7 @@ public class BubbleAttachments : MonoBehaviour
         MarkForDestruction();
     }
 
-    private void DisconnectedHandler()
+    private void DisconnectedHandler(Bubble bubble)
     {
         RemoveHandlers();
 

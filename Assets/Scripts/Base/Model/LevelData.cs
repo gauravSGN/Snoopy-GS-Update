@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
+using Goal;
 
 [XmlRoot("Level")]
 public class LevelData
@@ -14,6 +15,12 @@ public class LevelData
 
         [XmlAttribute("typeID")]
         public int typeID;
+
+        [XmlAttribute("normalBubbleSubType")]
+        public int contentType;
+
+        [XmlIgnore]
+        public Bubble model;
     }
 
     [XmlAttribute("remainingBubble")]
@@ -21,6 +28,9 @@ public class LevelData
 
     [XmlElement("Bubble")]
     public List<BubbleData> bubbles;
+
+    [XmlIgnore]
+    public List<LevelGoal> goals;
 
     [XmlAttribute("bombFill")]
     public float bombFill;

@@ -412,7 +412,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameView: {fileID: 1197956592}
   panSpeed: 0.5
-  bubbleCount: 0
   direction: -1
   bubbles: []
 --- !u!61 &397422955
@@ -1173,7 +1172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed578016699544ed88e56891938716a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 4900000, guid: 1838bc040b78f4c9594a57f7546ddffe, type: 3}
+  levelData: {fileID: 4900000, guid: 3a846805aa3244f5ba8e9e018d12b389, type: 3}
   loader: {fileID: 1499581533}
   bubbleFactory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
 --- !u!114 &1197956595
@@ -1478,7 +1477,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameView: {fileID: 1197956592}
   panSpeed: 1
-  bubbleCount: 0
   direction: 1
   bubbles: []
 --- !u!1 &1866197543

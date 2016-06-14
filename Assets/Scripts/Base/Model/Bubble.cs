@@ -6,10 +6,8 @@ using Graph;
 [Serializable]
 public class Bubble : GraphElement<Bubble>
 {
-    public delegate void BubbleHandler();
-
-    public event BubbleHandler OnPopped;
-    public event BubbleHandler OnDisconnected;
+    public event Action<Bubble> OnPopped;
+    public event Action<Bubble> OnDisconnected;
 
     public BubbleType type;
     public BubbleDefinition definition;
@@ -40,7 +38,7 @@ public class Bubble : GraphElement<Bubble>
     {
         if (OnPopped != null)
         {
-            OnPopped();
+            OnPopped(this);
         }
     }
 
@@ -50,7 +48,7 @@ public class Bubble : GraphElement<Bubble>
 
         if (OnDisconnected != null)
         {
-            OnDisconnected();
+            OnDisconnected(this);
         }
     }
 
