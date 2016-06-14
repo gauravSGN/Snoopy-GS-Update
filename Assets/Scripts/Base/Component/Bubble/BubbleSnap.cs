@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -23,7 +23,7 @@ public class BubbleSnap : MonoBehaviour
     {
         if (collision.collider.tag == "Bubble")
         {
-            AdjustToGrid(collision.collider.gameObject);
+            AdjustToGrid();
 
             foreach (var bubble in NearbyBubbles(transform.position))
             {
@@ -38,14 +38,14 @@ public class BubbleSnap : MonoBehaviour
             gameObject.layer = (int)Layers.GameObjects;
 
             Destroy(this);
-            EventDispatcher.Instance.Dispatch(new BubbleSettlingEvent());
+            GlobalState.Instance.EventDispatcher.Dispatch(new BubbleSettlingEvent());
 
             GetComponent<BubbleAttachments>().Model.CheckForMatches();
-            EventDispatcher.Instance.Dispatch(new BubbleSettledEvent { shooter = gameObject });
+            GlobalState.Instance.EventDispatcher.Dispatch(new BubbleSettledEvent { shooter = gameObject });
         }
     }
 
-    private void AdjustToGrid(GameObject bubble)
+    private void AdjustToGrid()
     {
         var myPosition = (Vector2)transform.position;
         var nearbyBubbles = NearbyBubbles(transform.position).Select(b => b.gameObject).ToArray();

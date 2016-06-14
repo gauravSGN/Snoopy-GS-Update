@@ -39,7 +39,7 @@ public class BubbleLauncher : MonoBehaviour
         CreateBubbles();
         SetAimLineColor();
 
-        EventDispatcher.Instance.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
     protected void OnMouseUp()
@@ -78,7 +78,7 @@ public class BubbleLauncher : MonoBehaviour
         rigidBody.gravityScale = 0.0f;
 
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        EventDispatcher.Instance.Dispatch(new BubbleFiredEvent(nextBubbles[0]));
+        GlobalState.Instance.EventDispatcher.Dispatch(new BubbleFiredEvent(nextBubbles[0]));
 
         nextBubbles[0] = null;
         shotModifiers = ResetShotModifiers();

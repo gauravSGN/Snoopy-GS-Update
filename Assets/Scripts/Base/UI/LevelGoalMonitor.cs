@@ -7,7 +7,7 @@ public class LevelGoalMonitor : MonoBehaviour
 
     protected void Start()
     {
-        EventDispatcher.Instance.AddEventHandler<GoalCreatedEvent>(GoalCreatedHandler);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<GoalCreatedEvent>(GoalCreatedHandler);
         gameObject.SetActive(false);
     }
 

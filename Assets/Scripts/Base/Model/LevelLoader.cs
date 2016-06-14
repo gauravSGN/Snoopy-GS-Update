@@ -123,7 +123,7 @@ public class LevelLoader : MonoBehaviour
 
         foreach (var goal in level.goals)
         {
-            EventDispatcher.Instance.Dispatch(new GoalCreatedEvent(goal));
+            GlobalState.Instance.EventDispatcher.Dispatch(new GoalCreatedEvent(goal));
         }
     }
 

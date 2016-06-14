@@ -21,16 +21,16 @@ public class SoundAfterMatch : MonoBehaviour
         GreaterThanOrEqualTo
     }
 
-    private new AudioSource audioSource;
-    private System.Random rnd = new System.Random();
-    private int counter = 0;
+    private AudioSource audioSource;
+    private readonly System.Random rnd = new System.Random();
+    private int counter;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
 
-        EventDispatcher.Instance.AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
-        EventDispatcher.Instance.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
     void OnBubbleReactionEvent(BubbleReactionEvent gameEvent)

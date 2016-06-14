@@ -19,8 +19,8 @@ public class ReactionLogic : MonoBehaviour
     protected void Start()
     {
         RotateOrReset();
-        EventDispatcher.Instance.AddEventHandler<BubbleSettledEvent>(OnBubbleSettled);
-        EventDispatcher.Instance.AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleSettledEvent>(OnBubbleSettled);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
     }
 
     private void OnBubbleReactionEvent(BubbleReactionEvent gameEvent)
@@ -42,11 +42,11 @@ public class ReactionLogic : MonoBehaviour
 
         if (levelState.remainingBubbles <= 0)
         {
-            EventDispatcher.Instance.Dispatch(new LevelCompleteEvent(false));
+            GlobalState.Instance.EventDispatcher.Dispatch(new LevelCompleteEvent(false));
         }
         else
         {
-            EventDispatcher.Instance.Dispatch(new ReadyForNextBubbleEvent());
+            GlobalState.Instance.EventDispatcher.Dispatch(new ReadyForNextBubbleEvent());
         }
     }
 

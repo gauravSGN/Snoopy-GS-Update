@@ -7,7 +7,7 @@ public class LevelTransition : MonoBehaviour
 
     protected void Start()
     {
-        EventDispatcher.Instance.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
     }
 
     private void OnLevelComplete(LevelCompleteEvent gameEvent)

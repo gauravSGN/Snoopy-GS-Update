@@ -9,7 +9,7 @@ public class BubbleExplode : MonoBehaviour
 
     public void Start()
     {
-        EventDispatcher.Instance.AddEventHandler<BubbleSettlingEvent>(OnSettling);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleSettlingEvent>(OnSettling);
     }
 
     public void Setup(int explosionSize)
@@ -27,7 +27,7 @@ public class BubbleExplode : MonoBehaviour
 
     public void Explode()
     {
-        EventDispatcher.Instance.RemoveEventHandler<BubbleSettlingEvent>(OnSettling);
+        GlobalState.Instance.EventDispatcher.RemoveEventHandler<BubbleSettlingEvent>(OnSettling);
 
         foreach (var hit in Physics2D.CircleCastAll(transform.position, BUBBLE_SPACING * sizeMultiplier, Vector2.up, 0.0f))
         {
