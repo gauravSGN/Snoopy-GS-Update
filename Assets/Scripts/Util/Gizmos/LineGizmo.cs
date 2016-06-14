@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class LineGizmo : FancyGizmo {
+public class LineGizmo : FancyGizmo
+{
     //cant use Tuple so we use this instead
-    private struct EndPoints{
-        public EndPoints(Vector3 start, Vector3 end){
+    private struct EndPoints
+    {
+        public EndPoints(Vector3 start, Vector3 end)
+        {
             this.start = start;
             this.end = end;
         }
@@ -18,32 +21,40 @@ public class LineGizmo : FancyGizmo {
 
     private List<EndPoints> history = new List<EndPoints>();
 
-    protected override void RecordHistory(){
-        if(endPoint != null){
+    protected override void RecordHistory()
+    {
+        if(endPoint != null)
+        {
             EndPoints toRecord = new EndPoints(transform.position, endPoint.position);
             history.Add(toRecord);
-            if(history.Count > maxHistory){
+            if(history.Count > maxHistory)
+            {
                 history.RemoveAt(0);
             }
         }
     }
 
-    void OnDrawGizmos(){
-        if(endPoint != null){
+    void OnDrawGizmos()
+    {
+        if(endPoint != null)
+        {
             EndPoints toDraw = new EndPoints(transform.position, endPoint.position);
             DrawAt(toDraw, color);
-            if(showHistory){
+            if(showHistory)
+            {
                 DrawHistory();
             }
         }
     }
 
-    private void DrawAt(EndPoints points, Color currColor){
+    private void DrawAt(EndPoints points, Color currColor)
+    {
         Vector3 start = points.start + positionOffset;
         Vector3 end = points.end + endPointOffset;
         Gizmos.color = currColor;
         Gizmos.DrawLine(start, end);
-        if(drawArrow){
+        if(drawArrow)
+        {
             float arrowHeadAngle = 20.0f;
             float arrowHeadLength = 0.25f;
             Vector3 direction = points.end - points.start;
@@ -54,8 +65,10 @@ public class LineGizmo : FancyGizmo {
         }
     }
 
-    private void DrawHistory(){
-        for(int i = 0; i < history.Count; ++i){
+    private void DrawHistory()
+    {
+        for(int i = 0; i < history.Count; ++i)
+        {
             //at idx 0 use falloffColor at Count use color
             Color currColor = Color.Lerp(historyFalloffColor, color, (float)i/history.Count);
             DrawAt(history[i], currColor);

@@ -1,24 +1,27 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿namespace FSM
+{
+    public class MessageReceivedTransition : Transition
+    {
+        public string messageName;
 
-namespace FSM {
-	public class MessageReceivedTransition : Transition {
-		public string messageName;
+        private bool ready;
 
-		private bool ready;
+        public override void OnEnter()
+        {
+            ready = false;
+        }
 
-		public override void OnEnter(){
-			ready = false;
-		}
+        public override bool IsReady()
+        {
+            return ready;
+        }
 
-		public override bool IsReady(){
-			return ready;
-		}
-
-		public override void HandleMessage(string message){
-			if(message == messageName){
-				ready = true;
-			}
-		}
-	}
+        public override void HandleMessage(string message)
+        {
+            if(message == messageName)
+            {
+                ready = true;
+            }
+        }
+    }
 }

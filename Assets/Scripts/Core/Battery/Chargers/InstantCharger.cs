@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
-public class InstantCharger : MonoBehaviour {
-	[SerializeField]
-	private Battery battery;
-	[SerializeField]
-	private float chargePercent;
+public class InstantCharger : MonoBehaviour
+{
+    [SerializeField]
+    private Battery battery;
 
-	void OnEnable() {
-		float amount = battery.totalCapacity * chargePercent;
-		battery.SetCapacity(amount);
-	}
+    [SerializeField]
+    private float chargePercent;
+
+    void OnEnable()
+    {
+        float amount = battery.totalCapacity * chargePercent;
+        battery.SetCapacity(amount);
+    }
 }
