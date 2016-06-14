@@ -3,9 +3,14 @@ using UnityEngine.UI;
 
 public class LevelStateTextUpdater : MonoBehaviour
 {
-    public Level level;
-    public string format;
-    public string fieldName;
+    [SerializeField]
+    private Level level;
+
+    [SerializeField]
+    private string format;
+
+    [SerializeField]
+    private string fieldName;
 
     private Text text;
 

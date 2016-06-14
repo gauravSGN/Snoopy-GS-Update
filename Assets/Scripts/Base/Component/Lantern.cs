@@ -1,16 +1,30 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Lantern : MonoBehaviour
 {
-    public Level level;
-    public GameObject glow;
-    public BubbleType bubbleType;
-    public GameObject launcher;
+    [SerializeField]
+    private GameObject glow;
 
-    private int max;
-    private int current;
-    private float progress;
-    private int lastBubbleCount;
+    [SerializeField]
+    private BubbleType bubbleType;
+
+    [SerializeField]
+    private Level level;
+
+    [SerializeField]
+    private GameObject launcher;
+
+    [SerializeField]
+    private int max = 0;
+
+    [SerializeField]
+    private int current = 0;
+
+    [SerializeField]
+    private float progress = 0;
+
+    [SerializeField]
+    private int lastBubbleCount = 0;
 
     public void Setup(int setMax)
     {

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 public class BubbleFactory : ScriptableObject
 {
-    public List<BubbleDefinition> bubbles;
+    [SerializeField]
+    private List<BubbleDefinition> bubbles;
 
     private Dictionary<BubbleType, BubbleDefinition> lookup;
 

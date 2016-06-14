@@ -5,13 +5,19 @@ using System.Xml.Serialization;
 
 public class LevelLoader : MonoBehaviour
 {
+    private const float COS_30_DEGREES = 0.8660254038f;
+
     public LevelData LevelData { get; private set; }
 
-    public BubbleFactory factory;
-    public GameConfig config;
-    public GameObject gameView;
+    [SerializeField]
+    private BubbleFactory factory;
 
-    private const float COS_30_DEGREES = 0.8660254038f;
+    [SerializeField]
+    private GameConfig config;
+
+    [SerializeField]
+    private GameObject gameView;
+
     private float rowDistance;
     private float topEdge;
     private int maxY;

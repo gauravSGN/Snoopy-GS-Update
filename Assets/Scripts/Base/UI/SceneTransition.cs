@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
-    public TextAsset nextLevelData;
+    [SerializeField]
+    private TextAsset nextLevelData;
 
     public void TriggerSceneTransition(string sceneName)
     {

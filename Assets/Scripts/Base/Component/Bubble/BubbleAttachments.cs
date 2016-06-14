@@ -2,8 +2,8 @@
 
 public class BubbleAttachments : MonoBehaviour
 {
-    public const int UPDATES_BEFORE_DESTRUCTION = 2;
-    public const int DO_NOT_DESTRUCT = -1;
+    private const int UPDATES_BEFORE_DESTRUCTION = 2;
+    private const int DO_NOT_DESTRUCT = -1;
 
     public Bubble Model { get { return model; } }
 
