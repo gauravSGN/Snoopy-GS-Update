@@ -1,11 +1,6 @@
 ﻿using Goal;
 
-public class GoalCreatedEvent : GameEvent
+public class GoalCreatedEvent : BaseGoalEvent
 {
-    public LevelGoal Goal { get; private set; }
-
-    public GoalCreatedEvent(LevelGoal goal)
-    {
-        Goal = goal;
-    }
+    public GoalCreatedEvent(LevelGoal goal) : base(goal) { }
 }

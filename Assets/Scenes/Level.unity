@@ -1138,6 +1138,7 @@ GameObject:
   - 4: {fileID: 1197956593}
   - 114: {fileID: 1197956594}
   - 114: {fileID: 1197956595}
+  - 114: {fileID: 1197956596}
   m_Layer: 0
   m_Name: Game View
   m_TagString: Untagged
@@ -1188,8 +1189,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24c2819c2fdc48799de3505a696b34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSceneName: Scenes/Map
   percentageOfFrameTime: 0.1
+--- !u!114 &1197956596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1197956592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a12e82966a9e42bea4ec55a66959500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapSceneName: Scenes/Map
 --- !u!1 &1223405830
 GameObject:
   m_ObjectHideFlags: 0
