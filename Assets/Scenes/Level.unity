@@ -379,7 +379,7 @@ GameObject:
   - 4: {fileID: 397422953}
   - 61: {fileID: 397422955}
   - 114: {fileID: 397422954}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Maximum Ball Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1431,7 +1431,7 @@ GameObject:
   - 4: {fileID: 1512320683}
   - 61: {fileID: 1512320684}
   - 114: {fileID: 1512320685}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Minimum Ball Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}

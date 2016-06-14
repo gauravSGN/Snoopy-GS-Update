@@ -12,6 +12,7 @@ public class BubbleSnap : MonoBehaviour
 
     protected void Start()
     {
+        gameObject.layer = (int)Layers.Default;
         rigidBody = GetComponent<Rigidbody2D>();
         collider = GetComponent<CircleCollider2D>();
 
@@ -34,6 +35,7 @@ public class BubbleSnap : MonoBehaviour
             rigidBody.isKinematic = true;
 
             collider.radius /= RADIUS_FACTOR;
+            gameObject.layer = (int)Layers.GameObjects;
 
             Destroy(this);
             EventDispatcher.Instance.Dispatch(new BubbleSettlingEvent());
@@ -81,7 +83,9 @@ public class BubbleSnap : MonoBehaviour
 
     private bool CanPlaceAtLocation(Vector2 location)
     {
-        foreach (var hit in Physics2D.CircleCastAll(location, (BUBBLE_SPACING / 2.0f) * 0.9f, Vector2.up, 0.0f, LayerMask.GetMask("Game Objects", "Boundary")))
+
+        foreach (var hit in Physics2D.CircleCastAll(location, (BUBBLE_SPACING / 2.0f) * 0.9f, Vector2.up, 0.0f,
+                                                    (1 << (int)Layers.GameObjects | 1 << (int)Layers.Walls)))
         {
             if (hit.collider.gameObject != gameObject)
             {
