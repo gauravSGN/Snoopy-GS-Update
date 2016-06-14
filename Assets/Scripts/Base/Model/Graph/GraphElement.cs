@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Graph
 {
-    public abstract class GraphElement<T> : IGraphElement where T : GraphElement<T>
+    public abstract class GraphElement<T> : GraphNode where T : GraphElement<T>
     {
         public bool IsRoot
         {
@@ -23,7 +23,7 @@ namespace Graph
         [SerializeField]
         private uint distanceFromRoot;
 
-        public IEnumerable<IGraphElement> Neighbors
+        public IEnumerable<GraphNode> Neighbors
         {
             get
             {

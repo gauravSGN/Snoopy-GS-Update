@@ -4,10 +4,10 @@ namespace Graph
 {
     public class RootFinder
     {
-        private readonly List<IGraphElement> visited = new List<IGraphElement>();
+        private readonly List<GraphNode> visited = new List<GraphNode>();
         private int count;
 
-        public IEnumerable<IGraphElement> Visited
+        public IEnumerable<GraphNode> Visited
         {
             get
             {
@@ -23,12 +23,12 @@ namespace Graph
             count = 0;
         }
 
-        public bool Contains(IGraphElement node)
+        public bool Contains(GraphNode node)
         {
             return visited.Contains(node) && (visited.IndexOf(node) < count);
         }
 
-        public bool IsConnectedToRoot(IGraphElement node)
+        public bool IsConnectedToRoot(GraphNode node)
         {
             AddVisitedNode(node);
 
@@ -49,7 +49,7 @@ namespace Graph
             return result;
         }
 
-        private void AddVisitedNode(IGraphElement node)
+        private void AddVisitedNode(GraphNode node)
         {
             if (count >= visited.Count)
             {

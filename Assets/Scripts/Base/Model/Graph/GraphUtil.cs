@@ -5,12 +5,12 @@ namespace Graph
 {
     public static class GraphUtil
     {
-        public static List<T> MatchNeighbors<T>(T node, Func<T, bool> predicate) where T : IGraphElement
+        public static List<T> MatchNeighbors<T>(T node, Func<T, bool> predicate) where T : GraphNode
         {
             return MatchNeighbors(new List<T> { node }, node, predicate);
         }
 
-        public static List<T> GetAdjacentNodes<T>(List<T> nodes) where T : IGraphElement
+        public static List<T> GetAdjacentNodes<T>(List<T> nodes) where T : GraphNode
         {
             var surrounding = new List<T>();
 
@@ -54,7 +54,7 @@ namespace Graph
             }
         }
 
-        private static List<T> MatchNeighbors<T>(List<T> matches, T node, Func<T, bool> predicate) where T : IGraphElement
+        private static List<T> MatchNeighbors<T>(List<T> matches, T node, Func<T, bool> predicate) where T : GraphNode
         {
             foreach (T neighbor in node.Neighbors)
             {

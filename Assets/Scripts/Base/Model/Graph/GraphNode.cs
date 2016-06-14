@@ -2,11 +2,11 @@
 
 namespace Graph
 {
-    public interface IGraphElement
+    public interface GraphNode
     {
         bool IsRoot { get; }
         uint DistanceFromRoot { get; set; }
-        IEnumerable<IGraphElement> Neighbors { get; }
+        IEnumerable<GraphNode> Neighbors { get; }
 
         void DisconnectAll();
         void RemoveFromGraph();
