@@ -12,7 +12,7 @@ public class LevelStateTextUpdater : MonoBehaviour
     void Start()
     {
         text = GetComponent<Text>();
-        level.LevelState.AddListener(UpdateState);
+        level.levelState.AddListener(UpdateState);
     }
 
     private void UpdateState(LevelState levelState)

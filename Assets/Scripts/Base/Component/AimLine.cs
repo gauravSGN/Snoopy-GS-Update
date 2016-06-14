@@ -13,13 +13,18 @@ public class AimLine : MonoBehaviour
     public float wallBounceDistance;
 
     private Vector3 aimTarget;
-    private List<Vector3> points = new List<Vector3>();
+    private readonly List<Vector3> points = new List<Vector3>();
 
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
 
     public Color Color
     {
+        get
+        {
+            return meshRenderer.material.color;
+        }
+
         set
         {
             if (meshRenderer != null)

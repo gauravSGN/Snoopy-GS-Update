@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.IO;
 
-public class CustomAssetCreator
+public static class CustomAssetCreator
 {
     [MenuItem("Assets/Create/Bubble Factory")]
     public static void CreateBubbleFactory()

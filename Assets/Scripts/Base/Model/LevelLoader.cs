@@ -39,28 +39,12 @@ public class LevelLoader : MonoBehaviour
         lanterns["snakeFill"] = "Green Lantern";
         lanterns["fireFill"] = "Yellow Lantern";
 
-        foreach(KeyValuePair<string, string> entry in lanterns)
+        foreach (var entry in lanterns)
         {
             var lantern = gameView.transform.FindChild("Lanterns").FindChild(entry.Value).gameObject;
-            float lanternFillValue = 0;
+            float lanternFillValue = (float)LevelData.GetType().GetField(entry.Key).GetValue(LevelData);
 
-            switch (entry.Key)
-            {
-                case "bombFill":
-                    lanternFillValue = LevelData.bombFill;
-                    break;
-                case "horzFill":
-                    lanternFillValue = LevelData.horzFill;
-                    break;
-                case "snakeFill":
-                    lanternFillValue = LevelData.snakeFill;
-                    break;
-                case "fireFill":
-                    lanternFillValue = LevelData.fireFill;
-                    break;
-            }
-
-            lantern.GetComponent<Lantern>().Setup((int)(lanternFillValue == 0 ? 0 : 1 / lanternFillValue));
+            lantern.GetComponent<Lantern>().Setup((int)(lanternFillValue > 0.0f ? (1.0 / lanternFillValue) : 0.0f));
         }
     }
 

@@ -2,15 +2,15 @@
 
 public class Lantern : MonoBehaviour
 {
+    public Level level;
     public GameObject glow;
     public BubbleType bubbleType;
-    public Level level;
     public GameObject launcher;
 
-    private int max = 0;
-    private int current = 0;
-    private float progress = 0;
-    private int lastBubbleCount = 0;
+    private int max;
+    private int current;
+    private float progress;
+    private int lastBubbleCount;
 
     public void Setup(int setMax)
     {
@@ -19,13 +19,13 @@ public class Lantern : MonoBehaviour
         if (max > 0)
         {
             gameObject.SetActive(true);
-            level.LevelState.AddListener(UpdateState);
+            level.levelState.AddListener(UpdateState);
         }
     }
 
     protected void OnMouseUp()
     {
-        if (progress == 1)
+        if (progress >= 1.0f)
         {
             launcher.GetComponent<BubbleLauncher>().AddShotModifier(AddExplosion);
             Reset();
@@ -47,12 +47,12 @@ public class Lantern : MonoBehaviour
             if (currentBubbleCount < lastBubbleCount)
             {
                 var fillRate = ((float)(max - current) - progress) / currentBubbleCount;
-                progress = Mathf.Min(1 , progress + ((lastBubbleCount - currentBubbleCount) * fillRate));
+                progress = Mathf.Min(1.0f, progress + ((lastBubbleCount - currentBubbleCount) * fillRate));
             }
 
             lastBubbleCount = currentBubbleCount;
 
-            if (!glow.activeSelf && progress == 1)
+            if (!glow.activeSelf && (progress >= 1.0f))
             {
                 glow.SetActive(true);
             }
@@ -62,7 +62,7 @@ public class Lantern : MonoBehaviour
     private void Reset()
     {
         glow.SetActive(false);
-        progress = 0;
+        progress = 0.0f;
         current++;
     }
 }

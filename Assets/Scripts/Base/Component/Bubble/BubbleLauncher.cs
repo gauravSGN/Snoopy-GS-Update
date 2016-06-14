@@ -16,7 +16,7 @@ public class BubbleLauncher : MonoBehaviour
     public void CycleQueue()
     {
         CycleLocalQueue();
-        level.LevelState.bubbleQueue.Rotate(nextBubbles.Length);
+        level.levelState.bubbleQueue.Rotate(nextBubbles.Length);
     }
 
     public void AddShotModifier(ModifyShot modifier)
@@ -49,7 +49,7 @@ public class BubbleLauncher : MonoBehaviour
         {
             if (nextBubbles[index] == null)
             {
-                nextBubbles[index] = level.bubbleFactory.CreateBubbleByType(level.LevelState.bubbleQueue.Peek(index));
+                nextBubbles[index] = level.bubbleFactory.CreateBubbleByType(level.levelState.bubbleQueue.Peek(index));
                 MoveBubbleToLocation(index);
             }
         }
@@ -79,7 +79,7 @@ public class BubbleLauncher : MonoBehaviour
 
     private void ReadyNextBubble()
     {
-        level.LevelState.bubbleQueue.GetNext();
+        level.levelState.bubbleQueue.GetNext();
 
         CycleLocalQueue();
         CreateBubbles();
@@ -127,7 +127,7 @@ public class BubbleLauncher : MonoBehaviour
 
     private List<ModifyShot> ResetShotModifiers()
     {
-        return new List<ModifyShot>(){AddBubbleSnap};
+        return new List<ModifyShot>{AddBubbleSnap};
     }
 
     private void AddBubbleSnap(GameObject bubble)
