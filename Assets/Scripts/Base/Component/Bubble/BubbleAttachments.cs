@@ -62,7 +62,7 @@ public class BubbleAttachments : MonoBehaviour
         RemoveHandlers();
 
         var rigidBody = GetComponent<Rigidbody2D>();
-        gameObject.layer = 8;
+        gameObject.layer = (int)Layers.FallingObjects;
 
         rigidBody.isKinematic = false;
         rigidBody.AddForce(new Vector2(Random.Range(-3.0f, 3.0f), 0.0f));

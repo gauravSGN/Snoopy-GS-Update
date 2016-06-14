@@ -97,7 +97,8 @@ public class AimLine : MonoBehaviour
         var distance = length - config.bubbles.size;
         var direction = (aimTarget - origin).normalized;
         var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale / 2.0f;
-        var layerMask = LayerMask.GetMask(new string[] { "Game Objects", "Boundary" });
+        var layerMask = (1 << (int)Layers.GameObjects | 1 << (int)Layers.Walls);
+
         int reflections = 1;
 
         points.Add(origin + config.bubbles.size * direction * 2.0f);
