@@ -101,6 +101,12 @@ public class LevelLoader : MonoBehaviour
         }
 
         AttachBubbles(bubbleMap);
+        ComputeRootDistances(bubbleMap);
+
+        foreach (var pair in bubbleMap)
+        {
+            pair.Value.GetComponent<BubbleAttachments>().Model.SortNeighbors();
+        }
 
         return bubbleTypeCount;
     }
@@ -134,6 +140,27 @@ public class LevelLoader : MonoBehaviour
             if (y == 1)
             {
                 pair.Value.GetComponent<BubbleAttachments>().Attach(ceilingBubbleMap [Mathf.Min(x, maxBubblesForOddRow - 1)]);
+            }
+        }
+
+        foreach (var pair in ceilingBubbleMap)
+        {
+            var model = pair.Value.GetComponent<BubbleAttachments>().Model;
+            model.DistanceFromRoot = 0;
+            model.PropagateRootDistance();
+        }
+    }
+
+    private void ComputeRootDistances(Dictionary<int, GameObject> bubbleMap)
+    {
+        foreach (var pair in bubbleMap)
+        {
+            var model = pair.Value.GetComponent<BubbleAttachments>().Model;
+
+            if (model.IsRoot)
+            {
+                model.DistanceFromRoot = 0;
+                model.PropagateRootDistance();
             }
         }
     }

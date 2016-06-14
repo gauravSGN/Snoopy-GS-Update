@@ -61,7 +61,11 @@ public class BubbleSnap : MonoBehaviour
 
     private void AttachToBubble(GameObject bubble)
     {
-        GetComponent<BubbleAttachments>().Attach(bubble);
+        var attachment = GetComponent<BubbleAttachments>();
+
+        attachment.Attach(bubble);
+        attachment.Model.MinimizeDistanceFromRoot();
+        attachment.Model.SortNeighbors();
     }
 
     private IEnumerable<Collider2D> NearbyBubbles(Vector2 location)

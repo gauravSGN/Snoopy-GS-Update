@@ -34,7 +34,7 @@ public class BubbleExplode : MonoBehaviour
             {
                 hit.collider.gameObject.transform.position = new Vector3(-1000.0f, -1000.0f);
                 var attachment = hit.collider.gameObject.GetComponent<BubbleAttachments>();
-                attachment.Model.RemoveAllConnections();
+                attachment.Model.DisconnectAll();
                 attachment.MarkForDestruction();
             }
         }
