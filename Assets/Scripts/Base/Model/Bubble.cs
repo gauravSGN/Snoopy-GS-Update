@@ -36,7 +36,7 @@ public class Bubble : GraphElement<Bubble>
 
         if (bubbleList.Count >= 3)
         {
-            var detachList = GraphUtil.RemoveNodes(bubbleList);
+            GraphUtil.RemoveNodes(bubbleList);
 
             foreach (var bubble in bubbleList)
             {

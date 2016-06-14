@@ -28,7 +28,7 @@ namespace Graph
             return surrounding;
         }
 
-        public static List<T> RemoveNodes<T>(List<T> nodes) where T : GraphElement<T>
+        public static void RemoveNodes<T>(List<T> nodes) where T : GraphElement<T>
         {
             var adjacent = GetAdjacentNodes(nodes);
 
@@ -52,8 +52,6 @@ namespace Graph
                     CullVisitedNodes(finder, adjacent);
                 }
             }
-
-            return adjacent;
         }
 
         private static List<T> MatchNeighbors<T>(List<T> matches, T node, Func<T, bool> predicate) where T : IGraphElement
