@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Level : MonoBehaviour
 {
@@ -15,6 +16,13 @@ public class Level : MonoBehaviour
             levelData = GlobalState.Instance.nextLevelData;
             GlobalState.Instance.nextLevelData = null;
         }
+
+        StartCoroutine(LoadingCoroutine());
+    }
+
+    private IEnumerator LoadingCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
 
         levelState.typeTotals = loader.LoadLevel(levelData);
 

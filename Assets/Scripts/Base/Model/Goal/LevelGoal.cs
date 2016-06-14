@@ -4,7 +4,7 @@ using System;
 namespace Goal
 {
     [Serializable]
-    public abstract class LevelGoal
+    public abstract class LevelGoal : Observable
     {
         public abstract GoalType Type { get; }
         public int CurrentValue { get { return currentValue; } }

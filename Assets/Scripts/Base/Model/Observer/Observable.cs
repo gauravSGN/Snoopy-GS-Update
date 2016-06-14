@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Observable<T> where T : Observable<T>
+public class Observable
 {
-    private List<Action<T>> listeners = new List<Action<T>>();
+    private List<object> listeners = new List<object>();
 
-    public void AddListener(Action<T> action)
+    public void AddListener(object action)
     {
         listeners.Add(action);
     }
 
-    public void RemoveListener(Action<T> action)
+    public void AddListener<T>(Action<T> action) where T : Observable
+    {
+        AddListener((object)action);
+    }
+
+    public void RemoveListener(object action)
     {
         if (listeners.Contains(action))
         {
@@ -18,11 +23,17 @@ public class Observable<T> where T : Observable<T>
         }
     }
 
+    public void RemoveListener<T>(Action<T> action) where T : Observable
+    {
+        RemoveListener((object)action);
+    }
+
     public void NotifyListeners()
     {
         foreach (var listener in listeners)
         {
-            listener.Invoke((T)this);
+            var action = (Action<Observable>)listener;
+            action.Invoke(this);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Goal
                 if ((BubbleContentType)bubble.contentType == BubbleContentType.BabyPanda)
                 {
                     bubble.model.OnPopped += BubblePoppedHandler;
+                    targetValue++;
                 }
             }
         }
@@ -22,6 +23,7 @@ namespace Goal
             bubble.OnPopped -= BubblePoppedHandler;
 
             currentValue++;
+            NotifyListeners();
         }
     }
 }

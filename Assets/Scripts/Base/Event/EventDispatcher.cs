@@ -11,7 +11,7 @@ public class EventDispatcher : MonoBehaviour
     private readonly Dictionary<Type, List<object>> handlers = new Dictionary<Type, List<object>>();
     private readonly Dictionary<Type, List<object>> pools = new Dictionary<Type, List<object>>();
 
-    public void OnEnable()
+    public void Awake()
     {
         instance = this;
     }
