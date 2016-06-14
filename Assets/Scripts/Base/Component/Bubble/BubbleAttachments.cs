@@ -5,18 +5,21 @@ public class BubbleAttachments : MonoBehaviour
     public const int UPDATES_BEFORE_DESTRUCTION = 2;
     public const int DO_NOT_DESTRUCT = -1;
 
-    public Bubble Model { get; private set; }
+    public Bubble Model { get { return model; } }
+
+    [SerializeField]
+    private Bubble model;
 
     private int updatesTilDestruction = -1;
 
     public void Attach(GameObject other)
     {
-        Model.AddConnection(other.GetComponent<BubbleAttachments>().Model);
+        Model.Connect(other.GetComponent<BubbleAttachments>().Model);
     }
 
     public void SetModel(Bubble model)
     {
-        Model = model;
+        this.model = model;
 
         model.OnPopped += PoppedHandler;
         model.OnDisconnected += DisconnectedHandler;

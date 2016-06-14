@@ -1,61 +1,47 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System;
+using Graph;
 
-public class Bubble
+[Serializable]
+public class Bubble : GraphElement<Bubble>
 {
     public delegate void BubbleHandler();
 
     public event BubbleHandler OnPopped;
     public event BubbleHandler OnDisconnected;
 
-    public bool IsRoot { get; set; }
     public BubbleType type;
     public BubbleDefinition definition;
-    public List<Bubble> connections = new List<Bubble>();
 
-    public void AddConnection(Bubble bubble)
+    override public void Connect(Bubble node)
     {
-        if (!connections.Contains(bubble))
-        {
-            connections.Add(bubble);
-            bubble.AddConnection(this);
-        }
+        base.Connect(node);
+
+        ResetDistanceFromRoot();
+        MinimizeDistanceFromRoot();
+        PropagateRootDistance();
     }
 
-    public void RemoveConnection(Bubble bubble)
+    override public void RemoveFromGraph()
     {
-        if (connections.Contains(bubble))
-        {
-            connections.Remove(bubble);
-            bubble.RemoveConnection(this);
-        }
-    }
+        base.RemoveFromGraph();
 
-    public void RemoveAllConnections()
-    {
-        while (connections.Count > 0)
-        {
-            RemoveConnection(connections[0]);
-        }
+        BubbleReactionEvent.Dispatch(ReactionPriority.Cull, MakeBubbleFall);
     }
 
     public void CheckForMatches()
     {
-        var bubbleList = new List<Bubble>();
-        var detachList = new List<Bubble>();
-
-        CheckForMatches(bubbleList, detachList);
+        var bubbleList = GraphUtil.MatchNeighbors(this, b => b.type == type);
 
         if (bubbleList.Count >= 3)
         {
+            var detachList = GraphUtil.RemoveNodes(bubbleList);
+
             foreach (var bubble in bubbleList)
             {
-                detachList.Remove(bubble);
-                bubble.RemoveAllConnections();
                 BubbleReactionEvent.Dispatch(ReactionPriority.Pop, bubble.PopBubble);
             }
-
-            CheckForFallingBubbles(detachList);
         }
     }
 
@@ -69,31 +55,11 @@ public class Bubble
 
     public void MakeBubbleFall()
     {
-        RemoveAllConnections();
+        DisconnectAll();
 
         if (OnDisconnected != null)
         {
             OnDisconnected();
-        }
-    }
-
-    private void CheckForMatches(List<Bubble> bubbleList, List<Bubble> detachList)
-    {
-        foreach (var connection in connections)
-        {
-            if ((connection.type == type) && !bubbleList.Contains(connection))
-            {
-                bubbleList.Add(connection);
-                connection.CheckForMatches(bubbleList, detachList);
-
-                foreach (var neighbor in connection.connections)
-                {
-                    if (!detachList.Contains(neighbor))
-                    {
-                        detachList.Add(neighbor);
-                    }
-                }
-            }
         }
     }
 
@@ -125,7 +91,7 @@ public class Bubble
         {
             connected.Add(bubble, bubble.IsRoot);
 
-            foreach (var neighbor in bubble.connections)
+            foreach (var neighbor in bubble.neighbors)
             {
                 ScanForRoots(neighbor, connected);
             }
@@ -134,7 +100,7 @@ public class Bubble
 
     private static void PropogateRoot(Dictionary<Bubble, bool> connected, Bubble root)
     {
-        foreach (var neighbor in root.connections)
+        foreach (var neighbor in root.neighbors)
         {
             if (!connected[neighbor])
             {
