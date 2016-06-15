@@ -330,6 +330,10 @@ Prefab:
       propertyPath: launcher
       value: 
       objectReference: {fileID: 443704577}
+    - target: {fileID: 117738, guid: 9a8d15a22785041b697226eea112b369, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9a8d15a22785041b697226eea112b369, type: 2}
   m_IsPrefabParent: 0
@@ -689,6 +693,10 @@ Prefab:
       propertyPath: launcher
       value: 
       objectReference: {fileID: 443704577}
+    - target: {fileID: 197960, guid: 283efdc4a919d4b53a09b69271a0a29f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 283efdc4a919d4b53a09b69271a0a29f, type: 2}
   m_IsPrefabParent: 0
@@ -982,6 +990,10 @@ Prefab:
       propertyPath: launcher
       value: 
       objectReference: {fileID: 443704577}
+    - target: {fileID: 133016, guid: 4a2d437662f12427a80ec31361a5074f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4a2d437662f12427a80ec31361a5074f, type: 2}
   m_IsPrefabParent: 0
@@ -1281,6 +1293,10 @@ Prefab:
       propertyPath: launcher
       value: 
       objectReference: {fileID: 443704577}
+    - target: {fileID: 162226, guid: 1e879796341f4400c863deed7fbc0826, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e879796341f4400c863deed7fbc0826, type: 2}
   m_IsPrefabParent: 0
