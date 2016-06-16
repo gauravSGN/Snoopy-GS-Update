@@ -27,6 +27,9 @@ public class LevelLoader : MonoBehaviour
     [SerializeField]
     private PowerUpController powerUpController;
 
+    [SerializeField]
+    private GameObject levelContainer;
+
     private float rowDistance;
     private float topEdge;
     private int maxY;
@@ -194,6 +197,7 @@ public class LevelLoader : MonoBehaviour
         var instance = bubbleFactory.CreateByType(type);
 
         instance.transform.position = GetBubbleLocation(x, y);
+        instance.transform.parent = (levelContainer != null) ? levelContainer.transform : null;
 
         return instance;
     }
