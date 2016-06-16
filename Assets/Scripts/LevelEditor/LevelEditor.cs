@@ -1,32 +1,35 @@
 ﻿using UnityEngine;
 
-public class LevelEditor : MonoBehaviour
+namespace LevelEditor
 {
-    [SerializeField]
-    private LevelLoader loader;
-
-    public void New()
+    public class LevelEditor : MonoBehaviour
     {
+        [SerializeField]
+        private LevelLoader loader;
 
-    }
+        public void New()
+        {
 
-    public void Open()
-    {
+        }
 
-    }
+        public void Open()
+        {
 
-    public void Save()
-    {
+        }
 
-    }
+        public void Save()
+        {
 
-    public void SaveAs()
-    {
+        }
 
-    }
+        public void SaveAs()
+        {
 
-    public void Clear()
-    {
+        }
 
+        public void Clear()
+        {
+
+        }
     }
 }
