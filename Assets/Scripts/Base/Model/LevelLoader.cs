@@ -81,9 +81,9 @@ public class LevelLoader : MonoBehaviour
         foreach (var bubble in level.bubbles)
         {
             bubble.y = (maxY + 1) - bubble.y;
-            var bubbleType = (BubbleType)(bubble.typeID % 5);
+            var bubbleType = (BubbleType)(bubble.typeID % 6);
             bubbleTypeCount[bubbleType] = bubbleTypeCount.ContainsKey(bubbleType) ? bubbleTypeCount[bubbleType] + 1 : 1;
-            bubbleMap[bubble.y << 4 | bubble.x] = createBubbleAndSetPosition((BubbleType)(bubble.typeID % 5), bubble.x, bubble.y);
+            bubbleMap[bubble.y << 4 | bubble.x] = createBubbleAndSetPosition((BubbleType)(bubble.typeID % 6), bubble.x, bubble.y);
             bubble.model = bubbleMap[bubble.y << 4 | bubble.x].GetComponent<BubbleAttachments>().Model;
 
             if ((BubbleContentType)bubble.contentType != BubbleContentType.None)
@@ -126,7 +126,7 @@ public class LevelLoader : MonoBehaviour
 
         for (int ceilingX = 0; ceilingX < maxBubblesForOddRow; ceilingX++)
         {
-            ceilingBubbleMap[ceilingX] = createBubbleAndSetPosition(BubbleType.Ceiling, ceilingX, 0, true);
+            ceilingBubbleMap[ceilingX] = createBubbleAndSetPosition(BubbleType.Ceiling, ceilingX, 0);
         }
 
         foreach (var pair in bubbleMap)
@@ -172,12 +172,11 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    private GameObject createBubbleAndSetPosition(BubbleType type, int x, int y, bool isRoot = false)
+    private GameObject createBubbleAndSetPosition(BubbleType type, int x, int y)
     {
         var instance = factory.CreateBubbleByType(type);
 
         instance.transform.position = GetBubbleLocation(x, y);
-        instance.GetComponent<BubbleAttachments>().Model.IsRoot = isRoot;
 
         return instance;
     }

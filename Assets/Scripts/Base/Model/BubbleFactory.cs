@@ -33,6 +33,7 @@ public class BubbleFactory : ScriptableObject
         {
             type = type,
             definition = definition,
+            IsRoot = definition.actsAsRoot,
         };
 
         instance.SendMessage("SetModel", model);

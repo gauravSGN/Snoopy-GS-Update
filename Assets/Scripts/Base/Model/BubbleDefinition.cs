@@ -7,5 +7,6 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
     public BubbleType type;
     public Color baseColor;
     public GameObject prefab;
+    public bool actsAsRoot;
     public int score;
 }
