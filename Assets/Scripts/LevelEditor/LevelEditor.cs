@@ -11,9 +11,15 @@ namespace LevelEditor
         [SerializeField]
         private LevelLoader loader;
 
+        [SerializeField]
+        private Transform levelContents;
+
+        private string filename;
+
         public void New()
         {
-
+            filename = null;
+            ClearLevel();
         }
 
         public void Open()
@@ -24,6 +30,7 @@ namespace LevelEditor
 
             if (!string.IsNullOrEmpty(levelFilename))
             {
+                filename = levelFilename;
                 loader.LoadLevel(File.ReadAllText(levelFilename));
             }
         }
@@ -41,6 +48,14 @@ namespace LevelEditor
         public void Clear()
         {
 
+        }
+
+        private void ClearLevel()
+        {
+            for (var index = levelContents.childCount - 1; index >= 0; index--)
+            {
+                Destroy(levelContents.GetChild(index).gameObject);
+            }
         }
     }
 }

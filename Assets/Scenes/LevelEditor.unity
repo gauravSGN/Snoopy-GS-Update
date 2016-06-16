@@ -2178,6 +2178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loader: {fileID: 343014256}
+  levelContents: {fileID: 1307234576}
 --- !u!1 &1356480299
 GameObject:
   m_ObjectHideFlags: 0
