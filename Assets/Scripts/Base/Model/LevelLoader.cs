@@ -114,7 +114,7 @@ public class LevelLoader : MonoBehaviour
 
                 if (content != null)
                 {
-                    content.transform.parent = bubbleMap[bubble.y << 4 | bubble.x].transform;
+                    content.transform.SetParent(bubbleMap[bubble.y << 4 | bubble.x].transform, false);
                     content.transform.localPosition = Vector3.back;
                 }
             }
@@ -201,8 +201,12 @@ public class LevelLoader : MonoBehaviour
     {
         var instance = bubbleFactory.CreateByType(type);
 
-        instance.transform.position = GetBubbleLocation(x, y);
-        instance.transform.parent = (levelContainer != null) ? levelContainer.transform : null;
+        if (levelContainer != null)
+        {
+            instance.transform.SetParent(levelContainer.transform, false);
+        }
+
+        instance.transform.localPosition = GetBubbleLocation(x, y);
 
         return instance;
     }
