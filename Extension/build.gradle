@@ -1,0 +1,9 @@
+apply from: 'https://s3.amazonaws.com/game-services/gs.plugin'
+
+targetCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = JavaVersion.VERSION_1_7
+
+gs {
+    version '3.1.7'
+    game 'snoopy-pop'
+}
