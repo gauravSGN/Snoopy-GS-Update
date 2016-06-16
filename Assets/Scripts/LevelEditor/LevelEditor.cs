@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using System;
 using System.IO;
+using UnityEngine;
+using UnityEditor;
 
 namespace LevelEditor
 {
@@ -14,12 +15,18 @@ namespace LevelEditor
         [SerializeField]
         private Transform levelContents;
 
+        [SerializeField]
+        private GameObject confirmationDialogPrefab;
+
         private string filename;
 
         public void New()
         {
-            filename = null;
-            ClearLevel();
+            ConfirmAction(delegate ()
+            {
+                filename = null;
+                ClearLevel();
+            });
         }
 
         public void Open()
@@ -55,6 +62,23 @@ namespace LevelEditor
             for (var index = levelContents.childCount - 1; index >= 0; index--)
             {
                 Destroy(levelContents.GetChild(index).gameObject);
+            }
+        }
+
+        private void ConfirmAction(Action action)
+        {
+            if (filename != null)
+            {
+                var dialog = Instantiate(confirmationDialogPrefab).GetComponent<ConfirmationDialog>();
+                dialog.transform.SetParent(transform.parent, false);
+
+                dialog.Title = "Destructive Command";
+                dialog.Body = "This action will overwrite the current working level data.  Are you sure you want to proceed?";
+                dialog.OnConfirm = action;
+            }
+            else
+            {
+                action.Invoke();
             }
         }
     }
