@@ -914,6 +914,7 @@ MonoBehaviour:
   format: 'Bubbles: {0}'
   fields:
   - remainingBubbles
+  level: {fileID: 1197956594}
 --- !u!1 &929098081
 GameObject:
   m_ObjectHideFlags: 0
