@@ -9,9 +9,6 @@ using System.Diagnostics;
 public class ReactionLogic : MonoBehaviour
 {
     [SerializeField]
-    private string mapSceneName;
-
-    [SerializeField]
     private float fractionOfFrameTime;
 
     private long maximumProcessingTimeInTicks;
