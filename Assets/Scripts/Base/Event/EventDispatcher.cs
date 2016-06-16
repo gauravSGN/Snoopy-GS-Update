@@ -3,17 +3,12 @@ using System.Collections.Generic;
 
 public class EventDispatcher
 {
-    private Dictionary<Type, List<object>> handlers = new Dictionary<Type, List<object>>();
-    private Dictionary<Type, List<object>> pools = new Dictionary<Type, List<object>>();
+    private readonly Dictionary<Type, List<object>> handlers = new Dictionary<Type, List<object>>();
+    private readonly Dictionary<Type, List<object>> pools = new Dictionary<Type, List<object>>();
 
     public void Reset()
     {
         handlers.Clear();
-    }
-
-    public void OnDestroy()
-    {
-        Reset();
     }
 
     public void AddEventHandler<T>(Action<T> handler) where T : GameEvent
