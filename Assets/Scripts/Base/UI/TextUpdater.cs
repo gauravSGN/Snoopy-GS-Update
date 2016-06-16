@@ -11,14 +11,14 @@ public class TextUpdater : MonoBehaviour
         {
             if (target != null)
             {
-                target.RemoveListener<Observable>(UpdateText);
+                target.RemoveListener(UpdateText);
             }
 
             target = value;
 
             if (target != null)
             {
-                target.AddListener<Observable>(UpdateText);
+                target.AddListener(UpdateText);
                 UpdateText(target);
             }
         }

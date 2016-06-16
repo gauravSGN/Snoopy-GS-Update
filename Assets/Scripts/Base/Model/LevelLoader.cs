@@ -90,8 +90,11 @@ public class LevelLoader : MonoBehaviour
             {
                 var content = factory.CreateContentByType((BubbleContentType)bubble.contentType);
 
-                content.transform.parent = bubbleMap[bubble.y << 4 | bubble.x].transform;
-                content.transform.localPosition = Vector3.back;
+                if (content != null)
+                {
+                    content.transform.parent = bubbleMap[bubble.y << 4 | bubble.x].transform;
+                    content.transform.localPosition = Vector3.back;
+                }
             }
         }
 

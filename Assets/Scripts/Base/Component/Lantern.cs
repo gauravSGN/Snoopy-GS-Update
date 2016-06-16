@@ -19,7 +19,7 @@ public class Lantern : MonoBehaviour
         if (max > 0)
         {
             gameObject.SetActive(true);
-            level.levelState.AddListener<LevelState>(UpdateState);
+            level.levelState.AddListener(UpdateState);
         }
     }
 
@@ -38,11 +38,11 @@ public class Lantern : MonoBehaviour
         bubble.GetComponent<BubbleAttachments>().Model.type = BubbleType.Steel;
     }
 
-    private void UpdateState(LevelState levelState)
+    private void UpdateState(Observable levelState)
     {
         if ((current < max) && (glow != null))
         {
-            var currentBubbleCount = levelState.typeTotals[bubbleType];
+            var currentBubbleCount = (levelState as LevelState).typeTotals[bubbleType];
 
             if (currentBubbleCount < lastBubbleCount)
             {

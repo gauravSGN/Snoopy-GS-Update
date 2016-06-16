@@ -20,8 +20,11 @@ public class BubbleFactory : ScriptableObject
     public BubbleContentDefinition GetContentDefinitionByType(BubbleContentType type)
     {
         contentLookup = contentLookup ?? CreateLookupTable<BubbleContentType, BubbleContentDefinition>(contents);
+        BubbleContentDefinition definition = null;
 
-        return contentLookup[type];
+        contentLookup.TryGetValue(type, out definition);
+
+        return definition;
     }
 
     public GameObject CreateBubbleByType(BubbleType type)
@@ -43,7 +46,15 @@ public class BubbleFactory : ScriptableObject
 
     public GameObject CreateContentByType(BubbleContentType type)
     {
-        return Instantiate(GetContentDefinitionByType(type).prefab);
+        var definition = GetContentDefinitionByType(type);
+        GameObject content = null;
+
+        if (definition != null)
+        {
+            content = Instantiate(GetContentDefinitionByType(type).prefab);
+        }
+
+        return content;
     }
 
     private Dictionary<K, V> CreateLookupTable<K, V>(List<V> items) where V : GameObjectDefinition<K>

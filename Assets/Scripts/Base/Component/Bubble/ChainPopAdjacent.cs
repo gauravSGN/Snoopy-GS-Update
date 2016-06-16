@@ -16,7 +16,7 @@ public class ChainPopAdjacent : MonoBehaviour
         attachments.Model.OnPopped -= PoppedHandler;
     }
 
-    private void PoppedHandler()
+    private void PoppedHandler(Bubble bubble)
     {
         var model = GetComponent<BubbleAttachments>().Model;
         var adjacentList = GetAdjacentBubbles(new List<Bubble>(), model);
