@@ -1,20 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using BubbleContent;
 
 public class BubbleFactory : ScriptableObject
 {
     public List<BubbleDefinition> bubbles;
+    public List<BubbleContentDefinition> contents;
 
-    private Dictionary<BubbleType, BubbleDefinition> lookup;
+    private Dictionary<BubbleType, BubbleDefinition> bubbleLookup;
+    private Dictionary<BubbleContentType, BubbleContentDefinition> contentLookup;
 
     public BubbleDefinition GetBubbleDefinitionByType(BubbleType type)
     {
-        if (lookup == null)
-        {
-            CreateLookupTable();
-        }
+        bubbleLookup = bubbleLookup ?? CreateLookupTable<BubbleType, BubbleDefinition>(bubbles);
 
-        return lookup[type];
+        return bubbleLookup[type];
+    }
+
+    public BubbleContentDefinition GetContentDefinitionByType(BubbleContentType type)
+    {
+        contentLookup = contentLookup ?? CreateLookupTable<BubbleContentType, BubbleContentDefinition>(contents);
+
+        return contentLookup[type];
     }
 
     public GameObject CreateBubbleByType(BubbleType type)
@@ -33,13 +40,20 @@ public class BubbleFactory : ScriptableObject
         return instance;
     }
 
-    private void CreateLookupTable()
+    public GameObject CreateContentByType(BubbleContentType type)
     {
-        lookup = new Dictionary<BubbleType, BubbleDefinition>();
+        return Instantiate(GetContentDefinitionByType(type).prefab);
+    }
 
-        foreach (var info in bubbles)
+    private Dictionary<K, V> CreateLookupTable<K, V>(List<V> items) where V : GameObjectDefinition<K>
+    {
+        var lookup = new Dictionary<K, V>();
+
+        foreach (var info in items)
         {
-            lookup.Add(info.type, info);
+            lookup.Add(info.Type, info);
         }
+
+        return lookup;
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Level : MonoBehaviour
 {
@@ -16,6 +17,13 @@ public class Level : MonoBehaviour
             GlobalState.Instance.nextLevelData = null;
         }
 
+        StartCoroutine(LoadingCoroutine());
+    }
+
+    private IEnumerator LoadingCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+
         levelState.typeTotals = loader.LoadLevel(levelData);
 
         levelState.score = 0;
@@ -24,6 +32,7 @@ public class Level : MonoBehaviour
 
         EventDispatcher.Instance.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
         EventDispatcher.Instance.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
+        EventDispatcher.Instance.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
     }
 
     private void OnBubbleFired(BubbleFiredEvent gameEvent)
@@ -38,5 +47,18 @@ public class Level : MonoBehaviour
         levelState.UpdateTypeTotals(gameEvent.bubble.GetComponent<BubbleAttachments>().Model.type, -1);
         levelState.score += gameEvent.score;
         levelState.NotifyListeners();
+    }
+
+    private void OnGoalComplete(GoalCompleteEvent gameEvent)
+    {
+        foreach (var goal in loader.LevelData.goals)
+        {
+            if (!goal.Complete)
+            {
+                return;
+            }
+        }
+
+        EventDispatcher.Instance.Dispatch(new LevelCompleteEvent(true));
     }
 }

@@ -8,7 +8,6 @@ using System.Diagnostics;
 
 public class ReactionLogic : MonoBehaviour
 {
-    public string mapSceneName;
     public float percentageOfFrameTime = 0.1f;
 
     private long maximumProcessingTimeInTicks;
@@ -42,8 +41,7 @@ public class ReactionLogic : MonoBehaviour
 
         if (levelState.remainingBubbles <= 0)
         {
-            EventDispatcher.Instance.Dispatch(new LoseLevelEvent());
-            SceneManager.LoadScene(mapSceneName);
+            EventDispatcher.Instance.Dispatch(new LevelCompleteEvent(false));
         }
         else
         {

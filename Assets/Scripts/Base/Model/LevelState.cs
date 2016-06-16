@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class LevelState : Observable<LevelState>
+public class LevelState : Observable
 {
     public int score;
     public int remainingBubbles;

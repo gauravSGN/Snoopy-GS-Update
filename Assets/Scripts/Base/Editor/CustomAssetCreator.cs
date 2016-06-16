@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.IO;
+using BubbleContent;
 
 public static class CustomAssetCreator
 {
@@ -14,6 +15,12 @@ public static class CustomAssetCreator
     public static void CreateBubbleDefinition()
     {
         CreateAThing<BubbleDefinition>();
+    }
+
+    [MenuItem("Assets/Create/Bubble Content Definition")]
+    public static void CreateBubbleContentDefinition()
+    {
+        CreateAThing<BubbleContentDefinition>();
     }
 
     [MenuItem("Assets/Create/Game Config")]

@@ -19,7 +19,7 @@ public class Lantern : MonoBehaviour
         if (max > 0)
         {
             gameObject.SetActive(true);
-            level.levelState.AddListener(UpdateState);
+            level.levelState.AddListener<LevelState>(UpdateState);
         }
     }
 

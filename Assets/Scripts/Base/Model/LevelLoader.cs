@@ -2,6 +2,8 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Goal;
+using BubbleContent;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -82,6 +84,15 @@ public class LevelLoader : MonoBehaviour
             var bubbleType = (BubbleType)(bubble.typeID % 5);
             bubbleTypeCount[bubbleType] = bubbleTypeCount.ContainsKey(bubbleType) ? bubbleTypeCount[bubbleType] + 1 : 1;
             bubbleMap[bubble.y << 4 | bubble.x] = createBubbleAndSetPosition((BubbleType)(bubble.typeID % 5), bubble.x, bubble.y);
+            bubble.model = bubbleMap[bubble.y << 4 | bubble.x].GetComponent<BubbleAttachments>().Model;
+
+            if ((BubbleContentType)bubble.contentType != BubbleContentType.None)
+            {
+                var content = factory.CreateContentByType((BubbleContentType)bubble.contentType);
+
+                content.transform.parent = bubbleMap[bubble.y << 4 | bubble.x].transform;
+                content.transform.localPosition = Vector3.back;
+            }
         }
 
         AttachBubbles(bubbleMap);
@@ -92,7 +103,19 @@ public class LevelLoader : MonoBehaviour
             pair.Value.GetComponent<BubbleAttachments>().Model.SortNeighbors();
         }
 
+        CreateGoals(level);
+
         return bubbleTypeCount;
+    }
+
+    private static void CreateGoals(LevelData level)
+    {
+        level.goals = LevelGoalFactory.GetGoalsForLevel(level);
+
+        foreach (var goal in level.goals)
+        {
+            EventDispatcher.Instance.Dispatch(new GoalCreatedEvent(goal));
+        }
     }
 
     private void AttachBubbles(Dictionary<int, GameObject> bubbleMap)
