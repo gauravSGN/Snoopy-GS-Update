@@ -4,23 +4,20 @@
 // scene editor to work without coming from a different scenes.
 public class GlobalState : MonoBehaviour
 {
-    public static GlobalState Instance { get { return instance; } }
-    private static GlobalState instance;
-
-    public EventDispatcher EventDispatcher { get { return eventDispatcher; } }
-    private EventDispatcher eventDispatcher;
+    public static GlobalState Instance { get; private set; }
+    public EventDispatcher EventDispatcher { get; private set; }
 
     public TextAsset nextLevelData;
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
-            instance = this;
-            eventDispatcher = new EventDispatcher();
+            Instance = this;
+            EventDispatcher = new EventDispatcher();
         }
-        else if (this != instance)
+        else if (this != Instance)
         {
             Destroy(gameObject);
         }
@@ -28,9 +25,9 @@ public class GlobalState : MonoBehaviour
 
     void OnLevelWasLoaded(int level)
     {
-        if ((instance != null) && (this == instance))
+        if ((Instance != null) && (this == Instance))
         {
-            eventDispatcher.Reset();
+            EventDispatcher.Reset();
         }
     }
 }
