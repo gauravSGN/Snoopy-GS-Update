@@ -15,7 +15,7 @@ public class BoundDetector : MonoBehaviour
     private Direction direction;
 
     [SerializeField]
-    private List<GameObject> bubbles = new List<GameObject>();
+    private readonly List<GameObject> bubbles = new List<GameObject>();
 
     private enum Direction
     {

@@ -15,16 +15,16 @@ public class Lantern : MonoBehaviour
     private GameObject launcher;
 
     [SerializeField]
-    private int max = 0;
+    private int max;
 
     [SerializeField]
-    private int current = 0;
+    private int current;
 
     [SerializeField]
-    private float progress = 0;
+    private float progress;
 
     [SerializeField]
-    private int lastBubbleCount = 0;
+    private int lastBubbleCount;
 
     public void Setup(int setMax)
     {
