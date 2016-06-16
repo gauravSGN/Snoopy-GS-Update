@@ -1,0 +1,8 @@
+{
+  "clientEvents.flushSampleRate": 1.0,
+  "events.triggerModules": {},
+  "events.stateModules": {
+    "friend": []
+  },
+  "asyncOps": {}
+}
