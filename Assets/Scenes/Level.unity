@@ -1247,7 +1247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24c2819c2fdc48799de3505a696b34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  percentageOfFrameTime: 0.1
+  mapSceneName: 
+  fractionOfFrameTime: 0.1
 --- !u!114 &1197956596
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class ReactionLogic : MonoBehaviour
     private string mapSceneName;
 
     [SerializeField]
-    private float percentageOfFrameTime = 0.1f;
+    private float fractionOfFrameTime;
 
     private long maximumProcessingTimeInTicks;
     private readonly Stopwatch stopwatch = new Stopwatch();
@@ -90,7 +90,7 @@ public class ReactionLogic : MonoBehaviour
 
     private void RestartTimer()
     {
-        maximumProcessingTimeInTicks = (long)(Time.smoothDeltaTime * percentageOfFrameTime * Stopwatch.Frequency);
+        maximumProcessingTimeInTicks = (long)(Time.smoothDeltaTime * fractionOfFrameTime * Stopwatch.Frequency);
         stopwatch.Reset();
         stopwatch.Start();
     }
