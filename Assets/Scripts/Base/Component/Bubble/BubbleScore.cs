@@ -11,7 +11,7 @@ public class BubbleScore : MonoBehaviour
 
     public void OnDestroy()
     {
-        if (model != null)
+        if ((model != null) && (GlobalState.Instance != null))
         {
             GlobalState.Instance.EventDispatcher.Dispatch(new BubbleDestroyedEvent(model.definition.Score, gameObject));
         }
