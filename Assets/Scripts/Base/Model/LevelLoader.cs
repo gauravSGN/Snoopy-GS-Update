@@ -36,10 +36,15 @@ public class LevelLoader : MonoBehaviour
 
     public Dictionary<BubbleType, int> LoadLevel(TextAsset levelData)
     {
+        return LoadLevel(levelData.text);
+    }
+
+    public Dictionary<BubbleType, int> LoadLevel(string levelData)
+    {
         rowDistance = config.bubbles.size * COS_30_DEGREES;
         Dictionary<BubbleType, int> bubbleTypeCount;
 
-        using (var reader = new StringReader(levelData.text))
+        using (var reader = new StringReader(levelData))
         {
             LevelData = ParseLevelData(reader);
             bubbleTypeCount = CreateLevel(LevelData);
