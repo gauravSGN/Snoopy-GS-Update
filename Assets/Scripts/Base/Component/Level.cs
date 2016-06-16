@@ -1,13 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class Level : MonoBehaviour
 {
     public readonly LevelState levelState = new LevelState();
-
-    public TextAsset levelData;
-    public LevelLoader loader;
     public BubbleFactory bubbleFactory;
+
+    [SerializeField]
+    private TextAsset levelData;
+
+    [SerializeField]
+    private LevelLoader loader;
 
     protected void Start()
     {
@@ -30,9 +33,9 @@ public class Level : MonoBehaviour
         levelState.remainingBubbles = loader.LevelData.remainingBubble;
         levelState.NotifyListeners();
 
-        EventDispatcher.Instance.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
-        EventDispatcher.Instance.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
-        EventDispatcher.Instance.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
     }
 
     private void OnBubbleFired(BubbleFiredEvent gameEvent)
@@ -59,6 +62,6 @@ public class Level : MonoBehaviour
             }
         }
 
-        EventDispatcher.Instance.Dispatch(new LevelCompleteEvent(true));
+        GlobalState.Instance.EventDispatcher.Dispatch(new LevelCompleteEvent(true));
     }
 }

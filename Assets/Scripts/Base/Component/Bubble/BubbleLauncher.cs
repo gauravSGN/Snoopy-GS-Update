@@ -5,10 +5,17 @@ public class BubbleLauncher : MonoBehaviour
 {
     public delegate void ModifyShot(GameObject bubble);
 
-    public GameObject[] locations;
-    public float launchSpeed;
-    public Level level;
-    public AimLine aimLine;
+    [SerializeField]
+    private GameObject[] locations;
+
+    [SerializeField]
+    private float launchSpeed;
+
+    [SerializeField]
+    private Level level;
+
+    [SerializeField]
+    private AimLine aimLine;
 
     private GameObject[] nextBubbles;
     private List<ModifyShot> shotModifiers;
@@ -32,7 +39,7 @@ public class BubbleLauncher : MonoBehaviour
         CreateBubbles();
         SetAimLineColor();
 
-        EventDispatcher.Instance.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
+        GlobalState.Instance.EventDispatcher.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
     protected void OnMouseUp()
@@ -71,7 +78,7 @@ public class BubbleLauncher : MonoBehaviour
         rigidBody.gravityScale = 0.0f;
 
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        EventDispatcher.Instance.Dispatch(new BubbleFiredEvent(nextBubbles[0]));
+        GlobalState.Instance.EventDispatcher.Dispatch(new BubbleFiredEvent(nextBubbles[0]));
 
         nextBubbles[0] = null;
         shotModifiers = ResetShotModifiers();

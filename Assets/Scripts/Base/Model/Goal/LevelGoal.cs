@@ -12,7 +12,7 @@
         protected void CompleteGoal()
         {
             Complete = true;
-            EventDispatcher.Instance.Dispatch(new GoalCompleteEvent(this));
+            GlobalState.Instance.EventDispatcher.Dispatch(new GoalCompleteEvent(this));
         }
     }
 }

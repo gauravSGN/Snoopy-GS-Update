@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
-public abstract class FancyGizmo : MonoBehaviour {
+public abstract class FancyGizmo : MonoBehaviour
+{
     public Vector3 positionOffset;
     public Color color = Color.yellow;
 
@@ -13,9 +13,11 @@ public abstract class FancyGizmo : MonoBehaviour {
     private float timer = 0f;
 
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
         timer += Time.deltaTime;
-        if(showHistory && timer >= historyInterval){
+        if(showHistory && timer >= historyInterval)
+        {
             timer = 0;
             RecordHistory();
         }

@@ -1,22 +1,12 @@
-﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class EventDispatcher : MonoBehaviour
+public class EventDispatcher
 {
-    public static EventDispatcher Instance { get { return instance; } }
-
-    private static EventDispatcher instance;
-
     private readonly Dictionary<Type, List<object>> handlers = new Dictionary<Type, List<object>>();
     private readonly Dictionary<Type, List<object>> pools = new Dictionary<Type, List<object>>();
 
-    public void Awake()
-    {
-        instance = this;
-    }
-
-    public void OnDestroy()
+    public void Reset()
     {
         handlers.Clear();
     }

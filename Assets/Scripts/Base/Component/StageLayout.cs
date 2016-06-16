@@ -2,11 +2,20 @@
 
 public class StageLayout : MonoBehaviour
 {
-    public GameConfig config;
-    public Camera gameCamera;
-    public GameObject background;
-    public BoxCollider2D leftWall;
-    public BoxCollider2D rightWall;
+    [SerializeField]
+    private GameConfig config;
+
+    [SerializeField]
+    private Camera gameCamera;
+
+    [SerializeField]
+    private GameObject background;
+
+    [SerializeField]
+    private BoxCollider2D leftWall;
+
+    [SerializeField]
+    private BoxCollider2D rightWall;
 
     protected void OnEnable()
     {

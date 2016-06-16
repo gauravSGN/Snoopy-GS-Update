@@ -1,6 +1,9 @@
-﻿public class LevelStateTextUpdater : TextUpdater
+using UnityEngine;
+
+public class LevelStateTextUpdater : TextUpdater
 {
-    public Level level;
+    [SerializeField]
+    private Level level;
 
     override protected void Start()
     {

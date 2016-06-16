@@ -1,7 +1,4 @@
-﻿using System;
-
-[Flags]
-public enum Layers
+﻿public enum Layers
 {
     Default = 0,
     TransparentFX = 1,

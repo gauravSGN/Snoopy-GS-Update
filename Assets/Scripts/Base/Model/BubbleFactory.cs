@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 using BubbleContent;
 
 public class BubbleFactory : ScriptableObject
 {
-    public List<BubbleDefinition> bubbles;
-    public List<BubbleContentDefinition> contents;
+    [SerializeField]
+    private List<BubbleContentDefinition> contents;
+
+    [SerializeField]
+    private List<BubbleDefinition> bubbles;
 
     private Dictionary<BubbleType, BubbleDefinition> bubbleLookup;
     private Dictionary<BubbleContentType, BubbleContentDefinition> contentLookup;

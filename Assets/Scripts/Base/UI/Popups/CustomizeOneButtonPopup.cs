@@ -6,10 +6,13 @@ public class CustomizeOneButtonPopup : MonoBehaviour, CustomizePopup
 {
     [SerializeField]
     private Text bodyText;
+
     [SerializeField]
     private Text buttonText;
+
     [SerializeField]
     private Text titleText;
+
     [SerializeField]
     private Image mainImage;
 
