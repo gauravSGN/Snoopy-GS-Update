@@ -1,33 +1,45 @@
 using System;
 using System.Linq;
-using UnityEngine;
 using UnityEditor;
 
 public static class AutomatedBuilder
 {
+    private const string OUTPUT_PATH_COMMAND_LINE_ARGUMENT_NAME = "-outputPath";
+
     static void BuildWindowsDesktop()
     {
-        Build(BuildTarget.StandaloneWindows64);
+        Build("Builds/Windows/App.exe", BuildTarget.StandaloneWindows64);
     }
 
     static void BuildMacDesktop()
     {
-        Build(BuildTarget.StandaloneOSXUniversal);
+        Build("Builds/OSX/App.app", BuildTarget.StandaloneOSXUniversal);
     }
 
     static void BuildiOS()
     {
-        Build(BuildTarget.iOS);
+        Build("Builds/iOS/App", BuildTarget.iOS);
     }
 
     static void BuildAndroid()
     {
-        Build(BuildTarget.Android);
+        Build("Builds/Android/App.apk", BuildTarget.Android);
     }
 
-    private static void Build(BuildTarget target)
+    private static void Build(string defaultPath, BuildTarget target)
     {
-        var path = Environment.GetEnvironmentVariable("OUTPUT_PATH");
+        var path = defaultPath;
+        var arguments = Environment.GetCommandLineArgs();
+
+        for (var i = 0; i < arguments.Length; i++)
+        {
+            if ((arguments[i] == OUTPUT_PATH_COMMAND_LINE_ARGUMENT_NAME) && (i + 1 < arguments.Length))
+            {
+                path = arguments[i + 1];
+                break;
+            }
+        }
+
         Console.WriteLine("Output Path: " + path);
 
         Console.WriteLine("Starting build...");
