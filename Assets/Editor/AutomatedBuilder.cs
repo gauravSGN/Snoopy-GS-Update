@@ -1,46 +1,36 @@
-using UnityEngine;
+using System;
+using System.Linq;
 using UnityEditor;
 
 public static class AutomatedBuilder
 {
-    [MenuItem("File/Build/iOS")]
-    static void PerformiOSBuild()
+    static void BuildWindowsDesktop()
     {
-        PerformAutomatedbuild("Builds/iOS", BuildTarget.iOS);
+        Build(BuildTarget.StandaloneWindows64);
     }
 
-    [MenuItem("File/Build/Android")]
-    static void PerformAndroidBuild()
+    static void BuildMacDesktop()
     {
-        PerformAutomatedbuild("Builds/Android", BuildTarget.Android);
+        Build(BuildTarget.StandaloneOSXUniversal);
     }
 
-    [MenuItem("File/Build/OSX Desktop")]
-    static void PerformDesktopBuild()
+    static void BuildiOS()
     {
-        PerformAutomatedbuild("Builds/OSX Desktop", BuildTarget.StandaloneOSXUniversal);
+        Build(BuildTarget.iOS);
     }
 
-    private static void PerformAutomatedbuild(string path, BuildTarget target)
+    static void BuildAndroid()
     {
-        Debug.Log("Switching Build Target");
-        EditorUserBuildSettings.SwitchActiveBuildTarget(target);
+        Build(BuildTarget.Android);
+    }
 
-        Debug.Log("Building...");
-        BuildPipeline.BuildPlayer(GetScenePaths(), path, target, BuildOptions.None);
-
-        Debug.Log("Done");
+    private static void Build(BuildTarget target)
+    {
+        BuildPipeline.BuildPlayer(GetScenePaths(), Environment.GetEnvironmentVariable("OUTPUT_PATH"), target, BuildOptions.None);
     }
 
     private static string[] GetScenePaths()
     {
-        string[] scenes = new string[EditorBuildSettings.scenes.Length];
-
-        for (int i = 0; i < scenes.Length; i++)
-        {
-            scenes[i] = EditorBuildSettings.scenes[i].path;
-        }
-
-        return scenes;
+        return EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
     }
 }
