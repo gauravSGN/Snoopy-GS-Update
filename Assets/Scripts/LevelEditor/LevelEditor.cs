@@ -37,8 +37,13 @@ namespace LevelEditor
 
             if (!string.IsNullOrEmpty(levelFilename))
             {
-                filename = levelFilename;
-                loader.LoadLevel(File.ReadAllText(levelFilename));
+                ConfirmAction(delegate ()
+                {
+                    filename = levelFilename;
+                    ClearLevel();
+
+                    loader.LoadLevel(File.ReadAllText(levelFilename));
+                });
             }
         }
 
@@ -54,7 +59,10 @@ namespace LevelEditor
 
         public void Clear()
         {
-
+            ConfirmAction(delegate ()
+            {
+                ClearLevel();
+            });
         }
 
         private void ClearLevel()
@@ -67,19 +75,12 @@ namespace LevelEditor
 
         private void ConfirmAction(Action action)
         {
-            if (filename != null)
-            {
-                var dialog = Instantiate(confirmationDialogPrefab).GetComponent<ConfirmationDialog>();
-                dialog.transform.SetParent(transform.parent, false);
+            var dialog = Instantiate(confirmationDialogPrefab).GetComponent<ConfirmationDialog>();
+            dialog.transform.SetParent(transform.parent, false);
 
-                dialog.Title = "Destructive Command";
-                dialog.Body = "This action will overwrite the current working level data.  Are you sure you want to proceed?";
-                dialog.OnConfirm = action;
-            }
-            else
-            {
-                action.Invoke();
-            }
+            dialog.Title = "Destructive Command";
+            dialog.Body = "This action will overwrite the current working level data.  Are you sure you want to proceed?";
+            dialog.OnConfirm = action;
         }
     }
 }

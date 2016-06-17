@@ -55,11 +55,11 @@ public class ConfirmationDialog : MonoBehaviour
 
     private void DispatchResult(Action action)
     {
+        Destroy(gameObject);
+
         if (action != null)
         {
             action.Invoke();
         }
-
-        Destroy(gameObject);
     }
 }
