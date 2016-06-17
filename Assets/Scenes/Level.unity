@@ -220,6 +220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpFactory: {fileID: 11400000, guid: fcf96848466bd4a74a7ab983e31ba1b4, type: 2}
+  launcher: {fileID: 443704579}
+  level: {fileID: 0}
 --- !u!1 &198621821
 GameObject:
   m_ObjectHideFlags: 0

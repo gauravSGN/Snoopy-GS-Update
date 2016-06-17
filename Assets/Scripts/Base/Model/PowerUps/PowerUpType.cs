@@ -1,12 +1,15 @@
-﻿namespace PowerUps
+using System;
+
+namespace PowerUps
 {
+    [Flags]
     public enum PowerUpType
     {
-        Yellow = 0,
-        Pink = 1,
-        Blue = 2,
-        Red = 3,
-        Purple = 4,
-        Green = 5,
+        Yellow = 1,
+        Pink = 2,
+        Blue = 4,
+        Red = 8,
+        Purple = 16,
+        Green = 32,
     }
 }

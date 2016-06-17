@@ -15,7 +15,9 @@ namespace PowerUps
         public GameObject CreatePowerUpByType(PowerUpType type)
         {
             var definition = GetBubbleDefinitionByType(type);
-            return Instantiate(definition.prefab);
+            var instance = Instantiate(definition.Prefab);
+            instance.GetComponent<PowerUp>().SetDefinition(definition);
+            return instance;
         }
 
         private PowerUpDefinition GetBubbleDefinitionByType(PowerUpType type)

@@ -8,13 +8,7 @@ namespace PowerUps
         private GameObject glow;
 
         [SerializeField]
-        private BubbleType bubbleType;
-
-        [SerializeField]
         private Level level;
-
-        [SerializeField]
-        private GameObject launcher;
 
         [SerializeField]
         private int max;
@@ -28,14 +22,22 @@ namespace PowerUps
         [SerializeField]
         private int lastBubbleCount;
 
-        public void Setup(int setMax)
+        private PowerUpDefinition definition;
+        private PowerUpController controller;
+
+        public void Setup(int setMax, PowerUpController setController, Level setLevel)
         {
             max = setMax;
+            controller = setController;
+            level = setLevel;
+            level.levelState.AddListener(UpdateState);
+        }
 
-            if (max > 0)
+        public void SetDefinition(PowerUpDefinition setDefinition)
+        {
+            if (definition == null)
             {
-                gameObject.SetActive(true);
-                level.levelState.AddListener(UpdateState);
+                definition = setDefinition;
             }
         }
 
@@ -43,22 +45,16 @@ namespace PowerUps
         {
             if (progress >= 1.0f)
             {
-                launcher.GetComponent<BubbleLauncher>().AddShotModifier(AddExplosion);
+                controller.AddPowerUp(definition.Type);
                 Reset();
             }
-        }
-
-        public void AddExplosion(GameObject bubble)
-        {
-            bubble.AddComponent<BubbleExplode>();
-            bubble.GetComponent<BubbleAttachments>().Model.type = BubbleType.Steel;
         }
 
         private void UpdateState(Observable levelState)
         {
             if ((current < max) && (glow != null))
             {
-                var currentBubbleCount = (levelState as LevelState).typeTotals[bubbleType];
+                var currentBubbleCount = (levelState as LevelState).typeTotals[definition.BubbleType];
 
                 if (currentBubbleCount < lastBubbleCount)
                 {

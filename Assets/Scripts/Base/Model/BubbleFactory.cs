@@ -33,13 +33,13 @@ public class BubbleFactory : ScriptableObject
     public GameObject CreateBubbleByType(BubbleType type)
     {
         var definition = GetBubbleDefinitionByType(type);
-        var instance = Instantiate(definition.prefab);
+        var instance = Instantiate(definition.Prefab);
 
         var model = new Bubble
         {
             type = type,
             definition = definition,
-            IsRoot = definition.actsAsRoot,
+            IsRoot = definition.ActsAsRoot,
         };
 
         instance.SendMessage("SetModel", model);

@@ -12,16 +12,23 @@ namespace PowerUps
         // [SerializeField]
         // private AreaEffectFactory areaEffectFactory;
 
+        [SerializeField]
+        private BubbleLauncher launcher;
+
         private Transform[] anchors;
+        private int powerUpMask;
+        private Level level;
 
         void Awake()
         {
             anchors = gameObject.GetComponentsInChildren<Transform>();
+            anchors = anchors.Where(child => child != gameObject.transform).ToArray();
         }
 
         public void Setup(Dictionary<PowerUpType, float> levelData)
         {
-            var index = 1;
+            level = gameObject.GetComponentInParent<Level>();
+            var index = 0;
 
             foreach (var data in levelData.Where(data => data.Value > 0.0f))
             {
@@ -31,11 +38,28 @@ namespace PowerUps
                 }
 
                 var powerUp = powerUpFactory.CreatePowerUpByType(data.Key);
-                powerUp.GetComponent<PowerUp>().Setup((int)data.Value);
+                powerUp.GetComponent<PowerUp>().Setup((int)(1 / data.Value), this, level);
                 powerUp.transform.parent = anchors[index];
                 powerUp.transform.localPosition = new Vector3(0, 0);
                 index++;
             }
+        }
+
+        public void AddPowerUp(PowerUpType type)
+        {
+            if (powerUpMask == 0)
+            {
+                launcher.AddShotModifier(AddScan);
+            }
+
+            powerUpMask = 1 << (int)type;
+        }
+
+        public void AddScan(GameObject bubble)
+        {
+            bubble.AddComponent<BubbleExplode>();
+            bubble.GetComponent<BubbleAttachments>().Model.type = BubbleType.Steel;
+            powerUpMask = 0;
         }
     }
 }

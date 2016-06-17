@@ -34,13 +34,13 @@ public class LevelLoader : MonoBehaviour
         {
             LevelData = ParseLevelData(reader);
             bubbleTypeCount = CreateLevel(LevelData);
-            SetupLanterns();
+            SetupPowerUps();
         }
 
         return bubbleTypeCount;
     }
 
-    private void SetupLanterns()
+    private void SetupPowerUps()
     {
         var keyToType = new Dictionary<string, PowerUpType>();
         keyToType["bombFill"] = PowerUpType.Red;
@@ -49,6 +49,7 @@ public class LevelLoader : MonoBehaviour
         keyToType["fireFill"] = PowerUpType.Yellow;
 
         var levelData = new Dictionary<PowerUpType, float>();
+
         foreach (var entry in keyToType)
         {
             levelData[entry.Value] = (float)LevelData.GetType().GetField(entry.Key).GetValue(LevelData);

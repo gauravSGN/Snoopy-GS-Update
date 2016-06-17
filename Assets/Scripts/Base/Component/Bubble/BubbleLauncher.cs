@@ -123,7 +123,7 @@ public class BubbleLauncher : MonoBehaviour
 
     private void SetAimLineColor()
     {
-        aimLine.Color = nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.baseColor;
+        aimLine.Color = nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.BaseColor;
     }
 
     private void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)
