@@ -6,9 +6,9 @@ public static class AutomatedBuilder
 {
     private static string[] arguments = Environment.GetCommandLineArgs();
 
-    private const string ANDROID_KEYSTORE_PASS = "-keystorePass";
-    private const string ANDROID_KEYALIAS_PASS = "-keyaliasPass";
-    private const string OUTPUT_PATH_COMMAND_LINE_ARGUMENT_NAME = "-outputPath";
+    private const string OUTPUT_PATH_ARGUMENT_NAME = "-outputPath";
+    private const string ANDROID_KEYSTORE_PASS_ARGUMENT_NAME = "-keystorePass";
+    private const string ANDROID_KEYALIAS_PASS_ARGUMENT_NAME = "-keyaliasPass";
 
     static void BuildWindowsDesktop()
     {
@@ -27,15 +27,15 @@ public static class AutomatedBuilder
 
     static void BuildAndroid()
     {
-        PlayerSettings.keystorePass = GetCommandLineArgument(ANDROID_KEYSTORE_PASS);
-        PlayerSettings.keyaliasPass = GetCommandLineArgument(ANDROID_KEYALIAS_PASS);
+        PlayerSettings.keystorePass = GetCommandLineArgument(ANDROID_KEYSTORE_PASS_ARGUMENT_NAME);
+        PlayerSettings.keyaliasPass = GetCommandLineArgument(ANDROID_KEYALIAS_PASS_ARGUMENT_NAME);
 
         Build("Builds/Android/App.apk", BuildTarget.Android);
     }
 
     private static void Build(string defaultPath, BuildTarget target)
     {
-        var commandLinePath = GetCommandLineArgument(OUTPUT_PATH_COMMAND_LINE_ARGUMENT_NAME);
+        var commandLinePath = GetCommandLineArgument(OUTPUT_PATH_ARGUMENT_NAME);
         var path = (commandLinePath != "") ? commandLinePath : defaultPath;
         Console.WriteLine("Output Path: " + path);
 
