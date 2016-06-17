@@ -10,7 +10,7 @@ namespace LevelEditor
         private const string LEVEL_EXTENSION = "xml";
 
         [SerializeField]
-        private LevelLoader loader;
+        private EditorLevelLoader loader;
 
         [SerializeField]
         private Transform levelContents;
@@ -25,7 +25,7 @@ namespace LevelEditor
             ConfirmAction(delegate ()
             {
                 filename = null;
-                ClearLevel();
+                loader.Clear();
             });
         }
 
@@ -40,7 +40,7 @@ namespace LevelEditor
                 ConfirmAction(delegate ()
                 {
                     filename = levelFilename;
-                    ClearLevel();
+                    loader.Clear();
 
                     loader.LoadLevel(File.ReadAllText(levelFilename));
                 });
@@ -59,22 +59,15 @@ namespace LevelEditor
 
         public void Clear()
         {
-            ConfirmAction(delegate ()
-            {
-                ClearLevel();
-            });
-        }
-
-        private void ClearLevel()
-        {
-            for (var index = levelContents.childCount - 1; index >= 0; index--)
-            {
-                Destroy(levelContents.GetChild(index).gameObject);
-            }
+            ConfirmAction(delegate () { loader.Clear(); });
         }
 
         private void ConfirmAction(Action action)
         {
+            // TODO: Remove this before finishing
+            action.Invoke();
+            return;
+
             var dialog = Instantiate(confirmationDialogPrefab).GetComponent<ConfirmationDialog>();
             dialog.transform.SetParent(transform.parent, false);
 

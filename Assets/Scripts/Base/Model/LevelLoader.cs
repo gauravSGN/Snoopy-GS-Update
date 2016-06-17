@@ -5,11 +5,10 @@ using System.Xml.Serialization;
 using Goal;
 using BubbleContent;
 using PowerUps;
+using Util;
 
 public class LevelLoader : MonoBehaviour
 {
-    private const float COS_30_DEGREES = 0.8660254038f;
-
     public LevelData LevelData { get; private set; }
 
     [SerializeField]
@@ -41,15 +40,12 @@ public class LevelLoader : MonoBehaviour
 
     public Dictionary<BubbleType, int> LoadLevel(string levelData)
     {
-        rowDistance = config.bubbles.size * COS_30_DEGREES;
+        rowDistance = config.bubbles.size * MathUtil.COS_30_DEGREES;
         Dictionary<BubbleType, int> bubbleTypeCount;
 
-        using (var reader = new StringReader(levelData))
-        {
-            LevelData = ParseLevelData(reader);
-            bubbleTypeCount = CreateLevel(LevelData);
-            SetupPowerUps();
-        }
+        LevelData = XmlUtil.Deserialize<LevelData>(levelData);
+        bubbleTypeCount = CreateLevel(LevelData);
+        SetupPowerUps();
 
         return bubbleTypeCount;
     }
