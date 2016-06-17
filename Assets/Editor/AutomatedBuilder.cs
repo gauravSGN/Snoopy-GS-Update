@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using UnityEngine;
 using UnityEditor;
 
 public static class AutomatedBuilder
@@ -26,7 +27,12 @@ public static class AutomatedBuilder
 
     private static void Build(BuildTarget target)
     {
-        BuildPipeline.BuildPlayer(GetScenePaths(), Environment.GetEnvironmentVariable("OUTPUT_PATH"), target, BuildOptions.None);
+        var path = Environment.GetEnvironmentVariable("OUTPUT_PATH");
+        Console.WriteLine("Output Path: " + path);
+
+        Console.WriteLine("Starting build...");
+        BuildPipeline.BuildPlayer(GetScenePaths(), path, target, BuildOptions.None);
+        Console.WriteLine("Done");
     }
 
     private static string[] GetScenePaths()
