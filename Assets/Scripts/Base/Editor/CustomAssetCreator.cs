@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.IO;
 using BubbleContent;
+using PowerUps;
 
 public static class CustomAssetCreator
 {
@@ -27,6 +28,18 @@ public static class CustomAssetCreator
     public static void CreateGameConfig()
     {
         CreateAThing<GameConfig>();
+    }
+
+    [MenuItem("Assets/Create/PowerUpDefinition")]
+    public static void CreatePowerUpDefinition()
+    {
+        CreateAThing<PowerUpDefinition>();
+    }
+
+    [MenuItem("Assets/Create/PowerUpFactory")]
+    public static void CreatePowerUpFactory()
+    {
+        CreateAThing<PowerUpFactory>();
     }
 
     private static void CreateAThing<T>() where T : ScriptableObject

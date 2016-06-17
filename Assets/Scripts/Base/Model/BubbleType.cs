@@ -6,6 +6,5 @@
     Red = 2,
     Green = 3,
     Steel = 4,
-    // Exploding = 5,
     Cloud = 5,
 }

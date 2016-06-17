@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using Goal;
 using BubbleContent;
+using PowerUps;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -41,19 +42,20 @@ public class LevelLoader : MonoBehaviour
 
     private void SetupLanterns()
     {
-        var lanterns = new Dictionary<string, string>();
-        lanterns["bombFill"] = "Red Lantern";
-        lanterns["horzFill"] = "Blue Lantern";
-        lanterns["snakeFill"] = "Green Lantern";
-        lanterns["fireFill"] = "Yellow Lantern";
+        var keyToType = new Dictionary<string, PowerUpType>();
+        keyToType["bombFill"] = PowerUpType.Red;
+        keyToType["horzFill"] = PowerUpType.Blue;
+        keyToType["snakeFill"] = PowerUpType.Green;
+        keyToType["fireFill"] = PowerUpType.Yellow;
 
-        foreach (var entry in lanterns)
+        var levelData = new Dictionary<PowerUpType, float>();
+        foreach (var entry in keyToType)
         {
-            var lantern = gameView.transform.FindChild("Lanterns").FindChild(entry.Value).gameObject;
-            float lanternFillValue = (float)LevelData.GetType().GetField(entry.Key).GetValue(LevelData);
-
-            lantern.GetComponent<Lantern>().Setup((int)(lanternFillValue > 0.0f ? (1.0 / lanternFillValue) : 0.0f));
+            levelData[entry.Value] = (float)LevelData.GetType().GetField(entry.Key).GetValue(LevelData);
         }
+
+        var powerUpController = gameView.transform.FindChild("Power Ups").gameObject.GetComponent<PowerUpController>();
+        powerUpController.Setup(levelData);
     }
 
     private LevelData ParseLevelData(StringReader reader)
