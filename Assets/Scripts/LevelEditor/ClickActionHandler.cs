@@ -58,7 +58,18 @@ namespace LevelEditor
         private void ApplyAction(PointerEventData eventData)
         {
             var gridCoord = GetGridCoordinate(eventData);
-            Debug.Log(gridCoord);
+
+            if (dragging)
+            {
+                if (modifiedPositions.Contains(gridCoord))
+                {
+                    return;
+                }
+
+                modifiedPositions.Add(gridCoord);
+            }
+
+            manipulator.PerformAction(gridCoord.Y, gridCoord.Y);
         }
 
         private GridPosition GetGridCoordinate(PointerEventData eventData)

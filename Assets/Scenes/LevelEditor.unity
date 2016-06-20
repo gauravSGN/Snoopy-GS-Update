@@ -3027,7 +3027,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 299.99997}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1526308726
@@ -3241,6 +3241,7 @@ MonoBehaviour:
   buttonContainer: {fileID: 569235364}
   listPrefab: {fileID: 101466, guid: aef777c27948a4dcc8a4ebb6281bf951, type: 2}
   buttonPrefab: {fileID: 141416, guid: a370ff8d6a1484e49a313f0cf762a94b, type: 2}
+  manipulator: {fileID: 1329098742}
 --- !u!1 &1557940945
 GameObject:
   m_ObjectHideFlags: 0
@@ -3274,8 +3275,8 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 32.5, y: -8.5}
-  m_SizeDelta: {x: -31, y: 17}
+  m_AnchoredPosition: {x: 24, y: 0}
+  m_SizeDelta: {x: -48, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1557940947
 MonoBehaviour:
@@ -4206,6 +4207,7 @@ GameObject:
   - 114: {fileID: 2023691112}
   - 114: {fileID: 2023691111}
   - 114: {fileID: 2023691110}
+  - 114: {fileID: 2023691114}
   m_Layer: 5
   m_Name: PlaceObjectButton
   m_TagString: Untagged
@@ -4323,6 +4325,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2023691108}
+--- !u!114 &2023691114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023691108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221df902e53264bedbd813fc3a2fe1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enumValue: 1
+  manipulator: {fileID: 1329098742}
 --- !u!1 &2057336380
 GameObject:
   m_ObjectHideFlags: 0

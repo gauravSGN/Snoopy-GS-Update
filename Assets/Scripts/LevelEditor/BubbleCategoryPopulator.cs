@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +21,9 @@ namespace LevelEditor
 
         [SerializeField]
         private GameObject buttonPrefab;
+
+        [SerializeField]
+        private LevelManipulator manipulator;
 
         public void SetActiveCategory(BubbleCategory category)
         {
@@ -80,16 +82,22 @@ namespace LevelEditor
             var bubbles = factory.Bubbles.Where(b => b.category == category).OrderBy(b => b.type);
             foreach (var definition in bubbles)
             {
-                var prefabSprite = definition.prefab.GetComponentInChildren<SpriteRenderer>();
+                CreateButtonFromDefinition(panel, definition);
+            }
+        }
 
-                if (prefabSprite != null)
-                {
-                    var button = Instantiate(buttonPrefab);
+        private void CreateButtonFromDefinition(GameObject panel, BubbleDefinition definition)
+        {
+            var prefabSprite = definition.prefab.GetComponentInChildren<SpriteRenderer>();
 
-                    button.name = definition.type.ToString();
-                    button.GetComponent<Image>().sprite = prefabSprite.sprite;
-                    button.transform.SetParent(panel.transform, false);
-                }
+            if (prefabSprite != null)
+            {
+                var button = Instantiate(buttonPrefab);
+
+                button.name = definition.type.ToString();
+                button.GetComponent<Image>().sprite = prefabSprite.sprite;
+                button.GetComponent<Button>().onClick.AddListener(() => manipulator.SetBubbleType(definition.Type));
+                button.transform.SetParent(panel.transform, false);
             }
         }
     }

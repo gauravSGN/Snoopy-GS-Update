@@ -3,11 +3,20 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using Util;
 using Model;
+using LevelEditor.Manipulator;
 
 namespace LevelEditor
 {
     public class LevelManipulator : MonoBehaviour
     {
+        private class ManipulatorActionFactory : AttributeDrivenFactory<ManipulatorAction, ManipulatorActionAttribute, ManipulatorActionType>
+        {
+            protected override ManipulatorActionType GetKeyFromAttribute(ManipulatorActionAttribute attribute)
+            {
+                return attribute.ActionType;
+            }
+        }
+
         private const int BUBBLE_SIZE = 32;
         private const float HALF_SIZE = BUBBLE_SIZE / 2.0f;
 
@@ -23,6 +32,11 @@ namespace LevelEditor
         private LevelData levelData;
         private readonly Dictionary<int, LevelData.BubbleData> models = new Dictionary<int, LevelData.BubbleData>();
         private readonly Dictionary<int, GameObject> views = new Dictionary<int, GameObject>();
+
+        private ManipulatorActionFactory actionFactory = new ManipulatorActionFactory();
+        private ManipulatorActionType actionType;
+        private ManipulatorAction action;
+        private BubbleType bubbleType;
 
         public void Clear()
         {
@@ -60,6 +74,29 @@ namespace LevelEditor
                 instance.transform.SetParent(bubbleContainer, false);
                 instance.transform.localPosition = GetBubbleLocation(x, y);
             }
+        }
+
+        public void SetActionType(ManipulatorActionType type)
+        {
+            if (actionType != type)
+            {
+                actionType = type;
+                action = actionFactory.Create(actionType);
+                Debug.Log(string.Format("LevelManipulator: Action type is now {0}", type));
+            }
+        }
+
+        public void SetBubbleType(BubbleType type)
+        {
+            if (bubbleType != type)
+            {
+                bubbleType = type;
+                Debug.Log(string.Format("LevelManipulator: Bubble type is now {0}", type));
+            }
+        }
+
+        public void PerformAction(int x, int y)
+        {
         }
 
         private Vector3 GetBubbleLocation(int x, int y)
