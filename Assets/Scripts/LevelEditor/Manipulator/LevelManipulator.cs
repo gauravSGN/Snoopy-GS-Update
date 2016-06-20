@@ -65,6 +65,19 @@ namespace LevelEditor
             }
         }
 
+        public string SaveLevel()
+        {
+            var data = new MutableLevelData();
+
+            //data.ShotCount = levelData.ShotCount;
+            //data.PowerUpFills = levelData.PowerUpFills;
+            data.Bubbles = models.Values;
+
+            levelData = data;
+
+            return JsonUtility.ToJson(data);
+        }
+
         public void PlaceBubble(int x, int y, BubbleType type)
         {
             var definition = factory.GetBubbleDefinitionByType(type);

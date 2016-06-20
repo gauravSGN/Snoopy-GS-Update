@@ -49,12 +49,35 @@ namespace LevelEditor
 
         public void Save()
         {
+            if (string.IsNullOrEmpty(filename))
+            {
+                SaveAs();
+            }
+            else
+            {
+                ConfirmAction(delegate ()
+                {
+                    var jsonText = manipulator.SaveLevel();
 
+                    using (var stream = File.Open(filename, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
+                    using (var writer = new StreamWriter(stream))
+                    {
+                        writer.Write(jsonText);
+                    }
+                });
+            }
         }
 
         public void SaveAs()
         {
+            var basePath = Path.Combine(Application.dataPath, "Data/Levels");
+            var levelFilename = EditorUtility.SaveFilePanel("Save Level", basePath, "NewLevel.json", LEVEL_EXTENSION);
 
+            if (!string.IsNullOrEmpty(levelFilename))
+            {
+                filename = levelFilename;
+                Save();
+            }
         }
 
         public void Clear()

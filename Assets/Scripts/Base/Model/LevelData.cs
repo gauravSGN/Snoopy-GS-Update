@@ -8,7 +8,7 @@ using Goal;
 namespace Model
 {
     [Serializable]
-    public sealed class LevelData
+    public class LevelData
     {
         [Serializable]
         public sealed class BubbleData
@@ -43,20 +43,20 @@ namespace Model
             }
         }
 
-        public int ShotCount { get { return shot_count; } }
-        public float[] PowerUpFills { get { return power_up_fills; } }
-        public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
+        public virtual int ShotCount { get { return shot_count; } }
+        public virtual float[] PowerUpFills { get { return power_up_fills; } }
+        public virtual IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
 
         [XmlIgnore]
         public List<LevelGoal> goals;
 
         [SerializeField]
-        private int shot_count;
+        protected int shot_count;
 
         [SerializeField]
-        private float[] power_up_fills;
+        protected float[] power_up_fills;
 
         [SerializeField]
-        private BubbleData[] bubbles;
+        protected BubbleData[] bubbles;
     }
 }
