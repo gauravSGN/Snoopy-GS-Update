@@ -59,17 +59,20 @@ namespace LevelEditor
         {
             var gridCoord = GetGridCoordinate(eventData);
 
-            if (dragging)
+            if (IsValidCoordinate(gridCoord))
             {
-                if (modifiedPositions.Contains(gridCoord))
+                if (dragging)
                 {
-                    return;
+                    if (modifiedPositions.Contains(gridCoord))
+                    {
+                        return;
+                    }
+
+                    modifiedPositions.Add(gridCoord);
                 }
 
-                modifiedPositions.Add(gridCoord);
+                manipulator.PerformAction(gridCoord.X, gridCoord.Y);
             }
-
-            manipulator.PerformAction(gridCoord.Y, gridCoord.Y);
         }
 
         private GridPosition GetGridCoordinate(PointerEventData eventData)
@@ -118,6 +121,12 @@ namespace LevelEditor
             yield return new Vector2(baseX + 1.0f, baseY);
             yield return new Vector2(baseX - 0.5f, baseY + 1.0f);
             yield return new Vector2(baseX + 0.5f, baseY + 1.0f);
+        }
+
+        private bool IsValidCoordinate(GridPosition coord)
+        {
+            int bubblesPerRow = 12 - (coord.Y & 1);
+            return (coord.X >= 0) && (coord.X < bubblesPerRow) && (coord.Y >= 0);
         }
     }
 }

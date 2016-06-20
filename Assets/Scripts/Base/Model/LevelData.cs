@@ -32,6 +32,15 @@ namespace Model
 
             [NonSerialized]
             public Bubble model;
+
+            public BubbleData() { }
+
+            public BubbleData(int x, int y, BubbleType type)
+            {
+                this.x = x;
+                this.y = y;
+                this.type = (int)type;
+            }
         }
 
         public int ShotCount { get { return shot_count; } }
