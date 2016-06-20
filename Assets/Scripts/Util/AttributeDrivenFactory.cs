@@ -20,7 +20,14 @@ namespace Util
                 GenerateActionTypeMap();
             }
 
-            return Activator.CreateInstance(validTypes[key]) as BaseType;
+            BaseType result = null;
+
+            if (validTypes.ContainsKey(key))
+            {
+                result = Activator.CreateInstance(validTypes[key]) as BaseType;
+            }
+
+            return result;
         }
 
         private void GenerateActionTypeMap()

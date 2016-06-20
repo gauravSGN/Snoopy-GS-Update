@@ -39,7 +39,7 @@ namespace LevelEditor
         public BubbleType BubbleType { get; private set; }
         public ManipulatorActionFactory ActionFactory { get; private set; }
 
-        public void Start()
+        public void Awake()
         {
             ActionFactory = new ManipulatorActionFactory();
         }
