@@ -2,6 +2,7 @@
 using System.IO;
 using UnityEngine;
 using UnityEditor;
+using LevelEditor.Manipulator;
 
 namespace LevelEditor
 {
@@ -25,7 +26,7 @@ namespace LevelEditor
             ConfirmAction(delegate ()
             {
                 filename = null;
-                manipulator.Clear();
+                ClearBoard();
             });
         }
 
@@ -40,7 +41,7 @@ namespace LevelEditor
                 ConfirmAction(delegate ()
                 {
                     filename = levelFilename;
-                    manipulator.Clear();
+                    ClearBoard();
 
                     manipulator.LoadLevel(File.ReadAllText(levelFilename));
                 });
@@ -82,7 +83,7 @@ namespace LevelEditor
 
         public void Clear()
         {
-            ConfirmAction(delegate () { manipulator.Clear(); });
+            ConfirmAction(delegate () { ClearBoard(); });
         }
 
         private void ConfirmAction(Action action)
@@ -97,6 +98,12 @@ namespace LevelEditor
             dialog.Title = "Destructive Command";
             dialog.Body = "This action will overwrite the current working level data.  Are you sure you want to proceed?";
             dialog.OnConfirm = action;
+        }
+
+        private void ClearBoard()
+        {
+            var clearAction = manipulator.ActionFactory.Create(ManipulatorActionType.Clear);
+            clearAction.Perform(manipulator, 0, 0);
         }
     }
 }

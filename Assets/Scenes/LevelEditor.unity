@@ -1071,6 +1071,7 @@ GameObject:
   - 114: {fileID: 306701203}
   - 114: {fileID: 306701202}
   - 114: {fileID: 306701201}
+  - 114: {fileID: 306701205}
   m_Layer: 5
   m_Name: ClearButton
   m_TagString: Untagged
@@ -1153,18 +1154,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 306701203}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1329098741}
-        m_MethodName: Clear
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &306701203
@@ -1200,6 +1190,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 306701199}
+--- !u!114 &306701205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 306701199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c325adc66d324adb9b204da22e6a44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manipulator: {fileID: 1329098742}
+  actionType: 3
 --- !u!1 &387171056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2667,8 +2670,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleContainer: {fileID: 1526308727}
-  prefab: {fileID: 129676, guid: 0212f60e8d4464444a642726f3d5efc4, type: 2}
-  factory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
+  bubblePrefab: {fileID: 129676, guid: 0212f60e8d4464444a642726f3d5efc4, type: 2}
+  bubbleFactory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
 --- !u!1 &1356480299
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,7 +2913,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 300.00003}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1526308726

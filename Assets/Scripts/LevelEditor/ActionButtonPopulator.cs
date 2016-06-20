@@ -1,6 +1,7 @@
 ﻿using LevelEditor.Manipulator;
 using UnityEngine;
 using UnityEngine.UI;
+using Util;
 
 namespace LevelEditor
 {
@@ -21,7 +22,7 @@ namespace LevelEditor
             {
                 var action = manipulator.ActionFactory.Create(enumValue);
 
-                if (action != null)
+                if ((action != null) && !AttributeUtil.HasAttribute<HideActionAttribute>(action.GetType()))
                 {
                     CreateButtonForType(action, enumValue);
                 }

@@ -12,7 +12,15 @@ namespace LevelEditor.Manipulator
 
         public void Perform(LevelManipulator manipulator, int x, int y)
         {
-            manipulator.RemoveBubble(x, y);
+            var key = y << 4 | x;
+
+            manipulator.Models.Remove(key);
+
+            if (manipulator.Views.ContainsKey(key))
+            {
+                GameObject.Destroy(manipulator.Views[key]);
+                manipulator.Views.Remove(key);
+            }
         }
     }
 }
