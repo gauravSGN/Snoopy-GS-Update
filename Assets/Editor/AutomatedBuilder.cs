@@ -1,46 +1,73 @@
-using UnityEngine;
+using System;
+using System.Linq;
 using UnityEditor;
 
 public static class AutomatedBuilder
 {
-    [MenuItem("File/Build/iOS")]
-    static void PerformiOSBuild()
+    private static string[] arguments = Environment.GetCommandLineArgs();
+
+    private const string OUTPUT_PATH_ARGUMENT_NAME = "-outputPath";
+    private const string ANDROID_KEYSTORE_PASS_ARGUMENT_NAME = "-keystorePass";
+    private const string ANDROID_KEYALIAS_PASS_ARGUMENT_NAME = "-keyaliasPass";
+
+    static void BuildWindowsDesktop()
     {
-        PerformAutomatedbuild("Builds/iOS", BuildTarget.iOS);
+        Build("Builds/Windows/App.exe", BuildTarget.StandaloneWindows64);
     }
 
-    [MenuItem("File/Build/Android")]
-    static void PerformAndroidBuild()
+    static void BuildMacDesktop()
     {
-        PerformAutomatedbuild("Builds/Android", BuildTarget.Android);
+        Build("Builds/OSX/App.app", BuildTarget.StandaloneOSXUniversal);
     }
 
-    [MenuItem("File/Build/OSX Desktop")]
-    static void PerformDesktopBuild()
+    static void BuildiOS()
     {
-        PerformAutomatedbuild("Builds/OSX Desktop", BuildTarget.StandaloneOSXUniversal);
+        Build("Builds/iOS/App", BuildTarget.iOS);
     }
 
-    private static void PerformAutomatedbuild(string path, BuildTarget target)
+    static void BuildAndroid()
     {
-        Debug.Log("Switching Build Target");
-        EditorUserBuildSettings.SwitchActiveBuildTarget(target);
+        PlayerSettings.keystorePass = GetCommandLineArgument(ANDROID_KEYSTORE_PASS_ARGUMENT_NAME);
+        PlayerSettings.keyaliasPass = GetCommandLineArgument(ANDROID_KEYALIAS_PASS_ARGUMENT_NAME);
 
-        Debug.Log("Building...");
+        Build("Builds/Android/App.apk", BuildTarget.Android);
+    }
+
+    private static void Build(string defaultPath, BuildTarget target)
+    {
+        var commandLinePath = GetCommandLineArgument(OUTPUT_PATH_ARGUMENT_NAME);
+        var path = (commandLinePath != "") ? commandLinePath : defaultPath;
+        Console.WriteLine("Output Path: " + path);
+
+        Console.WriteLine("Starting build...");
         BuildPipeline.BuildPlayer(GetScenePaths(), path, target, BuildOptions.None);
 
-        Debug.Log("Done");
+        Console.WriteLine("Done");
     }
 
     private static string[] GetScenePaths()
     {
-        string[] scenes = new string[EditorBuildSettings.scenes.Length];
+        return EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
+    }
 
-        for (int i = 0; i < scenes.Length; i++)
+    private static string GetCommandLineArgument(string argument)
+    {
+        string argumentValue = "";
+
+        for (var index = 0; index < arguments.Length; index++)
         {
-            scenes[i] = EditorBuildSettings.scenes[i].path;
+            if (arguments[index] == argument)
+            {
+                var nextIndex = index + 1;
+
+                if ((nextIndex < arguments.Length) && (arguments[nextIndex][0] != '-'))
+                {
+                    argumentValue = arguments[nextIndex];
+                    break;
+                }
+            }
         }
 
-        return scenes;
+        return argumentValue;
     }
 }
