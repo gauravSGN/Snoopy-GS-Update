@@ -1480,6 +1480,7 @@ GameObject:
   - 114: {fileID: 652298282}
   - 114: {fileID: 652298281}
   - 114: {fileID: 652298280}
+  - 114: {fileID: 652298284}
   m_Layer: 5
   m_Name: DeleteObjectButton
   m_TagString: Untagged
@@ -1597,6 +1598,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 652298278}
+--- !u!114 &652298284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 652298278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221df902e53264bedbd813fc3a2fe1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enumValue: 2
+  manipulator: {fileID: 1329098742}
 --- !u!1 &772731565
 GameObject:
   m_ObjectHideFlags: 0
