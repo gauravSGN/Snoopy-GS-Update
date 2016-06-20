@@ -30,7 +30,7 @@ public class Level : MonoBehaviour
         levelState.typeTotals = loader.LoadLevel(levelData);
 
         levelState.score = 0;
-        levelState.remainingBubbles = loader.LevelData.remainingBubble;
+        levelState.remainingBubbles = loader.LevelData.ShotCount;
         levelState.NotifyListeners();
 
         GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);

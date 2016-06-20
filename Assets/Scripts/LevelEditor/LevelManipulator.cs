@@ -1,13 +1,15 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 using Util;
+using Model;
 
 namespace LevelEditor
 {
-    public class EditorLevelLoader : MonoBehaviour
+    public class LevelManipulator : MonoBehaviour
     {
         private const int BUBBLE_SIZE = 32;
+        private const float HALF_SIZE = BUBBLE_SIZE / 2.0f;
 
         [SerializeField]
         private RectTransform bubbleContainer;
@@ -18,30 +20,34 @@ namespace LevelEditor
         [SerializeField]
         private BubbleFactory factory;
 
-        private int maxY;
+        private LevelData levelData;
+        private readonly Dictionary<int, LevelData.BubbleData> models = new Dictionary<int, LevelData.BubbleData>();
+        private readonly Dictionary<int, GameObject> views = new Dictionary<int, GameObject>();
 
         public void Clear()
         {
+            models.Clear();
+            views.Clear();
+
             for (var index = bubbleContainer.childCount - 1; index >= 0; index--)
             {
                 Destroy(bubbleContainer.GetChild(index).gameObject);
             }
         }
 
-        public void LoadLevel(string xmlText)
+        public void LoadLevel(string jsonText)
         {
-            var levelData = XmlUtil.Deserialize<LevelData>(xmlText);
-            maxY = levelData.bubbles.Aggregate(1, (acc, b) => Mathf.Max(acc, b.y));
+            levelData = JsonUtility.FromJson<LevelData>(jsonText);
 
-            foreach (var bubble in levelData.bubbles)
+            foreach (var bubble in levelData.Bubbles)
             {
-                CreateBubble(bubble);
+                PlaceBubble(bubble.X, bubble.Y, bubble.Type);
             }
         }
 
-        private void CreateBubble(LevelData.BubbleData bubble)
+        public void PlaceBubble(int x, int y, BubbleType type)
         {
-            var definition = factory.GetBubbleDefinitionByType((BubbleType)bubble.typeID);
+            var definition = factory.GetBubbleDefinitionByType(type);
             var prefabRenderer = definition.prefab.GetComponentInChildren<SpriteRenderer>();
 
             if (prefabRenderer != null)
@@ -52,16 +58,17 @@ namespace LevelEditor
                 image.sprite = prefabRenderer.sprite;
 
                 instance.transform.SetParent(bubbleContainer, false);
-                instance.transform.localPosition = GetBubbleLocation(bubble.x, bubble.y);
+                instance.transform.localPosition = GetBubbleLocation(x, y);
             }
         }
 
         private Vector3 GetBubbleLocation(int x, int y)
         {
-            var offset = ((maxY + y) & 1) * BUBBLE_SIZE / 2.0f;
+            var offset = (y & 1) * BUBBLE_SIZE / 2.0f;
+
             return new Vector3(
-                (BUBBLE_SIZE / 2.0f) + x * BUBBLE_SIZE + offset + 2,
-                (y - maxY) * BUBBLE_SIZE * MathUtil.COS_30_DEGREES - (BUBBLE_SIZE / 2.0f) - 2
+                HALF_SIZE + x * BUBBLE_SIZE + offset + 2,
+                -(HALF_SIZE + y * BUBBLE_SIZE * MathUtil.COS_30_DEGREES + 2)
             );
         }
     }

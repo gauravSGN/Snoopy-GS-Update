@@ -1,4 +1,5 @@
 ﻿using BubbleContent;
+using Model;
 
 namespace Goal
 {
@@ -8,9 +9,9 @@ namespace Goal
 
         override public void Initialize(LevelData levelData)
         {
-            foreach (var bubble in levelData.bubbles)
+            foreach (var bubble in levelData.Bubbles)
             {
-                if ((BubbleContentType)bubble.contentType == BubbleContentType.BabyPanda)
+                if (bubble.ContentType == BubbleContentType.BabyPanda)
                 {
                     bubble.model.OnPopped += BubblePoppedHandler;
                     TargetValue++;

@@ -1,4 +1,6 @@
-﻿namespace Goal
+﻿using Model;
+
+namespace Goal
 {
     abstract public class LevelGoal : Observable
     {

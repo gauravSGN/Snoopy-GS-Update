@@ -1,46 +1,53 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
+using UnityEngine;
+using BubbleContent;
 using Goal;
 
-[XmlRoot("Level")]
-public class LevelData
+namespace Model
 {
-    public class BubbleData
+    [Serializable]
+    public sealed class LevelData
     {
-        [XmlAttribute("grid_x")]
-        public int x;
+        [Serializable]
+        public sealed class BubbleData
+        {
+            public BubbleType Type { get { return (BubbleType)type; } }
+            public BubbleContentType ContentType { get { return (BubbleContentType)content_type; } }
+            public int X { get { return x; } }
+            public int Y { get { return y; } }
 
-        [XmlAttribute("grid_y")]
-        public int y;
+            [SerializeField]
+            private int type;
 
-        [XmlAttribute("typeID")]
-        public int typeID;
+            [SerializeField]
+            private int content_type;
 
-        [XmlAttribute("normalBubbleSubType")]
-        public int contentType;
+            [SerializeField]
+            private int x;
+
+            [SerializeField]
+            private int y;
+
+            [NonSerialized]
+            public Bubble model;
+        }
+
+        public int ShotCount { get { return shot_count; } }
+        public float[] PowerUpFills { get { return power_up_fills; } }
+        public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
 
         [XmlIgnore]
-        public Bubble model;
+        public List<LevelGoal> goals;
+
+        [SerializeField]
+        private int shot_count;
+
+        [SerializeField]
+        private float[] power_up_fills;
+
+        [SerializeField]
+        private BubbleData[] bubbles;
     }
-
-    [XmlAttribute("remainingBubble")]
-    public int remainingBubble;
-
-    [XmlElement("Bubble")]
-    public List<BubbleData> bubbles;
-
-    [XmlIgnore]
-    public List<LevelGoal> goals;
-
-    [XmlAttribute("bombFill")]
-    public float bombFill;
-
-    [XmlAttribute("horzFill")]
-    public float horzFill;
-
-    [XmlAttribute("snakeFill")]
-    public float snakeFill;
-
-    [XmlAttribute("fireFill")]
-    public float fireFill;
 }

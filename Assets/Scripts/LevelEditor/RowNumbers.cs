@@ -3,85 +3,88 @@ using UnityEngine;
 using UnityEngine.UI;
 using Util;
 
-public class RowNumbers : MonoBehaviour
+namespace LevelEditor
 {
-    private const float ROW_SIZE = 32 * MathUtil.COS_30_DEGREES;
-
-    private float ContentPosition { get { return content.localPosition.y; } }
-
-    [SerializeField]
-    private RectTransform content;
-
-    [SerializeField]
-    private GameObject textPrefab;
-
-    private RectTransform rectTransform;
-    private float lastY;
-    private float lastHeight;
-    private readonly List<Text> elements = new List<Text>();
-
-    private void Start()
+    public class RowNumbers : MonoBehaviour
     {
-        rectTransform = GetComponent<RectTransform>();
-        lastY = ContentPosition;
-        lastHeight = rectTransform.rect.height;
+        private const float ROW_SIZE = 32 * MathUtil.COS_30_DEGREES;
 
-        CreateTextElements();
-        UpdateTextElements();
-    }
+        private float ContentPosition { get { return content.localPosition.y; } }
 
-    private void Update()
-    {
-        if (Mathf.Abs(rectTransform.rect.height - lastHeight) > Mathf.Epsilon)
+        [SerializeField]
+        private RectTransform content;
+
+        [SerializeField]
+        private GameObject textPrefab;
+
+        private RectTransform rectTransform;
+        private float lastY;
+        private float lastHeight;
+        private readonly List<Text> elements = new List<Text>();
+
+        private void Start()
         {
-            lastHeight = rectTransform.rect.height;
-            CreateTextElements();
-        }
-
-        if (Mathf.Abs(ContentPosition - lastY) > Mathf.Epsilon)
-        {
+            rectTransform = GetComponent<RectTransform>();
             lastY = ContentPosition;
+            lastHeight = rectTransform.rect.height;
+
+            CreateTextElements();
             UpdateTextElements();
-            UpdatePosition();
         }
-    }
 
-    private void CreateTextElements()
-    {
-        var elementCount = 1 + lastHeight / ROW_SIZE;
-
-        while (elements.Count > elementCount)
+        private void Update()
         {
-            Destroy(elements[elements.Count - 1].gameObject);
-            elements.RemoveAt(elements.Count - 1);
+            if (Mathf.Abs(rectTransform.rect.height - lastHeight) > Mathf.Epsilon)
+            {
+                lastHeight = rectTransform.rect.height;
+                CreateTextElements();
+            }
+
+            if (Mathf.Abs(ContentPosition - lastY) > Mathf.Epsilon)
+            {
+                lastY = ContentPosition;
+                UpdateTextElements();
+                UpdatePosition();
+            }
         }
 
-        while (elements.Count < elementCount)
+        private void CreateTextElements()
         {
-            var element = Instantiate(textPrefab);
-            element.transform.SetParent(rectTransform, false);
-            element.transform.localPosition += (Vector3.down * (elements.Count * ROW_SIZE));
-            elements.Add(element.GetComponent<Text>());
+            var elementCount = 1 + lastHeight / ROW_SIZE;
+
+            while (elements.Count > elementCount)
+            {
+                Destroy(elements[elements.Count - 1].gameObject);
+                elements.RemoveAt(elements.Count - 1);
+            }
+
+            while (elements.Count < elementCount)
+            {
+                var element = Instantiate(textPrefab);
+                element.transform.SetParent(rectTransform, false);
+                element.transform.localPosition += (Vector3.down * (elements.Count * ROW_SIZE));
+                elements.Add(element.GetComponent<Text>());
+            }
         }
-    }
 
-    private void UpdateTextElements()
-    {
-        var topRow = (int)Mathf.Round(lastY / ROW_SIZE - 0.5f);
-
-        for (var index = 0; index < elements.Count; index++)
+        private void UpdateTextElements()
         {
-            elements[index].text = (topRow + index).ToString();
-        }
-    }
+            var topRow = (int)Mathf.Round(lastY / ROW_SIZE - 0.5f);
 
-    private void UpdatePosition()
-    {
-        var oldPosition = rectTransform.localPosition;
-        rectTransform.localPosition = new Vector3(
-            oldPosition.x,
-            lastY % ROW_SIZE,
-            oldPosition.z
-        );
+            for (var index = 0; index < elements.Count; index++)
+            {
+                elements[index].text = (topRow + index).ToString();
+            }
+        }
+
+        private void UpdatePosition()
+        {
+            var oldPosition = rectTransform.localPosition;
+            rectTransform.localPosition = new Vector3(
+                oldPosition.x,
+                lastY % ROW_SIZE,
+                oldPosition.z
+            );
+        }
     }
 }

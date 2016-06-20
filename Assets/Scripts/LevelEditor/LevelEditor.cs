@@ -7,10 +7,10 @@ namespace LevelEditor
 {
     public class LevelEditor : MonoBehaviour
     {
-        private const string LEVEL_EXTENSION = "xml";
+        private const string LEVEL_EXTENSION = "json";
 
         [SerializeField]
-        private EditorLevelLoader loader;
+        private LevelManipulator manipulator;
 
         [SerializeField]
         private Transform levelContents;
@@ -25,7 +25,7 @@ namespace LevelEditor
             ConfirmAction(delegate ()
             {
                 filename = null;
-                loader.Clear();
+                manipulator.Clear();
             });
         }
 
@@ -40,9 +40,9 @@ namespace LevelEditor
                 ConfirmAction(delegate ()
                 {
                     filename = levelFilename;
-                    loader.Clear();
+                    manipulator.Clear();
 
-                    loader.LoadLevel(File.ReadAllText(levelFilename));
+                    manipulator.LoadLevel(File.ReadAllText(levelFilename));
                 });
             }
         }
@@ -59,7 +59,7 @@ namespace LevelEditor
 
         public void Clear()
         {
-            ConfirmAction(delegate () { loader.Clear(); });
+            ConfirmAction(delegate () { manipulator.Clear(); });
         }
 
         private void ConfirmAction(Action action)

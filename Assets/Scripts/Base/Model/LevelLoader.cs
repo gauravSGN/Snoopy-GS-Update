@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using System.IO;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using Goal;
 using BubbleContent;
 using PowerUps;
 using Util;
+using Model;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -29,9 +28,11 @@ public class LevelLoader : MonoBehaviour
     [SerializeField]
     private GameObject levelContainer;
 
+    [SerializeField]
+    private List<Lantern> lanterns;
+
     private float rowDistance;
     private float topEdge;
-    private int maxY;
 
     public Dictionary<BubbleType, int> LoadLevel(TextAsset levelData)
     {
@@ -43,7 +44,7 @@ public class LevelLoader : MonoBehaviour
         rowDistance = config.bubbles.size * MathUtil.COS_30_DEGREES;
         Dictionary<BubbleType, int> bubbleTypeCount;
 
-        LevelData = XmlUtil.Deserialize<LevelData>(levelData);
+        LevelData = JsonUtility.FromJson<LevelData>(levelData);
         bubbleTypeCount = CreateLevel(LevelData);
         SetupPowerUps();
 
@@ -52,65 +53,45 @@ public class LevelLoader : MonoBehaviour
 
     private void SetupPowerUps()
     {
-        var keyToType = new Dictionary<string, PowerUpType>();
-        keyToType["bombFill"] = PowerUpType.Red;
-        keyToType["horzFill"] = PowerUpType.Blue;
-        keyToType["snakeFill"] = PowerUpType.Green;
-        keyToType["fireFill"] = PowerUpType.Yellow;
-
-        var levelData = new Dictionary<PowerUpType, float>();
-
-        foreach (var entry in keyToType)
+        var count = Mathf.Min(lanterns.Count, LevelData.PowerUpFills.Length);
+        for (var index = 0; index < count; index++)
         {
-            levelData[entry.Value] = (float)LevelData.GetType().GetField(entry.Key).GetValue(LevelData);
+            float lanternFillValue = LevelData.PowerUpFills[index];
+            lanterns[index].Setup((int)(lanternFillValue > 0.0f ? (1.0 / lanternFillValue) : 0.0f));
         }
 
         powerUpController.Setup(levelData);
     }
 
-    private LevelData ParseLevelData(StringReader reader)
-    {
-        var serializer = new XmlSerializer(typeof(LevelData));
-        return (LevelData)serializer.Deserialize(reader);
-    }
-
     private Vector3 GetBubbleLocation(int x, int y)
     {
-        var offset = (2 - ((maxY + y) & 1)) * config.bubbles.size / 2.0f;
-        var leftEdge = -config.bubbles.numPerRow * config.bubbles.size / 2.0f;
+        var offset = (y & 1) * config.bubbles.size / 2.0f;
+        var leftEdge = -(config.bubbles.numPerRow - 1) * config.bubbles.size / 2.0f;
         return new Vector3(leftEdge + x * config.bubbles.size + offset, topEdge - y * rowDistance);
     }
 
     private Dictionary<BubbleType, int> CreateLevel(LevelData level)
     {
         var bubbleMap = new Dictionary<int, GameObject>();
-        maxY = 0;
 
-        foreach (var bubble in level.bubbles)
-        {
-            maxY = Mathf.Max(maxY, bubble.y);
-        }
-
-        gameView.transform.position = new Vector3(0.0f, -rowDistance * Mathf.Max(0.0f, maxY - 8));
-        topEdge = Camera.main.orthographicSize + (0.5f * rowDistance);
+        topEdge = Camera.main.orthographicSize - (0.5f * rowDistance);
 
         var bubbleTypeCount = new Dictionary<BubbleType, int>();
 
-        foreach (var bubble in level.bubbles)
+        foreach (var bubble in level.Bubbles)
         {
-            bubble.y = (maxY + 1) - bubble.y;
-            var bubbleType = (BubbleType)(bubble.typeID % 6);
+            var bubbleType = (BubbleType)((int)bubble.Type % 6);
             bubbleTypeCount[bubbleType] = bubbleTypeCount.ContainsKey(bubbleType) ? bubbleTypeCount[bubbleType] + 1 : 1;
-            bubbleMap[bubble.y << 4 | bubble.x] = createBubbleAndSetPosition((BubbleType)(bubble.typeID % 6), bubble.x, bubble.y);
-            bubble.model = bubbleMap[bubble.y << 4 | bubble.x].GetComponent<BubbleAttachments>().Model;
+            bubbleMap[bubble.Y << 4 | bubble.X] = createBubbleAndSetPosition((BubbleType)((int)bubble.Type % 6), bubble.X, bubble.Y);
+            bubble.model = bubbleMap[bubble.Y << 4 | bubble.X].GetComponent<BubbleAttachments>().Model;
 
-            if ((BubbleContentType)bubble.contentType != BubbleContentType.None)
+            if (bubble.ContentType != BubbleContentType.None)
             {
                 var content = contentFactory.CreateByType((BubbleContentType)bubble.contentType);
 
                 if (content != null)
                 {
-                    content.transform.SetParent(bubbleMap[bubble.y << 4 | bubble.x].transform, false);
+                    content.transform.SetParent(bubbleMap[bubble.Y << 4 | bubble.X].transform, false);
                     content.transform.localPosition = Vector3.back;
                 }
             }
@@ -142,7 +123,7 @@ public class LevelLoader : MonoBehaviour
     private void AttachBubbles(Dictionary<int, GameObject> bubbleMap)
     {
         var neighbors = new int[6];
-        var maxBubblesForOddRow = config.bubbles.numPerRow - ((maxY & 1) ^ 1);
+        var maxBubblesForOddRow = config.bubbles.numPerRow - 1;
         var ceilingBubbleMap = new Dictionary<int, GameObject>();
 
         for (int ceilingX = 0; ceilingX < maxBubblesForOddRow; ceilingX++)
@@ -209,7 +190,7 @@ public class LevelLoader : MonoBehaviour
 
     private void GetNeighbors(int x, int y, int[] neighbors)
     {
-        var offset = 1 - ((maxY + y) & 1) * 2;
+        var offset = 1 - (y & 1) * 2;
 
         neighbors[0] = ((y - 1) << 4) | (x + offset);
         neighbors[1] = ((y - 1) << 4) | x;
