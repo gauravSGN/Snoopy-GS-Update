@@ -4,6 +4,7 @@ using Util;
 using Model;
 using LevelEditor.Manipulator;
 using BubbleContent;
+using LevelEditor.Properties;
 
 namespace LevelEditor
 {
@@ -33,6 +34,8 @@ namespace LevelEditor
         private ManipulatorActionType actionType;
         private ManipulatorAction action;
 
+        private readonly LevelProperties levelProperties = new LevelProperties();
+
         public BubbleType BubbleType { get; private set; }
         public BubbleContentType ContentType { get; private set; }
 
@@ -45,6 +48,8 @@ namespace LevelEditor
         public BubbleFactory BubbleFactory { get { return bubbleFactory; } }
         public ManipulatorActionFactory ActionFactory { get { return actionFactory; } }
 
+        public LevelProperties LevelProperties { get { return levelProperties; } }
+
         public void LoadLevel(string jsonText)
         {
             var levelData = JsonUtility.FromJson<LevelData>(jsonText);
@@ -55,6 +60,9 @@ namespace LevelEditor
                 BubbleType = bubble.Type;
                 placer.Perform(this, bubble.X, bubble.Y);
             }
+
+            LevelProperties.FromLevelData(levelData);
+            LevelProperties.NotifyListeners();
         }
 
         public string SaveLevel()
@@ -63,6 +71,8 @@ namespace LevelEditor
             {
                 Bubbles = models.Values,
             };
+
+            LevelProperties.ToLevelData(data);
 
             return JsonUtility.ToJson(data);
         }
