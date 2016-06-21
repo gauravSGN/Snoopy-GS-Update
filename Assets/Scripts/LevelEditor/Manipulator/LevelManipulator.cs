@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Util;
 using Model;
 using LevelEditor.Manipulator;
+using BubbleContent;
 
 namespace LevelEditor
 {
@@ -33,6 +34,7 @@ namespace LevelEditor
         private ManipulatorAction action;
 
         public BubbleType BubbleType { get; private set; }
+        public BubbleContentType ContentType { get; private set; }
 
         public Dictionary<int, LevelData.BubbleData> Models { get { return models; } }
         public Dictionary<int, GameObject> Views { get { return views; } }
@@ -77,10 +79,20 @@ namespace LevelEditor
 
         public void SetBubbleType(BubbleType type)
         {
-            if (BubbleType != type)
+            if ((BubbleType != type) || (ContentType != BubbleContentType.None))
             {
                 BubbleType = type;
+                ContentType = BubbleContentType.None;
                 Debug.Log(string.Format("LevelManipulator: Bubble type is now {0}", type));
+            }
+        }
+
+        public void SetContentType(BubbleContentType type)
+        {
+            if (ContentType != type)
+            {
+                ContentType = type;
+                Debug.Log(string.Format("LevelManipulator: Content type is now {0}", type));
             }
         }
 

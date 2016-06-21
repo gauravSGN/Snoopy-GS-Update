@@ -41,6 +41,12 @@ namespace Model
                 this.y = y;
                 this.type = (int)type;
             }
+
+            public BubbleData(int x, int y, BubbleType bubbleType, BubbleContentType contentType)
+                : this(x, y, bubbleType)
+            {
+                content_type = (int)contentType;
+            }
         }
 
         public virtual int ShotCount { get { return shot_count; } }

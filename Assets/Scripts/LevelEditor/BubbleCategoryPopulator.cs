@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using BubbleContent;
 
 namespace LevelEditor
 {
@@ -62,6 +64,8 @@ namespace LevelEditor
                 options.Add(new Dropdown.OptionData(category.ToString()));
             }
 
+            options.Add(new Dropdown.OptionData("Bubble Contents"));
+
             categoryList.AddOptions(options);
         }
 
@@ -69,36 +73,56 @@ namespace LevelEditor
         {
             foreach (var category in EnumExtensions.GetValues<BubbleCategory>())
             {
-                CreateButtonPanel(category);
+                CreateButtonPanel<BubbleDefinition, BubbleType>(
+                    category.ToString(),
+                    factory.Bubbles.Where(b => b.category == category),
+                    SetBubbleType
+                );
             }
+
+            CreateButtonPanel<BubbleContentDefinition, BubbleContentType>(
+                "Bubble Contents",
+                factory.Contents,
+                SetContentType
+            );
         }
 
-        private void CreateButtonPanel(BubbleCategory category)
+        private void CreateButtonPanel<T, U>(string name, IEnumerable<T> items, Action<U> action)
+            where T : GameObjectDefinition<U>
         {
             var panel = Instantiate(listPrefab);
-            panel.name = category.ToString();
+            panel.name = name;
             panel.transform.SetParent(buttonContainer, false);
 
-            var bubbles = factory.Bubbles.Where(b => b.category == category).OrderBy(b => b.type);
-            foreach (var definition in bubbles)
+            foreach (var definition in items.OrderBy(i => i.Type))
             {
-                CreateButtonFromDefinition(panel, definition);
+                CreateButtonFromDefinition(panel, definition, action);
             }
         }
 
-        private void CreateButtonFromDefinition(GameObject panel, BubbleDefinition definition)
+        private void CreateButtonFromDefinition<T>(GameObject panel, GameObjectDefinition<T> definition, Action<T> action)
         {
-            var prefabSprite = definition.prefab.GetComponentInChildren<SpriteRenderer>();
+            var prefabSprite = definition.Prefab.GetComponentInChildren<SpriteRenderer>();
 
             if (prefabSprite != null)
             {
                 var button = Instantiate(buttonPrefab);
 
-                button.name = definition.type.ToString();
+                button.name = definition.Type.ToString();
                 button.GetComponent<Image>().sprite = prefabSprite.sprite;
-                button.GetComponent<Button>().onClick.AddListener(() => manipulator.SetBubbleType(definition.Type));
+                button.GetComponent<Button>().onClick.AddListener(() => action(definition.Type));
                 button.transform.SetParent(panel.transform, false);
             }
+        }
+
+        private void SetBubbleType(BubbleType type)
+        {
+            manipulator.SetBubbleType(type);
+        }
+
+        private void SetContentType(BubbleContentType type)
+        {
+            manipulator.SetContentType(type);
         }
     }
 }
