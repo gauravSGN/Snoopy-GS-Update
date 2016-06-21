@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using Graph;
 
 public class BubbleExplode : MonoBehaviour
 {
@@ -17,27 +19,30 @@ public class BubbleExplode : MonoBehaviour
         sizeMultiplier = explosionSize;
     }
 
-    public void OnSettling(GameEvent gameEvent)
-    {
-        if (Physics2D.CircleCastAll(transform.position, BUBBLE_SPACING * sizeMultiplier, Vector2.up, 0.0f).Length > 0)
-        {
-            BubbleReactionEvent.Dispatch(ReactionPriority.Explode, this.Explode);
-        }
-    }
-
-    public void Explode()
+    protected void OnDestroy()
     {
         GlobalState.Instance.EventDispatcher.RemoveEventHandler<BubbleSettlingEvent>(OnSettling);
+    }
 
-        foreach (var hit in Physics2D.CircleCastAll(transform.position, BUBBLE_SPACING * sizeMultiplier, Vector2.up, 0.0f))
+    public void OnSettling(GameEvent gameEvent)
+    {
+        var hits = Physics2D.CircleCastAll(transform.position, BUBBLE_SPACING * sizeMultiplier, Vector2.up, 0.0f);
+
+        if (hits.Length > 0)
         {
-            if (hit.collider.gameObject.tag == "Bubble")
+            var bubbleList = new List<Bubble>();
+
+            for (int index = 0, length = hits.Length; index < length; index++)
             {
-                hit.collider.gameObject.transform.position = new Vector3(-1000.0f, -1000.0f);
-                var attachment = hit.collider.gameObject.GetComponent<BubbleAttachments>();
-                attachment.Model.DisconnectAll();
-                attachment.MarkForDestruction();
+                if (hits[index].collider.gameObject.tag == "Bubble")
+                {
+                    var model = hits[index].collider.gameObject.GetComponent<BubbleAttachments>().Model;
+                    bubbleList.Add(model);
+                    BubbleReactionEvent.Dispatch(ReactionPriority.PowerUp, model.PopBubble);
+                }
             }
+
+            GraphUtil.RemoveNodes(bubbleList);
         }
     }
 }

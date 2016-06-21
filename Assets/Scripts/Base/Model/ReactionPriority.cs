@@ -1,6 +1,6 @@
 public enum ReactionPriority
 {
-    Explode = 9,
+    PowerUp = 9,
     Pop = 10,
     Cull = 99999
 }

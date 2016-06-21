@@ -37,7 +37,7 @@ namespace PowerUps
                     break;
                 }
 
-                var powerUp = powerUpFactory.CreatePowerUpByType(data.Key);
+                var powerUp = powerUpFactory.CreateByType(data.Key);
                 powerUp.GetComponent<PowerUp>().Setup((int)(1 / data.Value), this, level);
                 powerUp.transform.parent = anchors[index];
                 powerUp.transform.localPosition = new Vector3(0, 0);
