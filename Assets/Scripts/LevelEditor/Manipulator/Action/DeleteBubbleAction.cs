@@ -22,5 +22,10 @@ namespace LevelEditor.Manipulator
                 manipulator.Views.Remove(key);
             }
         }
+
+        public void PerformAlternate(LevelManipulator manipulator, int x, int y)
+        {
+            Perform(manipulator, x, y);
+        }
     }
 }

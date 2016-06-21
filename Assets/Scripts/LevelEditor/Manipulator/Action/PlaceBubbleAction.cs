@@ -42,6 +42,11 @@ namespace LevelEditor.Manipulator
             }
         }
 
+        public void PerformAlternate(LevelManipulator manipulator, int x, int y)
+        {
+            deleter.Perform(manipulator, x, y);
+        }
+
         private Vector3 GetBubbleLocation(int x, int y)
         {
             var offset = (y & 1) * BUBBLE_SIZE / 2.0f;

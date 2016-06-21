@@ -18,5 +18,10 @@ namespace LevelEditor.Manipulator
             manipulator.Models.Clear();
             manipulator.Views.Clear();
         }
+
+        public void PerformAlternate(LevelManipulator manipulator, int x, int y)
+        {
+            Perform(manipulator, x, y);
+        }
     }
 }

@@ -7,5 +7,6 @@ namespace LevelEditor.Manipulator
         Sprite ButtonSprite { get; }
 
         void Perform(LevelManipulator manipulator, int x, int y);
+        void PerformAlternate(LevelManipulator manipulator, int x, int y);
     }
 }

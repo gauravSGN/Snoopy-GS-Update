@@ -91,5 +91,13 @@ namespace LevelEditor
                 action.Perform(this, x, y);
             }
         }
+
+        public void PerformAlternateAction(int x, int y)
+        {
+            if (action != null)
+            {
+                action.PerformAlternate(this, x, y);
+            }
+        }
     }
 }

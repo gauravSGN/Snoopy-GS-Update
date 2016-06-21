@@ -71,7 +71,14 @@ namespace LevelEditor
                     modifiedPositions.Add(gridCoord);
                 }
 
-                manipulator.PerformAction(gridCoord.X, gridCoord.Y);
+                if (eventData.button == PointerEventData.InputButton.Left)
+                {
+                    manipulator.PerformAction(gridCoord.X, gridCoord.Y);
+                }
+                else if (eventData.button == PointerEventData.InputButton.Right)
+                {
+                    manipulator.PerformAlternateAction(gridCoord.X, gridCoord.Y);
+                }
             }
         }
 
