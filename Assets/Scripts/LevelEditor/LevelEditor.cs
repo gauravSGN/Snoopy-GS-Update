@@ -3,6 +3,7 @@ using System.IO;
 using UnityEngine;
 using UnityEditor;
 using LevelEditor.Manipulator;
+using UnityEngine.SceneManagement;
 
 namespace LevelEditor
 {
@@ -84,6 +85,22 @@ namespace LevelEditor
         public void Clear()
         {
             ConfirmAction(delegate () { ClearBoard(); });
+        }
+
+        public void TestLevel()
+        {
+            if (string.IsNullOrEmpty(filename))
+            {
+                SaveAs();
+                return;
+            }
+
+            Uri absoluteUri = new Uri(filename);
+            Uri assetUri = new Uri(Application.dataPath);
+            string relativePath = assetUri.MakeRelativeUri(absoluteUri).ToString();
+            GlobalState.Instance.nextLevelData = (TextAsset)AssetDatabase.LoadAssetAtPath(relativePath, typeof(TextAsset));
+
+            SceneManager.LoadScene("Level");
         }
 
         private void ConfirmAction(Action action)
