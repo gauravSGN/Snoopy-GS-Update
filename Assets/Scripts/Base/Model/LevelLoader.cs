@@ -13,7 +13,10 @@ public class LevelLoader : MonoBehaviour
     public LevelData LevelData { get; private set; }
 
     [SerializeField]
-    private BubbleFactory factory;
+    private BubbleFactory bubbleFactory;
+
+    [SerializeField]
+    private BubbleContentFactory contentFactory;
 
     [SerializeField]
     private GameConfig config;
@@ -97,7 +100,7 @@ public class LevelLoader : MonoBehaviour
 
             if ((BubbleContentType)bubble.contentType != BubbleContentType.None)
             {
-                var content = factory.CreateContentByType((BubbleContentType)bubble.contentType);
+                var content = contentFactory.CreateByType((BubbleContentType)bubble.contentType);
 
                 if (content != null)
                 {
@@ -186,7 +189,7 @@ public class LevelLoader : MonoBehaviour
 
     private GameObject createBubbleAndSetPosition(BubbleType type, int x, int y)
     {
-        var instance = factory.CreateBubbleByType(type);
+        var instance = bubbleFactory.CreateByType(type);
 
         instance.transform.position = GetBubbleLocation(x, y);
 

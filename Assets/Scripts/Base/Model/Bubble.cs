@@ -12,7 +12,7 @@ public class Bubble : GraphElement<Bubble>
     public BubbleType type;
     public BubbleDefinition definition;
 
-    override public void RemoveFromGraph()
+    public override void RemoveFromGraph()
     {
         base.RemoveFromGraph();
 

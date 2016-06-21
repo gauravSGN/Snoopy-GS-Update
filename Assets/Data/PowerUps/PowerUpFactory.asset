@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8630584042fc242f198c71a21101ea01, type: 3}
   m_Name: PowerUpFactory
   m_EditorClassIdentifier: 
-  powerUps:
+  definitions:
   - {fileID: 11400000, guid: ba9267bde4b2548a2b0e51912e2becc1, type: 2}
   - {fileID: 11400000, guid: d05f02fd494854975b1abb29e0808c8f, type: 2}
   - {fileID: 11400000, guid: c5aac25774e66435bb04a46361144faf, type: 2}

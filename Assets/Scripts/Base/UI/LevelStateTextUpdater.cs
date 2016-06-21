@@ -5,7 +5,7 @@ public class LevelStateTextUpdater : TextUpdater
     [SerializeField]
     private Level level;
 
-    override protected void Start()
+    protected override void Start()
     {
         base.Start();
 
