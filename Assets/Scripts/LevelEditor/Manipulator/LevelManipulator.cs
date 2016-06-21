@@ -58,7 +58,15 @@ namespace LevelEditor
             foreach (var bubble in levelData.Bubbles)
             {
                 BubbleType = bubble.Type;
+                ContentType = BubbleContentType.None;
+
                 placer.Perform(this, bubble.X, bubble.Y);
+
+                if (bubble.ContentType != BubbleContentType.None)
+                {
+                    ContentType = bubble.ContentType;
+                    placer.Perform(this, bubble.X, bubble.Y);
+                }
             }
 
             LevelProperties.FromLevelData(levelData);
