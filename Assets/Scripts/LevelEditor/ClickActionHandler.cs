@@ -86,7 +86,7 @@ namespace LevelEditor
         {
             var clickPosition = GetClickPosition(eventData);
             var boardX = clickPosition.x / 32.0f;
-            var boardY = (clickPosition.y - bubbleContainer.localPosition.y) / 32.0f / MathUtil.COS_30_DEGREES;
+            var boardY = (clickPosition.y + bubbleContainer.localPosition.y) / 32.0f / MathUtil.COS_30_DEGREES;
 
             float maxDist = 999.0f;
             Vector2 nearest = Vector2.zero;
