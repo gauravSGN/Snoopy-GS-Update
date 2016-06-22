@@ -110,10 +110,6 @@ namespace LevelEditor
 
         private void ConfirmAction(Action action)
         {
-            // TODO: Remove this before finishing
-            action.Invoke();
-            return;
-
             var dialog = Instantiate(confirmationDialogPrefab).GetComponent<ConfirmationDialog>();
             dialog.transform.SetParent(transform.parent, false);
 
