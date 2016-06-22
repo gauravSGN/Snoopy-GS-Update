@@ -6,6 +6,7 @@ public static class AutomatedBuilder
 {
     private static string[] arguments = Environment.GetCommandLineArgs();
 
+    private const string BUNDLE_VERSION_ARGUMENT_NAME = "-version";
     private const string OUTPUT_PATH_ARGUMENT_NAME = "-outputPath";
     private const string ANDROID_KEYSTORE_PASS_ARGUMENT_NAME = "-keystorePass";
     private const string ANDROID_KEYALIAS_PASS_ARGUMENT_NAME = "-keyaliasPass";
@@ -35,6 +36,8 @@ public static class AutomatedBuilder
 
     private static void Build(string defaultPath, BuildTarget target)
     {
+        SetBundleVersion();
+
         var commandLinePath = GetCommandLineArgument(OUTPUT_PATH_ARGUMENT_NAME);
         var path = (commandLinePath != "") ? commandLinePath : defaultPath;
         Console.WriteLine("Output Path: " + path);
@@ -48,6 +51,18 @@ public static class AutomatedBuilder
     private static string[] GetScenePaths()
     {
         return EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
+    }
+
+    private static void SetBundleVersion()
+    {
+        var bundleVersion = GetCommandLineArgument(BUNDLE_VERSION_ARGUMENT_NAME);
+
+        if (bundleVersion != "")
+        {
+            PlayerSettings.bundleVersion = bundleVersion;
+        }
+
+        Console.WriteLine("Bundle Version: " + bundleVersion);
     }
 
     private static string GetCommandLineArgument(string argument)
