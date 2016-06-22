@@ -59,7 +59,7 @@ namespace PowerUps
                 if (currentBubbleCount < lastBubbleCount)
                 {
                     var fillRate = ((float)(max - current) - progress) / currentBubbleCount;
-                    progress = progress + ((lastBubbleCount - currentBubbleCount) * fillRate);
+                    progress += (lastBubbleCount - currentBubbleCount) * fillRate;
                 }
 
                 lastBubbleCount = currentBubbleCount;
