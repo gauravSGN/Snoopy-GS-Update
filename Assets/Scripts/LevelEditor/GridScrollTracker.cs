@@ -34,7 +34,7 @@ namespace LevelEditor
         private void UpdatePosition()
         {
             var previousDelta = deltaY;
-            deltaY = lastY % wrapHeight;
+            deltaY = ((lastY % wrapHeight) + wrapHeight) % wrapHeight;
 
             var oldPosition = rectTransform.localPosition;
             rectTransform.localPosition = new Vector3(

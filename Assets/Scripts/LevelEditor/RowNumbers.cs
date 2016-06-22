@@ -28,9 +28,9 @@ namespace LevelEditor
             {
                 lastHeight = rectTransform.rect.height;
                 CreateTextElements();
+                UpdateTextElements();
             }
-
-            if (Mathf.Abs(ContentPosition - lastY) > Mathf.Epsilon)
+            else if (Mathf.Abs(ContentPosition - lastY) > Mathf.Epsilon)
             {
                 UpdateTextElements();
             }
@@ -59,7 +59,7 @@ namespace LevelEditor
 
         private void UpdateTextElements()
         {
-            var topRow = (int)Mathf.Round(lastY / wrapHeight - 0.5f);
+            var topRow = (int)Mathf.Floor(ContentPosition / wrapHeight);
 
             for (var index = 0; index < elements.Count; index++)
             {
