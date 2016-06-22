@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace LevelEditor.Properties
 {
-    public abstract class TextFieldInspector : MonoBehaviour
+    abstract public class TextFieldInspector : MonoBehaviour
     {
         [SerializeField]
         protected Text label;
@@ -18,9 +18,9 @@ namespace LevelEditor.Properties
         public object Target { get { return fieldInfo.Target; } }
         public PropertyInfo Property { get { return fieldInfo.Property; } }
 
-        protected abstract void WritePropertyValue(string value);
+        abstract protected void WritePropertyValue(string value);
 
-        public virtual void InitializeField(FieldPropertyInfo info)
+        virtual public void InitializeField(FieldPropertyInfo info)
         {
             fieldInfo = info;
 
@@ -35,7 +35,7 @@ namespace LevelEditor.Properties
             inputField.onEndEdit.AddListener(WritePropertyValue);
         }
 
-        protected virtual void ReadPropertyValue()
+        virtual protected void ReadPropertyValue()
         {
             inputField.text = Property.GetValue(Target, null).ToString();
         }

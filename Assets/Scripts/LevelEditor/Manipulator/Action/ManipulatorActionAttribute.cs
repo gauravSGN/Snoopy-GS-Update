@@ -3,7 +3,7 @@
 namespace LevelEditor.Manipulator
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public sealed class ManipulatorActionAttribute : Attribute
+    sealed public class ManipulatorActionAttribute : Attribute
     {
         public ManipulatorActionType ActionType { get; private set; }
 

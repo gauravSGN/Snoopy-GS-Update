@@ -3,7 +3,7 @@ using Model;
 
 namespace Goal
 {
-    public sealed class RescueBabiesGoal : LevelGoal
+    sealed public class RescueBabiesGoal : LevelGoal
     {
         override public GoalType Type { get { return GoalType.RescueBabies; } }
 

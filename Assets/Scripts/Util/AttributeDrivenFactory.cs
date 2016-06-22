@@ -5,13 +5,13 @@ using System.Reflection;
 
 namespace Util
 {
-    public abstract class AttributeDrivenFactory<BaseType, AttributeType, KeyType>
+    abstract public class AttributeDrivenFactory<BaseType, AttributeType, KeyType>
         where BaseType : class
         where AttributeType : Attribute
     {
         private Dictionary<KeyType, Type> validTypes;
 
-        protected abstract KeyType GetKeyFromAttribute(AttributeType attribute);
+        abstract protected KeyType GetKeyFromAttribute(AttributeType attribute);
 
         public BaseType Create(KeyType key)
         {

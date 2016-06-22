@@ -7,7 +7,7 @@ using BubbleContent;
 
 namespace LevelEditor
 {
-    public sealed class BubbleCategoryPopulator : MonoBehaviour
+    sealed public class BubbleCategoryPopulator : MonoBehaviour
     {
         [SerializeField]
         private BubbleFactory factory;

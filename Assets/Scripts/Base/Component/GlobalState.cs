@@ -9,7 +9,7 @@ public class GlobalState : SingletonBehaviour<GlobalState>
     public string nextLevelData;
     public string returnScene;
 
-    protected override void Awake()
+    override protected void Awake()
     {
         base.Awake();
 

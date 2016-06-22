@@ -2,7 +2,7 @@
 
 namespace LevelEditor.Properties
 {
-    public sealed class FieldPropertyInfo
+    sealed public class FieldPropertyInfo
     {
         public object Target { get; private set; }
         public PropertyInfo Property { get; private set; }

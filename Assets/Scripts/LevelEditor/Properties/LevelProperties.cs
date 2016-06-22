@@ -2,7 +2,7 @@
 
 namespace LevelEditor.Properties
 {
-    public sealed class LevelProperties : Observable, PropertyProxy
+    sealed public class LevelProperties : Observable, PropertyProxy
     {
         public int ShotCount { get; set; }
 

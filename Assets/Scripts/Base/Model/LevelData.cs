@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using UnityEngine;
 using BubbleContent;
 using Goal;
@@ -11,7 +10,7 @@ namespace Model
     public class LevelData
     {
         [Serializable]
-        public sealed class BubbleData
+        sealed public class BubbleData
         {
             public int Key { get { return GetKey(X, Y); } }
 
@@ -56,11 +55,10 @@ namespace Model
             }
         }
 
-        public virtual int ShotCount { get { return shot_count; } }
-        public virtual float[] PowerUpFills { get { return power_up_fills; } }
-        public virtual IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
+        virtual public int ShotCount { get { return shot_count; } }
+        virtual public float[] PowerUpFills { get { return power_up_fills; } }
+        virtual public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
 
-        [XmlIgnore]
         public List<LevelGoal> goals;
 
         [SerializeField]

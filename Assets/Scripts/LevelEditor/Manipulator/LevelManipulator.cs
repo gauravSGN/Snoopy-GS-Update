@@ -12,7 +12,7 @@ namespace LevelEditor
     {
         public class ManipulatorActionFactory : AttributeDrivenFactory<ManipulatorAction, ManipulatorActionAttribute, ManipulatorActionType>
         {
-            protected override ManipulatorActionType GetKeyFromAttribute(ManipulatorActionAttribute attribute)
+            override protected ManipulatorActionType GetKeyFromAttribute(ManipulatorActionAttribute attribute)
             {
                 return attribute.ActionType;
             }
