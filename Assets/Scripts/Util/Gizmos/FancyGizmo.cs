@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class FancyGizmo : MonoBehaviour
+abstract public class FancyGizmo : MonoBehaviour
 {
     public Vector3 positionOffset;
     public Color color = Color.yellow;
@@ -23,5 +23,5 @@ public abstract class FancyGizmo : MonoBehaviour
         }
     }
 
-    protected abstract void RecordHistory();
+    abstract protected void RecordHistory();
 }

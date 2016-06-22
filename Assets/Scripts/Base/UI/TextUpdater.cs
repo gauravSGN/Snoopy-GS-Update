@@ -30,7 +30,7 @@ public class TextUpdater : MonoBehaviour
     private Text text;
     private Observable target;
 
-    protected virtual void Start()
+    virtual protected void Start()
     {
         text = GetComponent<Text>();
     }

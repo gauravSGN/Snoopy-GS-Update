@@ -139,7 +139,7 @@ public class AimLine : MonoBehaviour
 
             points.Add(points[index] + distance * direction);
 
-            if ((hit.collider != null) && (hit.collider.gameObject.tag != "Bubble") && (reflections > 0))
+            if ((hit.collider != null) && (hit.collider.gameObject.tag != StringConstants.Tags.BUBBLES) && (reflections > 0))
             {
                 --reflections;
                 index++;

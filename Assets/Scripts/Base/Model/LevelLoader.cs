@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using Goal;
 using BubbleContent;
+using PowerUps;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -12,13 +13,19 @@ public class LevelLoader : MonoBehaviour
     public LevelData LevelData { get; private set; }
 
     [SerializeField]
-    private BubbleFactory factory;
+    private BubbleFactory bubbleFactory;
+
+    [SerializeField]
+    private BubbleContentFactory contentFactory;
 
     [SerializeField]
     private GameConfig config;
 
     [SerializeField]
     private GameObject gameView;
+
+    [SerializeField]
+    private PowerUpController powerUpController;
 
     private float rowDistance;
     private float topEdge;
@@ -33,27 +40,28 @@ public class LevelLoader : MonoBehaviour
         {
             LevelData = ParseLevelData(reader);
             bubbleTypeCount = CreateLevel(LevelData);
-            SetupLanterns();
+            SetupPowerUps();
         }
 
         return bubbleTypeCount;
     }
 
-    private void SetupLanterns()
+    private void SetupPowerUps()
     {
-        var lanterns = new Dictionary<string, string>();
-        lanterns["bombFill"] = "Red Lantern";
-        lanterns["horzFill"] = "Blue Lantern";
-        lanterns["snakeFill"] = "Green Lantern";
-        lanterns["fireFill"] = "Yellow Lantern";
+        var keyToType = new Dictionary<string, PowerUpType>();
+        keyToType["bombFill"] = PowerUpType.Red;
+        keyToType["horzFill"] = PowerUpType.Blue;
+        keyToType["snakeFill"] = PowerUpType.Green;
+        keyToType["fireFill"] = PowerUpType.Yellow;
 
-        foreach (var entry in lanterns)
+        var levelData = new Dictionary<PowerUpType, float>();
+
+        foreach (var entry in keyToType)
         {
-            var lantern = gameView.transform.FindChild("Lanterns").FindChild(entry.Value).gameObject;
-            float lanternFillValue = (float)LevelData.GetType().GetField(entry.Key).GetValue(LevelData);
-
-            lantern.GetComponent<Lantern>().Setup((int)(lanternFillValue > 0.0f ? (1.0 / lanternFillValue) : 0.0f));
+            levelData[entry.Value] = (float)LevelData.GetType().GetField(entry.Key).GetValue(LevelData);
         }
+
+        powerUpController.Setup(levelData);
     }
 
     private LevelData ParseLevelData(StringReader reader)
@@ -94,7 +102,7 @@ public class LevelLoader : MonoBehaviour
 
             if ((BubbleContentType)bubble.contentType != BubbleContentType.None)
             {
-                var content = factory.CreateContentByType((BubbleContentType)bubble.contentType);
+                var content = contentFactory.CreateByType((BubbleContentType)bubble.contentType);
 
                 if (content != null)
                 {
@@ -183,7 +191,7 @@ public class LevelLoader : MonoBehaviour
 
     private GameObject createBubbleAndSetPosition(BubbleType type, int x, int y)
     {
-        var instance = factory.CreateBubbleByType(type);
+        var instance = bubbleFactory.CreateByType(type);
 
         instance.transform.position = GetBubbleLocation(x, y);
 

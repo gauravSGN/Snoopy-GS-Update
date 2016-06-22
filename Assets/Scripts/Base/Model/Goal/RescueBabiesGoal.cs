@@ -4,9 +4,9 @@ namespace Goal
 {
     public sealed class RescueBabiesGoal : LevelGoal
     {
-        public override GoalType Type { get { return GoalType.RescueBabies; } }
+        override public GoalType Type { get { return GoalType.RescueBabies; } }
 
-        public override void Initialize(LevelData levelData)
+        override public void Initialize(LevelData levelData)
         {
             foreach (var bubble in levelData.bubbles)
             {

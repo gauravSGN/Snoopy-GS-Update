@@ -2,31 +2,50 @@
 using UnityEngine;
 using System.IO;
 using BubbleContent;
+using PowerUps;
 
 public static class CustomAssetCreator
 {
-    [MenuItem("Assets/Create/Bubble Factory")]
+    [MenuItem("Assets/Create/Bubbles/Bubble Factory")]
     public static void CreateBubbleFactory()
     {
         CreateAThing<BubbleFactory>();
     }
 
-    [MenuItem("Assets/Create/Bubble Definition")]
+    [MenuItem("Assets/Create/Bubbles/Bubble Definition")]
     public static void CreateBubbleDefinition()
     {
         CreateAThing<BubbleDefinition>();
     }
 
-    [MenuItem("Assets/Create/Bubble Content Definition")]
+    [MenuItem("Assets/Create/Bubbles/Bubble Content Definition")]
     public static void CreateBubbleContentDefinition()
     {
         CreateAThing<BubbleContentDefinition>();
+    }
+
+    [MenuItem("Assets/Create/Bubbles/Bubble Content Factory")]
+    public static void CreateBubbleContentFactory()
+    {
+        CreateAThing<BubbleContentFactory>();
     }
 
     [MenuItem("Assets/Create/Game Config")]
     public static void CreateGameConfig()
     {
         CreateAThing<GameConfig>();
+    }
+
+    [MenuItem("Assets/Create/Power Up/Power Up Definition")]
+    public static void CreatePowerUpDefinition()
+    {
+        CreateAThing<PowerUpDefinition>();
+    }
+
+    [MenuItem("Assets/Create/Power Up/Power Up Factory")]
+    public static void CreatePowerUpFactory()
+    {
+        CreateAThing<PowerUpFactory>();
     }
 
     private static void CreateAThing<T>() where T : ScriptableObject

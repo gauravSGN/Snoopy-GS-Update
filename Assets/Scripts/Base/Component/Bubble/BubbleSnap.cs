@@ -21,7 +21,7 @@ public class BubbleSnap : MonoBehaviour
 
     protected void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Bubble")
+        if (collision.collider.tag == StringConstants.Tags.BUBBLES)
         {
             AdjustToGrid();
 
@@ -74,7 +74,7 @@ public class BubbleSnap : MonoBehaviour
     {
         foreach (var hit in Physics2D.CircleCastAll(location, BUBBLE_SPACING, Vector2.up, 0.0f))
         {
-            if ((hit.collider.gameObject != gameObject) && (hit.collider.gameObject.tag == "Bubble"))
+            if ((hit.collider.gameObject != gameObject) && (hit.collider.gameObject.tag == StringConstants.Tags.BUBBLES))
             {
                 yield return hit.collider;
             }

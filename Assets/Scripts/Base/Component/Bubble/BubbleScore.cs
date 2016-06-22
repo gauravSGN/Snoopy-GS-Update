@@ -13,7 +13,7 @@ public class BubbleScore : MonoBehaviour
     {
         if (model != null)
         {
-            GlobalState.Instance.EventDispatcher.Dispatch(new BubbleDestroyedEvent(model.definition.score, gameObject));
+            GlobalState.Instance.EventDispatcher.Dispatch(new BubbleDestroyedEvent(model.definition.Score, gameObject));
         }
     }
 }

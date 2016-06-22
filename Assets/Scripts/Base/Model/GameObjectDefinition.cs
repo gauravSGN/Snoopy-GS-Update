@@ -1,4 +1,10 @@
-﻿public interface GameObjectDefinition<out DefinitionEnumType>
+using UnityEngine;
+
+namespace Model
 {
-    DefinitionEnumType Type { get; }
+    public interface GameObjectDefinition<out DefinitionEnumType>
+    {
+        DefinitionEnumType Type { get; }
+        GameObject Prefab { get; }
+    }
 }
