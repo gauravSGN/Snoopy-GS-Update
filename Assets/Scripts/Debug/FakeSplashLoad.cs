@@ -10,10 +10,10 @@ public class FakeSplashLoad : MonoBehaviour
     [SerializeField]
     private Button playButton;
 
-    private float progress;
-
     [SerializeField]
     private float fillPerSecond;
+
+    private float progress;
 
     private readonly float delay = 0.1f;
 
