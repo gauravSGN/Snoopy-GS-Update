@@ -27,14 +27,15 @@ public class BubbleExplode : MonoBehaviour
     public void OnSettling(GameEvent gameEvent)
     {
         var hits = Physics2D.CircleCastAll(transform.position, BUBBLE_SPACING * sizeMultiplier, Vector2.up, 0.0f);
+        var length = hits.Length;
 
-        if (hits.Length > 0)
+        if (length > 0)
         {
             var bubbleList = new List<Bubble>();
 
-            for (int index = 0, length = hits.Length; index < length; index++)
+            for (int index = 0; index < length; index++)
             {
-                if (hits[index].collider.gameObject.tag == "Bubble")
+                if (hits[index].collider.gameObject.tag == StringConstants.Tags.BUBBLES)
                 {
                     var model = hits[index].collider.gameObject.GetComponent<BubbleAttachments>().Model;
                     bubbleList.Add(model);

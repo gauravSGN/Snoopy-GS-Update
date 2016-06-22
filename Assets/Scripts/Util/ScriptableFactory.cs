@@ -24,6 +24,7 @@ namespace Util
 
             return definitionLookup[type];
         }
+
         protected Dictionary<K, V> CreateLookupTable<K, V>(List<V> items) where V : GameObjectDefinition<K>
         {
             var lookup = new Dictionary<K, V>();

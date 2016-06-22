@@ -24,6 +24,9 @@ public class LevelLoader : MonoBehaviour
     [SerializeField]
     private GameObject gameView;
 
+    [SerializeField]
+    private PowerUpController powerUpController;
+
     private float rowDistance;
     private float topEdge;
     private int maxY;
@@ -58,7 +61,6 @@ public class LevelLoader : MonoBehaviour
             levelData[entry.Value] = (float)LevelData.GetType().GetField(entry.Key).GetValue(LevelData);
         }
 
-        var powerUpController = gameView.transform.FindChild("Power Ups").gameObject.GetComponent<PowerUpController>();
         powerUpController.Setup(levelData);
     }
 

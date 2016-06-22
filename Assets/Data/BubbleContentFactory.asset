@@ -9,6 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f61984bbe26a647d1b6514b32ebddc85, type: 3}
-  m_Name: New BubbleContent.BubbleContentFactory
+  m_Name: BubbleContentFactory
   m_EditorClassIdentifier: 
-  definitions: []
+  definitions:
+  - {fileID: 11400000, guid: 3f340a2b714cb4c85a54d0ec1713befd, type: 2}

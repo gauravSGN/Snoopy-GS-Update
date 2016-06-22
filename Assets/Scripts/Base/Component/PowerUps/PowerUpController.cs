@@ -18,18 +18,19 @@ namespace PowerUps
 
         void Awake()
         {
-            anchors = gameObject.GetComponentsInChildren<Transform>();
-            anchors = anchors.Where(child => child != gameObject.transform).ToArray();
+            var transforms = gameObject.GetComponentsInChildren<Transform>();
+            anchors = transforms.Where(child => child != gameObject.transform).ToArray();
         }
 
         public void Setup(Dictionary<PowerUpType, float> levelData)
         {
             level = gameObject.GetComponentInParent<Level>();
             var index = 0;
+            var length = anchors.Length;
 
             foreach (var data in levelData.Where(data => data.Value > 0.0f))
             {
-                if (index == anchors.Count())
+                if (index == length)
                 {
                     break;
                 }
@@ -37,7 +38,7 @@ namespace PowerUps
                 var powerUp = powerUpFactory.CreateByType(data.Key);
                 powerUp.GetComponent<PowerUp>().Setup((int)(1 / data.Value), this, level);
                 powerUp.transform.parent = anchors[index];
-                powerUp.transform.localPosition = new Vector3(0, 0);
+                powerUp.transform.localPosition = Vector3.zero;
                 index++;
             }
         }
@@ -49,13 +50,15 @@ namespace PowerUps
                 launcher.AddShotModifier(AddScan);
             }
 
-            powerUpMask = 1 << (int)type;
+            powerUpMask |= (int)type;
         }
 
         public void AddScan(GameObject bubble)
         {
+            // Make bubble unmatchable
+            bubble.GetComponent<BubbleAttachments>().Model.type = BubbleType.Colorless;
+
             bubble.AddComponent<BubbleExplode>();
-            bubble.GetComponent<BubbleAttachments>().Model.type = BubbleType.Steel;
             powerUpMask = 0;
         }
     }

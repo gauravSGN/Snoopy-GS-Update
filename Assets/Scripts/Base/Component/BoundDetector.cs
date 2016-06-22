@@ -47,7 +47,7 @@ public class BoundDetector : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collider)
     {
-        if ((collider.gameObject.tag == "Bubble") && !bubbles.Contains(collider.gameObject))
+        if ((collider.gameObject.tag == StringConstants.Tags.BUBBLES) && !bubbles.Contains(collider.gameObject))
         {
             bubbles.Add(collider.gameObject);
         }
@@ -55,7 +55,7 @@ public class BoundDetector : MonoBehaviour
 
     protected void OnTriggerExit2D(Collider2D collider)
     {
-        if ((collider.gameObject.tag == "Bubble") && bubbles.Contains(collider.gameObject))
+        if ((collider.gameObject.tag == StringConstants.Tags.BUBBLES) && bubbles.Contains(collider.gameObject))
         {
             bubbles.Remove(collider.gameObject);
         }

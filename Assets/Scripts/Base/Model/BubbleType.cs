@@ -1,5 +1,6 @@
 ﻿public enum BubbleType
 {
+    Colorless = -2,
     Ceiling = -1,
     Blue = 0,
     Yellow = 1,

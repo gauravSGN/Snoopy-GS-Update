@@ -221,7 +221,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpFactory: {fileID: 11400000, guid: fcf96848466bd4a74a7ab983e31ba1b4, type: 2}
   launcher: {fileID: 443704579}
-  level: {fileID: 0}
 --- !u!1 &198621821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,7 +1142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24c2819c2fdc48799de3505a696b34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSceneName: 
   fractionOfFrameTime: 0.1
 --- !u!114 &1197956596
 MonoBehaviour:
@@ -1426,9 +1424,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7980dd4c8fe24426bb6067a23dc54388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  factory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
+  bubbleFactory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
+  contentFactory: {fileID: 11400000, guid: 8ff695269c40e4a69ae094dd6f22719e, type: 2}
   config: {fileID: 11400000, guid: 00bfad0183ceb47049aa308aa06ce247, type: 2}
   gameView: {fileID: 1197956592}
+  powerUpController: {fileID: 142751819}
 --- !u!4 &1499581534
 Transform:
   m_ObjectHideFlags: 0
