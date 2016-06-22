@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Model;
+using UnityEngine;
 
 namespace LevelEditor.Manipulator
 {
@@ -12,7 +13,7 @@ namespace LevelEditor.Manipulator
 
         public void Perform(LevelManipulator manipulator, int x, int y)
         {
-            var key = y << 4 | x;
+            var key = LevelData.BubbleData.GetKey(x, y);
 
             manipulator.Models.Remove(key);
 

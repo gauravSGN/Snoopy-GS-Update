@@ -19,6 +19,16 @@ namespace LevelEditor.Manipulator
             get { return Resources.Load("Textures/UI/PlaceBubbleButton", typeof(Sprite)) as Sprite; }
         }
 
+        public static Vector3 GetBubbleLocation(int x, int y)
+        {
+            var offset = (y & 1) * BUBBLE_SIZE / 2.0f;
+
+            return new Vector3(
+                HALF_SIZE + x * BUBBLE_SIZE + offset + 2,
+                -(HALF_SIZE + y * BUBBLE_SIZE * MathUtil.COS_30_DEGREES + 2)
+            );
+        }
+
         public void Perform(LevelManipulator manipulator, int x, int y)
         {
             if (manipulator.ContentType == BubbleContentType.None)
@@ -43,16 +53,6 @@ namespace LevelEditor.Manipulator
             }
         }
 
-        private Vector3 GetBubbleLocation(int x, int y)
-        {
-            var offset = (y & 1) * BUBBLE_SIZE / 2.0f;
-
-            return new Vector3(
-                HALF_SIZE + x * BUBBLE_SIZE + offset + 2,
-                -(HALF_SIZE + y * BUBBLE_SIZE * MathUtil.COS_30_DEGREES + 2)
-            );
-        }
-
         private void PlaceBubble(LevelManipulator manipulator, int x, int y, BubbleType type)
         {
             deleter.Perform(manipulator, x, y);
@@ -71,15 +71,15 @@ namespace LevelEditor.Manipulator
                 instance.transform.SetParent(manipulator.BubbleContainer, false);
                 instance.transform.localPosition = GetBubbleLocation(x, y);
 
-                var key = y << 4 | x;
-                manipulator.Views.Add(key, instance);
-                manipulator.Models.Add(key, new LevelData.BubbleData(x, y, type));
+                var model = new LevelData.BubbleData(x, y, type);
+                manipulator.Views.Add(model.Key, instance);
+                manipulator.Models.Add(model.Key, model);
             }
         }
 
         private void ReplaceContents(LevelManipulator manipulator, int x, int y, BubbleContentType type)
         {
-            var key = y << 4 | x;
+            var key = LevelData.BubbleData.GetKey(x, y);
 
             if (manipulator.Models.ContainsKey(key))
             {
@@ -108,7 +108,7 @@ namespace LevelEditor.Manipulator
 
         private void RemoveContents(LevelManipulator manipulator, int x, int y)
         {
-            var key = y << 4 | x;
+            var key = LevelData.BubbleData.GetKey(x, y);
 
             if (manipulator.Models.ContainsKey(key))
             {

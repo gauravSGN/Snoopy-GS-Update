@@ -6,5 +6,6 @@
         PlaceBubble,
         DeleteBubble,
         Clear,
+        InsertRow,
     }
 }

@@ -13,6 +13,8 @@ namespace Model
         [Serializable]
         public sealed class BubbleData
         {
+            public int Key { get { return GetKey(X, Y); } }
+
             public BubbleType Type { get { return (BubbleType)type; } }
             public BubbleContentType ContentType { get { return (BubbleContentType)content_type; } }
             public int X { get { return x; } }
@@ -34,6 +36,11 @@ namespace Model
             public Bubble model;
 
             public BubbleData() { }
+
+            public static int GetKey(int x, int y)
+            {
+                return y << 4 | x;
+            }
 
             public BubbleData(int x, int y, BubbleType type)
             {

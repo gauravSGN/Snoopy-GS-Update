@@ -77,8 +77,8 @@ public class LevelLoader : MonoBehaviour
         {
             var bubbleType = (BubbleType)((int)bubble.Type % 6);
             bubbleTypeCount[bubbleType] = bubbleTypeCount.ContainsKey(bubbleType) ? bubbleTypeCount[bubbleType] + 1 : 1;
-            bubbleMap[bubble.Y << 4 | bubble.X] = createBubbleAndSetPosition((BubbleType)((int)bubble.Type % 6), bubble.X, bubble.Y);
-            bubble.model = bubbleMap[bubble.Y << 4 | bubble.X].GetComponent<BubbleAttachments>().Model;
+            bubbleMap[bubble.Key] = createBubbleAndSetPosition((BubbleType)((int)bubble.Type % 6), bubble.X, bubble.Y);
+            bubble.model = bubbleMap[bubble.Key].GetComponent<BubbleAttachments>().Model;
 
             if (bubble.ContentType != BubbleContentType.None)
             {
@@ -86,7 +86,7 @@ public class LevelLoader : MonoBehaviour
 
                 if (content != null)
                 {
-                    content.transform.SetParent(bubbleMap[bubble.Y << 4 | bubble.X].transform, false);
+                    content.transform.SetParent(bubbleMap[bubble.Key].transform, false);
                     content.transform.localPosition = Vector3.back;
                 }
             }
@@ -187,11 +187,11 @@ public class LevelLoader : MonoBehaviour
     {
         var offset = 1 - (y & 1) * 2;
 
-        neighbors[0] = ((y - 1) << 4) | (x + offset);
-        neighbors[1] = ((y - 1) << 4) | x;
-        neighbors[2] = (y << 4) | (x - 1);
-        neighbors[3] = (y << 4) | (x + 1);
-        neighbors[4] = ((y + 1) << 4) | (x + offset);
-        neighbors[5] = ((y + 1) << 4) | x;
+        neighbors[0] = LevelData.BubbleData.GetKey(x + offset, y - 1);
+        neighbors[1] = LevelData.BubbleData.GetKey(x, y - 1);
+        neighbors[2] = LevelData.BubbleData.GetKey(x - 1, y);
+        neighbors[3] = LevelData.BubbleData.GetKey(x + 1, y);
+        neighbors[4] = LevelData.BubbleData.GetKey(x + offset, y + 1);
+        neighbors[5] = LevelData.BubbleData.GetKey(x, y + 1);
     }
 }
