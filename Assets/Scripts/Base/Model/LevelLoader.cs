@@ -34,11 +34,6 @@ public class LevelLoader : MonoBehaviour
     private float rowDistance;
     private float topEdge;
 
-    public Dictionary<BubbleType, int> LoadLevel(TextAsset levelData)
-    {
-        return LoadLevel(levelData.text);
-    }
-
     public Dictionary<BubbleType, int> LoadLevel(string levelData)
     {
         rowDistance = config.bubbles.size * MathUtil.COS_30_DEGREES;

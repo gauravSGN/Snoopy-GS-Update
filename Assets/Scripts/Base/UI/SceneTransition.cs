@@ -10,7 +10,7 @@ public class SceneTransition : MonoBehaviour
     {
         if (nextLevelData != null)
         {
-            GlobalState.Instance.nextLevelData = nextLevelData;
+            GlobalState.Instance.nextLevelData = nextLevelData.text;
         }
 
         SceneManager.LoadScene(sceneName);

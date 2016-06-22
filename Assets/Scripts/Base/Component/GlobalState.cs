@@ -1,31 +1,27 @@
-﻿using UnityEngine;
+﻿using Util;
 
 // The GlobalState prefab needs to be in every scene that uses it for the
 // scene editor to work without coming from a different scenes.
-public class GlobalState : MonoBehaviour
+public class GlobalState : SingletonBehaviour<GlobalState>
 {
-    public static GlobalState Instance { get; private set; }
     public EventDispatcher EventDispatcher { get; private set; }
 
-    public TextAsset nextLevelData;
+    public string nextLevelData;
+    public string returnScene;
 
-    void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
+        base.Awake();
+
+        if (Instance == this)
         {
-            DontDestroyOnLoad(gameObject);
-            Instance = this;
             EventDispatcher = new EventDispatcher();
-        }
-        else if (this != Instance)
-        {
-            Destroy(gameObject);
         }
     }
 
     void OnLevelWasLoaded(int level)
     {
-        if ((Instance != null) && (this == Instance))
+        if (this == Instance)
         {
             EventDispatcher.Reset();
         }

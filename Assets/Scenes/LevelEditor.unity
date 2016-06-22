@@ -584,7 +584,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 300}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &98521845
@@ -3116,6 +3116,48 @@ MonoBehaviour:
   buttonContainer: {fileID: 1144909946}
   manipulator: {fileID: 1329098742}
   buttonPrefab: {fileID: 147940, guid: 145e48d4729bc4f7db02655e84e0460c, type: 2}
+--- !u!1001 &1175024391
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 440114, guid: f46a1d9e1b6f4463484b2e2ac2559978, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 440114, guid: f46a1d9e1b6f4463484b2e2ac2559978, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 440114, guid: f46a1d9e1b6f4463484b2e2ac2559978, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 440114, guid: f46a1d9e1b6f4463484b2e2ac2559978, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 440114, guid: f46a1d9e1b6f4463484b2e2ac2559978, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 440114, guid: f46a1d9e1b6f4463484b2e2ac2559978, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 440114, guid: f46a1d9e1b6f4463484b2e2ac2559978, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 440114, guid: f46a1d9e1b6f4463484b2e2ac2559978, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: f46a1d9e1b6f4463484b2e2ac2559978, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1187473915
 GameObject:
   m_ObjectHideFlags: 0
@@ -4060,7 +4102,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 299.99997}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1526308726

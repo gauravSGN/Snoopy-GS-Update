@@ -22,6 +22,16 @@ namespace LevelEditor
 
         private string filename;
 
+        public void Start()
+        {
+            filename = LevelEditorState.Instance.LevelFilename;
+
+            if (!string.IsNullOrEmpty(LevelEditorState.Instance.LevelData))
+            {
+                manipulator.LoadLevel(LevelEditorState.Instance.LevelData);
+            }
+        }
+
         public void New()
         {
             ConfirmAction(delegate ()
@@ -89,16 +99,11 @@ namespace LevelEditor
 
         public void TestLevel()
         {
-            if (string.IsNullOrEmpty(filename))
-            {
-                SaveAs();
-                return;
-            }
+            LevelEditorState.Instance.LevelFilename = filename;
+            LevelEditorState.Instance.LevelData = manipulator.SaveLevel();
 
-            Uri absoluteUri = new Uri(filename);
-            Uri assetUri = new Uri(Application.dataPath);
-            string relativePath = assetUri.MakeRelativeUri(absoluteUri).ToString();
-            GlobalState.Instance.nextLevelData = (TextAsset)AssetDatabase.LoadAssetAtPath(relativePath, typeof(TextAsset));
+            GlobalState.Instance.nextLevelData = LevelEditorState.Instance.LevelData;
+            GlobalState.Instance.returnScene = "Scenes/LevelEditor";
 
             SceneManager.LoadScene("Level");
         }

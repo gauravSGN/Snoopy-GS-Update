@@ -7,17 +7,23 @@ public class Level : MonoBehaviour
     public BubbleFactory bubbleFactory;
 
     [SerializeField]
-    private TextAsset levelData;
+    private TextAsset levelAsset;
 
     [SerializeField]
     private LevelLoader loader;
 
+    private string levelData;
+
     protected void Start()
     {
-        if (GlobalState.Instance && GlobalState.Instance.nextLevelData)
+        if ((GlobalState.Instance != null) && !string.IsNullOrEmpty(GlobalState.Instance.nextLevelData))
         {
             levelData = GlobalState.Instance.nextLevelData;
             GlobalState.Instance.nextLevelData = null;
+        }
+        else if (levelAsset != null)
+        {
+            levelData = levelAsset.text;
         }
 
         StartCoroutine(LoadingCoroutine());
