@@ -13,9 +13,9 @@ public class FakeSplashLoad : MonoBehaviour
     private float progress;
 
     [SerializeField]
-    private float fillPerSecond = 0;
+    private float fillPerSecond;
 
-    private float delay = 0.1f;
+    private readonly float delay = 0.1f;
 
     void Start()
     {
