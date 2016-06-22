@@ -6,11 +6,15 @@ public class FakeSplashLoad : MonoBehaviour
 {
     [SerializeField]
     private Slider fillBar;
+
     [SerializeField]
     private Button playButton;
+
     private float progress;
+
     [SerializeField]
     private float fillPerSecond = 0;
+
     private float delay = 0.1f;
 
     void Start()
@@ -21,7 +25,7 @@ public class FakeSplashLoad : MonoBehaviour
 
     private IEnumerator FakeLoad()
     {
-        while(progress < 1)
+        while (progress < 1)
         {
             yield return new WaitForSeconds(delay);
             progress += (fillPerSecond * delay);
