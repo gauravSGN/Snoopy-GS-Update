@@ -19,7 +19,7 @@ public class RayGizmo : FancyGizmo
 
     private List<Ray> history = new List<Ray>();
 
-    protected override void RecordHistory()
+    override protected void RecordHistory()
     {
         Ray toRecord = new Ray(transform.position, direction);
         history.Add(toRecord);

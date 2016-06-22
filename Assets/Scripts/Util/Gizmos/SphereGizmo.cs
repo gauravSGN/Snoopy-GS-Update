@@ -8,7 +8,7 @@ public class SphereGizmo : FancyGizmo
 
     private List<Vector3> history = new List<Vector3>();
 
-    protected override void RecordHistory()
+    override protected void RecordHistory()
     {
         history.Add(transform.position);
         if(history.Count > maxHistory)

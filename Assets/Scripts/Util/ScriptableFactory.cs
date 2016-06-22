@@ -4,7 +4,7 @@ using Model;
 
 namespace Util
 {
-    public abstract class ScriptableFactory<BaseType, DefinitionType> : ScriptableObject
+    abstract public class ScriptableFactory<BaseType, DefinitionType> : ScriptableObject
         where DefinitionType : GameObjectDefinition<BaseType>
     {
         [SerializeField]
@@ -12,13 +12,13 @@ namespace Util
 
         protected Dictionary<BaseType, DefinitionType> definitionLookup;
 
-        public virtual GameObject CreateByType(BaseType type)
+        virtual public GameObject CreateByType(BaseType type)
         {
             var definition = GetDefinitionByType(type);
             return Instantiate(definition.Prefab);
         }
 
-        protected virtual DefinitionType GetDefinitionByType(BaseType type)
+        virtual protected DefinitionType GetDefinitionByType(BaseType type)
         {
             definitionLookup = definitionLookup ?? CreateLookupTable<BaseType, DefinitionType>(definitions);
 

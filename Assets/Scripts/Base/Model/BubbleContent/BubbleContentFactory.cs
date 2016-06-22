@@ -5,7 +5,7 @@ namespace BubbleContent
 {
     public class BubbleContentFactory : ScriptableFactory<BubbleContentType, BubbleContentDefinition>
     {
-        public override GameObject CreateByType(BubbleContentType type)
+        override public GameObject CreateByType(BubbleContentType type)
         {
             var definition = GetDefinitionByType(type);
             GameObject content = null;
@@ -18,7 +18,7 @@ namespace BubbleContent
             return content;
         }
 
-        protected override BubbleContentDefinition GetDefinitionByType(BubbleContentType type)
+        override protected BubbleContentDefinition GetDefinitionByType(BubbleContentType type)
         {
             definitionLookup = definitionLookup ?? CreateLookupTable<BubbleContentType, BubbleContentDefinition>(definitions);
             BubbleContentDefinition definition = null;

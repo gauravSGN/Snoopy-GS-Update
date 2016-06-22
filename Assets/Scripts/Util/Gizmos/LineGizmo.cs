@@ -21,7 +21,7 @@ public class LineGizmo : FancyGizmo
 
     private List<EndPoints> history = new List<EndPoints>();
 
-    protected override void RecordHistory()
+    override protected void RecordHistory()
     {
         if(endPoint != null)
         {

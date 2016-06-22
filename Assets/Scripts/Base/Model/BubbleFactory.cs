@@ -3,7 +3,7 @@ using Util;
 
 public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
 {
-    public override GameObject CreateByType(BubbleType type)
+    override public GameObject CreateByType(BubbleType type)
     {
         var definition = GetDefinitionByType(type);
         var instance = Instantiate(definition.Prefab);
