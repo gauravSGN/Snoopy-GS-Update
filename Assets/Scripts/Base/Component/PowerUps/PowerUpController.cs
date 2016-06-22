@@ -9,9 +9,6 @@ namespace PowerUps
         [SerializeField]
         private PowerUpFactory powerUpFactory;
 
-        // [SerializeField]
-        // private AreaEffectFactory areaEffectFactory;
-
         [SerializeField]
         private BubbleLauncher launcher;
 
