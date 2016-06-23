@@ -23,6 +23,11 @@ public class ChainPopAdjacent : MonoBehaviour
 
         adjacentList.Remove(model);
         GraphUtil.RemoveNodes(adjacentList);
+
+        for (int index = 0, length = adjacentList.Count; index < length; index++)
+        {
+            BubbleReactionEvent.Dispatch(ReactionPriority.ChainPop, adjacentList[index].PopBubble);
+        }
     }
 
     private List<Bubble> GetAdjacentBubbles(List<Bubble> adjacentList, Bubble current)
