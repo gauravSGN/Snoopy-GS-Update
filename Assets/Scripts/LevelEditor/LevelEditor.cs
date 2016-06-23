@@ -1,9 +1,12 @@
 ﻿using System;
 using System.IO;
 using UnityEngine;
-using UnityEditor;
 using LevelEditor.Manipulator;
 using UnityEngine.SceneManagement;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace LevelEditor
 {
@@ -44,6 +47,7 @@ namespace LevelEditor
 
         public void Open()
         {
+#if UNITY_EDITOR
             var filters = new[] { "Level Data", LEVEL_EXTENSION };
             var basePath = Path.Combine(Application.dataPath, LEVEL_BASE_PATH);
             var levelFilename = EditorUtility.OpenFilePanelWithFilters("Open Level", basePath, filters);
@@ -58,6 +62,7 @@ namespace LevelEditor
                     manipulator.LoadLevel(File.ReadAllText(levelFilename));
                 });
             }
+#endif
         }
 
         public void Save()
@@ -83,6 +88,7 @@ namespace LevelEditor
 
         public void SaveAs()
         {
+#if UNITY_EDITOR
             var basePath = Path.Combine(Application.dataPath, LEVEL_BASE_PATH);
             var levelFilename = EditorUtility.SaveFilePanel("Save Level", basePath, "NewLevel.json", LEVEL_EXTENSION);
 
@@ -91,6 +97,7 @@ namespace LevelEditor
                 filename = levelFilename;
                 Save();
             }
+#endif
         }
 
         public void Clear()
