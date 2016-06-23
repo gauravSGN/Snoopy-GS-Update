@@ -13,7 +13,7 @@ LEVEL_ATTRIBS = [
 
 BUBBLE_ATTRIBS = [
     ("typeID", "type", int),
-    ("normalBubbleSubType", "content_type", int),
+    ("normalBubbleSubType", "contentType", int),
     ("grid_x", "x", int),
     ("grid_y", "y", int),
 ]

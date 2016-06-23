@@ -15,7 +15,7 @@ namespace Model
             public int Key { get { return GetKey(X, Y); } }
 
             public BubbleType Type { get { return (BubbleType)type; } }
-            public BubbleContentType ContentType { get { return (BubbleContentType)content_type; } }
+            public BubbleContentType ContentType { get { return (BubbleContentType)contentType; } }
             public int X { get { return x; } }
             public int Y { get { return y; } }
 
@@ -23,7 +23,7 @@ namespace Model
             private int type;
 
             [SerializeField]
-            private int content_type;
+            private int contentType;
 
             [SerializeField]
             private int x;
@@ -51,7 +51,7 @@ namespace Model
             public BubbleData(int x, int y, BubbleType bubbleType, BubbleContentType contentType)
                 : this(x, y, bubbleType)
             {
-                content_type = (int)contentType;
+                this.contentType = (int)contentType;
             }
         }
 
