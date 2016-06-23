@@ -9,7 +9,6 @@ public class TriggerDestroy : MonoBehaviour
         var model = gameObject.GetComponent<BubbleAttachments>().Model;
         model.PopBubble();
         GraphUtil.RemoveNodes(new List<Bubble>(){model});
-
     }
 
     protected void OnTriggerEnter2D(Collider2D collider)

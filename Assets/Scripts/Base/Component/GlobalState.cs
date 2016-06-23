@@ -1,7 +1,7 @@
 ﻿using Util;
 
 // The GlobalState prefab needs to be in every scene that uses it for the
-// scene editor to work without coming from a different scenes.
+// scene editor to work without coming from a different scene.
 public class GlobalState : SingletonBehaviour<GlobalState>
 {
     public EventDispatcher EventDispatcher { get; private set; }

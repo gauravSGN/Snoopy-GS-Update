@@ -18,10 +18,9 @@ public class ChainPopAdjacent : MonoBehaviour
 
     private void PoppedHandler(Bubble bubble)
     {
-        var model = GetComponent<BubbleAttachments>().Model;
-        var adjacentList = GetAdjacentBubbles(new List<Bubble>(), model);
+        var adjacentList = GetAdjacentBubbles(new List<Bubble>(), bubble);
 
-        adjacentList.Remove(model);
+        adjacentList.Remove(bubble);
         GraphUtil.RemoveNodes(adjacentList);
 
         for (int index = 0, length = adjacentList.Count; index < length; index++)
