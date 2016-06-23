@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Util;
 
 public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
 {
+    public IEnumerable<BubbleDefinition> Bubbles { get { return definitions; } }
+
     override public GameObject CreateByType(BubbleType type)
     {
         var definition = GetDefinitionByType(type);

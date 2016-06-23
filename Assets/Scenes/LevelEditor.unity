@@ -584,7 +584,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &98521845
@@ -3712,6 +3712,7 @@ MonoBehaviour:
   bubbleContainer: {fileID: 1526308727}
   bubblePrefab: {fileID: 129676, guid: 0212f60e8d4464444a642726f3d5efc4, type: 2}
   bubbleFactory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
+  contentFactory: {fileID: 11400000, guid: 8ff695269c40e4a69ae094dd6f22719e, type: 2}
 --- !u!1 &1356480299
 GameObject:
   m_ObjectHideFlags: 0
@@ -4326,7 +4327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de681a76c9744856aa3d1c1bbde177f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  factory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
   categoryList: {fileID: 1101937144}
   buttonContainer: {fileID: 569235364}
   listPrefab: {fileID: 101466, guid: aef777c27948a4dcc8a4ebb6281bf951, type: 2}

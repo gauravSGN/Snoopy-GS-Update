@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Model;
+using UnityEngine;
 
 public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleType>
 {

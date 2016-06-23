@@ -4,14 +4,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using BubbleContent;
+using Model;
 
 namespace LevelEditor
 {
     sealed public class BubbleCategoryPopulator : MonoBehaviour
     {
-        [SerializeField]
-        private BubbleFactory factory;
-
         [SerializeField]
         private Dropdown categoryList;
 
@@ -75,14 +73,14 @@ namespace LevelEditor
             {
                 CreateButtonPanel<BubbleDefinition, BubbleType>(
                     category.ToString(),
-                    factory.Bubbles.Where(b => b.category == category),
+                    manipulator.BubbleFactory.Bubbles.Where(b => b.category == category),
                     SetBubbleType
                 );
             }
 
             CreateButtonPanel<BubbleContentDefinition, BubbleContentType>(
                 "Bubble Contents",
-                factory.Contents,
+                manipulator.ContentFactory.Contents,
                 SetContentType
             );
         }

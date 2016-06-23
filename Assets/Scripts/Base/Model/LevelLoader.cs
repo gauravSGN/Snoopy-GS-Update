@@ -5,6 +5,7 @@ using BubbleContent;
 using PowerUps;
 using Util;
 using Model;
+using System.Linq;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -28,9 +29,6 @@ public class LevelLoader : MonoBehaviour
     [SerializeField]
     private GameObject levelContainer;
 
-    [SerializeField]
-    private List<Lantern> lanterns;
-
     private float rowDistance;
     private float topEdge;
 
@@ -48,11 +46,12 @@ public class LevelLoader : MonoBehaviour
 
     private void SetupPowerUps()
     {
-        var count = Mathf.Min(lanterns.Count, LevelData.PowerUpFills.Length);
+        var levelData = new Dictionary<PowerUpType, float>();
+        var count = Mathf.Min(EnumExtensions.GetValues<PowerUpType>().Count(), LevelData.PowerUpFills.Length);
+
         for (var index = 0; index < count; index++)
         {
-            float lanternFillValue = LevelData.PowerUpFills[index];
-            lanterns[index].Setup((int)(lanternFillValue > 0.0f ? (1.0 / lanternFillValue) : 0.0f));
+            levelData[(PowerUpType)(1 << index)] = LevelData.PowerUpFills[index];
         }
 
         powerUpController.Setup(levelData);
@@ -82,7 +81,7 @@ public class LevelLoader : MonoBehaviour
 
             if (bubble.ContentType != BubbleContentType.None)
             {
-                var content = contentFactory.CreateByType((BubbleContentType)bubble.contentType);
+                var content = contentFactory.CreateByType((BubbleContentType)bubble.ContentType);
 
                 if (content != null)
                 {

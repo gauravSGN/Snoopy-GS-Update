@@ -27,6 +27,9 @@ namespace LevelEditor
         [SerializeField]
         private BubbleFactory bubbleFactory;
 
+        [SerializeField]
+        private BubbleContentFactory contentFactory;
+
         private readonly Dictionary<int, LevelData.BubbleData> models = new Dictionary<int, LevelData.BubbleData>();
         private readonly Dictionary<int, GameObject> views = new Dictionary<int, GameObject>();
         private readonly ManipulatorActionFactory actionFactory = new ManipulatorActionFactory();
@@ -46,6 +49,7 @@ namespace LevelEditor
         public RectTransform BubbleContainer { get { return bubbleContainer; } }
 
         public BubbleFactory BubbleFactory { get { return bubbleFactory; } }
+        public BubbleContentFactory ContentFactory { get { return contentFactory; } }
         public ManipulatorActionFactory ActionFactory { get { return actionFactory; } }
 
         public LevelProperties LevelProperties { get { return levelProperties; } }

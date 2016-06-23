@@ -18,7 +18,7 @@ namespace Util
             return Instantiate(definition.Prefab);
         }
 
-        virtual protected DefinitionType GetDefinitionByType(BaseType type)
+        virtual public DefinitionType GetDefinitionByType(BaseType type)
         {
             definitionLookup = definitionLookup ?? CreateLookupTable<BaseType, DefinitionType>(definitions);
 

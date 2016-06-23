@@ -57,8 +57,8 @@ namespace LevelEditor.Manipulator
         {
             deleter.Perform(manipulator, x, y);
 
-            var definition = manipulator.BubbleFactory.GetBubbleDefinitionByType(type);
-            var prefabRenderer = definition.prefab.GetComponentInChildren<SpriteRenderer>();
+            var definition = manipulator.BubbleFactory.GetDefinitionByType(type);
+            var prefabRenderer = definition.Prefab.GetComponentInChildren<SpriteRenderer>();
 
             if (prefabRenderer != null)
             {
@@ -83,7 +83,7 @@ namespace LevelEditor.Manipulator
 
             if (manipulator.Models.ContainsKey(key))
             {
-                var definition = manipulator.BubbleFactory.GetContentDefinitionByType(type);
+                var definition = manipulator.ContentFactory.GetDefinitionByType(type);
                 var prefabRenderer = definition.prefab.GetComponentInChildren<SpriteRenderer>();
                 var model = manipulator.Models[key];
                 var view = manipulator.Views[key];
