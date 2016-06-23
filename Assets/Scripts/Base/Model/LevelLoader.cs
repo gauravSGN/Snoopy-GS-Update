@@ -40,6 +40,7 @@ public class LevelLoader : MonoBehaviour
         LevelData = JsonUtility.FromJson<LevelData>(levelData);
         bubbleTypeCount = CreateLevel(LevelData);
         SetupPowerUps();
+        PositionCamera();
 
         return bubbleTypeCount;
     }
@@ -55,6 +56,14 @@ public class LevelLoader : MonoBehaviour
         }
 
         powerUpController.Setup(levelData);
+    }
+
+    private void PositionCamera()
+    {
+        var maxY = LevelData.Bubbles.Aggregate(1, (acc, b) => Mathf.Max(acc, b.Y));
+        gameView.transform.position = new Vector3(
+            0.0f, -(maxY - 8) * config.bubbles.size * MathUtil.COS_30_DEGREES, 0.0f
+        );
     }
 
     private Vector3 GetBubbleLocation(int x, int y)

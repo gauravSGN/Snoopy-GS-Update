@@ -1135,7 +1135,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2129657073}
-  - 114: {fileID: 2129657074}
   m_Layer: 0
   m_Name: TopUI
   m_TagString: Untagged
@@ -1158,14 +1157,3 @@ Transform:
   - {fileID: 11738682}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &2129657074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2129657072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d7c1d583ad5c453e86f1baa51bef486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
