@@ -85,15 +85,16 @@ namespace LevelEditor
         private GridPosition GetGridCoordinate(PointerEventData eventData)
         {
             var clickPosition = GetClickPosition(eventData);
-            var boardX = clickPosition.x / 32.0f;
-            var boardY = (clickPosition.y + bubbleContainer.localPosition.y) / 32.0f / MathUtil.COS_30_DEGREES;
+            var boardX = clickPosition.x / LevelEditorConstants.BUBBLE_SIZE;
+            var boardY = (clickPosition.y + bubbleContainer.localPosition.y) / LevelEditorConstants.ROW_HEIGHT;
 
             float maxDist = 999.0f;
             Vector2 nearest = Vector2.zero;
 
             foreach (var bubblePosition in GetNearbyPositions((int)(boardX - 0.5f * ((int)boardY & 1)), (int)boardY))
             {
-                var dist2 = (bubblePosition.x - boardX) * (bubblePosition.x - boardX) + (bubblePosition.y - boardY) * (bubblePosition.y - boardY);
+                var dist2 = (bubblePosition.x - boardX) * (bubblePosition.x - boardX) +
+                            (bubblePosition.y - boardY) * (bubblePosition.y - boardY);
 
                 if (dist2 < maxDist)
                 {

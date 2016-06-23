@@ -9,9 +9,6 @@ namespace LevelEditor.Manipulator
     [ManipulatorAction(ManipulatorActionType.PlaceBubble)]
     public class PlaceBubbleAction : ManipulatorAction
     {
-        private const int BUBBLE_SIZE = 32;
-        private const float HALF_SIZE = BUBBLE_SIZE / 2.0f;
-
         private readonly DeleteBubbleAction deleter = new DeleteBubbleAction();
 
         public Sprite ButtonSprite
@@ -21,11 +18,11 @@ namespace LevelEditor.Manipulator
 
         public static Vector3 GetBubbleLocation(int x, int y)
         {
-            var offset = (y & 1) * BUBBLE_SIZE / 2.0f;
+            var offset = (y & 1) * LevelEditorConstants.HALF_SIZE;
 
             return new Vector3(
-                HALF_SIZE + x * BUBBLE_SIZE + offset + 2,
-                -(HALF_SIZE + y * BUBBLE_SIZE * MathUtil.COS_30_DEGREES + 2)
+                LevelEditorConstants.HALF_SIZE + x * LevelEditorConstants.BUBBLE_SIZE + offset + 2,
+                -(LevelEditorConstants.HALF_SIZE + y * LevelEditorConstants.ROW_HEIGHT + 2)
             );
         }
 
