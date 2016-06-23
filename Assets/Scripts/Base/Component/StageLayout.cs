@@ -28,6 +28,14 @@ public class StageLayout : MonoBehaviour
 
     private void SetCameraSize()
     {
+        gameCamera.aspect = 10.0f / 16.0f;
+        var viewportWidth = gameCamera.aspect * Screen.height / Screen.width;
+        gameCamera.rect = new Rect(
+            (1.0f - viewportWidth) / 2.0f,
+            0.0f,
+            viewportWidth,
+            1.0f
+        );
         gameCamera.orthographicSize = (config.bubbles.numPerRow / gameCamera.aspect * config.bubbles.size) / 2.0f;
     }
 

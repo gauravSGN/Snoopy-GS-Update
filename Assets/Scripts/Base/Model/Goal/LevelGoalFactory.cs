@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BubbleContent;
+using Model;
 
 namespace Goal
 {
@@ -31,7 +32,7 @@ namespace Goal
 
         private static bool RescueBabiesDeterminer(LevelData levelData)
         {
-            return levelData.bubbles.Any(b => (BubbleContentType)b.contentType == BubbleContentType.BabyPanda);
+            return levelData.Bubbles.Any(b => b.ContentType == BubbleContentType.BabyPanda);
         }
     }
 }

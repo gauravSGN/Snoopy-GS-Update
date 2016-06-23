@@ -1,16 +1,17 @@
 ﻿using BubbleContent;
+using Model;
 
 namespace Goal
 {
-    public sealed class RescueBabiesGoal : LevelGoal
+    sealed public class RescueBabiesGoal : LevelGoal
     {
         override public GoalType Type { get { return GoalType.RescueBabies; } }
 
         override public void Initialize(LevelData levelData)
         {
-            foreach (var bubble in levelData.bubbles)
+            foreach (var bubble in levelData.Bubbles)
             {
-                if ((BubbleContentType)bubble.contentType == BubbleContentType.BabyPanda)
+                if (bubble.ContentType == BubbleContentType.BabyPanda)
                 {
                     bubble.model.OnPopped += BubblePoppedHandler;
                     TargetValue++;

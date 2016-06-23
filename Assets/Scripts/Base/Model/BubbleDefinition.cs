@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Model;
+﻿using Model;
+using UnityEngine;
 
 public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleType>
 {
@@ -8,6 +8,9 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
     public Color BaseColor { get { return baseColor; } }
     public bool ActsAsRoot { get { return actsAsRoot; } }
     public int Score { get { return score; } }
+
+    [SerializeField]
+    public BubbleCategory category;
 
     [SerializeField]
     private BubbleType type;

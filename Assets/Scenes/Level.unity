@@ -701,6 +701,14 @@ Prefab:
       propertyPath: m_Name
       value: GlobalState
       objectReference: {fileID: 0}
+    - target: {fileID: 11464338, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: nextLevelData
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464338, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: returnScene
+      value: Scenes/Map
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
   m_IsPrefabParent: 0
@@ -1129,7 +1137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleFactory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
-  levelData: {fileID: 4900000, guid: 1838bc040b78f4c9594a57f7546ddffe, type: 3}
+  levelAsset: {fileID: 4900000, guid: 605fa69ebe999415da2609904499b4ec, type: 3}
   loader: {fileID: 1499581533}
 --- !u!114 &1197956595
 MonoBehaviour:
@@ -1351,7 +1359,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 1280}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1365,7 +1373,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 2
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 492632741}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1429,6 +1437,7 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: 00bfad0183ceb47049aa308aa06ce247, type: 2}
   gameView: {fileID: 1197956592}
   powerUpController: {fileID: 142751819}
+  levelContainer: {fileID: 0}
 --- !u!4 &1499581534
 Transform:
   m_ObjectHideFlags: 0
@@ -1713,10 +1722,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1394572487}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -66.2, y: 217.7}
-  m_SizeDelta: {x: 222.3, y: 189.5}
+  m_AnchorMin: {x: 0.5, y: 0.09605469}
+  m_AnchorMax: {x: 0.5, y: 0.24410157}
+  m_AnchoredPosition: {x: -66.2, y: 0}
+  m_SizeDelta: {x: 222.3, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2062605092
 MonoBehaviour:

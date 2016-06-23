@@ -1,46 +1,73 @@
-﻿using System.Collections.Generic;
-using System.Xml.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+using BubbleContent;
 using Goal;
 
-[XmlRoot("Level")]
-public class LevelData
+namespace Model
 {
-    public class BubbleData
+    [Serializable]
+    public class LevelData
     {
-        [XmlAttribute("grid_x")]
-        public int x;
+        [Serializable]
+        sealed public class BubbleData
+        {
+            public int Key { get { return GetKey(X, Y); } }
 
-        [XmlAttribute("grid_y")]
-        public int y;
+            public BubbleType Type { get { return (BubbleType)type; } }
+            public BubbleContentType ContentType { get { return (BubbleContentType)contentType; } }
+            public int X { get { return x; } }
+            public int Y { get { return y; } }
 
-        [XmlAttribute("typeID")]
-        public int typeID;
+            [SerializeField]
+            private int type;
 
-        [XmlAttribute("normalBubbleSubType")]
-        public int contentType;
+            [SerializeField]
+            private int contentType;
 
-        [XmlIgnore]
-        public Bubble model;
+            [SerializeField]
+            private int x;
+
+            [SerializeField]
+            private int y;
+
+            [NonSerialized]
+            public Bubble model;
+
+            public BubbleData() { }
+
+            public static int GetKey(int x, int y)
+            {
+                return y << 4 | x;
+            }
+
+            public BubbleData(int x, int y, BubbleType type)
+            {
+                this.x = x;
+                this.y = y;
+                this.type = (int)type;
+            }
+
+            public BubbleData(int x, int y, BubbleType bubbleType, BubbleContentType contentType)
+                : this(x, y, bubbleType)
+            {
+                this.contentType = (int)contentType;
+            }
+        }
+
+        virtual public int ShotCount { get { return shotCount; } }
+        virtual public float[] PowerUpFills { get { return powerUpFills; } }
+        virtual public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
+
+        public List<LevelGoal> goals;
+
+        [SerializeField]
+        protected int shotCount;
+
+        [SerializeField]
+        protected float[] powerUpFills;
+
+        [SerializeField]
+        protected BubbleData[] bubbles;
     }
-
-    [XmlAttribute("remainingBubble")]
-    public int remainingBubble;
-
-    [XmlElement("Bubble")]
-    public List<BubbleData> bubbles;
-
-    [XmlIgnore]
-    public List<LevelGoal> goals;
-
-    [XmlAttribute("bombFill")]
-    public float bombFill;
-
-    [XmlAttribute("horzFill")]
-    public float horzFill;
-
-    [XmlAttribute("snakeFill")]
-    public float snakeFill;
-
-    [XmlAttribute("fireFill")]
-    public float fireFill;
 }
