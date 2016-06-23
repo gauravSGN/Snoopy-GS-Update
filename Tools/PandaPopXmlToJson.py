@@ -8,7 +8,7 @@ import os
 
 
 LEVEL_ATTRIBS = [
-    ("remainingBubble", "shot_count", int),
+    ("remainingBubble", "shotCount", int),
 ]
 
 BUBBLE_ATTRIBS = [
@@ -37,7 +37,7 @@ def get_level_structure(xml_root):
 
     copy_attribs(LEVEL_ATTRIBS, xml_root.attrib, level)
 
-    level["power_up_fills"] = get_lantern_fills(xml_root)
+    level["powerUpFills"] = get_lantern_fills(xml_root)
     level["bubbles"] = list(map(parse_bubble, xml_root))
     adjust_y_coordinates(level["bubbles"])
 

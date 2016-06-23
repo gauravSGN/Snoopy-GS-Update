@@ -55,17 +55,17 @@ namespace Model
             }
         }
 
-        virtual public int ShotCount { get { return shot_count; } }
-        virtual public float[] PowerUpFills { get { return power_up_fills; } }
+        virtual public int ShotCount { get { return shotCount; } }
+        virtual public float[] PowerUpFills { get { return powerUpFills; } }
         virtual public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
 
         public List<LevelGoal> goals;
 
         [SerializeField]
-        protected int shot_count;
+        protected int shotCount;
 
         [SerializeField]
-        protected float[] power_up_fills;
+        protected float[] powerUpFills;
 
         [SerializeField]
         protected BubbleData[] bubbles;

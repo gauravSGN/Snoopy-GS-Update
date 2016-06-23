@@ -9,13 +9,13 @@ namespace LevelEditor
         public new int ShotCount
         {
             get { return base.ShotCount; }
-            set { shot_count = value; }
+            set { shotCount = value; }
         }
 
         public new float[] PowerUpFills
         {
             get { return base.PowerUpFills; }
-            set { power_up_fills = value; }
+            set { powerUpFills = value; }
         }
 
         public new IEnumerable<BubbleData> Bubbles
