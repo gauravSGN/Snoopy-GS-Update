@@ -11,7 +11,7 @@ public class FPSDisplay : MonoBehaviour
     void Update()
     {
         delayTimer += Time.deltaTime;
-        if(delayTimer >=  updateDelay)
+        if (delayTimer >= updateDelay)
         {
             deltaTime = Time.deltaTime;
             delayTimer = 0;
