@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class BoundDetector : MonoBehaviour
+public class BoundDetector : MonoBehaviour, UpdateReceiver
 {
     private const float CEILING = 0.0f;
 
@@ -23,7 +23,7 @@ public class BoundDetector : MonoBehaviour
         Down = 1,
     };
 
-    protected void Update()
+    public void OnUpdate()
     {
         var movingDown = (direction == Direction.Down) && (bubbles.Count == 0);
         var movingUp = (direction == Direction.Up) && (bubbles.Count > 0);
@@ -50,6 +50,15 @@ public class BoundDetector : MonoBehaviour
         if ((collider.gameObject.tag == StringConstants.Tags.BUBBLES) && !bubbles.Contains(collider.gameObject))
         {
             bubbles.Add(collider.gameObject);
+
+            if ((direction == Direction.Up) && (bubbles.Count == 1))
+            {
+                GlobalState.Instance.UpdateDispatcher.Updates.Add(this);
+            }
+            else if (direction == Direction.Down)
+            {
+                GlobalState.Instance.UpdateDispatcher.Updates.Remove(this);
+            }
         }
     }
 
@@ -58,6 +67,15 @@ public class BoundDetector : MonoBehaviour
         if ((collider.gameObject.tag == StringConstants.Tags.BUBBLES) && bubbles.Contains(collider.gameObject))
         {
             bubbles.Remove(collider.gameObject);
+
+            if ((direction == Direction.Up) && (bubbles.Count == 0))
+            {
+                GlobalState.Instance.UpdateDispatcher.Updates.Remove(this);
+            }
+            else if ((direction == Direction.Down) && (bubbles.Count == 0))
+            {
+                GlobalState.Instance.UpdateDispatcher.Updates.Add(this);
+            }
         }
     }
 }
