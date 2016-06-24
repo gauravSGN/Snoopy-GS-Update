@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BubbleAttachments : MonoBehaviour
+public class BubbleAttachments : MonoBehaviour, FixedUpdateReceiver
 {
     private const int UPDATES_BEFORE_DESTRUCTION = 2;
     private const int DO_NOT_DESTRUCT = -1;
@@ -28,9 +28,10 @@ public class BubbleAttachments : MonoBehaviour
     public void MarkForDestruction()
     {
         updatesTilDestruction = UPDATES_BEFORE_DESTRUCTION;
+        GlobalState.Instance.UpdateDispatcher.FixedUpdates.Add(this);
     }
 
-    protected void FixedUpdate()
+    public void OnFixedUpdate()
     {
         if (updatesTilDestruction != DO_NOT_DESTRUCT)
         {
@@ -40,6 +41,7 @@ public class BubbleAttachments : MonoBehaviour
             }
             else
             {
+                GlobalState.Instance.UpdateDispatcher.FixedUpdates.Remove(this);
                 RemoveHandlers();
                 Destroy(gameObject);
             }
