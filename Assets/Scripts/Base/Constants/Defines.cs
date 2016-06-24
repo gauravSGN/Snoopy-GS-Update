@@ -1,4 +1,2 @@
-﻿public static class Defines
-{
-    #define DEBUG;
-}
+﻿#define DEBUG
+
