@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class AimLine : MonoBehaviour
+public class AimLine : MonoBehaviour, UpdateReceiver
 {
     [SerializeField]
     private GameObject launchOrigin;
@@ -65,6 +65,11 @@ public class AimLine : MonoBehaviour
         }
     }
 
+    public void OnUpdate()
+    {
+        RebuildMesh();
+    }
+
     protected void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -74,17 +79,10 @@ public class AimLine : MonoBehaviour
         meshFilter.mesh = new Mesh();
     }
 
-    protected void Update()
-    {
-        if (meshRenderer.enabled)
-        {
-            RebuildMesh();
-        }
-    }
-
     protected void OnMouseDown()
     {
         meshRenderer.enabled = true;
+        GlobalState.Instance.UpdateDispatcher.Updates.Add(this);
         OnMouseDrag();
     }
 
@@ -93,7 +91,20 @@ public class AimLine : MonoBehaviour
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         var hit = Physics2D.Raycast(ray.origin, ray.direction);
 
+        var previouslyEnabled = meshRenderer.enabled;
         meshRenderer.enabled = (hit.collider != null) && (hit.collider.gameObject == gameObject);
+
+        if (previouslyEnabled != meshRenderer.enabled)
+        {
+            if (meshRenderer.enabled)
+            {
+                GlobalState.Instance.UpdateDispatcher.Updates.Add(this);
+            }
+            else
+            {
+                GlobalState.Instance.UpdateDispatcher.Updates.Remove(this);
+            }
+        }
 
         if (meshRenderer.enabled)
         {
@@ -106,6 +117,7 @@ public class AimLine : MonoBehaviour
     protected void OnMouseUp()
     {
         meshRenderer.enabled = false;
+        GlobalState.Instance.UpdateDispatcher.Updates.Remove(this);
     }
 
     private void GeneratePoints()

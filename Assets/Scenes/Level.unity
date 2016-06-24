@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleFactory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
-  levelAsset: {fileID: 4900000, guid: 605fa69ebe999415da2609904499b4ec, type: 3}
+  levelAsset: {fileID: 4900000, guid: eb0aaa9ceccb8493db02cb7938a24e64, type: 3}
   loader: {fileID: 1499581533}
 --- !u!114 &1197956595
 MonoBehaviour:
@@ -1538,6 +1538,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 142751818}
   m_RootOrder: 3
+--- !u!1 &1857731896 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 178964, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+  m_PrefabInternal: {fileID: 597194264}
+--- !u!114 &1857731897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1857731896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dedd082d270734722aebe95623f919ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1866197543
 GameObject:
   m_ObjectHideFlags: 0
