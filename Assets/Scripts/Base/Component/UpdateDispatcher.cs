@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UpdateDispatcher : MonoBehaviour
 {
-    public interface Receivers<T>
+    public interface Receivers<in T>
     {
         void Add(T target);
         void Remove(T target);
