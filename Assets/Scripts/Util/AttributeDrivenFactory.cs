@@ -38,10 +38,9 @@ namespace Util
             {
                 var attributes = type.GetCustomAttributes(typeof(AttributeType), false);
 
-                if (attributes.Length > 0)
+                foreach (AttributeType attribute in attributes)
                 {
-                    var key = GetKeyFromAttribute(attributes[0] as AttributeType);
-                    validTypes[key] = type;
+                    validTypes[GetKeyFromAttribute(attribute)] = type;
                 }
             }
         }

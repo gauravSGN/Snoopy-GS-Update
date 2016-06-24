@@ -1,16 +1,16 @@
-using System;
+using Reaction;
 
 public class BubbleReactionEvent : GameEvent
 {
     public ReactionPriority priority;
-    public Action action;
+    public Bubble bubble;
 
-    public static void Dispatch(ReactionPriority priority, Action action)
+    public static void Dispatch(ReactionPriority priority, Bubble bubble)
     {
         BubbleReactionEvent gameEvent = GlobalState.Instance.EventDispatcher.GetPooledEvent<BubbleReactionEvent>();
 
         gameEvent.priority = priority;
-        gameEvent.action = action;
+        gameEvent.bubble = bubble;
 
         GlobalState.Instance.EventDispatcher.DispatchPooled(gameEvent);
     }

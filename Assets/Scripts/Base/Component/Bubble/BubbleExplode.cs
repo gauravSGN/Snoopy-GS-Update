@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Graph;
+using Reaction;
 
 public class BubbleExplode : MonoBehaviour
 {
@@ -39,11 +40,9 @@ public class BubbleExplode : MonoBehaviour
                 {
                     var model = hits[index].collider.gameObject.GetComponent<BubbleAttachments>().Model;
                     bubbleList.Add(model);
-                    BubbleReactionEvent.Dispatch(ReactionPriority.PowerUp, model.PopBubble);
+                    BubbleReactionEvent.Dispatch(ReactionPriority.PowerUp, model);
                 }
             }
-
-            GraphUtil.RemoveNodes(bubbleList);
         }
     }
 }

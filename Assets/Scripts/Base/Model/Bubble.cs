@@ -1,5 +1,6 @@
 ﻿using System;
 using Graph;
+using Reaction;
 
 [Serializable]
 public class Bubble : GraphElement<Bubble>
@@ -14,7 +15,7 @@ public class Bubble : GraphElement<Bubble>
     {
         base.RemoveFromGraph();
 
-        BubbleReactionEvent.Dispatch(ReactionPriority.Cull, MakeBubbleFall);
+        BubbleReactionEvent.Dispatch(ReactionPriority.Cull, this);
     }
 
     public void CheckForMatches()
@@ -23,11 +24,9 @@ public class Bubble : GraphElement<Bubble>
 
         if (bubbleList.Count >= 3)
         {
-            GraphUtil.RemoveNodes(bubbleList);
-
             foreach (var bubble in bubbleList)
             {
-                BubbleReactionEvent.Dispatch(ReactionPriority.Pop, bubble.PopBubble);
+                BubbleReactionEvent.Dispatch(ReactionPriority.Pop, bubble);
             }
         }
     }

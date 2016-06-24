@@ -126,18 +126,19 @@ public class LevelLoader : MonoBehaviour
     private void AttachBubbles(Dictionary<int, GameObject> bubbleMap)
     {
         var neighbors = new int[6];
-        var maxBubblesForOddRow = config.bubbles.numPerRow - 1;
+        var ceilingBubbleCount = config.bubbles.numPerRow + 1;
         var ceilingBubbleMap = new Dictionary<int, GameObject>();
 
-        for (int ceilingX = 0; ceilingX < maxBubblesForOddRow; ceilingX++)
+        for (int ceilingX = 0; ceilingX < ceilingBubbleCount; ceilingX++)
         {
-            ceilingBubbleMap[ceilingX] = createBubbleAndSetPosition(BubbleType.Ceiling, ceilingX, 0);
+            ceilingBubbleMap[ceilingX - 1] = createBubbleAndSetPosition(BubbleType.Ceiling, ceilingX - 1, -1);
         }
 
         foreach (var pair in bubbleMap)
         {
             int x = pair.Key & 0xf;
             int y = pair.Key >> 4;
+            var attachments = pair.Value.GetComponent<BubbleAttachments>();
 
             GetNeighbors(x, y, neighbors);
 
@@ -145,13 +146,14 @@ public class LevelLoader : MonoBehaviour
             {
                 if (neighbor >= 0 && bubbleMap.ContainsKey(neighbor))
                 {
-                    pair.Value.GetComponent<BubbleAttachments>().Attach(bubbleMap[neighbor]);
+                    attachments.Attach(bubbleMap[neighbor]);
                 }
             }
 
-            if (y == 1)
+            if (y == 0)
             {
-                pair.Value.GetComponent<BubbleAttachments>().Attach(ceilingBubbleMap [Mathf.Min(x, maxBubblesForOddRow - 1)]);
+                attachments.Attach(ceilingBubbleMap[x - 1]);
+                attachments.Attach(ceilingBubbleMap[x]);
             }
         }
 
@@ -193,7 +195,7 @@ public class LevelLoader : MonoBehaviour
 
     private void GetNeighbors(int x, int y, int[] neighbors)
     {
-        var offset = 1 - (y & 1) * 2;
+        var offset = (y & 1) * 2 - 1;
 
         neighbors[0] = LevelData.BubbleData.GetKey(x + offset, y - 1);
         neighbors[1] = LevelData.BubbleData.GetKey(x, y - 1);

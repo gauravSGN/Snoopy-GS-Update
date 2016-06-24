@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Graph;
+using Reaction;
 
 public class ChainPopAdjacent : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class ChainPopAdjacent : MonoBehaviour
 
         for (int index = 0, length = adjacentList.Count; index < length; index++)
         {
-            BubbleReactionEvent.Dispatch(ReactionPriority.ChainPop, adjacentList[index].PopBubble);
+            BubbleReactionEvent.Dispatch(ReactionPriority.ChainPop, adjacentList[index]);
         }
     }
 
