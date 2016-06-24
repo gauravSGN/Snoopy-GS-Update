@@ -193,7 +193,7 @@ public class LevelLoader : MonoBehaviour
 
     private void GetNeighbors(int x, int y, int[] neighbors)
     {
-        var offset = 1 - (y & 1) * 2;
+        var offset = (y & 1) * 2 - 1;
 
         neighbors[0] = LevelData.BubbleData.GetKey(x + offset, y - 1);
         neighbors[1] = LevelData.BubbleData.GetKey(x, y - 1);
