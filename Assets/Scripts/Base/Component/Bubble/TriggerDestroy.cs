@@ -7,7 +7,8 @@ public class TriggerDestroy : MonoBehaviour
     {
         if ((collider.gameObject.tag == StringConstants.Tags.BUBBLES) && collider.gameObject.GetComponent<BubbleSnap>())
         {
-            BubbleReactionEvent.Dispatch(ReactionPriority.TriggerDestroy, gameObject.GetComponent<BubbleAttachments>().Model);
+            var model = gameObject.GetComponent<BubbleAttachments>().Model;
+            BubbleReactionEvent.Dispatch(ReactionPriority.TriggerDestroy, model);
         }
     }
 }

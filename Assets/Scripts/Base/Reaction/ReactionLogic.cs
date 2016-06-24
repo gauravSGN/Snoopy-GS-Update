@@ -9,7 +9,8 @@ namespace Reaction
 {
     public class ReactionLogic : MonoBehaviour
     {
-        public class ReactionHandlerFactory : AttributeDrivenFactory<ReactionHandler, ReactionHandlerAttribute, ReactionPriority>
+        public class ReactionHandlerFactory
+            : AttributeDrivenFactory<ReactionHandler, ReactionHandlerAttribute, ReactionPriority>
         {
             override protected ReactionPriority GetKeyFromAttribute(ReactionHandlerAttribute attribute)
             {

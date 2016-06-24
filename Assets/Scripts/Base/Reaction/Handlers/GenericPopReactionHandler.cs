@@ -18,9 +18,10 @@ namespace Reaction
 
             GraphUtil.RemoveNodes(bubbles);
 
-            foreach (var bubble in bubbles)
+            var count = bubbles.Count;
+            for (var index = 0; index < count; index++)
             {
-                bubble.PopBubble();
+                bubbles[index].PopBubble();
             }
         }
     }

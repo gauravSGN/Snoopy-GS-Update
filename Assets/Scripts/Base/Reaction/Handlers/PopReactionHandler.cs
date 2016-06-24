@@ -23,9 +23,10 @@ namespace Reaction
                 var chain = chains[0];
                 chains.RemoveAt(0);
 
-                foreach (var bubble in chain)
+                var count = chain.Count;
+                for (var index = 0; index < count; index++)
                 {
-                    bubble.PopBubble();
+                    chain[index].PopBubble();
                 }
 
                 yield return new WaitForSeconds(0.1f);
