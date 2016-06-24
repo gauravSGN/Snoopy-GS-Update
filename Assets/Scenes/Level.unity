@@ -658,6 +658,7 @@ MonoBehaviour:
   background: {fileID: 756811281}
   leftWall: {fileID: 1189042821}
   rightWall: {fileID: 1964412558}
+  wallScale: 4
 --- !u!1001 &597194264
 Prefab:
   m_ObjectHideFlags: 0
