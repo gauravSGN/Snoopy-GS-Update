@@ -2,7 +2,7 @@
 
 namespace Reaction
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     sealed public class ReactionHandlerAttribute : Attribute
     {
         public ReactionPriority Priority { get; private set; }

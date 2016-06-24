@@ -5,7 +5,9 @@ using Graph;
 namespace Reaction
 {
     [ReactionHandlerAttribute(ReactionPriority.PowerUp)]
-    public class PowerUpReactionHandler : ReactionHandler
+    [ReactionHandlerAttribute(ReactionPriority.ChainPop)]
+    [ReactionHandlerAttribute(ReactionPriority.TriggerDestroy)]
+    public class GenericPopReactionHandler : ReactionHandler
     {
         public override IEnumerator HandleActions()
         {
