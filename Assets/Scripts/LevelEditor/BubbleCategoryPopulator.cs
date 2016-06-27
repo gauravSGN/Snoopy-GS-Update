@@ -9,61 +9,57 @@ using LevelEditor.Manipulator;
 
 namespace LevelEditor
 {
+    [RequireComponent(typeof(TabSwitcher))]
     sealed public class BubbleCategoryPopulator : MonoBehaviour
     {
         [SerializeField]
-        private Dropdown categoryList;
+        private Transform buttonContainer;
 
         [SerializeField]
-        private Transform buttonContainer;
+        private Transform categoryContainer;
 
         [SerializeField]
         private GameObject listPrefab;
 
         [SerializeField]
-        private GameObject buttonPrefab;
+        private GameObject bubbleButtonPrefab;
+
+        [SerializeField]
+        private GameObject categoryButtonPrefab;
 
         [SerializeField]
         private LevelManipulator manipulator;
 
-        public void SetActiveCategory(BubbleCategory category)
-        {
-            SetActiveCategory(category.ToString());
-        }
-
-        public void SetActiveCategory(string name)
-        {
-            foreach (Transform child in buttonContainer.transform)
-            {
-                child.gameObject.SetActive(child.name == name);
-            }
-        }
-
-        public void OnCategoryChanged()
-        {
-            SetActiveCategory(categoryList.options[categoryList.value].text);
-        }
+        private TabSwitcher tabSwitcher;
 
         private void Start()
         {
+            tabSwitcher = GetComponent<TabSwitcher>();
+
             SetupCategoryList();
             CreateButtonPanels();
 
-            SetActiveCategory(BubbleCategory.Goal);
+            tabSwitcher.SwitchTab(GetOrCreatePanel(BubbleCategory.Goal.ToString()));
         }
 
         private void SetupCategoryList()
         {
-            var options = new List<Dropdown.OptionData>();
-
-            categoryList.ClearOptions();
-
             foreach (var category in EnumExtensions.GetValues<BubbleCategory>().Where(c => c != BubbleCategory.Basic))
             {
-                options.Add(new Dropdown.OptionData(category.ToString()));
+                CreateCategoryButton(category);
             }
+        }
 
-            categoryList.AddOptions(options);
+        private void CreateCategoryButton(BubbleCategory category)
+        {
+                var button = Instantiate(categoryButtonPrefab);
+                var panel = GetOrCreatePanel(category.ToString());
+
+                button.transform.SetParent(categoryContainer.transform, false);
+                button.name = category.ToString();
+
+                button.GetComponent<Button>().onClick.AddListener(() => tabSwitcher.SwitchTab(panel));
+                button.GetComponentInChildren<Text>().text = category.ToString();
         }
 
         private void CreateButtonPanels()
@@ -120,7 +116,7 @@ namespace LevelEditor
 
             if (prefabSprite != null)
             {
-                var button = Instantiate(buttonPrefab);
+                var button = Instantiate(bubbleButtonPrefab);
 
                 button.name = definition.Type.ToString();
                 button.GetComponent<Image>().sprite = prefabSprite.sprite;
