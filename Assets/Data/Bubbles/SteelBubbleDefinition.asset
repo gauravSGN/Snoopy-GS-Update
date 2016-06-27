@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d598c8f1285471d9ba9720ea457449, type: 3}
   m_Name: SteelBubbleDefinition
   m_EditorClassIdentifier: 
+  category: 2
   type: 4
   baseColor: {r: 0.7941176, g: 0.7941176, b: 0.7941176, a: 1}
   prefab: {fileID: 118326, guid: 98c24f9535f05435eafbc307eff16c20, type: 2}
+  actsAsRoot: 0
   score: 15
