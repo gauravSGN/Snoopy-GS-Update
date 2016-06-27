@@ -408,7 +408,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 89000cfc764bd4b569549c25ac9c5404, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -628,8 +628,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc309d6421f24ca5bf9f21052482b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deltaTime: 0
-  delayTimer: 0
 --- !u!114 &756726976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,7 +813,6 @@ MonoBehaviour:
   fillBar: {fileID: 1134976089}
   playButton: {fileID: 2103803448}
   fillPerSecond: 0.4
-  progress: 0
 --- !u!1 &1339170321
 GameObject:
   m_ObjectHideFlags: 0
