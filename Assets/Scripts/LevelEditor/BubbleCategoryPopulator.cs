@@ -52,14 +52,14 @@ namespace LevelEditor
 
         private void CreateCategoryButton(BubbleCategory category)
         {
-                var button = Instantiate(categoryButtonPrefab);
-                var panel = GetOrCreatePanel(category.ToString());
+            var button = Instantiate(categoryButtonPrefab);
+            var panel = GetOrCreatePanel(category.ToString());
 
-                button.transform.SetParent(categoryContainer.transform, false);
-                button.name = category.ToString();
+            button.transform.SetParent(categoryContainer.transform, false);
+            button.name = category.ToString();
 
-                button.GetComponent<Button>().onClick.AddListener(() => tabSwitcher.SwitchTab(panel));
-                button.GetComponentInChildren<Text>().text = category.ToString();
+            button.GetComponent<Button>().onClick.AddListener(() => tabSwitcher.SwitchTab(panel));
+            button.GetComponentInChildren<Text>().text = category.ToString();
         }
 
         private void CreateButtonPanels()
