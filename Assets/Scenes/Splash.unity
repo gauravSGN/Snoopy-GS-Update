@@ -94,8 +94,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 11738682}
   - 20: {fileID: 11738681}
-  - 92: {fileID: 11738680}
-  - 124: {fileID: 11738679}
   m_Layer: 0
   m_Name: TopUICamera
   m_TagString: MainCamera
@@ -103,20 +101,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!124 &11738679
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 11738677}
-  m_Enabled: 1
---- !u!92 &11738680
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 11738677}
-  m_Enabled: 1
 --- !u!20 &11738681
 Camera:
   m_ObjectHideFlags: 0
@@ -161,7 +145,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 1762433148}
   m_Father: {fileID: 2129657073}
   m_RootOrder: 1
 --- !u!1 &220103970
@@ -962,6 +947,49 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1528922418}
+--- !u!1 &1762433147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1762433148}
+  - 61: {fileID: 1762433149}
+  m_Layer: 0
+  m_Name: InputBlocker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1762433148
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1762433147}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 11738682}
+  m_RootOrder: 0
+--- !u!61 &1762433149
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1762433147}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 7, y: 7}
 --- !u!1 &1993211006
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,6 +1215,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2129657073}
+  - 114: {fileID: 2129657074}
   m_Layer: 0
   m_Name: TopUI
   m_TagString: Untagged
@@ -1209,3 +1238,14 @@ Transform:
   - {fileID: 11738682}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &2129657074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2129657072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7c1d583ad5c453e86f1baa51bef486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
