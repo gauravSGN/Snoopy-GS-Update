@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using Effects;
 
 public class BubbleSnap : MonoBehaviour
 {
@@ -21,10 +22,21 @@ public class BubbleSnap : MonoBehaviour
         if (collision.collider.tag == StringConstants.Tags.BUBBLES)
         {
             AdjustToGrid();
+            var origin = transform.position;
 
-            foreach (var bubble in NearbyBubbles(transform.position))
+            foreach (var bubble in NearbyBubbles(origin))
             {
                 AttachToBubble(bubble.gameObject);
+            }
+
+            foreach (var bubble in NearbyBubbles(origin, GlobalState.Instance.Config.reactions.shockwaveRadius))
+            {
+                var bubbleEffectController = bubble.GetComponent<BubbleEffectController>();
+
+                if (bubbleEffectController != null)
+                {
+                    bubbleEffectController.AddEffect(ImpactShockwaveEffect.Play(bubble.gameObject, origin));
+                }
             }
 
             rigidBody.velocity = Vector2.zero;
@@ -69,7 +81,12 @@ public class BubbleSnap : MonoBehaviour
 
     private IEnumerable<Collider2D> NearbyBubbles(Vector2 location)
     {
-        foreach (var hit in Physics2D.CircleCastAll(location, GlobalState.Instance.Config.bubbles.size, Vector2.up, 0.0f))
+        return NearbyBubbles(location, GlobalState.Instance.Config.bubbles.size);
+    }
+
+    private IEnumerable<Collider2D> NearbyBubbles(Vector2 location, float radius)
+    {
+        foreach (var hit in Physics2D.CircleCastAll(location, radius, Vector2.up, 0.0f))
         {
             if ((hit.collider.gameObject != gameObject) && (hit.collider.gameObject.tag == StringConstants.Tags.BUBBLES))
             {

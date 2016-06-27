@@ -29,6 +29,7 @@ GameObject:
   - 114: {fileID: 11449034}
   - 114: {fileID: 11438722}
   - 114: {fileID: 11435074}
+  - 114: {fileID: 11449376}
   m_Layer: 10
   m_Name: Blue Bubble
   m_TagString: Bubble
@@ -175,6 +176,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16693cfbf03d14e2ca9961a01ed44bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model:
+    isRoot: 0
+    distanceFromRoot: 2147483647
+    type: 0
+    definition: {fileID: 0}
+--- !u!114 &11449376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39efc2195f3bf411db9b076fd00405ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!198 &19800526
