@@ -1,5 +1,6 @@
-﻿using UnityEngine;
 using Util;
+using Config;
+using UnityEngine;
 
 // The GlobalState prefab needs to be in every scene that uses it for the
 // scene editor to work without coming from a different scene.
@@ -16,6 +17,11 @@ public class GlobalState : SingletonBehaviour<GlobalState>
     [SerializeField]
     private GameConfig config;
 
+    [SerializeField]
+    private TextAsset gsDescriptorJSON;
+
+    private GSDescriptor gsDescriptor;
+
     override protected void Awake()
     {
         base.Awake();
@@ -27,7 +33,17 @@ public class GlobalState : SingletonBehaviour<GlobalState>
         }
     }
 
-    void OnLevelWasLoaded(int level)
+    // Initialize things in Start if they will dispatch events
+    protected void Start()
+    {
+        if (Instance == this)
+        {
+            gsDescriptor = GSDescriptorFactory.CreateByPlatform(Application.platform, gsDescriptorJSON);
+            gsDescriptor.Initialize();
+        }
+    }
+
+    protected void OnLevelWasLoaded(int level)
     {
         if (this == Instance)
         {

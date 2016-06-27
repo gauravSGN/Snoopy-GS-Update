@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "gameId": "snoopy-pop",
+    "appId": "9999",
+    "locale": "",
+    "package": "GameServices",
+    "reset": false,
+    "syncOps": {},
+    "asyncOps": {},
+    "state0": {},
+    "config0": {},
+    "analytics": {
+        "server": "http://localhost/"
+    },
+    "crm": {
+        "url": "http://localhost/"
+    },
+    "http": {
+        "url": "http://localhost:8080/gs/"
+    }
+}

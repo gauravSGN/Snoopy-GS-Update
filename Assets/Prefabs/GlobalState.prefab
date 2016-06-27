@@ -40,7 +40,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10318b2a8e5942a58f38190f71d888a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevelData: {fileID: 0}
+  nextLevelData: 
+  returnScene: 
+  gsDescriptorJSON: {fileID: 4900000, guid: f099f1b53e0c242f69fe51af8c92f8d1, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

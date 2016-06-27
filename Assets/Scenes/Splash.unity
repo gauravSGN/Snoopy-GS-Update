@@ -699,6 +699,60 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
+--- !u!1001 &922148735
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 436150, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 436150, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 436150, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 436150, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 436150, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 436150, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 436150, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 436150, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464338, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: nextLevelData
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464338, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: gsDescriptor
+      value: 
+      objectReference: {fileID: 4900000, guid: f099f1b53e0c242f69fe51af8c92f8d1, type: 3}
+    - target: {fileID: 11464338, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: gsDescriptorJSON
+      value: 
+      objectReference: {fileID: 4900000, guid: f099f1b53e0c242f69fe51af8c92f8d1, type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1134976087
 GameObject:
   m_ObjectHideFlags: 0
