@@ -11,5 +11,12 @@ public class GameConfig : ScriptableObject
         public float shotColliderScale;
     }
 
+    [Serializable]
+    public class ReactionConfig
+    {
+        public float popSpreadDelay;
+    }
+
     public BubbleConfig bubbles;
+    public ReactionConfig reactions;
 }

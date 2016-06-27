@@ -15,3 +15,5 @@ MonoBehaviour:
     numPerRow: 12
     size: 0.25
     shotColliderScale: 0.5
+  reactions:
+    popSpreadDelay: 0.05
