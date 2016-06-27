@@ -7,9 +7,6 @@ public class AimLine : MonoBehaviour, UpdateReceiver
     private GameObject launchOrigin;
 
     [SerializeField]
-    private GameConfig config;
-
-    [SerializeField]
     private Texture2D texture;
 
     [SerializeField]
@@ -125,6 +122,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         points.Clear();
 
         Vector3 origin = launchOrigin.transform.position;
+        var config = GlobalState.Instance.Config;
         int index = 0;
         var distance = length - config.bubbles.size;
         var direction = (aimTarget - origin).normalized;

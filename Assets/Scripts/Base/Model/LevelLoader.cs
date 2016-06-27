@@ -18,9 +18,6 @@ public class LevelLoader : MonoBehaviour
     private BubbleContentFactory contentFactory;
 
     [SerializeField]
-    private GameConfig config;
-
-    [SerializeField]
     private GameObject gameView;
 
     [SerializeField]
@@ -34,7 +31,7 @@ public class LevelLoader : MonoBehaviour
 
     public Dictionary<BubbleType, int> LoadLevel(string levelData)
     {
-        rowDistance = config.bubbles.size * MathUtil.COS_30_DEGREES;
+        rowDistance = GlobalState.Instance.Config.bubbles.size * MathUtil.COS_30_DEGREES;
         Dictionary<BubbleType, int> bubbleTypeCount;
 
         LevelData = JsonUtility.FromJson<LevelData>(levelData);
@@ -62,12 +59,13 @@ public class LevelLoader : MonoBehaviour
     {
         var maxY = LevelData.Bubbles.Aggregate(1, (acc, b) => Mathf.Max(acc, b.Y));
         gameView.transform.position = new Vector3(
-            0.0f, -(maxY - 8) * config.bubbles.size * MathUtil.COS_30_DEGREES, 0.0f
+            0.0f, -(maxY - 8) * GlobalState.Instance.Config.bubbles.size * MathUtil.COS_30_DEGREES, 0.0f
         );
     }
 
     private Vector3 GetBubbleLocation(int x, int y)
     {
+        var config = GlobalState.Instance.Config;
         var offset = (y & 1) * config.bubbles.size / 2.0f;
         var leftEdge = -(config.bubbles.numPerRow - 1) * config.bubbles.size / 2.0f;
         return new Vector3(leftEdge + x * config.bubbles.size + offset, topEdge - y * rowDistance);
@@ -126,7 +124,7 @@ public class LevelLoader : MonoBehaviour
     private void AttachBubbles(Dictionary<int, GameObject> bubbleMap)
     {
         var neighbors = new int[6];
-        var ceilingBubbleCount = config.bubbles.numPerRow + 1;
+        var ceilingBubbleCount = GlobalState.Instance.Config.bubbles.numPerRow + 1;
         var ceilingBubbleMap = new Dictionary<int, GameObject>();
 
         for (int ceilingX = 0; ceilingX < ceilingBubbleCount; ceilingX++)

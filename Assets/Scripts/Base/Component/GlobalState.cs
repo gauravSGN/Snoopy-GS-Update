@@ -8,9 +8,13 @@ public class GlobalState : SingletonBehaviour<GlobalState>
 {
     public EventDispatcher EventDispatcher { get; private set; }
     public UpdateDispatcher UpdateDispatcher { get; private set; }
+    public GameConfig Config { get { return config; } }
 
     public string nextLevelData;
     public string returnScene;
+
+    [SerializeField]
+    private GameConfig config;
 
     override protected void Awake()
     {
