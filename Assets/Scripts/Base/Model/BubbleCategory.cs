@@ -1,4 +1,6 @@
 ﻿public enum BubbleCategory
 {
-    Default,
+    Basic,
+    Goal,
+    Obstacle,
 }

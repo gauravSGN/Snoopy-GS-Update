@@ -5,81 +5,78 @@ using UnityEngine;
 using UnityEngine.UI;
 using BubbleContent;
 using Model;
+using LevelEditor.Manipulator;
 
 namespace LevelEditor
 {
+    [RequireComponent(typeof(TabSwitcher))]
     sealed public class BubbleCategoryPopulator : MonoBehaviour
     {
         [SerializeField]
-        private Dropdown categoryList;
+        private Transform buttonContainer;
 
         [SerializeField]
-        private Transform buttonContainer;
+        private Transform categoryContainer;
 
         [SerializeField]
         private GameObject listPrefab;
 
         [SerializeField]
-        private GameObject buttonPrefab;
+        private GameObject bubbleButtonPrefab;
+
+        [SerializeField]
+        private GameObject categoryButtonPrefab;
 
         [SerializeField]
         private LevelManipulator manipulator;
 
-        public void SetActiveCategory(BubbleCategory category)
-        {
-            SetActiveCategory(category.ToString());
-        }
-
-        public void SetActiveCategory(string name)
-        {
-            foreach (Transform child in buttonContainer.transform)
-            {
-                child.gameObject.SetActive(child.name == name);
-            }
-        }
-
-        public void OnCategoryChanged()
-        {
-            SetActiveCategory(categoryList.options[categoryList.value].text);
-        }
+        private TabSwitcher tabSwitcher;
 
         private void Start()
         {
+            tabSwitcher = GetComponent<TabSwitcher>();
+
             SetupCategoryList();
             CreateButtonPanels();
 
-            SetActiveCategory(BubbleCategory.Default);
+            tabSwitcher.SwitchTab(GetOrCreatePanel(BubbleCategory.Goal.ToString()));
         }
 
         private void SetupCategoryList()
         {
-            var options = new List<Dropdown.OptionData>();
-
-            categoryList.ClearOptions();
-
-            foreach (var category in EnumExtensions.GetValues<BubbleCategory>())
+            foreach (var category in EnumExtensions.GetValues<BubbleCategory>().Where(c => c != BubbleCategory.Basic))
             {
-                options.Add(new Dropdown.OptionData(category.ToString()));
+                CreateCategoryButton(category);
             }
+        }
 
-            options.Add(new Dropdown.OptionData("Bubble Contents"));
+        private void CreateCategoryButton(BubbleCategory category)
+        {
+            var button = Instantiate(categoryButtonPrefab);
+            var panel = GetOrCreatePanel(category.ToString());
 
-            categoryList.AddOptions(options);
+            button.transform.SetParent(categoryContainer.transform, false);
+            button.name = category.ToString();
+
+            button.GetComponent<Button>().onClick.AddListener(() => tabSwitcher.SwitchTab(panel));
+            button.GetComponentInChildren<Text>().text = category.ToString();
         }
 
         private void CreateButtonPanels()
         {
-            foreach (var category in EnumExtensions.GetValues<BubbleCategory>())
+            var bubbleDefs = manipulator.BubbleFactory.Bubbles;
+
+            foreach (var category in EnumExtensions.GetValues<BubbleCategory>().Where(c => c != BubbleCategory.Basic))
             {
                 CreateButtonPanel<BubbleDefinition, BubbleType>(
                     category.ToString(),
-                    manipulator.BubbleFactory.Bubbles.Where(b => b.category == category),
+                    bubbleDefs.Where(b => (b.category == BubbleCategory.Basic) || (b.category == category)),
                     SetBubbleType
                 );
             }
 
             CreateButtonPanel<BubbleContentDefinition, BubbleContentType>(
-                "Bubble Contents",
+                BubbleCategory.Goal.ToString(),
                 manipulator.ContentFactory.Contents,
                 SetContentType
             );
@@ -88,14 +85,29 @@ namespace LevelEditor
         private void CreateButtonPanel<T, U>(string name, IEnumerable<T> items, Action<U> action)
             where T : GameObjectDefinition<U>
         {
-            var panel = Instantiate(listPrefab);
-            panel.name = name;
-            panel.transform.SetParent(buttonContainer, false);
+            var panel = GetOrCreatePanel(name);
 
             foreach (var definition in items.OrderBy(i => i.Type))
             {
                 CreateButtonFromDefinition(panel, definition, action);
             }
+        }
+
+        private GameObject GetOrCreatePanel(string name)
+        {
+            foreach (Transform child in buttonContainer.transform)
+            {
+                if (child.name == name)
+                {
+                    return child.gameObject;
+                }
+            }
+
+            var panel = Instantiate(listPrefab);
+            panel.transform.SetParent(buttonContainer, false);
+            panel.name = name;
+
+            return panel;
         }
 
         private void CreateButtonFromDefinition<T>(GameObject panel, GameObjectDefinition<T> definition, Action<T> action)
@@ -104,7 +116,7 @@ namespace LevelEditor
 
             if (prefabSprite != null)
             {
-                var button = Instantiate(buttonPrefab);
+                var button = Instantiate(bubbleButtonPrefab);
 
                 button.name = definition.Type.ToString();
                 button.GetComponent<Image>().sprite = prefabSprite.sprite;
@@ -116,11 +128,13 @@ namespace LevelEditor
         private void SetBubbleType(BubbleType type)
         {
             manipulator.SetBubbleType(type);
+            manipulator.SetActionType(ManipulatorActionType.PlaceBubble);
         }
 
         private void SetContentType(BubbleContentType type)
         {
             manipulator.SetContentType(type);
+            manipulator.SetActionType(ManipulatorActionType.PlaceBubble);
         }
     }
 }

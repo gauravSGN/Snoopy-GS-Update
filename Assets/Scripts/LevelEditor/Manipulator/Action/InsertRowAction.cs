@@ -4,25 +4,24 @@ using UnityEngine;
 
 namespace LevelEditor.Manipulator
 {
+    [HideAction]
     [ManipulatorAction(ManipulatorActionType.InsertRow)]
     public class InsertRowAction : ManipulatorAction
     {
         public Sprite ButtonSprite
         {
-            get { return Resources.Load("Textures/UI/InsertRowButton", typeof(Sprite)) as Sprite; }
+            get { return null; }
         }
 
         public void Perform(LevelManipulator manipulator, int x, int y)
         {
-            ShiftRows(manipulator, y & ~1, 2);
+            ShiftRows(manipulator, y, 2);
         }
 
         public void PerformAlternate(LevelManipulator manipulator, int x, int y)
         {
-            int baseRow = y & ~1;
-
-            RemoveRows(manipulator, baseRow, baseRow + 1);
-            ShiftRows(manipulator, baseRow + 2, -2);
+            RemoveRows(manipulator, y, y + 1);
+            ShiftRows(manipulator, y + 2, -2);
         }
 
         private void RemoveRows(LevelManipulator manipulator, params int[] rows)
