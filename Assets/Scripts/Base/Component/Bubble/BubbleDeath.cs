@@ -6,10 +6,13 @@ public class BubbleDeath : MonoBehaviour
 {
     [SerializeField]
     private GameObject destroyOnFinish;
+
     [SerializeField]
     private float deathDelay;
+
     [SerializeField]
     private List<GameObject> activateOnDeath;
+
     [SerializeField]
     private List<GameObject> deactivateOnDeath;
 
