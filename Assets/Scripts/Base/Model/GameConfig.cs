@@ -15,6 +15,9 @@ public class GameConfig : ScriptableObject
     public class ReactionConfig
     {
         public float popSpreadDelay;
+        public float shockwaveSpeed;
+        public float shockwaveDistance;
+        public float shockwaveRadius;
     }
 
     public BubbleConfig bubbles;

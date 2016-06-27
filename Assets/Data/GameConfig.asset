@@ -17,3 +17,6 @@ MonoBehaviour:
     shotColliderScale: 0.5
   reactions:
     popSpreadDelay: 0.05
+    shockwaveSpeed: 5
+    shockwaveDistance: 0.1
+    shockwaveRadius: 0.75

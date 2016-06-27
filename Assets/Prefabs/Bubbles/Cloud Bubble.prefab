@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11494108}
   - 114: {fileID: 11434930}
   - 114: {fileID: 11466412}
+  - 114: {fileID: 11457932}
   m_Layer: 10
   m_Name: Cloud Bubble
   m_TagString: Bubble
@@ -104,6 +105,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: daa602ffdfbf94b14b0a7f2312fc283e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11457932
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39efc2195f3bf411db9b076fd00405ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11459598
