@@ -22,7 +22,7 @@ namespace Config
 
         public void Initialize()
         {
-            gs.GS.Init(Contents, () =>
+            GS.Init(Contents, () =>
             {
                 GS.Api.SetIdentifier("store", (string)Contents["store"]);
 
@@ -32,9 +32,6 @@ namespace Config
                 GS.Api.OnStorageAvailable += OnStorageAvailable;
 
                 GlobalState.Instance.EventDispatcher.Dispatch(new GSInitializedEvent(this));
-
-                Debug.Log("GS Init complete");
-                Debug.Log(Application.version.ToString());
             });
         }
 
