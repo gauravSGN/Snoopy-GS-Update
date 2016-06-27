@@ -12,8 +12,9 @@ namespace Reaction
         {
             var bubbleList = new List<Bubble>(scheduledBubbles);
             var chains = BuildPopChains(scheduledBubbles);
-            scheduledBubbles = new List<Bubble>();
+            var delay = GlobalState.Instance.Config.reactions.popSpreadDelay;
 
+            scheduledBubbles = new List<Bubble>();
             GraphUtil.RemoveNodes(bubbleList);
 
             yield return null;
@@ -29,7 +30,7 @@ namespace Reaction
                     chain[index].PopBubble();
                 }
 
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(delay);
             }
         }
 
