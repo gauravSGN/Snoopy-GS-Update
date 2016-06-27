@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using Graph;
 using Reaction;
 
 public class BubbleExplode : MonoBehaviour
 {
-    private const float BUBBLE_SPACING = 0.225f;
-
     [SerializeField]
     private int sizeMultiplier = 2;
 
@@ -27,7 +24,8 @@ public class BubbleExplode : MonoBehaviour
 
     public void OnSettling(GameEvent gameEvent)
     {
-        var hits = Physics2D.CircleCastAll(transform.position, BUBBLE_SPACING * sizeMultiplier, Vector2.up, 0.0f);
+        var baseSize = GlobalState.Instance.Config.bubbles.size * 0.9f;
+        var hits = Physics2D.CircleCastAll(transform.position, baseSize * sizeMultiplier, Vector2.up, 0.0f);
         var length = hits.Length;
 
         if (length > 0)
