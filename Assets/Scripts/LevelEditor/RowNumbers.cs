@@ -59,7 +59,7 @@ namespace LevelEditor
 
         private void UpdateTextElements()
         {
-            var topRow = (int)Mathf.Floor(ContentPosition / wrapHeight);
+            var topRow = (int)Mathf.Floor(ContentPosition / wrapHeight) + 1;
 
             for (var index = 0; index < elements.Count; index++)
             {
