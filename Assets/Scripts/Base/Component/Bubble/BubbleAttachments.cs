@@ -1,16 +1,11 @@
 ﻿using UnityEngine;
 
-public class BubbleAttachments : MonoBehaviour, FixedUpdateReceiver
+public class BubbleAttachments : MonoBehaviour
 {
-    private const int UPDATES_BEFORE_DESTRUCTION = 2;
-    private const int DO_NOT_DESTRUCT = -1;
-
     public Bubble Model { get { return model; } }
 
     [SerializeField]
     private Bubble model;
-
-    private int updatesTilDestruction = -1;
 
     public void Attach(GameObject other)
     {
@@ -25,29 +20,6 @@ public class BubbleAttachments : MonoBehaviour, FixedUpdateReceiver
         model.OnDisconnected += DisconnectedHandler;
     }
 
-    public void MarkForDestruction()
-    {
-        updatesTilDestruction = UPDATES_BEFORE_DESTRUCTION;
-        GlobalState.Instance.UpdateDispatcher.FixedUpdates.Add(this);
-    }
-
-    public void OnFixedUpdate()
-    {
-        if (updatesTilDestruction != DO_NOT_DESTRUCT)
-        {
-            if (updatesTilDestruction > 0)
-            {
-                updatesTilDestruction--;
-            }
-            else
-            {
-                GlobalState.Instance.UpdateDispatcher.FixedUpdates.Remove(this);
-                RemoveHandlers();
-                Destroy(gameObject);
-            }
-        }
-    }
-
     private void RemoveHandlers()
     {
         Model.OnPopped -= PoppedHandler;
@@ -57,9 +29,7 @@ public class BubbleAttachments : MonoBehaviour, FixedUpdateReceiver
     private void PoppedHandler(Bubble bubble)
     {
         RemoveHandlers();
-
-        transform.position = new Vector3(-1000.0f, -1000.0f);
-        MarkForDestruction();
+        Destroy(gameObject);
     }
 
     private void DisconnectedHandler(Bubble bubble)
