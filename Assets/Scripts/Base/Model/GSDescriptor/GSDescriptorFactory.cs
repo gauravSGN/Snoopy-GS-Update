@@ -18,7 +18,7 @@ namespace Config
             #if UNITY_EDITOR && UNITY_ANDROID
                 platform = RuntimePlatform.Android;
             #elif UNITY_EDITOR && UNITY_IOS
-                platform = RuntimePlatform.iOS;
+                platform = RuntimePlatform.IPhonePlayer;
             #endif
 
             return (GSDescriptor)Activator.CreateInstance(platformClassMap[platform], new System.Object[] { source });

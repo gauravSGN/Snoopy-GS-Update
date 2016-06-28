@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 436150}
   - 114: {fileID: 11464338}
   - 114: {fileID: 11416500}
+  - 114: {fileID: 11470376}
   m_Layer: 0
   m_Name: GlobalState
   m_TagString: Untagged
@@ -56,6 +57,18 @@ MonoBehaviour:
   returnScene: 
   config: {fileID: 11400000, guid: 00bfad0183ceb47049aa308aa06ce247, type: 2}
   gsDescriptorJSON: {fileID: 4900000, guid: d761ff1178c8740afa3e207573158468, type: 3}
+--- !u!114 &11470376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb167809ede34ea0a4d3db7f589cb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingPrefab: {fileID: 114206, guid: a2cdad3d26e3040a388504800964fd34, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

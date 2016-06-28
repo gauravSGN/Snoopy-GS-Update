@@ -10,6 +10,7 @@ public class GlobalState : SingletonBehaviour<GlobalState>
     public EventDispatcher EventDispatcher { get; private set; }
     public UpdateDispatcher UpdateDispatcher { get; private set; }
     public GameConfig Config { get { return config; } }
+    public TopUIManager TopUIManager { get; private set;}
 
     public string nextLevelData;
     public string returnScene;
@@ -30,6 +31,7 @@ public class GlobalState : SingletonBehaviour<GlobalState>
         {
             EventDispatcher = new EventDispatcher();
             UpdateDispatcher = GetComponent<UpdateDispatcher>();
+            TopUIManager = GetComponent<TopUIManager>();
         }
     }
 

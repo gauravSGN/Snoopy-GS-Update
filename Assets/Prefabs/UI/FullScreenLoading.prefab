@@ -29,7 +29,7 @@ GameObject:
   - 223: {fileID: 22390544}
   - 114: {fileID: 11452044}
   - 114: {fileID: 11487322}
-  - 114: {fileID: 11441172}
+  - 114: {fileID: 11452996}
   m_Layer: 5
   m_Name: FullScreenLoading
   m_TagString: Untagged
@@ -192,18 +192,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11441172
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 114206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 742072ec221ee4f808b0a2114eff0527, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fillBar: {fileID: 11402828}
 --- !u!114 &11445864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,6 +252,17 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11452996
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7c1d583ad5c453e86f1baa51bef486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11487322
 MonoBehaviour:
   m_ObjectHideFlags: 1

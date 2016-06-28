@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 
 public class AsyncLoadingFill : MonoBehaviour
@@ -7,18 +8,19 @@ public class AsyncLoadingFill : MonoBehaviour
     [SerializeField]
     private Slider fillBar;
 
-    public void StartFill(AsyncOperation op)
+    public void StartFill(AsyncOperation op, Action<GameObject> cb)
     {
-        StartCoroutine(ProgressFill(op));
+        StartCoroutine(ProgressFill(op, cb));
     }
 
-    private IEnumerator ProgressFill(AsyncOperation op)
+    private IEnumerator ProgressFill(AsyncOperation op, Action<GameObject> cb)
     {
         while (!op.isDone)
         {
+            yield return new WaitForSeconds(0.03f);
             fillBar.value = op.progress;
-            yield return new WaitForSeconds(0.1f);
         }
-        gameObject.SetActive(false);
+
+        cb(gameObject);
     }
 }
