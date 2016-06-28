@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Text))]
 public class TextUpdater : MonoBehaviour
 {
     public Observable Target
@@ -33,6 +34,7 @@ public class TextUpdater : MonoBehaviour
     virtual protected void Start()
     {
         text = GetComponent<Text>();
+        UpdateText(Target);
     }
 
     protected void UpdateText(Observable target)
