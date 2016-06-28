@@ -36,7 +36,7 @@ public class MoveCameraDown : MonoBehaviour, UpdateReceiver
     {
         var transform = gameView.transform;
 
-        if ((transform.position.y < CEILING))
+        if (transform.position.y < CEILING)
         {
             var yTransform = (transform.position.y + (Time.deltaTime * panSpeed));
             transform.position = new Vector3(transform.position.x, yTransform);
