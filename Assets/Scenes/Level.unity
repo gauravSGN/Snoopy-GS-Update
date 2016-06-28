@@ -291,12 +291,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 397422952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6bb9251494e54b5684fb5d2cbf7cfff, type: 3}
+  m_Script: {fileID: 11500000, guid: 94413b54238ab4f4a9117c45b6df5922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameView: {fileID: 1197956592}
   panSpeed: 0.5
-  direction: -1
 --- !u!61 &397422955
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1036,7 +1035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleFactory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
-  levelAsset: {fileID: 4900000, guid: eb0aaa9ceccb8493db02cb7938a24e64, type: 3}
+  levelAsset: {fileID: 4900000, guid: 605fa69ebe999415da2609904499b4ec, type: 3}
   loader: {fileID: 1499581533}
 --- !u!114 &1197956595
 MonoBehaviour:
@@ -1376,12 +1375,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1512320682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6bb9251494e54b5684fb5d2cbf7cfff, type: 3}
+  m_Script: {fileID: 11500000, guid: 76533f40372064fbba7002e4972145e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameView: {fileID: 1197956592}
   panSpeed: 1
-  direction: 1
 --- !u!1 &1747281436
 GameObject:
   m_ObjectHideFlags: 0
