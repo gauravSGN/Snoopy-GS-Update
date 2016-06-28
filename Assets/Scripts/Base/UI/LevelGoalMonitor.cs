@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class LevelGoalMonitor : MonoBehaviour
 {
-    public GoalType goalType;
+    [SerializeField]
+    private GoalType goalType;
+
+    [SerializeField]
+    TextUpdater updater;
 
     protected void Start()
     {
@@ -15,9 +19,7 @@ public class LevelGoalMonitor : MonoBehaviour
     {
         if (gameEvent.Goal.Type == goalType)
         {
-            var updater = gameObject.GetComponent<TextUpdater>();
             updater.Target = gameEvent.Goal;
-
             gameObject.SetActive(true);
         }
     }
