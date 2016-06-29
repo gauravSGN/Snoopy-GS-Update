@@ -58,6 +58,7 @@ namespace Model
         virtual public int ShotCount { get { return shotCount; } }
         virtual public float[] PowerUpFills { get { return powerUpFills; } }
         virtual public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
+        virtual public int[] StarValues { get { return starValues; } }
 
         public List<LevelGoal> goals;
 
@@ -69,5 +70,8 @@ namespace Model
 
         [SerializeField]
         protected BubbleData[] bubbles;
+
+        [SerializeField]
+        protected int[] starValues = new int[3];
     }
 }

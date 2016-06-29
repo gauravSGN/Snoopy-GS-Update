@@ -34,24 +34,63 @@ namespace LevelEditor.Properties
 
             foreach (var property in propertyInfo.PropertyType.GetProperties())
             {
-                var field = CreateField(property);
+                IEnumerable<GameObject> fields;
 
-                if (field != null)
+                if (property.PropertyType.IsArray)
                 {
-                    field.SendMessage("InitializeField", new FieldPropertyInfo(target, property));
+                    fields = CreateArrayFields(property, target);
+                }
+                else
+                {
+                    fields = CreateField(property);
+                }
+
+                int index = 0;
+                foreach (var field in fields)
+                {
+                    field.SendMessage("InitializeField", new FieldPropertyInfo(target, property, index));
+                    index++;
                 }
             }
         }
 
-        private GameObject CreateField(PropertyInfo propertyInfo)
+        private IEnumerable<GameObject> CreateField(PropertyInfo propertyInfo)
+        {
+            var instance = CreateField(propertyInfo.PropertyType);
+
+            if (instance != null)
+            {
+                instance.name = propertyInfo.Name;
+                yield return instance;
+            }
+        }
+
+        private IEnumerable<GameObject> CreateArrayFields(PropertyInfo propertyInfo, object target)
+        {
+            var elementType = propertyInfo.PropertyType.GetElementType();
+            var test = propertyInfo.GetValue(target, null);
+            var array = (Array)test;
+
+            for (var index = 0; index < array.Length; index++)
+            {
+                var instance = CreateField(elementType);
+
+                if (instance != null)
+                {
+                    instance.name = string.Format("{0} {1}", propertyInfo.Name, index + 1);
+                    yield return instance;
+                }
+            }
+        }
+
+        private GameObject CreateField(Type fieldType)
         {
             GameObject prefab;
             GameObject instance = null;
 
-            if (prefabMap.TryGetValue(propertyInfo.PropertyType, out prefab))
+            if (prefabMap.TryGetValue(fieldType, out prefab))
             {
                 instance = Instantiate(prefab);
-                instance.name = propertyInfo.Name;
                 instance.transform.SetParent(itemContainer, false);
             }
 

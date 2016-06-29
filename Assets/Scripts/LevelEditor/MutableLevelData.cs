@@ -23,5 +23,11 @@ namespace LevelEditor
             get { return base.Bubbles; }
             set { bubbles = value.ToArray(); }
         }
+
+        public new int[] StarValues
+        {
+            get { return base.StarValues; }
+            set { starValues = value; }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ namespace LevelEditor.Properties
 
         public object Target { get { return fieldInfo.Target; } }
         public PropertyInfo Property { get { return fieldInfo.Property; } }
+        public int Index { get { return fieldInfo.Index; } }
 
         abstract protected void WritePropertyValue(string value);
 
@@ -25,6 +27,12 @@ namespace LevelEditor.Properties
             fieldInfo = info;
 
             label.text = Regex.Replace(Property.Name, "([a-z])([A-Z0-9])", "$1 $2");
+
+            if (Property.PropertyType.IsArray)
+            {
+                label.text = label.text + string.Format(" {0}", Index + 1);
+            }
+
             ReadPropertyValue();
 
             if (Target is Observable)
@@ -37,7 +45,15 @@ namespace LevelEditor.Properties
 
         virtual protected void ReadPropertyValue()
         {
-            inputField.text = Property.GetValue(Target, null).ToString();
+            if (Property.PropertyType.IsArray)
+            {
+                var array = (Array)Property.GetValue(Target, null);
+                inputField.text = array.GetValue(Index).ToString();
+            }
+            else
+            {
+                inputField.text = Property.GetValue(Target, null).ToString();
+            }
         }
 
         private void OnTargetChanged(Observable target)
