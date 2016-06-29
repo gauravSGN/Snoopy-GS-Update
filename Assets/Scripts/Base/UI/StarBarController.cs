@@ -19,15 +19,17 @@ public class StarBarController : MonoBehaviour
     [SerializeField]
     private List<Image> stars;
 
-    private int[] scores = { 100, 600, 1000 };
+    private int[] scores;
     private int currentStar = 0;
 
     protected void Start()
     {
-        PlaceStars();
-        LevelStateUpdated(level.levelState);
-
         level.levelState.AddListener(LevelStateUpdated);
+    }
+
+    protected void OnDestroy()
+    {
+        level.levelState.RemoveListener(LevelStateUpdated);
     }
 
     private void PlaceStars()
@@ -56,6 +58,12 @@ public class StarBarController : MonoBehaviour
 
     private void LevelStateUpdated(Observable state)
     {
+        if (scores == null)
+        {
+            scores = level.levelState.starValues;
+            PlaceStars();
+        }
+
         var starCount = Mathf.Min(scores.Length, stars.Count);
         var score = level.levelState.score;
 
