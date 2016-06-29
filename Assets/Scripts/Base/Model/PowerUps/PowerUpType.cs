@@ -6,10 +6,10 @@ namespace PowerUps
     public enum PowerUpType
     {
         Yellow = 1,
-        Pink = 2,
+        Green = 2,
         Blue = 4,
         Red = 8,
         Purple = 16,
-        Green = 32,
+        Pink = 32,
     }
 }

@@ -8,7 +8,7 @@ public class BallBreaker : MonoBehaviour
 
         if (death)
         {
-            StartCoroutine(death.TriggerDeathEffects());
+            StartCoroutine(death.TriggerDeathEffects(BubbleDeath.DeathType.Cull));
         }
         else
         {

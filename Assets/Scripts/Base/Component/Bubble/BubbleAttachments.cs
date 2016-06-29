@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class BubbleAttachments : MonoBehaviour
 {
@@ -29,7 +29,9 @@ public class BubbleAttachments : MonoBehaviour
     private void PoppedHandler(Bubble bubble)
     {
         RemoveHandlers();
-        Destroy(gameObject);
+
+        var death = gameObject.GetComponent<BubbleDeath>();
+        StartCoroutine(death.TriggerDeathEffects(BubbleDeath.DeathType.Pop));
     }
 
     private void DisconnectedHandler(Bubble bubble)

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   definitions:
   - {fileID: 11400000, guid: ba9267bde4b2548a2b0e51912e2becc1, type: 2}
-  - {fileID: 11400000, guid: d05f02fd494854975b1abb29e0808c8f, type: 2}
-  - {fileID: 11400000, guid: c5aac25774e66435bb04a46361144faf, type: 2}
   - {fileID: 11400000, guid: f809f70df348c473d9d0e2c462e97cd4, type: 2}
+  - {fileID: 11400000, guid: c5aac25774e66435bb04a46361144faf, type: 2}
+  - {fileID: 11400000, guid: d05f02fd494854975b1abb29e0808c8f, type: 2}

@@ -5,7 +5,6 @@ using Service;
 
 // The GlobalState prefab needs to be in every scene that uses it for the
 // scene editor to work without coming from a different scene.
-[RequireComponent(typeof(UpdateDispatcher))]
 public class GlobalState : SingletonBehaviour<GlobalState>
 {
     public GameConfig Config { get { return config; } }
