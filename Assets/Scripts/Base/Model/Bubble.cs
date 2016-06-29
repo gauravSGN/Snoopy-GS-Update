@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Graph;
 using Reaction;
 
@@ -20,7 +21,16 @@ public class Bubble : GraphElement<Bubble>
 
     public void CheckForMatches()
     {
-        var bubbleList = GraphUtil.MatchNeighbors(this, b => b.type == type);
+        var bubbleList = new List<Bubble>();
+        bubbleList.Add(this);
+
+        foreach (Bubble bubble in Neighbors)
+        {
+            if (!bubbleList.Contains(bubble) && MatchesColor(bubble))
+            {
+                GraphUtil.MatchNeighbors(bubbleList, bubble, bubble.MatchesColor);
+            }
+        }
 
         if (bubbleList.Count >= 3)
         {
@@ -29,6 +39,11 @@ public class Bubble : GraphElement<Bubble>
                 BubbleReactionEvent.Dispatch(ReactionPriority.Pop, bubble);
             }
         }
+    }
+
+    public bool MatchesColor(Bubble bubble)
+    {
+        return (bubble.definition.Color & definition.Color) > 0;
     }
 
     public void PopBubble()

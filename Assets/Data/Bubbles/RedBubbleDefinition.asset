@@ -11,7 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d598c8f1285471d9ba9720ea457449, type: 3}
   m_Name: RedBubbleDefinition
   m_EditorClassIdentifier: 
+  category: 0
   type: 2
+  color: 2
   baseColor: {r: 1, g: 0, b: 0, a: 1}
   prefab: {fileID: 167048, guid: 41453b7ed99fc400ba079719243b501b, type: 2}
+  actsAsRoot: 0
   score: 10
