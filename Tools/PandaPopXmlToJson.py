@@ -40,6 +40,7 @@ def get_level_structure(xml_root):
     level["powerUpFills"] = get_lantern_fills(xml_root)
     level["bubbles"] = list(map(parse_bubble, xml_root))
     adjust_y_coordinates(level["bubbles"])
+    fix_top_row(level["bubbles"])
 
     return level
 
@@ -63,9 +64,26 @@ def parse_bubble(bubble_data):
 
 def adjust_y_coordinates(bubbles):
     max_y = reduce(lambda a, b: max(a, b["y"]), bubbles, 1)
+    max_y += (max_y & 1)
 
     for bubble in bubbles:
         bubble["y"] = max_y - bubble["y"]
+
+
+def fix_top_row(bubbles):
+    top_row = [b for b in bubbles if b["y"] == 0]
+
+    if len(top_row) == 0:
+        next_row = [b for b in bubbles if b["y"] == 1]
+
+        for bubble in next_row:
+            new_bubble = OrderedDict()
+
+            for k, v in bubble.iteritems():
+                new_bubble[k] = v
+
+            new_bubble["y"] = 0
+            bubbles.append(new_bubble)
 
 
 if __name__ == "__main__":
