@@ -3,6 +3,7 @@ using System.IO;
 using UnityEngine;
 using LevelEditor.Manipulator;
 using UnityEngine.SceneManagement;
+using Service;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -110,8 +111,9 @@ namespace LevelEditor
             LevelEditorState.Instance.LevelFilename = filename;
             LevelEditorState.Instance.LevelData = manipulator.SaveLevel();
 
-            GlobalState.Instance.nextLevelData = LevelEditorState.Instance.LevelData;
-            GlobalState.Instance.returnScene = "Scenes/LevelEditor";
+            var sceneData = GlobalState.Instance.Services.Get<SceneService>();
+            sceneData.NextLevelData = LevelEditorState.Instance.LevelData;
+            sceneData.ReturnScene = "Scenes/LevelEditor";
 
             SceneManager.LoadScene("Level");
         }

@@ -1,4 +1,5 @@
 ﻿using Model;
+using Service;
 
 namespace Goal
 {
@@ -14,7 +15,7 @@ namespace Goal
         protected void CompleteGoal()
         {
             Complete = true;
-            GlobalState.Instance.EventDispatcher.Dispatch(new GoalCompleteEvent(this));
+            GlobalState.Instance.Services.Get<EventService>().Dispatch(new GoalCompleteEvent(this));
         }
     }
 }

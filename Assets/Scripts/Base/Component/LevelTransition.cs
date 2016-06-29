@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using Service;
 
 public class LevelTransition : MonoBehaviour
 {
@@ -7,12 +8,12 @@ public class LevelTransition : MonoBehaviour
 
     protected void Start()
     {
-        GlobalState.Instance.EventDispatcher.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
+        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
     }
 
     private void OnLevelComplete(LevelCompleteEvent gameEvent)
     {
-        var sceneName = GlobalState.Instance.returnScene ?? mapSceneName;
+        var sceneName = GlobalState.Instance.Services.Get<SceneService>().ReturnScene ?? mapSceneName;
         SceneManager.LoadScene(sceneName);
     }
 }

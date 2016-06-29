@@ -1,15 +1,10 @@
 ﻿using System.Collections.Generic;
+using Service;
 using UnityEngine;
 
-public class UpdateDispatcher : MonoBehaviour
+public class UpdateDispatcher : MonoBehaviour, UpdateService
 {
-    public interface Receivers<in T>
-    {
-        void Add(T target);
-        void Remove(T target);
-    }
-
-    private class ReceiverList<T> : Receivers<T>
+    private class ReceiverList<T> : UpdateReceiverList<T>
     {
         public readonly List<T> receivers = new List<T>();
 
@@ -31,15 +26,20 @@ public class UpdateDispatcher : MonoBehaviour
     private readonly ReceiverList<LateUpdateReceiver> lateUpdates = new ReceiverList<LateUpdateReceiver>();
     private readonly ReceiverList<FixedUpdateReceiver> fixedUpdates = new ReceiverList<FixedUpdateReceiver>();
 
-    public Receivers<UpdateReceiver> Updates { get { return updates; } }
-    public Receivers<LateUpdateReceiver> LateUpdates { get { return lateUpdates; } }
-    public Receivers<FixedUpdateReceiver> FixedUpdates { get { return fixedUpdates; } }
+    public UpdateReceiverList<UpdateReceiver> Updates { get { return updates; } }
+    public UpdateReceiverList<LateUpdateReceiver> LateUpdates { get { return lateUpdates; } }
+    public UpdateReceiverList<FixedUpdateReceiver> FixedUpdates { get { return fixedUpdates; } }
 
     public void Reset()
     {
         updates.receivers.Clear();
         lateUpdates.receivers.Clear();
         fixedUpdates.receivers.Clear();
+    }
+
+    protected void Start()
+    {
+        GlobalState.Instance.Services.SetInstance<UpdateService>(this);
     }
 
     protected void Update()

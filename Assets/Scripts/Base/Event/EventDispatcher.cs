@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Service;
 
-public class EventDispatcher
+public class EventDispatcher : EventService
 {
     private readonly Dictionary<Type, List<object>> handlers = new Dictionary<Type, List<object>>();
     private readonly Dictionary<Type, List<object>> pools = new Dictionary<Type, List<object>>();

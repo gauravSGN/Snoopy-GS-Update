@@ -2,6 +2,7 @@ using gs;
 using gs.data;
 using UnityEngine;
 using System.Collections.Generic;
+using Service;
 
 namespace Config
 {
@@ -31,7 +32,7 @@ namespace Config
                 GS.Api.OnStorageLow += OnStorageLow;
                 GS.Api.OnStorageAvailable += OnStorageAvailable;
 
-                GlobalState.Instance.EventDispatcher.Dispatch(new GSInitializedEvent(this));
+                GlobalState.Instance.Services.Get<EventService>().Dispatch(new GSInitializedEvent(this));
             });
         }
 

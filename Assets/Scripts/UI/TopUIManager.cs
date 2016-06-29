@@ -1,11 +1,17 @@
-﻿using UnityEngine;
+﻿using Service;
+using UnityEngine;
 
-public class TopUIManager : MonoBehaviour
+public class TopUIManager : MonoBehaviour, TopUIService
 {
     [SerializeField]
     private GameObject loadingPrefab;
 
     private GameObject loadingScreenInstance;
+
+    public void Start()
+    {
+        GlobalState.Instance.Services.SetInstance<TopUIService>(this);
+    }
 
     public void ShowLoading(AsyncOperation op)
     {

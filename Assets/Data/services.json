@@ -1,0 +1,20 @@
+{
+    "registry": [
+        {
+            "interfaceName": "Service.UpdateService, Assembly-CSharp",
+            "className": "UpdateDispatcher, Assembly-CSharp"
+        },
+        {
+            "interfaceName": "Service.TopUIService, Assembly-CSharp",
+            "className": "TopUIManager, Assembly-CSharp"
+        },
+        {
+            "interfaceName": "Service.EventService, Assembly-CSharp",
+            "className": "EventDispatcher, Assembly-CSharp"
+        },
+        {
+            "interfaceName": "Service.SceneService, Assembly-CSharp",
+            "className": "Service.SceneTransitionData, Assembly-CSharp"
+        }
+    ]
+}

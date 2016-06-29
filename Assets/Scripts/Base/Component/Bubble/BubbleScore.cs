@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Service;
 
 public class BubbleScore : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class BubbleScore : MonoBehaviour
     {
         if ((model != null) && (GlobalState.Instance != null))
         {
-            GlobalState.Instance.EventDispatcher.Dispatch(new BubbleDestroyedEvent(model.definition.Score, gameObject));
+            GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleDestroyedEvent(model.definition.Score, gameObject));
         }
     }
 }
