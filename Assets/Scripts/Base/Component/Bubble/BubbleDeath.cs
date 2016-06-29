@@ -31,7 +31,6 @@ public class BubbleDeath : MonoBehaviour
 
         for (int i = 0; i < activateList.Count; ++i)
         {
-            Debug.Log(i);
             activateList[i].SetActive(true);
         }
 
