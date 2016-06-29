@@ -5,9 +5,18 @@ namespace Graph
 {
     public static class GraphUtil
     {
-        public static List<T> MatchNeighbors<T>(T node, Func<T, bool> predicate) where T : GraphNode
+        public static List<T> MatchNeighbors<T>(List<T> matches, T node, Func<T, bool> predicate) where T : GraphNode
         {
-            return MatchNeighbors(new List<T> { node }, node, predicate);
+            foreach (T neighbor in node.Neighbors)
+            {
+                if (!matches.Contains(neighbor) && predicate(neighbor))
+                {
+                    matches.Add(neighbor);
+                    MatchNeighbors(matches, neighbor, predicate);
+                }
+            }
+
+            return matches;
         }
 
         public static List<T> GetAdjacentNodes<T>(List<T> nodes) where T : GraphNode
@@ -52,20 +61,6 @@ namespace Graph
                     CullVisitedNodes(finder, adjacent);
                 }
             }
-        }
-
-        private static List<T> MatchNeighbors<T>(List<T> matches, T node, Func<T, bool> predicate) where T : GraphNode
-        {
-            foreach (T neighbor in node.Neighbors)
-            {
-                if (!matches.Contains(neighbor) && predicate(neighbor))
-                {
-                    matches.Add(neighbor);
-                    MatchNeighbors(matches, neighbor, predicate);
-                }
-            }
-
-            return matches;
         }
 
         private static void RemoveVisitedNodes<T>(RootFinder finder, List<T> adjacent) where T : GraphElement<T>

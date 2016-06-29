@@ -4,6 +4,7 @@ using UnityEngine;
 public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleType>
 {
     public BubbleType Type { get { return type; } }
+    public BubbleColor Color { get { return color; } }
     public GameObject Prefab { get { return prefab; } }
     public Color BaseColor { get { return baseColor; } }
     public bool ActsAsRoot { get { return actsAsRoot; } }
@@ -14,6 +15,9 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
 
     [SerializeField]
     private BubbleType type;
+
+    [SerializeField]
+    private BubbleColor color;
 
     [SerializeField]
     private Color baseColor;

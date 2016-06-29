@@ -11,7 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d598c8f1285471d9ba9720ea457449, type: 3}
   m_Name: GreenBubbleDefinition
   m_EditorClassIdentifier: 
+  category: 0
   type: 3
+  color: 8
   baseColor: {r: 0.07586217, g: 1, b: 0, a: 1}
   prefab: {fileID: 187632, guid: ddc37cf96bf20458482e23ccc688f4ed, type: 2}
+  actsAsRoot: 0
   score: 10

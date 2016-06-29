@@ -11,7 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d598c8f1285471d9ba9720ea457449, type: 3}
   m_Name: BlueBubbleDefinition
   m_EditorClassIdentifier: 
+  category: 0
   type: 0
+  color: 1
   baseColor: {r: 0.034482475, g: 0, b: 1, a: 1}
   prefab: {fileID: 152662, guid: 73a2070f6e6234e77a1b8d4e1a66e674, type: 2}
+  actsAsRoot: 0
   score: 10
