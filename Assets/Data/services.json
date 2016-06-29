@@ -3,6 +3,10 @@
         {
             "interfaceName": "Service.UpdateService, Assembly-CSharp",
             "className": "UpdateDispatcher, Assembly-CSharp"
+        },
+        {
+            "interfaceName": "Service.TopUIService, Assembly-CSharp",
+            "className": "TopUIManager, Assembly-CSharp"
         }
     ]
 }

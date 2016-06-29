@@ -10,7 +10,6 @@ public class GlobalState : SingletonBehaviour<GlobalState>
 {
     public EventDispatcher EventDispatcher { get; private set; }
     public GameConfig Config { get { return config; } }
-    public TopUIManager TopUIManager { get; private set;}
     public ServiceRepository Services { get { return services; } }
 
     public string nextLevelData;
@@ -37,7 +36,6 @@ public class GlobalState : SingletonBehaviour<GlobalState>
             Services.RegisterFromJson(servicesJSON.text);
 
             EventDispatcher = new EventDispatcher();
-            TopUIManager = GetComponent<TopUIManager>();
         }
     }
 
