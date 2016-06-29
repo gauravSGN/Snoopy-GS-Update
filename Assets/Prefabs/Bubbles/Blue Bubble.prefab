@@ -47,6 +47,7 @@ GameObject:
   - 4: {fileID: 426316}
   - 95: {fileID: 9585974}
   - 212: {fileID: 21272404}
+  - 114: {fileID: 11400936}
   m_Layer: 0
   m_Name: GreenBubblePopAnimation
   m_TagString: Untagged
@@ -65,7 +66,6 @@ GameObject:
   - 198: {fileID: 19800526}
   - 199: {fileID: 19902702}
   - 114: {fileID: 11422086}
-  - 114: {fileID: 11467698}
   m_Layer: 0
   m_Name: BlueBubbleDeathParticle
   m_TagString: Untagged
@@ -176,6 +176,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11400936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d277b8ff5ef451495db8cab36db2d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11422086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnFinish: {fileID: 152662}
+  deathDelay: 0.5
   activateOnPop:
   - {fileID: 176182}
   activateOnCull:
@@ -242,17 +254,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39efc2195f3bf411db9b076fd00405ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11467698
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd8e63f800f840afb4230f3d837098b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!198 &19800526

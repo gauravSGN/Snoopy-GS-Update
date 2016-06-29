@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 457164}
   - 95: {fileID: 9590588}
   - 212: {fileID: 21296940}
+  - 114: {fileID: 11490886}
   m_Layer: 0
   m_Name: GreenBubblePopAnimation
   m_TagString: Untagged
@@ -28,7 +29,6 @@ GameObject:
   - 198: {fileID: 19842248}
   - 199: {fileID: 19910264}
   - 114: {fileID: 11409810}
-  - 114: {fileID: 11488194}
   m_Layer: 0
   m_Name: BlueBubbleDeathParticle
   m_TagString: Untagged
@@ -215,15 +215,15 @@ MonoBehaviour:
     distanceFromRoot: 2147483647
     type: 0
     definition: {fileID: 0}
---- !u!114 &11488194
+--- !u!114 &11490886
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 150668}
+  m_GameObject: {fileID: 127156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd8e63f800f840afb4230f3d837098b, type: 3}
+  m_Script: {fileID: 11500000, guid: f1d277b8ff5ef451495db8cab36db2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11493634
@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnFinish: {fileID: 187632}
+  deathDelay: 0.5
   activateOnPop:
   - {fileID: 127156}
   activateOnCull:
