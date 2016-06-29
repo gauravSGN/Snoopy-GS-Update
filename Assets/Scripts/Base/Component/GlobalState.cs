@@ -11,9 +11,6 @@ public class GlobalState : SingletonBehaviour<GlobalState>
     public GameConfig Config { get { return config; } }
     public ServiceRepository Services { get { return services; } }
 
-    public string nextLevelData;
-    public string returnScene;
-
     [SerializeField]
     private GameConfig config;
 

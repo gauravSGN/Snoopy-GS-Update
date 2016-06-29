@@ -11,6 +11,10 @@
         {
             "interfaceName": "Service.EventService, Assembly-CSharp",
             "className": "EventDispatcher, Assembly-CSharp"
+        },
+        {
+            "interfaceName": "Service.SceneService, Assembly-CSharp",
+            "className": "Service.SceneTransitionData, Assembly-CSharp"
         }
     ]
 }

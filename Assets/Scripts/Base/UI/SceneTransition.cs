@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Service;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
@@ -10,7 +11,7 @@ public class SceneTransition : MonoBehaviour
     {
         if (nextLevelData != null)
         {
-            GlobalState.Instance.nextLevelData = nextLevelData.text;
+            GlobalState.Instance.Services.Get<SceneService>().NextLevelData = nextLevelData.text;
         }
 
         SceneManager.LoadScene(sceneName);

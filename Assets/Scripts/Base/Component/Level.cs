@@ -17,10 +17,11 @@ public class Level : MonoBehaviour
 
     protected void Start()
     {
-        if ((GlobalState.Instance != null) && !string.IsNullOrEmpty(GlobalState.Instance.nextLevelData))
+        var sceneData = GlobalState.Instance.Services.Get<SceneService>();
+        if (!string.IsNullOrEmpty(sceneData.NextLevelData))
         {
-            levelData = GlobalState.Instance.nextLevelData;
-            GlobalState.Instance.nextLevelData = null;
+            levelData = sceneData.NextLevelData;
+            sceneData.NextLevelData = null;
         }
         else if (levelAsset != null)
         {

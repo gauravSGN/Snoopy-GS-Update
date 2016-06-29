@@ -13,7 +13,7 @@ public class LevelTransition : MonoBehaviour
 
     private void OnLevelComplete(LevelCompleteEvent gameEvent)
     {
-        var sceneName = GlobalState.Instance.returnScene ?? mapSceneName;
+        var sceneName = GlobalState.Instance.Services.Get<SceneService>().ReturnScene ?? mapSceneName;
         SceneManager.LoadScene(sceneName);
     }
 }
