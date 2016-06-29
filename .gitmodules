@@ -1,3 +1,3 @@
 [submodule "GS"]
 	path = GS
-	url = https://github.com/mindjolt/gs
+	url = git@github.com:mindjolt/gs.git
