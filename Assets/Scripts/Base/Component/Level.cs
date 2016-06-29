@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Service;
 
 public class Level : MonoBehaviour
 {
@@ -39,9 +40,9 @@ public class Level : MonoBehaviour
         levelState.remainingBubbles = loader.LevelData.ShotCount;
         levelState.NotifyListeners();
 
-        GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
-        GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
-        GlobalState.Instance.EventDispatcher.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
+        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
+        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
+        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
     }
 
     private void OnBubbleFired(BubbleFiredEvent gameEvent)
@@ -68,6 +69,6 @@ public class Level : MonoBehaviour
             }
         }
 
-        GlobalState.Instance.EventDispatcher.Dispatch(new LevelCompleteEvent(true));
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(true));
     }
 }

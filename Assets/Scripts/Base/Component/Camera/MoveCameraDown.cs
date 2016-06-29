@@ -16,7 +16,7 @@ public class MoveCameraDown : MonoBehaviour, UpdateReceiver
     protected void Start()
     {
         castingBox = gameObject.GetComponent<Collider2D>();
-        GlobalState.Instance.EventDispatcher.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
+        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
     public void OnUpdate()

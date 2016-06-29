@@ -7,6 +7,10 @@
         {
             "interfaceName": "Service.TopUIService, Assembly-CSharp",
             "className": "TopUIManager, Assembly-CSharp"
+        },
+        {
+            "interfaceName": "Service.EventService, Assembly-CSharp",
+            "className": "EventDispatcher, Assembly-CSharp"
         }
     ]
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Service;
 
 public class BubbleLauncher : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class BubbleLauncher : MonoBehaviour
         CreateBubbles();
         SetAimLineColor();
 
-        GlobalState.Instance.EventDispatcher.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
+        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
     protected void OnMouseUp()
@@ -78,7 +79,7 @@ public class BubbleLauncher : MonoBehaviour
         rigidBody.gravityScale = 0.0f;
 
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        GlobalState.Instance.EventDispatcher.Dispatch(new BubbleFiredEvent(nextBubbles[0]));
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleFiredEvent(nextBubbles[0]));
 
         nextBubbles[0] = null;
         shotModifiers = ResetShotModifiers();

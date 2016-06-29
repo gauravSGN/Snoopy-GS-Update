@@ -1,4 +1,5 @@
 using UnityEngine;
+using Service;
 
 [RequireComponent(typeof(AudioSource))]
 public class SoundAfterMatch : MonoBehaviour
@@ -29,8 +30,8 @@ public class SoundAfterMatch : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
-        GlobalState.Instance.EventDispatcher.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
+        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
+        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
     void OnBubbleReactionEvent(BubbleReactionEvent gameEvent)

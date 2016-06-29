@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using Effects;
+using Service;
 
 public class BubbleSnap : MonoBehaviour
 {
@@ -47,10 +48,10 @@ public class BubbleSnap : MonoBehaviour
             gameObject.layer = (int)Layers.GameObjects;
 
             Destroy(this);
-            GlobalState.Instance.EventDispatcher.Dispatch(new BubbleSettlingEvent());
+            GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleSettlingEvent());
 
             GetComponent<BubbleAttachments>().Model.CheckForMatches();
-            GlobalState.Instance.EventDispatcher.Dispatch(new BubbleSettledEvent { shooter = gameObject });
+            GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleSettledEvent { shooter = gameObject });
         }
     }
 

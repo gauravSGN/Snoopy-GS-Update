@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Reaction;
+using Service;
 
 public class BubbleExplode : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class BubbleExplode : MonoBehaviour
 
     public void Start()
     {
-        GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleSettlingEvent>(OnSettling);
+        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleSettlingEvent>(OnSettling);
     }
 
     public void Setup(int explosionSize)
@@ -19,7 +20,7 @@ public class BubbleExplode : MonoBehaviour
 
     protected void OnDestroy()
     {
-        GlobalState.Instance.EventDispatcher.RemoveEventHandler<BubbleSettlingEvent>(OnSettling);
+        GlobalState.Instance.Services.Get<EventService>().RemoveEventHandler<BubbleSettlingEvent>(OnSettling);
     }
 
     public void OnSettling(GameEvent gameEvent)

@@ -1,9 +1,9 @@
 using UnityEngine;
-
 using System.Collections;
 using System.Collections.Generic;
 using Util;
 using System.Linq;
+using Service;
 
 namespace Reaction
 {
@@ -22,8 +22,8 @@ namespace Reaction
 
         protected void Start()
         {
-            GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleSettledEvent>(OnBubbleSettled);
-            GlobalState.Instance.EventDispatcher.AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
+            GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleSettledEvent>(OnBubbleSettled);
+            GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
 
             var factory = new ReactionHandlerFactory();
 
@@ -77,11 +77,11 @@ namespace Reaction
 
             if (GetComponent<Level>().levelState.remainingBubbles <= 0)
             {
-                GlobalState.Instance.EventDispatcher.Dispatch(new LevelCompleteEvent(false));
+                GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(false));
             }
             else
             {
-                GlobalState.Instance.EventDispatcher.Dispatch(new ReadyForNextBubbleEvent());
+                GlobalState.Instance.Services.Get<EventService>().Dispatch(new ReadyForNextBubbleEvent());
             }
         }
     }

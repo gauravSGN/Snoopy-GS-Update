@@ -8,7 +8,6 @@ using Service;
 [RequireComponent(typeof(UpdateDispatcher))]
 public class GlobalState : SingletonBehaviour<GlobalState>
 {
-    public EventDispatcher EventDispatcher { get; private set; }
     public GameConfig Config { get { return config; } }
     public ServiceRepository Services { get { return services; } }
 
@@ -29,14 +28,9 @@ public class GlobalState : SingletonBehaviour<GlobalState>
 
     override protected void Awake()
     {
+        Services.RegisterFromJson(servicesJSON.text);
+
         base.Awake();
-
-        if (Instance == this)
-        {
-            Services.RegisterFromJson(servicesJSON.text);
-
-            EventDispatcher = new EventDispatcher();
-        }
     }
 
     // Initialize things in Start if they will dispatch events
@@ -53,7 +47,7 @@ public class GlobalState : SingletonBehaviour<GlobalState>
     {
         if (this == Instance)
         {
-            EventDispatcher.Reset();
+            Services.Get<EventService>().Reset();
             Services.Get<UpdateService>().Reset();
         }
     }

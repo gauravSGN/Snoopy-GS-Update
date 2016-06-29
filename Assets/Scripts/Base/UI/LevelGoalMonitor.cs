@@ -1,5 +1,6 @@
 ﻿using Goal;
 using UnityEngine;
+using Service;
 
 public class LevelGoalMonitor : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class LevelGoalMonitor : MonoBehaviour
 
     protected void Start()
     {
-        GlobalState.Instance.EventDispatcher.AddEventHandler<GoalCreatedEvent>(GoalCreatedHandler);
+        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<GoalCreatedEvent>(GoalCreatedHandler);
         gameObject.SetActive(false);
     }
 
