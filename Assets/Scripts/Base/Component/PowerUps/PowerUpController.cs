@@ -12,6 +12,15 @@ namespace PowerUps
         [SerializeField]
         private BubbleLauncher launcher;
 
+        [SerializeField]
+        private AnimatorOverrideController shooterAnimation;
+
+        [SerializeField]
+        private AnimatorOverrideController effectAnimation;
+
+        [SerializeField]
+        private Animator animationPrefab;
+
         private Transform[] anchors;
         private int powerUpMask;
         private Level level;
@@ -50,6 +59,9 @@ namespace PowerUps
                 launcher.AddShotModifier(AddScan);
             }
 
+            Animator animation = (Animator) Instantiate(animationPrefab, Vector3.zero, Quaternion.identity);
+            animation.runtimeAnimatorController = shooterAnimation;
+            launcher.SetModifierAnimation(animation.gameObject);
             powerUpMask |= (int)type;
         }
 
@@ -59,6 +71,7 @@ namespace PowerUps
             bubble.GetComponent<BubbleAttachments>().Model.type = BubbleType.Colorless;
 
             bubble.AddComponent<BubbleExplode>();
+            bubble.GetComponent<BubbleExplode>().Setup(2, effectAnimation);
             powerUpMask = 0;
         }
     }

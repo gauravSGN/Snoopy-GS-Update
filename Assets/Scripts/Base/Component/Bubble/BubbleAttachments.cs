@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class BubbleAttachments : MonoBehaviour
 {
     public Bubble Model { get { return model; } }
+
+    public AnimatorOverrideController animationController;
 
     [SerializeField]
     private Bubble model;
@@ -28,8 +30,9 @@ public class BubbleAttachments : MonoBehaviour
 
     private void PoppedHandler(Bubble bubble)
     {
+        var animationDelay = StartDeathAnimation();
         RemoveHandlers();
-        Destroy(gameObject);
+        Destroy(gameObject, animationDelay);
     }
 
     private void DisconnectedHandler(Bubble bubble)
@@ -41,5 +44,14 @@ public class BubbleAttachments : MonoBehaviour
 
         rigidBody.isKinematic = false;
         rigidBody.AddForce(new Vector2(Random.Range(-3.0f, 3.0f), 0.0f));
+    }
+
+    private float StartDeathAnimation()
+    {
+        var child = gameObject.transform.GetComponentInChildren<SpriteRenderer>().gameObject;
+        child.AddComponent<Animator>();
+        var animator = child.GetComponent<Animator>();
+        animator.runtimeAnimatorController = animationController;
+        return animator.GetCurrentAnimatorStateInfo(0).length;
     }
 }

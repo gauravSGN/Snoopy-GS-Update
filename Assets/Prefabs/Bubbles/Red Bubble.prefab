@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21215128}
   m_Layer: 0
   m_Name: BubbleRed
-  m_TagString: Untagged
+  m_TagString: BubbleTexture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16693cfbf03d14e2ca9961a01ed44bd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationController: {fileID: 0}
   model:
     isRoot: 0
     distanceFromRoot: 2147483647

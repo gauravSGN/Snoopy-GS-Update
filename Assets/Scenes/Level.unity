@@ -146,7 +146,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1 &128269338
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,6 +221,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpFactory: {fileID: 11400000, guid: fcf96848466bd4a74a7ab983e31ba1b4, type: 2}
   launcher: {fileID: 443704579}
+  effectAnimation: {fileID: 22100000, guid: 8517bf4d7b7b244058d1957e2d01273a, type: 2}
+  animationPrefab: {fileID: 9594498, guid: a3e367d6fb1a14cd8b32203c029fdd1f, type: 2}
 --- !u!1 &358632397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,7 +1024,7 @@ Transform:
   - {fileID: 358632398}
   - {fileID: 142751818}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!114 &1197956594
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class BubbleLauncher : MonoBehaviour
 
     private GameObject[] nextBubbles;
     private List<ModifyShot> shotModifiers;
+    private GameObject currentAnimation;
 
     public void CycleQueue()
     {
@@ -30,6 +31,12 @@ public class BubbleLauncher : MonoBehaviour
     public void AddShotModifier(ModifyShot modifier)
     {
         shotModifiers.Add(modifier);
+    }
+
+    public void SetModifierAnimation(GameObject bubbleAnimation)
+    {
+        currentAnimation = bubbleAnimation;
+        currentAnimation.transform.parent = nextBubbles[0].transform;
     }
 
     protected void Start()
@@ -82,6 +89,7 @@ public class BubbleLauncher : MonoBehaviour
         GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleFiredEvent(nextBubbles[0]));
 
         nextBubbles[0] = null;
+        currentAnimation = null;
         shotModifiers = ResetShotModifiers();
     }
 
@@ -117,6 +125,12 @@ public class BubbleLauncher : MonoBehaviour
         if (first != null)
         {
             MoveBubbleToLocation(lastIndex);
+        }
+
+        if (currentAnimation != null)
+        {
+            currentAnimation.transform.parent = null;
+            currentAnimation.transform.parent = nextBubbles[0].transform;
         }
 
         SetAimLineColor();
