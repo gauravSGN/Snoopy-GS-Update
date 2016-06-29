@@ -13,13 +13,10 @@ namespace PowerUps
         private BubbleLauncher launcher;
 
         [SerializeField]
-        private AnimatorOverrideController shooterAnimation;
+        private GameObject shooterAnimation;
 
         [SerializeField]
-        private AnimatorOverrideController effectAnimation;
-
-        [SerializeField]
-        private Animator animationPrefab;
+        private GameObject effectAnimation;
 
         private Transform[] anchors;
         private int powerUpMask;
@@ -59,8 +56,7 @@ namespace PowerUps
                 launcher.AddShotModifier(AddScan);
             }
 
-            Animator animation = (Animator) Instantiate(animationPrefab, Vector3.zero, Quaternion.identity);
-            animation.runtimeAnimatorController = shooterAnimation;
+            var animation = (GameObject)Instantiate(shooterAnimation, Vector3.zero, Quaternion.identity);
             launcher.SetModifierAnimation(animation.gameObject);
             powerUpMask |= (int)type;
         }

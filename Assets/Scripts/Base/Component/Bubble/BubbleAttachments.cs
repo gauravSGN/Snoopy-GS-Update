@@ -4,11 +4,6 @@ public class BubbleAttachments : MonoBehaviour
 {
     public Bubble Model { get { return model; } }
 
-    public AnimatorOverrideController animationController;
-
-    [SerializeField]
-    private GameObject animationObject;
-
     [SerializeField]
     private Bubble model;
 
@@ -33,9 +28,10 @@ public class BubbleAttachments : MonoBehaviour
 
     private void PoppedHandler(Bubble bubble)
     {
-        StartDeathAnimation();
         RemoveHandlers();
-        Destroy(gameObject);
+
+        var death = gameObject.GetComponent<BubbleDeath>();
+        StartCoroutine(death.TriggerDeathEffects(BubbleDeath.DeathType.Pop));
     }
 
     private void DisconnectedHandler(Bubble bubble)
@@ -47,14 +43,5 @@ public class BubbleAttachments : MonoBehaviour
 
         rigidBody.isKinematic = false;
         rigidBody.AddForce(new Vector2(Random.Range(-3.0f, 3.0f), 0.0f));
-    }
-
-    private void StartDeathAnimation()
-    {
-        // var child = gameObject.transform.GetComponentInChildren<SpriteRenderer>().gameObject;
-        // child.AddComponent<Animator>();
-        GameObject container = (GameObject)Instantiate(animationObject, gameObject.transform.position, Quaternion.identity);
-        var animator = container.GetComponent<Animator>();
-        animator.runtimeAnimatorController = animationController;
     }
 }

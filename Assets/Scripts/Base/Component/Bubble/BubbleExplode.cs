@@ -9,14 +9,14 @@ public class BubbleExplode : MonoBehaviour
     private int sizeMultiplier = 2;
 
     [SerializeField]
-    private AnimatorOverrideController deathAnimation;
+    private GameObject deathAnimation;
 
     public void Start()
     {
         GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleSettlingEvent>(OnSettling);
     }
 
-    public void Setup(int explosionSize, AnimatorOverrideController animation)
+    public void Setup(int explosionSize, GameObject animation)
     {
         sizeMultiplier = explosionSize;
         deathAnimation = animation;
@@ -39,10 +39,15 @@ public class BubbleExplode : MonoBehaviour
 
             for (int index = 0; index < length; index++)
             {
-                if (hits[index].collider.gameObject.tag == StringConstants.Tags.BUBBLES)
+                var bubble = hits[index].collider.gameObject;
+
+                if (bubble.tag == StringConstants.Tags.BUBBLES)
                 {
-                    var bubbleAttachments = hits[index].collider.gameObject.GetComponent<BubbleAttachments>();
-                    bubbleAttachments.animationController = deathAnimation;
+                    var bubbleDeath = bubble.GetComponent<BubbleDeath>();
+                    var animationObject = (GameObject)Instantiate(deathAnimation, bubble.transform.position, Quaternion.identity);
+                    bubbleDeath.AddPopEffect(animationObject);
+
+                    var bubbleAttachments = bubble.GetComponent<BubbleAttachments>();
                     bubbleList.Add(bubbleAttachments.Model);
                     BubbleReactionEvent.Dispatch(ReactionPriority.PowerUp, bubbleAttachments.Model);
                 }

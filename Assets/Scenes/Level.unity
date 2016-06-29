@@ -147,6 +147,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!1001 &82392520
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 424426, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424426, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424426, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424426, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424426, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424426, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424426, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 424426, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &128269338
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,12 +263,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpFactory: {fileID: 11400000, guid: fcf96848466bd4a74a7ab983e31ba1b4, type: 2}
   launcher: {fileID: 443704579}
-  shooterAnimation: {fileID: 22100000, guid: 8517bf4d7b7b244058d1957e2d01273a, type: 2}
-  effectAnimation: {fileID: 22100000, guid: e9c9a8b39dbcf4b5fb759a5d94e38784, type: 2}
-  animationPrefab: {fileID: 9594498, guid: a3e367d6fb1a14cd8b32203c029fdd1f, type: 2}
-  anchors: []
-  powerUpMask: 0
-  level: {fileID: 0}
+  shooterAnimation: {fileID: 189414, guid: e83c22c5a064640db95d5ee667daf179, type: 2}
+  effectAnimation: {fileID: 130354, guid: 84a944c428d2d47ff949c48ff8eb955d, type: 2}
 --- !u!1 &358632397
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,8 +433,6 @@ MonoBehaviour:
   launchSpeed: 5
   level: {fileID: 1197956594}
   aimLine: {fileID: 443704581}
-  nextBubbles: []
-  currentAnimation: {fileID: 0}
 --- !u!4 &443704580
 Transform:
   m_ObjectHideFlags: 0
@@ -430,9 +466,6 @@ MonoBehaviour:
   dotSpacing: 0.2
   moveSpeed: 2
   wallBounceDistance: 0.5
-  aimTarget: {x: 0, y: 0, z: 0}
-  meshRenderer: {fileID: 0}
-  meshFilter: {fileID: 0}
 --- !u!23 &443704583
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -784,7 +817,6 @@ MonoBehaviour:
   format: 427562626c65733a207b307d
   fields:
   - 72656d61696e696e67427562626c6573
-  text: {fileID: 0}
   level: {fileID: 1197956594}
 --- !u!1 &929098081
 GameObject:
@@ -938,8 +970,6 @@ MonoBehaviour:
   condition: 1
   bubbleMatchThreshold: 10
   chanceToPlay: 1
-  audioSource: {fileID: 0}
-  counter: 0
 --- !u!114 &1177221671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -958,8 +988,6 @@ MonoBehaviour:
   condition: 0
   bubbleMatchThreshold: 0
   chanceToPlay: 0.1
-  audioSource: {fileID: 0}
-  counter: 0
 --- !u!1 &1189042820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1081,6 @@ MonoBehaviour:
   bubbleFactory: {fileID: 11400000, guid: 8485ebde8c9ee4569bd1cf809eb2b68e, type: 2}
   levelAsset: {fileID: 4900000, guid: 605fa69ebe999415da2609904499b4ec, type: 3}
   loader: {fileID: 1499581533}
-  levelData: 
 --- !u!114 &1197956595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1327,12 +1354,6 @@ MonoBehaviour:
   gameView: {fileID: 1197956592}
   powerUpController: {fileID: 142751819}
   levelContainer: {fileID: 0}
-  rowDistance: 0
-  topEdge: 0
-  <LevelData>k__BackingField:
-    shotCount: 0
-    powerUpFills: []
-    bubbles: []
 --- !u!4 &1499581534
 Transform:
   m_ObjectHideFlags: 0
@@ -1403,7 +1424,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameView: {fileID: 1197956592}
   panSpeed: 1
-  castingBox: {fileID: 0}
 --- !u!1 &1747281436
 GameObject:
   m_ObjectHideFlags: 0

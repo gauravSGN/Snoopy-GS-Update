@@ -11,22 +11,41 @@ public class BubbleDeath : MonoBehaviour
     private float deathDelay;
 
     [SerializeField]
-    private List<GameObject> activateOnDeath;
+    private List<GameObject> activateOnPop;
+
+    [SerializeField]
+    private List<GameObject> activateOnCull;
 
     [SerializeField]
     private List<GameObject> deactivateOnDeath;
 
-    public IEnumerator TriggerDeathEffects()
+    public enum DeathType
     {
-        for(int i = 0; i < activateOnDeath.Count; ++i)
+        Pop = 0,
+        Cull = 1
+    }
+
+    public IEnumerator TriggerDeathEffects(DeathType type)
+    {
+        var activateList = type == DeathType.Pop ? activateOnPop : activateOnCull;
+
+        for (int i = 0; i < activateList.Count; ++i)
         {
-            activateOnDeath[i].SetActive(true);
+            Debug.Log(i);
+            activateList[i].SetActive(true);
         }
-        for(int i = 0; i < deactivateOnDeath.Count; ++i)
+
+        for (int i = 0; i < deactivateOnDeath.Count; ++i)
         {
             deactivateOnDeath[i].SetActive(false);
         }
+
         yield return new WaitForSeconds(deathDelay);
         Destroy(destroyOnFinish);
+    }
+
+    public void AddPopEffect(GameObject popEffect)
+    {
+        activateOnPop.Add(popEffect);
     }
 }
