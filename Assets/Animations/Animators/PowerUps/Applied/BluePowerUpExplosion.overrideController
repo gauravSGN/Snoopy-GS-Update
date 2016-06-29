@@ -8,5 +8,5 @@ AnimatorOverrideController:
   m_Name: BluePowerUpExplosion
   m_Controller: {fileID: 9100000, guid: 81bf90fb9aaa54134a0a475596dcb676, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: de43163bbee324e1b8080b40659eba49, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 2ac53ddce00d44051a4ba3336a912522, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 8c7e4601acb944c3e9552de98c3e9f66, type: 2}

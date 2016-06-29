@@ -105,10 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16693cfbf03d14e2ca9961a01ed44bd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationController: {fileID: 0}
+  animationController: {fileID: 22100000, guid: cb3fa8febf7974f678363e3849e8deb3,
+    type: 2}
   model:
     isRoot: 0
-    distanceFromRoot: 2147483647
     type: 0
     definition: {fileID: 0}
 --- !u!114 &11418756
@@ -122,6 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff8fef3eec99488f91a5ad8bbec26d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model:
+    isRoot: 0
+    type: 0
+    definition: {fileID: 0}
 --- !u!114 &11473434
 MonoBehaviour:
   m_ObjectHideFlags: 1

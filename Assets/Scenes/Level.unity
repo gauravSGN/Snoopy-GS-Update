@@ -221,8 +221,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpFactory: {fileID: 11400000, guid: fcf96848466bd4a74a7ab983e31ba1b4, type: 2}
   launcher: {fileID: 443704579}
-  effectAnimation: {fileID: 22100000, guid: 8517bf4d7b7b244058d1957e2d01273a, type: 2}
+  shooterAnimation: {fileID: 22100000, guid: 8517bf4d7b7b244058d1957e2d01273a, type: 2}
+  effectAnimation: {fileID: 22100000, guid: e9c9a8b39dbcf4b5fb759a5d94e38784, type: 2}
   animationPrefab: {fileID: 9594498, guid: a3e367d6fb1a14cd8b32203c029fdd1f, type: 2}
+  anchors: []
+  powerUpMask: 0
+  level: {fileID: 0}
 --- !u!1 &358632397
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +395,8 @@ MonoBehaviour:
   launchSpeed: 5
   level: {fileID: 1197956594}
   aimLine: {fileID: 443704581}
+  nextBubbles: []
+  currentAnimation: {fileID: 0}
 --- !u!4 &443704580
 Transform:
   m_ObjectHideFlags: 0
@@ -424,6 +430,9 @@ MonoBehaviour:
   dotSpacing: 0.2
   moveSpeed: 2
   wallBounceDistance: 0.5
+  aimTarget: {x: 0, y: 0, z: 0}
+  meshRenderer: {fileID: 0}
+  meshFilter: {fileID: 0}
 --- !u!23 &443704583
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -772,9 +781,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69935c1c1b9f9498eba7d13eb20ce26f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  format: 'Bubbles: {0}'
+  format: 427562626c65733a207b307d
   fields:
-  - remainingBubbles
+  - 72656d61696e696e67427562626c6573
+  text: {fileID: 0}
   level: {fileID: 1197956594}
 --- !u!1 &929098081
 GameObject:
@@ -928,6 +938,8 @@ MonoBehaviour:
   condition: 1
   bubbleMatchThreshold: 10
   chanceToPlay: 1
+  audioSource: {fileID: 0}
+  counter: 0
 --- !u!114 &1177221671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,6 +958,8 @@ MonoBehaviour:
   condition: 0
   bubbleMatchThreshold: 0
   chanceToPlay: 0.1
+  audioSource: {fileID: 0}
+  counter: 0
 --- !u!1 &1189042820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,9 +1050,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed578016699544ed88e56891938716a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubbleFactory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
-  levelAsset: {fileID: 4900000, guid: eb0aaa9ceccb8493db02cb7938a24e64, type: 3}
+  bubbleFactory: {fileID: 11400000, guid: 8485ebde8c9ee4569bd1cf809eb2b68e, type: 2}
+  levelAsset: {fileID: 4900000, guid: 605fa69ebe999415da2609904499b4ec, type: 3}
   loader: {fileID: 1499581533}
+  levelData: 
 --- !u!114 &1197956595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,7 +1076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a12e82966a9e42bea4ec55a66959500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSceneName: Scenes/Map
+  mapSceneName: 5363656e65732f4d6170
 --- !u!1 &1285461153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,11 +1322,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7980dd4c8fe24426bb6067a23dc54388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubbleFactory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
+  bubbleFactory: {fileID: 11400000, guid: 8485ebde8c9ee4569bd1cf809eb2b68e, type: 2}
   contentFactory: {fileID: 11400000, guid: 8ff695269c40e4a69ae094dd6f22719e, type: 2}
   gameView: {fileID: 1197956592}
   powerUpController: {fileID: 142751819}
   levelContainer: {fileID: 0}
+  rowDistance: 0
+  topEdge: 0
+  <LevelData>k__BackingField:
+    shotCount: 0
+    powerUpFills: []
+    bubbles: []
 --- !u!4 &1499581534
 Transform:
   m_ObjectHideFlags: 0
@@ -1382,6 +1403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameView: {fileID: 1197956592}
   panSpeed: 1
+  castingBox: {fileID: 0}
 --- !u!1 &1747281436
 GameObject:
   m_ObjectHideFlags: 0
