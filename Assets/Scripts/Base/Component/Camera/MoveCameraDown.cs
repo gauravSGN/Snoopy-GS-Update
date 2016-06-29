@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Service;
+using UnityEngine;
 
 public class MoveCameraDown : MonoBehaviour, UpdateReceiver
 {
@@ -28,7 +29,7 @@ public class MoveCameraDown : MonoBehaviour, UpdateReceiver
         }
         else
         {
-            GlobalState.Instance.UpdateDispatcher.Updates.Remove(this);
+            GlobalState.Instance.Services.Get<UpdateService>().Updates.Remove(this);
         }
     }
 
@@ -57,7 +58,7 @@ public class MoveCameraDown : MonoBehaviour, UpdateReceiver
     {
         if (!IsTouchingBubbles())
         {
-            GlobalState.Instance.UpdateDispatcher.Updates.Add(this);
+            GlobalState.Instance.Services.Get<UpdateService>().Updates.Add(this);
         }
     }
 }

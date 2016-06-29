@@ -61,5 +61,10 @@ namespace Service
 
             return (T)service;
         }
+
+        public void SetInstance<T>(T instance) where T : SharedService
+        {
+            instances[typeof(T)] = instance;
+        }
     }
 }

@@ -60,4 +60,17 @@ public class ServiceRepositoryTests
 
         Assert.AreEqual("Bar", service.Value);
     }
+
+    [Test]
+    public void ManualInstantiationOfServices()
+    {
+        var repository = new ServiceRepository();
+
+        repository.Register<TestService>(typeof(FooService));
+        repository.SetInstance<TestService>(new BarService());
+
+        var service = repository.Get<TestService>();
+
+        Assert.AreEqual("Bar", service.Value);
+    }
 }

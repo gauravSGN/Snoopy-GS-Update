@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Service;
 
 public class AimLine : MonoBehaviour, UpdateReceiver
 {
@@ -79,7 +80,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
     protected void OnMouseDown()
     {
         meshRenderer.enabled = true;
-        GlobalState.Instance.UpdateDispatcher.Updates.Add(this);
+        GlobalState.Instance.Services.Get<UpdateService>().Updates.Add(this);
         OnMouseDrag();
     }
 
@@ -95,11 +96,11 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         {
             if (meshRenderer.enabled)
             {
-                GlobalState.Instance.UpdateDispatcher.Updates.Add(this);
+                GlobalState.Instance.Services.Get<UpdateService>().Updates.Add(this);
             }
             else
             {
-                GlobalState.Instance.UpdateDispatcher.Updates.Remove(this);
+                GlobalState.Instance.Services.Get<UpdateService>().Updates.Remove(this);
             }
         }
 
@@ -114,7 +115,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
     protected void OnMouseUp()
     {
         meshRenderer.enabled = false;
-        GlobalState.Instance.UpdateDispatcher.Updates.Remove(this);
+        GlobalState.Instance.Services.Get<UpdateService>().Updates.Remove(this);
     }
 
     private void GeneratePoints()

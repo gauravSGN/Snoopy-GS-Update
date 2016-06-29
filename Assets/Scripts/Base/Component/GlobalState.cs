@@ -1,6 +1,7 @@
 using Util;
 using Config;
 using UnityEngine;
+using Service;
 
 // The GlobalState prefab needs to be in every scene that uses it for the
 // scene editor to work without coming from a different scene.
@@ -8,9 +9,9 @@ using UnityEngine;
 public class GlobalState : SingletonBehaviour<GlobalState>
 {
     public EventDispatcher EventDispatcher { get; private set; }
-    public UpdateDispatcher UpdateDispatcher { get; private set; }
     public GameConfig Config { get { return config; } }
     public TopUIManager TopUIManager { get; private set;}
+    public ServiceRepository Services { get { return services; } }
 
     public string nextLevelData;
     public string returnScene;
@@ -21,7 +22,11 @@ public class GlobalState : SingletonBehaviour<GlobalState>
     [SerializeField]
     private TextAsset gsDescriptorJSON;
 
+    [SerializeField]
+    private TextAsset servicesJSON;
+
     private GSDescriptor gsDescriptor;
+    private readonly ServiceRepository services = new ServiceRepository();
 
     override protected void Awake()
     {
@@ -29,8 +34,9 @@ public class GlobalState : SingletonBehaviour<GlobalState>
 
         if (Instance == this)
         {
+            Services.RegisterFromJson(servicesJSON.text);
+
             EventDispatcher = new EventDispatcher();
-            UpdateDispatcher = GetComponent<UpdateDispatcher>();
             TopUIManager = GetComponent<TopUIManager>();
         }
     }
@@ -50,7 +56,7 @@ public class GlobalState : SingletonBehaviour<GlobalState>
         if (this == Instance)
         {
             EventDispatcher.Reset();
-            UpdateDispatcher.Reset();
+            Services.Get<UpdateService>().Reset();
         }
     }
 }
