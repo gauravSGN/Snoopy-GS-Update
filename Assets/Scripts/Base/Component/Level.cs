@@ -39,6 +39,7 @@ public class Level : MonoBehaviour
 
         levelState.score = 0;
         levelState.remainingBubbles = loader.LevelData.ShotCount;
+        levelState.starValues = loader.LevelData.StarValues;
         levelState.NotifyListeners();
 
         GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleFiredEvent>(OnBubbleFired);

@@ -6,6 +6,7 @@ public class LevelState : Observable
     public int remainingBubbles;
     public Dictionary<BubbleType, int> typeTotals = new Dictionary<BubbleType, int>();
     public BubbleQueue bubbleQueue = new BubbleQueue();
+    public int[] starValues;
 
     public void UpdateTypeTotals(BubbleType type, int delta)
     {

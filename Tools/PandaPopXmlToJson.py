@@ -38,6 +38,7 @@ def get_level_structure(xml_root):
     copy_attribs(LEVEL_ATTRIBS, xml_root.attrib, level)
 
     level["powerUpFills"] = get_lantern_fills(xml_root)
+    level["starValues"] = get_star_values(xml_root)
     level["bubbles"] = list(map(parse_bubble, xml_root))
     adjust_y_coordinates(level["bubbles"])
     fix_top_row(level["bubbles"])
@@ -46,12 +47,20 @@ def get_level_structure(xml_root):
 
 
 def get_lantern_fills(level):
-    return [
+    return map(float, [
         level.attrib["bombFill"],
         level.attrib["horzFill"],
         level.attrib["snakeFill"],
         level.attrib["fireFill"],
-    ]
+    ])
+
+
+def get_star_values(level):
+    return map(int, [
+        level.attrib["star1"],
+        level.attrib["star2"],
+        level.attrib["star3"],
+    ])
 
 
 def parse_bubble(bubble_data):
