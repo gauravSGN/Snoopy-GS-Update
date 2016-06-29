@@ -129,7 +129,6 @@ public class BubbleLauncher : MonoBehaviour
 
         if (currentAnimation != null)
         {
-            currentAnimation.transform.parent = null;
             currentAnimation.transform.parent = nextBubbles[0].transform;
         }
 
