@@ -1,66 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Service;
+using System;
 
 public class AimLine : MonoBehaviour, UpdateReceiver
 {
+    public event Action<Vector2> Fire;
+
     [SerializeField]
     private GameObject launchOrigin;
 
     [SerializeField]
-    private Texture2D texture;
-
-    [SerializeField]
-    private float length;
-
-    [SerializeField]
-    private float lineWidth;
-
-    [SerializeField]
-    private float dotSpacing;
-
-    [SerializeField]
-    private float moveSpeed;
-
-    [SerializeField]
-    private float wallBounceDistance;
+    private AimLineEventTrigger eventTrigger;
 
     private Vector3 aimTarget;
     private readonly List<Vector3> points = new List<Vector3>();
-
+    private GameConfig.AimlineConfig aimlineConfig;
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
 
+    public bool Aiming { get { return meshRenderer.enabled; } }
+    public Vector3 Target { get { return aimTarget; } }
+
     public Color Color
     {
-        get
-        {
-            return meshRenderer.material.color;
-        }
-
-        set
-        {
-            if (meshRenderer != null)
-            {
-                meshRenderer.material.color = value;
-            }
-        }
-    }
-
-    public bool Aiming
-    {
-        get
-        {
-            return meshRenderer.enabled;
-        }
-    }
-
-    public Vector3 Target
-    {
-        get
-        {
-            return aimTarget;
-        }
+        get { return meshRenderer.material.color; }
+        set { meshRenderer.material.color = value; }
     }
 
     public void OnUpdate()
@@ -68,54 +33,44 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         RebuildMesh();
     }
 
-    protected void Awake()
+    protected void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.material.mainTexture = texture;
-
         meshFilter = GetComponent<MeshFilter>();
+
         meshFilter.mesh = new Mesh();
+        aimlineConfig = GlobalState.Instance.Config.aimline;
+
+        eventTrigger.StartAiming += OnStartAiming;
+        eventTrigger.StopAiming += OnStopAiming;
+        eventTrigger.MoveTarget += OnMoveTarget;
+        eventTrigger.Fire += OnFire;
     }
 
-    protected void OnMouseDown()
+    private void OnStartAiming()
     {
         meshRenderer.enabled = true;
         GlobalState.Instance.Services.Get<UpdateService>().Updates.Add(this);
-        OnMouseDrag();
     }
 
-    protected void OnMouseDrag()
-    {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        var hit = Physics2D.Raycast(ray.origin, ray.direction);
-
-        var previouslyEnabled = meshRenderer.enabled;
-        meshRenderer.enabled = (hit.collider != null) && (hit.collider.gameObject == gameObject);
-
-        if (previouslyEnabled != meshRenderer.enabled)
-        {
-            if (meshRenderer.enabled)
-            {
-                GlobalState.Instance.Services.Get<UpdateService>().Updates.Add(this);
-            }
-            else
-            {
-                GlobalState.Instance.Services.Get<UpdateService>().Updates.Remove(this);
-            }
-        }
-
-        if (meshRenderer.enabled)
-        {
-            aimTarget = hit.point;
-
-            GeneratePoints();
-        }
-    }
-
-    protected void OnMouseUp()
+    private void OnStopAiming()
     {
         meshRenderer.enabled = false;
         GlobalState.Instance.Services.Get<UpdateService>().Updates.Remove(this);
+    }
+
+    private void OnMoveTarget(Vector2 target)
+    {
+        aimTarget = target;
+        GeneratePoints();
+    }
+
+    private void OnFire()
+    {
+        if (Fire != null)
+        {
+            Fire(aimTarget);
+        }
     }
 
     private void GeneratePoints()
@@ -125,7 +80,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         Vector3 origin = launchOrigin.transform.position;
         var config = GlobalState.Instance.Config;
         int index = 0;
-        var distance = length - config.bubbles.size;
+        var distance = aimlineConfig.length - config.bubbles.size;
         var direction = (aimTarget - origin).normalized;
         var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale / 2.0f;
         var layerMask = (1 << (int)Layers.GameObjects | 1 << (int)Layers.Walls);
@@ -154,7 +109,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
             {
                 --reflections;
                 index++;
-                distance = wallBounceDistance;
+                distance = aimlineConfig.wallBounceDistance;
                 direction = new Vector2(-direction.x, direction.y);
 
                 continue;
@@ -172,7 +127,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         var triangles = new List<int>();
         var uvs = new List<Vector2>();
 
-        var halfSize = lineWidth / 2.0f;
+        var halfSize = aimlineConfig.lineWidth / 2.0f;
         int vertexOffset = 0;
 
         foreach (var point in GetPointsOnAimLine())
@@ -209,7 +164,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
     private IEnumerable<Vector2> GetPointsOnAimLine()
     {
         var origin = launchOrigin.transform.position - launchOrigin.transform.localPosition;
-        float offset = ((moveSpeed * Time.realtimeSinceStartup) % 1.0f) * dotSpacing;
+        float offset = ((aimlineConfig.moveSpeed * Time.realtimeSinceStartup) % 1.0f) * aimlineConfig.dotSpacing;
         var count = points.Count - 1;
 
         for (var index = 0; index < count; index++)
@@ -226,10 +181,10 @@ public class AimLine : MonoBehaviour, UpdateReceiver
             {
                 yield return new Vector2(x, y);
 
-                x += direction.x * dotSpacing;
-                y += direction.y * dotSpacing;
+                x += direction.x * aimlineConfig.dotSpacing;
+                y += direction.y * aimlineConfig.dotSpacing;
 
-                segmentLength -= dotSpacing;
+                segmentLength -= aimlineConfig.dotSpacing;
             } while (segmentLength >= 0.0f);
 
             offset = -segmentLength;

@@ -44,18 +44,12 @@ public class BubbleLauncher : MonoBehaviour
         nextBubbles = new GameObject[locations.Length];
         shotModifiers = ResetShotModifiers();
 
+        aimLine.Fire += FireBubbleAt;
+
         CreateBubbles();
         SetAimLineColor();
 
         GlobalState.Instance.Services.Get<EventService>().AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
-    }
-
-    protected void OnMouseUp()
-    {
-        if (nextBubbles[0] != null && aimLine.Aiming)
-        {
-            FireBubbleAt(aimLine.Target);
-        }
     }
 
     private void CreateBubbles()

@@ -1,0 +1,66 @@
+﻿using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class AimLineEventTrigger : EventTrigger
+{
+    public event Action StartAiming;
+    public event Action StopAiming;
+    public event Action<Vector2> MoveTarget;
+    public event Action Fire;
+
+    private bool aiming;
+    private bool hovering;
+
+    override public void OnDrag(PointerEventData data)
+    {
+        if (hovering)
+        {
+            MoveTarget(GetCursorPosition(data));
+        }
+    }
+
+    override public void OnPointerDown(PointerEventData data)
+    {
+        aiming = hovering = true;
+
+        MoveTarget(GetCursorPosition(data));
+        StartAiming();
+    }
+
+    override public void OnPointerEnter(PointerEventData data)
+    {
+        if (aiming)
+        {
+            hovering = true;
+            MoveTarget(GetCursorPosition(data));
+            StartAiming();
+        }
+    }
+
+    override public void OnPointerExit(PointerEventData data)
+    {
+        if (aiming)
+        {
+            hovering = false;
+            StopAiming();
+        }
+    }
+
+    override public void OnPointerUp(PointerEventData data)
+    {
+        if (hovering)
+        {
+            Fire();
+        }
+
+        StopAiming();
+
+        aiming = hovering = false;
+    }
+
+    private Vector2 GetCursorPosition(PointerEventData data)
+    {
+        return data.pressEventCamera.ScreenToWorldPoint(data.pointerCurrentRaycast.screenPosition);
+    }
+}
