@@ -30,6 +30,7 @@ public class BubbleAttachments : MonoBehaviour
     {
         RemoveHandlers();
 
+        gameObject.layer = (int)Layers.IgnoreRayCast;
         var death = gameObject.GetComponent<BubbleDeath>();
         StartCoroutine(death.TriggerDeathEffects(BubbleDeath.DeathType.Pop));
     }
