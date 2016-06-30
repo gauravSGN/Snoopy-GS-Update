@@ -33,7 +33,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         RebuildMesh();
     }
 
-    protected void Start()
+    protected void OnEnable()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         meshFilter = GetComponent<MeshFilter>();
