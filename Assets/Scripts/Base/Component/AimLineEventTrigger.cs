@@ -1,4 +1,5 @@
 ﻿using System;
+using Service;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,6 +12,11 @@ public class AimLineEventTrigger : EventTrigger
 
     private bool aiming;
     private bool hovering;
+
+    public void Start()
+    {
+        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<InputToggleEvent>(OnInputToggle);
+    }
 
     override public void OnDrag(PointerEventData data)
     {
@@ -62,5 +68,12 @@ public class AimLineEventTrigger : EventTrigger
     private Vector2 GetCursorPosition(PointerEventData data)
     {
         return data.pressEventCamera.ScreenToWorldPoint(data.pointerCurrentRaycast.screenPosition);
+    }
+
+    private void OnInputToggle(InputToggleEvent gameEvent)
+    {
+        StopAiming();
+
+        gameObject.SetActive(gameEvent.enabled);
     }
 }

@@ -79,7 +79,7 @@ public class BubbleLauncher : MonoBehaviour
         rigidBody.velocity = direction;
         rigidBody.gravityScale = 0.0f;
 
-        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new InputToggleEvent(false));
         GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleFiredEvent(nextBubbles[0]));
 
         nextBubbles[0] = null;
@@ -136,7 +136,7 @@ public class BubbleLauncher : MonoBehaviour
 
     private void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)
     {
-        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new InputToggleEvent(true));
         ReadyNextBubble();
     }
 
