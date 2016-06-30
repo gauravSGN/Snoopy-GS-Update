@@ -20,6 +20,17 @@ public class GameConfig : ScriptableObject
         public float shockwaveRadius;
     }
 
+    [Serializable]
+    public class AimlineConfig
+    {
+        public float length;
+        public float lineWidth;
+        public float dotSpacing;
+        public float moveSpeed;
+        public float wallBounceDistance;
+    }
+
     public BubbleConfig bubbles;
     public ReactionConfig reactions;
+    public AimlineConfig aimline;
 }

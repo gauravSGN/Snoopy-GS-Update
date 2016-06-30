@@ -20,3 +20,9 @@ MonoBehaviour:
     shockwaveSpeed: 5
     shockwaveDistance: 0.1
     shockwaveRadius: 0.75
+  aimline:
+    length: 5
+    lineWidth: 0.167
+    dotSpacing: 0.2
+    moveSpeed: 2
+    wallBounceDistance: 0.5
