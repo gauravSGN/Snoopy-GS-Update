@@ -2853,7 +2853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubbleContainer: {fileID: 1526308727}
   bubblePrefab: {fileID: 129676, guid: 0212f60e8d4464444a642726f3d5efc4, type: 2}
-  bubbleFactory: {fileID: 11400000, guid: 5c63e04f104c74276bd9bd77f67f850a, type: 2}
+  bubbleFactory: {fileID: 11400000, guid: 8485ebde8c9ee4569bd1cf809eb2b68e, type: 2}
   contentFactory: {fileID: 11400000, guid: 8ff695269c40e4a69ae094dd6f22719e, type: 2}
 --- !u!1 &1356480299
 GameObject:

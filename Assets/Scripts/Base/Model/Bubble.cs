@@ -28,6 +28,7 @@ public class Bubble : GraphElement<Bubble>
         {
             if (!bubbleList.Contains(bubble) && MatchesColor(bubble))
             {
+                bubbleList.Add(bubble);
                 GraphUtil.MatchNeighbors(bubbleList, bubble, bubble.MatchesColor);
             }
         }
