@@ -1,0 +1,146 @@
+
+charlie_A.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm
+  rotate: false
+  xy: 101, 10
+  size: 33, 56
+  orig: 35, 58
+  offset: 1, 1
+  index: -1
+arm R
+  rotate: false
+  xy: 136, 29
+  size: 39, 46
+  orig: 41, 48
+  offset: 1, 1
+  index: -1
+ear L
+  rotate: false
+  xy: 422, 217
+  size: 38, 35
+  orig: 40, 37
+  offset: 1, 1
+  index: -1
+ear R
+  rotate: true
+  xy: 347, 194
+  size: 37, 25
+  orig: 39, 27
+  offset: 1, 1
+  index: -1
+eye brows
+  rotate: false
+  xy: 2, 2
+  size: 37, 7
+  orig: 39, 9
+  offset: 1, 1
+  index: -1
+eyes
+  rotate: false
+  xy: 136, 17
+  size: 38, 10
+  orig: 40, 12
+  offset: 1, 1
+  index: -1
+hair
+  rotate: true
+  xy: 200, 114
+  size: 50, 25
+  orig: 52, 27
+  offset: 1, 1
+  index: -1
+hand L
+  rotate: false
+  xy: 101, 68
+  size: 30, 46
+  orig: 32, 48
+  offset: 1, 1
+  index: -1
+head
+  rotate: false
+  xy: 2, 116
+  size: 129, 136
+  orig: 131, 138
+  offset: 1, 1
+  index: -1
+leg L
+  rotate: true
+  xy: 133, 77
+  size: 34, 56
+  orig: 36, 58
+  offset: 1, 1
+  index: -1
+leg R
+  rotate: true
+  xy: 290, 195
+  size: 36, 55
+  orig: 38, 57
+  offset: 1, 1
+  index: -1
+mouth
+  rotate: false
+  xy: 295, 233
+  size: 77, 19
+  orig: 79, 21
+  offset: 1, 1
+  index: -1
+neck
+  rotate: true
+  xy: 374, 217
+  size: 35, 46
+  orig: 37, 48
+  offset: 1, 1
+  index: -1
+nose
+  rotate: false
+  xy: 462, 230
+  size: 22, 22
+  orig: 24, 24
+  offset: 1, 1
+  index: -1
+pants L
+  rotate: false
+  xy: 230, 181
+  size: 58, 50
+  orig: 60, 52
+  offset: 1, 1
+  index: -1
+pants R
+  rotate: false
+  xy: 133, 113
+  size: 65, 51
+  orig: 67, 53
+  offset: 1, 1
+  index: -1
+shadow
+  rotate: false
+  xy: 133, 233
+  size: 160, 19
+  orig: 162, 21
+  offset: 1, 1
+  index: -1
+shirt
+  rotate: false
+  xy: 2, 11
+  size: 97, 103
+  orig: 99, 105
+  offset: 1, 1
+  index: -1
+shoe L
+  rotate: false
+  xy: 133, 166
+  size: 94, 31
+  orig: 96, 33
+  offset: 1, 1
+  index: -1
+shoe R copy
+  rotate: false
+  xy: 133, 199
+  size: 95, 32
+  orig: 97, 34
+  offset: 1, 1
+  index: -1

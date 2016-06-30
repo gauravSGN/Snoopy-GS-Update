@@ -4,7 +4,7 @@ using System.Collections;
 public class FPSDisplay : MonoBehaviour
 {
 #if (DEBUG)
-    private const float updateDelay = 0.1f;
+    private const float updateDelay = 0.05f;
     private float deltaTime;
     private float delayTimer;
 
