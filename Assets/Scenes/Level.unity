@@ -755,9 +755,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69935c1c1b9f9498eba7d13eb20ce26f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  format: 427562626c65733a207b307d
+  format: 'Bubbles: {0}'
   fields:
-  - 72656d61696e696e67427562626c6573
+  - remainingBubbles
   level: {fileID: 1197956594}
 --- !u!1 &929098081
 GameObject:
@@ -1044,7 +1044,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a12e82966a9e42bea4ec55a66959500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSceneName: 5363656e65732f4d6170
 --- !u!1 &1285461153
 GameObject:
   m_ObjectHideFlags: 0

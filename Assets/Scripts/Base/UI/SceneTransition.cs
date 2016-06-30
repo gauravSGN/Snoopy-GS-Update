@@ -14,6 +14,9 @@ public class SceneTransition : MonoBehaviour
             GlobalState.Instance.Services.Get<SceneService>().NextLevelData = nextLevelData.text;
         }
 
+        var sceneData = GlobalState.Instance.Services.Get<SceneService>();
+        sceneData.ReturnScene = Application.loadedLevelName;
+
         SceneManager.LoadScene(sceneName);
     }
 }
