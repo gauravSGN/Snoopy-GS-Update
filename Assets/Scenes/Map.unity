@@ -242,6 +242,14 @@ Prefab:
       propertyPath: m_Name
       value: Map Button (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 11478690, guid: aeb447f365f154b27a69a178d3436ff0, type: 2}
+      propertyPath: nextLevelData
+      value: 
+      objectReference: {fileID: 4900000, guid: 605fa69ebe999415da2609904499b4ec, type: 3}
+    - target: {fileID: 11467334, guid: aeb447f365f154b27a69a178d3436ff0, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Scenes/AnimTests
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aeb447f365f154b27a69a178d3436ff0, type: 2}
   m_IsPrefabParent: 0
