@@ -19,6 +19,7 @@ public class BubbleLauncher : MonoBehaviour
     private AimLine aimLine;
 
     private GameObject[] nextBubbles;
+    private BubbleType[] nextTypes;
     private List<ModifyShot> shotModifiers;
     private GameObject currentAnimation;
 
@@ -42,12 +43,14 @@ public class BubbleLauncher : MonoBehaviour
     protected void Start()
     {
         nextBubbles = new GameObject[locations.Length];
+        nextTypes = new BubbleType[locations.Length];
         shotModifiers = ResetShotModifiers();
 
         aimLine.Fire += FireBubbleAt;
 
         CreateBubbles();
         SetAimLineColor();
+        level.levelState.bubbleQueue.AddListener(OnBubbleQueueChanged);
 
         GlobalState.Instance.Services.Get<EventService>().AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
@@ -58,7 +61,8 @@ public class BubbleLauncher : MonoBehaviour
         {
             if (nextBubbles[index] == null)
             {
-                nextBubbles[index] = level.bubbleFactory.CreateByType(level.levelState.bubbleQueue.Peek(index));
+                nextTypes[index] = level.levelState.bubbleQueue.Peek(index);
+                nextBubbles[index] = level.bubbleFactory.CreateByType(nextTypes[index]);
                 MoveBubbleToLocation(index);
             }
         }
@@ -89,10 +93,10 @@ public class BubbleLauncher : MonoBehaviour
 
     private void ReadyNextBubble()
     {
-        level.levelState.bubbleQueue.GetNext();
-
         CycleLocalQueue();
         CreateBubbles();
+
+        level.levelState.bubbleQueue.GetNext();
     }
 
     private void MoveBubbleToLocation(int index)
@@ -105,17 +109,22 @@ public class BubbleLauncher : MonoBehaviour
     {
         var lastIndex = nextBubbles.Length - 1;
         var first = nextBubbles[0];
+        var firstType = nextTypes[0];
 
         for (var index = 0; index < lastIndex; index++)
         {
             nextBubbles[index] = nextBubbles[index + 1];
+            nextTypes[index] = nextTypes[index + 1];
+
             if (nextBubbles[index] != null)
             {
                 MoveBubbleToLocation(index);
             }
         }
 
+        nextTypes[lastIndex] = firstType;
         nextBubbles[lastIndex] = first;
+
         if (first != null)
         {
             MoveBubbleToLocation(lastIndex);
@@ -148,5 +157,25 @@ public class BubbleLauncher : MonoBehaviour
     private void AddBubbleSnap(GameObject bubble)
     {
         bubble.AddComponent<BubbleSnap>();
+    }
+
+    private void OnBubbleQueueChanged(Observable target)
+    {
+        var bubbleQueue = target as BubbleQueue;
+
+        for (var index = 0; index < nextTypes.Length; index++)
+        {
+            if (nextTypes[index] != bubbleQueue.Peek(index))
+            {
+                if (nextBubbles[index] != null)
+                {
+                    Destroy(nextBubbles[index]);
+                    nextBubbles[index] = null;
+                }
+            }
+        }
+
+        CreateBubbles();
+        SetAimLineColor();
     }
 }
