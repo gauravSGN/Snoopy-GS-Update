@@ -29,7 +29,7 @@ public class PriorityQueue<T, U>
 
     public T Dequeue()
     {
-        if(items.Count > 0)
+        if (items.Count > 0)
         {
             var toReturn = items[0].Item1;
             items.RemoveAt(0);
@@ -61,7 +61,7 @@ public class PriorityQueue<T, U>
 
     public T Peek()
     {
-        if(items.Count > 0)
+        if (items.Count > 0)
         {
             return items[0].Item1;
         }

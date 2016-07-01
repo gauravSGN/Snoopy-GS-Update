@@ -44,7 +44,7 @@ public class PriorityQueueTests
         EnqueueInOrder();
         int idx = 0;
         Assert.AreEqual(values.Length, queue.Count);
-        while(queue.Count > 0)
+        while (queue.Count > 0)
         {
             var item = queue.Dequeue();
             Assert.AreEqual(values[idx], item);
@@ -59,7 +59,7 @@ public class PriorityQueueTests
         EnqueueReverseOrder();
         int idx = values.Length - 1;
         Assert.AreEqual(values.Length, queue.Count);
-        while(queue.Count > 0)
+        while (queue.Count > 0)
         {
             var item = queue.Dequeue();
             Assert.AreEqual(values[idx], item);
@@ -77,7 +77,7 @@ public class PriorityQueueTests
 
     private void EnqueueInOrder()
     {
-        for(int i = 0; i < values.Length; ++i)
+        for (int i = 0; i < values.Length; ++i)
         {
             queue.Enqueue(values[i], values[i]);
         }
@@ -85,7 +85,7 @@ public class PriorityQueueTests
 
     private void EnqueueReverseOrder()
     {
-        for(int i = 0, prio = values.Length; i < values.Length; ++i, --prio)
+        for (int i = 0, prio = values.Length; i < values.Length; ++i, --prio)
         {
             queue.Enqueue(values[i], prio);
         }
