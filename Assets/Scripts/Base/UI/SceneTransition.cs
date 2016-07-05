@@ -15,7 +15,7 @@ public class SceneTransition : MonoBehaviour
         }
 
         var sceneData = GlobalState.Instance.Services.Get<SceneService>();
-        sceneData.ReturnScene = Application.loadedLevelName;
+        sceneData.ReturnScene = SceneManager.GetActiveScene().name;
 
         SceneManager.LoadScene(sceneName);
     }
