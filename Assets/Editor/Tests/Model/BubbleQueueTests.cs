@@ -15,7 +15,14 @@ public class BubbleQueueTests
     [SetUp]
     public void Init()
     {
-        bubbleQueue = new BubbleQueue();
+        var levelState = new LevelState();
+
+        levelState.UpdateTypeTotals(BubbleType.Blue, 100);
+        levelState.UpdateTypeTotals(BubbleType.Red, 100);
+        levelState.UpdateTypeTotals(BubbleType.Yellow, 100);
+        levelState.UpdateTypeTotals(BubbleType.Green, 100);
+
+        bubbleQueue = new BubbleQueue(levelState);
     }
 
     [Test]
@@ -40,7 +47,7 @@ public class BubbleQueueTests
     {
         foreach (var invalidIndex in invalidIndexes)
         {
-            Assert.Throws<System.IndexOutOfRangeException>(() => bubbleQueue.Peek(invalidIndex));
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => bubbleQueue.Peek(invalidIndex));
         }
     }
 
@@ -58,7 +65,7 @@ public class BubbleQueueTests
     {
         foreach (var invalidIndex in invalidIndexes)
         {
-            Assert.Throws<System.IndexOutOfRangeException>(() => bubbleQueue.Rotate(invalidIndex));
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => bubbleQueue.Rotate(invalidIndex));
         }
     }
 
@@ -67,17 +74,16 @@ public class BubbleQueueTests
     {
         var bubbleTypeList = new List<BubbleType>();
 
-        for (var numItems = 2; numItems < BubbleQueue.MAX_QUEUE_SIZE + 1; numItems++)
+        for (var numItems = 2; numItems <= BubbleQueue.MAX_QUEUE_SIZE; numItems++)
         {
-            bubbleQueue = new BubbleQueue();
             bubbleTypeList.Clear();
 
-            for (var i = 0; i < numItems; i++ )
+            for (var i = 0; i < numItems; i++)
             {
                 bubbleTypeList.Add(bubbleQueue.Peek(i));
             }
 
-            bubbleQueue.Rotate(numItems - 1);
+            bubbleQueue.Rotate(numItems);
 
             for (var i = 0; i < numItems; i++)
             {
