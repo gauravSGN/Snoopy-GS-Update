@@ -24,7 +24,7 @@ public class PriorityQueueTests
         Assert.Throws<System.InvalidOperationException>(() => queue.Dequeue());
     }
 
-	[Test]
+    [Test]
     public void PeekEmpty()
     {
         Assert.Throws<System.InvalidOperationException>(() => queue.Peek());

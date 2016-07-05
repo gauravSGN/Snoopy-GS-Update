@@ -12,6 +12,7 @@ public class PriorityQueue<T, U>
         items = new List<Tuple<T, U>>(capacity);
         this.comparator = comparator;
     }
+
     public int Count
     {
         get{ return items.Count; }
