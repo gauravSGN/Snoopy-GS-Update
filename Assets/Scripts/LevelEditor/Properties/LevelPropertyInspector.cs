@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using Util;
 
 namespace LevelEditor.Properties
 {
@@ -49,9 +50,12 @@ namespace LevelEditor.Properties
                 }
 
                 int index = 0;
+                var attributes = property.GetCustomAttributes(typeof(PropertyDisplayAttribute), false);
+                var display = (attributes.Length > 0) ? (PropertyDisplayAttribute)attributes[0] : null;
+
                 foreach (var field in fields)
                 {
-                    field.SendMessage("InitializeField", new FieldPropertyInfo(target, property, index));
+                    field.SendMessage("InitializeField", new FieldPropertyInfo(target, property, index, display));
                     index++;
                 }
             }
