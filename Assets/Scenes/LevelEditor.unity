@@ -1491,6 +1491,7 @@ MonoBehaviour:
   itemContainer: {fileID: 98521844}
   propertyName: LevelProperties
   integerPrefab: {fileID: 147784, guid: db7b6089fad8048938b96c677e5311d1, type: 2}
+  floatPrefab: {fileID: 125830, guid: a20f91240b46444f4bddde6de0649d83, type: 2}
 --- !u!1 &362182879
 GameObject:
   m_ObjectHideFlags: 0
