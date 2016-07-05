@@ -12,8 +12,8 @@ namespace LevelEditor.Properties
         public int[] StarValues { get; set; }
 
         [PropertyDisplayAttribute(
-            new string[] { "Blue PowerUp Fills", "Red PowerUp Fills", "Green PowerUp Fills", "Yellow PowerUp Fills", "Pink PowerUp Fills", "Purple PowerUp Fills" },
-            new string[] { "95ecfd", "f2a5a3", "a1e699", "fbd575", "ff8080", "8000ff" })]
+            new string[] { "Blue PowerUp Fills", "Yellow PowerUp Fills", "Red PowerUp Fills", "Green PowerUp Fills", "Pink PowerUp Fills", "Purple PowerUp Fills" },
+            new string[] { "3484d8", "ea9115", "d22d2b", "11952a", "e746a1", "891fc4" })]
         public float[] PowerUpFills { get; set; }
 
         public LevelProperties()

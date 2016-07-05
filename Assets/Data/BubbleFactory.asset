@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Name: BubbleFactory
   m_EditorClassIdentifier: 
   definitions:
-  - {fileID: 11400000, guid: 7c6149681589a497cbcbd26fcb1dd493, type: 2}
   - {fileID: 11400000, guid: be130d48e9be24ff4a8c1176ae69a944, type: 2}
-  - {fileID: 11400000, guid: 18866394060c74228b59efd24b073e7f, type: 2}
-  - {fileID: 11400000, guid: 8a3bc49885f4a4a48b5824b77dc3c8d1, type: 2}
-  - {fileID: 11400000, guid: eb440004b2644438aa41b97954b44c35, type: 2}
-  - {fileID: 11400000, guid: 910fdfd9f54e7461fb0eb6481d0f0415, type: 2}
+  - {fileID: 11400000, guid: 7c6149681589a497cbcbd26fcb1dd493, type: 2}
   - {fileID: 11400000, guid: 439d4e38d9ab242df9848e588c6e7e0e, type: 2}
+  - {fileID: 11400000, guid: eb440004b2644438aa41b97954b44c35, type: 2}
+  - {fileID: 11400000, guid: 8a3bc49885f4a4a48b5824b77dc3c8d1, type: 2}
+  - {fileID: 11400000, guid: 5246fded48bcf40a0aa55e88bf000496, type: 2}
+  - {fileID: 11400000, guid: 76c33b7be841345cbb046bd45af1aa5f, type: 2}
+  - {fileID: 11400000, guid: 910fdfd9f54e7461fb0eb6481d0f0415, type: 2}
+  - {fileID: 11400000, guid: 18866394060c74228b59efd24b073e7f, type: 2}
