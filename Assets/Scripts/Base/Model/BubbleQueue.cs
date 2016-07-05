@@ -49,8 +49,6 @@ public class BubbleQueue : Observable
         queued.RemoveAt(0);
         BuildQueue();
 
-        UnityEngine.Debug.Log(string.Format("BubbleQueue.Next: {0} ({1})", next, string.Join(", ", queued.Select(t => t.ToString()).ToArray())));
-
         return next;
     }
 
@@ -128,11 +126,6 @@ public class BubbleQueue : Observable
                 queued.RemoveAt(index);
                 index--;
             }
-        }
-
-        if (count != options.Keys.Count)
-        {
-            UnityEngine.Debug.Log(string.Format("RemoveInactiveTypes: {0}", string.Join(", ", options.Keys.Select(k => k.ToString()).ToArray())));
         }
     }
 
