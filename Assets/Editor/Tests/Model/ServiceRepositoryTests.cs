@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Service;
-using System.Collections.Generic;
 
 public class ServiceRepositoryTests
 {

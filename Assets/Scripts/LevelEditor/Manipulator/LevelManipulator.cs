@@ -33,6 +33,8 @@ namespace LevelEditor
         private readonly Dictionary<int, LevelData.BubbleData> models = new Dictionary<int, LevelData.BubbleData>();
         private readonly Dictionary<int, GameObject> views = new Dictionary<int, GameObject>();
         private readonly ManipulatorActionFactory actionFactory = new ManipulatorActionFactory();
+        private readonly List<string> undoBuffer = new List<string>();
+        private readonly List<string> redoBuffer = new List<string>();
 
         private ManipulatorActionType actionType;
         private ManipulatorAction action;
@@ -132,6 +134,55 @@ namespace LevelEditor
             {
                 action.PerformAlternate(this, x, y);
             }
+        }
+
+        public void Undo()
+        {
+            if (undoBuffer.Count > 0)
+            {
+                var state = undoBuffer[undoBuffer.Count - 1];
+                undoBuffer.RemoveAt(undoBuffer.Count - 1);
+
+                RestoreState(state);
+            }
+        }
+
+        public void Redo()
+        {
+            if (redoBuffer.Count > 0)
+            {
+                var state = redoBuffer[redoBuffer.Count - 1];
+                redoBuffer.RemoveAt(redoBuffer.Count - 1);
+
+                RestoreState(state);
+            }
+        }
+
+        public void BeginNewAction()
+        {
+            undoBuffer.Add(SaveLevel());
+            redoBuffer.Clear();
+
+            while (undoBuffer.Count > LevelEditorConstants.UNDO_BUFFER_SIZE)
+            {
+                undoBuffer.RemoveAt(0);
+            }
+        }
+
+        private void RestoreState(string state)
+        {
+            var saveBubbleType = BubbleType;
+            var saveContentType = ContentType;
+            var saveActionType = actionType;
+
+            var clear = new ClearAction();
+            clear.Perform(this, 0, 0);
+
+            LoadLevel(state);
+
+            SetBubbleType(saveBubbleType);
+            SetContentType(saveContentType);
+            SetActionType(saveActionType);
         }
     }
 }

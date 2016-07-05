@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Util;
 
 namespace LevelEditor
 {
@@ -31,6 +30,7 @@ namespace LevelEditor
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
             dragging = true;
+            manipulator.BeginNewAction();
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData)

@@ -18,6 +18,7 @@ namespace LevelEditor.Manipulator
 
         private void PerformAction()
         {
+            manipulator.BeginNewAction();
             var action = manipulator.ActionFactory.Create(actionType);
 
             if (action != null)
