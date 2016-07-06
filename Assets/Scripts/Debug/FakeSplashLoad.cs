@@ -5,7 +5,7 @@ using System.Collections;
 public class FakeSplashLoad : MonoBehaviour
 {
     [SerializeField]
-    private Slider fillBar;
+    private Image fillBar;
 
     [SerializeField]
     private Button playButton;
@@ -29,9 +29,10 @@ public class FakeSplashLoad : MonoBehaviour
         {
             yield return new WaitForSeconds(delay);
             progress += (fillPerSecond * delay);
-            fillBar.value = progress;
+            fillBar.fillAmount = progress;
         }
-        fillBar.gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+        gameObject.SetActive(false);
         playButton.gameObject.SetActive(true);
     }
 }
