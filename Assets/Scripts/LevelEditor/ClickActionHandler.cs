@@ -111,9 +111,12 @@ namespace LevelEditor
 
         private Vector2 GetClickPosition(PointerEventData eventData)
         {
+            Vector2 clickPosition;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out clickPosition);
+
             return new Vector2(
-                Input.mousePosition.x - rectTransform.position.x - rectTransform.rect.x,
-                rectTransform.rect.height - (Input.mousePosition.y - rectTransform.position.y - rectTransform.rect.y)
+                clickPosition.x + rectTransform.rect.width * rectTransform.pivot.x,
+                -clickPosition.y + rectTransform.rect.height * rectTransform.pivot.y
             );
         }
 
