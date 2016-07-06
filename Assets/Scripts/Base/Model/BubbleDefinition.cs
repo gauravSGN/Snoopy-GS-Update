@@ -1,5 +1,8 @@
 ﻿using Model;
 using UnityEngine;
+using Animation;
+using System.Collections.Generic;
+using System;
 
 public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleType>
 {
@@ -9,6 +12,23 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
     public Color BaseColor { get { return baseColor; } }
     public bool ActsAsRoot { get { return actsAsRoot; } }
     public int Score { get { return score; } }
+    public Dictionary<BubbleDeathType, List<AnimationType>> AnimationMap
+    {
+        get
+        {
+            if (animationMap == null)
+            {
+                animationMap = new Dictionary<BubbleDeathType, List<AnimationType>>();
+
+                foreach (var item in defaultAnimations)
+                {
+                    animationMap[item.name] = item.list;
+                }
+            }
+
+            return animationMap;
+        }
+    }
 
     [SerializeField]
     public BubbleCategory category;
@@ -30,4 +50,16 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
 
     [SerializeField]
     private int score;
+
+    [SerializeField]
+    private List<NamedAnimationList> defaultAnimations;
+
+    [Serializable]
+    public struct NamedAnimationList
+    {
+        public BubbleDeathType name;
+        public List<AnimationType> list;
+    }
+
+    private Dictionary<BubbleDeathType, List<AnimationType>> animationMap;
 }

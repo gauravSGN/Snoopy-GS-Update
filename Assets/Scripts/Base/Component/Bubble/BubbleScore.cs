@@ -3,18 +3,21 @@ using Service;
 
 public class BubbleScore : MonoBehaviour
 {
-    private Bubble model;
-
     public void SetModel(Bubble bubbleModel)
     {
-        model = bubbleModel;
+        bubbleModel.OnPopped += OnImpendingDestruction;
+        bubbleModel.OnDisconnected += OnImpendingDestruction;
     }
 
-    public void OnDestroy()
+    private void RemoveHandlers(Bubble model)
     {
-        if ((model != null) && (GlobalState.Instance != null))
-        {
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleDestroyedEvent(model.definition.Score, gameObject));
-        }
+        model.OnPopped -= OnImpendingDestruction;
+        model.OnDisconnected -= OnImpendingDestruction;
+    }
+
+    private void OnImpendingDestruction(Bubble bubble)
+    {
+        RemoveHandlers(bubble);
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleDestroyedEvent(bubble.definition.Score, gameObject));
     }
 }

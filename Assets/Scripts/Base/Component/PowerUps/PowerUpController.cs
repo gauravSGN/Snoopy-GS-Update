@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using Animation;
+using Service;
 
 namespace PowerUps
 {
@@ -13,14 +15,15 @@ namespace PowerUps
         private BubbleLauncher launcher;
 
         [SerializeField]
-        private GameObject shooterAnimation;
+        private AnimationType shooterType;
 
         [SerializeField]
-        private GameObject effectAnimation;
+        private AnimationType effectType;
 
         private Transform[] anchors;
         private int powerUpMask;
         private Level level;
+        private AnimationService animationService;
 
         void Awake()
         {
@@ -30,6 +33,7 @@ namespace PowerUps
 
         public void Setup(Dictionary<PowerUpType, float> levelData)
         {
+            animationService = GlobalState.Instance.Services.Get<AnimationService>();
             level = gameObject.GetComponentInParent<Level>();
             var index = 0;
             var length = anchors.Length;
@@ -56,8 +60,7 @@ namespace PowerUps
                 launcher.AddShotModifier(AddScan);
             }
 
-            var animation = (GameObject)Instantiate(shooterAnimation, Vector3.zero, Quaternion.identity);
-            launcher.SetModifierAnimation(animation.gameObject);
+            launcher.SetModifierAnimation(animationService.CreateByType(shooterType));
             powerUpMask |= (int)type;
         }
 
@@ -67,7 +70,7 @@ namespace PowerUps
             bubble.GetComponent<BubbleAttachments>().Model.type = BubbleType.Colorless;
 
             bubble.AddComponent<BubbleExplode>();
-            bubble.GetComponent<BubbleExplode>().Setup(2, effectAnimation);
+            bubble.GetComponent<BubbleExplode>().Setup(2, effectType);
             powerUpMask = 0;
         }
     }
