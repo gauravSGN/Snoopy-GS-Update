@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using Util;
 
 namespace LevelEditor.Properties
 {
@@ -18,6 +19,9 @@ namespace LevelEditor.Properties
 
         [SerializeField]
         private GameObject integerPrefab;
+
+        [SerializeField]
+        private GameObject floatPrefab;
 
         private readonly Dictionary<Type, GameObject> prefabMap = new Dictionary<Type, GameObject>();
 
@@ -46,9 +50,12 @@ namespace LevelEditor.Properties
                 }
 
                 int index = 0;
+                var attributes = property.GetCustomAttributes(typeof(PropertyDisplayAttribute), false);
+                var display = (attributes.Length > 0) ? (PropertyDisplayAttribute)attributes[0] : null;
+
                 foreach (var field in fields)
                 {
-                    field.SendMessage("InitializeField", new FieldPropertyInfo(target, property, index));
+                    field.SendMessage("InitializeField", new FieldPropertyInfo(target, property, index, display));
                     index++;
                 }
             }
@@ -100,6 +107,7 @@ namespace LevelEditor.Properties
         private void CreatePrefabMap()
         {
             prefabMap[typeof(int)] = integerPrefab;
+            prefabMap[typeof(float)] = floatPrefab;
         }
     }
 }

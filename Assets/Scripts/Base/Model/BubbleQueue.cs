@@ -107,7 +107,6 @@ public class BubbleQueue : Observable
     {
         var typeTotals = levelState.typeTotals;
         var keys = new List<BubbleType>(options.Keys);
-        var count = keys.Count;
 
         for (var index = 0; index < keys.Count; index++)
         {

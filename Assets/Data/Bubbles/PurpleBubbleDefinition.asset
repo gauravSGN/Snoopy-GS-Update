@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1d598c8f1285471d9ba9720ea457449, type: 3}
-  m_Name: BlueBubbleDefinition
+  m_Name: PurpleBubbleDefinition
   m_EditorClassIdentifier: 
   category: 0
-  type: 0
-  color: 1
-  baseColor: {r: 0.20392157, g: 0.5176471, b: 0.84705883, a: 1}
-  prefab: {fileID: 152662, guid: 73a2070f6e6234e77a1b8d4e1a66e674, type: 2}
+  type: 5
+  color: 16
+  baseColor: {r: 0.5372549, g: 0.12156863, b: 0.76862746, a: 1}
+  prefab: {fileID: 120774, guid: 9edd2091d53d64d6cb66eb57d7fc95da, type: 2}
   actsAsRoot: 0
-  score: 10
+  score: 0

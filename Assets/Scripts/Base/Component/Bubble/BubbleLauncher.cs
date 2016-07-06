@@ -55,6 +55,11 @@ public class BubbleLauncher : MonoBehaviour
         GlobalState.Instance.Services.Get<EventService>().AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
+    protected void OnDestroy()
+    {
+        level.levelState.bubbleQueue.RemoveListener(OnBubbleQueueChanged);
+    }
+
     private void CreateBubbles()
     {
         for (var index = 0; index < nextBubbles.Length; index++)

@@ -14,7 +14,7 @@ MonoBehaviour:
   category: 0
   type: 2
   color: 2
-  baseColor: {r: 1, g: 0, b: 0, a: 1}
+  baseColor: {r: 0.8235294, g: 0.1764706, b: 0.16862746, a: 1}
   prefab: {fileID: 167048, guid: 41453b7ed99fc400ba079719243b501b, type: 2}
   actsAsRoot: 0
   score: 10

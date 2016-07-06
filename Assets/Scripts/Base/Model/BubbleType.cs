@@ -2,10 +2,14 @@
 {
     Colorless = -2,
     Ceiling = -1,
+
     Blue = 0,
     Yellow = 1,
     Red = 2,
     Green = 3,
-    Steel = 4,
-    Cloud = 5,
+    Pink = 4,
+    Purple = 5,
+
+    Steel = 1000,
+    Cloud = 1001,
 }
