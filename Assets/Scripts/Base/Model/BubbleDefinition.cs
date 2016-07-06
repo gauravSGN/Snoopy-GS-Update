@@ -30,6 +30,13 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
         }
     }
 
+    [Serializable]
+    public struct NamedAnimationList
+    {
+        public BubbleDeathType name;
+        public List<AnimationType> list;
+    }
+
     [SerializeField]
     public BubbleCategory category;
 
@@ -53,13 +60,6 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
 
     [SerializeField]
     private List<NamedAnimationList> defaultAnimations;
-
-    [Serializable]
-    public struct NamedAnimationList
-    {
-        public BubbleDeathType name;
-        public List<AnimationType> list;
-    }
 
     private Dictionary<BubbleDeathType, List<AnimationType>> animationMap;
 }
