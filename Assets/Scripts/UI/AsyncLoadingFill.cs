@@ -6,7 +6,7 @@ using System.Collections;
 public class AsyncLoadingFill : MonoBehaviour
 {
     [SerializeField]
-    private Slider fillBar;
+    private Image fillBar;
 
     public void StartFill(AsyncOperation op, Action<GameObject> cb)
     {
@@ -18,7 +18,7 @@ public class AsyncLoadingFill : MonoBehaviour
         while (!op.isDone)
         {
             yield return new WaitForSeconds(0.03f);
-            fillBar.value = op.progress;
+            fillBar.fillAmount = op.progress;
         }
 
         cb(gameObject);
