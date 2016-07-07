@@ -5,7 +5,7 @@ public class MakeKinematic : MonoBehaviour
     [SerializeField]
     private Rigidbody2D body;
 
-    void Awake()
+    protected void Awake()
     {
         body.isKinematic = true;
     }

@@ -334,8 +334,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpFactory: {fileID: 11400000, guid: fcf96848466bd4a74a7ab983e31ba1b4, type: 2}
   launcher: {fileID: 443704579}
-  shooterAnimation: {fileID: 189414, guid: e83c22c5a064640db95d5ee667daf179, type: 2}
-  effectAnimation: {fileID: 130354, guid: 84a944c428d2d47ff949c48ff8eb955d, type: 2}
+  shooterType: 2
+  effectType: 1
 --- !u!1 &171593155
 GameObject:
   m_ObjectHideFlags: 0

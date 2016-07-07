@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9024793891edc4e23bcdabe7dd47a364, type: 3}
+  m_Name: AnimationFactory
+  m_EditorClassIdentifier: 
+  definitions:
+  - {fileID: 11400000, guid: 6f152a639fe174a17be10d18d4ad7957, type: 2}
+  - {fileID: 11400000, guid: 78e1140b5ab6f44d3b8606eeb4169d47, type: 2}
+  - {fileID: 11400000, guid: b8b42ef97bd6344ffabdada2b27a4516, type: 2}
+  - {fileID: 11400000, guid: fb95555e7460847ac93a1a7a171775d5, type: 2}

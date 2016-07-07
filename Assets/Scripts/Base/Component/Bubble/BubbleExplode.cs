@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Reaction;
 using Service;
+using Animation;
+using Effects;
 
 public class BubbleExplode : MonoBehaviour
 {
@@ -9,17 +11,17 @@ public class BubbleExplode : MonoBehaviour
     private int sizeMultiplier = 2;
 
     [SerializeField]
-    private GameObject deathAnimation;
+    private AnimationType deathAnimationType;
 
     public void Start()
     {
         GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleSettlingEvent>(OnSettling);
     }
 
-    public void Setup(int explosionSize, GameObject animation)
+    public void Setup(int explosionSize, AnimationType animation)
     {
         sizeMultiplier = explosionSize;
-        deathAnimation = animation;
+        deathAnimationType = animation;
     }
 
     protected void OnDestroy()
@@ -33,6 +35,9 @@ public class BubbleExplode : MonoBehaviour
         var hits = Physics2D.CircleCastAll(transform.position, baseSize * sizeMultiplier, Vector2.up, 0.0f);
         var length = hits.Length;
 
+        var bubbleDeath = gameObject.GetComponent<BubbleDeath>();
+        bubbleDeath.AddEffect(DeathAnimationEffect.Play(gameObject, deathAnimationType), BubbleDeathType.Pop);
+
         if (length > 0)
         {
             var bubbleList = new List<Bubble>();
@@ -43,10 +48,6 @@ public class BubbleExplode : MonoBehaviour
 
                 if (bubble.tag == StringConstants.Tags.BUBBLES)
                 {
-                    var bubbleDeath = bubble.GetComponent<BubbleDeath>();
-                    var animationObject = (GameObject)Instantiate(deathAnimation, bubble.transform.position, Quaternion.identity);
-                    bubbleDeath.AddPopEffect(animationObject);
-
                     var bubbleAttachments = bubble.GetComponent<BubbleAttachments>();
                     bubbleList.Add(bubbleAttachments.Model);
                     BubbleReactionEvent.Dispatch(ReactionPriority.PowerUp, bubbleAttachments.Model);

@@ -18,3 +18,8 @@ MonoBehaviour:
   prefab: {fileID: 131708, guid: 8cf9f71ff7b1f4711a9fd305f2c53e79, type: 2}
   actsAsRoot: 0
   score: 10
+  defaultAnimations:
+  - name: 0
+    list: 0300000000000000
+  - name: 1
+    list: 00000000

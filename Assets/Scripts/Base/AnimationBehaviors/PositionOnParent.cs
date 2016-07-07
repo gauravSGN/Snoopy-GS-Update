@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PositionOnBubble : StateMachineBehaviour
+public class PositionOnParent : StateMachineBehaviour
 {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

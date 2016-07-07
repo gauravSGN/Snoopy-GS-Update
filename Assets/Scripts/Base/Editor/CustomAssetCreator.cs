@@ -3,6 +3,7 @@ using UnityEngine;
 using System.IO;
 using BubbleContent;
 using PowerUps;
+using Animation;
 
 public static class CustomAssetCreator
 {
@@ -46,6 +47,18 @@ public static class CustomAssetCreator
     public static void CreatePowerUpFactory()
     {
         CreateAThing<PowerUpFactory>();
+    }
+
+    [MenuItem("Assets/Create/Animation/Animation Definition")]
+    public static void CreateAnimationDefinition()
+    {
+        CreateAThing<AnimationDefinition>();
+    }
+
+    [MenuItem("Assets/Create/Animation/Animation Factory")]
+    public static void CreateAnimationFactory()
+    {
+        CreateAThing<AnimationFactory>();
     }
 
     private static void CreateAThing<T>() where T : ScriptableObject
