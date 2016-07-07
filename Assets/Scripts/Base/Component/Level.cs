@@ -18,6 +18,7 @@ public class Level : MonoBehaviour
     protected void Start()
     {
         var sceneData = GlobalState.Instance.Services.Get<SceneService>();
+
         if (!string.IsNullOrEmpty(sceneData.NextLevelData))
         {
             levelData = sceneData.NextLevelData;
@@ -27,6 +28,8 @@ public class Level : MonoBehaviour
         {
             levelData = levelAsset.text;
         }
+
+        levelState.levelNumber = sceneData.LevelNumber;
 
         StartCoroutine(LoadingCoroutine());
     }
@@ -71,6 +74,27 @@ public class Level : MonoBehaviour
             }
         }
 
+        UpdateUserScoreAndStars();
+
         GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(true));
+    }
+
+    private void UpdateUserScoreAndStars()
+    {
+        var user = GlobalState.Instance.Services.Get<UserStateService>();
+
+        if (user.levels[levelState.levelNumber].score < levelState.score)
+        {
+             user.levels[levelState.levelNumber].score = levelState.score;
+
+             for (int starIndex = levelState.starValues.Length - 1; starIndex >= 0; starIndex--)
+             {
+                 if (levelState.score >= levelState.starValues[starIndex])
+                 {
+                     user.levels[levelState.levelNumber].stars = (starIndex + 1);
+                     break;
+                 }
+             }
+        }
     }
 }

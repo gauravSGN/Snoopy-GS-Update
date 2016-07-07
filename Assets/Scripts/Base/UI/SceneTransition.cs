@@ -7,14 +7,19 @@ public class SceneTransition : MonoBehaviour
     [SerializeField]
     private TextAsset nextLevelData;
 
+    [SerializeField]
+    private int levelNumber;
+
     public void TriggerSceneTransition(string sceneName)
     {
+        var sceneData = GlobalState.Instance.Services.Get<SceneService>();
+
         if (nextLevelData != null)
         {
-            GlobalState.Instance.Services.Get<SceneService>().NextLevelData = nextLevelData.text;
+            sceneData.NextLevelData = nextLevelData.text;
         }
 
-        var sceneData = GlobalState.Instance.Services.Get<SceneService>();
+        sceneData.LevelNumber = levelNumber;
         sceneData.ReturnScene = SceneManager.GetActiveScene().name;
 
         SceneManager.LoadScene(sceneName);

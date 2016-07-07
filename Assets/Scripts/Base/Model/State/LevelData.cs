@@ -5,22 +5,22 @@ namespace State
 {
     public class LevelData : StateHandler
     {
-        public uint score
+        public long score
         {
-            get { return GetValue<uint>("score", 0); }
-            set { SetValue<uint>("score", value); }
+            get { return GetValue<long>("score", 0); }
+            set { SetValue<long>("score", value); }
         }
 
-        public uint stars
+        public long stars
         {
-            get { return GetValue<uint>("stars", 0); }
-            set { SetValue<uint>("stars", value); }
+            get { return GetValue<long>("stars", 0); }
+            set { SetValue<long>("stars", value); }
         }
 
-        public uint updatedAt
+        public long updatedAt
         {
-            get { return GetValue<uint>("updatedAt", 0); }
-            set { SetValue<uint>("updatedAt", value); }
+            get { return GetValue<long>("updatedAt", 0); }
+            set { SetValue<long>("updatedAt", value); }
         }
 
         public LevelData(Data state, Action<Observable> initialListener = null) : base(state, initialListener)

@@ -4,9 +4,9 @@ namespace Service
 {
     public interface UserStateService : SharedService
     {
-        uint currentLevel { get; set; }
-        uint maxLevel { get; set; }
-        uint hasPaid { get; set; }
+        long currentLevel { get; set; }
+        long maxLevel { get; set; }
+        long hasPaid { get; set; }
         Inventory inventory { get; }
         Levels levels { get; }
     }

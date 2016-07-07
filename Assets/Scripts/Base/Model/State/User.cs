@@ -1,28 +1,27 @@
 using gs;
 using Service;
-using System.Collections.Generic;
 using Data = System.Collections.Generic.IDictionary<string, object>;
 
 namespace State
 {
     public class User : StateHandler, UserStateService
     {
-        public uint currentLevel
+        public long currentLevel
         {
-            get { return GetValue<uint>("currentLevel", 1); }
-            set { SetValue<uint>("currentLevel", value); }
+            get { return GetValue<long>("currentLevel", 1); }
+            set { SetValue<long>("currentLevel", value); }
         }
 
-        public uint maxLevel
+        public long maxLevel
         {
-            get { return GetValue<uint>("maxLevel", 1); }
-            set { SetValue<uint>("maxLevel", value); }
+            get { return GetValue<long>("maxLevel", 1); }
+            set { SetValue<long>("maxLevel", value); }
         }
 
-        public uint hasPaid
+        public long hasPaid
         {
-            get { return GetValue<uint>("hasPaid", 0); }
-            set { SetValue<uint>("hasPaid", value); }
+            get { return GetValue<long>("hasPaid", 0); }
+            set { SetValue<long>("hasPaid", value); }
         }
 
         public Inventory inventory { get; private set; }
@@ -30,7 +29,7 @@ namespace State
 
         public User() : base(GS.Api.State)
         {
-            string[] dataStateKeys = {"inventory", "ftue", "levels"};
+            string[] dataStateKeys = {"inventory", "levels"};
 
             foreach (var dataStateKey in dataStateKeys)
             {
@@ -39,8 +38,6 @@ namespace State
 
             inventory = new Inventory((Data)GS.Api.State["inventory"], NotifyListenersCallback);
             levels = new Levels((Data)GS.Api.State["levels"], NotifyListenersCallback);
-
-            // ftue
         }
     }
 }
