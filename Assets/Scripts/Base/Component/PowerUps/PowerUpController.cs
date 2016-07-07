@@ -69,8 +69,9 @@ namespace PowerUps
             // Make bubble unmatchable
             bubble.GetComponent<BubbleAttachments>().Model.type = BubbleType.Colorless;
 
-            bubble.AddComponent<BubbleExplode>();
-            bubble.GetComponent<BubbleExplode>().Setup(2, effectType);
+            var explosion = bubble.AddComponent<BubbleExplode>();
+            explosion.Setup(2, effectType);
+
             powerUpMask = 0;
         }
     }
