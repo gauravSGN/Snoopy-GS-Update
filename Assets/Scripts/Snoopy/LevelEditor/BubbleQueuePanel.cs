@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using Snoopy.Model;
 using LevelEditor;
@@ -14,6 +15,9 @@ namespace Snoopy.LevelEditor
         private RectTransform contentContainer;
 
         [SerializeField]
+        private Text totalText;
+
+        [SerializeField]
         private GameObject bucketPrefab;
 
         [SerializeField]
@@ -24,21 +28,80 @@ namespace Snoopy.LevelEditor
 
         public void Start()
         {
-            buckets.Add(CreateBucket(queue.reserve));
-            buckets.Add(CreateBucket(queue.extras));
+            buckets.Add(CreateBucket(queue.reserve, false));
+            buckets.Add(CreateBucket(queue.extras, false));
 
-            contentContainer.sizeDelta = new Vector2(0.0f, rowHeight * 2.0f);
+            OnBucketChanged();
         }
 
-        private BubbleQueueBucket CreateBucket(BubbleQueueDefinition.Bucket bucket)
+        public void AddBucket()
+        {
+            var index = queue.buckets.Count;
+
+            queue.buckets.Add(new BubbleQueueDefinition.Bucket());
+            buckets.Insert(index, CreateBucket(queue.buckets[index], true));
+
+            OnBucketChanged();
+        }
+
+        public void RemoveBucket()
+        {
+            var index = queue.buckets.Count - 1;
+
+            if (index >= 0)
+            {
+                Destroy(buckets[index].gameObject);
+                buckets.RemoveAt(index);
+                queue.buckets.RemoveAt(index);
+                OnBucketChanged();
+            }
+        }
+
+        private BubbleQueueBucket CreateBucket(BubbleQueueDefinition.Bucket bucket, bool canBeMandatory)
         {
             var instance = Instantiate(bucketPrefab);
             var component = instance.GetComponent<BubbleQueueBucket>();
 
             instance.transform.SetParent(contentContainer, false);
             component.Initialize(manipulator.BubbleFactory, bucket);
+            component.ShowMandatoryOption = canBeMandatory;
+            component.OnBucketChanged += OnBucketChanged;
 
             return component;
+        }
+
+        private void OnBucketChanged()
+        {
+            int offset = 0;
+            var count = buckets.Count;
+
+            contentContainer.sizeDelta = new Vector2(0.0f, rowHeight * count);
+
+            for (var index = 0; index < count - 2; index++)
+            {
+                var bucket = buckets[index];
+                var length = bucket.Bucket.length;
+
+                if (length == 1)
+                {
+                    bucket.Label = string.Format("Bubble {0}", offset + 1);
+                }
+                else
+                {
+                    bucket.Label = string.Format("Bubbles {0}-{1}", offset + 1, offset + length);
+                }
+
+                offset += length;
+            }
+
+            for (var index = 0; index < count; index++)
+            {
+                buckets[index].transform.SetSiblingIndex(index);
+            }
+
+            buckets[count - 2].Label = "Reserve";
+            buckets[count - 1].Label = "Extras";
+            totalText.text = string.Format("Total = {0}", offset);
         }
     }
 }

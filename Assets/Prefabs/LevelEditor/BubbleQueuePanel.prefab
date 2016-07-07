@@ -374,8 +374,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11459028}
   m_HandleRect: {fileID: 22449594}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 0.5
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 22415620}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -777,7 +777,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11400520}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11499532}
+        m_MethodName: RemoveBucket
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11466498
@@ -818,7 +829,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11427276}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11499532}
+        m_MethodName: AddBucket
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11474554
@@ -910,7 +932,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8afbc49814730405c8dfd06a6ff4b4b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manipulator: {fileID: 0}
   contentContainer: {fileID: 22474626}
+  totalText: {fileID: 11449004}
   bucketPrefab: {fileID: 180676, guid: 6216a006cb66947d39bd995e0091d162, type: 2}
   rowHeight: 64
 --- !u!222 &22205932

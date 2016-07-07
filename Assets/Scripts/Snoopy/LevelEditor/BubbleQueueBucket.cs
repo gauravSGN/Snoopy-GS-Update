@@ -3,11 +3,14 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using Snoopy.Model;
 using System.Linq;
+using System;
 
 namespace Snoopy.LevelEditor
 {
     public class BubbleQueueBucket : MonoBehaviour
     {
+        public event Action OnBucketChanged;
+
         [SerializeField]
         private Text label;
 
@@ -26,9 +29,23 @@ namespace Snoopy.LevelEditor
         private BubbleQueueDefinition.Bucket bucket;
         private List<BubbleQueueElement> elements = new List<BubbleQueueElement>();
 
+        public BubbleQueueDefinition.Bucket Bucket { get { return bucket; } }
+
+        public string Label
+        {
+            get { return label.text; }
+            set { label.text = value; }
+        }
+
+        public bool ShowMandatoryOption
+        {
+            get { return mandatoryToggle.gameObject.activeSelf; }
+            set { mandatoryToggle.gameObject.SetActive(value); }
+        }
+
         public void Start()
         {
-            inputField.onEndEdit.AddListener(OnEndEdit);
+            inputField.onEndEdit.AddListener(OnEndLengthEdit);
             mandatoryToggle.onValueChanged.AddListener(OnMandatoryValueChanged);
         }
 
@@ -54,11 +71,18 @@ namespace Snoopy.LevelEditor
                     index++;
                 }
             }
+
+            inputField.text = bucket.length.ToString();
         }
 
-        private void OnEndEdit(string text)
+        private void OnEndLengthEdit(string text)
         {
-            bucket.length = int.Parse(text);
+            bucket.length = Mathf.Max(1, int.Parse(text));
+
+            if (OnBucketChanged != null)
+            {
+                OnBucketChanged();
+            }
         }
 
         private void OnMandatoryValueChanged(bool value)
