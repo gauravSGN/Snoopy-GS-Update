@@ -11,7 +11,8 @@ public class LevelState : Observable
 
     public LevelState()
     {
-        bubbleQueue = new BubbleQueue(this);
+        // TODO - Come back and config this
+        bubbleQueue = new WeightedBubbleQueue(this);
     }
 
     public void UpdateTypeTotals(BubbleType type, int delta)
