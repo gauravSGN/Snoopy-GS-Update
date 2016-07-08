@@ -24,14 +24,14 @@ namespace Snoopy.LevelEditor
         private float rowHeight;
 
         private readonly List<BubbleQueueBucket> buckets = new List<BubbleQueueBucket>();
-        private BubbleQueueDefinition queue = new BubbleQueueDefinition();
+        private BubbleQueueDefinition queue;
 
         public void Start()
         {
-            buckets.Add(CreateBucket(queue.reserve, false));
-            buckets.Add(CreateBucket(queue.extras, false));
+            queue = manipulator.Queue;
+            queue.AddListener(OnQueueChanged);
 
-            OnBucketChanged();
+            Initialize();
         }
 
         public void AddBucket()
@@ -50,11 +50,39 @@ namespace Snoopy.LevelEditor
 
             if (index >= 0)
             {
-                Destroy(buckets[index].gameObject);
-                buckets.RemoveAt(index);
+                RemoveBucketAtIndex(index);
                 queue.buckets.RemoveAt(index);
                 OnBucketChanged();
             }
+        }
+
+        private void Initialize()
+        {
+            foreach (var bucket in queue.buckets)
+            {
+                buckets.Add(CreateBucket(bucket, true));
+            }
+
+            buckets.Add(CreateBucket(queue.reserve, false));
+            buckets.Add(CreateBucket(queue.extras, false));
+
+            OnBucketChanged();
+        }
+
+        private void OnQueueChanged(Observable target)
+        {
+            while (buckets.Count > 0)
+            {
+                RemoveBucketAtIndex(0);
+            }
+
+            Initialize();
+        }
+
+        private void RemoveBucketAtIndex(int index)
+        {
+            Destroy(buckets[index].gameObject);
+            buckets.RemoveAt(index);
         }
 
         private BubbleQueueBucket CreateBucket(BubbleQueueDefinition.Bucket bucket, bool canBeMandatory)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BubbleContent;
 using Goal;
+using Snoopy.Model;
 
 namespace Model
 {
@@ -59,6 +60,7 @@ namespace Model
         virtual public float[] PowerUpFills { get { return powerUpFills; } }
         virtual public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
         virtual public int[] StarValues { get { return starValues; } }
+        virtual public BubbleQueueDefinition Queue { get { return queue; } }
 
         public List<LevelGoal> goals;
 
@@ -73,5 +75,8 @@ namespace Model
 
         [SerializeField]
         protected int[] starValues = new int[3];
+
+        [SerializeField]
+        protected BubbleQueueDefinition queue;
     }
 }

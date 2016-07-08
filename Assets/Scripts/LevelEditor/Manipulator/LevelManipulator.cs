@@ -5,6 +5,7 @@ using Model;
 using LevelEditor.Manipulator;
 using BubbleContent;
 using LevelEditor.Properties;
+using Snoopy.Model;
 
 namespace LevelEditor
 {
@@ -40,6 +41,7 @@ namespace LevelEditor
         private ManipulatorAction action;
 
         private readonly LevelProperties levelProperties = new LevelProperties();
+        private readonly BubbleQueueDefinition queue = new BubbleQueueDefinition();
 
         public BubbleType BubbleType { get; private set; }
         public BubbleContentType ContentType { get; private set; }
@@ -55,6 +57,7 @@ namespace LevelEditor
         public ManipulatorActionFactory ActionFactory { get { return actionFactory; } }
 
         public LevelProperties LevelProperties { get { return levelProperties; } }
+        public BubbleQueueDefinition Queue { get { return queue; } }
 
         public void LoadLevel(string jsonText)
         {
@@ -77,6 +80,9 @@ namespace LevelEditor
 
             LevelProperties.FromLevelData(levelData);
             LevelProperties.NotifyListeners();
+
+            queue.CopyFrom(levelData.Queue);
+            queue.NotifyListeners();
         }
 
         public string SaveLevel()
@@ -84,6 +90,7 @@ namespace LevelEditor
             var data = new MutableLevelData
             {
                 Bubbles = models.Values,
+                Queue = queue,
             };
 
             LevelProperties.ToLevelData(data);

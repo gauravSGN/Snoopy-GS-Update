@@ -5,7 +5,7 @@ using System;
 namespace Snoopy.Model
 {
     [Serializable]
-    public sealed class BubbleQueueDefinition
+    public sealed class BubbleQueueDefinition : Observable
     {
         [Serializable]
         public sealed class Bucket
@@ -25,5 +25,15 @@ namespace Snoopy.Model
         public List<Bucket> buckets = new List<Bucket>();
         public Bucket reserve = new Bucket(1, 1, 1, 1, 1, 1);
         public Bucket extras = new Bucket();
+
+        public void CopyFrom(BubbleQueueDefinition queue)
+        {
+            if (queue != null)
+            {
+                buckets = queue.buckets;
+                reserve = queue.reserve;
+                extras = queue.extras;
+            }
+        }
     }
 }
