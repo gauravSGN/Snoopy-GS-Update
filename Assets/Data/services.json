@@ -19,6 +19,10 @@
         {
             "interfaceName": "Service.AnimationService, Assembly-CSharp",
             "className": "AnimationProxy, Assembly-CSharp"
+        },
+        {
+            "interfaceName": "Service.UserStateService, Assembly-CSharp",
+            "className": "State.User, Assembly-CSharp"
         }
     ]
 }
