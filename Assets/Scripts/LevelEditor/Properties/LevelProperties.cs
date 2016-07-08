@@ -18,7 +18,8 @@ namespace LevelEditor.Properties
 
         public LevelProperties()
         {
-            StarValues = new int[3];
+            ShotCount = 20;
+            StarValues = new int[] { 100, 500, 1000 };
             PowerUpFills = new float[6];
         }
 

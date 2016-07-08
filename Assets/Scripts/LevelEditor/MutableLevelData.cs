@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using Model;
+using Snoopy.Model;
 
 namespace LevelEditor
 {
@@ -28,6 +29,12 @@ namespace LevelEditor
         {
             get { return base.StarValues; }
             set { starValues = value; }
+        }
+
+        public new BubbleQueueDefinition Queue
+        {
+            get { return base.Queue; }
+            set { queue = value; }
         }
     }
 }
