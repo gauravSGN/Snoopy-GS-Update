@@ -5,8 +5,8 @@ using Graph;
 namespace Reaction
 {
     [ReactionHandlerAttribute(ReactionPriority.PowerUp)]
-    [ReactionHandlerAttribute(ReactionPriority.ChainPop)]
-    [ReactionHandlerAttribute(ReactionPriority.TriggerDestroy)]
+    [ReactionHandlerAttribute(ReactionPriority.GenericPop)]
+    [ReactionHandlerAttribute(ReactionPriority.PhysicsDestroy)]
     public class GenericPopReactionHandler : ReactionHandler
     {
         public override IEnumerator HandleActions()
@@ -18,8 +18,7 @@ namespace Reaction
 
             GraphUtil.RemoveNodes(bubbles);
 
-            var count = bubbles.Count;
-            for (var index = 0; index < count; index++)
+            for (int index = 0, count = bubbles.Count; index < count; index++)
             {
                 bubbles[index].PopBubble();
             }

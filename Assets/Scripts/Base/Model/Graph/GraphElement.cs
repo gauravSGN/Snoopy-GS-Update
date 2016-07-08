@@ -18,6 +18,9 @@ namespace Graph
         }
 
         [SerializeField]
+        protected int numberOfNeighbors;
+
+        [SerializeField]
         private bool isRoot;
 
         [SerializeField]
@@ -47,6 +50,8 @@ namespace Graph
             {
                 neighbors.Add(node);
                 node.Connect((T)this);
+
+                numberOfNeighbors = neighbors.Count;
             }
         }
 
@@ -56,6 +61,8 @@ namespace Graph
             {
                 neighbors.Remove(node);
                 node.Disconnect((T)this);
+
+                numberOfNeighbors = neighbors.Count;
             }
         }
 
