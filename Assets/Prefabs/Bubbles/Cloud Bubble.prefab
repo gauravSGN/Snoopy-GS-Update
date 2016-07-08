@@ -13,7 +13,6 @@ GameObject:
   - 114: {fileID: 11459598}
   - 114: {fileID: 11494108}
   - 114: {fileID: 11434930}
-  - 114: {fileID: 11466412}
   - 114: {fileID: 11457932}
   - 114: {fileID: 11484482}
   m_Layer: 10
@@ -92,7 +91,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -133,19 +132,9 @@ MonoBehaviour:
   model:
     isRoot: 0
     distanceFromRoot: 2147483647
+    numberOfNeighbors: 0
     type: 0
     definition: {fileID: 0}
---- !u!114 &11466412
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 117630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42817f0cc28994179803394863d78358, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11484482
 MonoBehaviour:
   m_ObjectHideFlags: 1

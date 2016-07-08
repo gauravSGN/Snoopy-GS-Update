@@ -18,13 +18,13 @@ namespace Graph
         }
 
         [SerializeField]
+        protected int numberOfNeighbors;
+
+        [SerializeField]
         private bool isRoot;
 
         [SerializeField]
         private uint distanceFromRoot;
-
-        [SerializeField]
-        private int numberOfNeighbors;
 
         public IEnumerable<GraphNode> Neighbors
         {
