@@ -42,9 +42,11 @@ public class Level : MonoBehaviour
         levelState.starValues = loader.LevelData.StarValues;
         levelState.NotifyListeners();
 
-        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
-        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
-        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
+        var eventService = GlobalState.Instance.Services.Get<EventService>();
+
+        eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
+        eventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
+        eventService.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
     }
 
     private void OnBubbleFired(BubbleFiredEvent gameEvent)

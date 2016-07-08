@@ -6,6 +6,7 @@ using Reaction;
 [Serializable]
 public class Bubble : GraphElement<Bubble>
 {
+    public event Action<Bubble> OnSnap;
     public event Action<Bubble> OnPopped;
     public event Action<Bubble> OnDisconnected;
 
@@ -52,6 +53,14 @@ public class Bubble : GraphElement<Bubble>
         if (OnPopped != null)
         {
             OnPopped(this);
+        }
+    }
+
+    public void SnapToBubble()
+    {
+        if (OnSnap != null)
+        {
+            OnSnap(this);
         }
     }
 

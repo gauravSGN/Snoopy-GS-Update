@@ -82,9 +82,10 @@ public class LevelLoader : MonoBehaviour
 
         foreach (var bubble in level.Bubbles)
         {
-            var bubbleType = (BubbleType)((int)bubble.Type % 6);
+            var bubbleType = BubbleType.IsDefined(typeof(BubbleType), bubble.Type) ? bubble.Type : (BubbleType)((int)bubble.Type % 6);
+
             bubbleTypeCount[bubbleType] = bubbleTypeCount.ContainsKey(bubbleType) ? bubbleTypeCount[bubbleType] + 1 : 1;
-            bubbleMap[bubble.Key] = createBubbleAndSetPosition((BubbleType)((int)bubble.Type % 6), bubble.X, bubble.Y);
+            bubbleMap[bubble.Key] = createBubbleAndSetPosition(bubbleType, bubble.X, bubble.Y);
             bubble.model = bubbleMap[bubble.Key].GetComponent<BubbleAttachments>().Model;
 
             if (bubble.ContentType != BubbleContentType.None)

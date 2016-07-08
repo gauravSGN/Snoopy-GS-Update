@@ -23,6 +23,9 @@ namespace Graph
         [SerializeField]
         private uint distanceFromRoot;
 
+        [SerializeField]
+        private int numberOfNeighbors;
+
         public IEnumerable<GraphNode> Neighbors
         {
             get
@@ -47,6 +50,8 @@ namespace Graph
             {
                 neighbors.Add(node);
                 node.Connect((T)this);
+
+                numberOfNeighbors = neighbors.Count;
             }
         }
 
@@ -56,6 +61,8 @@ namespace Graph
             {
                 neighbors.Remove(node);
                 node.Disconnect((T)this);
+
+                numberOfNeighbors = neighbors.Count;
             }
         }
 
