@@ -18,6 +18,10 @@ public class GameConfig : ScriptableObject
         public float shockwaveSpeed;
         public float shockwaveDistance;
         public float shockwaveRadius;
+        public float cullMinXForce;
+        public float cullMaxXForce;
+        public float cullMinYForce;
+        public float cullMaxYForce;
     }
 
     [Serializable]

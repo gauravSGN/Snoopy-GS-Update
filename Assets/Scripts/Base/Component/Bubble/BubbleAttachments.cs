@@ -43,6 +43,7 @@ public class BubbleAttachments : MonoBehaviour
         gameObject.layer = (int)Layers.FallingObjects;
 
         rigidBody.isKinematic = false;
-        rigidBody.AddForce(new Vector2(Random.Range(-3.0f, 3.0f), 0.0f));
+        rigidBody.AddForce(new Vector3(Random.Range(GlobalState.Instance.Config.reactions.cullMinXForce, GlobalState.Instance.Config.reactions.cullMaxXForce),
+                                       Random.Range(GlobalState.Instance.Config.reactions.cullMinYForce, GlobalState.Instance.Config.reactions.cullMaxYForce)));
     }
 }
