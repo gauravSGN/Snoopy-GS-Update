@@ -14,7 +14,7 @@ MonoBehaviour:
   bubbles:
     numPerRow: 12
     size: 0.25
-    shotColliderScale: 0.4
+    shotColliderScale: 0.25
   reactions:
     popSpreadDelay: 0.05
     shockwaveSpeed: 5
