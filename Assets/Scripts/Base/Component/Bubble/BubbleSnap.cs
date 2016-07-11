@@ -31,7 +31,7 @@ public class BubbleSnap : MonoBehaviour
                 bubble.GetComponent<BubbleAttachments>().Model.SnapToBubble();
             }
 
-            foreach (var bubble in NearbyBubbles(origin, GlobalState.Instance.Config.reactions.shockwaveRadius))
+            foreach (var bubble in NearbyBubbles(origin, GlobalState.Instance.Config.impactEffect.radius))
             {
                 var bubbleEffectController = bubble.GetComponent<BubbleEffectController>();
 
