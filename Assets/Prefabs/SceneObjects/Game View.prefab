@@ -896,7 +896,7 @@ MonoBehaviour:
   locations:
   - {fileID: 105830}
   - {fileID: 143398}
-  launchSpeed: 5
+  launchSpeed: 6.5
   level: {fileID: 11450880}
   aimLine: {fileID: 11476056}
 --- !u!114 &11431538
