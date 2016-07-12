@@ -30,6 +30,9 @@ namespace LevelEditor
         [SerializeField]
         private LevelManipulator manipulator;
 
+        [SerializeField]
+        private GameObject tuningPanel;
+
         private TabSwitcher tabSwitcher;
 
         private void Start()
@@ -38,6 +41,7 @@ namespace LevelEditor
 
             SetupCategoryList();
             CreateButtonPanels();
+            CreateTuningPanelButton();
 
             tabSwitcher.SwitchTab(GetOrCreatePanel(BubbleCategory.Goal.ToString()));
         }
@@ -52,14 +56,18 @@ namespace LevelEditor
 
         private void CreateCategoryButton(BubbleCategory category)
         {
+            CreateToggleButton(category.ToString(), GetOrCreatePanel(category.ToString()));
+        }
+
+        private void CreateToggleButton(string name, GameObject panel)
+        {
             var button = Instantiate(categoryButtonPrefab);
-            var panel = GetOrCreatePanel(category.ToString());
 
             button.transform.SetParent(categoryContainer.transform, false);
-            button.name = category.ToString();
+            button.name = name;
 
             button.GetComponent<Button>().onClick.AddListener(() => tabSwitcher.SwitchTab(panel));
-            button.GetComponentInChildren<Text>().text = category.ToString();
+            button.GetComponentInChildren<Text>().text = name;
         }
 
         private void CreateButtonPanels()
@@ -80,6 +88,11 @@ namespace LevelEditor
                 manipulator.ContentFactory.Contents,
                 SetContentType
             );
+        }
+
+        private void CreateTuningPanelButton()
+        {
+            CreateToggleButton("Tune", tuningPanel);
         }
 
         private void CreateButtonPanel<T, U>(string name, IEnumerable<T> items, Action<U> action)
