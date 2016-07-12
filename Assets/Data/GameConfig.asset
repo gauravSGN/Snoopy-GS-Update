@@ -17,13 +17,35 @@ MonoBehaviour:
     shotColliderScale: 0.17
   reactions:
     popSpreadDelay: 0.05
-    shockwaveSpeed: 5
-    shockwaveDistance: 0.1
-    shockwaveRadius: 0.75
     cullMinXForce: -10
     cullMaxXForce: 10
     cullMinYForce: -5
     cullMaxYForce: 5
+  impactEffect:
+    duration: 0.2
+    distance: 0.01
+    radius: 0.5
+    easing:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -0.000000026309863
+        inSlope: 2.0010345
+        outSlope: 2.0010345
+        tangentMode: 10
+      - time: 0.49959585
+        value: 0.99970853
+        inSlope: 0.0013455749
+        outSlope: 0.0013455749
+        tangentMode: 10
+      - time: 0.99970824
+        value: 0.00031220296
+        inSlope: -1.9983433
+        outSlope: -1.9983433
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
   aimline:
     length: 5
     lineWidth: 0.167
