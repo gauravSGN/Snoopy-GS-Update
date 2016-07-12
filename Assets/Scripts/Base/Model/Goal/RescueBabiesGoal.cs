@@ -13,15 +13,17 @@ namespace Goal
             {
                 if (bubble.ContentType == BubbleContentType.BabyPanda)
                 {
-                    bubble.model.OnPopped += BubblePoppedHandler;
+                    bubble.model.OnPopped += BubbleReactionHandler;
+                    bubble.model.OnDisconnected += BubbleReactionHandler;
                     TargetValue++;
                 }
             }
         }
 
-        private void BubblePoppedHandler(Bubble bubble)
+        private void BubbleReactionHandler(Bubble bubble)
         {
-            bubble.OnPopped -= BubblePoppedHandler;
+            bubble.OnPopped -= BubbleReactionHandler;
+            bubble.OnDisconnected -= BubbleReactionHandler;
 
             CurrentValue++;
             NotifyListeners();
