@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using Snoopy.Model;
 using LevelEditor;
+using System.Linq;
 
 namespace Snoopy.LevelEditor
 {
@@ -21,6 +22,12 @@ namespace Snoopy.LevelEditor
         private GameObject bucketPrefab;
 
         [SerializeField]
+        private RectTransform dotsPanel;
+
+        [SerializeField]
+        private GameObject dotPrefab;
+
+        [SerializeField]
         private float rowHeight;
 
         private readonly List<BubbleQueueBucket> buckets = new List<BubbleQueueBucket>();
@@ -31,28 +38,46 @@ namespace Snoopy.LevelEditor
             queue = manipulator.Queue;
             queue.AddListener(OnQueueChanged);
 
+            CreateDots();
             Initialize();
         }
 
         public void AddBucket()
         {
-            var index = queue.buckets.Count;
-
-            queue.buckets.Add(new BubbleQueueDefinition.Bucket());
-            buckets.Insert(index, CreateBucket(queue.buckets[index], true));
-
-            OnBucketChanged();
+            InsertBucketAtIndex(queue.buckets.Count);
         }
 
-        public void RemoveBucket()
+        public void InsertBucket(BubbleQueueBucket bucket)
         {
-            var index = queue.buckets.Count - 1;
+            InsertBucketAtIndex(buckets.IndexOf(bucket));
+        }
+
+        public void RemoveBucket(BubbleQueueBucket bucket)
+        {
+            var index = buckets.IndexOf(bucket);
 
             if (index >= 0)
             {
                 RemoveBucketAtIndex(index);
                 queue.buckets.RemoveAt(index);
                 OnBucketChanged();
+            }
+        }
+
+        private void CreateDots()
+        {
+            foreach (var def in manipulator.BubbleFactory.Bubbles.Where(b => b.category == BubbleCategory.Basic))
+            {
+                var sprite = def.Prefab.GetComponentInChildren<SpriteRenderer>();
+
+                if (sprite != null)
+                {
+                    var instance = Instantiate(dotPrefab);
+                    var image = instance.GetComponent<Image>();
+
+                    image.color = def.BaseColor;
+                    image.transform.SetParent(dotsPanel, false);
+                }
             }
         }
 
@@ -79,6 +104,14 @@ namespace Snoopy.LevelEditor
             Initialize();
         }
 
+        private void InsertBucketAtIndex(int index)
+        {
+            queue.buckets.Insert(index, new BubbleQueueDefinition.Bucket());
+            buckets.Insert(index, CreateBucket(queue.buckets[index], true));
+
+            OnBucketChanged();
+        }
+
         private void RemoveBucketAtIndex(int index)
         {
             Destroy(buckets[index].gameObject);
@@ -91,8 +124,9 @@ namespace Snoopy.LevelEditor
             var component = instance.GetComponent<BubbleQueueBucket>();
 
             instance.transform.SetParent(contentContainer, false);
-            component.Initialize(manipulator.BubbleFactory, bucket);
+            component.Initialize(manipulator.BubbleFactory, this, bucket);
             component.ShowMandatoryOption = canBeMandatory;
+            component.EnableInsert = component.EnableDelete = canBeMandatory;
             component.OnBucketChanged += OnBucketChanged;
 
             return component;
@@ -112,11 +146,11 @@ namespace Snoopy.LevelEditor
 
                 if (length == 1)
                 {
-                    bucket.Label = string.Format("Bubble {0}", offset + 1);
+                    bucket.Label = string.Format("{0}", offset + 1);
                 }
                 else
                 {
-                    bucket.Label = string.Format("Bubbles {0}-{1}", offset + 1, offset + length);
+                    bucket.Label = string.Format("{0}-{1}", offset + 1, offset + length);
                 }
 
                 offset += length;

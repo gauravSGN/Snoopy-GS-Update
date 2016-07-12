@@ -8,36 +8,54 @@ namespace Snoopy.LevelEditor
     public class BubbleQueueElement : MonoBehaviour
     {
         [SerializeField]
-        private InputField inputField;
+        private Text text;
 
         [SerializeField]
-        private Image image;
+        private Color disabledColor;
 
+        private InputField inputField;
         private BubbleQueueDefinition.Bucket bucket;
+        private Color textColor;
         private int index;
-
-        public Sprite Sprite
-        {
-            get { return image.sprite; }
-            set { image.sprite = value; }
-        }
 
         public void Start()
         {
+            inputField = GetComponent<InputField>();
             inputField.onEndEdit.AddListener(OnEndEdit);
+            UpdateText();
         }
 
-        public void Initialize(BubbleQueueDefinition.Bucket bucket, int index)
+        public void Initialize(BubbleQueueDefinition.Bucket bucket, int index, Color color)
         {
             this.bucket = bucket;
             this.index = index;
+            textColor = color;
 
-            inputField.text = bucket.counts[index].ToString();
+            UpdateText();
         }
 
         private void OnEndEdit(string text)
         {
-            bucket.counts[index] = int.Parse(text);
+            try
+            {
+                bucket.counts[index] = int.Parse(text);
+            }
+            catch (System.FormatException)
+            {
+                bucket.counts[index] = 0;
+            }
+
+            UpdateText();
+        }
+
+        private void UpdateText()
+        {
+            if (inputField != null)
+            {
+                var value = bucket.counts[index];
+                inputField.text = (value <= 0) ? "-" : value.ToString();
+                text.color = (value <= 0) ? disabledColor : textColor;
+            }
         }
     }
 }
