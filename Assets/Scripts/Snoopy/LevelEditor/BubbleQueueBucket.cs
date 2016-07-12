@@ -24,12 +24,30 @@ namespace Snoopy.LevelEditor
         private Toggle mandatoryToggle;
 
         [SerializeField]
+        private Button insertButton;
+
+        [SerializeField]
+        private Button deleteButton;
+
+        [SerializeField]
         private GameObject elementPrefab;
 
         private BubbleQueueDefinition.Bucket bucket;
         private List<BubbleQueueElement> elements = new List<BubbleQueueElement>();
 
         public BubbleQueueDefinition.Bucket Bucket { get { return bucket; } }
+
+        public bool EnableInsert
+        {
+            get { return insertButton.gameObject.activeSelf; }
+            set { insertButton.gameObject.SetActive(value); }
+        }
+
+        public bool EnableDelete
+        {
+            get { return deleteButton.gameObject.activeSelf; }
+            set { deleteButton.gameObject.SetActive(value); }
+        }
 
         public string Label
         {
@@ -49,7 +67,7 @@ namespace Snoopy.LevelEditor
             mandatoryToggle.onValueChanged.AddListener(OnMandatoryValueChanged);
         }
 
-        public void Initialize(BubbleFactory factory, BubbleQueueDefinition.Bucket bucket)
+        public void Initialize(BubbleFactory factory, BubbleQueuePanel panel, BubbleQueueDefinition.Bucket bucket)
         {
             this.bucket = bucket;
             int index = 0;
@@ -64,8 +82,7 @@ namespace Snoopy.LevelEditor
                     var element = instance.GetComponent<BubbleQueueElement>();
 
                     instance.transform.SetParent(elementContainer, false);
-                    element.Sprite = sprite.sprite;
-                    element.Initialize(bucket, index);
+                    element.Initialize(bucket, index, def.BaseColor);
 
                     elements.Add(element);
                     index++;
@@ -73,6 +90,9 @@ namespace Snoopy.LevelEditor
             }
 
             inputField.text = bucket.length.ToString();
+
+            insertButton.onClick.AddListener(() => panel.InsertBucket(this));
+            deleteButton.onClick.AddListener(() => panel.RemoveBucket(this));
         }
 
         private void OnEndLengthEdit(string text)
