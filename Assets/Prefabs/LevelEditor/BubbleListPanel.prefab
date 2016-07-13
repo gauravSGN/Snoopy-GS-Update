@@ -10,6 +10,7 @@ GameObject:
   - 224: {fileID: 22429140}
   - 222: {fileID: 22275458}
   - 114: {fileID: 11408330}
+  - 114: {fileID: 11428118}
   m_Layer: 5
   m_Name: BubbleListPanel
   m_TagString: Untagged
@@ -40,6 +41,18 @@ MonoBehaviour:
   m_Spacing: {x: 4, y: 4}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &11428118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1184210157, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AllowSwitchOff: 0
 --- !u!222 &22275458
 CanvasRenderer:
   m_ObjectHideFlags: 1
