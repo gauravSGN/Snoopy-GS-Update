@@ -26,6 +26,7 @@ public class WeightedBubbleQueue : BaseBubbleQueue, BubbleQueue
             options.Add(type, new OptionData());
         }
 
+        BuildQueue();
     }
 
     override protected BubbleType GenerateElement()
@@ -49,21 +50,6 @@ public class WeightedBubbleQueue : BaseBubbleQueue, BubbleQueue
         }
 
         return BubbleType.Blue;
-    }
-
-    override protected void BuildQueue()
-    {
-        var modified = queued.Count < MAX_QUEUE_SIZE;
-
-        while (queued.Count < MAX_QUEUE_SIZE)
-        {
-            queued.Add(GenerateElement());
-        }
-
-        if (modified)
-        {
-            NotifyListeners();
-        }
     }
 
     override protected void RemoveInactiveTypes()

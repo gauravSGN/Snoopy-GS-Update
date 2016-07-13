@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-abstract public class BaseBubbleQueue : Observable
+abstract public class BaseBubbleQueue : Observable, BubbleQueue
 {
-    public const int MAX_QUEUE_SIZE = 4;
+    public const int MAX_QUEUE_SIZE = 3;
 
     public static readonly BubbleType[] LAUNCHER_BUBBLE_TYPES =
     {
@@ -18,14 +18,12 @@ abstract public class BaseBubbleQueue : Observable
     protected readonly List<BubbleType> queued = new List<BubbleType>();
 
     abstract protected BubbleType GenerateElement();
-    abstract protected void BuildQueue();
     abstract protected void RemoveInactiveTypes();
 
     public BaseBubbleQueue(LevelState state)
     {
         levelState = state;
         state.AddListener(OnLevelStateChanged);
-        BuildQueue();
     }
 
     public BubbleType GetNext()
@@ -49,6 +47,21 @@ abstract public class BaseBubbleQueue : Observable
 
         queued.RemoveAt(0);
         queued.Insert(count - 1, first);
+    }
+
+    protected void BuildQueue()
+    {
+        var modified = queued.Count < MAX_QUEUE_SIZE;
+
+        while (queued.Count < MAX_QUEUE_SIZE)
+        {
+            queued.Add(GenerateElement());
+        }
+
+        if (modified)
+        {
+            NotifyListeners();
+        }
     }
 
     private void OnLevelStateChanged(Observable state)

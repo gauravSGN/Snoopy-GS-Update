@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 
-public class BubbleQueueTests
+abstract public class BubbleQueueTests
 {
     private BubbleQueue bubbleQueue;
     private readonly int[] invalidIndexes =
@@ -11,6 +11,8 @@ public class BubbleQueueTests
         BaseBubbleQueue.MAX_QUEUE_SIZE,
         BaseBubbleQueue.MAX_QUEUE_SIZE + 1000,
     };
+
+    abstract protected BubbleQueue GetBubbleQueue(LevelState levelState);
 
     [SetUp]
     public void Init()
@@ -24,7 +26,7 @@ public class BubbleQueueTests
         levelState.UpdateTypeTotals(BubbleType.Pink, 100);
         levelState.UpdateTypeTotals(BubbleType.Purple, 100);
 
-        bubbleQueue = new WeightedBubbleQueue(levelState);
+        bubbleQueue = GetBubbleQueue(levelState);
     }
 
     [Test]

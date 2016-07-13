@@ -30,7 +30,6 @@ public class Level : MonoBehaviour
         }
 
         levelState.levelNumber = sceneData.LevelNumber;
-
         StartCoroutine(LoadingCoroutine());
     }
 
@@ -39,10 +38,10 @@ public class Level : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         levelState.typeTotals = loader.LoadLevel(levelData);
-
         levelState.score = 0;
         levelState.remainingBubbles = loader.LevelData.ShotCount;
         levelState.starValues = loader.LevelData.StarValues;
+        levelState.bubbleQueue = new BucketBubbleQueue(levelState, loader.LevelData.Queue);
         levelState.NotifyListeners();
 
         var eventService = GlobalState.Instance.Services.Get<EventService>();
@@ -50,6 +49,7 @@ public class Level : MonoBehaviour
         eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
         eventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
         eventService.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
+        eventService.Dispatch(new LevelLoadedEvent());
     }
 
     private void OnBubbleFired(BubbleFiredEvent gameEvent)
