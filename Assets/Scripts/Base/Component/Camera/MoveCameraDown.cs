@@ -40,10 +40,10 @@ public class MoveCameraDown : MonoBehaviour
     private IEnumerator moveGameView()
     {
         yield return new WaitForSeconds(startDelay);
-        while(IsTouchingBubbles())
+        while (IsTouchingBubbles())
         {
             var transform = gameView.transform;
-            var yTransform = (transform.position.y - (Time.deltaTime * panSpeed));
+            var yTransform = transform.position.y - (Time.deltaTime * panSpeed);
             transform.position = new Vector3(transform.position.x, yTransform);
             yield return null;
         }
