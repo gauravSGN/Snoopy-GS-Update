@@ -87,16 +87,16 @@ public class Level : MonoBehaviour
 
         if (user.levels[levelState.levelNumber].score < levelState.score)
         {
-             user.levels[levelState.levelNumber].score = levelState.score;
+            user.levels[levelState.levelNumber].score = levelState.score;
 
-             for (int starIndex = levelState.starValues.Length - 1; starIndex >= 0; starIndex--)
-             {
-                 if (levelState.score >= levelState.starValues[starIndex])
-                 {
-                     user.levels[levelState.levelNumber].stars = (starIndex + 1);
-                     break;
-                 }
-             }
+            for (int starIndex = levelState.starValues.Length - 1; starIndex >= 0; starIndex--)
+            {
+                if (levelState.score >= levelState.starValues[starIndex])
+                {
+                    user.levels[levelState.levelNumber].stars = (starIndex + 1);
+                    break;
+                }
+            }
         }
     }
 }

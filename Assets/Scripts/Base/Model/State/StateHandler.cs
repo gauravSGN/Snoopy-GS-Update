@@ -41,5 +41,18 @@ namespace State
         {
             NotifyListeners();
         }
+
+        protected void InitializeStateKeys()
+        {
+            foreach (var stateKey in GetStateKeys())
+            {
+                InitializeChildObjectIfNecessary(stateKey);
+            }
+        }
+
+        virtual protected string[] GetStateKeys()
+        {
+            return new string[0];
+        }
     }
 }

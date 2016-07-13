@@ -57,3 +57,5 @@ MonoBehaviour:
     dotSpacing: 0.2
     moveSpeed: 2
     wallBounceDistance: 0.5
+  purchasables:
+    maxLives: 5
