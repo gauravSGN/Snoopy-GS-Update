@@ -22,12 +22,6 @@ namespace Snoopy.LevelEditor
         private GameObject bucketPrefab;
 
         [SerializeField]
-        private RectTransform dotsPanel;
-
-        [SerializeField]
-        private GameObject dotPrefab;
-
-        [SerializeField]
         private float rowHeight;
 
         private readonly List<BubbleQueueBucket> buckets = new List<BubbleQueueBucket>();
@@ -38,7 +32,6 @@ namespace Snoopy.LevelEditor
             queue = manipulator.Queue;
             queue.AddListener(OnQueueChanged);
 
-            CreateDots();
             Initialize();
         }
 
@@ -61,23 +54,6 @@ namespace Snoopy.LevelEditor
                 RemoveBucketAtIndex(index);
                 queue.buckets.RemoveAt(index);
                 OnBucketChanged();
-            }
-        }
-
-        private void CreateDots()
-        {
-            foreach (var def in manipulator.BubbleFactory.Bubbles.Where(b => b.category == BubbleCategory.Basic))
-            {
-                var sprite = def.Prefab.GetComponentInChildren<SpriteRenderer>();
-
-                if (sprite != null)
-                {
-                    var instance = Instantiate(dotPrefab);
-                    var image = instance.GetComponent<Image>();
-
-                    image.color = def.BaseColor;
-                    image.transform.SetParent(dotsPanel, false);
-                }
             }
         }
 
