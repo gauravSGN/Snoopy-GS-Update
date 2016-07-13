@@ -23,7 +23,7 @@ MonoBehaviour:
     cullMaxYForce: 5
   impactEffect:
     duration: 0.15
-    distance: 0.15
+    distance: 0.1
     radius: 0.5
     easing:
       serializedVersion: 2
