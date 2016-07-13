@@ -189,6 +189,7 @@ GameObject:
   - 224: {fileID: 22461852}
   - 222: {fileID: 22257134}
   - 114: {fileID: 11439494}
+  - 114: {fileID: 11449802}
   m_Layer: 5
   m_Name: RandomBubblePanel
   m_TagString: Untagged
@@ -911,6 +912,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Load
+--- !u!114 &11449802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 151592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9af65e5fec434040bae958f715bc845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manipulator: {fileID: 0}
+  groupPrefab: {fileID: 141876, guid: 396a705bf588d4c07adcbd45ad3cf24e, type: 2}
+  contents: {fileID: 22435080}
+  rowHeight: 32
 --- !u!114 &11449988
 MonoBehaviour:
   m_ObjectHideFlags: 1

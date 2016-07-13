@@ -13,8 +13,8 @@ namespace Model
             Each,
         }
 
-        public List<int> exclusions;
-        public float[] weights;
-        public RollType rollType;
+        public List<int> exclusions = new List<int>();
+        public int[] weights = new int[6];
+        public RollType rollType = RollType.Once;
     }
 }

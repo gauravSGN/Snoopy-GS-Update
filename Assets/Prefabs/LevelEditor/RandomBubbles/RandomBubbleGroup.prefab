@@ -98,6 +98,7 @@ GameObject:
   - 222: {fileID: 22298926}
   - 114: {fileID: 11452166}
   - 114: {fileID: 11483526}
+  - 114: {fileID: 11417248}
   m_Layer: 5
   m_Name: RandomBubbleGroup
   m_TagString: Untagged
@@ -327,6 +328,23 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11417248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24ad4970375c4edfb1865ce136693e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elementContainer: {fileID: 22410262}
+  elementPrefab: {fileID: 125824, guid: 25c656482b8e643fa87fd0968342ecf8, type: 2}
+  groupLabel: {fileID: 11472694}
+  onceEachButton: {fileID: 11413224}
+  countLabel: {fileID: 11401412}
+  deleteButton: {fileID: 11429964}
 --- !u!114 &11427956
 MonoBehaviour:
   m_ObjectHideFlags: 1
