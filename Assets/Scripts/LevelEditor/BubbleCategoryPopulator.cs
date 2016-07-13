@@ -133,7 +133,9 @@ namespace LevelEditor
 
                 button.name = definition.Type.ToString();
                 button.GetComponent<Image>().sprite = prefabSprite.sprite;
-                button.GetComponent<Button>().onClick.AddListener(() => action(definition.Type));
+                var toggle = button.GetComponent<Toggle>();
+                toggle.group = panel.GetComponent<ToggleGroup>();
+                toggle.onValueChanged.AddListener((v) => { if (v) action(definition.Type); });
                 button.transform.SetParent(panel.transform, false);
             }
         }
