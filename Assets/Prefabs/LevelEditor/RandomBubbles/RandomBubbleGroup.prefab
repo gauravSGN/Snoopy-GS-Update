@@ -63,6 +63,7 @@ GameObject:
   - 224: {fileID: 22431670}
   - 222: {fileID: 22299356}
   - 114: {fileID: 11429208}
+  - 114: {fileID: 11441170}
   m_Layer: 5
   m_Name: ExclusionsPanel
   m_TagString: Untagged
@@ -345,6 +346,7 @@ MonoBehaviour:
   onceEachButton: {fileID: 11413224}
   countLabel: {fileID: 11401412}
   deleteButton: {fileID: 11429964}
+  exclusionPanel: {fileID: 11441170}
 --- !u!114 &11427956
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,6 +456,20 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+--- !u!114 &11441170
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11469cb642b3466a90aea33196e27e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addButton: {fileID: 11413588}
+  contents: {fileID: 22431670}
+  elementPrefab: {fileID: 129302, guid: 132bb3da9006a4d399addfd5736eebfc, type: 2}
 --- !u!114 &11452166
 MonoBehaviour:
   m_ObjectHideFlags: 1

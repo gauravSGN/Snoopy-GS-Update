@@ -43,6 +43,7 @@ namespace LevelEditor
             {
                 filename = null;
                 ClearBoard();
+                GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelEditorLoadEvent());
             });
         }
 
