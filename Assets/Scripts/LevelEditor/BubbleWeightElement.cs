@@ -3,9 +3,9 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using Snoopy.Model;
 
-namespace Snoopy.LevelEditor
+namespace LevelEditor
 {
-    public class BubbleQueueElement : MonoBehaviour
+    public class BubbleWeightElement : MonoBehaviour
     {
         [SerializeField]
         private Text text;
@@ -14,8 +14,8 @@ namespace Snoopy.LevelEditor
         private Color disabledColor;
 
         private InputField inputField;
-        private BubbleQueueDefinition.Bucket bucket;
         private Color textColor;
+        private int[] values;
         private int index;
 
         public void Start()
@@ -25,9 +25,9 @@ namespace Snoopy.LevelEditor
             UpdateText();
         }
 
-        public void Initialize(BubbleQueueDefinition.Bucket bucket, int index, Color color)
+        public void Initialize(int[] values, int index, Color color)
         {
-            this.bucket = bucket;
+            this.values = values;
             this.index = index;
             textColor = color;
 
@@ -38,11 +38,11 @@ namespace Snoopy.LevelEditor
         {
             try
             {
-                bucket.counts[index] = int.Parse(text);
+                values[index] = int.Parse(text);
             }
             catch (System.FormatException)
             {
-                bucket.counts[index] = 0;
+                values[index] = 0;
             }
 
             UpdateText();
@@ -52,7 +52,7 @@ namespace Snoopy.LevelEditor
         {
             if (inputField != null)
             {
-                var value = bucket.counts[index];
+                var value = values[index];
                 inputField.text = (value <= 0) ? "-" : value.ToString();
                 text.color = (value <= 0) ? disabledColor : textColor;
             }

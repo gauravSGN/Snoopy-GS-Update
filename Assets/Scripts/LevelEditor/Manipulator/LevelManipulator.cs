@@ -42,6 +42,7 @@ namespace LevelEditor
 
         private readonly LevelProperties levelProperties = new LevelProperties();
         private readonly BubbleQueueDefinition queue = new BubbleQueueDefinition();
+        private List<RandomBubbleDefinition> randoms = new List<RandomBubbleDefinition>();
 
         public BubbleType BubbleType { get; private set; }
         public BubbleContentType ContentType { get; private set; }
@@ -58,6 +59,7 @@ namespace LevelEditor
 
         public LevelProperties LevelProperties { get { return levelProperties; } }
         public BubbleQueueDefinition Queue { get { return queue; } }
+        public List<RandomBubbleDefinition> Randoms { get { return randoms; } }
 
         public void LoadLevel(string jsonText)
         {
@@ -83,6 +85,10 @@ namespace LevelEditor
 
             queue.CopyFrom(levelData.Queue);
             queue.NotifyListeners();
+
+            randoms = new List<RandomBubbleDefinition>(levelData.Randoms ?? new RandomBubbleDefinition[0]);
+
+            GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelEditorLoadEvent());
         }
 
         public string SaveLevel()
@@ -91,6 +97,7 @@ namespace LevelEditor
             {
                 Bubbles = models.Values,
                 Queue = queue,
+                Randoms = randoms.ToArray(),
             };
 
             LevelProperties.ToLevelData(data);

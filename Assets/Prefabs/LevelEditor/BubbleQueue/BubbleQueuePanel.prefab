@@ -936,6 +936,8 @@ MonoBehaviour:
   contentContainer: {fileID: 22474626}
   totalText: {fileID: 11449004}
   bucketPrefab: {fileID: 180676, guid: 6216a006cb66947d39bd995e0091d162, type: 2}
+  dotsPanel: {fileID: 0}
+  dotPrefab: {fileID: 0}
   rowHeight: 64
 --- !u!222 &22205932
 CanvasRenderer:

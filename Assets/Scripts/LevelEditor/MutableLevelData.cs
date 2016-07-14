@@ -36,5 +36,11 @@ namespace LevelEditor
             get { return base.Queue; }
             set { queue = value; }
         }
+
+        public new RandomBubbleDefinition[] Randoms
+        {
+            get { return base.Randoms; }
+            set { randoms = value; }
+        }
     }
 }

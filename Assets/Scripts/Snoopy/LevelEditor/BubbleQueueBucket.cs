@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
+using LevelEditor;
 using Snoopy.Model;
-using System.Linq;
 using System;
 
 namespace Snoopy.LevelEditor
 {
-    public class BubbleQueueBucket : MonoBehaviour
+    public class BubbleQueueBucket : BubbleWeightEditor
     {
         public event Action OnBucketChanged;
 
@@ -18,9 +17,6 @@ namespace Snoopy.LevelEditor
         private InputField inputField;
 
         [SerializeField]
-        private RectTransform elementContainer;
-
-        [SerializeField]
         private Toggle mandatoryToggle;
 
         [SerializeField]
@@ -29,11 +25,7 @@ namespace Snoopy.LevelEditor
         [SerializeField]
         private Button deleteButton;
 
-        [SerializeField]
-        private GameObject elementPrefab;
-
         private BubbleQueueDefinition.Bucket bucket;
-        private List<BubbleQueueElement> elements = new List<BubbleQueueElement>();
 
         public BubbleQueueDefinition.Bucket Bucket { get { return bucket; } }
 
@@ -70,24 +62,8 @@ namespace Snoopy.LevelEditor
         public void Initialize(BubbleFactory factory, BubbleQueuePanel panel, BubbleQueueDefinition.Bucket bucket)
         {
             this.bucket = bucket;
-            int index = 0;
 
-            foreach (var def in factory.Bubbles.Where(b => b.category == BubbleCategory.Basic))
-            {
-                var sprite = def.Prefab.GetComponentInChildren<SpriteRenderer>();
-
-                if (sprite != null)
-                {
-                    var instance = Instantiate(elementPrefab);
-                    var element = instance.GetComponent<BubbleQueueElement>();
-
-                    instance.transform.SetParent(elementContainer, false);
-                    element.Initialize(bucket, index, def.BaseColor);
-
-                    elements.Add(element);
-                    index++;
-                }
-            }
+            CreateWeightElements(factory, bucket.counts);
 
             inputField.text = bucket.length.ToString();
 

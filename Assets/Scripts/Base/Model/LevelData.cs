@@ -61,6 +61,7 @@ namespace Model
         virtual public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
         virtual public int[] StarValues { get { return starValues; } }
         virtual public BubbleQueueDefinition Queue { get { return queue; } }
+        virtual public RandomBubbleDefinition[] Randoms { get { return randoms; } }
 
         public List<LevelGoal> goals;
 
@@ -78,5 +79,8 @@ namespace Model
 
         [SerializeField]
         protected BubbleQueueDefinition queue;
+
+        [SerializeField]
+        protected RandomBubbleDefinition[] randoms;
     }
 }
