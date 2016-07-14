@@ -33,6 +33,8 @@ namespace State
         public long lastTimeHeartAwarded
         {
             get { return GetValue<long>("lastTimeHeartAwarded", 0); }
+
+            // We avoid using SetValue here so NotifyDispatchers is only called once when hearts are modified
             private set { state["lastTimeHeartAwarded"] = (long)value; }
         }
 
@@ -50,8 +52,6 @@ namespace State
 
                 return secondsRemaining;
             }
-
-            private set {}
         }
 
         public Purchasables(Data state, Action<Observable> initialListener = null) : base(state, initialListener)
