@@ -8,17 +8,15 @@ namespace State
 {
     public class PersistableStateHandler : StateHandler, Persistable
     {
-        private Persistence persistence;
-
         public uint PersistableVersion { get { return 1; } }
 
-        public PersistableStateHandler(Data topLevelState, Action<Observable> initialListener = null) : base(topLevelState, initialListener)
+        public PersistableStateHandler(Data topLevelState, Action<Observable> initialListener = null)
+            : base(topLevelState, initialListener)
         {
             state = new Dictionary<string, object>();
             InitializeStateKeys();
 
-            persistence = GS.Api.Persistence;
-            persistence.register(this);
+            GS.Api.Persistence.register(this);
         }
 
         // recover and persist implement the Persistable interface and thus will break our coding standard
@@ -36,7 +34,13 @@ namespace State
 
         public void Save()
         {
-            persistence.flush(this);
+            GS.Api.Persistence.flush(this);
+        }
+
+        protected void SaveAndNotifyListenersCallback(Observable target)
+        {
+            Save();
+            NotifyListeners();
         }
     }
 }

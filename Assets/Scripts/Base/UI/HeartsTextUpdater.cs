@@ -1,7 +1,6 @@
 using State;
 using Service;
 using UnityEngine;
-using System;
 
 public class HeartsTextUpdater : TextUpdater
 {
@@ -16,7 +15,7 @@ public class HeartsTextUpdater : TextUpdater
 
         if (user != null)
         {
-            Target = user.purchasables;
+            Target = user.purchasables.hearts;
         }
     }
 
@@ -24,9 +23,9 @@ public class HeartsTextUpdater : TextUpdater
     {
         if (target != null)
         {
-            var purchasables = (Purchasables)target;
+            var hearts = (Hearts)target;
 
-            if (purchasables.hearts == GlobalState.Instance.Config.purchasables.maxHearts)
+            if (hearts.quantity == GlobalState.Instance.Config.purchasables.maxHearts)
             {
                 text.text = textWhenFull;
             }

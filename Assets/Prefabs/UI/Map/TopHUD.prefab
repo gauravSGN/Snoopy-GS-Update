@@ -409,7 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   format: '{0} ({1})'
   fields:
-  - hearts
+  - quantity
   - secondsUntilNextHeart
   textWhenFull: FULL
 --- !u!114 &11456358

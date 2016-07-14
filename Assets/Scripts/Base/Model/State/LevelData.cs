@@ -23,7 +23,7 @@ namespace State
             set { SetValue<long>("updatedAt", value); }
         }
 
-        public LevelData(Data state, Action<Observable> initialListener = null) : base(state, initialListener)
+        public LevelData(Data topLevelState, Action<Observable> initialListener = null) : base(topLevelState, initialListener)
         {
         }
     }
