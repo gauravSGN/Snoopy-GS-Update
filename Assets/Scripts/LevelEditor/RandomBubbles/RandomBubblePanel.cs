@@ -108,7 +108,7 @@ namespace LevelEditor
 
             group.Initialize(manipulator.BubbleFactory, definitions[index]);
             group.DeleteButton.onClick.AddListener(() => RemoveGroup(group));
-            group.Label = string.Format("R{0}", index);
+            group.Label = string.Format("R{0}", index + 1);
             group.Count = 0;
             groups.Add(group);
         }
