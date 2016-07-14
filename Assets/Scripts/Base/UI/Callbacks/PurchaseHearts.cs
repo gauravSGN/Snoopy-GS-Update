@@ -15,8 +15,7 @@ namespace UI.Callbacks
         {
             var user = GlobalState.Instance.Services.Get<UserStateService>();
 
-            if ((user != null) &&
-                (user.purchasables.hearts.quantity < GlobalState.Instance.Config.purchasables.maxHearts) &&
+            if ((user.purchasables.hearts.quantity < GlobalState.Instance.Config.purchasables.maxHearts) &&
                 (user.purchasables.coins.quantity >= coinCost))
             {
                 user.purchasables.hearts.quantity += numberOfHearts;

@@ -10,12 +10,7 @@ namespace UI.Callbacks
 
         public void Buy()
         {
-            var user = GlobalState.Instance.Services.Get<UserStateService>();
-
-            if (user != null)
-            {
-                user.purchasables.coins.quantity += numberOfCoins;
-            }
+            GlobalState.Instance.Services.Get<UserStateService>().purchasables.coins.quantity += numberOfCoins;
         }
     }
 }
