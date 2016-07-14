@@ -1,47 +1,27 @@
-﻿using Service;
 using UnityEngine;
+using System.Collections;
 
-public class MoveCameraDown : MonoBehaviour, UpdateReceiver
+public class MoveCameraDown : MonoBehaviour
 {
-    private const float CEILING = 0.0f;
-
     [SerializeField]
     private GameObject gameView;
 
     [SerializeField]
     private float panSpeed;
 
+    [SerializeField]
+    private float startDelay;
+
     private Collider2D castingBox;
 
-    protected void Start()
+    private void Start()
     {
-        castingBox = gameObject.GetComponent<Collider2D>();
-        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
+        castingBox = GetComponent<Collider2D>();
     }
 
-    public void OnUpdate()
+    public void OnTriggerEnter2D(Collider2D collider)
     {
-        var isMoving = !IsTouchingBubbles();
-
-        if (isMoving)
-        {
-            moveGameView();
-        }
-        else
-        {
-            GlobalState.Instance.Services.Get<UpdateService>().Updates.Remove(this);
-        }
-    }
-
-    private void moveGameView()
-    {
-        var transform = gameView.transform;
-
-        if (transform.position.y < CEILING)
-        {
-            var yTransform = (transform.position.y + (Time.deltaTime * panSpeed));
-            transform.position = new Vector3(transform.position.x, yTransform);
-        }
+        StartCoroutine(MoveGameView());
     }
 
     private bool IsTouchingBubbles()
@@ -54,11 +34,15 @@ public class MoveCameraDown : MonoBehaviour, UpdateReceiver
         return Physics2D.BoxCastAll(origin, size, 0, direction, 0, 1 << (int)Layers.GameObjects).Length > 0;
     }
 
-    private void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)
+    private IEnumerator MoveGameView()
     {
-        if (!IsTouchingBubbles())
+        yield return new WaitForSeconds(startDelay);
+        var transform = gameView.transform;
+        while (IsTouchingBubbles())
         {
-            GlobalState.Instance.Services.Get<UpdateService>().Updates.Add(this);
+            var yTransform = transform.position.y - (Time.deltaTime * panSpeed);
+            transform.position = new Vector3(transform.position.x, yTransform);
+            yield return null;
         }
     }
 }
