@@ -21,10 +21,7 @@ public class MoveCameraDown : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
-        // var transform = gameView.transform;
-        // var yTransform = (transform.position.y + ((Time.deltaTime * panSpeed) * -1));
-        // transform.position = new Vector3(transform.position.x, yTransform);
-        StartCoroutine(moveGameView());
+        StartCoroutine(MoveGameView());
     }
 
     private bool IsTouchingBubbles()
@@ -37,12 +34,12 @@ public class MoveCameraDown : MonoBehaviour
         return Physics2D.BoxCastAll(origin, size, 0, direction, 0, 1 << (int)Layers.GameObjects).Length > 0;
     }
 
-    private IEnumerator moveGameView()
+    private IEnumerator MoveGameView()
     {
         yield return new WaitForSeconds(startDelay);
+        var transform = gameView.transform;
         while (IsTouchingBubbles())
         {
-            var transform = gameView.transform;
             var yTransform = transform.position.y - (Time.deltaTime * panSpeed);
             transform.position = new Vector3(transform.position.x, yTransform);
             yield return null;

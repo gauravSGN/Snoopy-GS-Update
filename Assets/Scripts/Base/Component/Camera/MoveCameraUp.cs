@@ -23,7 +23,7 @@ public class MoveCameraUp : MonoBehaviour
         GlobalState.Instance.Services.Get<EventService>().AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
-    private IEnumerator moveGameView()
+    private IEnumerator MoveGameView()
     {
         yield return new WaitForSeconds(startDelay);
         var transform = gameView.transform;
@@ -49,7 +49,7 @@ public class MoveCameraUp : MonoBehaviour
     {
         if (!IsTouchingBubbles())
         {
-            StartCoroutine(moveGameView());
+            StartCoroutine(MoveGameView());
         }
     }
 }
