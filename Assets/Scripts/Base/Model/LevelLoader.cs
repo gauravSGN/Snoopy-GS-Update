@@ -58,10 +58,10 @@ public class LevelLoader : MonoBehaviour
 
     private void PositionCamera()
     {
+        var scroll = gameView.GetComponent<LevelIntroScroll>();
         var maxY = LevelData.Bubbles.Aggregate(1, (acc, b) => Mathf.Max(acc, b.Y));
-        gameView.transform.position = new Vector3(
-            0.0f, -(maxY - 8) * GlobalState.Instance.Config.bubbles.size * MathUtil.COS_30_DEGREES, 0.0f
-        );
+        var targetY = -(maxY - 11) * GlobalState.Instance.Config.bubbles.size * MathUtil.COS_30_DEGREES;
+        scroll.ScrollTo(targetY);
     }
 
     private Vector3 GetBubbleLocation(int x, int y)

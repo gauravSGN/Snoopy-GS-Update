@@ -204,6 +204,7 @@ GameObject:
   - 114: {fileID: 11450880}
   - 114: {fileID: 11462800}
   - 114: {fileID: 11404042}
+  - 114: {fileID: 11465266}
   m_Layer: 0
   m_Name: Game View
   m_TagString: Untagged
@@ -982,6 +983,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24c2819c2fdc48799de3505a696b34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11465266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e6b8352ca7b411da476c8765072e8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 2
+  boundsObject: {fileID: 191534}
+  launcherGroup: {fileID: 171954}
 --- !u!114 &11466544
 MonoBehaviour:
   m_ObjectHideFlags: 1
