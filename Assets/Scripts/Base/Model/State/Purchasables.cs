@@ -48,8 +48,6 @@ namespace State
                     secondsRemaining = Math.Max(0, (nextHeartTime - GetUnixTime()));
                 }
 
-                Debug.Log("Seconds Remaining: " + secondsRemaining.ToString());
-
                 return secondsRemaining;
             }
 
@@ -72,7 +70,6 @@ namespace State
                     NotifyListeners();
                 }
 
-                Debug.Log("Heart replenished");
                 replenishing = false;
                 hearts++;
             }
@@ -87,8 +84,6 @@ namespace State
 
             if (heartsToReplenish > 0)
             {
-                Debug.Log("Hearts Replenished: " + heartsToReplenish.ToString());
-
                 lastTimeHeartAwarded += (heartsToReplenish * secondsPerHeart);
                 SetValue<long>("hearts", hearts + heartsToReplenish);
                 Save();
