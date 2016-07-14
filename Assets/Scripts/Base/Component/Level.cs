@@ -41,7 +41,7 @@ public class Level : MonoBehaviour
         levelState.score = 0;
         levelState.remainingBubbles = loader.LevelData.ShotCount;
         levelState.starValues = loader.LevelData.StarValues;
-        levelState.bubbleQueue = new BucketBubbleQueue(levelState, loader.LevelData.Queue);
+        levelState.bubbleQueue = BubbleQueueFactory.GetBubbleQueue(loader.BubbleQueueType, levelState, loader.LevelData.Queue);
         levelState.NotifyListeners();
 
         var eventService = GlobalState.Instance.Services.Get<EventService>();

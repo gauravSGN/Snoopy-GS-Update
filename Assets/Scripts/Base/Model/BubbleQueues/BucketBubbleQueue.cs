@@ -23,11 +23,7 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
 
     override protected BubbleType GenerateElement()
     {
-        if ((currentBucket != queueDefinition.extras) &&
-            ((currentCount == currentBucket.length) || (currentBucket.counts.Sum() == 0)))
-        {
-            SetCurrentBucket();
-        }
+        ChangeBucket();
 
         if (randomizedBucket.Count == 0)
         {
@@ -42,8 +38,6 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
             randomizedBucket = randomizedBucket.OrderBy(item => random.Next()).ToList();;
         }
 
-        Debug.Log(string.Join(",", randomizedBucket.Select(item => item.ToString()).ToArray()));
-
         currentCount++;
         var nextElement = randomizedBucket[0];
         randomizedBucket.RemoveAt(0);
@@ -53,8 +47,7 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
     override protected void RemoveInactiveTypes()
     {
         var typeTotals = levelState.typeTotals;
-        var eliminatedTypes = typeTotals.Where( pair => (pair.Value == 0) && (!removedTypes.Contains(pair.Key)))
-                                .Select(pair => pair.Key).ToList();
+        var eliminatedTypes = typeTotals.Where(IsEliminated).Select(pair => pair.Key).ToList();
 
         if (eliminatedTypes.Count > 0)
         {
@@ -93,6 +86,15 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
 
             randomizedBucket = new List<BubbleType>();
             // Debug.Log("queued after elimination : " + string.Join(",", queued.Select(item => item.ToString()).ToArray()));
+        }
+    }
+
+    private void ChangeBucket()
+    {
+        if ((currentBucket != queueDefinition.extras) &&
+            ((currentCount == currentBucket.length) || (currentBucket.counts.Sum() == 0)))
+        {
+            SetCurrentBucket();
         }
     }
 
@@ -137,5 +139,10 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
         }
 
         return returnBucket;
+    }
+
+    private bool IsEliminated(KeyValuePair<BubbleType, int> pair)
+    {
+        return LAUNCHER_BUBBLE_TYPES.Contains(pair.Key) && (pair.Value == 0) && (!removedTypes.Contains(pair.Key));
     }
 }

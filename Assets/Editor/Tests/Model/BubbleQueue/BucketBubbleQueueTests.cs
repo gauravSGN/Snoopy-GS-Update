@@ -1,5 +1,4 @@
 using Snoopy.Model;
-using UnityEngine;
 
 public class BucketBubbleQueueTests : BubbleQueueTests
 {
@@ -14,11 +13,6 @@ public class BucketBubbleQueueTests : BubbleQueueTests
             definition.buckets.Add(bucket);
         }
 
-        foreach (var item in definition.buckets)
-        {
-            Debug.Log(item.counts);
-            Debug.Log(item.length);
-        }
         definition.extras = new BubbleQueueDefinition.Bucket(1, 1, 1, 1, 1, 1);
         return new BucketBubbleQueue(levelState, definition);
     }

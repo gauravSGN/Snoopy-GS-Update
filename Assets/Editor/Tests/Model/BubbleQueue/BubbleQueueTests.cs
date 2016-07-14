@@ -25,6 +25,7 @@ abstract public class BubbleQueueTests
         levelState.UpdateTypeTotals(BubbleType.Green, 100);
         levelState.UpdateTypeTotals(BubbleType.Pink, 100);
         levelState.UpdateTypeTotals(BubbleType.Purple, 100);
+        levelState.remainingBubbles = 100;
 
         bubbleQueue = GetBubbleQueue(levelState);
     }

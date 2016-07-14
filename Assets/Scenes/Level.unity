@@ -807,6 +807,7 @@ MonoBehaviour:
   contentFactory: {fileID: 11400000, guid: 8ff695269c40e4a69ae094dd6f22719e, type: 2}
   gameView: {fileID: 1197956592}
   powerUpController: {fileID: 142751819}
+  bubbleQueueType: 1
   levelContainer: {fileID: 1611852003}
 --- !u!4 &1499581534
 Transform:
