@@ -4,8 +4,6 @@ using System.Collections;
 
 public class MoveCameraUp : MonoBehaviour
 {
-    private const float CEILING = 0.22f;
-
     [SerializeField]
     private GameObject gameView;
 
@@ -14,6 +12,9 @@ public class MoveCameraUp : MonoBehaviour
 
     [SerializeField]
     private float startDelay;
+
+    [SerializeField]
+    private Transform viewBoundary;
 
     private Collider2D castingBox;
 
@@ -27,11 +28,16 @@ public class MoveCameraUp : MonoBehaviour
     {
         yield return new WaitForSeconds(startDelay);
         var transform = gameView.transform;
-        while (!IsTouchingBubbles() && transform.position.y < CEILING)
+        var maxY = viewBoundary.position.y;
+        while (!IsTouchingBubbles() && transform.position.y < maxY)
         {
             var yTransform = transform.position.y + (Time.deltaTime * panSpeed);
-            transform.position = new Vector3(transform.position.x, yTransform);
+            transform.position = new Vector3(transform.position.x, yTransform, transform.position.z);
             yield return null;
+        }
+        if(transform.position.y > maxY)
+        {
+            transform.position = new Vector3(transform.position.x, maxY, transform.position.z);
         }
     }
 
