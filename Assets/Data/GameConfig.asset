@@ -58,4 +58,5 @@ MonoBehaviour:
     moveSpeed: 2
     wallBounceDistance: 0.5
   purchasables:
-    maxLives: 5
+    maxHearts: 5
+    secondsPerHeart: 30

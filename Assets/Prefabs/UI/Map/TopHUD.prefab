@@ -29,7 +29,7 @@ GameObject:
   - 222: {fileID: 22225804}
   - 114: {fileID: 11456358}
   - 114: {fileID: 11401616}
-  - 114: {fileID: 11403658}
+  - 114: {fileID: 11451620}
   m_Layer: 5
   m_Name: Count Text
   m_TagString: Untagged
@@ -219,20 +219,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!114 &11403658
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 113076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f6571b4a1777456bb0786f48d74d5c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  format: '{0}'
-  fields:
-  - hearts
 --- !u!114 &11407226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -410,6 +396,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Lives
+--- !u!114 &11451620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6288913779eee44658ec2bf98fe333d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  format: '{0} ({1})'
+  fields:
+  - hearts
+  - secondsUntilNextHeart
+  textWhenFull: FULL
 --- !u!114 &11456358
 MonoBehaviour:
   m_ObjectHideFlags: 1

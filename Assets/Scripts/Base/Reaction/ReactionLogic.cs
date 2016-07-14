@@ -79,11 +79,7 @@ namespace Reaction
 
             if (GetComponent<Level>().levelState.remainingBubbles <= 0)
             {
-                var user = GlobalState.Instance.Services.Get<UserStateService>();
-
-                user.purchasables.hearts--;
-                user.purchasables.Save();
-
+                GlobalState.Instance.Services.Get<UserStateService>().purchasables.hearts--;
                 GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(false));
             }
             else

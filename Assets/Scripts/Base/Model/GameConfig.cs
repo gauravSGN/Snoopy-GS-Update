@@ -44,7 +44,8 @@ public class GameConfig : ScriptableObject
     [Serializable]
     public class PurchasableConfig
     {
-        public int maxLives;
+        public int maxHearts;
+        public int secondsPerHeart;
     }
 
     public BubbleConfig bubbles;

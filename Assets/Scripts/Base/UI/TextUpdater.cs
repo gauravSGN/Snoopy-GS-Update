@@ -5,6 +5,12 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class TextUpdater : MonoBehaviour
 {
+    public string format;
+    public List<string> fields;
+
+    protected Text text;
+    protected Observable target;
+
     public Observable Target
     {
         get { return target; }
@@ -25,11 +31,13 @@ public class TextUpdater : MonoBehaviour
         }
     }
 
-    public string format;
-    public List<string> fields;
-
-    private Text text;
-    private Observable target;
+    virtual protected void OnDestroy()
+    {
+        if (target != null)
+        {
+            target.RemoveListener(UpdateText);
+        }
+    }
 
     virtual protected void Start()
     {
@@ -37,7 +45,7 @@ public class TextUpdater : MonoBehaviour
         UpdateText(Target);
     }
 
-    protected void UpdateText(Observable target)
+    virtual protected void UpdateText(Observable target)
     {
         if ((text != null) && (target != null))
         {

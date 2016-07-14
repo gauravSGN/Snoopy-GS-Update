@@ -32,6 +32,7 @@ namespace Config
                 GS.Api.OnStorageLow += OnStorageLow;
                 GS.Api.OnStorageAvailable += OnStorageAvailable;
 
+                GlobalState.Instance.Services.Get<UserStateService>().purchasables.ReplenishHearts();
                 GlobalState.Instance.Services.Get<EventService>().Dispatch(new GSInitializedEvent(this));
             });
         }
