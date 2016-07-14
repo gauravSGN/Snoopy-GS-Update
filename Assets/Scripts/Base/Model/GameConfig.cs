@@ -46,6 +46,7 @@ public class GameConfig : ScriptableObject
     {
         public int maxHearts;
         public int secondsPerHeart;
+        public int newUserCoins;
     }
 
     public BubbleConfig bubbles;

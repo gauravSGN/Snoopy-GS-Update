@@ -5,19 +5,23 @@ namespace State
 {
     public class Purchasables : PersistableStateHandler
     {
+        private const string COINS = "coins";
         private const string HEARTS = "hearts";
 
+        public Coins coins { get; private set; }
         public Hearts hearts { get; private set; }
 
         public Purchasables(Data topLevelState, Action<Observable> initialListener = null) : base(topLevelState, initialListener)
         {
             InitializeStateKeys();
+
+            coins = new Coins((Data)state[COINS], SaveAndNotifyListenersCallback);
             hearts = new Hearts((Data)state[HEARTS], SaveAndNotifyListenersCallback);
         }
 
         override protected string[] GetStateKeys()
         {
-            return new string[] {HEARTS};
+            return new string[] {COINS, HEARTS};
         }
     }
 }

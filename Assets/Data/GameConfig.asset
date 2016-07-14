@@ -60,3 +60,4 @@ MonoBehaviour:
   purchasables:
     maxHearts: 5
     secondsPerHeart: 30
+    newUserCoins: 100
