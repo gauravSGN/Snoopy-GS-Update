@@ -2,6 +2,7 @@ using Util;
 using Config;
 using UnityEngine;
 using Service;
+using System.Collections;
 
 // The GlobalState prefab needs to be in every scene that uses it for the
 // scene editor to work without coming from a different scene.
@@ -27,6 +28,14 @@ public class GlobalState : SingletonBehaviour<GlobalState>
         Services.RegisterFromJson(servicesJSON.text);
 
         base.Awake();
+    }
+
+    public void RunCoroutine(IEnumerator enumerator)
+    {
+        if (Instance == this)
+        {
+            StartCoroutine(enumerator);
+        }
     }
 
     // Initialize things in Start if they will dispatch events

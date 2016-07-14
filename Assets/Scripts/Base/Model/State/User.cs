@@ -24,20 +24,21 @@ namespace State
             set { SetValue<long>("hasPaid", value); }
         }
 
-        public Inventory inventory { get; private set; }
+        public Purchasables purchasables { get; private set; }
         public Levels levels { get; private set; }
 
         public User() : base(GS.Api.State)
         {
-            string[] dataStateKeys = {"inventory", "levels"};
+            InitializeStateKeys();
 
-            foreach (var dataStateKey in dataStateKeys)
-            {
-                InitializeChildObjectIfNecessary(dataStateKey);
-            }
-
-            inventory = new Inventory((Data)GS.Api.State["inventory"], NotifyListenersCallback);
             levels = new Levels((Data)GS.Api.State["levels"], NotifyListenersCallback);
+
+            purchasables = new Purchasables(null, NotifyListenersCallback);
+        }
+
+        override protected string[] GetStateKeys()
+        {
+            return new string[] {"levels"};
         }
     }
 }

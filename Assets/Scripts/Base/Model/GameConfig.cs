@@ -41,9 +41,16 @@ public class GameConfig : ScriptableObject
         public float wallBounceDistance;
     }
 
+    [Serializable]
+    public class PurchasableConfig
+    {
+        public int maxHearts;
+        public int secondsPerHeart;
+    }
+
     public BubbleConfig bubbles;
     public ReactionConfig reactions;
-
     public ImpactEffectConfig impactEffect;
     public AimlineConfig aimline;
+    public PurchasableConfig purchasables;
 }
