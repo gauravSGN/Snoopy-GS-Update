@@ -8,6 +8,9 @@ public class LevelIntroScroll : MonoBehaviour
     private float scrollSpeed;
 
     [SerializeField]
+    private Transform scrollBound;
+
+    [SerializeField]
     private GameObject boundsObject;
 
     [SerializeField]
@@ -15,8 +18,9 @@ public class LevelIntroScroll : MonoBehaviour
 
     public void ScrollTo(float yPos)
     {
+        var targetY = Mathf.Min(yPos, scrollBound.position.y);
         boundsObject.SetActive(false);
-        StartCoroutine(DoScroll(yPos));
+        StartCoroutine(DoScroll(targetY));
     }
 
     private IEnumerator DoScroll(float targetY)
