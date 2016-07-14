@@ -78,7 +78,7 @@ namespace PowerUps
         // Just set objects active/inactive until we have an animation
         public void HidePowerUps()
         {
-            for(int i = 0, count = anchors.Length; i < count; ++i)
+            for (int i = 0, count = anchors.Length; i < count; ++i)
             {
                 anchors[i].gameObject.SetActive(false);
             }
@@ -86,7 +86,7 @@ namespace PowerUps
 
         public void ShowPowerUps()
         {
-            for(int i = 0, count = anchors.Length; i < count; ++i)
+            for (int i = 0, count = anchors.Length; i < count; ++i)
             {
                 anchors[i].gameObject.SetActive(true);
             }
