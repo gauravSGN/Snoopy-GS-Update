@@ -4,9 +4,6 @@ using gs.persist;
 using Data = System.Collections.Generic.IDictionary<string, object>;
 using System.Collections.Generic;
 
-
-using UnityEngine;
-
 namespace State
 {
     public class PersistableStateHandler : StateHandler, Persistable
