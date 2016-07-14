@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 abstract public class BaseBubbleQueue : Observable, BubbleQueue
 {
-    public const int MAX_QUEUE_SIZE = 3;
+    public const int MAX_QUEUE_SIZE = 4;
 
     public static readonly BubbleType[] LAUNCHER_BUBBLE_TYPES =
     {

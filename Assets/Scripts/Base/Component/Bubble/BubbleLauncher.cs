@@ -99,14 +99,15 @@ public class BubbleLauncher : MonoBehaviour
         nextBubbles[0] = null;
         currentAnimation = null;
         shotModifiers = ResetShotModifiers();
+        level.levelState.bubbleQueue.RemoveListener(OnBubbleQueueChanged);
+        level.levelState.bubbleQueue.GetNext();
     }
 
     private void ReadyNextBubble()
     {
+        level.levelState.bubbleQueue.AddListener(OnBubbleQueueChanged);
         CycleLocalQueue();
-        CreateBubbles();
-
-        level.levelState.bubbleQueue.GetNext();
+        OnBubbleQueueChanged((Observable)level.levelState.bubbleQueue);
     }
 
     private void MoveBubbleToLocation(int index)
