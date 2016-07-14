@@ -41,6 +41,7 @@ namespace LevelEditor
         public void Start()
         {
             onceEachButton.onClick.AddListener(OnOnceEachButtonClick);
+            SetOnceEachText();
         }
 
         public void Initialize(BubbleFactory factory, RandomBubbleDefinition definition)
@@ -54,6 +55,11 @@ namespace LevelEditor
         private void OnOnceEachButtonClick()
         {
             definition.rollType = (RandomBubbleDefinition.RollType)(1 - (int)definition.rollType);
+            SetOnceEachText();
+        }
+
+        private void SetOnceEachText()
+        {
             onceEachButton.GetComponentInChildren<Text>().text = definition.rollType.ToString().Substring(0, 1);
         }
     }

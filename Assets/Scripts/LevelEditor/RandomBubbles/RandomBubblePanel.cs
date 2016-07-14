@@ -1,12 +1,24 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using Service;
 using Model;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace LevelEditor
 {
     public class RandomBubblePanel : MonoBehaviour
     {
+        [Serializable]
+        private sealed class RandomsFileWrapper
+        {
+            public RandomBubbleDefinition[] randoms;
+        }
+
         [SerializeField]
         private LevelManipulator manipulator;
 
@@ -36,6 +48,54 @@ namespace LevelEditor
             CreateGroup();
 
             ResizeContents();
+        }
+
+        public void SaveToFile()
+        {
+#if UNITY_EDITOR
+            var basePath = Path.Combine(Application.dataPath, LevelEditorConstants.RANDOMS_BASE_PATH);
+            var filename = EditorUtility.SaveFilePanel(
+                "Save Randoms",
+                basePath,
+                "NewRandoms.json",
+                LevelEditorConstants.RANDOMS_EXTENSION);
+
+            if (!string.IsNullOrEmpty(filename))
+            {
+                var data = new RandomsFileWrapper();
+                data.randoms = definitions.ToArray();
+
+                using (var file = File.Open(filename, FileMode.Create, FileAccess.Write, FileShare.Write))
+                using (var stream = new StreamWriter(file))
+                {
+                    stream.WriteLine(JsonUtility.ToJson(data));
+                }
+            }
+#endif
+        }
+
+        public void LoadFromFile()
+        {
+#if UNITY_EDITOR
+            var filters = new[] { "Randoms Data", LevelEditorConstants.RANDOMS_EXTENSION };
+            var basePath = Path.Combine(Application.dataPath, LevelEditorConstants.RANDOMS_BASE_PATH);
+            var filename = EditorUtility.OpenFilePanelWithFilters("Open Randoms", basePath, filters);
+
+            if (!string.IsNullOrEmpty(filename))
+            {
+                var data = JsonUtility.FromJson<RandomsFileWrapper>(File.ReadAllText(filename));
+
+                RemoveAllGroups();
+
+                foreach (var definition in data.randoms)
+                {
+                    definitions.Add(definition);
+                }
+
+                CreateAllGroups();
+                ResizeContents();
+            }
+#endif
         }
 
         private void CreateGroup()
@@ -71,17 +131,11 @@ namespace LevelEditor
 
         private void InitializeGroups()
         {
-            while (groups.Count > 0)
-            {
-                RemoveGroup(groups[0]);
-            }
+            RemoveAllGroups();
 
             definitions = manipulator.Randoms;
 
-            while (groups.Count < definitions.Count)
-            {
-                CreateGroup();
-            }
+            CreateAllGroups();
 
             if (definitions.Count < 1)
             {
@@ -89,6 +143,22 @@ namespace LevelEditor
             }
 
             ResizeContents();
+        }
+
+        private void RemoveAllGroups()
+        {
+            while (groups.Count > 0)
+            {
+                RemoveGroup(groups[0]);
+            }
+        }
+
+        private void CreateAllGroups()
+        {
+            while (groups.Count < definitions.Count)
+            {
+                CreateGroup();
+            }
         }
 
         private void ResizeContents()
