@@ -58,7 +58,7 @@ namespace PowerUps
 
                 if (currentBubbleCount < lastBubbleCount)
                 {
-                    var fillRate = ((float)(max - current) - progress) / currentBubbleCount;
+                    var fillRate = ((float)(max - current) - progress) / Mathf.Max(1, currentBubbleCount);
                     progress += (lastBubbleCount - currentBubbleCount) * fillRate;
                 }
 

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bc86a0c3420942c9be104c52806f06a, type: 3}
-  m_Name: RedPowerUpDefinition
+  m_Name: PurplePowerUpDefinition
   m_EditorClassIdentifier: 
-  type: 4
-  bubbleType: 2
-  prefab: {fileID: 117738, guid: 9a8d15a22785041b697226eea112b369, type: 2}
+  type: 32
+  bubbleType: 5
+  prefab: {fileID: 167290, guid: 2d21f2cf167f740c1927bef3fdd7c71f, type: 2}

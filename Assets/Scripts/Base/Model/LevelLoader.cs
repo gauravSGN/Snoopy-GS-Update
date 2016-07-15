@@ -41,23 +41,10 @@ public class LevelLoader : MonoBehaviour
 
         LevelData = JsonUtility.FromJson<LevelData>(levelData);
         bubbleTypeCount = CreateLevel(LevelData);
-        SetupPowerUps();
+        powerUpController.Setup(LevelData.PowerUpFills);
         PositionCamera();
 
         return bubbleTypeCount;
-    }
-
-    private void SetupPowerUps()
-    {
-        var levelData = new Dictionary<PowerUpType, float>();
-        var count = Mathf.Min(EnumExtensions.GetValues<PowerUpType>().Count(), LevelData.PowerUpFills.Length);
-
-        for (var index = 0; index < count; index++)
-        {
-            levelData[(PowerUpType)(1 << index)] = LevelData.PowerUpFills[index];
-        }
-
-        powerUpController.Setup(levelData);
     }
 
     private void PositionCamera()
