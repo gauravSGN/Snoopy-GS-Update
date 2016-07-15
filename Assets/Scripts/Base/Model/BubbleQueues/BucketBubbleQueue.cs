@@ -1,4 +1,3 @@
-using UnityEngine;
 using Snoopy.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +5,6 @@ using System;
 
 public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
 {
-    // drop to reserve bucket if bubble eliminated
     private BubbleQueueDefinition queueDefinition;
     private BubbleQueueDefinition.Bucket currentBucket;
     private int currentCount;
@@ -53,28 +51,20 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
         {
             foreach (var type in eliminatedTypes)
             {
-                Debug.Log("Removed : " + type);
                 removedTypes.Add(type);
                 var typeIndex = Array.IndexOf(LAUNCHER_BUBBLE_TYPES, type);
-                // Debug.Log(typeIndex);
 
                 currentBucket.counts[typeIndex] = 0;
-                // Debug.Log(string.Join(",", currentBucket.counts.Select(item => item.ToString()).ToArray()));
                 queueDefinition.extras.counts[typeIndex] = 0;
-                // Debug.Log(string.Join(",", queueDefinition.extras.counts.Select(item => item.ToString()).ToArray()));
                 queueDefinition.reserve.counts[typeIndex] = 0;
-                // Debug.Log(string.Join(",", queueDefinition.reserve.counts.Select(item => item.ToString()).ToArray()));
 
                 for (var index = 0; index < queueDefinition.buckets.Count; index++)
                 {
                     queueDefinition.buckets[index].counts[typeIndex] = 0;
-                    // Debug.Log(string.Join(",", queueDefinition.buckets[index].counts.Select(item => item.ToString()).ToArray()));
                 }
 
-                // Debug.Log("queued before elimination: " + string.Join(",", queued.Select(item => item.ToString()).ToArray()));
                 for (var index = 0; index < queued.Count; index++)
                 {
-                    // Debug.Log("Before : " + index.ToString() + " : " + queued[index]);
                     if (queued[index] == type)
                     {
                         queued.RemoveAt(index);
@@ -85,14 +75,37 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
             }
 
             randomizedBucket = new List<BubbleType>();
-            // Debug.Log("queued after elimination : " + string.Join(",", queued.Select(item => item.ToString()).ToArray()));
         }
     }
 
     private void ChangeBucket()
     {
-        if ((currentBucket != queueDefinition.extras) &&
-            ((currentCount == currentBucket.length) || (currentBucket.counts.Sum() == 0)))
+        var changeBucket = false;
+
+        if (currentBucket != queueDefinition.extras)
+        {
+            var possibleColorCount = currentBucket.counts.Where( x => x > 0 ).ToList().Count;
+
+            if ((currentCount == currentBucket.length) || (possibleColorCount == 0))
+            {
+                changeBucket = true;
+            }
+            else if ((currentBucket != queueDefinition.reserve) && (possibleColorCount < 3))
+            {
+                var cycleLength = currentBucket.counts.Sum();
+
+                if (currentBucket.mandatory && (currentCount <= cycleLength))
+                {
+                    currentBucket.length = cycleLength;
+                }
+                else
+                {
+                    changeBucket = true;
+                }
+            }
+        }
+
+        if (changeBucket)
         {
             SetCurrentBucket();
         }
@@ -115,20 +128,17 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
             {
                 if (queueDefinition.buckets.Count > 0)
                 {
-                    Debug.Log("Base Bucket");
                     returnBucket = queueDefinition.buckets[0];
                     queueDefinition.buckets.RemoveAt(0);
                 }
                 else
                 {
-                    Debug.Log("Reserve Bucket");
                     returnBucket = queueDefinition.reserve;
                     returnBucket.length = levelState.remainingBubbles;
                 }
             }
             else
             {
-                Debug.Log("Extras Bucket");
                 returnBucket = queueDefinition.extras;
             }
 
