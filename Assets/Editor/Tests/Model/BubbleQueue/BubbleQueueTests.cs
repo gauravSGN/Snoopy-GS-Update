@@ -1,16 +1,18 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 
-public class BubbleQueueTests
+abstract public class BubbleQueueTests
 {
     private BubbleQueue bubbleQueue;
     private readonly int[] invalidIndexes =
     {
         -1,
         -1000,
-        BubbleQueue.MAX_QUEUE_SIZE,
-        BubbleQueue.MAX_QUEUE_SIZE + 1000,
+        BaseBubbleQueue.MAX_QUEUE_SIZE,
+        BaseBubbleQueue.MAX_QUEUE_SIZE + 1000,
     };
+
+    abstract protected BubbleQueue GetBubbleQueue(LevelState levelState);
 
     [SetUp]
     public void Init()
@@ -21,24 +23,27 @@ public class BubbleQueueTests
         levelState.UpdateTypeTotals(BubbleType.Red, 100);
         levelState.UpdateTypeTotals(BubbleType.Yellow, 100);
         levelState.UpdateTypeTotals(BubbleType.Green, 100);
+        levelState.UpdateTypeTotals(BubbleType.Pink, 100);
+        levelState.UpdateTypeTotals(BubbleType.Purple, 100);
+        levelState.remainingBubbles = 100;
 
-        bubbleQueue = new BubbleQueue(levelState);
+        bubbleQueue = GetBubbleQueue(levelState);
     }
 
     [Test]
     public void GetNext_EmptyQueue()
     {
-        Assert.Contains(bubbleQueue.GetNext(), BubbleQueue.LAUNCHER_BUBBLE_TYPES);
+        Assert.Contains(bubbleQueue.GetNext(), BaseBubbleQueue.LAUNCHER_BUBBLE_TYPES);
     }
 
     [Test]
     public void GetNext_FilledQueue()
     {
-        Assert.Contains(bubbleQueue.Peek(BubbleQueue.MAX_QUEUE_SIZE - 1), BubbleQueue.LAUNCHER_BUBBLE_TYPES);
+        Assert.Contains(bubbleQueue.Peek(BaseBubbleQueue.MAX_QUEUE_SIZE - 1), BaseBubbleQueue.LAUNCHER_BUBBLE_TYPES);
 
-        for (var i = 0; i < BubbleQueue.MAX_QUEUE_SIZE; i++)
+        for (var i = 0; i < BaseBubbleQueue.MAX_QUEUE_SIZE; i++)
         {
-            Assert.Contains(bubbleQueue.GetNext(), BubbleQueue.LAUNCHER_BUBBLE_TYPES);
+            Assert.Contains(bubbleQueue.GetNext(), BaseBubbleQueue.LAUNCHER_BUBBLE_TYPES);
         }
     }
 
@@ -54,9 +59,9 @@ public class BubbleQueueTests
     [Test]
     public void Peek_ValidIndexes()
     {
-        for (var i = 0; i < BubbleQueue.MAX_QUEUE_SIZE; i++)
+        for (var i = 0; i < BaseBubbleQueue.MAX_QUEUE_SIZE; i++)
         {
-            Assert.Contains(bubbleQueue.Peek(i), BubbleQueue.LAUNCHER_BUBBLE_TYPES);
+            Assert.Contains(bubbleQueue.Peek(i), BaseBubbleQueue.LAUNCHER_BUBBLE_TYPES);
         }
     }
 
@@ -74,7 +79,7 @@ public class BubbleQueueTests
     {
         var bubbleTypeList = new List<BubbleType>();
 
-        for (var numItems = 2; numItems <= BubbleQueue.MAX_QUEUE_SIZE; numItems++)
+        for (var numItems = 2; numItems <= BaseBubbleQueue.MAX_QUEUE_SIZE; numItems++)
         {
             bubbleTypeList.Clear();
 

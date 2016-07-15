@@ -11,6 +11,7 @@ using Service;
 public class LevelLoader : MonoBehaviour
 {
     public LevelData LevelData { get; private set; }
+    public BubbleQueueType BubbleQueueType { get { return bubbleQueueType; } }
 
     [SerializeField]
     private BubbleFactory bubbleFactory;
@@ -23,6 +24,9 @@ public class LevelLoader : MonoBehaviour
 
     [SerializeField]
     private PowerUpController powerUpController;
+
+    [SerializeField]
+    private BubbleQueueType bubbleQueueType;
 
     [SerializeField]
     private GameObject levelContainer;

@@ -48,11 +48,16 @@ public class BubbleLauncher : MonoBehaviour
 
         aimLine.Fire += FireBubbleAt;
 
+        var eventService = GlobalState.Instance.Services.Get<EventService>();
+        eventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
+        eventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
+    }
+
+    private void OnLevelLoaded(LevelLoadedEvent gameEvent)
+    {
         CreateBubbles();
         SetAimLineColor();
         level.levelState.bubbleQueue.AddListener(OnBubbleQueueChanged);
-
-        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
     protected void OnDestroy()
@@ -94,14 +99,15 @@ public class BubbleLauncher : MonoBehaviour
         nextBubbles[0] = null;
         currentAnimation = null;
         shotModifiers = ResetShotModifiers();
+        level.levelState.bubbleQueue.RemoveListener(OnBubbleQueueChanged);
+        level.levelState.bubbleQueue.GetNext();
     }
 
     private void ReadyNextBubble()
     {
+        level.levelState.bubbleQueue.AddListener(OnBubbleQueueChanged);
         CycleLocalQueue();
-        CreateBubbles();
-
-        level.levelState.bubbleQueue.GetNext();
+        OnBubbleQueueChanged((Observable)level.levelState.bubbleQueue);
     }
 
     private void MoveBubbleToLocation(int index)
