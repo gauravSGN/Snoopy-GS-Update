@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using Snoopy.Model;
-using UnityEngine;
 
 public static class BubbleQueueFactory
 {
-    private static Dictionary<BubbleQueueType, Func<QueueData, BubbleQueue>> typeMap = new Dictionary<BubbleQueueType, Func<QueueData, BubbleQueue>>()
-    {
-        { BubbleQueueType.WeightedBubbleQueue, WeightedCreator },
-        { BubbleQueueType.BucketBubbleQueue, BucketCreator },
-    };
+    private static Dictionary<BubbleQueueType, Func<QueueData, BubbleQueue>> typeMap =
+        new Dictionary<BubbleQueueType, Func<QueueData, BubbleQueue>>()
+        {
+            { BubbleQueueType.WeightedBubbleQueue, WeightedCreator },
+            { BubbleQueueType.BucketBubbleQueue, BucketCreator },
+        };
 
     private struct QueueData
     {
@@ -25,7 +25,6 @@ public static class BubbleQueueFactory
 
     public static BubbleQueue GetBubbleQueue(BubbleQueueType queueType, LevelState levelState, BubbleQueueDefinition definition)
     {
-        Debug.Log(queueType);
         return typeMap[queueType](new QueueData(levelState, definition));
     }
 

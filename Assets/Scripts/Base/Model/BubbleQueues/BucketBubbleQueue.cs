@@ -33,7 +33,7 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
                 }
             }
 
-            randomizedBucket = randomizedBucket.OrderBy(item => random.Next()).ToList();;
+            randomizedBucket = randomizedBucket.OrderBy(item => random.Next()).ToList();
         }
 
         currentCount++;
