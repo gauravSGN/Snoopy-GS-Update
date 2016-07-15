@@ -66,6 +66,7 @@ namespace Snoopy.LevelEditor
             CreateWeightElements(factory, bucket.counts);
 
             inputField.text = bucket.length.ToString();
+            mandatoryToggle.isOn = bucket.mandatory;
 
             insertButton.onClick.AddListener(() => panel.InsertBucket(this));
             deleteButton.onClick.AddListener(() => panel.RemoveBucket(this));
