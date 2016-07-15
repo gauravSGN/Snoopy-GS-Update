@@ -31,25 +31,30 @@ namespace PowerUps
             anchors = transforms.Where(child => child != gameObject.transform).ToArray();
         }
 
-        public void Setup(Dictionary<PowerUpType, float> levelData)
+        public void Setup(int[] fillData)
         {
             animationService = GlobalState.Instance.Services.Get<AnimationService>();
             level = gameObject.GetComponentInParent<Level>();
-            var index = 0;
-            var length = anchors.Length;
+            var anchorLength = anchors.Length;
+            var anchorIndex = 0;
 
-            foreach (var data in levelData.Where(data => data.Value > 0.0f))
+            for (int index = 0, length = fillData.Length; index < length; index++)
             {
-                if (index == length)
+                if (anchorIndex < anchorLength)
+                {
+                    if (fillData[index] > 0.0f)
+                    {
+                        var powerUp = powerUpFactory.CreateByType((PowerUpType)(1 << index));
+                        powerUp.GetComponent<PowerUp>().Setup(fillData[index], this, level);
+                        powerUp.transform.parent = anchors[anchorIndex];
+                        powerUp.transform.localPosition = Vector3.zero;
+                        anchorIndex++;
+                    }
+                }
+                else
                 {
                     break;
                 }
-
-                var powerUp = powerUpFactory.CreateByType(data.Key);
-                powerUp.GetComponent<PowerUp>().Setup((int)(1 / data.Value), this, level);
-                powerUp.transform.parent = anchors[index];
-                powerUp.transform.localPosition = Vector3.zero;
-                index++;
             }
         }
 

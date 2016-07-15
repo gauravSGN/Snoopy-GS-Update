@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc86a0c3420942c9be104c52806f06a, type: 3}
   m_Name: YellowPowerUpDefinition
   m_EditorClassIdentifier: 
-  type: 1
+  type: 2
   bubbleType: 1
   prefab: {fileID: 133016, guid: 4a2d437662f12427a80ec31361a5074f, type: 2}
