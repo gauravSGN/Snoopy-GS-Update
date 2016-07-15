@@ -1,3 +1,4 @@
+using Util;
 using Service;
 using UnityEngine;
 
@@ -10,7 +11,10 @@ namespace UI.Callbacks
 
         public void Buy()
         {
-            GlobalState.Instance.Services.Get<UserStateService>().purchasables.coins.quantity += numberOfCoins;
+            var user = GlobalState.Instance.Services.Get<UserStateService>();
+
+            user.purchasables.coins.quantity += numberOfCoins;
+            user.hasPaid = DateTimeUtil.GetUnixTime();
         }
     }
 }

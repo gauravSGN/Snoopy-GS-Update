@@ -23,7 +23,7 @@ namespace State
             return state.ContainsKey(key) ? (T)state[key] : defaultValue;
         }
 
-        protected void SetValue<T>(string key, object value)
+        virtual protected void SetValue<T>(string key, object value)
         {
             state[key] = (T)value;
             NotifyListeners();
