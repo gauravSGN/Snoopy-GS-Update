@@ -16,7 +16,7 @@ namespace Snoopy.LevelEditor
         private RectTransform contentContainer;
 
         [SerializeField]
-        private Text totalText;
+        private InputField moveCountField;
 
         [SerializeField]
         private GameObject bucketPrefab;
@@ -31,6 +31,8 @@ namespace Snoopy.LevelEditor
         {
             queue = manipulator.Queue;
             queue.AddListener(OnQueueChanged);
+
+            moveCountField.onEndEdit.AddListener(OnMoveCountEndEdit);
 
             Initialize();
         }
@@ -66,6 +68,8 @@ namespace Snoopy.LevelEditor
 
             buckets.Add(CreateBucket(queue.reserve, false));
             buckets.Add(CreateBucket(queue.extras, false));
+
+            moveCountField.text = queue.ShotCount.ToString();
 
             OnBucketChanged();
         }
@@ -139,7 +143,19 @@ namespace Snoopy.LevelEditor
 
             buckets[count - 2].Label = "Reserve";
             buckets[count - 1].Label = "Extras";
-            totalText.text = string.Format("Total = {0}", offset);
+        }
+
+        private void OnMoveCountEndEdit(string value)
+        {
+            try
+            {
+                queue.ShotCount = Mathf.Max(1, int.Parse(value));
+            }
+            catch (System.FormatException)
+            {
+                queue.ShotCount = 1;
+                moveCountField.text = queue.ShotCount.ToString();
+            }
         }
     }
 }

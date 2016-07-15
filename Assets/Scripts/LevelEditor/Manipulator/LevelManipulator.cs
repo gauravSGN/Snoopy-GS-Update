@@ -84,6 +84,7 @@ namespace LevelEditor
             LevelProperties.NotifyListeners();
 
             queue.CopyFrom(levelData.Queue);
+            queue.ShotCount = levelData.ShotCount;
             queue.NotifyListeners();
 
             randoms = new List<RandomBubbleDefinition>(levelData.Randoms ?? new RandomBubbleDefinition[0]);
@@ -98,6 +99,7 @@ namespace LevelEditor
                 Bubbles = models.Values,
                 Queue = queue,
                 Randoms = randoms.ToArray(),
+                ShotCount = queue.ShotCount,
             };
 
             LevelProperties.ToLevelData(data);

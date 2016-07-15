@@ -25,6 +25,8 @@ namespace Snoopy.Model
         public Bucket reserve = new Bucket(1, 1, 1, 1, 1, 1);
         public Bucket extras = new Bucket();
 
+        public int ShotCount { get; set; }
+
         public void CopyFrom(BubbleQueueDefinition queue)
         {
             if (queue != null)

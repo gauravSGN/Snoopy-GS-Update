@@ -43,7 +43,7 @@ namespace LevelEditor
             CreateButtonPanels();
             CreateTuningPanelButton();
 
-            tabSwitcher.SwitchTab(GetOrCreatePanel(BubbleCategory.Goal.ToString()));
+            tabSwitcher.SwitchTab(GetOrCreatePanel(BubbleCategory.Modes.ToString()));
         }
 
         private void SetupCategoryList()
@@ -84,7 +84,7 @@ namespace LevelEditor
             }
 
             CreateButtonPanel<BubbleContentDefinition, BubbleContentType>(
-                BubbleCategory.Goal.ToString(),
+                BubbleCategory.Modes.ToString(),
                 manipulator.ContentFactory.Contents,
                 SetContentType
             );
