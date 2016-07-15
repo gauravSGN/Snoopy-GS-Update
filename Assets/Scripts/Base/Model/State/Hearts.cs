@@ -1,3 +1,4 @@
+using Util;
 using System;
 using UnityEngine;
 using System.Collections;
@@ -23,7 +24,7 @@ namespace State
 
                 if ((newHearts > oldHearts) || (oldHearts == maxHearts))
                 {
-                    lastTimeHeartAwarded = GetUnixTime();
+                    lastTimeHeartAwarded = DateTimeUtil.GetUnixTime();
                 }
 
                 SetValue<long>(QUANTITY, newHearts);
@@ -49,7 +50,7 @@ namespace State
                 if (quantity < GlobalState.Instance.Config.purchasables.maxHearts)
                 {
                     var nextHeartTime = (lastTimeHeartAwarded + GlobalState.Instance.Config.purchasables.secondsPerHeart);
-                    secondsRemaining = Math.Max(0, (nextHeartTime - GetUnixTime()));
+                    secondsRemaining = Math.Max(0, (nextHeartTime - DateTimeUtil.GetUnixTime()));
                 }
 
                 return secondsRemaining;
@@ -80,7 +81,7 @@ namespace State
         public void Replenish()
         {
             var secondsPerHeart = GlobalState.Instance.Config.purchasables.secondsPerHeart;
-            long heartsToReplenish = (long)((GetUnixTime() - lastTimeHeartAwarded) / secondsPerHeart);
+            long heartsToReplenish = (long)((DateTimeUtil.GetUnixTime() - lastTimeHeartAwarded) / secondsPerHeart);
 
             heartsToReplenish = Math.Min(Math.Max(heartsToReplenish, 0),
                                          (GlobalState.Instance.Config.purchasables.maxHearts - quantity));
@@ -92,11 +93,6 @@ namespace State
             }
 
             GlobalState.Instance.RunCoroutine(ReplenishOverTime());
-        }
-
-        private long GetUnixTime()
-        {
-            return (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
         }
     }
 }

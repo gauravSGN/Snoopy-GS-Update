@@ -12,7 +12,7 @@ namespace State
         public long quantity
         {
             get { return GetValue<long>(QUANTITY, GlobalState.Instance.Config.purchasables.newUserCoins); }
-            set { SetValue<long>(QUANTITY, value); }
+            set { SetValue<long>(QUANTITY, Math.Max(value, 0)); }
         }
 
         public Coins(Data topLevelState, Action<Observable> initialListener = null) : base(topLevelState, initialListener)
