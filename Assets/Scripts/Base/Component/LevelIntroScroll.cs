@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using PowerUps;
+using System.Collections.Generic;
 
 public class LevelIntroScroll : MonoBehaviour
 {
@@ -11,15 +12,15 @@ public class LevelIntroScroll : MonoBehaviour
     private Transform scrollBound;
 
     [SerializeField]
-    private GameObject boundsObject;
+    private GameObject launcherGroup;
 
     [SerializeField]
-    private GameObject launcherGroup;
+    private List<GameObject> disableOnScroll;
 
     public void ScrollTo(float yPos)
     {
         var targetY = Mathf.Min(yPos, scrollBound.position.y);
-        boundsObject.SetActive(false);
+        GameObjectUtil.DisableObjects(disableOnScroll);
         StartCoroutine(DoScroll(targetY));
     }
 
@@ -37,7 +38,7 @@ public class LevelIntroScroll : MonoBehaviour
         transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
         launcherGroup.transform.position = finalLauncherPosition;
 
-        boundsObject.SetActive(true);
+        GameObjectUtil.EnableObjects(disableOnScroll);
         powerUpController.ShowPowerUps();
     }
 }

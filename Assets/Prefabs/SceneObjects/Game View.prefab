@@ -996,8 +996,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollSpeed: 2
   scrollBound: {fileID: 0}
-  boundsObject: {fileID: 191534}
   launcherGroup: {fileID: 171954}
+  disableOnScroll:
+  - {fileID: 191534}
+  - {fileID: 150788}
 --- !u!114 &11466544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1025,6 +1027,8 @@ MonoBehaviour:
   gameView: {fileID: 157536}
   panSpeed: 0.5
   startDelay: 0.1
+  disableOnMove:
+  - {fileID: 150788}
 --- !u!114 &11476056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1085,6 +1089,8 @@ MonoBehaviour:
   panSpeed: 1
   startDelay: 0.1
   viewBoundary: {fileID: 0}
+  disableOnMove:
+  - {fileID: 150788}
 --- !u!114 &11494924
 MonoBehaviour:
   m_ObjectHideFlags: 1

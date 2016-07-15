@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MoveCameraDown : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class MoveCameraDown : MonoBehaviour
 
     [SerializeField]
     private float startDelay;
+
+    [SerializeField]
+    List<GameObject> disableOnMove;
 
     private Collider2D castingBox;
 
@@ -36,7 +40,10 @@ public class MoveCameraDown : MonoBehaviour
 
     private IEnumerator MoveGameView()
     {
+        GameObjectUtil.DisableObjects(disableOnMove);
+
         yield return new WaitForSeconds(startDelay);
+
         var transform = gameView.transform;
         while (IsTouchingBubbles())
         {
@@ -44,5 +51,7 @@ public class MoveCameraDown : MonoBehaviour
             transform.position = new Vector3(transform.position.x, yTransform);
             yield return null;
         }
+
+        GameObjectUtil.EnableObjects(disableOnMove);
     }
 }

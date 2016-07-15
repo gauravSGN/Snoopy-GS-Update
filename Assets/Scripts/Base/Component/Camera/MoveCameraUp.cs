@@ -1,6 +1,7 @@
 ﻿using Service;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MoveCameraUp : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class MoveCameraUp : MonoBehaviour
     [SerializeField]
     private Transform viewBoundary;
 
+    [SerializeField]
+    List<GameObject> disableOnMove;
+
     private Collider2D castingBox;
 
     protected void Start()
@@ -26,7 +30,10 @@ public class MoveCameraUp : MonoBehaviour
 
     private IEnumerator MoveGameView()
     {
+        GameObjectUtil.DisableObjects(disableOnMove);
+
         yield return new WaitForSeconds(startDelay);
+
         var transform = gameView.transform;
         var maxY = viewBoundary.position.y;
         while (!IsTouchingBubbles() && transform.position.y < maxY)
@@ -39,6 +46,8 @@ public class MoveCameraUp : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, maxY, transform.position.z);
         }
+
+        GameObjectUtil.EnableObjects(disableOnMove);
     }
 
     private bool IsTouchingBubbles()
