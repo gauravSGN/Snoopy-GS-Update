@@ -27,6 +27,12 @@ namespace Snoopy.Model
 
         public int ShotCount { get; set; }
 
+        // Designers want a default shot count of 20
+        public BubbleQueueDefinition()
+        {
+            ShotCount = 20;
+        }
+
         public void CopyFrom(BubbleQueueDefinition queue)
         {
             if (queue != null)
