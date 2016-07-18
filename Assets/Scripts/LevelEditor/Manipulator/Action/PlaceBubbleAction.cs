@@ -37,6 +37,14 @@ namespace LevelEditor.Manipulator
 
         private void PlaceBubble(LevelManipulator manipulator, int x, int y, BubbleType type)
         {
+            var key = BubbleData.GetKey(x, y);
+            BubbleData.ModifierData[] modifiers = null;
+
+            if (manipulator.Models.ContainsKey(key))
+            {
+                modifiers = manipulator.Models[key].modifiers;
+            }
+
             deleter.Perform(manipulator, x, y);
 
             var definition = manipulator.BubbleFactory.GetDefinitionByType(type);
@@ -53,9 +61,11 @@ namespace LevelEditor.Manipulator
                 instance.transform.SetParent(manipulator.BubbleContainer, false);
                 instance.transform.localPosition = GetBubbleLocation(x, y);
 
-                var model = new BubbleData(x, y, type);
+                var model = new BubbleData(x, y, type) { modifiers = modifiers };
                 manipulator.Views.Add(model.Key, instance);
                 manipulator.Models.Add(model.Key, model);
+
+                manipulator.BubbleFactory.ApplyEditorModifiers(instance, model);
             }
         }
     }

@@ -41,6 +41,7 @@ namespace LevelEditor
         private List<RandomBubbleDefinition> randoms = new List<RandomBubbleDefinition>();
 
         public BubbleType BubbleType { get; private set; }
+        public BubbleModifierDefinition Modifier { get; private set; }
 
         public Dictionary<int, BubbleData> Models { get { return models; } }
         public Dictionary<int, GameObject> Views { get { return views; } }
@@ -66,6 +67,7 @@ namespace LevelEditor
 
                 placer.Perform(this, bubble.X, bubble.Y);
                 bubbleFactory.ApplyEditorModifiers(views[BubbleData.GetKey(bubble.X, bubble.Y)], bubble);
+                models[BubbleData.GetKey(bubble.X, bubble.Y)].modifiers = bubble.modifiers;
             }
 
             LevelProperties.FromLevelData(levelData);
@@ -101,17 +103,17 @@ namespace LevelEditor
             {
                 actionType = type;
                 action = ActionFactory.Create(actionType);
-                Debug.Log(string.Format("LevelManipulator: Action type is now {0}", type));
             }
         }
 
         public void SetBubbleType(BubbleType type)
         {
-            if (BubbleType != type)
-            {
-                BubbleType = type;
-                Debug.Log(string.Format("LevelManipulator: Bubble type is now {0}", type));
-            }
+            BubbleType = type;
+        }
+
+        public void SetModifier(BubbleModifierDefinition modifier)
+        {
+            Modifier = modifier;
         }
 
         public void PerformAction(int x, int y)

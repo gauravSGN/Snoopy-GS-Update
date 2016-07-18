@@ -7,5 +7,7 @@
         DeleteBubble,
         Clear,
         InsertRow,
+        PlaceModifier,
+        DeleteModifier,
     }
 }
