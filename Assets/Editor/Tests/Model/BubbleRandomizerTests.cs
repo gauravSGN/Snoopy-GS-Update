@@ -18,13 +18,15 @@ public class BubbleRandomizerTests
     [SetUp]
     public void Init()
     {
-        singleOnce = new ChainedRandomizer<int>(ChainedRandomizer<int>.SelectionMethod.Once, items, new float[] { 1.0f, 1.0f, 1.0f, 1.0f });
-        singleEach = new ChainedRandomizer<int>(ChainedRandomizer<int>.SelectionMethod.Each, items, new float[] { 1.0f, 1.0f, 1.0f, 1.0f });
+        var rng = new System.Random();
 
-        oneGenerator = new ChainedRandomizer<int>(ChainedRandomizer<int>.SelectionMethod.Once, items, new float[] { 1.0f, 0.0f, 0.0f, 0.0f });
-        twoGenerator = new ChainedRandomizer<int>(ChainedRandomizer<int>.SelectionMethod.Once, items, new float[] { 0.0f, 2.0f, 0.0f, 0.0f });
-        threeGenerator = new ChainedRandomizer<int>(ChainedRandomizer<int>.SelectionMethod.Once, items, new float[] { 0.0f, 0.0f, 3.0f, 0.0f });
-        fourGenerator = new ChainedRandomizer<int>(ChainedRandomizer<int>.SelectionMethod.Once, items, new float[] { 0.0f, 0.0f, 0.0f, 4.0f });
+        singleOnce = new ChainedRandomizer<int>(rng, ChainedRandomizer<int>.SelectionMethod.Once, items, new float[] { 1.0f, 1.0f, 1.0f, 1.0f });
+        singleEach = new ChainedRandomizer<int>(rng, ChainedRandomizer<int>.SelectionMethod.Each, items, new float[] { 1.0f, 1.0f, 1.0f, 1.0f });
+
+        oneGenerator = new ChainedRandomizer<int>(rng, ChainedRandomizer<int>.SelectionMethod.Once, items, new float[] { 1.0f, 0.0f, 0.0f, 0.0f });
+        twoGenerator = new ChainedRandomizer<int>(rng, ChainedRandomizer<int>.SelectionMethod.Once, items, new float[] { 0.0f, 2.0f, 0.0f, 0.0f });
+        threeGenerator = new ChainedRandomizer<int>(rng, ChainedRandomizer<int>.SelectionMethod.Once, items, new float[] { 0.0f, 0.0f, 3.0f, 0.0f });
+        fourGenerator = new ChainedRandomizer<int>(rng, ChainedRandomizer<int>.SelectionMethod.Once, items, new float[] { 0.0f, 0.0f, 0.0f, 4.0f });
     }
 
     [Test]
