@@ -25,6 +25,9 @@ namespace LevelEditor
         [SerializeField]
         private GameObject confirmationDialogPrefab;
 
+        [SerializeField]
+        private GameObject returnPrefab;
+
         private string filename;
 
         public void Start()
@@ -114,7 +117,9 @@ namespace LevelEditor
 
             var sceneData = GlobalState.Instance.Services.Get<SceneService>();
             sceneData.NextLevelData = LevelEditorState.Instance.LevelData;
-            sceneData.ReturnScene = "Scenes/LevelEditor";
+            sceneData.ReturnScene = LevelEditorConstants.SCENE_NAME;
+
+            Instantiate(returnPrefab);
 
             SceneManager.LoadScene("Level");
         }

@@ -4,6 +4,8 @@ namespace LevelEditor
 {
     static public class LevelEditorConstants
     {
+        public const string SCENE_NAME = "LevelEditor";
+
         public const int UNDO_BUFFER_SIZE = 10;
 
         // Designers wanted the play area to be even larger, so it has been increased by 60.39593909%.

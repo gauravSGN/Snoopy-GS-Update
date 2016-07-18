@@ -512,8 +512,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 818297272}
   m_HandleRect: {fileID: 818297271}
   m_Direction: 0
-  m_Value: 0.5
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3980,6 +3980,7 @@ MonoBehaviour:
   levelContents: {fileID: 0}
   confirmationDialogPrefab: {fileID: 186434, guid: 01946e8975f7441468f2a6e16a8457b0,
     type: 2}
+  returnPrefab: {fileID: 127528, guid: f05259ffad1634eb38378976d7cda11d, type: 2}
 --- !u!114 &1329098742
 MonoBehaviour:
   m_ObjectHideFlags: 0
