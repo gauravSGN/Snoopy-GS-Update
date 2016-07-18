@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc86a0c3420942c9be104c52806f06a, type: 3}
   m_Name: BluePowerUpDefinition
   m_EditorClassIdentifier: 
-  type: 4
+  type: 1
   bubbleType: 0
   prefab: {fileID: 162226, guid: 1e879796341f4400c863deed7fbc0826, type: 2}

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using Snoopy.Model;
 using LevelEditor;
+using System.Linq;
 
 namespace Snoopy.LevelEditor
 {
@@ -15,7 +16,7 @@ namespace Snoopy.LevelEditor
         private RectTransform contentContainer;
 
         [SerializeField]
-        private Text totalText;
+        private InputField moveCountField;
 
         [SerializeField]
         private GameObject bucketPrefab;
@@ -31,22 +32,24 @@ namespace Snoopy.LevelEditor
             queue = manipulator.Queue;
             queue.AddListener(OnQueueChanged);
 
+            moveCountField.onEndEdit.AddListener(OnMoveCountEndEdit);
+
             Initialize();
         }
 
         public void AddBucket()
         {
-            var index = queue.buckets.Count;
-
-            queue.buckets.Add(new BubbleQueueDefinition.Bucket());
-            buckets.Insert(index, CreateBucket(queue.buckets[index], true));
-
-            OnBucketChanged();
+            InsertBucketAtIndex(queue.buckets.Count);
         }
 
-        public void RemoveBucket()
+        public void InsertBucket(BubbleQueueBucket bucket)
         {
-            var index = queue.buckets.Count - 1;
+            InsertBucketAtIndex(buckets.IndexOf(bucket));
+        }
+
+        public void RemoveBucket(BubbleQueueBucket bucket)
+        {
+            var index = buckets.IndexOf(bucket);
 
             if (index >= 0)
             {
@@ -66,6 +69,8 @@ namespace Snoopy.LevelEditor
             buckets.Add(CreateBucket(queue.reserve, false));
             buckets.Add(CreateBucket(queue.extras, false));
 
+            moveCountField.text = queue.ShotCount.ToString();
+
             OnBucketChanged();
         }
 
@@ -77,6 +82,14 @@ namespace Snoopy.LevelEditor
             }
 
             Initialize();
+        }
+
+        private void InsertBucketAtIndex(int index)
+        {
+            queue.buckets.Insert(index, new BubbleQueueDefinition.Bucket());
+            buckets.Insert(index, CreateBucket(queue.buckets[index], true));
+
+            OnBucketChanged();
         }
 
         private void RemoveBucketAtIndex(int index)
@@ -91,8 +104,9 @@ namespace Snoopy.LevelEditor
             var component = instance.GetComponent<BubbleQueueBucket>();
 
             instance.transform.SetParent(contentContainer, false);
-            component.Initialize(manipulator.BubbleFactory, bucket);
+            component.Initialize(manipulator.BubbleFactory, this, bucket);
             component.ShowMandatoryOption = canBeMandatory;
+            component.EnableInsert = component.EnableDelete = canBeMandatory;
             component.OnBucketChanged += OnBucketChanged;
 
             return component;
@@ -112,11 +126,11 @@ namespace Snoopy.LevelEditor
 
                 if (length == 1)
                 {
-                    bucket.Label = string.Format("Bubble {0}", offset + 1);
+                    bucket.Label = string.Format("{0}", offset + 1);
                 }
                 else
                 {
-                    bucket.Label = string.Format("Bubbles {0}-{1}", offset + 1, offset + length);
+                    bucket.Label = string.Format("{0}-{1}", offset + 1, offset + length);
                 }
 
                 offset += length;
@@ -129,7 +143,19 @@ namespace Snoopy.LevelEditor
 
             buckets[count - 2].Label = "Reserve";
             buckets[count - 1].Label = "Extras";
-            totalText.text = string.Format("Total = {0}", offset);
+        }
+
+        private void OnMoveCountEndEdit(string value)
+        {
+            try
+            {
+                queue.ShotCount = Mathf.Max(1, int.Parse(value));
+            }
+            catch (System.FormatException)
+            {
+                queue.ShotCount = 1;
+                moveCountField.text = queue.ShotCount.ToString();
+            }
         }
     }
 }

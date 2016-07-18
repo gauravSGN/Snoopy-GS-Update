@@ -100,7 +100,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
                     break;
                 }
 
-                distance = hit.distance - shooterRadius * 0.05f;
+                distance = hit.distance - shooterRadius * 0.5f;
             }
 
             points.Add(points[index] + distance * direction);

@@ -13,7 +13,7 @@ namespace LevelEditor
             set { shotCount = value; }
         }
 
-        public new float[] PowerUpFills
+        public new int[] PowerUpFills
         {
             get { return base.PowerUpFills; }
             set { powerUpFills = value; }
@@ -35,6 +35,12 @@ namespace LevelEditor
         {
             get { return base.Queue; }
             set { queue = value; }
+        }
+
+        public new RandomBubbleDefinition[] Randoms
+        {
+            get { return base.Randoms; }
+            set { randoms = value; }
         }
     }
 }

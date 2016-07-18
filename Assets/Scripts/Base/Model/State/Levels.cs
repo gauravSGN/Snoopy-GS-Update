@@ -25,7 +25,7 @@ namespace State
             }
         }
 
-        public Levels(Data state, Action<Observable> initialListener = null) : base(state, initialListener)
+        public Levels(Data topLevelState, Action<Observable> initialListener = null) : base(topLevelState, initialListener)
         {
         }
     }

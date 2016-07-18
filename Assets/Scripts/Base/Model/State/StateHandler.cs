@@ -23,7 +23,7 @@ namespace State
             return state.ContainsKey(key) ? (T)state[key] : defaultValue;
         }
 
-        protected void SetValue<T>(string key, object value)
+        virtual protected void SetValue<T>(string key, object value)
         {
             state[key] = (T)value;
             NotifyListeners();
@@ -40,6 +40,19 @@ namespace State
         protected void NotifyListenersCallback(Observable target)
         {
             NotifyListeners();
+        }
+
+        protected void InitializeStateKeys()
+        {
+            foreach (var stateKey in GetStateKeys())
+            {
+                InitializeChildObjectIfNecessary(stateKey);
+            }
+        }
+
+        virtual protected string[] GetStateKeys()
+        {
+            return new string[0];
         }
     }
 }

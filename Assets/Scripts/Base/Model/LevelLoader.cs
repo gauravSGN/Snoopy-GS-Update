@@ -11,6 +11,7 @@ using Service;
 public class LevelLoader : MonoBehaviour
 {
     public LevelData LevelData { get; private set; }
+    public BubbleQueueType BubbleQueueType { get { return bubbleQueueType; } }
 
     [SerializeField]
     private BubbleFactory bubbleFactory;
@@ -25,6 +26,9 @@ public class LevelLoader : MonoBehaviour
     private PowerUpController powerUpController;
 
     [SerializeField]
+    private BubbleQueueType bubbleQueueType;
+
+    [SerializeField]
     private GameObject levelContainer;
 
     private float rowDistance;
@@ -37,31 +41,18 @@ public class LevelLoader : MonoBehaviour
 
         LevelData = JsonUtility.FromJson<LevelData>(levelData);
         bubbleTypeCount = CreateLevel(LevelData);
-        SetupPowerUps();
+        powerUpController.Setup(LevelData.PowerUpFills);
         PositionCamera();
 
         return bubbleTypeCount;
     }
 
-    private void SetupPowerUps()
-    {
-        var levelData = new Dictionary<PowerUpType, float>();
-        var count = Mathf.Min(EnumExtensions.GetValues<PowerUpType>().Count(), LevelData.PowerUpFills.Length);
-
-        for (var index = 0; index < count; index++)
-        {
-            levelData[(PowerUpType)(1 << index)] = LevelData.PowerUpFills[index];
-        }
-
-        powerUpController.Setup(levelData);
-    }
-
     private void PositionCamera()
     {
+        var scroll = gameView.GetComponent<LevelIntroScroll>();
         var maxY = LevelData.Bubbles.Aggregate(1, (acc, b) => Mathf.Max(acc, b.Y));
-        gameView.transform.position = new Vector3(
-            0.0f, -(maxY - 8) * GlobalState.Instance.Config.bubbles.size * MathUtil.COS_30_DEGREES, 0.0f
-        );
+        var targetY = -(maxY - 11) * GlobalState.Instance.Config.bubbles.size * MathUtil.COS_30_DEGREES;
+        scroll.ScrollTo(targetY);
     }
 
     private Vector3 GetBubbleLocation(int x, int y)

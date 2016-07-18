@@ -12,16 +12,19 @@ public class SceneTransition : MonoBehaviour
 
     public void TriggerSceneTransition(string sceneName)
     {
-        var sceneData = GlobalState.Instance.Services.Get<SceneService>();
-
-        if (nextLevelData != null)
+        if (GlobalState.Instance.Services.Get<UserStateService>().purchasables.hearts.quantity > 0)
         {
-            sceneData.NextLevelData = nextLevelData.text;
+            var sceneData = GlobalState.Instance.Services.Get<SceneService>();
+
+            if (nextLevelData != null)
+            {
+                sceneData.NextLevelData = nextLevelData.text;
+            }
+
+            sceneData.LevelNumber = levelNumber;
+            sceneData.ReturnScene = SceneManager.GetActiveScene().name;
+
+            SceneManager.LoadScene(sceneName);
         }
-
-        sceneData.LevelNumber = levelNumber;
-        sceneData.ReturnScene = SceneManager.GetActiveScene().name;
-
-        SceneManager.LoadScene(sceneName);
     }
 }

@@ -15,13 +15,20 @@ public class GameConfig : ScriptableObject
     public class ReactionConfig
     {
         public float popSpreadDelay;
-        public float shockwaveSpeed;
-        public float shockwaveDistance;
-        public float shockwaveRadius;
         public float cullMinXForce;
         public float cullMaxXForce;
         public float cullMinYForce;
         public float cullMaxYForce;
+    }
+
+    [Serializable]
+    public class ImpactEffectConfig
+    {
+        public float duration;
+        public float distance;
+        public float radius;
+
+        public AnimationCurve easing;
     }
 
     [Serializable]
@@ -34,7 +41,17 @@ public class GameConfig : ScriptableObject
         public float wallBounceDistance;
     }
 
+    [Serializable]
+    public class PurchasableConfig
+    {
+        public int maxHearts;
+        public int secondsPerHeart;
+        public int newUserCoins;
+    }
+
     public BubbleConfig bubbles;
     public ReactionConfig reactions;
+    public ImpactEffectConfig impactEffect;
     public AimlineConfig aimline;
+    public PurchasableConfig purchasables;
 }

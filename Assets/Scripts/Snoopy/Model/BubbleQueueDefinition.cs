@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 
 namespace Snoopy.Model
@@ -25,6 +24,14 @@ namespace Snoopy.Model
         public List<Bucket> buckets = new List<Bucket>();
         public Bucket reserve = new Bucket(1, 1, 1, 1, 1, 1);
         public Bucket extras = new Bucket();
+
+        public int ShotCount { get; set; }
+
+        // Designers want a default shot count of 20
+        public BubbleQueueDefinition()
+        {
+            ShotCount = 20;
+        }
 
         public void CopyFrom(BubbleQueueDefinition queue)
         {

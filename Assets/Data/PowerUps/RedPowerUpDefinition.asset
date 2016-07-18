@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc86a0c3420942c9be104c52806f06a, type: 3}
   m_Name: RedPowerUpDefinition
   m_EditorClassIdentifier: 
-  type: 8
+  type: 4
   bubbleType: 2
   prefab: {fileID: 117738, guid: 9a8d15a22785041b697226eea112b369, type: 2}

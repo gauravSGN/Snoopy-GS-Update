@@ -14,19 +14,50 @@ MonoBehaviour:
   bubbles:
     numPerRow: 12
     size: 0.25
-    shotColliderScale: 0.25
+    shotColliderScale: 0.17
   reactions:
     popSpreadDelay: 0.05
-    shockwaveSpeed: 5
-    shockwaveDistance: 0.1
-    shockwaveRadius: 0.75
     cullMinXForce: -10
     cullMaxXForce: 10
     cullMinYForce: -5
     cullMaxYForce: 5
+  impactEffect:
+    duration: 0.15
+    distance: 0.1
+    radius: 0.5
+    easing:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -0.000000026309863
+        inSlope: 2.0052316
+        outSlope: 2.0052316
+        tangentMode: 10
+      - time: 0.49855015
+        value: 0.99970853
+        inSlope: 1.8706925
+        outSlope: 1.8706925
+        tangentMode: 0
+      - time: 0.5019986
+        value: 1.0005362
+        inSlope: -1.5783908
+        outSlope: -1.5783908
+        tangentMode: 0
+      - time: 0.99970824
+        value: 0.00031220296
+        inSlope: -2.0096536
+        outSlope: -2.0096536
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
   aimline:
     length: 5
     lineWidth: 0.167
     dotSpacing: 0.2
     moveSpeed: 2
     wallBounceDistance: 0.5
+  purchasables:
+    maxHearts: 5
+    secondsPerHeart: 60
+    newUserCoins: 100

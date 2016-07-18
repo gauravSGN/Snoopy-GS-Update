@@ -30,7 +30,6 @@ public class Level : MonoBehaviour
         }
 
         levelState.levelNumber = sceneData.LevelNumber;
-
         StartCoroutine(LoadingCoroutine());
     }
 
@@ -39,10 +38,10 @@ public class Level : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         levelState.typeTotals = loader.LoadLevel(levelData);
-
         levelState.score = 0;
         levelState.remainingBubbles = loader.LevelData.ShotCount;
         levelState.starValues = loader.LevelData.StarValues;
+        levelState.bubbleQueue = BubbleQueueFactory.GetBubbleQueue(loader.BubbleQueueType, levelState, loader.LevelData.Queue);
         levelState.NotifyListeners();
 
         var eventService = GlobalState.Instance.Services.Get<EventService>();
@@ -50,6 +49,7 @@ public class Level : MonoBehaviour
         eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
         eventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
         eventService.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
+        eventService.Dispatch(new LevelLoadedEvent());
     }
 
     private void OnBubbleFired(BubbleFiredEvent gameEvent)
@@ -87,16 +87,16 @@ public class Level : MonoBehaviour
 
         if (user.levels[levelState.levelNumber].score < levelState.score)
         {
-             user.levels[levelState.levelNumber].score = levelState.score;
+            user.levels[levelState.levelNumber].score = levelState.score;
 
-             for (int starIndex = levelState.starValues.Length - 1; starIndex >= 0; starIndex--)
-             {
-                 if (levelState.score >= levelState.starValues[starIndex])
-                 {
-                     user.levels[levelState.levelNumber].stars = (starIndex + 1);
-                     break;
-                 }
-             }
+            for (int starIndex = levelState.starValues.Length - 1; starIndex >= 0; starIndex--)
+            {
+                if (levelState.score >= levelState.starValues[starIndex])
+                {
+                    user.levels[levelState.levelNumber].stars = (starIndex + 1);
+                    break;
+                }
+            }
         }
     }
 }

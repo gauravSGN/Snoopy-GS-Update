@@ -22,8 +22,10 @@ namespace Reaction
 
         protected void Start()
         {
-            GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleSettledEvent>(OnBubbleSettled);
-            GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
+            var eventService = GlobalState.Instance.Services.Get<EventService>();
+
+            eventService.AddEventHandler<BubbleSettledEvent>(OnBubbleSettled);
+            eventService.AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
 
             var factory = new ReactionHandlerFactory();
 
@@ -77,6 +79,7 @@ namespace Reaction
 
             if (GetComponent<Level>().levelState.remainingBubbles <= 0)
             {
+                GlobalState.Instance.Services.Get<UserStateService>().purchasables.hearts.quantity--;
                 GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(false));
             }
             else

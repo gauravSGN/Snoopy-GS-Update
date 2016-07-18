@@ -6,8 +6,9 @@ public static class AutomatedBuilder
 {
     private static string[] arguments = Environment.GetCommandLineArgs();
 
-    private const string BUNDLE_VERSION_ARGUMENT_NAME = "-version";
     private const string OUTPUT_PATH_ARGUMENT_NAME = "-outputPath";
+    private const string BUNDLE_VERSION_ARGUMENT_NAME = "-version";
+    private const string DEVELOPMENT_BUILD_ARGUMENT_NAME = "-developmentBuild";
     private const string ANDROID_KEYSTORE_PASS_ARGUMENT_NAME = "-keystorePass";
     private const string ANDROID_KEYALIAS_PASS_ARGUMENT_NAME = "-keyaliasPass";
 
@@ -42,8 +43,17 @@ public static class AutomatedBuilder
         var path = (commandLinePath != "") ? commandLinePath : defaultPath;
         Console.WriteLine("Output Path: " + path);
 
+        BuildOptions options = BuildOptions.None;
+
+        if (GetCommandLineArgument(DEVELOPMENT_BUILD_ARGUMENT_NAME) == "true")
+        {
+            Console.WriteLine("Development build options enabled");
+            options |= BuildOptions.Development;
+            options |= BuildOptions.AllowDebugging;
+        }
+
         Console.WriteLine("Starting build...");
-        BuildPipeline.BuildPlayer(GetScenePaths(), path, target, BuildOptions.None);
+        BuildPipeline.BuildPlayer(GetScenePaths(), path, target, options);
 
         Console.WriteLine("Done");
     }

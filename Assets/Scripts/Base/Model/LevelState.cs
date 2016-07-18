@@ -9,11 +9,6 @@ public class LevelState : Observable
     public BubbleQueue bubbleQueue;
     public Dictionary<BubbleType, int> typeTotals = new Dictionary<BubbleType, int>();
 
-    public LevelState()
-    {
-        bubbleQueue = new BubbleQueue(this);
-    }
-
     public void UpdateTypeTotals(BubbleType type, int delta)
     {
         typeTotals[type] = typeTotals.ContainsKey(type) ? typeTotals[type] + delta : delta;

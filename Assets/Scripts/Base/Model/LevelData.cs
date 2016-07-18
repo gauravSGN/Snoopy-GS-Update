@@ -57,10 +57,11 @@ namespace Model
         }
 
         virtual public int ShotCount { get { return shotCount; } }
-        virtual public float[] PowerUpFills { get { return powerUpFills; } }
+        virtual public int[] PowerUpFills { get { return powerUpFills; } }
         virtual public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
         virtual public int[] StarValues { get { return starValues; } }
         virtual public BubbleQueueDefinition Queue { get { return queue; } }
+        virtual public RandomBubbleDefinition[] Randoms { get { return randoms; } }
 
         public List<LevelGoal> goals;
 
@@ -68,7 +69,7 @@ namespace Model
         protected int shotCount;
 
         [SerializeField]
-        protected float[] powerUpFills;
+        protected int[] powerUpFills;
 
         [SerializeField]
         protected BubbleData[] bubbles;
@@ -78,5 +79,8 @@ namespace Model
 
         [SerializeField]
         protected BubbleQueueDefinition queue;
+
+        [SerializeField]
+        protected RandomBubbleDefinition[] randoms;
     }
 }
