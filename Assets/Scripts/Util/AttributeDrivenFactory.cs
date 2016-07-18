@@ -30,6 +30,19 @@ namespace Util
             return result;
         }
 
+        public IEnumerable<BaseType> CreateAll()
+        {
+            if (validTypes == null)
+            {
+                GenerateActionTypeMap();
+            }
+
+            foreach (var pair in validTypes)
+            {
+                yield return Create(pair.Key);
+            }
+        }
+
         private void GenerateActionTypeMap()
         {
             validTypes = new Dictionary<KeyType, Type>();

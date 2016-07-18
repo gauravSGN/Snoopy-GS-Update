@@ -72,7 +72,7 @@ public class LevelLoader : MonoBehaviour
             var bubbleType = BubbleType.IsDefined(typeof(BubbleType), bubble.Type) ? bubble.Type : (BubbleType)((int)bubble.Type % 6);
 
             bubbleTypeCount[bubbleType] = bubbleTypeCount.ContainsKey(bubbleType) ? bubbleTypeCount[bubbleType] + 1 : 1;
-            bubbleMap[bubble.Key] = createBubbleAndSetPosition(bubbleType, bubble.X, bubble.Y);
+            bubbleMap[bubble.Key] = createBubbleAndSetPosition(bubble);
             bubble.model = bubbleMap[bubble.Key].GetComponent<BubbleAttachments>().Model;
         }
 
@@ -107,7 +107,8 @@ public class LevelLoader : MonoBehaviour
 
         for (int ceilingX = 0; ceilingX < ceilingBubbleCount; ceilingX++)
         {
-            ceilingBubbleMap[ceilingX - 1] = createBubbleAndSetPosition(BubbleType.Ceiling, ceilingX - 1, -1);
+            var ceilingData = new BubbleData(ceilingX - 1, -1, BubbleType.Ceiling);
+            ceilingBubbleMap[ceilingX - 1] = createBubbleAndSetPosition(ceilingData);
         }
 
         foreach (var pair in bubbleMap)
@@ -155,16 +156,16 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    private GameObject createBubbleAndSetPosition(BubbleType type, int x, int y)
+    private GameObject createBubbleAndSetPosition(BubbleData bubbleData)
     {
-        var instance = bubbleFactory.CreateByType(type);
+        var instance = bubbleFactory.Create(bubbleData);
 
         if (levelContainer != null)
         {
             instance.transform.SetParent(levelContainer.transform, false);
         }
 
-        instance.transform.localPosition = GetBubbleLocation(x, y);
+        instance.transform.localPosition = GetBubbleLocation(bubbleData.X, bubbleData.Y);
 
         return instance;
     }

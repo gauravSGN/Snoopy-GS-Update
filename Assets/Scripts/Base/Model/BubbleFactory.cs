@@ -4,13 +4,52 @@ using Util;
 using Model;
 using Effects;
 using Animation;
+using Modifiers;
 
 public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
 {
+    private class ModifierFactory : AttributeDrivenFactory<BubbleModifier, BubbleModifierAttribute, BubbleModifierType>
+    {
+        override protected BubbleModifierType GetKeyFromAttribute(BubbleModifierAttribute attribute)
+        {
+            return attribute.ModifierType;
+        }
+    }
+
     public IEnumerable<BubbleDefinition> Bubbles { get { return definitions; } }
 
     [SerializeField]
     private List<BubbleModifierDefinition> modifiers;
+
+    private List<BubbleModifier> bubbleModifiers;
+
+    public GameObject Create(BubbleData data)
+    {
+        if (bubbleModifiers == null)
+        {
+            PopulateModifiers();
+        }
+
+        if (data.modifiers != null)
+        {
+            foreach (var modifier in bubbleModifiers)
+            {
+                modifier.ApplyDataModifications(data);
+            }
+        }
+
+        var gameObject = CreateByType(data.Type);
+
+        if (data.modifiers != null)
+        {
+            foreach (var modifier in bubbleModifiers)
+            {
+                modifier.ApplyGameObjectModifications(data, gameObject);
+            }
+        }
+
+        return gameObject;
+    }
 
     override public GameObject CreateByType(BubbleType type)
     {
@@ -44,5 +83,11 @@ public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
                 }
             }
         }
+    }
+
+    private void PopulateModifiers()
+    {
+        var factory = new ModifierFactory();
+        bubbleModifiers = new List<BubbleModifier>(factory.CreateAll());
     }
 }
