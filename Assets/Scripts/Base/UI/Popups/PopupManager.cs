@@ -38,6 +38,7 @@ public class PopupManager : MonoBehaviour
     {
         popupQueue.Enqueue(new Tuple<PopupType, PopupConfig>(type, config), (int)priority);
     }
+
     public void EnqueueOneButtonPopup(OneButtonPopupConfig config, PopupPriority priority)
     {
         EnqueuePopup(PopupType.OneButton, config, priority);
