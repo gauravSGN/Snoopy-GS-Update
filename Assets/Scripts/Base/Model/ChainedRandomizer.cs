@@ -4,28 +4,21 @@ using System;
 
 namespace Model
 {
-    [Serializable]
     public class ChainedRandomizer<T> where T : struct
     {
         public enum SelectionMethod { Once, Each }
 
-        [SerializeField]
         private SelectionMethod method;
-
-        [SerializeField]
         private float[] weights;
-
-        private List<ChainedRandomizer<T>> exclusions;
         private float[] activeWeights;
+        private List<ChainedRandomizer<T>> exclusions;
         private IList<T> items;
         private T? selectedItem;
+        private System.Random rng;
 
-        protected ChainedRandomizer() { }
-
-        public ChainedRandomizer(SelectionMethod method, IList<T> items) : this(method, items, new float[items.Count]) { }
-
-        public ChainedRandomizer(SelectionMethod method, IList<T> items, IEnumerable<float> weights)
+        public ChainedRandomizer(System.Random rng, SelectionMethod method, IList<T> items, IEnumerable<float> weights)
         {
+            this.rng = rng;
             this.method = method;
             this.items = items;
             this.weights = new float[items.Count];
@@ -72,7 +65,6 @@ namespace Model
 
         private T GenerateValue()
         {
-            var rng = new System.Random();
             float result = (float)rng.NextDouble() * GetTotalWeight();
             var count = items.Count;
             T item = default(T);
