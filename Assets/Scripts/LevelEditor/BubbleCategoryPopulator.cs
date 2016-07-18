@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using BubbleContent;
 using Model;
 using LevelEditor.Manipulator;
 
@@ -83,11 +82,11 @@ namespace LevelEditor
                 );
             }
 
-            CreateButtonPanel<BubbleContentDefinition, BubbleContentType>(
+            /*CreateButtonPanel<BubbleContentDefinition, BubbleContentType>(
                 BubbleCategory.Modes.ToString(),
                 manipulator.ContentFactory.Contents,
                 SetContentType
-            );
+            );*/
         }
 
         private void CreateTuningPanelButton()
@@ -146,10 +145,10 @@ namespace LevelEditor
             manipulator.SetActionType(ManipulatorActionType.PlaceBubble);
         }
 
-        private void SetContentType(BubbleContentType type)
+        /*private void SetContentType(BubbleContentType type)
         {
             manipulator.SetContentType(type);
             manipulator.SetActionType(ManipulatorActionType.PlaceBubble);
-        }
+        }*/
     }
 }

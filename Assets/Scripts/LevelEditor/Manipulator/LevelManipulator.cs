@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Util;
 using Model;
 using LevelEditor.Manipulator;
-using BubbleContent;
 using LevelEditor.Properties;
 using Snoopy.Model;
 
@@ -28,10 +27,7 @@ namespace LevelEditor
         [SerializeField]
         private BubbleFactory bubbleFactory;
 
-        [SerializeField]
-        private BubbleContentFactory contentFactory;
-
-        private readonly Dictionary<int, LevelData.BubbleData> models = new Dictionary<int, LevelData.BubbleData>();
+        private readonly Dictionary<int, BubbleData> models = new Dictionary<int, BubbleData>();
         private readonly Dictionary<int, GameObject> views = new Dictionary<int, GameObject>();
         private readonly ManipulatorActionFactory actionFactory = new ManipulatorActionFactory();
         private readonly List<string> undoBuffer = new List<string>();
@@ -45,16 +41,14 @@ namespace LevelEditor
         private List<RandomBubbleDefinition> randoms = new List<RandomBubbleDefinition>();
 
         public BubbleType BubbleType { get; private set; }
-        public BubbleContentType ContentType { get; private set; }
 
-        public Dictionary<int, LevelData.BubbleData> Models { get { return models; } }
+        public Dictionary<int, BubbleData> Models { get { return models; } }
         public Dictionary<int, GameObject> Views { get { return views; } }
 
         public GameObject BubblePrefab { get { return bubblePrefab; } }
         public RectTransform BubbleContainer { get { return bubbleContainer; } }
 
         public BubbleFactory BubbleFactory { get { return bubbleFactory; } }
-        public BubbleContentFactory ContentFactory { get { return contentFactory; } }
         public ManipulatorActionFactory ActionFactory { get { return actionFactory; } }
 
         public LevelProperties LevelProperties { get { return levelProperties; } }
@@ -69,15 +63,8 @@ namespace LevelEditor
             foreach (var bubble in levelData.Bubbles)
             {
                 BubbleType = bubble.Type;
-                ContentType = BubbleContentType.None;
 
                 placer.Perform(this, bubble.X, bubble.Y);
-
-                if (bubble.ContentType != BubbleContentType.None)
-                {
-                    ContentType = bubble.ContentType;
-                    placer.Perform(this, bubble.X, bubble.Y);
-                }
             }
 
             LevelProperties.FromLevelData(levelData);
@@ -119,20 +106,10 @@ namespace LevelEditor
 
         public void SetBubbleType(BubbleType type)
         {
-            if ((BubbleType != type) || (ContentType != BubbleContentType.None))
+            if (BubbleType != type)
             {
                 BubbleType = type;
-                ContentType = BubbleContentType.None;
                 Debug.Log(string.Format("LevelManipulator: Bubble type is now {0}", type));
-            }
-        }
-
-        public void SetContentType(BubbleContentType type)
-        {
-            if (ContentType != type)
-            {
-                ContentType = type;
-                Debug.Log(string.Format("LevelManipulator: Content type is now {0}", type));
             }
         }
 
@@ -188,7 +165,6 @@ namespace LevelEditor
         private void RestoreState(string state)
         {
             var saveBubbleType = BubbleType;
-            var saveContentType = ContentType;
             var saveActionType = actionType;
 
             var clear = new ClearAction();
@@ -197,7 +173,6 @@ namespace LevelEditor
             LoadLevel(state);
 
             SetBubbleType(saveBubbleType);
-            SetContentType(saveContentType);
             SetActionType(saveActionType);
         }
     }

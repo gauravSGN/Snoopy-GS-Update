@@ -1,7 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.IO;
-using BubbleContent;
 using PowerUps;
 using Animation;
 
@@ -17,18 +16,6 @@ public static class CustomAssetCreator
     public static void CreateBubbleDefinition()
     {
         CreateAThing<BubbleDefinition>();
-    }
-
-    [MenuItem("Assets/Create/Bubbles/Bubble Content Definition")]
-    public static void CreateBubbleContentDefinition()
-    {
-        CreateAThing<BubbleContentDefinition>();
-    }
-
-    [MenuItem("Assets/Create/Bubbles/Bubble Content Factory")]
-    public static void CreateBubbleContentFactory()
-    {
-        CreateAThing<BubbleContentFactory>();
     }
 
     [MenuItem("Assets/Create/Game Config")]

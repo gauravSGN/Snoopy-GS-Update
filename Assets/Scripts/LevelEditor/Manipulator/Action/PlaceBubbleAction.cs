@@ -1,5 +1,4 @@
-﻿using BubbleContent;
-using Model;
+﻿using Model;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
@@ -28,26 +27,12 @@ namespace LevelEditor.Manipulator
 
         public void Perform(LevelManipulator manipulator, int x, int y)
         {
-            if (manipulator.ContentType == BubbleContentType.None)
-            {
-                PlaceBubble(manipulator, x, y, manipulator.BubbleType);
-            }
-            else
-            {
-                ReplaceContents(manipulator, x, y, manipulator.ContentType);
-            }
+            PlaceBubble(manipulator, x, y, manipulator.BubbleType);
         }
 
         public void PerformAlternate(LevelManipulator manipulator, int x, int y)
         {
-            if (manipulator.ContentType == BubbleContentType.None)
-            {
                 deleter.Perform(manipulator, x, y);
-            }
-            else
-            {
-                RemoveContents(manipulator, x, y);
-            }
         }
 
         private void PlaceBubble(LevelManipulator manipulator, int x, int y, BubbleType type)
@@ -68,61 +53,9 @@ namespace LevelEditor.Manipulator
                 instance.transform.SetParent(manipulator.BubbleContainer, false);
                 instance.transform.localPosition = GetBubbleLocation(x, y);
 
-                var model = new LevelData.BubbleData(x, y, type);
+                var model = new BubbleData(x, y, type);
                 manipulator.Views.Add(model.Key, instance);
                 manipulator.Models.Add(model.Key, model);
-            }
-        }
-
-        private void ReplaceContents(LevelManipulator manipulator, int x, int y, BubbleContentType type)
-        {
-            var key = LevelData.BubbleData.GetKey(x, y);
-
-            if (manipulator.Models.ContainsKey(key))
-            {
-                var definition = manipulator.ContentFactory.GetDefinitionByType(type);
-                var prefabRenderer = definition.prefab.GetComponentInChildren<SpriteRenderer>();
-                var model = manipulator.Models[key];
-                var view = manipulator.Views[key];
-
-                if (prefabRenderer != null)
-                {
-                    RemoveAllChildren(view.transform);
-                    var instance = GameObject.Instantiate(manipulator.BubblePrefab);
-
-                    var image = instance.GetComponent<Image>();
-                    image.sprite = prefabRenderer.sprite;
-
-                    instance.name = string.Format("{0}", type);
-                    instance.transform.SetParent(view.transform, false);
-                    instance.transform.localPosition = Vector3.zero;
-
-                    manipulator.Models.Remove(key);
-                    manipulator.Models.Add(key, new LevelData.BubbleData(x, y, model.Type, type));
-                }
-            }
-        }
-
-        private void RemoveContents(LevelManipulator manipulator, int x, int y)
-        {
-            var key = LevelData.BubbleData.GetKey(x, y);
-
-            if (manipulator.Models.ContainsKey(key))
-            {
-                var model = manipulator.Models[key];
-
-                RemoveAllChildren(manipulator.Views[key].transform);
-
-                manipulator.Models.Remove(key);
-                manipulator.Models.Add(key, new LevelData.BubbleData(x, y, model.Type));
-            }
-        }
-
-        private void RemoveAllChildren(Transform parent)
-        {
-            for (var index = parent.childCount - 1; index >= 0; index--)
-            {
-                GameObject.Destroy(parent.GetChild(index).gameObject);
             }
         }
     }

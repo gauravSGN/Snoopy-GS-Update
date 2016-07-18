@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Goal;
-using BubbleContent;
 using PowerUps;
 using Util;
 using Model;
@@ -15,9 +14,6 @@ public class LevelLoader : MonoBehaviour
 
     [SerializeField]
     private BubbleFactory bubbleFactory;
-
-    [SerializeField]
-    private BubbleContentFactory contentFactory;
 
     [SerializeField]
     private GameObject gameView;
@@ -78,17 +74,6 @@ public class LevelLoader : MonoBehaviour
             bubbleTypeCount[bubbleType] = bubbleTypeCount.ContainsKey(bubbleType) ? bubbleTypeCount[bubbleType] + 1 : 1;
             bubbleMap[bubble.Key] = createBubbleAndSetPosition(bubbleType, bubble.X, bubble.Y);
             bubble.model = bubbleMap[bubble.Key].GetComponent<BubbleAttachments>().Model;
-
-            if (bubble.ContentType != BubbleContentType.None)
-            {
-                var content = contentFactory.CreateByType((BubbleContentType)bubble.ContentType);
-
-                if (content != null)
-                {
-                    content.transform.SetParent(bubbleMap[bubble.Key].transform, false);
-                    content.transform.localPosition = Vector3.back;
-                }
-            }
         }
 
         AttachBubbles(bubbleMap);
@@ -188,11 +173,11 @@ public class LevelLoader : MonoBehaviour
     {
         var offset = (y & 1) * 2 - 1;
 
-        neighbors[0] = LevelData.BubbleData.GetKey(x + offset, y - 1);
-        neighbors[1] = LevelData.BubbleData.GetKey(x, y - 1);
-        neighbors[2] = LevelData.BubbleData.GetKey(x - 1, y);
-        neighbors[3] = LevelData.BubbleData.GetKey(x + 1, y);
-        neighbors[4] = LevelData.BubbleData.GetKey(x + offset, y + 1);
-        neighbors[5] = LevelData.BubbleData.GetKey(x, y + 1);
+        neighbors[0] = BubbleData.GetKey(x + offset, y - 1);
+        neighbors[1] = BubbleData.GetKey(x, y - 1);
+        neighbors[2] = BubbleData.GetKey(x - 1, y);
+        neighbors[3] = BubbleData.GetKey(x + 1, y);
+        neighbors[4] = BubbleData.GetKey(x + offset, y + 1);
+        neighbors[5] = BubbleData.GetKey(x, y + 1);
     }
 }

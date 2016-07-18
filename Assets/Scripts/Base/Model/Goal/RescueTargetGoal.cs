@@ -1,22 +1,19 @@
-﻿using BubbleContent;
-using Model;
+﻿using Model;
+using System.Linq;
 
 namespace Goal
 {
-    sealed public class RescueBabiesGoal : LevelGoal
+    sealed public class RescueTargetGoal : LevelGoal
     {
         override public GoalType Type { get { return GoalType.RescueBabies; } }
 
         override public void Initialize(LevelData levelData)
         {
-            foreach (var bubble in levelData.Bubbles)
+            foreach (var bubble in levelData.Bubbles.Where(HasRescueTarget))
             {
-                if (bubble.ContentType == BubbleContentType.BabyPanda)
-                {
-                    bubble.model.OnPopped += BubbleReactionHandler;
-                    bubble.model.OnDisconnected += BubbleReactionHandler;
-                    TargetValue++;
-                }
+                bubble.model.OnPopped += BubbleReactionHandler;
+                bubble.model.OnDisconnected += BubbleReactionHandler;
+                TargetValue++;
             }
         }
 
@@ -32,6 +29,12 @@ namespace Goal
             {
                 CompleteGoal();
             }
+        }
+
+        private static bool HasRescueTarget(BubbleData bubble)
+        {
+            return (bubble.modifiers != null) &&
+                   bubble.modifiers.Any(m => m.type == BubbleModifierType.RescueTarget);
         }
     }
 }

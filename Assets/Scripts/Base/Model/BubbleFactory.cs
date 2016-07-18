@@ -1,12 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Util;
+using Model;
 using Effects;
 using Animation;
 
 public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
 {
     public IEnumerable<BubbleDefinition> Bubbles { get { return definitions; } }
+
+    [SerializeField]
+    private List<BubbleModifierDefinition> modifiers;
 
     override public GameObject CreateByType(BubbleType type)
     {
