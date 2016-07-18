@@ -18,17 +18,11 @@ public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
 
     public IEnumerable<BubbleDefinition> Bubbles { get { return definitions; } }
 
-    [SerializeField]
-    private List<BubbleModifierDefinition> modifiers;
-
     private List<BubbleModifier> bubbleModifiers;
 
     public GameObject Create(BubbleData data)
     {
-        if (bubbleModifiers == null)
-        {
-            PopulateModifiers();
-        }
+        PopulateModifiers();
 
         if (data.modifiers != null)
         {
@@ -69,6 +63,19 @@ public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
         return instance;
     }
 
+    public void ApplyEditorModifiers(GameObject instance, BubbleData data)
+    {
+        PopulateModifiers();
+
+        if (data.modifiers != null)
+        {
+            foreach (var modifier in bubbleModifiers)
+            {
+                modifier.ApplyEditorModifications(data, instance);
+            }
+        }
+    }
+
     private void SetupBasePopEffects(GameObject instance, BubbleDefinition definition)
     {
         var bubbleDeath = instance.GetComponent<BubbleDeath>();
@@ -87,7 +94,10 @@ public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
 
     private void PopulateModifiers()
     {
-        var factory = new ModifierFactory();
-        bubbleModifiers = new List<BubbleModifier>(factory.CreateAll());
+        if (bubbleModifiers == null)
+        {
+            var factory = new ModifierFactory();
+            bubbleModifiers = new List<BubbleModifier>(factory.CreateAll());
+        }
     }
 }

@@ -65,6 +65,7 @@ namespace LevelEditor
                 BubbleType = bubble.Type;
 
                 placer.Perform(this, bubble.X, bubble.Y);
+                bubbleFactory.ApplyEditorModifiers(views[BubbleData.GetKey(bubble.X, bubble.Y)], bubble);
             }
 
             LevelProperties.FromLevelData(levelData);

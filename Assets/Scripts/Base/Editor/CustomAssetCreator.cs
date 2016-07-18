@@ -3,6 +3,7 @@ using UnityEngine;
 using System.IO;
 using PowerUps;
 using Animation;
+using Model;
 
 public static class CustomAssetCreator
 {
@@ -16,6 +17,12 @@ public static class CustomAssetCreator
     public static void CreateBubbleDefinition()
     {
         CreateAThing<BubbleDefinition>();
+    }
+
+    [MenuItem("Assets/Create/Bubbles/Bubble Modifier")]
+    public static void CreateBubbleModifierDefinition()
+    {
+        CreateAThing<BubbleModifierDefinition>();
     }
 
     [MenuItem("Assets/Create/Game Config")]

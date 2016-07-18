@@ -12,6 +12,7 @@ namespace Modifiers
 
         abstract protected void ModifyBubbleData(BubbleData bubbleData, BubbleData.ModifierData data);
         abstract protected void ModifyGameObject(GameObject target, BubbleData.ModifierData data);
+        abstract protected void ModifyEditorObject(GameObject target, BubbleData.ModifierData data);
 
         public void ApplyDataModifications(BubbleData data)
         {
@@ -21,6 +22,11 @@ namespace Modifiers
         public void ApplyGameObjectModifications(BubbleData data, GameObject target)
         {
             Apply(data.modifiers, m => ModifyGameObject(target, m));
+        }
+
+        public void ApplyEditorModifications(BubbleData data, GameObject target)
+        {
+            Apply(data.modifiers, m => ModifyEditorObject(target, m));
         }
 
         private void Apply(IEnumerable<BubbleData.ModifierData> data, Action<BubbleData.ModifierData> action)

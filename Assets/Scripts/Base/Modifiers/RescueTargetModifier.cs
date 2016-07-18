@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using Model;
 
 namespace Modifiers
@@ -22,14 +23,31 @@ namespace Modifiers
 
         override protected void ModifyGameObject(GameObject target, BubbleData.ModifierData data)
         {
-            var thingInside = new GameObject();
-            thingInside.name = "RescueTarget";
+            var rescueSprite = CreateRescueSprite(target);
 
-            thingInside.transform.SetParent(target.transform, false);
-            thingInside.transform.localPosition = Vector3.back;
+            rescueSprite.AddComponent<SpriteRenderer>().sprite = sprite;
+        }
 
-            var renderer = thingInside.AddComponent<SpriteRenderer>();
-            renderer.sprite = sprite;
+        override protected void ModifyEditorObject(GameObject target, BubbleData.ModifierData data)
+        {
+            var rescueSprite = CreateRescueSprite(target);
+
+            var image = rescueSprite.AddComponent<Image>();
+            image.sprite = sprite;
+
+            var rectTransform = rescueSprite.GetComponent<RectTransform>();
+            rectTransform.sizeDelta = target.GetComponent<RectTransform>().sizeDelta;
+        }
+
+        private GameObject CreateRescueSprite(GameObject parent)
+        {
+            var rescueSprite = new GameObject();
+            rescueSprite.name = "RescueTarget";
+
+            rescueSprite.transform.SetParent(parent.transform, false);
+            rescueSprite.transform.localPosition = Vector3.back;
+
+            return rescueSprite;
         }
     }
 }
