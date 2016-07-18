@@ -2,6 +2,7 @@ using Snoopy.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using UnityEngine;
 
 public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
 {
@@ -16,6 +17,7 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
     {
         queueDefinition = definition;
         SetCurrentBucket();
+        RemoveInactiveTypes();
         BuildQueue();
     }
 
@@ -25,15 +27,22 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
 
         if (randomizedBucket.Count == 0)
         {
-            for (int index = 0, length = currentBucket.counts.Length; index < length; index++)
+            if (currentBucket.counts.Sum() > 0)
             {
-                for (int x = 0, count = currentBucket.counts[index]; x < count; x++)
+                for (int index = 0, length = currentBucket.counts.Length; index < length; index++)
                 {
-                    randomizedBucket.Add(LAUNCHER_BUBBLE_TYPES[index]);
+                    for (int x = 0, count = currentBucket.counts[index]; x < count; x++)
+                    {
+                        randomizedBucket.Add(LAUNCHER_BUBBLE_TYPES[index]);
+                    }
                 }
-            }
 
-            randomizedBucket = randomizedBucket.OrderBy(item => random.Next()).ToList();
+                randomizedBucket = randomizedBucket.OrderBy(item => random.Next()).ToList();
+            }
+            else
+            {
+                randomizedBucket.Add(BubbleType.Blue);
+            }
         }
 
         currentCount++;
@@ -142,7 +151,9 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
                 returnBucket = queueDefinition.extras;
             }
 
-            if ((returnBucket != queueDefinition.extras) && (returnBucket.counts.Sum() == 0))
+            if ((returnBucket != queueDefinition.extras)  &&
+                (returnBucket != queueDefinition.reserve) &&
+                (returnBucket.counts.Sum() == 0))
             {
                 returnBucket = null;
             }
