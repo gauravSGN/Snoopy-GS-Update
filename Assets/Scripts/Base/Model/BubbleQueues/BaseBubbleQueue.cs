@@ -26,7 +26,7 @@ abstract public class BaseBubbleQueue : Observable, BubbleQueue
         levelState = state;
         state.AddListener(OnLevelStateChanged);
 
-        foreach(var type in LAUNCHER_BUBBLE_TYPES.Where(bubbleType => !levelState.typeTotals.ContainsKey(bubbleType)))
+        foreach (var type in LAUNCHER_BUBBLE_TYPES.Where(bubbleType => !levelState.typeTotals.ContainsKey(bubbleType)))
         {
             levelState.typeTotals[type] = 0;
         }
