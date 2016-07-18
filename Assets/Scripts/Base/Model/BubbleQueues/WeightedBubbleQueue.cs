@@ -26,6 +26,7 @@ public class WeightedBubbleQueue : BaseBubbleQueue, BubbleQueue
             options.Add(type, new OptionData());
         }
 
+        RemoveInactiveTypes();
         BuildQueue();
     }
 
