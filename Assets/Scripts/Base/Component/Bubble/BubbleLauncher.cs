@@ -22,6 +22,7 @@ public class BubbleLauncher : MonoBehaviour
     private BubbleType[] nextTypes;
     private List<ModifyShot> shotModifiers;
     private GameObject currentAnimation;
+    private Animator launcherAnimator;
 
     public void CycleQueue()
     {
@@ -45,6 +46,7 @@ public class BubbleLauncher : MonoBehaviour
         nextBubbles = new GameObject[locations.Length];
         nextTypes = new BubbleType[locations.Length];
         shotModifiers = ResetShotModifiers();
+        launcherAnimator = locations[0].GetComponentInChildren<Animator>();
 
         aimLine.Fire += FireBubbleAt;
 
@@ -83,6 +85,12 @@ public class BubbleLauncher : MonoBehaviour
         foreach (var modifier in shotModifiers)
         {
             modifier(nextBubbles[0]);
+        }
+
+        if (launcherAnimator)
+        {
+            Debug.Log("Attemping to fire");
+            launcherAnimator.SetTrigger("Firing");
         }
 
         var direction = (point - (Vector2)locations[0].transform.position).normalized * launchSpeed;
