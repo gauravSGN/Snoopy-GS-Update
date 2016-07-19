@@ -13,7 +13,7 @@ namespace LevelEditor.Manipulator
 
         public void Perform(LevelManipulator manipulator, int x, int y)
         {
-            var key = LevelData.BubbleData.GetKey(x, y);
+            var key = BubbleData.GetKey(x, y);
 
             manipulator.Models.Remove(key);
 

@@ -1,12 +1,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Util;
+using Model;
 using Effects;
 using Animation;
+using Modifiers;
 
 public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
 {
+    private class ModifierFactory : AttributeDrivenFactory<BubbleModifier, BubbleModifierAttribute, BubbleModifierType>
+    {
+        override protected BubbleModifierType GetKeyFromAttribute(BubbleModifierAttribute attribute)
+        {
+            return attribute.ModifierType;
+        }
+    }
+
     public IEnumerable<BubbleDefinition> Bubbles { get { return definitions; } }
+
+    private List<BubbleModifier> bubbleModifiers;
+
+    public GameObject Create(BubbleData data)
+    {
+        PopulateModifiers();
+
+        if (data.modifiers != null)
+        {
+            foreach (var modifier in bubbleModifiers)
+            {
+                modifier.ApplyDataModifications(data);
+            }
+        }
+
+        var gameObject = CreateByType(data.Type);
+
+        if (data.modifiers != null)
+        {
+            foreach (var modifier in bubbleModifiers)
+            {
+                modifier.ApplyGameObjectModifications(data, gameObject);
+            }
+        }
+
+        return gameObject;
+    }
 
     override public GameObject CreateByType(BubbleType type)
     {
@@ -26,6 +63,19 @@ public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
         return instance;
     }
 
+    public void ApplyEditorModifiers(GameObject instance, BubbleData data)
+    {
+        PopulateModifiers();
+
+        if (data.modifiers != null)
+        {
+            foreach (var modifier in bubbleModifiers)
+            {
+                modifier.ApplyEditorModifications(data, instance);
+            }
+        }
+    }
+
     private void SetupBasePopEffects(GameObject instance, BubbleDefinition definition)
     {
         var bubbleDeath = instance.GetComponent<BubbleDeath>();
@@ -39,6 +89,15 @@ public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
                     bubbleDeath.AddEffect(DeathAnimationEffect.Play(instance, animationType), pair.Key);
                 }
             }
+        }
+    }
+
+    private void PopulateModifiers()
+    {
+        if (bubbleModifiers == null)
+        {
+            var factory = new ModifierFactory();
+            bubbleModifiers = new List<BubbleModifier>(factory.CreateAll());
         }
     }
 }

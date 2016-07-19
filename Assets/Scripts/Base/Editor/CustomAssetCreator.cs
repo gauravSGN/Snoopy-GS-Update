@@ -1,9 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.IO;
-using BubbleContent;
 using PowerUps;
 using Animation;
+using Model;
 
 public static class CustomAssetCreator
 {
@@ -19,16 +19,10 @@ public static class CustomAssetCreator
         CreateAThing<BubbleDefinition>();
     }
 
-    [MenuItem("Assets/Create/Bubbles/Bubble Content Definition")]
-    public static void CreateBubbleContentDefinition()
+    [MenuItem("Assets/Create/Bubbles/Bubble Modifier")]
+    public static void CreateBubbleModifierDefinition()
     {
-        CreateAThing<BubbleContentDefinition>();
-    }
-
-    [MenuItem("Assets/Create/Bubbles/Bubble Content Factory")]
-    public static void CreateBubbleContentFactory()
-    {
-        CreateAThing<BubbleContentFactory>();
+        CreateAThing<BubbleModifierDefinition>();
     }
 
     [MenuItem("Assets/Create/Game Config")]
