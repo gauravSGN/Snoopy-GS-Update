@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 1f3401a8a63c1458e8fc882b86634ffe
-timeCreated: 1464902744
+guid: 2d94f698ad8574ba0a4f1cb4adfcfb3b
+timeCreated: 1468948246
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -29,11 +29,11 @@ TextureImporter:
   textureFormat: -3
   maxTextureSize: 2048
   textureSettings:
-    filterMode: 1
-    aniso: 0
+    filterMode: -1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
-  nPOTScale: 0
+    wrapMode: -1
+  nPOTScale: 1
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
@@ -51,7 +51,7 @@ TextureImporter:
   spriteSheet:
     sprites: []
     outline: []
-  spritePackingTag: bubbles
+  spritePackingTag: particles
   userData: 
   assetBundleName: 
   assetBundleVariant: 
