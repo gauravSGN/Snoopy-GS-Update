@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Model
 {
-    sealed public class BubbleModifierDefinition : ScriptableObject
+    sealed public class BubbleModifierDefinition : ScriptableObject, BubbleModifierInfo
     {
         [SerializeField]
         private BubbleModifierType type;

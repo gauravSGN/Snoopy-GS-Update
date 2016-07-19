@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,15 @@ namespace Modifiers
         public void ApplyEditorModifications(BubbleData data, GameObject target)
         {
             Apply(data.modifiers, m => ModifyEditorObject(target, m));
+        }
+
+        protected void AddTextToBubble(GameObject target, string text)
+        {
+            var textComponent = target.GetComponentInChildren<Text>();
+            var values = textComponent.text.Split(' ').ToList();
+            values.Add(text);
+            values.Sort();
+            textComponent.text = string.Join(" ", values.ToArray());
         }
 
         private void Apply(IEnumerable<BubbleData.ModifierData> data, Action<BubbleData.ModifierData> action)

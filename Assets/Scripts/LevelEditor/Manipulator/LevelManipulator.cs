@@ -41,7 +41,7 @@ namespace LevelEditor
         private List<RandomBubbleDefinition> randoms = new List<RandomBubbleDefinition>();
 
         public BubbleType BubbleType { get; private set; }
-        public BubbleModifierDefinition Modifier { get; private set; }
+        public BubbleModifierInfo Modifier { get; private set; }
 
         public Dictionary<int, BubbleData> Models { get { return models; } }
         public Dictionary<int, GameObject> Views { get { return views; } }
@@ -111,7 +111,7 @@ namespace LevelEditor
             BubbleType = type;
         }
 
-        public void SetModifier(BubbleModifierDefinition modifier)
+        public void SetModifier(BubbleModifierInfo modifier)
         {
             Modifier = modifier;
         }
