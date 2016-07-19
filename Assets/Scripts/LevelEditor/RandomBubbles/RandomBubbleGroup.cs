@@ -61,7 +61,7 @@ namespace LevelEditor
 
         private void OnOnceEachButtonClick()
         {
-            definition.rollType = (RandomBubbleDefinition.RollType)(1 - (int)definition.rollType);
+            definition.rollType = (ChainedRandomizer<BubbleType>.SelectionMethod)(1 - (int)definition.rollType);
             SetOnceEachText();
         }
 

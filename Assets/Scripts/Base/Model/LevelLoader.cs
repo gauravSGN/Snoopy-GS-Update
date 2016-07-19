@@ -9,9 +9,6 @@ using Service;
 
 public class LevelLoader : MonoBehaviour
 {
-    public LevelData LevelData { get; private set; }
-    public BubbleQueueType BubbleQueueType { get { return bubbleQueueType; } }
-
     [SerializeField]
     private BubbleFactory bubbleFactory;
 
@@ -27,20 +24,25 @@ public class LevelLoader : MonoBehaviour
     [SerializeField]
     private GameObject levelContainer;
 
+    private LevelConfiguration configuration;
     private float rowDistance;
     private float topEdge;
 
-    public Dictionary<BubbleType, int> LoadLevel(string levelData)
+    public LevelData LevelData { get; private set; }
+    public BubbleQueueType BubbleQueueType { get { return bubbleQueueType; } }
+    public LevelConfiguration Configuration { get { return configuration; } }
+
+    public void LoadLevel(string levelData)
     {
         rowDistance = GlobalState.Instance.Config.bubbles.size * MathUtil.COS_30_DEGREES;
-        Dictionary<BubbleType, int> bubbleTypeCount;
-
         LevelData = JsonUtility.FromJson<LevelData>(levelData);
-        bubbleTypeCount = CreateLevel(LevelData);
+
+        configuration = new LevelConfiguration(LevelData);
+        bubbleFactory.Configuration = configuration;
+
+        CreateLevel(LevelData);
         powerUpController.Setup(LevelData.PowerUpFills);
         PositionCamera();
-
-        return bubbleTypeCount;
     }
 
     private void PositionCamera()
@@ -59,21 +61,23 @@ public class LevelLoader : MonoBehaviour
         return new Vector3(leftEdge + x * config.bubbles.size + offset, topEdge - y * rowDistance);
     }
 
-    private Dictionary<BubbleType, int> CreateLevel(LevelData level)
+    private void CreateLevel(LevelData level)
     {
         var bubbleMap = new Dictionary<int, GameObject>();
 
         topEdge = Camera.main.orthographicSize - (0.5f * rowDistance);
 
-        var bubbleTypeCount = new Dictionary<BubbleType, int>();
-
         foreach (var bubble in level.Bubbles)
         {
-            var bubbleType = BubbleType.IsDefined(typeof(BubbleType), bubble.Type) ? bubble.Type : (BubbleType)((int)bubble.Type % 6);
-
-            bubbleTypeCount[bubbleType] = bubbleTypeCount.ContainsKey(bubbleType) ? bubbleTypeCount[bubbleType] + 1 : 1;
             bubbleMap[bubble.Key] = createBubbleAndSetPosition(bubble);
             bubble.model = bubbleMap[bubble.Key].GetComponent<BubbleAttachments>().Model;
+
+            if (!configuration.Counts.ContainsKey(bubble.model.type))
+            {
+                configuration.Counts[bubble.model.type] = 0;
+            }
+
+            configuration.Counts[bubble.model.type]++;
         }
 
         AttachBubbles(bubbleMap);
@@ -85,8 +89,6 @@ public class LevelLoader : MonoBehaviour
         }
 
         CreateGoals(level);
-
-        return bubbleTypeCount;
     }
 
     private static void CreateGoals(LevelData level)

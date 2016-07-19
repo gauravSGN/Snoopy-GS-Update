@@ -10,6 +10,7 @@ namespace Modifiers
     abstract public class BubbleModifier
     {
         public abstract BubbleModifierType ModifierType { get; }
+        public LevelConfiguration Configuration { get; set; }
 
         abstract protected void ModifyBubbleData(BubbleData bubbleData, BubbleData.ModifierData data);
         abstract protected void ModifyGameObject(GameObject target, BubbleData.ModifierData data);

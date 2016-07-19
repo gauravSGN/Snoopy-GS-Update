@@ -18,11 +18,12 @@ namespace Modifiers
 
         override protected void ModifyBubbleData(BubbleData bubbleData, BubbleData.ModifierData data)
         {
-            // This modifier makes no changes to the bubble data.
+            bubbleData.Type = Configuration.Randoms[int.Parse(data.data)].GetValue();
         }
 
         override protected void ModifyGameObject(GameObject target, BubbleData.ModifierData data)
         {
+            // This modifier makes no changes to the game object.
         }
 
         override protected void ModifyEditorObject(GameObject target, BubbleData.ModifierData data)
