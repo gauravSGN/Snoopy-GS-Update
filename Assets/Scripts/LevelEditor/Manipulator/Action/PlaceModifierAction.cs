@@ -36,6 +36,8 @@ namespace LevelEditor.Manipulator
             var model = manipulator.Models[BubbleData.GetKey(x, y)];
             var modifiers = new List<BubbleData.ModifierData>(model.modifiers ?? new BubbleData.ModifierData[0]);
 
+            manipulator.SetBubbleType(model.Type);
+
             modifiers.Add(new BubbleData.ModifierData
             {
                 type = modifier.Type,
@@ -48,6 +50,7 @@ namespace LevelEditor.Manipulator
         private void RemoveModifier(LevelManipulator manipulator, int x, int y, BubbleModifierDefinition modifier)
         {
             var model = manipulator.Models[BubbleData.GetKey(x, y)];
+            manipulator.SetBubbleType(model.Type);
 
             if (model.modifiers != null)
             {
