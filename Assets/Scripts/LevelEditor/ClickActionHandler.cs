@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using LevelEditor.Menu;
+using Model;
 
 namespace LevelEditor
 {
@@ -17,6 +19,9 @@ namespace LevelEditor
 
         [SerializeField]
         private RectTransform bubbleContainer;
+
+        [SerializeField]
+        private BubbleActionMenu contextMenu;
 
         private RectTransform rectTransform;
         private readonly List<GridPosition> modifiedPositions = new List<GridPosition>();
@@ -77,7 +82,14 @@ namespace LevelEditor
                 }
                 else if (eventData.button == PointerEventData.InputButton.Right)
                 {
-                    manipulator.PerformAlternateAction(gridCoord.X, gridCoord.Y);
+                    var key = BubbleData.GetKey(gridCoord.X, gridCoord.Y);
+                    var models = manipulator.Models;
+
+                    if (models.ContainsKey(key))
+                    {
+                        contextMenu.Populate(models[key]);
+                        contextMenu.Show();
+                    }
                 }
             }
         }
