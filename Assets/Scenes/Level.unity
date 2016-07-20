@@ -1097,6 +1097,10 @@ Prefab:
       propertyPath: loader
       value: 
       objectReference: {fileID: 1499581533}
+    - target: {fileID: 11446176, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: scanType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
   m_IsPrefabParent: 0

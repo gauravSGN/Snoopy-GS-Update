@@ -4,11 +4,25 @@ using Reaction;
 using Service;
 using Animation;
 using Effects;
+using System;
 
 public class BubbleExplode : MonoBehaviour
 {
+    private static Dictionary<ScanType, Func<GameObject, RaycastHit2D[]>> scanMap =
+        new Dictionary<ScanType, Func<GameObject, RaycastHit2D[]>>()
+        {
+            { ScanType.Circle, CircleScan },
+            { ScanType.Diamond, DiamondScan },
+        };
+
+    public enum ScanType
+    {
+        Circle = 0,
+        Diamond = 1,
+    }
+
     [SerializeField]
-    private int sizeMultiplier = 2;
+    private ScanType scanType;
 
     [SerializeField]
     private AnimationType deathAnimationType;
@@ -18,9 +32,9 @@ public class BubbleExplode : MonoBehaviour
         GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleSettlingEvent>(OnSettling);
     }
 
-    public void Setup(int explosionSize, AnimationType animation)
+    public void Setup(ScanType type, AnimationType animation)
     {
-        sizeMultiplier = explosionSize;
+        scanType = type;
         deathAnimationType = animation;
     }
 
@@ -31,8 +45,7 @@ public class BubbleExplode : MonoBehaviour
 
     public void OnSettling(GameEvent gameEvent)
     {
-        var baseSize = GlobalState.Instance.Config.bubbles.size * 0.9f;
-        var hits = Physics2D.CircleCastAll(transform.position, baseSize * sizeMultiplier, Vector2.up, 0.0f);
+        var hits = scanMap[scanType](gameObject);
         var length = hits.Length;
 
         var bubbleDeath = gameObject.GetComponent<BubbleDeath>();
@@ -54,5 +67,24 @@ public class BubbleExplode : MonoBehaviour
                 }
             }
         }
+    }
+
+    private static RaycastHit2D[] CircleScan(GameObject baseBubble)
+    {
+        var baseSize = GlobalState.Instance.Config.bubbles.size * 0.9f;
+        return Physics2D.CircleCastAll(baseBubble.transform.position, baseSize * 2, Vector2.up, 0.0f);
+    }
+
+    private static RaycastHit2D[] DiamondScan(GameObject baseBubble)
+    {
+        var bubbleSize = GlobalState.Instance.Config.bubbles.size;
+        var basePosition = baseBubble.transform.position;
+        var origin = new Vector2(basePosition.x - bubbleSize, basePosition.y - (0.5f * bubbleSize));
+        var tripleBubbleSize = 3 * bubbleSize;
+        var size = new Vector2(0.25f * bubbleSize, tripleBubbleSize);
+        var theta = Mathf.PI / 3.0f;
+        var direction = new Vector2(Mathf.Cos(theta), Mathf.Sin(theta));
+
+        return Physics2D.BoxCastAll(origin, size, 30, direction, tripleBubbleSize);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Linq;
-using System.Collections.Generic;
 using Animation;
 using Service;
 
@@ -19,6 +18,9 @@ namespace PowerUps
 
         [SerializeField]
         private AnimationType effectType;
+
+        [SerializeField]
+        private BubbleExplode.ScanType scanType;
 
         private Transform[] anchors;
         private int powerUpMask;
@@ -75,7 +77,7 @@ namespace PowerUps
             bubble.GetComponent<BubbleAttachments>().Model.type = BubbleType.Colorless;
 
             var explosion = bubble.AddComponent<BubbleExplode>();
-            explosion.Setup(2, effectType);
+            explosion.Setup(scanType, effectType);
 
             powerUpMask = 0;
         }

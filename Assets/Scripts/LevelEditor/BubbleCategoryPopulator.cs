@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using BubbleContent;
 using Model;
 using LevelEditor.Manipulator;
 
@@ -33,6 +32,9 @@ namespace LevelEditor
         [SerializeField]
         private GameObject tuningPanel;
 
+        [SerializeField]
+        private GameObject modesPanel;
+
         private TabSwitcher tabSwitcher;
 
         private void Start()
@@ -41,9 +43,10 @@ namespace LevelEditor
 
             SetupCategoryList();
             CreateButtonPanels();
-            CreateTuningPanelButton();
 
-            tabSwitcher.SwitchTab(GetOrCreatePanel(BubbleCategory.Modes.ToString()));
+            CreateToggleButton("Tune", tuningPanel);
+
+            tabSwitcher.SwitchTab(modesPanel);
         }
 
         private void SetupCategoryList()
@@ -82,17 +85,6 @@ namespace LevelEditor
                     SetBubbleType
                 );
             }
-
-            CreateButtonPanel<BubbleContentDefinition, BubbleContentType>(
-                BubbleCategory.Modes.ToString(),
-                manipulator.ContentFactory.Contents,
-                SetContentType
-            );
-        }
-
-        private void CreateTuningPanelButton()
-        {
-            CreateToggleButton("Tune", tuningPanel);
         }
 
         private void CreateButtonPanel<T, U>(string name, IEnumerable<T> items, Action<U> action)
@@ -143,12 +135,6 @@ namespace LevelEditor
         private void SetBubbleType(BubbleType type)
         {
             manipulator.SetBubbleType(type);
-            manipulator.SetActionType(ManipulatorActionType.PlaceBubble);
-        }
-
-        private void SetContentType(BubbleContentType type)
-        {
-            manipulator.SetContentType(type);
             manipulator.SetActionType(ManipulatorActionType.PlaceBubble);
         }
     }

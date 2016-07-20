@@ -59,7 +59,7 @@ namespace LevelEditor.Manipulator
                 var model = moveList[index];
                 var view = viewList[index];
 
-                var newModel = new LevelData.BubbleData(model.X, model.Y + delta, model.Type, model.ContentType);
+                var newModel = model.CloneAt(model.X, model.Y + delta);
                 view.transform.localPosition = PlaceBubbleAction.GetBubbleLocation(newModel.X, newModel.Y);
 
                 models[newModel.Key] = newModel;

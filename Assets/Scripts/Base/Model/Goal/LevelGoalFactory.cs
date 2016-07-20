@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BubbleContent;
 using Model;
 
 namespace Goal
@@ -10,7 +9,7 @@ namespace Goal
     {
         private static Dictionary<Func<LevelData, bool>, Type> goalDeterminers = new Dictionary<Func<LevelData, bool>, Type>
         {
-            { RescueBabiesDeterminer, typeof(RescueBabiesGoal) },
+            { RescueTargetDeterminer, typeof(RescueTargetGoal) },
         };
 
         public static List<LevelGoal> GetGoalsForLevel(LevelData levelData)
@@ -30,9 +29,9 @@ namespace Goal
             return goals;
         }
 
-        private static bool RescueBabiesDeterminer(LevelData levelData)
+        private static bool RescueTargetDeterminer(LevelData levelData)
         {
-            return levelData.Bubbles.Any(b => b.ContentType == BubbleContentType.BabyPanda);
+            return levelData.Bubbles.Where(b => b.modifiers != null).SelectMany(b => b.modifiers).Any(m => m.type == BubbleModifierType.RescueTarget);
         }
     }
 }
