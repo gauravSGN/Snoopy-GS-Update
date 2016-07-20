@@ -37,7 +37,8 @@ public class Level : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        levelState.typeTotals = loader.LoadLevel(levelData);
+        loader.LoadLevel(levelData);
+        levelState.typeTotals = loader.Configuration.Counts;
         levelState.score = 0;
         levelState.remainingBubbles = loader.LevelData.ShotCount;
         levelState.starValues = loader.LevelData.StarValues;

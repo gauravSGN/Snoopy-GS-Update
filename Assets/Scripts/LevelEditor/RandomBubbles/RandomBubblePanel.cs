@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using LevelEditor.Manipulator;
 using Service;
 using Model;
 
@@ -108,6 +109,7 @@ namespace LevelEditor
 
             group.Initialize(manipulator.BubbleFactory, definitions[index]);
             group.DeleteButton.onClick.AddListener(() => RemoveGroup(group));
+            group.OnActivate += OnGroupActivate;
             group.Label = string.Format("R{0}", index + 1);
             group.Count = 0;
             groups.Add(group);
@@ -122,6 +124,18 @@ namespace LevelEditor
             groups.RemoveAt(index);
 
             ResizeContents();
+        }
+
+        private void OnGroupActivate(RandomBubbleGroup group)
+        {
+            var index = groups.IndexOf(group);
+
+            manipulator.SetActionType(ManipulatorActionType.PlaceModifier);
+            manipulator.SetModifier(new BubbleModifierData
+            {
+                Type = BubbleModifierType.Random,
+                Data = index.ToString(),
+            });
         }
 
         private void OnLevelEditorLoad(LevelEditorLoadEvent gameEvent)
