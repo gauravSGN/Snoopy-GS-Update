@@ -47,7 +47,7 @@ namespace Util
         {
             validTypes = new Dictionary<KeyType, Type>();
 
-            foreach (var type in GetValidTypes())
+            foreach (var type in ReflectionUtil.GetDerivedTypes<BaseType>())
             {
                 var attributes = type.GetCustomAttributes(typeof(AttributeType), false);
 
@@ -56,13 +56,6 @@ namespace Util
                     validTypes[GetKeyFromAttribute(attribute)] = type;
                 }
             }
-        }
-
-        private static IEnumerable<Type> GetValidTypes()
-        {
-            var assemblyTypes = Assembly.GetExecutingAssembly().GetTypes();
-            var actionTypes = assemblyTypes.Where(t => typeof(BaseType).IsAssignableFrom(t));
-            return actionTypes.Where(t => !t.IsAbstract && !t.IsInterface);
         }
     }
 }
