@@ -78,16 +78,7 @@ namespace LevelEditor
             }
             else
             {
-                ConfirmAction(delegate ()
-                {
-                    var jsonText = manipulator.SaveLevel();
-
-                    using (var stream = File.Open(filename, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
-                    using (var writer = new StreamWriter(stream))
-                    {
-                        writer.Write(jsonText);
-                    }
-                });
+                File.WriteAllText(filename, manipulator.SaveLevel());
             }
         }
 

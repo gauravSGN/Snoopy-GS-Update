@@ -20,7 +20,12 @@ namespace Model
 
         public int Key { get { return GetKey(X, Y); } }
 
-        public BubbleType Type { get { return (BubbleType)type; } }
+        public BubbleType Type
+        {
+            get { return (BubbleType)type; }
+            set { type = (int)value; }
+        }
+
         public int X { get { return x; } }
         public int Y { get { return y; } }
 

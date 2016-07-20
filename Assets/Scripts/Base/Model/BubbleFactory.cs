@@ -18,7 +18,24 @@ public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
 
     public IEnumerable<BubbleDefinition> Bubbles { get { return definitions; } }
 
+    public LevelConfiguration Configuration
+    {
+        get { return configuration; }
+        set
+        {
+            configuration = value;
+
+            PopulateModifiers();
+
+            foreach (var modifier in bubbleModifiers)
+            {
+                modifier.Configuration = value;
+            }
+        }
+    }
+
     private List<BubbleModifier> bubbleModifiers;
+    private LevelConfiguration configuration;
 
     public GameObject Create(BubbleData data)
     {

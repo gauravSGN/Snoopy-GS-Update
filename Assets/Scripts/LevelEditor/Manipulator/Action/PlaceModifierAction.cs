@@ -31,10 +31,12 @@ namespace LevelEditor.Manipulator
             }
         }
 
-        private void ApplyModifier(LevelManipulator manipulator, int x, int y, BubbleModifierDefinition modifier)
+        private void ApplyModifier(LevelManipulator manipulator, int x, int y, BubbleModifierInfo modifier)
         {
             var model = manipulator.Models[BubbleData.GetKey(x, y)];
             var modifiers = new List<BubbleData.ModifierData>(model.modifiers ?? new BubbleData.ModifierData[0]);
+
+            manipulator.SetBubbleType(model.Type);
 
             modifiers.Add(new BubbleData.ModifierData
             {
@@ -45,9 +47,10 @@ namespace LevelEditor.Manipulator
             model.modifiers = modifiers.ToArray();
         }
 
-        private void RemoveModifier(LevelManipulator manipulator, int x, int y, BubbleModifierDefinition modifier)
+        private void RemoveModifier(LevelManipulator manipulator, int x, int y, BubbleModifierInfo modifier)
         {
             var model = manipulator.Models[BubbleData.GetKey(x, y)];
+            manipulator.SetBubbleType(model.Type);
 
             if (model.modifiers != null)
             {
