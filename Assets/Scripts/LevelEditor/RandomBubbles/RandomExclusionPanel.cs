@@ -40,7 +40,7 @@ namespace LevelEditor
 
             for (var index = 0; index < count; index++)
             {
-                elements[index].text = data[index].ToString();
+                elements[index].text = (data[index] + 1).ToString();
             }
 
             ReorderElements();
@@ -85,7 +85,8 @@ namespace LevelEditor
         {
             for (var index = 0; index < elements.Count;)
             {
-                if (elements[index].text.Trim() == "")
+                var elementText = elements[index].text.Trim();
+                if ((elementText == "") || (elementText == "0"))
                 {
                     RemoveElement(index);
                 }
@@ -93,12 +94,12 @@ namespace LevelEditor
                 {
                     try
                     {
-                        data[index] = int.Parse(elements[index].text);
+                        data[index] = int.Parse(elementText) - 1;
                     }
                     catch (System.FormatException)
                     {
                         data[index] = 0;
-                        elements[index].text = data[index].ToString();
+                        elements[index].text = (data[index] + 1).ToString();
                     }
 
                     index++;

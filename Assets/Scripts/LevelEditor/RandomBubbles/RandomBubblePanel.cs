@@ -132,7 +132,7 @@ namespace LevelEditor
         {
             var index = groups.IndexOf(group);
 
-            manipulator.SetActionType(ManipulatorActionType.PlaceModifier);
+            manipulator.SetActionType(ManipulatorActionType.PlaceBubbleAndModifier);
             manipulator.SetModifier(new BubbleModifierData
             {
                 Type = BubbleModifierType.Random,
