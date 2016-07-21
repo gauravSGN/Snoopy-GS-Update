@@ -804,7 +804,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleFactory: {fileID: 11400000, guid: 8485ebde8c9ee4569bd1cf809eb2b68e, type: 2}
-  contentFactory: {fileID: 11400000, guid: 8ff695269c40e4a69ae094dd6f22719e, type: 2}
   gameView: {fileID: 1197956592}
   powerUpController: {fileID: 142751819}
   bubbleQueueType: 1
@@ -925,6 +924,48 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22452602, guid: a38197215072b4e7da0c4d697bdb71aa,
     type: 2}
   m_PrefabInternal: {fileID: 1442564700}
+--- !u!1001 &1866182820
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 494482, guid: 9a90b6720e2944e7b9d5a69829dc3462, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 148.54883
+      objectReference: {fileID: 0}
+    - target: {fileID: 494482, guid: 9a90b6720e2944e7b9d5a69829dc3462, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 287.36276
+      objectReference: {fileID: 0}
+    - target: {fileID: 494482, guid: 9a90b6720e2944e7b9d5a69829dc3462, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 494482, guid: 9a90b6720e2944e7b9d5a69829dc3462, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 494482, guid: 9a90b6720e2944e7b9d5a69829dc3462, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 494482, guid: 9a90b6720e2944e7b9d5a69829dc3462, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 494482, guid: 9a90b6720e2944e7b9d5a69829dc3462, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 494482, guid: 9a90b6720e2944e7b9d5a69829dc3462, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 9a90b6720e2944e7b9d5a69829dc3462, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2062605090
 GameObject:
   m_ObjectHideFlags: 0
