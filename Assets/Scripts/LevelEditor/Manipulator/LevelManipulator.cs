@@ -33,15 +33,12 @@ namespace LevelEditor
         private readonly List<string> undoBuffer = new List<string>();
         private readonly List<string> redoBuffer = new List<string>();
 
-        private ManipulatorActionType actionType;
-        private ManipulatorAction action;
+        private ManipulatorState state = new ManipulatorState();
+        private readonly Stack<ManipulatorState> stateStack = new Stack<ManipulatorState>();
 
         private readonly LevelProperties levelProperties = new LevelProperties();
         private readonly BubbleQueueDefinition queue = new BubbleQueueDefinition();
         private List<RandomBubbleDefinition> randoms = new List<RandomBubbleDefinition>();
-
-        public BubbleType BubbleType { get; private set; }
-        public BubbleModifierInfo Modifier { get; private set; }
 
         public Dictionary<int, BubbleData> Models { get { return models; } }
         public Dictionary<int, GameObject> Views { get { return views; } }
@@ -56,6 +53,9 @@ namespace LevelEditor
         public BubbleQueueDefinition Queue { get { return queue; } }
         public List<RandomBubbleDefinition> Randoms { get { return randoms; } }
 
+        public BubbleType BubbleType { get { return state.BubbleType; } }
+        public BubbleModifierInfo Modifier { get { return state.Modifier; } }
+
         public void LoadLevel(string jsonText)
         {
             var levelData = JsonUtility.FromJson<LevelData>(jsonText);
@@ -63,7 +63,7 @@ namespace LevelEditor
 
             foreach (var bubble in levelData.Bubbles)
             {
-                BubbleType = bubble.Type;
+                state.BubbleType = bubble.Type;
 
                 placer.Perform(this, bubble.X, bubble.Y);
                 bubbleFactory.ApplyEditorModifiers(views[BubbleData.GetKey(bubble.X, bubble.Y)], bubble);
@@ -99,36 +99,36 @@ namespace LevelEditor
 
         public void SetActionType(ManipulatorActionType type)
         {
-            if (actionType != type)
+            if (state.ActionType != type)
             {
-                actionType = type;
-                action = ActionFactory.Create(actionType);
+                state.ActionType = type;
+                state.Action = ActionFactory.Create(state.ActionType);
             }
         }
 
         public void SetBubbleType(BubbleType type)
         {
-            BubbleType = type;
+            state.BubbleType = type;
         }
 
         public void SetModifier(BubbleModifierInfo modifier)
         {
-            Modifier = modifier;
+            state.Modifier = modifier;
         }
 
         public void PerformAction(int x, int y)
         {
-            if (action != null)
+            if (state.Action != null)
             {
-                action.Perform(this, x, y);
+                state.Action.Perform(this, x, y);
             }
         }
 
         public void PerformAlternateAction(int x, int y)
         {
-            if (action != null)
+            if (state.Action != null)
             {
-                action.PerformAlternate(this, x, y);
+                state.Action.PerformAlternate(this, x, y);
             }
         }
 
@@ -165,18 +165,30 @@ namespace LevelEditor
             }
         }
 
+        public void PushState()
+        {
+            stateStack.Push(state);
+            state = state.Clone();
+        }
+
+        public void PopState()
+        {
+            if (stateStack.Count > 0)
+            {
+                state = stateStack.Pop();
+            }
+        }
+
         private void RestoreState(string state)
         {
-            var saveBubbleType = BubbleType;
-            var saveActionType = actionType;
+            PushState();
 
             var clear = new ClearAction();
             clear.Perform(this, 0, 0);
 
             LoadLevel(state);
 
-            SetBubbleType(saveBubbleType);
-            SetActionType(saveActionType);
+            PopState();
         }
     }
 }

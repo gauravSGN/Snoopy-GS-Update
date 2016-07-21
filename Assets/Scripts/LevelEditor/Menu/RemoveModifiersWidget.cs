@@ -38,12 +38,10 @@ namespace LevelEditor.Menu
         {
             data.modifiers = null;
 
-            var previousType = Manipulator.BubbleType;
-
-            Manipulator.SetBubbleType(data.Type);
-            placer.Perform(Manipulator, data.X, data.Y);
-
-            Manipulator.SetBubbleType(previousType);
+            PerformNonvolatileAction(() => {
+                Manipulator.SetBubbleType(data.Type);
+                placer.Perform(Manipulator, data.X, data.Y);
+            });
 
             Complete();
         }

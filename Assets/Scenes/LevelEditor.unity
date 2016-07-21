@@ -1767,6 +1767,18 @@ Prefab:
       propertyPath: manipulator
       value: 
       objectReference: {fileID: 1329098742}
+    - target: {fileID: 123366, guid: e2a741fca97614f4e85afdeeff0ae31a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22406266, guid: e2a741fca97614f4e85afdeeff0ae31a, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22442712, guid: e2a741fca97614f4e85afdeeff0ae31a, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2a741fca97614f4e85afdeeff0ae31a, type: 2}
   m_IsPrefabParent: 0
