@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c81e6d7f3b2c4aa2b6f9e3394c475fc, type: 3}
   m_Name: PreLevelPopup
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   prefab: {fileID: 153344, guid: 1b6ef94df5c9349e5802e07908d142ba, type: 2}

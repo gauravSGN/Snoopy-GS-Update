@@ -1,8 +1,8 @@
-using UnityEngine;
-
 namespace UI.Popup
 {
-    abstract public class PopupConfig : ScriptableObject
+    public class PopupConfig
     {
+        virtual public PopupPriority priority { get; set; }
+        virtual public PopupType type { get { return PopupType.Generic; } }
     }
 }

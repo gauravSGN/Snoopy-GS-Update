@@ -5,6 +5,10 @@ namespace UI.Popup
 {
     public class Popup : MonoBehaviour
     {
+        virtual public void Setup(PopupConfig config)
+        {
+        }
+
         virtual public void Display()
         {
             gameObject.SetActive(true);

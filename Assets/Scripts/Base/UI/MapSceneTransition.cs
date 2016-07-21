@@ -29,7 +29,12 @@ public class MapSceneTransition : MonoBehaviour
                 nextScene = StringConstants.Scenes.LEVEL;
             }
 
-            GlobalState.Instance.Services.Get<PopupService>().Enqueue(PopupType.PreLevel, null);
+            GlobalState.Instance.Services.Get<PopupService>().Enqueue(new PreLevelPopupConfig
+            {
+                level = levelNumber,
+                nextScene = nextScene,
+                stars = GlobalState.Instance.Services.Get<UserStateService>().levels[levelNumber].stars,
+            });
         }
     }
 }

@@ -35,9 +35,9 @@ namespace UI.Popup
             }
         }
 
-        public void Enqueue(PopupType type, PopupConfig config, PopupPriority priority = PopupPriority.Normal)
+        public void Enqueue(PopupConfig config)
         {
-            popupQueue.Enqueue(new Tuple<PopupType, PopupConfig>(type, config), (int)priority);
+            popupQueue.Enqueue(new Tuple<PopupType, PopupConfig>(config.type, config), (int)config.priority);
             ShowNextPopup();
         }
 
@@ -61,7 +61,10 @@ namespace UI.Popup
 
                 var popup = popupFactory.CreateByType(info.Item1);
                 popup.gameObject.transform.SetParent(parentCanvas.transform, false);
-                popup.gameObject.GetComponent<Popup>().Display();
+
+                var component = popup.gameObject.GetComponent<Popup>();
+                component.Setup(info.Item2);
+                component.Display();
             }
         }
 
