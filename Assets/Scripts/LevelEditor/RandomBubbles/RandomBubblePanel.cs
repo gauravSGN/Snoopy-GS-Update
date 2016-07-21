@@ -40,7 +40,7 @@ namespace LevelEditor
             InitializeGroups();
 
             var eventService = GlobalState.Instance.Services.Get<EventService>();
-            eventService.AddEventHandler<LevelEditorLoadEvent>(OnLevelEditorLoad);
+            eventService.AddEventHandler<RandomBubblesChangedEvent>(OnRandomBubblesChanged);
         }
 
         public void AddGroup()
@@ -86,12 +86,9 @@ namespace LevelEditor
             {
                 var data = JsonUtility.FromJson<RandomsFileWrapper>(File.ReadAllText(filename));
 
-                RemoveAllGroups();
-
-                foreach (var definition in data.randoms)
-                {
-                    definitions.Add(definition);
-                }
+                DeleteAllGroups();
+                manipulator.Randoms.Clear();
+                manipulator.Randoms.AddRange(data.randoms);
 
                 CreateAllGroups();
                 ResizeContents();
@@ -118,12 +115,17 @@ namespace LevelEditor
         private void RemoveGroup(RandomBubbleGroup group)
         {
             var index = groups.IndexOf(group);
-            Destroy(group.gameObject);
 
+            DeleteGroup(index);
             definitions.RemoveAt(index);
-            groups.RemoveAt(index);
 
             ResizeContents();
+        }
+
+        private void DeleteGroup(int index)
+        {
+            Destroy(groups[index].gameObject);
+            groups.RemoveAt(index);
         }
 
         private void OnGroupActivate(RandomBubbleGroup group)
@@ -138,14 +140,14 @@ namespace LevelEditor
             });
         }
 
-        private void OnLevelEditorLoad(LevelEditorLoadEvent gameEvent)
+        private void OnRandomBubblesChanged(RandomBubblesChangedEvent gameEvent)
         {
             InitializeGroups();
         }
 
         private void InitializeGroups()
         {
-            RemoveAllGroups();
+            DeleteAllGroups();
 
             definitions = manipulator.Randoms;
 
@@ -159,11 +161,11 @@ namespace LevelEditor
             ResizeContents();
         }
 
-        private void RemoveAllGroups()
+        private void DeleteAllGroups()
         {
             while (groups.Count > 0)
             {
-                RemoveGroup(groups[0]);
+                DeleteGroup(0);
             }
         }
 

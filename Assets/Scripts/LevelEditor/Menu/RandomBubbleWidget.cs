@@ -130,6 +130,8 @@ namespace LevelEditor.Menu
                 Manipulator.Randoms.Add(definition);
             }
 
+            GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new RandomBubblesChangedEvent());
+
             var modifier = data.modifiers.First(m => m.type == BubbleModifierType.Random);
             modifier.data = Manipulator.Randoms.IndexOf(match).ToString();
 
