@@ -18,6 +18,20 @@ arm_hold_3qtr_L
   orig: 60, 43
   offset: 0, 0
   index: -1
+arm_hold_profile_L
+  rotate: true
+  xy: 978, 100
+  size: 26, 44
+  orig: 26, 44
+  offset: 0, 0
+  index: -1
+arm_holding_profile_L_02
+  rotate: true
+  xy: 973, 43
+  size: 33, 46
+  orig: 33, 46
+  offset: 0, 0
+  index: -1
 body_front
   rotate: true
   xy: 703, 76
@@ -34,21 +48,21 @@ body_profile_L
   index: -1
 brow
   rotate: false
-  xy: 57, 8
+  xy: 311, 12
   size: 12, 10
   orig: 12, 10
   offset: 0, 0
   index: -1
 brow_3qtr
   rotate: false
-  xy: 1014, 105
+  xy: 77, 11
   size: 8, 7
   orig: 8, 7
   offset: 0, 0
   index: -1
 collar
-  rotate: false
-  xy: 745, 56
+  rotate: true
+  xy: 748, 45
   size: 29, 18
   orig: 29, 18
   offset: 0, 0
@@ -76,42 +90,70 @@ ear_profile_L
   index: -1
 eye_3qtr_L
   rotate: false
-  xy: 649, 39
+  xy: 778, 68
   size: 7, 12
   orig: 7, 12
   offset: 0, 0
   index: -1
-eye_3qtr_R
+eye_3qtr_L_up
   rotate: false
-  xy: 1014, 114
+  xy: 626, 2
+  size: 7, 11
+  orig: 7, 11
+  offset: 0, 0
+  index: -1
+eye_3qtr_L_up_line
+  rotate: false
+  xy: 299, 4
+  size: 10, 18
+  orig: 10, 18
+  offset: 0, 0
+  index: -1
+eye_3qtr_R
+  rotate: true
+  xy: 311, 2
   size: 8, 12
   orig: 8, 12
   offset: 0, 0
   index: -1
+eye_3qtr_R_up
+  rotate: false
+  xy: 768, 62
+  size: 8, 12
+  orig: 8, 12
+  offset: 0, 0
+  index: -1
+eye_3qtr_R_up_line
+  rotate: true
+  xy: 57, 8
+  size: 10, 18
+  orig: 10, 18
+  offset: 0, 0
+  index: -1
 eye_closed_default
   rotate: true
-  xy: 737, 38
+  xy: 626, 15
   size: 13, 6
   orig: 13, 6
   offset: 0, 0
   index: -1
 foot_front_L
   rotate: false
-  xy: 577, 30
+  xy: 696, 21
   size: 51, 21
   orig: 51, 21
   offset: 0, 0
   index: -1
 foot_front_R
   rotate: false
-  xy: 692, 53
+  xy: 134, 3
   size: 51, 21
   orig: 51, 21
   offset: 0, 0
   index: -1
 hand_default_L
-  rotate: false
-  xy: 660, 29
+  rotate: true
+  xy: 696, 44
   size: 30, 50
   orig: 30, 50
   offset: 0, 0
@@ -123,9 +165,23 @@ hand_fronthold
   orig: 15, 33
   offset: 0, 0
   index: -1
+hand_fronthold_L
+  rotate: true
+  xy: 225, 4
+  size: 20, 34
+  orig: 20, 34
+  offset: 0, 0
+  index: -1
+hand_fronthold_L_02
+  rotate: true
+  xy: 187, 3
+  size: 21, 36
+  orig: 21, 36
+  offset: 0, 0
+  index: -1
 hand_hold_3qtr_L
   rotate: false
-  xy: 978, 79
+  xy: 660, 32
   size: 34, 47
   orig: 34, 47
   offset: 0, 0
@@ -167,7 +223,7 @@ leg_front_L
   index: -1
 leg_front_R
   rotate: true
-  xy: 692, 31
+  xy: 978, 78
   size: 20, 43
   orig: 20, 43
   offset: 0, 0
@@ -179,6 +235,13 @@ mouth_smile_34
   orig: 55, 29
   offset: 0, 0
   index: -1
+mouth_smile_profile
+  rotate: false
+  xy: 577, 30
+  size: 55, 21
+  orig: 55, 21
+  offset: 0, 0
+  index: -1
 nose_3qtr
   rotate: false
   xy: 37, 5
@@ -188,7 +251,7 @@ nose_3qtr
   index: -1
 nose_profile_L
   rotate: false
-  xy: 630, 34
+  xy: 634, 34
   size: 17, 17
   orig: 17, 17
   offset: 0, 0
@@ -209,7 +272,7 @@ shadow
   index: -1
 tail
   rotate: false
-  xy: 973, 59
+  xy: 261, 4
   size: 36, 18
   orig: 36, 18
   offset: 0, 0
