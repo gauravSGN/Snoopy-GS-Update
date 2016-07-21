@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: snoopy1_Atlas
+  m_Name: snoopy_Atlas
   m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: 48246a9eac3a24d0187fbac0263557f0, type: 3}
+  atlasFile: {fileID: 4900000, guid: ba074f07395ef40b4bddc0d3ea0387e9, type: 3}
   materials:
-  - {fileID: 2100000, guid: edd1f0a4b7b9f4be486fca9dfdc546bb, type: 2}
+  - {fileID: 2100000, guid: 72e40947e688840bf8cad24a911f036e, type: 2}
