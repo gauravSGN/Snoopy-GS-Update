@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Service;
+using Spine.Unity;
 
 public class BubbleLauncher : MonoBehaviour
 {
@@ -18,10 +19,17 @@ public class BubbleLauncher : MonoBehaviour
     [SerializeField]
     private AimLine aimLine;
 
+    [SerializeField]
+    private GameObject launcherCharacter;
+
     private GameObject[] nextBubbles;
     private BubbleType[] nextTypes;
     private List<ModifyShot> shotModifiers;
     private GameObject currentAnimation;
+
+    private Animator launcherAnimator;
+    private AnimationEventProxy animationEventProxy;
+    private Vector2 direction;
 
     public void CycleQueue()
     {
@@ -45,6 +53,9 @@ public class BubbleLauncher : MonoBehaviour
         nextBubbles = new GameObject[locations.Length];
         nextTypes = new BubbleType[locations.Length];
         shotModifiers = ResetShotModifiers();
+        launcherAnimator = launcherCharacter.GetComponent<Animator>();
+        animationEventProxy = launcherCharacter.GetComponent<AnimationEventProxy>();
+        launcherCharacter.GetComponent<SkeletonAnimator>().Skeleton.SetAttachment("red_bubble2", null);
 
         aimLine.Fire += FireBubbleAt;
 
@@ -85,19 +96,27 @@ public class BubbleLauncher : MonoBehaviour
             modifier(nextBubbles[0]);
         }
 
-        var direction = (point - (Vector2)locations[0].transform.position).normalized * launchSpeed;
-        var rigidBody = nextBubbles[0].GetComponent<Rigidbody2D>();
-        nextBubbles[0].transform.parent = null;
+        direction = (point - (Vector2)locations[0].transform.position).normalized * launchSpeed;
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new InputToggleEvent(false));
+        animationEventProxy.OnAnimationFire += OnAnimationFireBubble;
+        launcherAnimator.SetTrigger("Firing");
+    }
 
-        rigidBody.isKinematic = false;
+    private void OnAnimationFireBubble()
+    {
+        nextBubbles[0].transform.parent = null;
+        var rigidBody = nextBubbles[0].GetComponent<Rigidbody2D>();
+
         rigidBody.velocity = direction;
         rigidBody.gravityScale = 0.0f;
+        rigidBody.isKinematic = false;;
 
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new InputToggleEvent(false));
         GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleFiredEvent(nextBubbles[0]));
 
         nextBubbles[0] = null;
         currentAnimation = null;
+        direction = Vector2.zero;
+
         shotModifiers = ResetShotModifiers();
         level.levelState.bubbleQueue.RemoveListener(OnBubbleQueueChanged);
         level.levelState.bubbleQueue.GetNext();
@@ -108,6 +127,7 @@ public class BubbleLauncher : MonoBehaviour
         level.levelState.bubbleQueue.AddListener(OnBubbleQueueChanged);
         CycleLocalQueue();
         OnBubbleQueueChanged((Observable)level.levelState.bubbleQueue);
+        animationEventProxy.OnAnimationFire -= OnAnimationFireBubble;
     }
 
     private void MoveBubbleToLocation(int index)
