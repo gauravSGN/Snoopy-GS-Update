@@ -1,6 +1,6 @@
+using Model;
 using UnityEngine;
 using System.Collections.Generic;
-using Model;
 
 namespace Util
 {
@@ -21,7 +21,6 @@ namespace Util
         virtual public DefinitionType GetDefinitionByType(BaseType type)
         {
             definitionLookup = definitionLookup ?? CreateLookupTable<BaseType, DefinitionType>(definitions);
-
             return definitionLookup[type];
         }
 

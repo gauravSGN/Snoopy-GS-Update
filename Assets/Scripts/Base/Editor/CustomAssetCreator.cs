@@ -4,6 +4,7 @@ using System.IO;
 using PowerUps;
 using Animation;
 using Model;
+using UI.Popup;
 
 public static class CustomAssetCreator
 {
@@ -53,6 +54,18 @@ public static class CustomAssetCreator
     public static void CreateAnimationFactory()
     {
         CreateAThing<AnimationFactory>();
+    }
+
+    [MenuItem("Assets/Create/Popup/Popup Definition")]
+    public static void CreatePopupDefinition()
+    {
+        CreateAThing<PopupDefinition>();
+    }
+
+    [MenuItem("Assets/Create/Popup/Popup Factory")]
+    public static void CreatePopupFactory()
+    {
+        CreateAThing<PopupFactory>();
     }
 
     private static void CreateAThing<T>() where T : ScriptableObject

@@ -1,8 +1,8 @@
 ﻿using Service;
+using UI.Popup;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class SceneTransition : MonoBehaviour
+public class MapSceneTransition : MonoBehaviour
 {
     [SerializeField]
     private TextAsset nextLevelData;
@@ -10,7 +10,7 @@ public class SceneTransition : MonoBehaviour
     [SerializeField]
     private int levelNumber;
 
-    public void TriggerSceneTransition(string sceneName)
+    public void Initiate(string nextScene = "")
     {
         if (GlobalState.Instance.Services.Get<UserStateService>().purchasables.hearts.quantity > 0)
         {
@@ -22,9 +22,14 @@ public class SceneTransition : MonoBehaviour
             }
 
             sceneData.LevelNumber = levelNumber;
-            sceneData.ReturnScene = SceneManager.GetActiveScene().name;
+            sceneData.ReturnScene = StringConstants.Scenes.MAP;
 
-            SceneManager.LoadScene(sceneName);
+            if (nextScene == "")
+            {
+                nextScene = StringConstants.Scenes.LEVEL;
+            }
+
+            GlobalState.Instance.Services.Get<PopupService>().Enqueue(PopupType.PreLevel, null);
         }
     }
 }

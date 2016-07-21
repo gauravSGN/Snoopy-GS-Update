@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public abstract class PopupConfig : ScriptableObject
+namespace UI.Popup
 {
-
+    abstract public class PopupConfig : ScriptableObject
+    {
+    }
 }

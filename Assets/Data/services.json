@@ -23,6 +23,10 @@
         {
             "interfaceName": "Service.UserStateService, Assembly-CSharp",
             "className": "State.User, Assembly-CSharp"
+        },
+        {
+            "interfaceName": "Service.PopupService, Assembly-CSharp",
+            "className": "UI.Popup.PopupManager, Assembly-CSharp"
         }
     ]
 }
