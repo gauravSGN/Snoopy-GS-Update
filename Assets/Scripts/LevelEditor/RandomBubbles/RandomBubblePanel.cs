@@ -116,14 +116,38 @@ namespace LevelEditor
 
         private void RemoveGroup(RandomBubbleGroup group)
         {
-            var index = groups.IndexOf(group);
+            Action action = delegate
+            {
+                var index = groups.IndexOf(group);
 
-            DeleteGroup(index);
-            definitions.RemoveAt(index);
+                RemoveRandomFromBoard(index);
+                ShiftRandomGroups(index);
 
-            ShiftAllTheThings(index);
+                DeleteGroup(index);
+                definitions.RemoveAt(index);
 
-            ResizeContents();
+                InitializeGroups();
+                UpdateGroupCounts();
+
+                ResizeContents();
+
+                var modifier = manipulator.Modifier;
+                if ((modifier != null) &&
+                    (modifier.Type == BubbleModifierType.Random) &&
+                    (int.Parse(modifier.Data) >= groups.Count))
+                {
+                    manipulator.SetModifier(null);
+                }
+            };
+
+            if (group.Count > 0)
+            {
+                GameObject.Find("LevelEditor").GetComponent<LevelEditor>().ConfirmAction(action);
+            }
+            else
+            {
+                action.Invoke();
+            }
         }
 
         private void DeleteGroup(int index)
@@ -179,15 +203,6 @@ namespace LevelEditor
         private void ResizeContents()
         {
             contents.sizeDelta = new Vector2(0.0f, rowHeight * groups.Count);
-        }
-
-        private void ShiftAllTheThings(int removedIndex)
-        {
-            RemoveRandomFromBoard(removedIndex);
-            ShiftRandomGroups(removedIndex);
-            UpdateGroupCounts();
-
-            InitializeGroups();
         }
 
         private void RemoveRandomFromBoard(int removedIndex)
