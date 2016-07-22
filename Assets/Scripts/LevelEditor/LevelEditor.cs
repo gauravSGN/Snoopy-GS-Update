@@ -127,6 +127,7 @@ namespace LevelEditor
 
         private void ClearBoard()
         {
+            GlobalState.Instance.Services.Get<EventService>().Dispatch(new ClearLevelEvent());
             var clearAction = manipulator.ActionFactory.Create(ManipulatorActionType.Clear);
             clearAction.Perform(manipulator, 0, 0);
         }
