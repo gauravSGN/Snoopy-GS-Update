@@ -6,6 +6,6 @@ namespace UI.Popup
         public long stars;
         public string nextScene;
 
-        override public PopupType type { get { return PopupType.PreLevel; } }
+        override public PopupType Type { get { return PopupType.PreLevel; } }
     }
 }

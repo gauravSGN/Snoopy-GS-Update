@@ -1,4 +1,5 @@
 ﻿using Core;
+using System;
 using Service;
 using UnityEngine;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace UI.Popup
 
         public void Enqueue(PopupConfig config)
         {
-            popupQueue.Enqueue(config, (int)config.priority);
+            popupQueue.Enqueue(config, (int)config.Priority);
             ShowNextPopup();
         }
 
@@ -55,16 +56,21 @@ namespace UI.Popup
         {
             if (PopupsEnabled && (popupQueue.Count > 0))
             {
-                var config = popupQueue.Dequeue();
+                var config = popupQueue.Peek();
 
-                popupOverlay.gameObject.SetActive(true);
+                if (config.IgnoreQueue || (currentPopups.Count == 0))
+                {
+                    popupQueue.Dequeue();
 
-                var popup = popupFactory.CreateByType(config.type);
-                popup.gameObject.transform.SetParent(parentCanvas.transform, false);
+                    var popup = popupFactory.CreateByType(config.Type);
+                    popup.gameObject.transform.SetParent(parentCanvas.transform, false);
 
-                var component = popup.gameObject.GetComponent<Popup>();
-                component.Setup(config);
-                component.Display();
+                    UpdatePopupOverlay();
+
+                    var component = popup.gameObject.GetComponent<Popup>();
+                    component.Setup(config);
+                    component.Display();
+                }
             }
         }
 
@@ -74,8 +80,6 @@ namespace UI.Popup
             {
                 currentPopups.Add(gameEvent.Popup);
             }
-
-            popupOverlay.gameObject.SetActive(true);
         }
 
         private void OnPopupClosed(PopupClosedEvent gameEvent)
@@ -86,11 +90,15 @@ namespace UI.Popup
             }
 
             ShowNextPopup();
+            UpdatePopupOverlay();
+        }
 
-            if (currentPopups.Count == 0)
-            {
-                popupOverlay.gameObject.SetActive(false);
-            }
+        private void UpdatePopupOverlay()
+        {
+            var maxSiblingIndex = parentCanvas.transform.childCount - 1;
+
+            popupOverlay.gameObject.SetActive(maxSiblingIndex > 0);
+            popupOverlay.gameObject.transform.SetSiblingIndex(Math.Max(0, maxSiblingIndex - 1));
         }
     }
 }

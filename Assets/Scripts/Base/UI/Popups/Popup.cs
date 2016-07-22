@@ -23,6 +23,7 @@ namespace UI.Popup
 
         virtual protected void OnCloseTweenComplete(AbstractGoTween tween)
         {
+            gameObject.transform.SetParent(null);
             GlobalState.Instance.Services.Get<EventService>().Dispatch(new PopupClosedEvent(this));
             Destroy(gameObject);
         }
