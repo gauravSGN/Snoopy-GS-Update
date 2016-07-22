@@ -80,6 +80,7 @@ namespace LevelEditor
             randoms = new List<RandomBubbleDefinition>(levelData.Randoms ?? new RandomBubbleDefinition[0]);
             GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new RandomBubblesChangedEvent());
 
+            GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelModifiedEvent());
             GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelEditorLoadEvent());
         }
 
@@ -141,6 +142,7 @@ namespace LevelEditor
                 undoBuffer.RemoveAt(undoBuffer.Count - 1);
 
                 RestoreState(state);
+                GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelModifiedEvent());
             }
         }
 
@@ -152,6 +154,7 @@ namespace LevelEditor
                 redoBuffer.RemoveAt(redoBuffer.Count - 1);
 
                 RestoreState(state);
+                GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelModifiedEvent());
             }
         }
 

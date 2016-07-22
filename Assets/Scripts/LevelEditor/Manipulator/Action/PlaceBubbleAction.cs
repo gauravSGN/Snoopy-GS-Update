@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
+using Service;
 
 namespace LevelEditor.Manipulator
 {
@@ -32,7 +33,7 @@ namespace LevelEditor.Manipulator
 
         public void PerformAlternate(LevelManipulator manipulator, int x, int y)
         {
-                deleter.Perform(manipulator, x, y);
+            deleter.Perform(manipulator, x, y);
         }
 
         private void PlaceBubble(LevelManipulator manipulator, int x, int y, BubbleType type)
@@ -66,6 +67,8 @@ namespace LevelEditor.Manipulator
                 manipulator.Models.Add(model.Key, model);
 
                 manipulator.BubbleFactory.ApplyEditorModifiers(instance, model);
+
+                GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelModifiedEvent());
             }
         }
     }

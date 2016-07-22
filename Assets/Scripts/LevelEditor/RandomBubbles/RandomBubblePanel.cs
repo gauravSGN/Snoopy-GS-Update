@@ -41,7 +41,8 @@ namespace LevelEditor
             InitializeGroups();
 
             var eventService = GlobalState.Instance.Services.Get<EventService>();
-            eventService.AddEventHandler<RandomBubblesChangedEvent>(OnRandomBubblesChanged);
+            eventService.AddEventHandler<RandomBubblesChangedEvent>((e) => InitializeGroups());
+            eventService.AddEventHandler<LevelModifiedEvent>((e) => UpdateGroupCounts());
         }
 
         public void AddGroup()
@@ -141,11 +142,6 @@ namespace LevelEditor
                 Type = BubbleModifierType.Random,
                 Data = index.ToString(),
             });
-        }
-
-        private void OnRandomBubblesChanged(RandomBubblesChangedEvent gameEvent)
-        {
-            InitializeGroups();
         }
 
         private void InitializeGroups()
@@ -258,6 +254,11 @@ namespace LevelEditor
                 }
 
                 counts[modifier.data]++;
+            }
+
+            foreach (var group in groups)
+            {
+                group.Count = 0;
             }
 
             foreach (var pair in counts)
