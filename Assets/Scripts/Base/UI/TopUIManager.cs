@@ -10,12 +10,10 @@ public class TopUIManager : MonoBehaviour, TopUIService
     private GameObject loadingPrefab;
 
     private GameObject loadingScreenInstance;
-    private PopupManager popupManager;
 
     public void Start()
     {
         GlobalState.Instance.Services.SetInstance<TopUIService>(this);
-        popupManager = topUIObject.GetComponent<PopupManager>();
     }
 
     public void ShowLoading(AsyncOperation op)
@@ -28,10 +26,5 @@ public class TopUIManager : MonoBehaviour, TopUIService
     private void DestroyWhenDone(GameObject toDestroy)
     {
         Destroy(toDestroy);
-    }
-
-    public void ShowOneButtonPopup(OneButtonPopupConfig config)
-    {
-        popupManager.ShowOneButtonPopupImmediate(config);
     }
 }
