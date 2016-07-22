@@ -18,8 +18,8 @@ namespace UI.Popup
 
         private bool popupsEnabled = true;
         private readonly List<Popup> currentPopups = new List<Popup>();
-        private readonly PriorityQueue<Tuple<PopupType, PopupConfig>, int> popupQueue =
-            new PriorityQueue<Tuple<PopupType, PopupConfig>, int>(Util.MathUtil.CompareInts);
+        private readonly PriorityQueue<PopupConfig, int> popupQueue =
+            new PriorityQueue<PopupConfig, int>(Util.MathUtil.CompareInts);
 
         private bool PopupsEnabled
         {
@@ -37,7 +37,7 @@ namespace UI.Popup
 
         public void Enqueue(PopupConfig config)
         {
-            popupQueue.Enqueue(new Tuple<PopupType, PopupConfig>(config.type, config), (int)config.priority);
+            popupQueue.Enqueue(config, (int)config.priority);
             ShowNextPopup();
         }
 
@@ -55,15 +55,15 @@ namespace UI.Popup
         {
             if (PopupsEnabled && (popupQueue.Count > 0))
             {
-                Tuple<PopupType, PopupConfig> info = popupQueue.Dequeue();
+                var config = popupQueue.Dequeue();
 
                 popupOverlay.gameObject.SetActive(true);
 
-                var popup = popupFactory.CreateByType(info.Item1);
+                var popup = popupFactory.CreateByType(config.type);
                 popup.gameObject.transform.SetParent(parentCanvas.transform, false);
 
                 var component = popup.gameObject.GetComponent<Popup>();
-                component.Setup(info.Item2);
+                component.Setup(config);
                 component.Display();
             }
         }
