@@ -17,6 +17,7 @@ namespace UI.Popup
         private GameObject[] starPositions;
 
         private bool transitionOnClose;
+        private PreLevelPopupConfig config;
 
         public void Transition()
         {
@@ -26,7 +27,7 @@ namespace UI.Popup
 
         override public void Setup(PopupConfig genericConfig)
         {
-            var config = genericConfig as PreLevelPopupConfig;
+            config = genericConfig as PreLevelPopupConfig;
 
             bannerText.text = "Level " + config.level.ToString();
 
@@ -42,7 +43,7 @@ namespace UI.Popup
 
             if (transitionOnClose)
             {
-                SceneManager.LoadScene(StringConstants.Scenes.LEVEL);
+                SceneManager.LoadScene(config.nextScene);
             }
             else
             {
