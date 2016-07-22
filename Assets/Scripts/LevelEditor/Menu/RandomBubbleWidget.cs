@@ -37,6 +37,7 @@ namespace LevelEditor.Menu
 
             InitializeButtons(panel);
             InitializeFields(colors, weightFields);
+            InitializeExclusions(panel);
 
             return panel;
         }
@@ -77,6 +78,9 @@ namespace LevelEditor.Menu
                 weightFields.Add(field);
             }
 
+            var rectTransform = panel.GetComponent<RectTransform>();
+            rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, -rect.y + 6.0f + (halfCount + 1) * rect.height);
+
             return weightFields;
         }
 
@@ -113,6 +117,15 @@ namespace LevelEditor.Menu
                 field.transform.FindChild("Dot").GetComponent<Image>().color = color;
                 field.GetComponentInChildren<BubbleWeightElement>().Initialize(definition.weights, index, color);
             }
+        }
+
+        private void InitializeExclusions(GameObject panel)
+        {
+            var exclusions = panel.transform.FindChild("ExclusionsPanel").GetComponent<RandomExclusionPanel>();
+            var halfCount = (definition.weights.Length + 1) / 2;
+
+            exclusions.transform.localPosition = new Vector3(2.0f, -28.0f - (halfCount * 24.0f));
+            exclusions.Initialize(definition.exclusions);
         }
 
         private void OnOnceEachClick()
