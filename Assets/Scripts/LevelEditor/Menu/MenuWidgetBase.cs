@@ -15,5 +15,12 @@ namespace LevelEditor.Menu
                 OnWidgetComplete();
             }
         }
+
+        protected void PerformNonvolatileAction(Action action)
+        {
+            Manipulator.PushState();
+            action.Invoke();
+            Manipulator.PopState();
+        }
     }
 }

@@ -9,5 +9,6 @@
         InsertRow,
         PlaceModifier,
         DeleteModifier,
+        PlaceBubbleAndModifier,
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Model;
+using Service;
 using UnityEngine;
 
 namespace LevelEditor.Manipulator
@@ -22,6 +23,8 @@ namespace LevelEditor.Manipulator
                 GameObject.Destroy(manipulator.Views[key]);
                 manipulator.Views.Remove(key);
             }
+
+            GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelModifiedEvent());
         }
 
         public void PerformAlternate(LevelManipulator manipulator, int x, int y)

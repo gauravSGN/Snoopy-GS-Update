@@ -115,7 +115,7 @@ namespace LevelEditor
             SceneManager.LoadScene("Level");
         }
 
-        private void ConfirmAction(Action action)
+        public void ConfirmAction(Action action)
         {
             var dialog = Instantiate(confirmationDialogPrefab).GetComponent<ConfirmationDialog>();
             dialog.transform.SetParent(transform.parent, false);

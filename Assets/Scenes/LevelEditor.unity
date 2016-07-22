@@ -1552,7 +1552,6 @@ GameObject:
   - 114: {fileID: 306701203}
   - 114: {fileID: 306701202}
   - 114: {fileID: 306701201}
-  - 114: {fileID: 306701205}
   m_Layer: 5
   m_Name: ClearButton
   m_TagString: Untagged
@@ -1635,7 +1634,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 306701203}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1329098741}
+        m_MethodName: Clear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &306701203
@@ -1671,19 +1681,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 306701199}
---- !u!114 &306701205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 306701199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c325adc66d324adb9b204da22e6a44c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manipulator: {fileID: 1329098742}
-  actionType: 3
 --- !u!1001 &312610965
 Prefab:
   m_ObjectHideFlags: 0
@@ -1767,6 +1764,18 @@ Prefab:
       propertyPath: manipulator
       value: 
       objectReference: {fileID: 1329098742}
+    - target: {fileID: 123366, guid: e2a741fca97614f4e85afdeeff0ae31a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22406266, guid: e2a741fca97614f4e85afdeeff0ae31a, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22442712, guid: e2a741fca97614f4e85afdeeff0ae31a, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2a741fca97614f4e85afdeeff0ae31a, type: 2}
   m_IsPrefabParent: 0
