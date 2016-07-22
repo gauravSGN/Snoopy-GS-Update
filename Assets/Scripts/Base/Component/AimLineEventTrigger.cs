@@ -28,10 +28,13 @@ public class AimLineEventTrigger : EventTrigger
 
     override public void OnPointerDown(PointerEventData data)
     {
-        aiming = hovering = true;
+        if(data.button == PointerEventData.InputButton.Left)
+        {
+            aiming = hovering = true;
 
-        MoveTarget(GetCursorPosition(data));
-        StartAiming();
+            MoveTarget(GetCursorPosition(data));
+            StartAiming();
+        }
     }
 
     override public void OnPointerEnter(PointerEventData data)

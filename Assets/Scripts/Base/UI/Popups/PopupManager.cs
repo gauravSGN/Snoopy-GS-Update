@@ -97,8 +97,8 @@ namespace UI.Popup
         {
             var maxSiblingIndex = parentCanvas.transform.childCount - 1;
 
-            popupOverlay.gameObject.SetActive(maxSiblingIndex > 0);
-            popupOverlay.gameObject.transform.SetSiblingIndex(Math.Max(0, maxSiblingIndex - 1));
+            // popupOverlay.gameObject.SetActive(maxSiblingIndex > 0);
+            // popupOverlay.gameObject.transform.SetSiblingIndex(Math.Max(0, maxSiblingIndex - 1));
         }
     }
 }
