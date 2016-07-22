@@ -98,6 +98,16 @@ namespace LevelEditor
 #endif
         }
 
+        public void Preview()
+        {
+            RandomStateSaver.Instance.Apply(manipulator);
+        }
+
+        public void ResetPreview()
+        {
+            RandomStateSaver.Instance.Reset(manipulator);
+        }
+
         private void CreateGroup()
         {
             var index = groups.Count;
