@@ -7,4 +7,10 @@ namespace StringConstants
     {
         public const string BUBBLES = "Bubble";
     }
+
+    public static class Scenes
+    {
+        public const string MAP = "Scenes/Map";
+        public const string LEVEL = "Scenes/Level";
+    }
 }

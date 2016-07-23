@@ -15,7 +15,7 @@ public class PriorityQueue<T, U>
 
     public int Count
     {
-        get{ return items.Count; }
+        get { return items.Count; }
     }
 
     public void Clear()

@@ -115,7 +115,7 @@ namespace LevelEditor
             SceneManager.LoadScene("Level");
         }
 
-        private void ConfirmAction(Action action)
+        public void ConfirmAction(Action action)
         {
             var dialog = Instantiate(confirmationDialogPrefab).GetComponent<ConfirmationDialog>();
             dialog.transform.SetParent(transform.parent, false);
@@ -127,6 +127,7 @@ namespace LevelEditor
 
         private void ClearBoard()
         {
+            GlobalState.Instance.Services.Get<EventService>().Dispatch(new ClearLevelEvent());
             var clearAction = manipulator.ActionFactory.Create(ManipulatorActionType.Clear);
             clearAction.Perform(manipulator, 0, 0);
         }

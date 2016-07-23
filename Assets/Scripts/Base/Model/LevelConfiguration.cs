@@ -14,21 +14,20 @@ namespace Model
         {
             RNG = new System.Random();
             Counts = new Dictionary<BubbleType, int>();
-
-            CreateRandomizers(data);
+            Randoms = CreateRandomizers(RNG, data.Randoms);
         }
 
-        private void CreateRandomizers(LevelData data)
+        public static ChainedRandomizer<BubbleType>[] CreateRandomizers(System.Random rng, RandomBubbleDefinition[] randoms)
         {
-            var count = data.Randoms.Length;
-            Randoms = new ChainedRandomizer<BubbleType>[count];
+            var count = randoms.Length;
+            var result = new ChainedRandomizer<BubbleType>[count];
 
             for (var index = 0; index < count; index++)
             {
-                var group = data.Randoms[index];
+                var group = randoms[index];
 
-                Randoms[index] = new ChainedRandomizer<BubbleType>(
-                    RNG,
+                result[index] = new ChainedRandomizer<BubbleType>(
+                    rng,
                     group.rollType,
                     BaseBubbleQueue.LAUNCHER_BUBBLE_TYPES,
                     group.weights.Select(w => (float)w)
@@ -37,11 +36,13 @@ namespace Model
 
             for (var index = 0; index < count; index++)
             {
-                foreach (var exclusion in data.Randoms[index].exclusions)
+                foreach (var exclusion in randoms[index].exclusions)
                 {
-                    Randoms[index].AddExclusion(Randoms[exclusion]);
+                    result[index].AddExclusion(result[exclusion]);
                 }
             }
+
+            return result;
         }
     }
 }

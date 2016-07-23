@@ -1,0 +1,111 @@
+fileFormatVersion: 2
+guid: 8c2da14adc5974de09304c284d3a1c2d
+timeCreated: 1468973186
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: snoopy_orangebanner_718_0
+    21300002: snoopy_orangebanner_718_1
+    21300004: snoopy_orangebanner_718_2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 122, y: 0, z: 115, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: snoopy_orangebanner_718_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 3
+        width: 107
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -8.5, y: 68.5}
+        - {x: -53.5, y: 63.5}
+        - {x: -53.5, y: -66.5}
+        - {x: -50.5, y: -68.5}
+        - {x: 50.5, y: -68.5}
+        - {x: 53.5, y: -59.5}
+        - {x: 53.5, y: 68.5}
+    - name: snoopy_orangebanner_718_1
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 3
+        width: 106
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: 68.5}
+        - {x: -53, y: 68.5}
+        - {x: -53, y: -60.5}
+        - {x: -50, y: -68.5}
+        - {x: 53, y: -68.5}
+        - {x: 53, y: 59.5}
+        - {x: 45, y: 65.5}
+    - name: snoopy_orangebanner_718_2
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 16
+        width: 102
+        height: 125
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -51, y: 62.5}
+        - {x: -51, y: -62.5}
+        - {x: 51, y: -62.5}
+        - {x: 51, y: 62.5}
+    outline: []
+  spritePackingTag: popup
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

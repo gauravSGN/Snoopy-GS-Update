@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using LevelEditor.Manipulator;
@@ -40,7 +41,8 @@ namespace LevelEditor
             InitializeGroups();
 
             var eventService = GlobalState.Instance.Services.Get<EventService>();
-            eventService.AddEventHandler<LevelEditorLoadEvent>(OnLevelEditorLoad);
+            eventService.AddEventHandler<RandomBubblesChangedEvent>((e) => InitializeGroups());
+            eventService.AddEventHandler<LevelModifiedEvent>((e) => UpdateGroupCounts());
         }
 
         public void AddGroup()
@@ -86,17 +88,24 @@ namespace LevelEditor
             {
                 var data = JsonUtility.FromJson<RandomsFileWrapper>(File.ReadAllText(filename));
 
-                RemoveAllGroups();
-
-                foreach (var definition in data.randoms)
-                {
-                    definitions.Add(definition);
-                }
+                DeleteAllGroups();
+                manipulator.Randoms.Clear();
+                manipulator.Randoms.AddRange(data.randoms);
 
                 CreateAllGroups();
                 ResizeContents();
             }
 #endif
+        }
+
+        public void Preview()
+        {
+            RandomStateSaver.Instance.Apply(manipulator);
+        }
+
+        public void ResetPreview()
+        {
+            RandomStateSaver.Instance.Reset(manipulator);
         }
 
         private void CreateGroup()
@@ -117,20 +126,51 @@ namespace LevelEditor
 
         private void RemoveGroup(RandomBubbleGroup group)
         {
-            var index = groups.IndexOf(group);
-            Destroy(group.gameObject);
+            Action action = delegate
+            {
+                var index = groups.IndexOf(group);
 
-            definitions.RemoveAt(index);
+                RemoveRandomFromBoard(index);
+                ShiftRandomGroups(index);
+
+                DeleteGroup(index);
+                definitions.RemoveAt(index);
+
+                InitializeGroups();
+                UpdateGroupCounts();
+
+                ResizeContents();
+
+                var modifier = manipulator.Modifier;
+                if ((modifier != null) &&
+                    (modifier.Type == BubbleModifierType.Random) &&
+                    (int.Parse(modifier.Data) >= groups.Count))
+                {
+                    manipulator.SetModifier(null);
+                }
+            };
+
+            if (group.Count > 0)
+            {
+                GameObject.Find("LevelEditor").GetComponent<LevelEditor>().ConfirmAction(action);
+            }
+            else
+            {
+                action.Invoke();
+            }
+        }
+
+        private void DeleteGroup(int index)
+        {
+            Destroy(groups[index].gameObject);
             groups.RemoveAt(index);
-
-            ResizeContents();
         }
 
         private void OnGroupActivate(RandomBubbleGroup group)
         {
             var index = groups.IndexOf(group);
 
-            manipulator.SetActionType(ManipulatorActionType.PlaceModifier);
+            manipulator.SetActionType(ManipulatorActionType.PlaceBubbleAndModifier);
             manipulator.SetModifier(new BubbleModifierData
             {
                 Type = BubbleModifierType.Random,
@@ -138,14 +178,9 @@ namespace LevelEditor
             });
         }
 
-        private void OnLevelEditorLoad(LevelEditorLoadEvent gameEvent)
-        {
-            InitializeGroups();
-        }
-
         private void InitializeGroups()
         {
-            RemoveAllGroups();
+            DeleteAllGroups();
 
             definitions = manipulator.Randoms;
 
@@ -159,11 +194,11 @@ namespace LevelEditor
             ResizeContents();
         }
 
-        private void RemoveAllGroups()
+        private void DeleteAllGroups()
         {
             while (groups.Count > 0)
             {
-                RemoveGroup(groups[0]);
+                DeleteGroup(0);
             }
         }
 
@@ -178,6 +213,92 @@ namespace LevelEditor
         private void ResizeContents()
         {
             contents.sizeDelta = new Vector2(0.0f, rowHeight * groups.Count);
+        }
+
+        private void RemoveRandomFromBoard(int removedIndex)
+        {
+            var deleter = new DeleteBubbleAction();
+            var placer = new PlaceBubbleAction();
+
+            var allRandomBubbles = GetAllRandomBubbles();
+
+            manipulator.PushState();
+
+            foreach (var bubble in allRandomBubbles)
+            {
+                var modifier = bubble.modifiers.First(m => m.type == BubbleModifierType.Random);
+                var modifierIndex = int.Parse(modifier.data);
+
+                if (modifierIndex == removedIndex)
+                {
+                    // Delete randoms that were part of this group
+                    deleter.Perform(manipulator, bubble.X, bubble.Y);
+                }
+                else if (modifierIndex > removedIndex)
+                {
+                    // Shift higher random groups down to fill the gap
+                    modifier.data = (modifierIndex - 1).ToString();
+                    manipulator.SetBubbleType(bubble.Type);
+                    placer.Perform(manipulator, bubble.X, bubble.Y);
+                }
+            }
+
+            manipulator.PopState();
+        }
+
+        private void ShiftRandomGroups(int removedIndex)
+        {
+            foreach (var definition in definitions)
+            {
+                var exclusions = definition.exclusions.Where(e => e != removedIndex).ToList();
+
+                for (var index = 0; index < exclusions.Count; index++)
+                {
+                    if (exclusions[index] >= removedIndex)
+                    {
+                        exclusions[index]--;
+                    }
+                }
+
+                definition.exclusions = exclusions;
+            }
+        }
+
+        private void UpdateGroupCounts()
+        {
+            var allRandomBubbles = GetAllRandomBubbles();
+            var counts = new Dictionary<string, int>();
+
+            foreach (var bubble in allRandomBubbles)
+            {
+                var modifier = bubble.modifiers.First(m => m.type == BubbleModifierType.Random);
+
+                if (!counts.ContainsKey(modifier.data))
+                {
+                    counts.Add(modifier.data, 0);
+                }
+
+                counts[modifier.data]++;
+            }
+
+            foreach (var group in groups)
+            {
+                group.Count = 0;
+            }
+
+            foreach (var pair in counts)
+            {
+                groups[int.Parse(pair.Key)].Count = pair.Value;
+            }
+        }
+
+        private BubbleData[] GetAllRandomBubbles()
+        {
+            return manipulator.Models
+                .Where(p => (p.Value.modifiers != null) &&
+                             p.Value.modifiers.Any(m => m.type == BubbleModifierType.Random))
+                .Select(p => p.Value)
+                .ToArray();
         }
     }
 }
