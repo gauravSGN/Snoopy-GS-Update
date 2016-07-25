@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapSceneTransition : MonoBehaviour
 {
     [SerializeField]
-    private TextAsset nextLevelData;
+    private string levelAssetName;
 
     [SerializeField]
     private int levelNumber;
@@ -16,9 +16,10 @@ public class MapSceneTransition : MonoBehaviour
         {
             var sceneData = GlobalState.Instance.Services.Get<SceneService>();
 
-            if (nextLevelData != null)
+            var levelData = GlobalState.Instance.Services.Get<AssetService>().LoadAsset<TextAsset>(levelAssetName);
+            if (levelData != null)
             {
-                sceneData.NextLevelData = nextLevelData.text;
+                sceneData.NextLevelData = levelData.text;
             }
 
             sceneData.LevelNumber = levelNumber;
