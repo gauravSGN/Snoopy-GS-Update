@@ -1,6 +1,9 @@
-using System.Collections;
-using UnityEngine;
+using System;
 using Service;
+using UI.Popup;
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Level : MonoBehaviour
 {
@@ -99,7 +102,14 @@ public class Level : MonoBehaviour
 
         UpdateUserScoreAndStars();
 
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(true));
+        GlobalState.Instance.Services.Get<PopupService>().Enqueue(new GenericPopupConfig
+        {
+            title = "Level Won",
+            mainText = ("Score: " + levelState.score.ToString() + "\n" +
+                        "Stars: " + GlobalState.Instance.Services.Get<UserStateService>().levels[levelState.levelNumber].stars.ToString()),
+            closeActions = new List<Action> { DispatchLevelWon },
+            affirmativeActions = new List<Action> { DispatchLevelWon }
+        });
     }
 
     private void UpdateUserScoreAndStars()
@@ -119,5 +129,10 @@ public class Level : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void DispatchLevelWon()
+    {
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(true));
     }
 }

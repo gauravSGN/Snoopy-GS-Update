@@ -1,92 +1,111 @@
 using System;
-using System.Collections.Generic;
 using Service;
+using System.Collections.Generic;
+using HandlerDict = System.Collections.Generic.Dictionary<System.Type, System.Collections.Generic.List<object>>;
 
-public class EventDispatcher : EventService
+namespace Event
 {
-    private readonly Dictionary<Type, List<object>> handlers = new Dictionary<Type, List<object>>();
-    private readonly Dictionary<Type, List<object>> pools = new Dictionary<Type, List<object>>();
-
-    public void Reset()
+    public class EventDispatcher : EventService
     {
-        handlers.Clear();
-    }
+        private readonly HandlerDict pools = new HandlerDict();
+        private readonly List<HandlerDict> handlerDictList = new List<HandlerDict>();
 
-    public void AddEventHandler<T>(Action<T> handler) where T : GameEvent
-    {
-        DictionaryInsert(handlers, typeof(T), handler);
-    }
-
-    public void RemoveEventHandler<T>(Action<T> handler) where T : GameEvent
-    {
-        var eventType = typeof(T);
-
-        if (handlers.ContainsKey(eventType))
+        public EventDispatcher()
         {
-            var handlerList = handlers[eventType];
-
-            if (handlerList.Contains(handler))
+            foreach (var handlerDictType in EnumExtensions.GetValues<HandlerDictType>())
             {
-                handlerList.Remove(handler);
+                handlerDictList.Insert((int)handlerDictType, new HandlerDict());
             }
         }
-    }
 
-    public void Dispatch<T>(T gameEvent) where T : GameEvent
-    {
-        var eventType = typeof(T);
-
-        if (handlers.ContainsKey(eventType))
+        public void Reset()
         {
-            var handlerList = handlers[eventType];
+            handlerDictList[(int)HandlerDictType.Transient].Clear();
+        }
 
-            foreach (var handler in handlerList)
+        public void AddEventHandler<T>(Action<T> handler, HandlerDictType handlerDictType = HandlerDictType.Transient) where T : GameEvent
+        {
+            DictionaryInsert(handlerDictList[(int)handlerDictType], typeof(T), handler);
+        }
+
+        public void RemoveEventHandler<T>(Action<T> handler) where T : GameEvent
+        {
+            var eventType = typeof(T);
+
+            foreach (var handlers in handlerDictList)
             {
-                (handler as Action<T>).Invoke(gameEvent);
+                if (handlers.ContainsKey(eventType))
+                {
+                    var handlerList = handlers[eventType];
+
+                    if (handlerList.Contains(handler))
+                    {
+                        handlerList.Remove(handler);
+                    }
+                }
             }
         }
-    }
 
-    public void DispatchPooled<T>(T gameEvent) where T : GameEvent
-    {
-        Dispatch(gameEvent);
-        AddPooledEvent(gameEvent);
-    }
-
-    public T GetPooledEvent<T>() where T : GameEvent
-    {
-        var eventType = typeof(T);
-        T gameEvent;
-
-        if (pools.ContainsKey(eventType) && (pools[eventType].Count > 0))
+        public void Dispatch<T>(T gameEvent) where T : GameEvent
         {
-            gameEvent = (T)pools[eventType][0];
-            pools[eventType].RemoveAt(0);
-        }
-        else
-        {
-            gameEvent = (T)Activator.CreateInstance(eventType);
+            var eventType = typeof(T);
+
+            foreach (var handlers in handlerDictList)
+            {
+                if (handlers.ContainsKey(eventType))
+                {
+                    var handlerList = handlers[eventType];
+
+                    foreach (var handler in handlerList)
+                    {
+                        (handler as Action<T>).Invoke(gameEvent);
+                    }
+                }
+            }
         }
 
-        return gameEvent;
-    }
-
-    public void AddPooledEvent<T>(T gameEvent) where T : GameEvent
-    {
-        DictionaryInsert(pools, typeof(T), gameEvent);
-    }
-
-    private void DictionaryInsert<K, V>(Dictionary<K, List<V>> dictionary, K key, V item)
-    {
-        if (!dictionary.ContainsKey(key))
+        public void DispatchPooled<T>(T gameEvent) where T : GameEvent
         {
-            dictionary.Add(key, new List<V>());
+            Dispatch(gameEvent);
+            AddPooledEvent(gameEvent);
         }
 
-        var list = dictionary[key];
-        if (!list.Contains(item))
+        public T GetPooledEvent<T>() where T : GameEvent
         {
-            list.Add(item);
+            var eventType = typeof(T);
+            T gameEvent;
+
+            if (pools.ContainsKey(eventType) && (pools[eventType].Count > 0))
+            {
+                gameEvent = (T)pools[eventType][0];
+                pools[eventType].RemoveAt(0);
+            }
+            else
+            {
+                gameEvent = (T)Activator.CreateInstance(eventType);
+            }
+
+            return gameEvent;
+        }
+
+        public void AddPooledEvent<T>(T gameEvent) where T : GameEvent
+        {
+            DictionaryInsert(pools, typeof(T), gameEvent);
+        }
+
+        private void DictionaryInsert<K, V>(Dictionary<K, List<V>> dictionary, K key, V item)
+        {
+            if (!dictionary.ContainsKey(key))
+            {
+                dictionary.Add(key, new List<V>());
+            }
+
+            var list = dictionary[key];
+            if (!list.Contains(item))
+            {
+                list.Add(item);
+            }
         }
     }
 }
+

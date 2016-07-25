@@ -8,9 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bdd796c5eaf84d928c9a6252b9e4043, type: 3}
-  m_Name: PopupFactory
+  m_Script: {fileID: 11500000, guid: 9c81e6d7f3b2c4aa2b6f9e3394c475fc, type: 3}
+  m_Name: GenericPopup
   m_EditorClassIdentifier: 
-  definitions:
-  - {fileID: 11400000, guid: 08fcd32e20918455dbfd4af0d6af878d, type: 2}
-  - {fileID: 11400000, guid: 483cfde7a68844d9f88a663fedcc44c9, type: 2}
+  type: 0
+  prefab: {fileID: 156006, guid: 22506cf9ea9ac45bea401e545624dc66, type: 2}
