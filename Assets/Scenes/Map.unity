@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevelData: {fileID: 4900000, guid: 605fa69ebe999415da2609904499b4ec, type: 3}
+  levelAssetName: 
   levelNumber: 3
 --- !u!114 &160349957
 MonoBehaviour:
@@ -565,6 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevelData: {fileID: 4900000, guid: 605fa69ebe999415da2609904499b4ec, type: 3}
+  levelAssetName: Levels/Level_14_9
   levelNumber: 2
 --- !u!114 &416696814
 MonoBehaviour:
@@ -815,6 +817,10 @@ Prefab:
     - target: {fileID: 22496368, guid: aeb447f365f154b27a69a178d3436ff0, type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11438178, guid: aeb447f365f154b27a69a178d3436ff0, type: 2}
+      propertyPath: levelAssetName
+      value: Levels/Level_1_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aeb447f365f154b27a69a178d3436ff0, type: 2}

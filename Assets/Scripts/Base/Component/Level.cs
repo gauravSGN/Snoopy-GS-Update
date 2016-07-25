@@ -13,6 +13,9 @@ public class Level : MonoBehaviour
     [SerializeField]
     private LevelLoader loader;
 
+    [SerializeField]
+    private SpriteRenderer background;
+
     private string levelData;
 
     protected void Start()
@@ -50,6 +53,23 @@ public class Level : MonoBehaviour
         eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
         eventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
         eventService.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
+
+        var assetService = GlobalState.Instance.Services.Get<AssetService>();
+
+        assetService.LoadAssetAsync<Sprite>(loader.LevelData.Background, delegate(Sprite sprite)
+            {
+                background.sprite = sprite;
+            });
+
+        assetService.OnComplete += OnAssetLoadingComplete;
+    }
+
+    private void OnAssetLoadingComplete()
+    {
+        var assetService = GlobalState.Instance.Services.Get<AssetService>();
+        var eventService = GlobalState.Instance.Services.Get<EventService>();
+
+        assetService.OnComplete -= OnAssetLoadingComplete;
         eventService.Dispatch(new LevelLoadedEvent());
     }
 

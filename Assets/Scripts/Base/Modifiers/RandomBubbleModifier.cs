@@ -1,20 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Model;
+using Service;
 
 namespace Modifiers
 {
     [BubbleModifierAttribute(BubbleModifierType.Random)]
     public class RandomBubbleModifier : BubbleModifier
     {
+        private const string SPRITE_PATH = "Textures/Modifiers/RandomBubble";
+
         private Sprite sprite;
 
         override public BubbleModifierType ModifierType { get { return BubbleModifierType.Random; } }
-
-        public RandomBubbleModifier()
-        {
-            sprite = Resources.Load("Textures/Modifiers/RandomBubble", typeof(Sprite)) as Sprite;
-        }
 
         override protected void ModifyBubbleData(BubbleData bubbleData, BubbleData.ModifierData data)
         {
@@ -28,6 +26,8 @@ namespace Modifiers
 
         override protected void ModifyEditorObject(GameObject target, BubbleData.ModifierData data)
         {
+            sprite = sprite ?? GlobalState.Instance.Services.Get<AssetService>().LoadAsset<Sprite>(SPRITE_PATH);
+
             target.GetComponent<Image>().sprite = sprite;
             AddTextToBubble(target, string.Format("R{0}", int.Parse(data.data) + 1));
         }

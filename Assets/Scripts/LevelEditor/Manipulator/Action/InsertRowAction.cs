@@ -8,11 +8,6 @@ namespace LevelEditor.Manipulator
     [ManipulatorAction(ManipulatorActionType.InsertRow)]
     public class InsertRowAction : ManipulatorAction
     {
-        public Sprite ButtonSprite
-        {
-            get { return null; }
-        }
-
         public void Perform(LevelManipulator manipulator, int x, int y)
         {
             ShiftRows(manipulator, y, 2);

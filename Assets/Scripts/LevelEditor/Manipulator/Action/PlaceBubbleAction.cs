@@ -11,11 +11,6 @@ namespace LevelEditor.Manipulator
     {
         private readonly DeleteBubbleAction deleter = new DeleteBubbleAction();
 
-        public Sprite ButtonSprite
-        {
-            get { return Resources.Load("Textures/UI/PlaceBubbleButton", typeof(Sprite)) as Sprite; }
-        }
-
         public static Vector3 GetBubbleLocation(int x, int y)
         {
             var offset = (y & 1) * LevelEditorConstants.HALF_SIZE;
