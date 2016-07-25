@@ -1,5 +1,4 @@
-﻿using Core;
-using System;
+﻿using System;
 using Service;
 using UnityEngine;
 using System.Collections.Generic;
@@ -46,8 +45,8 @@ namespace UI.Popup
         {
             var eventService = GlobalState.Instance.Services.Get<EventService>();
 
-            eventService.AddEventHandler<PopupDisplayedEvent>(OnPopupDisplayed);
-            eventService.AddEventHandler<PopupClosedEvent>(OnPopupClosed);
+            eventService.AddEventHandler<PopupDisplayedEvent>(OnPopupDisplayed, Event.HandlerDictType.Persistent);
+            eventService.AddEventHandler<PopupClosedEvent>(OnPopupClosed, Event.HandlerDictType.Persistent);
 
             GlobalState.Instance.Services.SetInstance<PopupService>(this);
         }
@@ -97,8 +96,8 @@ namespace UI.Popup
         {
             var maxSiblingIndex = parentCanvas.transform.childCount - 1;
 
-            // popupOverlay.gameObject.SetActive(maxSiblingIndex > 0);
-            // popupOverlay.gameObject.transform.SetSiblingIndex(Math.Max(0, maxSiblingIndex - 1));
+            popupOverlay.gameObject.SetActive(maxSiblingIndex > 0);
+            popupOverlay.gameObject.transform.SetSiblingIndex(Math.Max(0, maxSiblingIndex - 1));
         }
     }
 }
