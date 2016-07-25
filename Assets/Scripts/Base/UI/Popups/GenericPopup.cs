@@ -34,12 +34,9 @@ namespace UI.Popup
 
             var actionsToProcess = (clickedOk ? config.affirmativeActions : config.closeActions);
 
-            if (actionsToProcess.Count > 0)
+            foreach (var action in actionsToProcess)
             {
-                foreach (var action in actionsToProcess)
-                {
-                    action.Invoke();
-                }
+                action.Invoke();
             }
         }
     }
