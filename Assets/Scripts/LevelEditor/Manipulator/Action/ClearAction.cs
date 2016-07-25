@@ -7,8 +7,6 @@ namespace LevelEditor.Manipulator
     [ManipulatorAction(ManipulatorActionType.Clear)]
     public class ClearAction : ManipulatorAction
     {
-        public Sprite ButtonSprite { get { return null; } }
-
         public void Perform(LevelManipulator manipulator, int x, int y)
         {
             foreach (var pair in manipulator.Views)

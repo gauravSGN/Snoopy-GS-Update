@@ -6,8 +6,6 @@ namespace LevelEditor.Manipulator
     [ManipulatorAction(ManipulatorActionType.PlaceBubbleAndModifier)]
     public class PlaceBubbleAndModifierAction : ManipulatorAction
     {
-        public Sprite ButtonSprite { get { return null; } }
-
         private readonly PlaceBubbleAction bubblePlacer = new PlaceBubbleAction();
         private readonly PlaceModifierAction modifierPlacer = new PlaceModifierAction();
 
