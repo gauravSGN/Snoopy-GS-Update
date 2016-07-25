@@ -1117,6 +1117,7 @@ MonoBehaviour:
   bubbleFactory: {fileID: 11400000, guid: 8485ebde8c9ee4569bd1cf809eb2b68e, type: 2}
   levelAsset: {fileID: 4900000, guid: eb0aaa9ceccb8493db02cb7938a24e64, type: 3}
   loader: {fileID: 0}
+  background: {fileID: 21247072}
 --- !u!114 &11462800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1408,7 +1409,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dfb42f570d26247e684c31f6d92993bb, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
