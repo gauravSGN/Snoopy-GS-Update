@@ -8,6 +8,8 @@ namespace LevelEditor
 {
     public class RandomBubbleGroup : BubbleWeightEditor
     {
+        public event Action OnRollTypeChanged;
+
         public Action<RandomBubbleGroup> OnActivate;
 
         [SerializeField]
@@ -26,7 +28,7 @@ namespace LevelEditor
         private Button deleteButton;
 
         [SerializeField]
-        private RandomExclusionPanel exclusionPanel;
+        private RandomBubbleExclusions exclusionPanel;
 
         private RandomBubbleDefinition definition;
 
@@ -59,10 +61,20 @@ namespace LevelEditor
             exclusionPanel.Initialize(definition.exclusions);
         }
 
+        public void UpdateExclusions(List<int> options)
+        {
+            exclusionPanel.UpdateOptions(options);
+        }
+
         private void OnOnceEachButtonClick()
         {
             definition.rollType = (ChainedRandomizer<BubbleType>.SelectionMethod)(1 - (int)definition.rollType);
             SetOnceEachText();
+
+            if (OnRollTypeChanged != null)
+            {
+                OnRollTypeChanged.Invoke();
+            }
         }
 
         private void OnActivateClick()

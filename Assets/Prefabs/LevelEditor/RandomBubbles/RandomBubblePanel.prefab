@@ -1063,8 +1063,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11459462}
   m_HandleRect: {fileID: 22434534}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 0.5
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manipulator: {fileID: 0}
-  groupPrefab: {fileID: 102748, guid: 396a705bf588d4c07adcbd45ad3cf24e, type: 2}
+  groupPrefab: {fileID: 150922, guid: 396a705bf588d4c07adcbd45ad3cf24e, type: 2}
   contents: {fileID: 22484226}
   rowHeight: 32
 --- !u!114 &11478670
@@ -1241,7 +1241,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11495702}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11477152}
+        m_MethodName: ResetPreview
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11489928
@@ -1282,7 +1293,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11462036}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11477152}
+        m_MethodName: Preview
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11491430

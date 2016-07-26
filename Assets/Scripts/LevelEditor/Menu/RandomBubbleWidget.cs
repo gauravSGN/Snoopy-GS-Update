@@ -120,11 +120,16 @@ namespace LevelEditor.Menu
 
         private void InitializeExclusions(GameObject panel)
         {
-            var exclusions = panel.transform.FindChild("ExclusionsPanel").GetComponent<RandomExclusionPanel>();
+            var exclusions = panel.transform.FindChild("ExclusionsPanel").GetComponent<RandomBubbleExclusions>();
             var halfCount = (definition.weights.Length + 1) / 2;
+            var options = Manipulator.Randoms
+                .Where(r => r.rollType == ChainedRandomizer<BubbleType>.SelectionMethod.Once)
+                .Select(r => Manipulator.Randoms.IndexOf(r))
+                .ToList();
 
             exclusions.transform.localPosition = new Vector3(2.0f, -28.0f - (halfCount * 24.0f));
             exclusions.Initialize(definition.exclusions);
+            exclusions.UpdateOptions(options);
         }
 
         private void OnOnceEachClick()
