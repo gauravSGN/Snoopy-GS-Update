@@ -39,6 +39,8 @@ public class GameConfig : ScriptableObject
         public float dotSpacing;
         public float moveSpeed;
         public float wallBounceDistance;
+
+        public float colliderAdjustment;
     }
 
     [Serializable]
