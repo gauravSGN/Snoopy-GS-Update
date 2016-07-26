@@ -116,7 +116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56e2956857d442e7babe6181d527a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevelData: {fileID: 4900000, guid: 605fa69ebe999415da2609904499b4ec, type: 3}
   levelAssetName: 
   levelNumber: 3
 --- !u!114 &160349957
@@ -509,7 +508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56e2956857d442e7babe6181d527a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevelData: {fileID: 4900000, guid: 605fa69ebe999415da2609904499b4ec, type: 3}
   levelAssetName: Levels/Level_14_9
   levelNumber: 2
 --- !u!114 &416696814
