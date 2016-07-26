@@ -83,7 +83,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         var distance = aimlineConfig.length - config.bubbles.size;
         var direction = (aimTarget - origin).normalized;
         // Make the cast size slightly larger than the actual shooter size to avoid false negatives
-        var shooterRadius = (config.bubbles.size * config.bubbles.shotColliderScale / 1.4f);
+        var shooterRadius = (config.bubbles.size * config.bubbles.shotColliderScale / config.aimline.colliderAdjustment);
         var layerMask = (1 << (int)Layers.GameObjects | 1 << (int)Layers.Walls);
         int reflections = 1;
 

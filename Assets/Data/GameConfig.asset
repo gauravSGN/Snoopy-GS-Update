@@ -57,6 +57,7 @@ MonoBehaviour:
     dotSpacing: 0.2
     moveSpeed: 2
     wallBounceDistance: 0.5
+    colliderAdjustment: 1.4
   purchasables:
     maxHearts: 5
     secondsPerHeart: 60
