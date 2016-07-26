@@ -45,6 +45,7 @@ public class GlobalState : SingletonBehaviour<GlobalState>
         {
             gsDescriptor = GSDescriptorFactory.CreateByPlatform(Application.platform, gsDescriptorJSON);
             gsDescriptor.Initialize();
+            Application.targetFrameRate = 60;
         }
     }
 
