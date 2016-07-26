@@ -82,7 +82,8 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         int index = 0;
         var distance = aimlineConfig.length - config.bubbles.size;
         var direction = (aimTarget - origin).normalized;
-        var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale / 2.0f;
+        // Make the cast size slightly larger than the actual shooter size to avoid false negatives
+        var shooterRadius = (config.bubbles.size * config.bubbles.shotColliderScale / 1.4f);
         var layerMask = (1 << (int)Layers.GameObjects | 1 << (int)Layers.Walls);
         int reflections = 1;
 
@@ -101,18 +102,18 @@ public class AimLine : MonoBehaviour, UpdateReceiver
                 }
 
                 distance = hit.distance - shooterRadius * 0.5f;
-            }
 
-            points.Add(points[index] + distance * direction);
+                points.Add(points[index] + distance * direction);
 
-            if ((hit.collider != null) && (hit.collider.gameObject.tag != StringConstants.Tags.BUBBLES) && (reflections > 0))
-            {
-                --reflections;
-                index++;
-                distance = aimlineConfig.wallBounceDistance;
-                direction = new Vector2(-direction.x, direction.y);
+                if ((hit.collider.gameObject.tag != StringConstants.Tags.BUBBLES) && (reflections > 0))
+                {
+                    --reflections;
+                    index++;
+                    distance = aimlineConfig.wallBounceDistance;
+                    direction = new Vector2(-direction.x, direction.y);
 
-                continue;
+                    continue;
+                }
             }
 
             break;
