@@ -1115,7 +1115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleFactory: {fileID: 11400000, guid: 8485ebde8c9ee4569bd1cf809eb2b68e, type: 2}
-  levelAsset: {fileID: 4900000, guid: eb0aaa9ceccb8493db02cb7938a24e64, type: 3}
+  levelAssetPath: Levels/Level_1_1
   loader: {fileID: 0}
   background: {fileID: 21247072}
 --- !u!114 &11462800
