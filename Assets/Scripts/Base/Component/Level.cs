@@ -11,7 +11,7 @@ public class Level : MonoBehaviour
     public BubbleFactory bubbleFactory;
 
     [SerializeField]
-    private TextAsset levelAsset;
+    private string levelAssetPath;
 
     [SerializeField]
     private LevelLoader loader;
@@ -30,9 +30,9 @@ public class Level : MonoBehaviour
             levelData = sceneData.NextLevelData;
             sceneData.NextLevelData = null;
         }
-        else if (levelAsset != null)
+        else if (levelAssetPath != null)
         {
-            levelData = levelAsset.text;
+            levelData = GlobalState.Instance.Services.Get<AssetService>().LoadAsset<TextAsset>(levelAssetPath).text;
         }
 
         levelState.levelNumber = sceneData.LevelNumber;
