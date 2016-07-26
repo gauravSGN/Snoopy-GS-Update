@@ -28,7 +28,7 @@ public class AimLineEventTrigger : EventTrigger
 
     override public void OnPointerDown(PointerEventData data)
     {
-        if(data.button == PointerEventData.InputButton.Left)
+        if (data.button == PointerEventData.InputButton.Left)
         {
             aiming = hovering = true;
 
@@ -39,7 +39,7 @@ public class AimLineEventTrigger : EventTrigger
 
     override public void OnPointerEnter(PointerEventData data)
     {
-        if (aiming)
+        if (aiming && data.button == PointerEventData.InputButton.Left)
         {
             hovering = true;
             MoveTarget(GetCursorPosition(data));
@@ -58,14 +58,17 @@ public class AimLineEventTrigger : EventTrigger
 
     override public void OnPointerUp(PointerEventData data)
     {
-        if (hovering)
+        if (data.button == PointerEventData.InputButton.Left)
         {
-            Fire();
+            if (hovering)
+            {
+                Fire();
+            }
+
+            StopAiming();
+
+            aiming = hovering = false;
         }
-
-        StopAiming();
-
-        aiming = hovering = false;
     }
 
     private Vector2 GetCursorPosition(PointerEventData data)
