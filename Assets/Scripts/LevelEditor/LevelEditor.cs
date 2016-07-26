@@ -13,9 +13,6 @@ namespace LevelEditor
 {
     public class LevelEditor : MonoBehaviour
     {
-        private const string LEVEL_EXTENSION = "json";
-        private const string LEVEL_BASE_PATH = "Data/Levels";
-
         [SerializeField]
         private LevelManipulator manipulator;
 
@@ -53,8 +50,8 @@ namespace LevelEditor
         public void Open()
         {
 #if UNITY_EDITOR
-            var filters = new[] { "Level Data", LEVEL_EXTENSION };
-            var basePath = Path.Combine(Application.dataPath, LEVEL_BASE_PATH);
+            var filters = new[] { "Level Data", LevelEditorConstants.LEVEL_EXTENSION };
+            var basePath = Path.Combine(Application.dataPath, LevelEditorConstants.LEVEL_BASE_PATH);
             var levelFilename = EditorUtility.OpenFilePanelWithFilters("Open Level", basePath, filters);
 
             if (!string.IsNullOrEmpty(levelFilename))
@@ -85,8 +82,8 @@ namespace LevelEditor
         public void SaveAs()
         {
 #if UNITY_EDITOR
-            var basePath = Path.Combine(Application.dataPath, LEVEL_BASE_PATH);
-            var levelFilename = EditorUtility.SaveFilePanel("Save Level", basePath, "NewLevel.json", LEVEL_EXTENSION);
+            var basePath = Path.Combine(Application.dataPath, LevelEditorConstants.LEVEL_BASE_PATH);
+            var levelFilename = EditorUtility.SaveFilePanel("Save Level", basePath, "NewLevel.json", LevelEditorConstants.LEVEL_EXTENSION);
 
             if (!string.IsNullOrEmpty(levelFilename))
             {
