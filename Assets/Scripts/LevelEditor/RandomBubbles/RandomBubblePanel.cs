@@ -119,9 +119,12 @@ namespace LevelEditor
             group.Initialize(manipulator.BubbleFactory, definitions[index]);
             group.DeleteButton.onClick.AddListener(() => RemoveGroup(group));
             group.OnActivate += OnGroupActivate;
+            group.OnRollTypeChanged += UpdateExclusions;
             group.Label = string.Format("R{0}", index + 1);
             group.Count = 0;
             groups.Add(group);
+
+            UpdateExclusions();
         }
 
         private void RemoveGroup(RandomBubbleGroup group)
@@ -191,6 +194,7 @@ namespace LevelEditor
                 AddGroup();
             }
 
+            UpdateExclusions();
             ResizeContents();
         }
 
@@ -299,6 +303,19 @@ namespace LevelEditor
                              p.Value.modifiers.Any(m => m.type == BubbleModifierType.Random))
                 .Select(p => p.Value)
                 .ToArray();
+        }
+
+        private void UpdateExclusions()
+        {
+            var options = definitions
+                .Where(d => d.rollType == ChainedRandomizer<BubbleType>.SelectionMethod.Once)
+                .Select(d => definitions.IndexOf(d))
+                .ToList();
+
+            foreach (var group in groups)
+            {
+                group.UpdateExclusions(options);
+            }
         }
     }
 }
