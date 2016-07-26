@@ -102,18 +102,17 @@ public class AimLine : MonoBehaviour, UpdateReceiver
                 }
 
                 distance = hit.distance - shooterRadius * 0.5f;
+            }
+            points.Add(points[index] + distance * direction);
 
-                points.Add(points[index] + distance * direction);
+            if (hit.collider != null && (hit.collider.gameObject.tag != StringConstants.Tags.BUBBLES) && (reflections > 0))
+            {
+                --reflections;
+                index++;
+                distance = aimlineConfig.wallBounceDistance;
+                direction = new Vector2(-direction.x, direction.y);
 
-                if ((hit.collider.gameObject.tag != StringConstants.Tags.BUBBLES) && (reflections > 0))
-                {
-                    --reflections;
-                    index++;
-                    distance = aimlineConfig.wallBounceDistance;
-                    direction = new Vector2(-direction.x, direction.y);
-
-                    continue;
-                }
+                continue;
             }
 
             break;
