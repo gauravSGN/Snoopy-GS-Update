@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Name: snoopy_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 2a19fb149024a4144a521da426239edc, type: 2}
-  skeletonJSON: {fileID: 4900000, guid: 11233e4d0cc86490f9aecc91554b4a3d, type: 3}
+  - {fileID: 11400000, guid: d7e348c231ff04eca8a70032431658bc, type: 2}
+  skeletonJSON: {fileID: 4900000, guid: 82570a9b18ea249d28a4ebf460d12025, type: 3}
   scale: 0.00437
   fromAnimation: []
   toAnimation: []
   duration: []
   defaultMix: 0.2
-  controller: {fileID: 9100000, guid: 45280b89bcbda433f86fee5349019c12, type: 2}
+  controller: {fileID: 9100000, guid: 07b3a72499a034ec88160bd16ff43cdd, type: 2}
