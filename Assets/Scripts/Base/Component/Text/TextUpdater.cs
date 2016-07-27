@@ -36,9 +36,7 @@ abstract public class TextUpdater : MonoBehaviour
         }
     }
 
-    virtual protected void UpdateText(Observable target)
-    {
-    }
+    abstract protected void UpdateText(Observable target);
 
     protected string BuildString()
     {
