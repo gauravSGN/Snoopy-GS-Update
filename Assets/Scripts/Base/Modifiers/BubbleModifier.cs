@@ -65,7 +65,10 @@ namespace Modifiers
         private void MoveTextToTopOfObject(GameObject target)
         {
             var textComponent = target.GetComponentInChildren<Text>();
-            textComponent.transform.SetAsLastSibling();
+            if(textComponent != null)
+            {
+                textComponent.transform.SetAsLastSibling();
+            }
         }
     }
 }
