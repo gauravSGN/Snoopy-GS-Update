@@ -2,7 +2,7 @@ using State;
 using Service;
 using UnityEngine;
 
-public class CoinsTextUpdater : TextUpdater
+public class CoinsTextUpdater : UITextUpdater
 {
     override protected void Start()
     {

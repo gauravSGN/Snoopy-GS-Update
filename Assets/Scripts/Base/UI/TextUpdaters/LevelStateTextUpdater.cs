@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LevelStateTextUpdater : TextUpdater
+public class LevelStateTextUpdater : UITextUpdater
 {
     [SerializeField]
     private Level level;
