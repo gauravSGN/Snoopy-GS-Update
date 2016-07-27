@@ -99,7 +99,7 @@ namespace LevelEditor
         {
             items.Clear();
 
-            var count = options.Count;
+            var count = Mathf.Min(options.Count, itemInstances.Count);
             for (var index = 0; index < count; index++)
             {
                 if (itemInstances[index].GetComponentInChildren<Toggle>().isOn)
