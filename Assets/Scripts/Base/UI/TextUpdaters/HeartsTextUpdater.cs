@@ -2,7 +2,7 @@ using State;
 using Service;
 using UnityEngine;
 
-public class HeartsTextUpdater : TextUpdater
+public class HeartsTextUpdater : UITextUpdater
 {
     [SerializeField]
     private string textWhenFull;

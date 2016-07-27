@@ -1,6 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LevelStateTextUpdater : UITextUpdater
+public class LevelStateTextMeshUpdater : TextMeshUpdater
 {
     [SerializeField]
     private Level level;
@@ -8,7 +8,6 @@ public class LevelStateTextUpdater : UITextUpdater
     override protected void Start()
     {
         base.Start();
-
         Target = level.levelState;
     }
 }
