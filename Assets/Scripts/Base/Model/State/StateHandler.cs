@@ -8,7 +8,9 @@ namespace State
     {
         protected Data state;
 
-        public StateHandler(Data topLevelState, Action<Observable> initialListener = null)
+        public StateHandler(Data topLevelState) : this(topLevelState, null) {}
+
+        public StateHandler(Data topLevelState, Action<Observable> initialListener)
         {
             state = topLevelState;
 

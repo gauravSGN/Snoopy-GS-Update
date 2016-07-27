@@ -90,7 +90,8 @@ public class BubbleSnap : MonoBehaviour
     {
         foreach (var hit in Physics2D.CircleCastAll(location, radius, Vector2.up, 0.0f))
         {
-            if ((hit.collider.gameObject != gameObject) && (hit.collider.gameObject.tag == StringConstants.Tags.BUBBLES))
+            if ((hit.collider.gameObject != gameObject) &&
+                (hit.collider.gameObject.tag == StringConstants.Tags.BUBBLES))
             {
                 yield return hit.collider;
             }

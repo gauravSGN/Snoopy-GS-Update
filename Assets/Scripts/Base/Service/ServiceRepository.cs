@@ -50,13 +50,10 @@ namespace Service
             SharedService service = null;
             Type type = null;
 
-            if (!instances.TryGetValue(serviceType, out service))
+            if (!instances.TryGetValue(serviceType, out service) && serviceTypes.TryGetValue(serviceType, out type))
             {
-                if (serviceTypes.TryGetValue(serviceType, out type))
-                {
-                    service = (SharedService)Activator.CreateInstance(type);
-                    instances.Add(serviceType, service);
-                }
+                service = (SharedService)Activator.CreateInstance(type);
+                instances.Add(serviceType, service);
             }
 
             return (T)service;

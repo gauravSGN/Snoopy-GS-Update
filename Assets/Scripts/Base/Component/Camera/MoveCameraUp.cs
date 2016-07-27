@@ -25,7 +25,9 @@ public class MoveCameraUp : MonoBehaviour
     protected void Start()
     {
         castingBox = gameObject.GetComponent<Collider2D>();
-        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
+
+        var eventService = GlobalState.Instance.Services.Get<EventService>();
+        eventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
     private IEnumerator MoveGameView()

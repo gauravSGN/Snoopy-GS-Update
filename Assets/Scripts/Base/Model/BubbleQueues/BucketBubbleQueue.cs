@@ -6,12 +6,13 @@ using UnityEngine;
 
 public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
 {
-    private BubbleQueueDefinition queueDefinition;
+    private readonly BubbleQueueDefinition queueDefinition;
+    private readonly System.Random random = new System.Random();
+    private readonly List<BubbleType> removedTypes = new List<BubbleType>();
+
     private BubbleQueueDefinition.Bucket currentBucket;
     private int currentCount;
     private List<BubbleType> randomizedBucket;
-    private System.Random random = new System.Random();
-    private List<BubbleType> removedTypes = new List<BubbleType>();
 
     public BucketBubbleQueue(LevelState state, BubbleQueueDefinition definition) : base(state)
     {
@@ -27,22 +28,7 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
 
         if (randomizedBucket.Count == 0)
         {
-            if (currentBucket.counts.Sum() > 0)
-            {
-                for (int index = 0, length = currentBucket.counts.Length; index < length; index++)
-                {
-                    for (int x = 0, count = currentBucket.counts[index]; x < count; x++)
-                    {
-                        randomizedBucket.Add(LAUNCHER_BUBBLE_TYPES[index]);
-                    }
-                }
-
-                randomizedBucket = randomizedBucket.OrderBy(item => random.Next()).ToList();
-            }
-            else
-            {
-                randomizedBucket.Add(BubbleType.Blue);
-            }
+            RefillRandomizedBucket();
         }
 
         currentCount++;
@@ -72,15 +58,10 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
                     queueDefinition.buckets[index].counts[typeIndex] = 0;
                 }
 
-                for (var index = 0; index < queued.Count; index++)
-                {
-                    if (queued[index] == type)
-                    {
-                        queued.RemoveAt(index);
-                        index--;
-                        currentCount--;
-                    }
-                }
+                var initialCount = queued.Count;
+                while (queued.Remove(type));
+
+                currentCount -= (initialCount - queued.Count);
             }
 
             randomizedBucket = new List<BubbleType>();
@@ -165,5 +146,25 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
     private bool IsEliminated(KeyValuePair<BubbleType, int> pair)
     {
         return LAUNCHER_BUBBLE_TYPES.Contains(pair.Key) && (pair.Value == 0) && (!removedTypes.Contains(pair.Key));
+    }
+
+    private void RefillRandomizedBucket()
+    {
+        if (currentBucket.counts.Sum() > 0)
+        {
+            for (int index = 0, length = currentBucket.counts.Length; index < length; index++)
+            {
+                for (int x = 0, count = currentBucket.counts[index]; x < count; x++)
+                {
+                    randomizedBucket.Add(LAUNCHER_BUBBLE_TYPES[index]);
+                }
+            }
+
+            randomizedBucket = randomizedBucket.OrderBy(item => random.Next()).ToList();
+        }
+        else
+        {
+            randomizedBucket.Add(BubbleType.Blue);
+        }
     }
 }

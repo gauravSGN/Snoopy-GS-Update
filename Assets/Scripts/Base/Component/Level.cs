@@ -48,7 +48,10 @@ public class Level : MonoBehaviour
         levelState.score = 0;
         levelState.remainingBubbles = loader.LevelData.ShotCount;
         levelState.starValues = loader.LevelData.StarValues;
-        levelState.bubbleQueue = BubbleQueueFactory.GetBubbleQueue(loader.BubbleQueueType, levelState, loader.LevelData.Queue);
+
+        var bubbleQueue = BubbleQueueFactory.GetBubbleQueue(loader.BubbleQueueType, levelState, loader.LevelData.Queue);
+        levelState.bubbleQueue = bubbleQueue;
+
         levelState.NotifyListeners();
 
         var eventService = GlobalState.Instance.Services.Get<EventService>();
@@ -102,11 +105,13 @@ public class Level : MonoBehaviour
 
         UpdateUserScoreAndStars();
 
+        var stars = GlobalState.Instance.Services.Get<UserStateService>().levels[levelState.levelNumber].stars;
+
         GlobalState.Instance.Services.Get<PopupService>().Enqueue(new GenericPopupConfig
         {
             title = "Level Won",
             mainText = ("Score: " + levelState.score.ToString() + "\n" +
-                        "Stars: " + GlobalState.Instance.Services.Get<UserStateService>().levels[levelState.levelNumber].stars.ToString()),
+                        "Stars: " + stars.ToString()),
             closeActions = new List<Action> { DispatchLevelWon },
             affirmativeActions = new List<Action> { DispatchLevelWon }
         });

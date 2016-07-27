@@ -11,7 +11,10 @@ namespace State
         public Coins coins { get; private set; }
         public Hearts hearts { get; private set; }
 
-        public Purchasables(Data topLevelState, Action<Observable> initialListener = null) : base(topLevelState, initialListener)
+        public Purchasables(Data topLevelState) : this(topLevelState, null) {}
+
+        public Purchasables(Data topLevelState, Action<Observable> initialListener)
+            : base(topLevelState, initialListener)
         {
             InitializeStateKeys();
 
@@ -21,7 +24,7 @@ namespace State
 
         override protected string[] GetStateKeys()
         {
-            return new string[] {COINS, HEARTS};
+            return new[] { COINS, HEARTS };
         }
     }
 }

@@ -8,13 +8,14 @@ namespace Model
     {
         public enum SelectionMethod { Once, Each }
 
-        private SelectionMethod method;
-        private float[] weights;
+        private readonly SelectionMethod method;
+        private readonly System.Random rng;
+        private readonly float[] weights;
+        private readonly IList<T> items;
+
         private float[] activeWeights;
         private List<ChainedRandomizer<T>> exclusions;
-        private IList<T> items;
         private T? selectedItem;
-        private System.Random rng;
 
         public ChainedRandomizer(System.Random rng, SelectionMethod method, IList<T> items, IEnumerable<float> weights)
         {
@@ -55,7 +56,9 @@ namespace Model
         {
             if (other.method == SelectionMethod.Each)
             {
-                throw new ArgumentException("Only randomizers with the Once selection method can be used as exclusions.");
+                throw new ArgumentException(
+                    "Only randomizers with the Once selection method can be used as exclusions."
+                );
             }
 
             exclusions = exclusions ?? new List<ChainedRandomizer<T>>();

@@ -10,7 +10,9 @@ namespace State
     {
         public uint PersistableVersion { get { return 1; } }
 
-        public PersistableStateHandler(Data topLevelState, Action<Observable> initialListener = null)
+        public PersistableStateHandler(Data topLevelState) : this(topLevelState, null) {}
+
+        public PersistableStateHandler(Data topLevelState, Action<Observable> initialListener)
             : base(topLevelState, initialListener)
         {
             state = new Dictionary<string, object>();

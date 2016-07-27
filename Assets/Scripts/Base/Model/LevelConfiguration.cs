@@ -6,18 +6,19 @@ namespace Model
 {
     sealed public class LevelConfiguration
     {
-        public System.Random RNG { get; private set; }
+        public System.Random RandomNumberGenerator { get; private set; }
         public Dictionary<BubbleType, int> Counts { get; private set; }
         public ChainedRandomizer<BubbleType>[] Randoms { get; private set; }
 
         public LevelConfiguration(LevelData data)
         {
-            RNG = new System.Random();
+            RandomNumberGenerator = new System.Random();
             Counts = new Dictionary<BubbleType, int>();
-            Randoms = CreateRandomizers(RNG, data.Randoms);
+            Randoms = CreateRandomizers(RandomNumberGenerator, data.Randoms);
         }
 
-        public static ChainedRandomizer<BubbleType>[] CreateRandomizers(System.Random rng, RandomBubbleDefinition[] randoms)
+        public static ChainedRandomizer<BubbleType>[] CreateRandomizers(System.Random rng,
+                                                                        RandomBubbleDefinition[] randoms)
         {
             var count = randoms.Length;
             var result = new ChainedRandomizer<BubbleType>[count];

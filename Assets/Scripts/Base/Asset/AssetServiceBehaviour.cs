@@ -11,23 +11,25 @@ namespace Asset
         public event Action<float> OnProgress;
         public event Action OnComplete;
 
-        abstract private class AsyncAssetRequest
+        private interface AsyncAssetRequest
         {
-            public ResourceRequest request;
-            public UnityEngine.Object asset;
+            ResourceRequest Request { get; }
+            UnityEngine.Object Asset { get; set; }
 
-            abstract public void InvokeCallback();
+            void InvokeCallback();
         }
 
         private class AsyncAssetRequest<T> : AsyncAssetRequest where T : UnityEngine.Object
         {
-            public Action<T> callback;
+            public ResourceRequest Request { get; set; }
+            public UnityEngine.Object Asset { get; set; }
+            public Action<T> Callback { get; set; }
 
-            override public void InvokeCallback()
+            public void InvokeCallback()
             {
-                if (callback != null)
+                if (Callback != null)
                 {
-                    callback.Invoke(asset as T);
+                    Callback.Invoke(Asset as T);
                 }
             }
         }
@@ -64,26 +66,14 @@ namespace Asset
         {
             requests.Add(new AsyncAssetRequest<T>
             {
-                request = Resources.LoadAsync<T>(assetName),
-                callback = callback,
+                Request = Resources.LoadAsync<T>(assetName),
+                Callback = callback,
             });
 
             if (requests.Count == 1)
             {
                 StartCoroutine(AsyncLoadRoutine());
             }
-        }
-
-        private string ResolveAssetName(string name)
-        {
-            var result = name;
-
-            if (assets.ContainsKey(name))
-            {
-                result = assets[name];
-            }
-
-            return result;
         }
 
         private void PopulateAssetTable()
@@ -115,9 +105,9 @@ namespace Asset
                 {
                     var request = requests[index];
 
-                    if (request.request.isDone)
+                    if (request.Request.isDone)
                     {
-                        request.asset = request.request.asset;
+                        request.Asset = request.Request.asset;
                         request.InvokeCallback();
 
                         numComplete++;
@@ -125,7 +115,7 @@ namespace Asset
                     }
                     else
                     {
-                        progress += request.request.progress;
+                        progress += request.Request.progress;
                         index++;
                     }
                 }

@@ -7,6 +7,7 @@ using UnityEngine;
 using ExtensionMethods;
 using System.Collections;
 using System.Collections.Generic;
+using HandlerDict = System.Collections.Generic.SortedDictionary<Reaction.ReactionPriority, Reaction.ReactionHandler>;
 
 namespace Reaction
 {
@@ -21,7 +22,7 @@ namespace Reaction
             }
         }
 
-        private readonly SortedDictionary<ReactionPriority, ReactionHandler> handlers = new SortedDictionary<ReactionPriority, ReactionHandler>();
+        private readonly HandlerDict handlers = new HandlerDict();
 
         protected void Start()
         {
@@ -71,12 +72,13 @@ namespace Reaction
 
             if (GetComponent<Level>().levelState.remainingBubbles <= 0)
             {
-                GlobalState.Instance.Services.Get<UserStateService>().purchasables.hearts.quantity--;
+                var userState = GlobalState.Instance.Services.Get<UserStateService>();
+                userState.purchasables.hearts.quantity--;
 
                 GlobalState.Instance.Services.Get<PopupService>().Enqueue(new GenericPopupConfig
                 {
                     title = "Level Lost",
-                    mainText = "Hearts Left: " + GlobalState.Instance.Services.Get<UserStateService>().purchasables.hearts.quantity.ToString(),
+                    mainText = "Hearts Left: " + userState.purchasables.hearts.quantity.ToString(),
                     closeActions = new List<Action> { DispatchLevelLost },
                     affirmativeActions = new List<Action> { DispatchLevelLost }
                 });

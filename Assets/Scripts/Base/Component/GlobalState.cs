@@ -20,7 +20,6 @@ public class GlobalState : SingletonBehaviour<GlobalState>
     [SerializeField]
     private TextAsset servicesJSON;
 
-    private GSDescriptor gsDescriptor;
     private readonly ServiceRepository services = new ServiceRepository();
 
     override protected void Awake()
@@ -43,8 +42,7 @@ public class GlobalState : SingletonBehaviour<GlobalState>
     {
         if (Instance == this)
         {
-            gsDescriptor = GSDescriptorFactory.CreateByPlatform(Application.platform, gsDescriptorJSON);
-            gsDescriptor.Initialize();
+            GSDescriptorFactory.CreateByPlatform(Application.platform, gsDescriptorJSON).Initialize();
             Application.targetFrameRate = 60;
         }
     }
