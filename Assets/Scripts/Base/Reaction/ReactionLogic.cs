@@ -4,6 +4,7 @@ using Service;
 using UI.Popup;
 using System.Linq;
 using UnityEngine;
+using ExtensionMethods;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -59,24 +60,13 @@ namespace Reaction
 
         private IEnumerator ProcessReactions()
         {
-            var active = true;
+            var coroutines = handlers.Where(p => p.Value.Count > 0).Select(p => p.Value.HandleActions()).ToList();
 
-            while (active)
+            if (coroutines.Count > 0)
             {
-                var coroutines = handlers.Where(p => p.Value.Count > 0).Select(p => p.Value.HandleActions()).ToList();
-                active = coroutines.Count > 0;
-
-                while (coroutines.Count > 0)
-                {
-                    if (coroutines[0].MoveNext())
-                    {
-                        yield return coroutines[0].Current;
-                    }
-                    else
-                    {
-                        coroutines.RemoveAt(0);
-                    }
-                }
+                coroutines.Add(ProcessReactions());
+                this.StartCoroutinesSequential(coroutines);
+                yield break;
             }
 
             if (GetComponent<Level>().levelState.remainingBubbles <= 0)
