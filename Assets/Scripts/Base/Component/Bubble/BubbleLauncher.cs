@@ -105,7 +105,7 @@ public class BubbleLauncher : MonoBehaviour
 
         rigidBody.velocity = direction;
         rigidBody.gravityScale = 0.0f;
-        rigidBody.isKinematic = false;;
+        rigidBody.isKinematic = false;
 
         GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleFiredEvent(nextBubbles[0]));
 
@@ -192,13 +192,10 @@ public class BubbleLauncher : MonoBehaviour
 
         for (var index = 0; index < nextTypes.Length; index++)
         {
-            if (nextTypes[index] != bubbleQueue.Peek(index))
+            if ((nextTypes[index] != bubbleQueue.Peek(index)) && (nextBubbles[index] != null))
             {
-                if (nextBubbles[index] != null)
-                {
-                    Destroy(nextBubbles[index]);
-                    nextBubbles[index] = null;
-                }
+                Destroy(nextBubbles[index]);
+                nextBubbles[index] = null;
             }
         }
 

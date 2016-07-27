@@ -49,7 +49,7 @@ namespace State
 
         override protected string[] GetStateKeys()
         {
-            return new string[] {LEVELS};
+            return new[] { LEVELS };
         }
 
         override protected void SetValue<T>(string key, object value)

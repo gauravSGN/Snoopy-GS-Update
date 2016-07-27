@@ -23,7 +23,9 @@ public static class BubbleQueueFactory
         }
     }
 
-    public static BubbleQueue GetBubbleQueue(BubbleQueueType queueType, LevelState levelState, BubbleQueueDefinition definition)
+    public static BubbleQueue GetBubbleQueue(BubbleQueueType queueType,
+                                             LevelState levelState,
+                                             BubbleQueueDefinition definition)
     {
         return typeMap[queueType](new QueueData(levelState, definition));
     }

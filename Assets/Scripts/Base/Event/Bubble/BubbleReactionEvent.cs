@@ -8,7 +8,7 @@ public class BubbleReactionEvent : GameEvent
 
     public static void Dispatch(ReactionPriority priority, Bubble bubble)
     {
-        BubbleReactionEvent gameEvent = GlobalState.Instance.Services.Get<EventService>().GetPooledEvent<BubbleReactionEvent>();
+        var gameEvent = GlobalState.Instance.Services.Get<EventService>().GetPooledEvent<BubbleReactionEvent>();
 
         gameEvent.priority = priority;
         gameEvent.bubble = bubble;

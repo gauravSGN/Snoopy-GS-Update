@@ -24,7 +24,6 @@ namespace PowerUps
 
         private Transform[] anchors;
         private int powerUpMask;
-        private Level level;
         private AnimationService animationService;
 
         void Awake()
@@ -36,7 +35,7 @@ namespace PowerUps
         public void Setup(float[] fillData)
         {
             animationService = GlobalState.Instance.Services.Get<AnimationService>();
-            level = gameObject.GetComponentInParent<Level>();
+            var level = gameObject.GetComponentInParent<Level>();
             var anchorLength = anchors.Length;
             var anchorIndex = 0;
 

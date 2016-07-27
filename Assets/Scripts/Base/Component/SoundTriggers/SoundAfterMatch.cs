@@ -30,8 +30,9 @@ public class SoundAfterMatch : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
-        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
+        var eventService = GlobalState.Instance.Services.Get<EventService>();
+        eventService.AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
+        eventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
     void OnBubbleReactionEvent(BubbleReactionEvent gameEvent)
@@ -52,7 +53,8 @@ public class SoundAfterMatch : MonoBehaviour
     bool ConditionMet()
     {
         bool equalToConditionMet = ((condition == ThreshholdCondition.EqualTo) && (counter == bubbleMatchThreshold));
-        bool greaterThanOrEqualToConditionMet = ((condition == ThreshholdCondition.GreaterThanOrEqualTo) && (counter >= bubbleMatchThreshold));
+        bool greaterThanOrEqualToConditionMet = ((condition == ThreshholdCondition.GreaterThanOrEqualTo) &&
+                                                 (counter >= bubbleMatchThreshold));
 
         return equalToConditionMet || greaterThanOrEqualToConditionMet;
     }

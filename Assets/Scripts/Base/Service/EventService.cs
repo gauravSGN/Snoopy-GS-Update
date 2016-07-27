@@ -5,7 +5,8 @@ namespace Service
 {
     public interface EventService : SharedService
     {
-        void AddEventHandler<T>(Action<T> handler, HandlerDictType handlerDictType = HandlerDictType.Transient) where T : GameEvent;
+        void AddEventHandler<T>(Action<T> handler) where T : GameEvent;
+        void AddEventHandler<T>(Action<T> handler, HandlerDictType handlerDictType) where T : GameEvent;
         void RemoveEventHandler<T>(Action<T> handler) where T : GameEvent;
 
         void Dispatch<T>(T gameEvent) where T : GameEvent;

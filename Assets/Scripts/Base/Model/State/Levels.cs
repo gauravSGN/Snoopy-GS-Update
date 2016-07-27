@@ -6,7 +6,7 @@ namespace State
 {
     public class Levels : StateHandler
     {
-        private Dictionary<int, LevelData> levelDataMap = new Dictionary<int, LevelData>();
+        private readonly Dictionary<int, LevelData> levelDataMap = new Dictionary<int, LevelData>();
 
         public LevelData this[int level]
         {
@@ -25,7 +25,9 @@ namespace State
             }
         }
 
-        public Levels(Data topLevelState, Action<Observable> initialListener = null) : base(topLevelState, initialListener)
+        public Levels(Data topLevelState) : this(topLevelState, null) {}
+
+        public Levels(Data topLevelState, Action<Observable> initialListener) : base(topLevelState, initialListener)
         {
         }
     }

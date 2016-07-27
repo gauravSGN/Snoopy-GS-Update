@@ -38,7 +38,7 @@ namespace State
             get { return GetValue<long>(LAST_TIME_HEART_AWARDED, 0); }
 
             // We avoid using SetValue here so NotifyDispatchers is only called once when hearts are modified
-            private set { state[LAST_TIME_HEART_AWARDED] = (long)value; }
+            private set { state[LAST_TIME_HEART_AWARDED] = value; }
         }
 
         public long secondsUntilNextHeart
@@ -49,7 +49,8 @@ namespace State
 
                 if (quantity < GlobalState.Instance.Config.purchasables.maxHearts)
                 {
-                    var nextHeartTime = (lastTimeHeartAwarded + GlobalState.Instance.Config.purchasables.secondsPerHeart);
+                    var purchasablesConfig = GlobalState.Instance.Config.purchasables;
+                    var nextHeartTime = (lastTimeHeartAwarded + purchasablesConfig.secondsPerHeart);
                     secondsRemaining = Math.Max(0, (nextHeartTime - DateTimeUtil.GetUnixTime()));
                 }
 
@@ -57,7 +58,9 @@ namespace State
             }
         }
 
-        public Hearts(Data topLevelState, Action<Observable> initialListener = null) : base(topLevelState, initialListener)
+        public Hearts(Data topLevelState) : this(topLevelState, null) {}
+
+        public Hearts(Data topLevelState, Action<Observable> initialListener) : base(topLevelState, initialListener)
         {
         }
 

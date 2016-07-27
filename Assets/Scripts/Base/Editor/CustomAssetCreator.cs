@@ -82,7 +82,8 @@ public static class CustomAssetCreator
             path = path.Replace(Path.GetFileName(AssetDatabase.GetAssetPath(Selection.activeObject)), "");
         }
 
-        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + "/New " + typeof(T).ToString() + ".asset");
+        var targetPath = string.Format("{0}/New {1}.asset", path, typeof(T));
+        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(targetPath);
 
         AssetDatabase.CreateAsset(instance, assetPathAndName);
         AssetDatabase.SaveAssets();
