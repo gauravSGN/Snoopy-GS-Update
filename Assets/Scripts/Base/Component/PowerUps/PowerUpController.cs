@@ -33,7 +33,7 @@ namespace PowerUps
             anchors = transforms.Where(child => child != gameObject.transform).ToArray();
         }
 
-        public void Setup(int[] fillData)
+        public void Setup(float[] fillData)
         {
             animationService = GlobalState.Instance.Services.Get<AnimationService>();
             level = gameObject.GetComponentInParent<Level>();

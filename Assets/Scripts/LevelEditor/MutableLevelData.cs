@@ -19,7 +19,7 @@ namespace LevelEditor
             set { shotCount = value; }
         }
 
-        public new int[] PowerUpFills
+        public new float[] PowerUpFills
         {
             get { return base.PowerUpFills; }
             set { powerUpFills = value; }
