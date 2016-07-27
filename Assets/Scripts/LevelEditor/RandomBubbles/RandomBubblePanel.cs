@@ -307,14 +307,16 @@ namespace LevelEditor
 
         private void UpdateExclusions()
         {
-            var options = definitions
+            var allOptions = definitions
                 .Where(d => d.rollType == ChainedRandomizer<BubbleType>.SelectionMethod.Once)
                 .Select(d => definitions.IndexOf(d))
                 .ToList();
 
-            foreach (var group in groups)
+            var count = groups.Count;
+
+            for (var index = 0; index < count; index++)
             {
-                group.UpdateExclusions(options);
+                groups[index].UpdateExclusions(allOptions.Where(o => o != index).ToList());
             }
         }
     }
