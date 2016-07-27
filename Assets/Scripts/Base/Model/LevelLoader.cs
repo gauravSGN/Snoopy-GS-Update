@@ -69,7 +69,7 @@ public class LevelLoader : MonoBehaviour
 
         foreach (var bubble in level.Bubbles)
         {
-            bubbleMap[bubble.Key] = createBubbleAndSetPosition(bubble);
+            bubbleMap[bubble.Key] = CreateBubbleAndSetPosition(bubble);
             bubble.model = bubbleMap[bubble.Key].GetComponent<BubbleAttachments>().Model;
 
             if (!configuration.Counts.ContainsKey(bubble.model.type))
@@ -110,7 +110,7 @@ public class LevelLoader : MonoBehaviour
         for (int ceilingX = 0; ceilingX < ceilingBubbleCount; ceilingX++)
         {
             var ceilingData = new BubbleData(ceilingX - 1, -1, BubbleType.Ceiling);
-            ceilingBubbleMap[ceilingX - 1] = createBubbleAndSetPosition(ceilingData);
+            ceilingBubbleMap[ceilingX - 1] = CreateBubbleAndSetPosition(ceilingData);
         }
 
         foreach (var pair in bubbleMap)
@@ -158,7 +158,7 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    private GameObject createBubbleAndSetPosition(BubbleData bubbleData)
+    private GameObject CreateBubbleAndSetPosition(BubbleData bubbleData)
     {
         var instance = bubbleFactory.Create(bubbleData);
 

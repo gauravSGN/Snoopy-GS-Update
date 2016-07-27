@@ -68,13 +68,6 @@ public class WeightedBubbleQueue : BaseBubbleQueue, BubbleQueue
             }
         }
 
-        for (var index = 0; index < queued.Count; index++)
-        {
-            if (!options.ContainsKey(queued[index]))
-            {
-                queued.RemoveAt(index);
-                index--;
-            }
-        }
+        queued.RemoveAll(i => !options.ContainsKey(i));
     }
 }

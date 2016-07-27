@@ -1,0 +1,300 @@
+
+snoopy.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm_default_L
+  rotate: true
+  xy: 176, 2
+  size: 24, 36
+  orig: 26, 38
+  offset: 1, 1
+  index: -1
+arm_hold_3qtr_L
+  rotate: false
+  xy: 692, 85
+  size: 58, 41
+  orig: 60, 43
+  offset: 1, 1
+  index: -1
+arm_hold_profile_L
+  rotate: true
+  xy: 132, 2
+  size: 24, 42
+  orig: 26, 44
+  offset: 1, 1
+  index: -1
+arm_holding_profile_L_02
+  rotate: true
+  xy: 354, 26
+  size: 31, 45
+  orig: 33, 46
+  offset: 1, 1
+  index: -1
+arm_holding_profile_L_03
+  rotate: true
+  xy: 752, 83
+  size: 43, 53
+  orig: 45, 55
+  offset: 1, 1
+  index: -1
+body_front
+  rotate: true
+  xy: 549, 78
+  size: 48, 70
+  orig: 50, 73
+  offset: 1, 2
+  index: -1
+body_profile_L
+  rotate: true
+  xy: 396, 70
+  size: 56, 70
+  orig: 59, 72
+  offset: 1, 1
+  index: -1
+brow
+  rotate: true
+  xy: 965, 95
+  size: 10, 8
+  orig: 12, 10
+  offset: 1, 1
+  index: -1
+brow_3qtr
+  rotate: false
+  xy: 902, 84
+  size: 6, 5
+  orig: 8, 7
+  offset: 1, 1
+  index: -1
+collar
+  rotate: false
+  xy: 873, 73
+  size: 27, 16
+  orig: 29, 18
+  offset: 1, 1
+  index: -1
+ear_3qtr_L
+  rotate: true
+  xy: 621, 84
+  size: 42, 69
+  orig: 44, 71
+  offset: 1, 1
+  index: -1
+ear_3qtr_R
+  rotate: true
+  xy: 807, 109
+  size: 17, 64
+  orig: 25, 68
+  offset: 7, 1
+  index: -1
+ear_front
+  rotate: false
+  xy: 259, 32
+  size: 93, 25
+  orig: 95, 27
+  offset: 1, 1
+  index: -1
+ear_profile_L
+  rotate: true
+  xy: 468, 80
+  size: 46, 79
+  orig: 48, 81
+  offset: 1, 1
+  index: -1
+eye_3qtr_L
+  rotate: false
+  xy: 344, 19
+  size: 5, 11
+  orig: 7, 12
+  offset: 1, 1
+  index: -1
+eye_3qtr_L_up
+  rotate: false
+  xy: 120, 2
+  size: 5, 10
+  orig: 7, 11
+  offset: 1, 1
+  index: -1
+eye_3qtr_L_up_line
+  rotate: true
+  xy: 309, 2
+  size: 8, 16
+  orig: 10, 18
+  offset: 1, 1
+  index: -1
+eye_3qtr_R
+  rotate: true
+  xy: 120, 14
+  size: 6, 10
+  orig: 8, 12
+  offset: 1, 1
+  index: -1
+eye_3qtr_R_up
+  rotate: false
+  xy: 459, 59
+  size: 6, 9
+  orig: 8, 12
+  offset: 1, 2
+  index: -1
+eye_3qtr_R_up_line
+  rotate: true
+  xy: 327, 2
+  size: 8, 16
+  orig: 10, 18
+  offset: 1, 1
+  index: -1
+eye_closed_default
+  rotate: false
+  xy: 621, 78
+  size: 11, 4
+  orig: 13, 6
+  offset: 1, 1
+  index: -1
+foot_front_L
+  rotate: false
+  xy: 873, 107
+  size: 49, 19
+  orig: 51, 21
+  offset: 1, 1
+  index: -1
+foot_front_R
+  rotate: false
+  xy: 924, 107
+  size: 49, 19
+  orig: 51, 21
+  offset: 1, 1
+  index: -1
+foot_profile
+  rotate: true
+  xy: 975, 96
+  size: 30, 44
+  orig: 32, 46
+  offset: 1, 1
+  index: -1
+hand_default_L
+  rotate: true
+  xy: 259, 2
+  size: 28, 48
+  orig: 30, 50
+  offset: 1, 1
+  index: -1
+hand_fronthold
+  rotate: false
+  xy: 858, 77
+  size: 13, 30
+  orig: 15, 33
+  offset: 1, 2
+  index: -1
+hand_fronthold_L
+  rotate: true
+  xy: 85, 2
+  size: 18, 33
+  orig: 20, 34
+  offset: 1, 1
+  index: -1
+hand_fronthold_L_02
+  rotate: true
+  xy: 309, 12
+  size: 18, 33
+  orig: 21, 36
+  offset: 1, 2
+  index: -1
+hand_hold_3qtr_L
+  rotate: true
+  xy: 401, 25
+  size: 32, 44
+  orig: 34, 47
+  offset: 1, 2
+  index: -1
+head_3qtr
+  rotate: false
+  xy: 132, 28
+  size: 125, 98
+  orig: 135, 100
+  offset: 1, 1
+  index: -1
+head_front
+  rotate: true
+  xy: 259, 59
+  size: 67, 135
+  orig: 69, 137
+  offset: 1, 1
+  index: -1
+head_profile_L
+  rotate: false
+  xy: 2, 22
+  size: 128, 104
+  orig: 130, 106
+  offset: 1, 1
+  index: -1
+leg_front_L
+  rotate: true
+  xy: 45, 2
+  size: 18, 38
+  orig: 20, 41
+  offset: 1, 2
+  index: -1
+leg_front_R
+  rotate: true
+  xy: 2, 2
+  size: 18, 41
+  orig: 20, 43
+  offset: 1, 1
+  index: -1
+mouth_front
+  rotate: false
+  xy: 214, 4
+  size: 43, 22
+  orig: 45, 23
+  offset: 1, 1
+  index: -1
+mouth_smile_34
+  rotate: false
+  xy: 807, 80
+  size: 49, 27
+  orig: 55, 29
+  offset: 5, 1
+  index: -1
+mouth_smile_profile
+  rotate: false
+  xy: 873, 91
+  size: 37, 14
+  orig: 55, 21
+  offset: 17, 4
+  index: -1
+nose_3qtr
+  rotate: true
+  xy: 447, 41
+  size: 16, 11
+  orig: 18, 13
+  offset: 1, 1
+  index: -1
+nose_profile_L
+  rotate: false
+  xy: 948, 90
+  size: 15, 15
+  orig: 17, 17
+  offset: 1, 1
+  index: -1
+schultz_line
+  rotate: true
+  xy: 396, 59
+  size: 9, 61
+  orig: 11, 62
+  offset: 1, 1
+  index: -1
+schultz_line_02
+  rotate: true
+  xy: 468, 76
+  size: 2, 51
+  orig: 4, 65
+  offset: 1, 7
+  index: -1
+tail
+  rotate: false
+  xy: 912, 89
+  size: 34, 16
+  orig: 36, 18
+  offset: 1, 1
+  index: -1

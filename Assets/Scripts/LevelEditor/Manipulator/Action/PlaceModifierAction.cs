@@ -12,10 +12,21 @@ namespace LevelEditor.Manipulator
 
         public void Perform(LevelManipulator manipulator, int x, int y)
         {
-            if (manipulator.Models.ContainsKey(BubbleData.GetKey(x, y)) && (manipulator.Modifier != null))
+            var key = BubbleData.GetKey(x, y);
+            var modifier = manipulator.Modifier;
+
+            if (manipulator.Models.ContainsKey(key) && (modifier != null))
             {
-                RemoveModifier(manipulator, x, y, manipulator.Modifier);
-                ApplyModifier(manipulator, x, y, manipulator.Modifier);
+                var bubble = manipulator.Models[key];
+                var hasModifier = (bubble.modifiers != null) && bubble.modifiers.Any(m => m.type == modifier.Type);
+
+                RemoveModifier(manipulator, x, y, modifier);
+
+                if (!hasModifier)
+                {
+                    ApplyModifier(manipulator, x, y, modifier);
+                }
+
                 placer.Perform(manipulator, x, y);
             }
         }

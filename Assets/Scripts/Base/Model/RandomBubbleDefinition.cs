@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
+using BubbleRandomizer = Model.ChainedRandomizer<BubbleType>;
+
 namespace Model
 {
     [Serializable]
@@ -10,7 +12,7 @@ namespace Model
     {
         public List<int> exclusions = new List<int>();
         public int[] weights = new int[6];
-        public ChainedRandomizer<BubbleType>.SelectionMethod rollType = ChainedRandomizer<BubbleType>.SelectionMethod.Once;
+        public BubbleRandomizer.SelectionMethod rollType = BubbleRandomizer.SelectionMethod.Once;
 
         public RandomBubbleDefinition Clone()
         {

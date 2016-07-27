@@ -18,6 +18,7 @@ public class BubbleScore : MonoBehaviour
     private void OnImpendingDestruction(Bubble bubble)
     {
         RemoveHandlers(bubble);
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleDestroyedEvent(bubble.definition.Score, gameObject));
+        var bubbleDestroyedEvent = new BubbleDestroyedEvent(bubble.definition.Score, gameObject);
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(bubbleDestroyedEvent);
     }
 }

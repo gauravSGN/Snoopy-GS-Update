@@ -8,7 +8,7 @@ public class LevelGoalMonitor : MonoBehaviour
     private GoalType goalType;
 
     [SerializeField]
-    TextUpdater updater;
+    UITextUpdater updater;
 
     protected void Start()
     {

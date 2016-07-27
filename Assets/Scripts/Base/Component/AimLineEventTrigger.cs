@@ -30,7 +30,8 @@ public class AimLineEventTrigger : EventTrigger
     {
         if (data.button == PointerEventData.InputButton.Left)
         {
-            aiming = hovering = true;
+            aiming = true;
+            hovering = true;
 
             MoveTarget(GetCursorPosition(data));
             StartAiming();
@@ -67,7 +68,8 @@ public class AimLineEventTrigger : EventTrigger
 
             StopAiming();
 
-            aiming = hovering = false;
+            aiming = false;
+            hovering = false;
         }
     }
 

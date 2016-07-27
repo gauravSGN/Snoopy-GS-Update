@@ -15,7 +15,9 @@ namespace State
             set { SetValue<long>(QUANTITY, Math.Max(value, 0)); }
         }
 
-        public Coins(Data topLevelState, Action<Observable> initialListener = null) : base(topLevelState, initialListener)
+        public Coins(Data topLevelState) : this(topLevelState, null) {}
+
+        public Coins(Data topLevelState, Action<Observable> initialListener) : base(topLevelState, initialListener)
         {
         }
     }
