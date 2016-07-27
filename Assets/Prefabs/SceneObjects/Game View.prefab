@@ -30,7 +30,7 @@ GameObject:
   - 114: {fileID: 11495642}
   - 114: {fileID: 11420210}
   m_Layer: 0
-  m_Name: Snoopy v2
+  m_Name: Snoopy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -627,7 +627,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0000000050664193, y: 0.18100539, z: -1}
+  m_LocalPosition: {x: 4.3389992e-10, y: 0.2940136, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -864,7 +864,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: d89480f8adb994c3f9869e6bd9e4eb2e, type: 2}
+  - {fileID: 2100000, guid: 327b2ba1aa3b14df29574986c46c9245, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1028,7 +1028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9db98c60740638449864eb028fbe7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 47a6b750667044ab7b5b9f091ee3c9cb, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 6f140cfddda8f4ffea4919252a1a28d4, type: 2}
   initialSkinName: default
   separatorSlotNames: []
   zSpacing: 0
@@ -1052,10 +1052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f73eebcc63a4946ad9c1dd9d418ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launcherCharacter: {fileID: 114468}
   eventTrigger: {fileID: 11466544}
   launchOrigin: {fileID: 189344}
-  bubbleAttachment: red_bubble
 --- !u!114 &11431538
 MonoBehaviour:
   m_ObjectHideFlags: 1
