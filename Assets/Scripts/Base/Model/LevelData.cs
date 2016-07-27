@@ -11,7 +11,7 @@ namespace Model
     {
         virtual public string Background { get { return background; } }
         virtual public int ShotCount { get { return shotCount; } }
-        virtual public int[] PowerUpFills { get { return powerUpFills; } }
+        virtual public float[] PowerUpFills { get { return powerUpFills; } }
         virtual public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
         virtual public int[] StarValues { get { return starValues; } }
         virtual public BubbleQueueDefinition Queue { get { return queue; } }
@@ -26,7 +26,7 @@ namespace Model
         protected int shotCount;
 
         [SerializeField]
-        protected int[] powerUpFills;
+        protected float[] powerUpFills;
 
         [SerializeField]
         protected BubbleData[] bubbles;
