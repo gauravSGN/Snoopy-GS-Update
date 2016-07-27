@@ -28,8 +28,7 @@ namespace Event
             AddEventHandler<T>(handler, HandlerDictType.Transient);
         }
 
-        public void AddEventHandler<T>(Action<T> handler, HandlerDictType handlerDictType = HandlerDictType.Transient)
-            where T : GameEvent
+        public void AddEventHandler<T>(Action<T> handler, HandlerDictType handlerDictType) where T : GameEvent
         {
             DictionaryInsert(handlerDictList[(int)handlerDictType], typeof(T), handler);
         }
