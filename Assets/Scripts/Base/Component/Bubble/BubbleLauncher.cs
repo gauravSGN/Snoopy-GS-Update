@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Service;
-using Spine.Unity;
 
 public class BubbleLauncher : MonoBehaviour
 {
@@ -20,15 +19,12 @@ public class BubbleLauncher : MonoBehaviour
     private AimLine aimLine;
 
     [SerializeField]
-    private GameObject launcherCharacter;
+    private LauncherCharacterController characterController;
 
     private GameObject[] nextBubbles;
     private BubbleType[] nextTypes;
     private List<ModifyShot> shotModifiers;
     private GameObject currentAnimation;
-
-    private Animator launcherAnimator;
-    private AnimationEventProxy animationEventProxy;
     private Vector2 direction;
 
     public void CycleQueue()
@@ -56,9 +52,6 @@ public class BubbleLauncher : MonoBehaviour
         nextBubbles = new GameObject[locations.Length];
         nextTypes = new BubbleType[locations.Length];
         shotModifiers = ResetShotModifiers();
-        launcherAnimator = launcherCharacter.GetComponent<Animator>();
-        animationEventProxy = launcherCharacter.GetComponent<AnimationEventProxy>();
-        launcherCharacter.GetComponent<SkeletonAnimator>().Skeleton.SetAttachment("red_bubble2", null);
 
         aimLine.Fire += FireBubbleAt;
 
@@ -100,9 +93,9 @@ public class BubbleLauncher : MonoBehaviour
         }
 
         direction = (point - (Vector2)locations[0].transform.position).normalized * launchSpeed;
+        characterController.OnAnimationFire += OnAnimationFireBubble;
         GlobalState.Instance.Services.Get<EventService>().Dispatch(new InputToggleEvent(false));
-        animationEventProxy.OnAnimationFire += OnAnimationFireBubble;
-        launcherAnimator.SetTrigger("Firing");
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleFiringEvent());
     }
 
     private void OnAnimationFireBubble()
@@ -130,7 +123,7 @@ public class BubbleLauncher : MonoBehaviour
         level.levelState.bubbleQueue.AddListener(OnBubbleQueueChanged);
         CycleLocalQueue();
         OnBubbleQueueChanged((Observable)level.levelState.bubbleQueue);
-        animationEventProxy.OnAnimationFire -= OnAnimationFireBubble;
+        characterController.OnAnimationFire -= OnAnimationFireBubble;
     }
 
     private void MoveBubbleToLocation(int index)
