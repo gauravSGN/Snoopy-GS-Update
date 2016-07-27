@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
   m_Name: snoopy_Atlas
   m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: 2bafa5340fb15438cb9270a8d548006e, type: 3}
+  atlasFile: {fileID: 4900000, guid: 3c862f5cecb644c3eb38a634e6eb9262, type: 3}
   materials:
-  - {fileID: 2100000, guid: d89480f8adb994c3f9869e6bd9e4eb2e, type: 2}
+  - {fileID: 2100000, guid: 327b2ba1aa3b14df29574986c46c9245, type: 2}

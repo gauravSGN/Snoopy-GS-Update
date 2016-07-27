@@ -95,6 +95,7 @@ public class BubbleLauncher : MonoBehaviour
         direction = (point - (Vector2)locations[0].transform.position).normalized * launchSpeed;
         characterController.OnAnimationFire += OnAnimationFireBubble;
         GlobalState.Instance.Services.Get<EventService>().Dispatch(new InputToggleEvent(false));
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleFiringEvent());
     }
 
     private void OnAnimationFireBubble()

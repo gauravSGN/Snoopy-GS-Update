@@ -13,7 +13,7 @@ arm_default_L
   index: -1
 arm_hold_3qtr_L
   rotate: false
-  xy: 755, 85
+  xy: 692, 85
   size: 58, 41
   orig: 60, 43
   offset: 1, 1
@@ -34,7 +34,7 @@ arm_holding_profile_L_02
   index: -1
 arm_holding_profile_L_03
   rotate: true
-  xy: 815, 83
+  xy: 752, 83
   size: 43, 53
   orig: 45, 55
   offset: 1, 1
@@ -54,22 +54,22 @@ body_profile_L
   offset: 1, 1
   index: -1
 brow
-  rotate: false
-  xy: 120, 12
+  rotate: true
+  xy: 965, 95
   size: 10, 8
   orig: 12, 10
   offset: 1, 1
   index: -1
 brow_3qtr
   rotate: false
-  xy: 344, 12
+  xy: 902, 84
   size: 6, 5
   orig: 8, 7
   offset: 1, 1
   index: -1
 collar
   rotate: false
-  xy: 806, 65
+  xy: 873, 73
   size: 27, 16
   orig: 29, 18
   offset: 1, 1
@@ -83,7 +83,7 @@ ear_3qtr_L
   index: -1
 ear_3qtr_R
   rotate: true
-  xy: 870, 109
+  xy: 807, 109
   size: 17, 64
   orig: 25, 68
   offset: 7, 1
@@ -110,8 +110,8 @@ eye_3qtr_L
   offset: 1, 1
   index: -1
 eye_3qtr_L_up
-  rotate: true
-  xy: 870, 73
+  rotate: false
+  xy: 120, 2
   size: 5, 10
   orig: 7, 11
   offset: 1, 1
@@ -125,7 +125,7 @@ eye_3qtr_L_up_line
   index: -1
 eye_3qtr_R
   rotate: true
-  xy: 120, 4
+  xy: 120, 14
   size: 6, 10
   orig: 8, 12
   offset: 1, 1
@@ -153,21 +153,21 @@ eye_closed_default
   index: -1
 foot_front_L
   rotate: false
-  xy: 936, 107
+  xy: 873, 107
   size: 49, 19
   orig: 51, 21
   offset: 1, 1
   index: -1
 foot_front_R
   rotate: false
-  xy: 755, 64
+  xy: 924, 107
   size: 49, 19
   orig: 51, 21
   offset: 1, 1
   index: -1
 foot_profile
   rotate: true
-  xy: 921, 75
+  xy: 975, 96
   size: 30, 44
   orig: 32, 46
   offset: 1, 1
@@ -181,7 +181,7 @@ hand_default_L
   index: -1
 hand_fronthold
   rotate: false
-  xy: 447, 27
+  xy: 858, 77
   size: 13, 30
   orig: 15, 33
   offset: 1, 2
@@ -251,37 +251,30 @@ mouth_front
   index: -1
 mouth_smile_34
   rotate: false
-  xy: 870, 80
+  xy: 807, 80
   size: 49, 27
   orig: 55, 29
   offset: 5, 1
   index: -1
 mouth_smile_profile
-  rotate: true
-  xy: 967, 68
+  rotate: false
+  xy: 873, 91
   size: 37, 14
   orig: 55, 21
   offset: 17, 4
   index: -1
 nose_3qtr
-  rotate: false
-  xy: 852, 70
+  rotate: true
+  xy: 447, 41
   size: 16, 11
   orig: 18, 13
   offset: 1, 1
   index: -1
 nose_profile_L
   rotate: false
-  xy: 835, 66
+  xy: 948, 90
   size: 15, 15
   orig: 17, 17
-  offset: 1, 1
-  index: -1
-red_bubble
-  rotate: false
-  xy: 692, 67
-  size: 61, 59
-  orig: 63, 61
   offset: 1, 1
   index: -1
 schultz_line
@@ -300,7 +293,7 @@ schultz_line_02
   index: -1
 tail
   rotate: false
-  xy: 987, 110
+  xy: 912, 89
   size: 34, 16
   orig: 36, 18
   offset: 1, 1

@@ -1,14 +1,16 @@
 using UnityEngine;
+using Spine;
 using Spine.Unity;
 using Service;
 using System;
 
 public class LauncherCharacterController : MonoBehaviour
 {
-    public event Action OnAnimationFire;
+    private const string ANGLE = "Angle";
+    private const string AIMING = "Aiming";
+    private const string FIRING = "Firing";
 
-    [SerializeField]
-    private GameObject launcherCharacter;
+    public event Action OnAnimationFire;
 
     [SerializeField]
     private AimLineEventTrigger eventTrigger;
@@ -16,12 +18,8 @@ public class LauncherCharacterController : MonoBehaviour
     [SerializeField]
     private GameObject launchOrigin;
 
-    [SerializeField]
-    private string bubbleAttachment;
-
     private Animator launcherAnimator;
-    private Vector2 startingVector;
-    private Spine.Skeleton skeleton;
+    private Skeleton skeleton;
 
     public void AnimationFire()
     {
@@ -33,42 +31,37 @@ public class LauncherCharacterController : MonoBehaviour
 
     protected void Start()
     {
-        launcherAnimator = launcherCharacter.GetComponent<Animator>();
-        skeleton = launcherCharacter.GetComponent<SkeletonAnimator>().Skeleton;
-        skeleton.SetAttachment(bubbleAttachment, null);
+        launcherAnimator = gameObject.GetComponent<Animator>();
+        skeleton = gameObject.GetComponent<SkeletonAnimator>().Skeleton;
 
-        launcherAnimator.SetFloat("Angle", 90.0f);
+        launcherAnimator.SetFloat(ANGLE, 90.0f);
         eventTrigger.MoveTarget += OnMoveTarget;
 
         var eventService = GlobalState.Instance.Services.Get<EventService>();
-        eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
+        eventService.AddEventHandler<BubbleFiringEvent>(OnBubbleFiring);
+        eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
     }
 
-
-    private void OnInputToggle(InputToggleEvent inputToggleEvent)
+    private void OnBubbleFiring(BubbleFiringEvent bubbleFiringEvent)
     {
-        if (launcherAnimator != null && skeleton != null)
-        {
-            if (!inputToggleEvent.enabled)
-            {
-                launcherAnimator.SetTrigger("Firing");
-                launcherAnimator.SetFloat("Angle", 90f);
+        launcherAnimator.SetBool(AIMING, false);
+        launcherAnimator.SetTrigger(FIRING);
+    }
 
-            }
-            else
-            {
-                skeleton.FlipX = false;
-            }
-        }
+    private void OnBubbleFired(BubbleFiredEvent bubbleFiredEvent)
+    {
+        launcherAnimator.SetFloat(ANGLE, 90f);
+        skeleton.FlipX = false;
     }
 
     private void OnMoveTarget(Vector2 target)
     {
+        launcherAnimator.SetBool(AIMING, true);
+
         var direction = (target - (Vector2)launchOrigin.transform.position).normalized;
         var angle = Vector2.Angle(Vector2.up, direction);
-        skeleton.FlipX = direction.x > 0.01f;
 
-        Debug.Log(angle);
-        launcherAnimator.SetFloat("Angle", angle);
+        skeleton.FlipX = direction.x > 0.01f;
+        launcherAnimator.SetFloat(ANGLE, angle);
     }
 }
