@@ -60,10 +60,14 @@ namespace Model
 
         public BubbleData CloneAt(int x, int y)
         {
-            return new BubbleData(x, y, Type)
+            var result = new BubbleData(x, y, Type);
+
+            if (modifiers != null)
             {
-                modifiers = modifiers.Select(m => new ModifierData { type = m.type, data = m.data }).ToArray(),
-            };
+                result.modifiers = modifiers.Select(m => new ModifierData { type = m.type, data = m.data }).ToArray();
+            }
+
+            return result;
         }
     }
 }
