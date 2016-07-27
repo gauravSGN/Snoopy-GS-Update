@@ -9,6 +9,7 @@ namespace Model
     [Serializable]
     public class LevelData
     {
+        virtual public string Background { get { return background; } }
         virtual public int ShotCount { get { return shotCount; } }
         virtual public int[] PowerUpFills { get { return powerUpFills; } }
         virtual public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
@@ -17,6 +18,9 @@ namespace Model
         virtual public RandomBubbleDefinition[] Randoms { get { return randoms; } }
 
         public List<LevelGoal> goals;
+
+        [SerializeField]
+        protected string background;
 
         [SerializeField]
         protected int shotCount;

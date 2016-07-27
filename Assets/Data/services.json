@@ -10,7 +10,7 @@
         },
         {
             "interfaceName": "Service.EventService, Assembly-CSharp",
-            "className": "EventDispatcher, Assembly-CSharp"
+            "className": "Event.EventDispatcher, Assembly-CSharp"
         },
         {
             "interfaceName": "Service.SceneService, Assembly-CSharp",

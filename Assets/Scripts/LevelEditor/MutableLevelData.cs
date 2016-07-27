@@ -7,6 +7,12 @@ namespace LevelEditor
 {
     public class MutableLevelData : LevelData
     {
+        public new string Background
+        {
+            get { return base.Background; }
+            set { background = value; }
+        }
+
         public new int ShotCount
         {
             get { return base.ShotCount; }

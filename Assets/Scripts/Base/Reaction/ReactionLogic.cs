@@ -1,9 +1,11 @@
+using Util;
+using System;
+using Service;
+using UI.Popup;
+using System.Linq;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Util;
-using System.Linq;
-using Service;
 
 namespace Reaction
 {
@@ -80,12 +82,24 @@ namespace Reaction
             if (GetComponent<Level>().levelState.remainingBubbles <= 0)
             {
                 GlobalState.Instance.Services.Get<UserStateService>().purchasables.hearts.quantity--;
-                GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(false));
+
+                GlobalState.Instance.Services.Get<PopupService>().Enqueue(new GenericPopupConfig
+                {
+                    title = "Level Lost",
+                    mainText = "Hearts Left: " + GlobalState.Instance.Services.Get<UserStateService>().purchasables.hearts.quantity.ToString(),
+                    closeActions = new List<Action> { DispatchLevelLost },
+                    affirmativeActions = new List<Action> { DispatchLevelLost }
+                });
             }
             else
             {
                 GlobalState.Instance.Services.Get<EventService>().Dispatch(new ReadyForNextBubbleEvent());
             }
+        }
+
+        private void DispatchLevelLost()
+        {
+            GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(false));
         }
     }
 }

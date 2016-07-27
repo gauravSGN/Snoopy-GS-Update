@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Name: PopupFactory
   m_EditorClassIdentifier: 
   definitions:
+  - {fileID: 11400000, guid: 08fcd32e20918455dbfd4af0d6af878d, type: 2}
   - {fileID: 11400000, guid: 483cfde7a68844d9f88a663fedcc44c9, type: 2}

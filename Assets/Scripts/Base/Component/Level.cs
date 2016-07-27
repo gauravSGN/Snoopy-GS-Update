@@ -1,6 +1,9 @@
-using System.Collections;
-using UnityEngine;
+using System;
 using Service;
+using UI.Popup;
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Level : MonoBehaviour
 {
@@ -8,10 +11,13 @@ public class Level : MonoBehaviour
     public BubbleFactory bubbleFactory;
 
     [SerializeField]
-    private TextAsset levelAsset;
+    private string levelAssetPath;
 
     [SerializeField]
     private LevelLoader loader;
+
+    [SerializeField]
+    private SpriteRenderer background;
 
     private string levelData;
 
@@ -24,9 +30,9 @@ public class Level : MonoBehaviour
             levelData = sceneData.NextLevelData;
             sceneData.NextLevelData = null;
         }
-        else if (levelAsset != null)
+        else if (levelAssetPath != null)
         {
-            levelData = levelAsset.text;
+            levelData = GlobalState.Instance.Services.Get<AssetService>().LoadAsset<TextAsset>(levelAssetPath).text;
         }
 
         levelState.levelNumber = sceneData.LevelNumber;
@@ -50,6 +56,23 @@ public class Level : MonoBehaviour
         eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
         eventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
         eventService.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
+
+        var assetService = GlobalState.Instance.Services.Get<AssetService>();
+
+        assetService.LoadAssetAsync<Sprite>(loader.LevelData.Background, delegate(Sprite sprite)
+            {
+                background.sprite = sprite;
+            });
+
+        assetService.OnComplete += OnAssetLoadingComplete;
+    }
+
+    private void OnAssetLoadingComplete()
+    {
+        var assetService = GlobalState.Instance.Services.Get<AssetService>();
+        var eventService = GlobalState.Instance.Services.Get<EventService>();
+
+        assetService.OnComplete -= OnAssetLoadingComplete;
         eventService.Dispatch(new LevelLoadedEvent());
     }
 
@@ -79,7 +102,14 @@ public class Level : MonoBehaviour
 
         UpdateUserScoreAndStars();
 
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(true));
+        GlobalState.Instance.Services.Get<PopupService>().Enqueue(new GenericPopupConfig
+        {
+            title = "Level Won",
+            mainText = ("Score: " + levelState.score.ToString() + "\n" +
+                        "Stars: " + GlobalState.Instance.Services.Get<UserStateService>().levels[levelState.levelNumber].stars.ToString()),
+            closeActions = new List<Action> { DispatchLevelWon },
+            affirmativeActions = new List<Action> { DispatchLevelWon }
+        });
     }
 
     private void UpdateUserScoreAndStars()
@@ -99,5 +129,10 @@ public class Level : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void DispatchLevelWon()
+    {
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(true));
     }
 }

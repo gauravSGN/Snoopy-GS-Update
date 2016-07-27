@@ -33,8 +33,11 @@ public class BubbleLauncher : MonoBehaviour
 
     public void CycleQueue()
     {
-        CycleLocalQueue();
-        level.levelState.bubbleQueue.Rotate(nextBubbles.Length);
+        if (!aimLine.Aiming)
+        {
+            CycleLocalQueue();
+            level.levelState.bubbleQueue.Rotate(nextBubbles.Length);
+        }
     }
 
     public void AddShotModifier(ModifyShot modifier)

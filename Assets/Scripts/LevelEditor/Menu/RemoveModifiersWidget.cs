@@ -2,21 +2,19 @@
 using UnityEngine.UI;
 using LevelEditor.Manipulator;
 using Model;
+using Service;
 
 namespace LevelEditor.Menu
 {
     sealed public class RemoveModifiersWidget : MenuWidgetBase, MenuWidget
     {
+        private const string PREFAB_PATH = "LevelEditor/Menu/RemoveModifiersButton";
+
         public int SortOrder { get { return 2; } }
 
         private GameObject prefab;
         private BubbleData data;
         private PlaceBubbleAction placer = new PlaceBubbleAction();
-
-        public RemoveModifiersWidget()
-        {
-            prefab = Resources.Load("LevelEditor/Menu/RemoveModifiersButton", typeof(GameObject)) as GameObject;
-        }
 
         public bool IsValidFor(BubbleData bubble)
         {
@@ -25,6 +23,7 @@ namespace LevelEditor.Menu
 
         public GameObject CreateWidget(BubbleData bubble)
         {
+            prefab = prefab ?? GlobalState.Instance.Services.Get<AssetService>().LoadAsset<GameObject>(PREFAB_PATH);
             data = bubble;
 
             var instance = GameObject.Instantiate(prefab);

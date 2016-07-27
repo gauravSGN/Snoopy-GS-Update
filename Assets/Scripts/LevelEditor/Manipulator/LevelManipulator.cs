@@ -39,6 +39,7 @@ namespace LevelEditor
         private readonly LevelProperties levelProperties = new LevelProperties();
         private readonly BubbleQueueDefinition queue = new BubbleQueueDefinition();
         private List<RandomBubbleDefinition> randoms = new List<RandomBubbleDefinition>();
+        private string background = "Backgrounds/BackgroundWorld1";
 
         public Dictionary<int, BubbleData> Models { get { return models; } }
         public Dictionary<int, GameObject> Views { get { return views; } }
@@ -52,6 +53,11 @@ namespace LevelEditor
         public LevelProperties LevelProperties { get { return levelProperties; } }
         public BubbleQueueDefinition Queue { get { return queue; } }
         public List<RandomBubbleDefinition> Randoms { get { return randoms; } }
+        public string Background
+        {
+            get { return background; }
+            set { background = value; }
+        }
 
         public BubbleType BubbleType { get { return state.BubbleType; } }
         public BubbleModifierInfo Modifier { get { return state.Modifier; } }
@@ -80,6 +86,8 @@ namespace LevelEditor
             randoms = new List<RandomBubbleDefinition>(levelData.Randoms ?? new RandomBubbleDefinition[0]);
             GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new RandomBubblesChangedEvent());
 
+            Background = levelData.Background;
+
             GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelModifiedEvent());
             GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelEditorLoadEvent());
         }
@@ -88,6 +96,7 @@ namespace LevelEditor
         {
             var data = new MutableLevelData
             {
+                Background = Background,
                 Bubbles = models.Values,
                 Queue = queue,
                 Randoms = randoms.ToArray(),

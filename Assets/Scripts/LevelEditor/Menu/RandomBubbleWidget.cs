@@ -4,22 +4,20 @@ using System.Linq;
 using System.Collections.Generic;
 using LevelEditor.Manipulator;
 using Model;
+using Service;
 
 namespace LevelEditor.Menu
 {
     sealed public class RandomBubbleWidget : MenuWidgetBase, MenuWidget
     {
+        private const string PREFAB_PATH = "LevelEditor/Menu/RandomContextPanel";
+
         public int SortOrder { get { return 99; } }
 
         private GameObject prefab;
         private BubbleData data;
         private RandomBubbleDefinition definition;
         private PlaceBubbleAction placer = new PlaceBubbleAction();
-
-        public RandomBubbleWidget()
-        {
-            prefab = Resources.Load("LevelEditor/Menu/RandomContextPanel", typeof(GameObject)) as GameObject;
-        }
 
         public bool IsValidFor(BubbleData bubble)
         {
@@ -28,8 +26,9 @@ namespace LevelEditor.Menu
 
         public GameObject CreateWidget(BubbleData bubble)
         {
-            data = bubble;
+            prefab = prefab ?? GlobalState.Instance.Services.Get<AssetService>().LoadAsset<GameObject>(PREFAB_PATH);
             definition = CreateDefinition(bubble);
+            data = bubble;
 
             var colors = GetColors();
             var panel = GameObject.Instantiate(prefab);
@@ -121,11 +120,16 @@ namespace LevelEditor.Menu
 
         private void InitializeExclusions(GameObject panel)
         {
-            var exclusions = panel.transform.FindChild("ExclusionsPanel").GetComponent<RandomExclusionPanel>();
+            var exclusions = panel.transform.FindChild("ExclusionsPanel").GetComponent<RandomBubbleExclusions>();
             var halfCount = (definition.weights.Length + 1) / 2;
+            var options = Manipulator.Randoms
+                .Where(r => r.rollType == ChainedRandomizer<BubbleType>.SelectionMethod.Once)
+                .Select(r => Manipulator.Randoms.IndexOf(r))
+                .ToList();
 
             exclusions.transform.localPosition = new Vector3(2.0f, -28.0f - (halfCount * 24.0f));
             exclusions.Initialize(definition.exclusions);
+            exclusions.UpdateOptions(options);
         }
 
         private void OnOnceEachClick()
