@@ -20,6 +20,7 @@ namespace LevelEditor
         private GameObject itemTemplate;
 
         private List<GameObject> itemInstances = new List<GameObject>();
+        private Vector3 originalPosition;
         private Transform originalParent;
         private List<int> items;
         private List<int> options;
@@ -42,17 +43,27 @@ namespace LevelEditor
         {
             var active = itemsPanel.activeSelf;
 
+            var canvas = GetComponentInParent<Canvas>();
+            var modalOverlay = canvas.transform.FindChild("ModalOverlay");
+            var modalButton = modalOverlay.GetComponent<Button>();
+
             if (!active)
             {
                 RebuildItems();
 
-                var canvas = GetComponentInParent<Canvas>();
                 originalParent = itemsPanel.transform.parent;
-                itemsPanel.transform.SetParent(canvas.transform, true);
+                originalPosition = itemsPanel.transform.localPosition;
+                itemsPanel.transform.SetParent(modalOverlay.transform, true);
+
+                modalButton.onClick.AddListener(Toggle);
+                modalOverlay.gameObject.SetActive(true);
             }
             else
             {
                 itemsPanel.transform.SetParent(originalParent, true);
+                itemsPanel.transform.localPosition = originalPosition;
+
+                modalButton.onClick.RemoveListener(Toggle);
 
                 ReadResults();
             }
