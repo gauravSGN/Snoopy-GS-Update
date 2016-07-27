@@ -23,12 +23,18 @@ namespace Modifiers
 
         public void ApplyGameObjectModifications(BubbleData data, GameObject target)
         {
-            Apply(data.modifiers, m => ModifyGameObject(target, m));
+            if (Apply(data.modifiers, m => ModifyGameObject(target, m)))
+            {
+                MoveTextToTopOfObject(target);
+            }
         }
 
         public void ApplyEditorModifications(BubbleData data, GameObject target)
         {
-            Apply(data.modifiers, m => ModifyEditorObject(target, m));
+            if (Apply(data.modifiers, m => ModifyEditorObject(target, m)))
+            {
+                MoveTextToTopOfObject(target);
+            }
         }
 
         protected void AddTextToBubble(GameObject target, string text)
@@ -40,14 +46,28 @@ namespace Modifiers
             textComponent.text = string.Join(" ", values.ToArray());
         }
 
-        private void Apply(IEnumerable<BubbleData.ModifierData> data, Action<BubbleData.ModifierData> action)
+        private bool Apply(IEnumerable<BubbleData.ModifierData> data, Action<BubbleData.ModifierData> action)
         {
+            var modified = false;
+
             foreach (var modifier in data)
             {
                 if (modifier.type == ModifierType)
                 {
                     action(modifier);
+                    modified = true;
                 }
+            }
+
+            return modified;
+        }
+
+        private void MoveTextToTopOfObject(GameObject target)
+        {
+            var textComponent = target.GetComponentInChildren<Text>();
+            if(textComponent != null)
+            {
+                textComponent.transform.SetAsLastSibling();
             }
         }
     }

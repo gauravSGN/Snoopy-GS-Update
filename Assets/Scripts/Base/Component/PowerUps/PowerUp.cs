@@ -11,10 +11,10 @@ namespace PowerUps
         private Level level;
 
         [SerializeField]
-        private int max;
+        private float max;
 
         [SerializeField]
-        private int current;
+        private float current;
 
         [SerializeField]
         private float progress;
@@ -25,7 +25,7 @@ namespace PowerUps
         private PowerUpDefinition definition;
         private PowerUpController controller;
 
-        public void Setup(int setMax, PowerUpController setController, Level setLevel)
+        public void Setup(float setMax, PowerUpController setController, Level setLevel)
         {
             max = setMax;
             controller = setController;
@@ -75,7 +75,7 @@ namespace PowerUps
         {
             glow.SetActive(false);
             progress = 0.0f;
-            current++;
+            current += 1.0f;
         }
     }
 }
