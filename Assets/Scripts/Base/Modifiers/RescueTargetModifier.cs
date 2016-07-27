@@ -8,7 +8,7 @@ namespace Modifiers
     [BubbleModifierAttribute(BubbleModifierType.RescueTarget)]
     public class RescueTargetModifier : BubbleModifier
     {
-        private const string SPRITE_PATH = "Textures/Modifiers/BabyPanda";
+        private const string SPRITE_PATH = "Textures/Modifiers/woodstock";
 
         private Sprite sprite;
 
