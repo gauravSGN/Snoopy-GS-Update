@@ -14,7 +14,7 @@ namespace LevelEditor
 
         private List<BubbleData> savedState;
 
-        void Start()
+        public void Start()
         {
             if (Instance == this)
             {

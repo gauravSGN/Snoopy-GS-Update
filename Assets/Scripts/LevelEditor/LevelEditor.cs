@@ -39,7 +39,7 @@ namespace LevelEditor
 
         public void New()
         {
-            ConfirmAction(delegate ()
+            ConfirmAction(delegate
             {
                 filename = null;
                 ClearBoard();
@@ -83,7 +83,12 @@ namespace LevelEditor
         {
 #if UNITY_EDITOR
             var basePath = Path.Combine(Application.dataPath, LevelEditorConstants.LEVEL_BASE_PATH);
-            var levelFilename = EditorUtility.SaveFilePanel("Save Level", basePath, "NewLevel.json", LevelEditorConstants.LEVEL_EXTENSION);
+            var levelFilename = EditorUtility.SaveFilePanel(
+                "Save Level",
+                basePath,
+                string.Format("NewLevel.{0}", LevelEditorConstants.LEVEL_EXTENSION),
+                LevelEditorConstants.LEVEL_EXTENSION
+            );
 
             if (!string.IsNullOrEmpty(levelFilename))
             {
@@ -95,7 +100,7 @@ namespace LevelEditor
 
         public void Clear()
         {
-            ConfirmAction(delegate () { ClearBoard(); });
+            ConfirmAction(ClearBoard);
         }
 
         public void TestLevel()
@@ -118,7 +123,7 @@ namespace LevelEditor
             dialog.transform.SetParent(transform.parent, false);
 
             dialog.Title = "Destructive Command";
-            dialog.Body = "This action will overwrite the current working level data.  Are you sure you want to proceed?";
+            dialog.Body = "This action will modify the current working level data.  Are you sure you want to proceed?";
             dialog.OnConfirm = action;
         }
 

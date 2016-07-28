@@ -13,12 +13,9 @@ namespace LevelEditor
         [SerializeField]
         private ManipulatorActionType type;
 
-        private Button button;
-
         public void Start()
         {
-            button = GetComponent<Button>();
-            button.onClick.AddListener(OnClick);
+            GetComponent<Button>().onClick.AddListener(OnClick);
         }
 
         private void OnClick()

@@ -34,7 +34,7 @@ namespace LevelEditor
         private float rowHeight;
 
         private List<RandomBubbleDefinition> definitions;
-        private List<RandomBubbleGroup> groups = new List<RandomBubbleGroup>();
+        private readonly List<RandomBubbleGroup> groups = new List<RandomBubbleGroup>();
 
         public void Start()
         {

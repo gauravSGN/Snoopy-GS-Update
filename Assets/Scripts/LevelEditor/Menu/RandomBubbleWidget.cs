@@ -17,7 +17,7 @@ namespace LevelEditor.Menu
         private GameObject prefab;
         private BubbleData data;
         private RandomBubbleDefinition definition;
-        private PlaceBubbleAction placer = new PlaceBubbleAction();
+        private readonly PlaceBubbleAction placer = new PlaceBubbleAction();
 
         public bool IsValidFor(BubbleData bubble)
         {
@@ -53,9 +53,8 @@ namespace LevelEditor.Menu
         private RandomBubbleDefinition CreateDefinition(BubbleData bubble)
         {
             var modifier = bubble.modifiers.First(m => m.type == BubbleModifierType.Random);
-            var definition = Manipulator.Randoms[int.Parse(modifier.data)];
 
-            return definition.Clone();
+            return Manipulator.Randoms[int.Parse(modifier.data)].Clone();
         }
 
         private List<GameObject> CreateFields(GameObject panel, Color[] colors)
@@ -78,7 +77,10 @@ namespace LevelEditor.Menu
             }
 
             var rectTransform = panel.GetComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, -rect.y + 6.0f + (halfCount + 1) * rect.height);
+            rectTransform.sizeDelta = new Vector2(
+                rectTransform.sizeDelta.x,
+                -rect.y + 6.0f + (halfCount + 1) * rect.height
+            );
 
             return weightFields;
         }
@@ -91,10 +93,10 @@ namespace LevelEditor.Menu
             SetOnceEachText(onceEachButton);
 
             onceEachButton.onClick.AddListener(() =>
-            {
+                {
                     OnOnceEachClick();
                     SetOnceEachText(onceEachButton);
-            });
+                });
 
             saveButton.onClick.AddListener(OnSaveClick);
         }

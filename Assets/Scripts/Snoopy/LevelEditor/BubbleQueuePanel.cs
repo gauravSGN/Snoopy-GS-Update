@@ -106,7 +106,8 @@ namespace Snoopy.LevelEditor
             instance.transform.SetParent(contentContainer, false);
             component.Initialize(manipulator.BubbleFactory, this, bucket);
             component.ShowMandatoryOption = canBeMandatory;
-            component.EnableInsert = component.EnableDelete = canBeMandatory;
+            component.EnableInsert = canBeMandatory;
+            component.EnableDelete = canBeMandatory;
             component.OnBucketChanged += OnBucketChanged;
 
             return component;

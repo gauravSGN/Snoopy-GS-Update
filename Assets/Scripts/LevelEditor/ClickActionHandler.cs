@@ -6,7 +6,8 @@ using Model;
 
 namespace LevelEditor
 {
-    public class ClickActionHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+    public class ClickActionHandler
+        : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
     {
         private struct GridPosition
         {
@@ -124,7 +125,12 @@ namespace LevelEditor
         private Vector2 GetClickPosition(PointerEventData eventData)
         {
             Vector2 clickPosition;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out clickPosition);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                rectTransform,
+                eventData.position,
+                eventData.pressEventCamera,
+                out clickPosition
+            );
 
             return new Vector2(
                 clickPosition.x + rectTransform.rect.width * rectTransform.pivot.x,

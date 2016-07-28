@@ -14,7 +14,7 @@ namespace LevelEditor.Menu
 
         private GameObject prefab;
         private BubbleData data;
-        private DeleteBubbleAction deleter = new DeleteBubbleAction();
+        private readonly DeleteBubbleAction deleter = new DeleteBubbleAction();
 
         public bool IsValidFor(BubbleData bubble)
         {

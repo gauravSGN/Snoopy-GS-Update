@@ -10,7 +10,8 @@ namespace LevelEditor
 {
     public class LevelManipulator : MonoBehaviour
     {
-        public class ManipulatorActionFactory : AttributeDrivenFactory<ManipulatorAction, ManipulatorActionAttribute, ManipulatorActionType>
+        public class ManipulatorActionFactory
+            : AttributeDrivenFactory<ManipulatorAction, ManipulatorActionAttribute, ManipulatorActionType>
         {
             override protected ManipulatorActionType GetKeyFromAttribute(ManipulatorActionAttribute attribute)
             {
@@ -147,10 +148,10 @@ namespace LevelEditor
         {
             if (undoBuffer.Count > 0)
             {
-                var state = undoBuffer[undoBuffer.Count - 1];
+                var previousState = undoBuffer[undoBuffer.Count - 1];
                 undoBuffer.RemoveAt(undoBuffer.Count - 1);
 
-                RestoreState(state);
+                RestoreState(previousState);
                 GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelModifiedEvent());
             }
         }
@@ -159,10 +160,10 @@ namespace LevelEditor
         {
             if (redoBuffer.Count > 0)
             {
-                var state = redoBuffer[redoBuffer.Count - 1];
+                var nextState = redoBuffer[redoBuffer.Count - 1];
                 redoBuffer.RemoveAt(redoBuffer.Count - 1);
 
-                RestoreState(state);
+                RestoreState(nextState);
                 GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelModifiedEvent());
             }
         }
