@@ -8,7 +8,7 @@ namespace LevelEditor.Manipulator
     [ManipulatorAction(ManipulatorActionType.PlaceModifier)]
     public class PlaceModifierAction : ManipulatorAction
     {
-        private PlaceBubbleAction placer = new PlaceBubbleAction();
+        private readonly PlaceBubbleAction placer = new PlaceBubbleAction();
 
         public void Perform(LevelManipulator manipulator, int x, int y)
         {

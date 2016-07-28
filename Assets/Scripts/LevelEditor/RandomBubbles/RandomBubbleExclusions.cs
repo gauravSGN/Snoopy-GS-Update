@@ -19,7 +19,7 @@ namespace LevelEditor
         [SerializeField]
         private GameObject itemTemplate;
 
-        private List<GameObject> itemInstances = new List<GameObject>();
+        private readonly List<GameObject> itemInstances = new List<GameObject>();
         private Vector3 originalPosition;
         private Transform originalParent;
         private List<int> items;
@@ -35,7 +35,7 @@ namespace LevelEditor
         {
             this.options = options;
 
-            RemoveInvalidItems();
+            items.RemoveAll(i => !options.Contains(i));
             UpdateCaption();
         }
 
@@ -119,31 +119,13 @@ namespace LevelEditor
                 }
             }
 
-            RemoveInvalidItems();
+            items.RemoveAll(i => !options.Contains(i));
             UpdateCaption();
         }
 
         private void UpdateCaption()
         {
             caption.text = string.Join(",", items.Select(i => (i + 1).ToString()).ToArray());
-        }
-
-        private void RemoveInvalidItems()
-        {
-            if (options != null)
-            {
-                for (var index = 0; index < items.Count;)
-                {
-                    if (!options.Contains(items[index]))
-                    {
-                        items.RemoveAt(index);
-                    }
-                    else
-                    {
-                        index++;
-                    }
-                }
-            }
         }
     }
 }

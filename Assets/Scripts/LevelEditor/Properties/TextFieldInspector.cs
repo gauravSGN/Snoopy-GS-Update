@@ -78,7 +78,9 @@ namespace LevelEditor.Properties
 
         private void SetFieldColor()
         {
-            if ((fieldInfo.Display != null) && (fieldInfo.Display.Colors != null) && (Index < fieldInfo.Display.Colors.Length))
+            if ((fieldInfo.Display != null) &&
+                (fieldInfo.Display.Colors != null) &&
+                (Index < fieldInfo.Display.Colors.Length))
             {
                 var hexColor = fieldInfo.Display.Colors[Index];
                 var red = Convert.ToInt32(hexColor.Substring(0, 2), 16) / 255.0f;

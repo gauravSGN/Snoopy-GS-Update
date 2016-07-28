@@ -115,7 +115,9 @@ namespace LevelEditor
             return panel;
         }
 
-        private void CreateButtonFromDefinition<T>(GameObject panel, GameObjectDefinition<T> definition, Action<T> action)
+        private void CreateButtonFromDefinition<T>(GameObject panel,
+                                                   GameObjectDefinition<T> definition,
+                                                   Action<T> action)
         {
             var prefabSprite = definition.Prefab.GetComponentInChildren<SpriteRenderer>();
 
@@ -127,7 +129,7 @@ namespace LevelEditor
                 button.GetComponent<Image>().sprite = prefabSprite.sprite;
                 var toggle = button.GetComponent<Toggle>();
                 toggle.group = panel.GetComponent<ToggleGroup>();
-                toggle.onValueChanged.AddListener((v) => { if (v) action(definition.Type); });
+                toggle.onValueChanged.AddListener((v) => { if (v) { action(definition.Type); } });
                 button.transform.SetParent(panel.transform, false);
             }
         }

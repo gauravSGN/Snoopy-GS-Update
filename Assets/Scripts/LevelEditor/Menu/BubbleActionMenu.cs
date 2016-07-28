@@ -21,7 +21,12 @@ namespace LevelEditor.Menu
         public void Show()
         {
             Vector2 clickPosition;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), Input.mousePosition, null, out clickPosition);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                GetComponent<RectTransform>(),
+                Input.mousePosition,
+                null,
+                out clickPosition
+            );
 
             menuContainer.localPosition = clickPosition;
 

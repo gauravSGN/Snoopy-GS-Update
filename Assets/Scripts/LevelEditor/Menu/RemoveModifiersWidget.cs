@@ -14,7 +14,7 @@ namespace LevelEditor.Menu
 
         private GameObject prefab;
         private BubbleData data;
-        private PlaceBubbleAction placer = new PlaceBubbleAction();
+        private readonly PlaceBubbleAction placer = new PlaceBubbleAction();
 
         public bool IsValidFor(BubbleData bubble)
         {

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace LevelEditor
@@ -22,6 +23,16 @@ namespace LevelEditor
         [SerializeField]
         private List<ShortcutMapping> mappings;
 
+        private bool[] modifierState = new bool[5];
+        private KeyCode[][] modifierMapping = new KeyCode[][]
+        {
+            new[] { KeyCode.LeftShift, KeyCode.RightShift },
+            new[] { KeyCode.LeftAlt, KeyCode.RightAlt },
+            new[] { KeyCode.LeftControl, KeyCode.RightControl },
+            new[] { KeyCode.LeftCommand, KeyCode.RightCommand },
+            new[] { KeyCode.LeftAlt, KeyCode.RightAlt },
+        };
+
         public void Update()
         {
             foreach (var mapping in mappings)
@@ -37,11 +48,19 @@ namespace LevelEditor
         {
             var result = true;
 
-            result = result && (!mapping.shift || Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
-            result = result && (!mapping.alt || Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt));
-            result = result && (!mapping.control || Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
-            result = result && (!mapping.command || Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand));
-            result = result && (!mapping.option || Input.GetKey(KeyCode.LeftApple) || Input.GetKey(KeyCode.RightApple));
+            modifierState[0] = mapping.shift;
+            modifierState[1] = mapping.alt;
+            modifierState[2] = mapping.control;
+            modifierState[3] = mapping.command;
+            modifierState[4] = mapping.option;
+
+            for (int index = 0, count = modifierState.Length; index < count; index++)
+            {
+                if (modifierState[index])
+                {
+                    result = result && modifierMapping[index].Aggregate(false, (a, c) => a || Input.GetKey(c));
+                }
+            }
 
             return result;
         }
