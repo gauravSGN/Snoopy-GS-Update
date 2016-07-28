@@ -20,6 +20,6 @@ MonoBehaviour:
   score: 10
   defaultAnimations:
   - name: 0
-    list: 0300000000000000
+    list: 03000000
   - name: 1
-    list: 00000000
+    list: 

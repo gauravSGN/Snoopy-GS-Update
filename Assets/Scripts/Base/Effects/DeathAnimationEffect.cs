@@ -10,9 +10,12 @@ namespace Effects
         public static IEnumerator Play(GameObject bubble, AnimationType type)
         {
             yield return null;
+
             var animation = GlobalState.Instance.Services.Get<AnimationService>().CreateByType(type);
-            animation.transform.parent = bubble.transform;
-            animation.transform.localPosition = Vector3.back;
+            var transform = animation.transform;
+
+            transform.SetParent(bubble.transform);
+            transform.localPosition = Vector3.back;
         }
     }
 }
