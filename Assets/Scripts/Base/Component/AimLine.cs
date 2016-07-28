@@ -45,6 +45,9 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         eventTrigger.StopAiming += OnStopAiming;
         eventTrigger.MoveTarget += OnMoveTarget;
         eventTrigger.Fire += OnFire;
+
+        // Start disabled so Aiming is in correct state
+        meshRenderer.enabled = false;
     }
 
     private void OnStartAiming()
