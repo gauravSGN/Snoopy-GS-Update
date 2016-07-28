@@ -2,7 +2,6 @@ using Snoopy.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using UnityEngine;
 
 public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
 {
@@ -18,7 +17,7 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
     {
         queueDefinition = definition;
         SetCurrentBucket();
-        RemoveInactiveTypes();
+        RemoveTypes(GetEliminatedTypes());
         BuildQueue();
     }
 
@@ -39,48 +38,15 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
 
     override protected void RemoveInactiveTypes()
     {
-        var typeTotals = levelState.typeTotals;
-        var eliminatedTypes = typeTotals.Where(IsEliminated).Select(pair => pair.Key).ToList();
+        var eliminatedTypes = GetEliminatedTypes();
 
         if (eliminatedTypes.Count > 0)
         {
-            foreach (var type in eliminatedTypes)
-            {
-                removedTypes.Add(type);
-                var typeIndex = Array.IndexOf(LAUNCHER_BUBBLE_TYPES, type);
-
-                currentBucket.counts[typeIndex] = 0;
-                queueDefinition.extras.counts[typeIndex] = 0;
-                queueDefinition.reserve.counts[typeIndex] = 0;
-
-                for (var index = 0; index < queueDefinition.buckets.Count; index++)
-                {
-                    queueDefinition.buckets[index].counts[typeIndex] = 0;
-                }
-
-                var initialCount = queued.Count;
-                while (queued.Remove(type));
-
-                currentCount -= (initialCount - queued.Count);
-            }
-
+            RemoveTypes(eliminatedTypes);
             randomizedBucket = new List<BubbleType>();
-        }
-    }
 
-    private void ChangeBucket()
-    {
-        var changeBucket = false;
-
-        if (currentBucket != queueDefinition.extras)
-        {
-            var possibleColorCount = currentBucket.counts.Where( x => x > 0 ).ToList().Count;
-
-            if ((currentCount == currentBucket.length) || (possibleColorCount == 0))
-            {
-                changeBucket = true;
-            }
-            else if ((currentBucket != queueDefinition.reserve) && (possibleColorCount < 3))
+            if ((currentBucket != queueDefinition.reserve) &&
+                (currentBucket.counts.Where( x => x > 0 ).ToList().Count < 3))
             {
                 var cycleLength = currentBucket.counts.Sum();
 
@@ -90,14 +56,45 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
                 }
                 else
                 {
-                    changeBucket = true;
+                    SetCurrentBucket();
                 }
             }
         }
+    }
 
-        if (changeBucket)
+    private void RemoveTypes(List<BubbleType> eliminatedTypes)
+    {
+        foreach (var type in eliminatedTypes)
         {
-            SetCurrentBucket();
+            removedTypes.Add(type);
+            var typeIndex = Array.IndexOf(LAUNCHER_BUBBLE_TYPES, type);
+
+            currentBucket.counts[typeIndex] = 0;
+            queueDefinition.extras.counts[typeIndex] = 0;
+            queueDefinition.reserve.counts[typeIndex] = 0;
+
+            for (var index = 0; index < queueDefinition.buckets.Count; index++)
+            {
+                queueDefinition.buckets[index].counts[typeIndex] = 0;
+            }
+
+            var initialCount = queued.Count;
+            while (queued.Remove(type));
+
+            currentCount -= (initialCount - queued.Count);
+        }
+    }
+
+    private void ChangeBucket()
+    {
+        if (currentBucket != queueDefinition.extras)
+        {
+            var possibleColorCount = currentBucket.counts.Where( x => x > 0 ).ToList().Count;
+
+            if ((currentCount == currentBucket.length) || (possibleColorCount == 0))
+            {
+                SetCurrentBucket();
+            }
         }
     }
 
@@ -141,6 +138,11 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
         }
 
         return returnBucket;
+    }
+
+    private List<BubbleType> GetEliminatedTypes()
+    {
+        return levelState.typeTotals.Where(IsEliminated).Select(pair => pair.Key).ToList();
     }
 
     private bool IsEliminated(KeyValuePair<BubbleType, int> pair)
