@@ -9,14 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: charlie_A_SkeletonData
+  m_Name: charlie_brown_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: d3788ed7cdcc9472187e2ae44e771a95, type: 2}
-  skeletonJSON: {fileID: 4900000, guid: edd8686aa019e4fa28d70468f63757d0, type: 3}
+  - {fileID: 11400000, guid: 4b1caf4565a93404f8b7ab922de41649, type: 2}
+  skeletonJSON: {fileID: 4900000, guid: 2aca19437662d48b3a63a0c9735c7364, type: 3}
   scale: 0.01
   fromAnimation: []
   toAnimation: []
   duration: []
   defaultMix: 0.2
-  controller: {fileID: 9100000, guid: f3683ddc5f6754495b7d01bd91456de8, type: 2}
+  controller: {fileID: 9100000, guid: 8db2845e63dba4cbca348779d2c04703, type: 2}
