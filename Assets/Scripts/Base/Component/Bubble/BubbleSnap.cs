@@ -22,38 +22,62 @@ public class BubbleSnap : MonoBehaviour
     {
         if (collision.collider.tag == StringConstants.Tags.BUBBLES)
         {
-            AdjustToGrid();
-            var origin = transform.position;
-
-            foreach (var bubble in NearbyBubbles(origin))
-            {
-                AttachToBubble(bubble.gameObject);
-                bubble.GetComponent<BubbleAttachments>().Model.SnapToBubble();
-            }
-
-            foreach (var bubble in NearbyBubbles(origin, GlobalState.Instance.Config.impactEffect.radius))
-            {
-                var bubbleEffectController = bubble.GetComponent<BubbleEffectController>();
-
-                if (bubbleEffectController != null)
-                {
-                    bubbleEffectController.AddEffect(ImpactShockwaveEffect.Play(bubble.gameObject, origin));
-                }
-            }
-
-            rigidBody.velocity = Vector2.zero;
-            rigidBody.gravityScale = 1.0f;
-            rigidBody.isKinematic = true;
-
-            collider.radius /= GlobalState.Instance.Config.bubbles.shotColliderScale;
-            gameObject.layer = (int)Layers.GameObjects;
-
-            Destroy(this);
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleSettlingEvent());
-
-            GetComponent<BubbleAttachments>().Model.CheckForMatches();
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleSettledEvent { shooter = gameObject });
+            SnapIntoPlace();
         }
+        else
+        {
+            var config = GlobalState.Instance.Config;
+            var gameObjectLayer = 1 << (int)Layers.GameObjects;
+            var velocity = (Vector3)rigidBody.velocity.normalized;
+            var position = transform.position;
+            var radius = config.bubbles.size / 2.0f;
+
+            velocity = new Vector3(Mathf.Abs(velocity.x) * Mathf.Sign(position.x), velocity.y);
+            position -= velocity * radius;
+
+            var collider = Physics2D.OverlapCircle(position, radius, gameObjectLayer);
+
+            if (collider != null)
+            {
+                transform.position = position - velocity * radius;
+                SnapIntoPlace();
+            }
+        }
+    }
+
+    private void SnapIntoPlace()
+    {
+        AdjustToGrid();
+        var origin = transform.position;
+
+        foreach (var bubble in NearbyBubbles(origin))
+        {
+            AttachToBubble(bubble.gameObject);
+            bubble.GetComponent<BubbleAttachments>().Model.SnapToBubble();
+        }
+
+        foreach (var bubble in NearbyBubbles(origin, GlobalState.Instance.Config.impactEffect.radius))
+        {
+            var bubbleEffectController = bubble.GetComponent<BubbleEffectController>();
+
+            if (bubbleEffectController != null)
+            {
+                bubbleEffectController.AddEffect(ImpactShockwaveEffect.Play(bubble.gameObject, origin));
+            }
+        }
+
+        rigidBody.velocity = Vector2.zero;
+        rigidBody.gravityScale = 1.0f;
+        rigidBody.isKinematic = true;
+
+        collider.radius /= GlobalState.Instance.Config.bubbles.shotColliderScale;
+        gameObject.layer = (int)Layers.GameObjects;
+
+        Destroy(this);
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleSettlingEvent());
+
+        GetComponent<BubbleAttachments>().Model.CheckForMatches();
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleSettledEvent { shooter = gameObject });
     }
 
     private void AdjustToGrid()

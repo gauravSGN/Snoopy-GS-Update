@@ -5,6 +5,9 @@ using System;
 
 public class AimLine : MonoBehaviour, UpdateReceiver
 {
+    private const int LAYER_MASK = (1 << (int)Layers.GameObjects | 1 << (int)Layers.Walls);
+    private const int GAME_OBJECT_MASK = 1 << (int)Layers.GameObjects;
+
     public event Action<Vector2> Fire;
 
     [SerializeField]
@@ -78,42 +81,56 @@ public class AimLine : MonoBehaviour, UpdateReceiver
 
     private void GeneratePoints()
     {
-        points.Clear();
-
         Vector3 origin = launchOrigin.transform.position;
         var config = GlobalState.Instance.Config;
         int index = 0;
         var distance = aimlineConfig.length - config.bubbles.size;
         var direction = (aimTarget - origin).normalized;
-        // Make the cast size slightly larger than the actual shooter size to avoid false negatives
-        var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale / config.aimline.colliderAdjustment;
-        var layerMask = (1 << (int)Layers.GameObjects | 1 << (int)Layers.Walls);
+        var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale;
         int reflections = 1;
 
+        points.Clear();
         points.Add(origin + config.bubbles.size * direction * 2.0f);
 
         while (distance > 0.0f)
         {
-            var hit = Physics2D.CircleCast(points[index], shooterRadius, direction, distance, layerMask);
+            var hit = Physics2D.CircleCast(points[index], shooterRadius, direction, distance, LAYER_MASK);
 
             if (hit.collider != null)
             {
-                // Make sure we're not trying to go backwards
                 if (Vector3.Dot(direction, ((Vector3)hit.point - points[index])) < 0.0f)
                 {
+                    // Make sure we're not trying to go backwards
                     break;
                 }
 
                 distance = hit.distance - shooterRadius * 0.5f;
+
+                if (hit.collider.gameObject.tag == StringConstants.Tags.BUBBLES)
+                {
+                    // Push the aimline endpoint up against the edge of the bubble we collided with
+                    distance += shooterRadius;
+                }
             }
+
             points.Add(points[index] + distance * direction);
 
             if ((hit.collider != null) &&
                 (reflections > 0) &&
                 (hit.collider.gameObject.tag != StringConstants.Tags.BUBBLES))
             {
+                // We've hit a wall
                 --reflections;
                 index++;
+
+                // Make sure we shouldn't have hit a bubble as we bounce off the wall.  This should resolve the edge
+                // case that allowed aiming around the end of a short row.
+                if (Physics2D.OverlapCircle(points[index], config.bubbles.size / 2.0f, GAME_OBJECT_MASK) != null)
+                {
+                    points[index] = points[index] - direction * config.bubbles.size / 2.0f;
+                    break;
+                }
+
                 distance = aimlineConfig.wallBounceDistance;
                 direction = new Vector2(-direction.x, direction.y);
 
