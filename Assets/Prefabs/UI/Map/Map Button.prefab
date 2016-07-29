@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56e2956857d442e7babe6181d527a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevelData: {fileID: 4900000, guid: eb0aaa9ceccb8493db02cb7938a24e64, type: 3}
+  levelAssetName: 
   levelNumber: 1
 --- !u!114 &11456356
 MonoBehaviour:
