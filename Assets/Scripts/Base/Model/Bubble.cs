@@ -23,10 +23,7 @@ public class Bubble : GraphElement<Bubble>
         }
         set
         {
-            if (definition.Activatible)
-            {
-                active = value;
-            }
+            active = definition.Activatible && value;
         }
     }
 
