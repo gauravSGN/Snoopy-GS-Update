@@ -16,6 +16,7 @@ public class BubbleSnap : MonoBehaviour
         collider = GetComponent<CircleCollider2D>();
 
         collider.radius *= GlobalState.Instance.Config.bubbles.shotColliderScale;
+        GetComponent<BubbleAttachments>().Model.active = true;
     }
 
     protected void OnCollisionEnter2D(Collision2D collision)

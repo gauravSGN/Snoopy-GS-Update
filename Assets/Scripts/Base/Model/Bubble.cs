@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Graph;
+﻿using Graph;
 using Reaction;
+using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class Bubble : GraphElement<Bubble>
@@ -12,6 +12,7 @@ public class Bubble : GraphElement<Bubble>
 
     public BubbleType type;
     public BubbleDefinition definition;
+    public bool active = false;
 
     override public void RemoveFromGraph()
     {
@@ -27,10 +28,10 @@ public class Bubble : GraphElement<Bubble>
 
         foreach (Bubble bubble in Neighbors)
         {
-            if (!bubbleList.Contains(bubble) && MatchesColor(bubble))
+            if (!bubbleList.Contains(bubble) && IsMatching(bubble))
             {
                 bubbleList.Add(bubble);
-                GraphUtil.MatchNeighbors(bubbleList, bubble, bubble.MatchesColor);
+                GraphUtil.MatchNeighbors(bubbleList, bubble, bubble.IsMatching);
             }
         }
 
@@ -43,9 +44,9 @@ public class Bubble : GraphElement<Bubble>
         }
     }
 
-    public bool MatchesColor(Bubble bubble)
+    public bool IsMatching(Bubble bubble)
     {
-        return (bubble.definition.Color & definition.Color) > 0;
+        return (bubble.definition.Color & definition.Color) > 0 && bubble.active;
     }
 
     public void PopBubble()

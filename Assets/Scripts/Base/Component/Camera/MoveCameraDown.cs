@@ -1,44 +1,14 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
-public class MoveCameraDown : MonoBehaviour
+public class MoveCameraDown : BaseMoveCamera
 {
-    [SerializeField]
-    private GameObject gameView;
-
-    [SerializeField]
-    private float panSpeed;
-
-    [SerializeField]
-    private float startDelay;
-
-    [SerializeField]
-    List<GameObject> disableOnMove;
-
-    private Collider2D castingBox;
-
-    private void Start()
-    {
-        castingBox = GetComponent<Collider2D>();
-    }
-
     public void OnTriggerEnter2D(Collider2D collider)
     {
         StartCoroutine(MoveGameView());
     }
 
-    private bool IsTouchingBubbles()
-    {
-        var bounds = castingBox.bounds;
-        var origin = bounds.center;
-        var size = bounds.max - bounds.min;
-        var direction = Vector2.left;
-
-        return Physics2D.BoxCastAll(origin, size, 0, direction, 0, 1 << (int)Layers.GameObjects).Length > 0;
-    }
-
-    private IEnumerator MoveGameView()
+    override protected IEnumerator MoveGameView()
     {
         GameObjectUtil.DisableObjects(disableOnMove);
 
