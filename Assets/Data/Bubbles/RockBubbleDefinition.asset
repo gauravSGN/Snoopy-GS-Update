@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1d598c8f1285471d9ba9720ea457449, type: 3}
-  m_Name: SteelBubbleDefinition
+  m_Name: RockBubbleDefinition
   m_EditorClassIdentifier: 
   category: 2
   type: 1000
@@ -17,6 +17,7 @@ MonoBehaviour:
   baseColor: {r: 0.7941176, g: 0.7941176, b: 0.7941176, a: 1}
   prefab: {fileID: 118326, guid: 98c24f9535f05435eafbc307eff16c20, type: 2}
   actsAsRoot: 0
+  activatible: 0
   score: 15
   defaultAnimations:
   - name: 0

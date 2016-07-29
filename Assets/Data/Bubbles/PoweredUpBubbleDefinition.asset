@@ -17,5 +17,6 @@ MonoBehaviour:
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   prefab: {fileID: 0}
   actsAsRoot: 0
+  activatible: 1
   score: 0
   defaultAnimations: []
