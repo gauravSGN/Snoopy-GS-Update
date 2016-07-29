@@ -40,7 +40,7 @@ namespace LevelEditor
         private readonly LevelProperties levelProperties = new LevelProperties();
         private readonly BubbleQueueDefinition queue = new BubbleQueueDefinition();
         private List<RandomBubbleDefinition> randoms = new List<RandomBubbleDefinition>();
-        private string background = "Backgrounds/BackgroundWorld1";
+        private string background = LevelEditorConstants.DEFAULT_BACKGROUND;
 
         public Dictionary<int, BubbleData> Models { get { return models; } }
         public Dictionary<int, GameObject> Views { get { return views; } }
