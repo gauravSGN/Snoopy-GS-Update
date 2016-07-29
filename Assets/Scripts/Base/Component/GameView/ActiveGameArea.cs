@@ -28,7 +28,7 @@ public class ActiveGameArea : MonoBehaviour
     {
         if (bubble.tag == StringConstants.Tags.BUBBLES)
         {
-            bubble.GetComponent<BubbleAttachments>().Model.active = active;
+            bubble.GetComponent<BubbleAttachments>().Model.Active = active;
         }
     }
 }

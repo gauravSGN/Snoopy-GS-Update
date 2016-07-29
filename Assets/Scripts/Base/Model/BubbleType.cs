@@ -10,6 +10,6 @@
     Pink = 4,
     Purple = 5,
 
-    Steel = 1000,
+    Rock = 1000,
     Cloud = 1001,
 }

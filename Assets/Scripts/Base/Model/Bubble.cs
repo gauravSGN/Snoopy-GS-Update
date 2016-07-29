@@ -12,7 +12,20 @@ public class Bubble : GraphElement<Bubble>
 
     public BubbleType type;
     public BubbleDefinition definition;
-    public bool active = false;
+
+    private bool active = false;
+
+    public bool Active
+    {
+        get
+        {
+            return active;
+        }
+        set
+        {
+            active = definition.Activatible && value;
+        }
+    }
 
     override public void RemoveFromGraph()
     {
@@ -46,7 +59,7 @@ public class Bubble : GraphElement<Bubble>
 
     public bool IsMatching(Bubble bubble)
     {
-        return (bubble.definition.Color & definition.Color) > 0 && bubble.active;
+        return (bubble.definition.Color & definition.Color) > 0 && bubble.Active;
     }
 
     public void PopBubble()
