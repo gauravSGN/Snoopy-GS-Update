@@ -11,6 +11,7 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
     public GameObject Prefab { get { return prefab; } }
     public Color BaseColor { get { return baseColor; } }
     public bool ActsAsRoot { get { return actsAsRoot; } }
+    public bool Activatible { get { return activatible; } }
     public int Score { get { return score; } }
     public Dictionary<BubbleDeathType, List<AnimationType>> AnimationMap
     {
@@ -54,6 +55,9 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
 
     [SerializeField]
     private bool actsAsRoot;
+
+    [SerializeField]
+    private bool activatible;
 
     [SerializeField]
     private int score;

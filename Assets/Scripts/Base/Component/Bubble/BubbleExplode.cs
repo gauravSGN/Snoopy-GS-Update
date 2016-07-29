@@ -61,7 +61,7 @@ public class BubbleExplode : MonoBehaviour
                 var bubbleAttachments = bubble.GetComponent<BubbleAttachments>();
 
                 if ((bubble.tag == StringConstants.Tags.BUBBLES) &&
-                    (bubbleAttachments.Model.active || bubble == gameObject))
+                    (bubbleAttachments.Model.Active || bubble == gameObject))
                 {
                     bubbleList.Add(bubbleAttachments.Model);
                     BubbleReactionEvent.Dispatch(ReactionPriority.PowerUp, bubbleAttachments.Model);

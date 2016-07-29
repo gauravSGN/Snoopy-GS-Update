@@ -17,6 +17,7 @@ MonoBehaviour:
   baseColor: {r: 0.06666667, g: 0.58431375, b: 0.16470589, a: 1}
   prefab: {fileID: 187632, guid: ddc37cf96bf20458482e23ccc688f4ed, type: 2}
   actsAsRoot: 0
+  activeChangeable: 1
   score: 10
   defaultAnimations:
   - name: 0
