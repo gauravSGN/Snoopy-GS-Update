@@ -26,10 +26,11 @@ public class BubbleLauncher : MonoBehaviour
     private List<ModifyShot> shotModifiers;
     private GameObject currentAnimation;
     private Vector2 direction;
+    private bool inputAllowed;
 
     public void CycleQueue()
     {
-        if (!aimLine.Aiming)
+        if (!aimLine.Aiming && inputAllowed)
         {
             CycleLocalQueue();
             level.levelState.bubbleQueue.Rotate(nextBubbles.Length);
@@ -59,6 +60,8 @@ public class BubbleLauncher : MonoBehaviour
         var eventService = GlobalState.Instance.Services.Get<EventService>();
         eventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
         eventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
+        eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
+        inputAllowed = true;
     }
 
     private void OnLevelLoaded(LevelLoadedEvent gameEvent)
@@ -210,5 +213,10 @@ public class BubbleLauncher : MonoBehaviour
 
         CreateBubbles();
         SetAimLineColor();
+    }
+
+    private void OnInputToggle(InputToggleEvent gameEvent)
+    {
+        inputAllowed = gameEvent.enabled;
     }
 }
