@@ -1,10 +1,11 @@
-﻿using UnityEditor;
-using UnityEngine;
-using System.IO;
+﻿using Model;
+using UI.Map;
+using UI.Popup;
 using PowerUps;
 using Animation;
-using Model;
-using UI.Popup;
+using System.IO;
+using UnityEditor;
+using UnityEngine;
 
 public static class CustomAssetCreator
 {
@@ -66,6 +67,18 @@ public static class CustomAssetCreator
     public static void CreatePopupFactory()
     {
         CreateAThing<PopupFactory>();
+    }
+
+    [MenuItem("Assets/Create/MapChunk/MapChunk Definition")]
+    public static void CreateMapChunkDefinition()
+    {
+        CreateAThing<MapChunkDefinition>();
+    }
+
+    [MenuItem("Assets/Create/MapChunk/MapChunk Factory")]
+    public static void CreateMapChunkFactory()
+    {
+        CreateAThing<MapChunkFactory>();
     }
 
     private static void CreateAThing<T>() where T : ScriptableObject

@@ -8,6 +8,8 @@ using System.Collections;
 // scene editor to work without coming from a different scene.
 public class GlobalState : SingletonBehaviour<GlobalState>
 {
+    public static EventService EventService { get { return Instance.Services.Get<EventService>(); } }
+
     public GameConfig Config { get { return config; } }
     public ServiceRepository Services { get { return services; } }
 
