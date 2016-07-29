@@ -9,18 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1d598c8f1285471d9ba9720ea457449, type: 3}
-  m_Name: RockBubbleDefinition
+  m_Name: PoweredUpBubbleDefinition
   m_EditorClassIdentifier: 
-  category: 2
-  type: 1000
+  category: 0
+  type: -2
   color: 0
-  baseColor: {r: 0.7941176, g: 0.7941176, b: 0.7941176, a: 1}
-  prefab: {fileID: 118326, guid: 98c24f9535f05435eafbc307eff16c20, type: 2}
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
+  prefab: {fileID: 0}
   actsAsRoot: 0
-  activatible: 0
-  score: 15
-  defaultAnimations:
-  - name: 0
-    list: 03000000
-  - name: 1
-    list: 
+  activatible: 1
+  score: 0
+  defaultAnimations: []

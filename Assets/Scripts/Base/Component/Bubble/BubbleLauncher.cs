@@ -39,6 +39,7 @@ public class BubbleLauncher : MonoBehaviour
     public void AddShotModifier(ModifyShot modifier)
     {
         shotModifiers.Add(modifier);
+        SetAimLineColor();
     }
 
     public void SetModifierAnimation(GameObject bubbleAnimation)
@@ -167,7 +168,15 @@ public class BubbleLauncher : MonoBehaviour
 
     private void SetAimLineColor()
     {
-        aimLine.Color = nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.BaseColor;
+        var color = nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.BaseColor;
+
+        // If we have anything more than the default modifier, change the aimline to white.
+        if (shotModifiers.Count > 1)
+        {
+            color = Color.white;
+        }
+
+        aimLine.Color = color;
     }
 
     private void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)
@@ -178,7 +187,7 @@ public class BubbleLauncher : MonoBehaviour
 
     private List<ModifyShot> ResetShotModifiers()
     {
-        return new List<ModifyShot>{AddBubbleSnap};
+        return new List<ModifyShot>{ AddBubbleSnap };
     }
 
     private void AddBubbleSnap(GameObject bubble)

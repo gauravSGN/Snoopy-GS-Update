@@ -22,6 +22,9 @@ namespace PowerUps
         [SerializeField]
         private BubbleExplode.ScanType scanType;
 
+        [SerializeField]
+        private BubbleDefinition shooterDefinition;
+
         private Transform[] anchors;
         private int powerUpMask;
         private AnimationService animationService;
@@ -73,7 +76,9 @@ namespace PowerUps
         public void AddScan(GameObject bubble)
         {
             // Make bubble unmatchable
-            bubble.GetComponent<BubbleAttachments>().Model.type = BubbleType.Colorless;
+            var model = bubble.GetComponent<BubbleAttachments>().Model;
+            model.type = BubbleType.Colorless;
+            model.definition = shooterDefinition;
 
             var explosion = bubble.AddComponent<BubbleExplode>();
             explosion.Setup(scanType, effectType);
