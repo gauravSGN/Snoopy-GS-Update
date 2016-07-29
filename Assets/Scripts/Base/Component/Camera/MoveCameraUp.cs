@@ -1,36 +1,21 @@
 ﻿using Service;
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
-public class MoveCameraUp : MonoBehaviour
+public class MoveCameraUp : BaseMoveCamera
 {
-    [SerializeField]
-    private GameObject gameView;
-
-    [SerializeField]
-    private float panSpeed;
-
-    [SerializeField]
-    private float startDelay;
-
     [SerializeField]
     private Transform viewBoundary;
 
-    [SerializeField]
-    List<GameObject> disableOnMove;
-
-    private Collider2D castingBox;
-
-    protected void Start()
+    override protected void Start()
     {
-        castingBox = gameObject.GetComponent<Collider2D>();
+        base.Start();
 
         var eventService = GlobalState.Instance.Services.Get<EventService>();
         eventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
-    private IEnumerator MoveGameView()
+    override protected IEnumerator MoveGameView()
     {
         GameObjectUtil.DisableObjects(disableOnMove);
 
@@ -38,28 +23,20 @@ public class MoveCameraUp : MonoBehaviour
 
         var transform = gameView.transform;
         var maxY = viewBoundary.position.y;
+
         while (!IsTouchingBubbles() && transform.position.y < maxY)
         {
             var yTransform = transform.position.y + (Time.deltaTime * panSpeed);
             transform.position = new Vector3(transform.position.x, yTransform, transform.position.z);
             yield return null;
         }
-        if(transform.position.y > maxY)
+
+        if (transform.position.y > maxY)
         {
             transform.position = new Vector3(transform.position.x, maxY, transform.position.z);
         }
 
         GameObjectUtil.EnableObjects(disableOnMove);
-    }
-
-    private bool IsTouchingBubbles()
-    {
-        var bounds = castingBox.bounds;
-        var origin = bounds.center;
-        var size = bounds.max - bounds.min;
-        var direction = Vector2.left;
-
-        return Physics2D.BoxCastAll(origin, size, 0, direction, 0, 1 << (int)Layers.GameObjects).Length > 0;
     }
 
     private void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)
