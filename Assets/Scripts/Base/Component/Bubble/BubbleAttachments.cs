@@ -32,7 +32,10 @@ public class BubbleAttachments : MonoBehaviour
 
         gameObject.layer = (int)Layers.IgnoreRayCast;
         var death = gameObject.GetComponent<BubbleDeath>();
-        StartCoroutine(death.TriggerDeathEffects(BubbleDeathType.Pop));
+        if(death != null)
+        {
+            StartCoroutine(death.TriggerDeathEffects(BubbleDeathType.Pop));
+        }
     }
 
     private void DisconnectedHandler(Bubble bubble)
