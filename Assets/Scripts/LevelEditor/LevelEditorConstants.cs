@@ -18,5 +18,7 @@ namespace LevelEditor
 
         public const string RANDOMS_EXTENSION = "json";
         public const string RANDOMS_BASE_PATH = "Data/Randoms";
+
+        public const string DEFAULT_BACKGROUND = "Backgrounds/episode_0_background";
     }
 }
