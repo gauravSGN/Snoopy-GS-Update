@@ -60,6 +60,7 @@ public class GameConfig : ScriptableObject
         public int minClusterSize;
         public int maxClusterSize;
         public float clusterCoefficient;
+        public int remainingMovesValue;
     }
 
     public BubbleConfig bubbles;

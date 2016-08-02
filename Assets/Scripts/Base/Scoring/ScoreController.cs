@@ -35,6 +35,7 @@ namespace Scoring
 
             eventService.AddEventHandler<BubbleReactionEvent>(OnBubbleReaction);
             eventService.AddEventHandler<StartReactionsEvent>(OnStartReactions);
+            eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
         }
 
         public void OnDestroy()
@@ -57,6 +58,11 @@ namespace Scoring
             pending.Clear();
         }
 
+        private void OnLevelComplete(LevelCompleteEvent gameEvent)
+        {
+            AddToScore(level.levelState.remainingBubbles * config.remainingMovesValue);
+        }
+
         private void HandlePoppedBubbles(IEnumerable<Bubble> bubbles)
         {
             var bubbleList = bubbles.ToList();
@@ -69,14 +75,13 @@ namespace Scoring
 
                 foreach (var bubble in cluster)
                 {
-                    ShowBubbleScore(bubble, bubble.definition.Score);
+                    ShowBubbleScore(bubble, (int)(bubble.definition.Score * Mathf.Floor(multiplier)));
                 }
 
                 totalScore += (int)(cluster[0].definition.Score * cluster.Count * multiplier);
             }
 
-            level.levelState.score += totalScore;
-            level.levelState.NotifyListeners();
+            AddToScore(totalScore);
         }
 
         private void HandleCulledBubbles(IEnumerable<Bubble> bubbles)
@@ -97,8 +102,7 @@ namespace Scoring
                 ShowBubbleScore(bubble, score);
             }
 
-            level.levelState.score += totalScore;
-            level.levelState.NotifyListeners();
+            AddToScore(totalScore);
         }
 
         private void ShowBubbleScore(Bubble bubble, int score)
@@ -142,6 +146,12 @@ namespace Scoring
             }
 
             return multiplier;
+        }
+
+        private void AddToScore(int value)
+        {
+            level.levelState.score += value;
+            level.levelState.NotifyListeners();
         }
     }
 }

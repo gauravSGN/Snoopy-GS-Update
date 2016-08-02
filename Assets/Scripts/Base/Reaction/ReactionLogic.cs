@@ -74,6 +74,8 @@ namespace Reaction
 
             if (GetComponent<Level>().levelState.remainingBubbles <= 0)
             {
+                GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(false));
+
                 var userState = GlobalState.Instance.Services.Get<UserStateService>();
                 userState.purchasables.hearts.quantity--;
 
@@ -81,8 +83,8 @@ namespace Reaction
                 {
                     title = "Level Lost",
                     mainText = "Hearts Left: " + userState.purchasables.hearts.quantity.ToString(),
-                    closeActions = new List<Action> { DispatchLevelLost },
-                    affirmativeActions = new List<Action> { DispatchLevelLost }
+                    closeActions = new List<Action> { DispatchReturnToMap },
+                    affirmativeActions = new List<Action> { DispatchReturnToMap }
                 });
             }
             else
@@ -91,9 +93,9 @@ namespace Reaction
             }
         }
 
-        private void DispatchLevelLost()
+        private void DispatchReturnToMap()
         {
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(false));
+            GlobalState.Instance.Services.Get<EventService>().Dispatch(new ReturnToMapEvent());
         }
     }
 }

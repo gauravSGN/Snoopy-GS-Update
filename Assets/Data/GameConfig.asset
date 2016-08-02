@@ -84,3 +84,4 @@ MonoBehaviour:
     minClusterSize: 5
     maxClusterSize: 90
     clusterCoefficient: 0.1
+    remainingMovesValue: 100
