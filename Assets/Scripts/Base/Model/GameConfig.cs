@@ -54,6 +54,8 @@ public class GameConfig : ScriptableObject
     [Serializable]
     public class ScoringConfig
     {
+        public AnimationCurve rollup;
+        public float rollupDuration;
         public float dropMultiplier;
     }
 

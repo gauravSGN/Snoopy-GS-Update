@@ -89,7 +89,6 @@ public class Level : MonoBehaviour
     private void OnBubbleDestroyed(BubbleDestroyedEvent gameEvent)
     {
         levelState.UpdateTypeTotals(gameEvent.bubble.GetComponent<BubbleAttachments>().Model.type, -1);
-        levelState.score += gameEvent.score;
         levelState.NotifyListeners();
     }
 

@@ -232,7 +232,7 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11469342, guid: 8fe870826113e420299f84c2f87f1c10, type: 2}
+    - target: {fileID: 11479248, guid: 8fe870826113e420299f84c2f87f1c10, type: 2}
       propertyPath: level
       value: 
       objectReference: {fileID: 1197956594}
@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89dffe36d5a9b43b3ad34b5dfdfa64ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: {fileID: 1197956594}
 --- !u!4 &456451989
 Transform:
   m_ObjectHideFlags: 0

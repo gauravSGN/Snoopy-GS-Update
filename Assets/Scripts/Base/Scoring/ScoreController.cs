@@ -14,6 +14,9 @@ namespace Scoring
 {
     public class ScoreController : MonoBehaviour
     {
+        [SerializeField]
+        private Level level;
+
         private readonly ReactionDict handlers = new ReactionDict();
 
         private readonly List<Tuple<ReactionPriority, Bubble>> pending = new List<Tuple<ReactionPriority, Bubble>>();
@@ -56,14 +59,21 @@ namespace Scoring
 
         private void HandlePoppedBubbles(IEnumerable<Bubble> bubbles)
         {
+            int totalScore = 0;
+
             foreach (var bubble in bubbles)
             {
+                totalScore += bubble.definition.Score;
                 ShowBubbleScore(bubble, bubble.definition.Score);
             }
+
+            level.levelState.score += totalScore;
+            level.levelState.NotifyListeners();
         }
 
         private void HandleCulledBubbles(IEnumerable<Bubble> bubbles)
         {
+            int totalScore = 0;
             int score;
 
             foreach (var bubble in bubbles)
@@ -75,8 +85,12 @@ namespace Scoring
                     score = (int)(score * config.dropMultiplier);
                 }
 
+                totalScore += score;
                 ShowBubbleScore(bubble, score);
             }
+
+            level.levelState.score += totalScore;
+            level.levelState.NotifyListeners();
         }
 
         private void ShowBubbleScore(Bubble bubble, int score)
