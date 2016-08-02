@@ -10,7 +10,9 @@ public class SetScoreText : StateMachineBehaviour
         if (parent != null)
         {
             var textMesh = gameObject.GetComponent<TextMesh>();
+
             textMesh.text = parent.GetComponent<BubbleScore>().Score.ToString();
+            textMesh.color = parent.GetComponent<BubbleAttachments>().Model.definition.BaseColor;
 
             gameObject.transform.SetParent(null, true);
         }
