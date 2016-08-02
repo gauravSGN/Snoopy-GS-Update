@@ -5,11 +5,11 @@ namespace Model
 {
     sealed public class RandomBag<T>
     {
-        public int Count { get { return items.Count; } }
-        public bool Empty { get { return items.Count == 0; } }
-
         private readonly List<T> items = new List<T>();
         private bool needsShuffle = false;
+
+        public int Count { get { return items.Count; } }
+        public bool Empty { get { return items.Count == 0; } }
 
         public RandomBag() { }
 
