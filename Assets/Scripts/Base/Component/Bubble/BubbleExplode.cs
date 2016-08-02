@@ -49,7 +49,7 @@ public class BubbleExplode : MonoBehaviour
         var length = hits.Length;
 
         var bubbleDeath = gameObject.GetComponent<BubbleDeath>();
-        bubbleDeath.AddEffect(DeathAnimationEffect.Play(gameObject, deathAnimationType), BubbleDeathType.Pop);
+        bubbleDeath.AddEffect(AnimationEffect.Play(gameObject, deathAnimationType), BubbleDeathType.Pop);
 
         if (length > 0)
         {

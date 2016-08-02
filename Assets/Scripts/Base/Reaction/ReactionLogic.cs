@@ -65,6 +65,8 @@ namespace Reaction
 
             if (coroutines.Count > 0)
             {
+                GlobalState.EventService.Dispatch(new Event.StartReactionsEvent());
+
                 coroutines.Add(ProcessReactions());
                 this.StartCoroutinesSequential(coroutines);
                 yield break;

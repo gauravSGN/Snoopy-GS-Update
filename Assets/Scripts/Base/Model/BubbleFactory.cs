@@ -103,7 +103,7 @@ public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
             {
                 foreach (var animationType in pair.Value)
                 {
-                    bubbleDeath.AddEffect(DeathAnimationEffect.Play(instance, animationType), pair.Key);
+                    bubbleDeath.AddEffect(AnimationEffect.Play(instance, animationType), pair.Key);
                 }
             }
         }

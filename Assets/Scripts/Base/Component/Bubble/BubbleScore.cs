@@ -1,32 +1,41 @@
-﻿using Effects;
+﻿using Event;
+using Effects;
 using Service;
 using Animation;
 using UnityEngine;
 
 public class BubbleScore : MonoBehaviour
 {
+    private Bubble model;
+
+    public int Score { get; private set; }
+
+    public void Start()
+    {
+        GlobalState.EventService.AddEventHandler<BubbleScoreEvent>(OnBubbleScore);
+    }
+
+    public void OnDestroy()
+    {
+        GlobalState.EventService.RemoveEventHandler<BubbleScoreEvent>(OnBubbleScore);
+    }
+
     public void SetModel(Bubble bubbleModel)
     {
-        bubbleModel.OnPopped += OnImpendingDestruction;
-        bubbleModel.OnDisconnected += OnImpendingDestruction;
+        model = bubbleModel;
     }
 
-    private void RemoveHandlers(Bubble model)
+    private void OnBubbleScore(BubbleScoreEvent gameEvent)
     {
-        model.OnPopped -= OnImpendingDestruction;
-        model.OnDisconnected -= OnImpendingDestruction;
-    }
-
-    private void OnImpendingDestruction(Bubble bubble)
-    {
-        RemoveHandlers(bubble);
-        var bubbleDestroyedEvent = new BubbleDestroyedEvent(bubble.definition.Score, gameObject);
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(bubbleDestroyedEvent);
-
-        if (bubble.definition.Score > 0)
+        if (gameEvent.bubble == model)
         {
+            Score = gameEvent.score;
+
+            var bubbleDestroyedEvent = new BubbleDestroyedEvent(model.definition.Score, gameObject);
+            GlobalState.Instance.Services.Get<EventService>().Dispatch(bubbleDestroyedEvent);
+
             var effectController = gameObject.GetComponent<BubbleEffectController>();
-            effectController.AddEffect(DeathAnimationEffect.Play(gameObject, AnimationType.ScoreText));
+            effectController.AddEffect(AnimationEffect.Play(gameObject, AnimationType.ScoreText));
         }
     }
 }
