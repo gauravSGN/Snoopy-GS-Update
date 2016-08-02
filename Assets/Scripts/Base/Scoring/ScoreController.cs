@@ -17,10 +17,12 @@ namespace Scoring
         private readonly ReactionDict handlers = new ReactionDict();
 
         private readonly List<Tuple<ReactionPriority, Bubble>> pending = new List<Tuple<ReactionPriority, Bubble>>();
+        private GameConfig.ScoringConfig config;
         private EventService eventService;
 
         public void Start()
         {
+            config = GlobalState.Instance.Config.scoring;
             eventService = GlobalState.EventService;
 
             eventService.AddPooledEvent<BubbleScoreEvent>(new BubbleScoreEvent(null, 0));
@@ -56,15 +58,24 @@ namespace Scoring
         {
             foreach (var bubble in bubbles)
             {
-                ShowBubbleScore(bubble, 10);
+                ShowBubbleScore(bubble, bubble.definition.Score);
             }
         }
 
         private void HandleCulledBubbles(IEnumerable<Bubble> bubbles)
         {
+            int score;
+
             foreach (var bubble in bubbles)
             {
-                ShowBubbleScore(bubble, 20);
+                score = bubble.definition.Score;
+
+                if (bubble.definition.category == BubbleCategory.Basic)
+                {
+                    score = (int)(score * config.dropMultiplier);
+                }
+
+                ShowBubbleScore(bubble, score);
             }
         }
 

@@ -51,9 +51,16 @@ public class GameConfig : ScriptableObject
         public int newUserCoins;
     }
 
+    [Serializable]
+    public class ScoringConfig
+    {
+        public float dropMultiplier;
+    }
+
     public BubbleConfig bubbles;
     public ReactionConfig reactions;
     public ImpactEffectConfig impactEffect;
     public AimlineConfig aimline;
     public PurchasableConfig purchasables;
+    public ScoringConfig scoring;
 }

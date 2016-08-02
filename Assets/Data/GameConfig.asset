@@ -62,3 +62,5 @@ MonoBehaviour:
     maxHearts: 5
     secondsPerHeart: 60
     newUserCoins: 100
+  scoring:
+    dropMultiplier: 2
