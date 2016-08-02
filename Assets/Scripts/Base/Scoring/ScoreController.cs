@@ -59,12 +59,20 @@ namespace Scoring
 
         private void HandlePoppedBubbles(IEnumerable<Bubble> bubbles)
         {
+            var bubbleList = bubbles.ToList();
             int totalScore = 0;
 
-            foreach (var bubble in bubbles)
+            while (bubbleList.Count > 0)
             {
-                totalScore += bubble.definition.Score;
-                ShowBubbleScore(bubble, bubble.definition.Score);
+                var cluster = ExtractCluster(bubbleList);
+                var multiplier = ComputeClusterMultiplier(cluster.Count);
+
+                foreach (var bubble in cluster)
+                {
+                    ShowBubbleScore(bubble, bubble.definition.Score);
+                }
+
+                totalScore += (int)(cluster[0].definition.Score * cluster.Count * multiplier);
             }
 
             level.levelState.score += totalScore;
@@ -101,6 +109,39 @@ namespace Scoring
             bubbleScore.score = score;
 
             eventService.DispatchPooled(bubbleScore);
+        }
+
+        private List<Bubble> ExtractCluster(List<Bubble> bubbles)
+        {
+            return ExtractCluster(bubbles, new List<Bubble>(), bubbles[0]);
+        }
+
+        private List<Bubble> ExtractCluster(List<Bubble> bubbles, List<Bubble> cluster, Bubble next)
+        {
+            cluster.Add(next);
+            bubbles.Remove(next);
+
+            foreach (Bubble neighbor in next.Neighbors)
+            {
+                if (next.IsMatching(neighbor) && bubbles.Contains(neighbor) && !cluster.Contains(neighbor))
+                {
+                    ExtractCluster(bubbles, cluster, neighbor);
+                }
+            }
+
+            return cluster;
+        }
+
+        private float ComputeClusterMultiplier(int count)
+        {
+            var multiplier = 1.0f;
+
+            if (count >= config.minClusterSize)
+            {
+                multiplier += Mathf.Min(config.maxClusterSize, count) * config.clusterCoefficient;
+            }
+
+            return multiplier;
         }
     }
 }

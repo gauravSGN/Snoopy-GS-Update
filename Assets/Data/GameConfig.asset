@@ -81,3 +81,6 @@ MonoBehaviour:
       m_RotationOrder: 0
     rollupDuration: 0.5
     dropMultiplier: 2
+    minClusterSize: 5
+    maxClusterSize: 90
+    clusterCoefficient: 0.1

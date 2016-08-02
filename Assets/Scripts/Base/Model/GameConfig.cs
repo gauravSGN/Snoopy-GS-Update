@@ -57,6 +57,9 @@ public class GameConfig : ScriptableObject
         public AnimationCurve rollup;
         public float rollupDuration;
         public float dropMultiplier;
+        public int minClusterSize;
+        public int maxClusterSize;
+        public float clusterCoefficient;
     }
 
     public BubbleConfig bubbles;
