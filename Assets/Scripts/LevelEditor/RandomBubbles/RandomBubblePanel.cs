@@ -292,7 +292,11 @@ namespace LevelEditor
 
             foreach (var pair in counts)
             {
-                groups[int.Parse(pair.Key)].Count = pair.Value;
+                var idx = int.Parse(pair.Key);
+                if (idx < groups.Count)
+                {
+                    groups[idx].Count = pair.Value;
+                }
             }
         }
 
