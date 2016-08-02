@@ -35,6 +35,11 @@ namespace Model
             needsShuffle = true;
         }
 
+        public void Clear()
+        {
+            items.Clear();
+        }
+
         public T Next()
         {
             if (items.Count == 0)

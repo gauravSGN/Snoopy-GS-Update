@@ -34,6 +34,18 @@ public class RandomBagTests
     }
 
     [Test]
+    public void BagCanBeCleared()
+    {
+        var bag = new RandomBag<int>(new[] { 1, 2, 3 });
+        Assert.IsFalse(bag.Empty);
+
+        bag.Clear();
+
+        Assert.IsTrue(bag.Empty);
+        Assert.AreEqual(0, bag.Count);
+    }
+
+    [Test]
     public void ItemsCannotBeRemovedWhenBagIsEmpty()
     {
         var bag = new RandomBag<int>();
