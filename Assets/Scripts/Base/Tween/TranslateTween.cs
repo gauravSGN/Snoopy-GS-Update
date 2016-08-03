@@ -12,6 +12,12 @@ public class TranslateTween : MonoBehaviour
     [SerializeField]
     private float duration;
 
+    [SerializeField]
+    private AnimationCurve easeTo = AnimationCurve.Linear(0, 0, 1, 1);
+
+    [SerializeField]
+    private AnimationCurve easeFrom = AnimationCurve.Linear(0, 0, 1, 1);
+
     private enum TweenMethod
     {
         PositionFrom,
@@ -46,11 +52,15 @@ public class TranslateTween : MonoBehaviour
         if (type == TweenMethod.PositionFrom)
         {
             tween = transform.positionFrom(duration, vec, true);
+            tween.easeCurve = easeFrom;
         }
         else
         {
             tween = transform.positionTo(duration, vec, true);
+            tween.easeCurve = easeTo;
         }
+
+        tween.easeType = GoEaseType.AnimationCurve;
 
         if (onComplete != null)
         {

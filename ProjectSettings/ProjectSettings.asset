@@ -168,8 +168,7 @@ PlayerSettings:
   iOSDeviceRequirements: []
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  androidSplashScreen: {fileID: 2800000, guid: 89000cfc764bd4b569549c25ac9c5404,
-    type: 3}
+  androidSplashScreen: {fileID: 2800000, guid: 89000cfc764bd4b569549c25ac9c5404, type: 3}
   AndroidKeystoreName: com.sgn.pandapop.keystore
   AndroidKeyaliasName: pandapop
   AndroidTVCompatibility: 1
