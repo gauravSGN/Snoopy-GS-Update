@@ -5,6 +5,7 @@ using Model;
 using LevelEditor.Manipulator;
 using LevelEditor.Properties;
 using Snoopy.Model;
+using Scoring;
 
 namespace LevelEditor
 {
@@ -81,6 +82,7 @@ namespace LevelEditor
             }
 
             LevelProperties.FromLevelData(levelData);
+            LevelProperties.StarValues = ScoreUtil.ComputeStarsForLevel(levelData, BubbleFactory);
             LevelProperties.NotifyListeners();
 
             queue.CopyFrom(levelData.Queue);
@@ -103,6 +105,9 @@ namespace LevelEditor
                 Randoms = randoms.ToArray(),
                 ShotCount = queue.ShotCount,
             };
+
+            LevelProperties.StarValues = ScoreUtil.ComputeStarsForLevel(data, BubbleFactory);
+            LevelProperties.NotifyListeners();
 
             LevelProperties.ToLevelData(data);
 
