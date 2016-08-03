@@ -1,7 +1,5 @@
-using gs;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 namespace UI.Popup
 {
@@ -22,21 +20,14 @@ namespace UI.Popup
         [SerializeField]
         private Toggle sfxToggle;
 
-        private bool returnToMap;
-        private SettingsPopupConfig config;
-
         override public void Setup(PopupConfig genericConfig)
         {
             base.Setup(genericConfig);
-            config = genericConfig as SettingsPopupConfig;
+            var config = genericConfig as SettingsPopupConfig;
 
             bannerText.text = config.title;
-            appVersionText.text = "v" + Application.version;
-
-            if (GS.Api.ClientId != null)
-            {
-                userIDText.text = "ID: " + GS.Api.ClientId;
-            }
+            appVersionText.text = config.appVersion;
+            userIDText.text = config.userID;
 
             musicToggle.isOn = GlobalState.User.settings.musicOn;
             musicToggle.onValueChanged.AddListener(value => GlobalState.User.settings.musicOn = value);

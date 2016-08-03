@@ -1,3 +1,4 @@
+using gs;
 using System;
 using Service;
 using UI.Popup;
@@ -26,7 +27,12 @@ namespace UI.Callbacks
 
         public void DisplaySettings()
         {
-            GlobalState.Instance.Services.Get<PopupService>().Enqueue(new SettingsPopupConfig { title = "Settings" });
+            GlobalState.Instance.Services.Get<PopupService>().Enqueue(new SettingsPopupConfig
+            {
+                title = "Settings",
+                userID = "ID: " + GS.Api.ClientId,
+                appVersion = "v" + Application.version,
+            });
         }
 
         private void LaunchLevelLossConfirmationPopup()
