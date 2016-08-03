@@ -46,6 +46,7 @@ public class Level : MonoBehaviour
         loader.LoadLevel(levelData);
         levelState.typeTotals = loader.Configuration.Counts;
         levelState.score = 0;
+        levelState.initialShotCount = loader.LevelData.ShotCount;
         levelState.remainingBubbles = loader.LevelData.ShotCount;
         levelState.starValues = loader.LevelData.StarValues;
 

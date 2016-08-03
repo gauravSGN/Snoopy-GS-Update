@@ -1391,7 +1391,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11458214}
-        m_MethodName: Transition
+        m_MethodName: Affirmative
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

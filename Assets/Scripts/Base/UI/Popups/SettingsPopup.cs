@@ -25,14 +25,9 @@ namespace UI.Popup
         private bool returnToMap;
         private SettingsPopupConfig config;
 
-        public void ReturnToMap()
-        {
-            returnToMap = true;
-            Close();
-        }
-
         override public void Setup(PopupConfig genericConfig)
         {
+            base.Setup(genericConfig);
             config = genericConfig as SettingsPopupConfig;
 
             bannerText.text = config.title;
@@ -48,16 +43,6 @@ namespace UI.Popup
 
             sfxToggle.isOn = GlobalState.User.settings.sfxOn;
             sfxToggle.onValueChanged.AddListener(value => GlobalState.User.settings.sfxOn = value);
-        }
-
-        override protected void OnCloseTweenComplete(AbstractGoTween tween)
-        {
-            base.OnCloseTweenComplete(tween);
-
-            if (returnToMap && (SceneManager.GetActiveScene().name != StringConstants.Scenes.MAP))
-            {
-                SceneManager.LoadScene(StringConstants.Scenes.MAP);
-            }
         }
     }
 }
