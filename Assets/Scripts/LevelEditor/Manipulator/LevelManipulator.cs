@@ -68,6 +68,9 @@ namespace LevelEditor
             var levelData = JsonUtility.FromJson<LevelData>(jsonText);
             var placer = new PlaceBubbleAction();
 
+            randoms = new List<RandomBubbleDefinition>(levelData.Randoms ?? new RandomBubbleDefinition[0]);
+            GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new RandomBubblesChangedEvent());
+
             foreach (var bubble in levelData.Bubbles)
             {
                 state.BubbleType = bubble.Type;
@@ -83,9 +86,6 @@ namespace LevelEditor
             queue.CopyFrom(levelData.Queue);
             queue.ShotCount = levelData.ShotCount;
             queue.NotifyListeners();
-
-            randoms = new List<RandomBubbleDefinition>(levelData.Randoms ?? new RandomBubbleDefinition[0]);
-            GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new RandomBubblesChangedEvent());
 
             Background = levelData.Background;
 
