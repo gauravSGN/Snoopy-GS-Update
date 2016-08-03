@@ -5,6 +5,7 @@ public class LevelState : Observable
     public int score;
     public int levelNumber;
     public int[] starValues;
+    public int initialShotCount;
     public int remainingBubbles;
     public BubbleQueue bubbleQueue;
     public Dictionary<BubbleType, int> typeTotals = new Dictionary<BubbleType, int>();

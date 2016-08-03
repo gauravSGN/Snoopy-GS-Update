@@ -176,18 +176,7 @@ MonoBehaviour:
   m_VerticalScrollbarSpacing: -3
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OnScrollValueChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &189536570
@@ -238,7 +227,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22472730, guid: d0a84fb68e29446948db32485b83851d, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 22472730, guid: d0a84fb68e29446948db32485b83851d, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -322,6 +311,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 133352, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
   m_IsPrefabParent: 0
@@ -362,7 +355,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22405704, guid: 6fcc45205fba449e28793dd301b61016, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 22405704, guid: 6fcc45205fba449e28793dd301b61016, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -905,8 +898,8 @@ RectTransform:
   m_Children:
   - {fileID: 1869745264}
   - {fileID: 189536566}
-  - {fileID: 962418916}
   - {fileID: 929545646}
+  - {fileID: 962418916}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
