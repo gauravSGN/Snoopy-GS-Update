@@ -89,7 +89,6 @@ public class Level : MonoBehaviour
     private void OnBubbleDestroyed(BubbleDestroyedEvent gameEvent)
     {
         levelState.UpdateTypeTotals(gameEvent.bubble.GetComponent<BubbleAttachments>().Model.type, -1);
-        levelState.score += gameEvent.score;
         levelState.NotifyListeners();
     }
 
@@ -103,6 +102,7 @@ public class Level : MonoBehaviour
             }
         }
 
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(true));
         UpdateUserScoreAndStars();
 
         var stars = GlobalState.Instance.Services.Get<UserStateService>().levels[levelState.levelNumber].stars;
@@ -112,8 +112,8 @@ public class Level : MonoBehaviour
             title = "Level Won",
             mainText = ("Score: " + levelState.score.ToString() + "\n" +
                         "Stars: " + stars.ToString()),
-            closeActions = new List<Action> { DispatchLevelWon },
-            affirmativeActions = new List<Action> { DispatchLevelWon }
+            closeActions = new List<Action> { DispatchReturnToMap },
+            affirmativeActions = new List<Action> { DispatchReturnToMap }
         });
     }
 
@@ -136,8 +136,8 @@ public class Level : MonoBehaviour
         }
     }
 
-    private void DispatchLevelWon()
+    private void DispatchReturnToMap()
     {
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(true));
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new ReturnToMapEvent());
     }
 }

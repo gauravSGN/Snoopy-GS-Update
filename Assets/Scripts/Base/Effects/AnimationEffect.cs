@@ -5,7 +5,7 @@ using Service;
 
 namespace Effects
 {
-    public static class DeathAnimationEffect
+    public static class AnimationEffect
     {
         public static IEnumerator Play(GameObject bubble, AnimationType type)
         {

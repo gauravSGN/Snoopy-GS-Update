@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using Goal;
 
 public class GameConfig : ScriptableObject
 {
@@ -51,9 +52,30 @@ public class GameConfig : ScriptableObject
         public int newUserCoins;
     }
 
+    [Serializable]
+    public class ScoringConfig
+    {
+        [Serializable]
+        public struct GoalScores
+        {
+            public GoalType goalType;
+            public int score;
+        }
+
+        public AnimationCurve rollup;
+        public float rollupDuration;
+        public float dropMultiplier;
+        public int minClusterSize;
+        public int maxClusterSize;
+        public float clusterCoefficient;
+        public int remainingMovesValue;
+        public GoalScores[] goals;
+    }
+
     public BubbleConfig bubbles;
     public ReactionConfig reactions;
     public ImpactEffectConfig impactEffect;
     public AimlineConfig aimline;
     public PurchasableConfig purchasables;
+    public ScoringConfig scoring;
 }
