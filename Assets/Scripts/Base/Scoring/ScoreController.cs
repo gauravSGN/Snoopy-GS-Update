@@ -35,6 +35,7 @@ namespace Scoring
 
             eventService.AddEventHandler<BubbleReactionEvent>(OnBubbleReaction);
             eventService.AddEventHandler<StartReactionsEvent>(OnStartReactions);
+            eventService.AddEventHandler<GoalIncrementEvent>(OnGoalIncrement);
             eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
         }
 
@@ -56,6 +57,16 @@ namespace Scoring
             }
 
             pending.Clear();
+        }
+
+        private void OnGoalIncrement(GoalIncrementEvent gameEvent)
+        {
+            AddToScore(gameEvent.score);
+
+            if (gameEvent.bubble != null)
+            {
+                ShowBubbleScore(gameEvent.bubble, gameEvent.score);
+            }
         }
 
         private void OnLevelComplete(LevelCompleteEvent gameEvent)

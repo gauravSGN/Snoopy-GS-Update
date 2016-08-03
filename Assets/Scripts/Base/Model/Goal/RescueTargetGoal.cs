@@ -15,12 +15,16 @@ namespace Goal
                 bubble.model.OnDisconnected += BubbleReactionHandler;
                 TargetValue++;
             }
+
+            Score = GetScoreForGoalType(Type);
         }
 
         private void BubbleReactionHandler(Bubble bubble)
         {
             bubble.OnPopped -= BubbleReactionHandler;
             bubble.OnDisconnected -= BubbleReactionHandler;
+
+            GlobalState.EventService.Dispatch(new GoalIncrementEvent(this, bubble, Score));
 
             CurrentValue++;
             NotifyListeners();

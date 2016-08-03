@@ -85,3 +85,6 @@ MonoBehaviour:
     maxClusterSize: 90
     clusterCoefficient: 0.1
     remainingMovesValue: 100
+    goals:
+    - goalType: 0
+      score: 500
