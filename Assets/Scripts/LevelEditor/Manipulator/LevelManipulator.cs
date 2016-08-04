@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using Util;
 using Model;
@@ -42,6 +43,7 @@ namespace LevelEditor
         private readonly BubbleQueueDefinition queue = new BubbleQueueDefinition();
         private List<RandomBubbleDefinition> randoms = new List<RandomBubbleDefinition>();
         private string background = LevelEditorConstants.DEFAULT_BACKGROUND;
+        private IEnumerator scoreCoroutine;
 
         public Dictionary<int, BubbleData> Models { get { return models; } }
         public Dictionary<int, GameObject> Views { get { return views; } }
@@ -198,6 +200,15 @@ namespace LevelEditor
             }
         }
 
+        public void RecomputeScores()
+        {
+            if (scoreCoroutine == null)
+            {
+                scoreCoroutine = DoScoreComputation();
+                StartCoroutine(scoreCoroutine);
+            }
+        }
+
         private void RestoreState(string state)
         {
             PushState();
@@ -208,6 +219,25 @@ namespace LevelEditor
             LoadLevel(state);
 
             PopState();
+        }
+
+        private IEnumerator DoScoreComputation()
+        {
+            yield return null;
+
+            var data = new MutableLevelData
+            {
+                Background = Background,
+                Bubbles = models.Values,
+                Queue = queue,
+                Randoms = randoms.ToArray(),
+                ShotCount = queue.ShotCount,
+            };
+
+            LevelProperties.StarValues = ScoreUtil.ComputeStarsForLevel(data, BubbleFactory);
+            LevelProperties.NotifyListeners();
+
+            scoreCoroutine = null;
         }
     }
 }

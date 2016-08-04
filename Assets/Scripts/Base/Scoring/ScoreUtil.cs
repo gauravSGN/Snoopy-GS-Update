@@ -228,6 +228,7 @@ namespace Scoring
             return factory.Bubbles
                 .Where(b => b.category == category)
                 .Select(d => d.Type)
+                .Where(t => (int)t >= 0)
                 .ToList();
         }
     }
