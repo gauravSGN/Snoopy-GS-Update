@@ -44,5 +44,11 @@ namespace State
             Save();
             NotifyListeners();
         }
+
+        override protected void SetValue<T>(string key, object value)
+        {
+            state[key] = (T)value;
+            SaveAndNotifyListenersCallback(null);
+        }
     }
 }

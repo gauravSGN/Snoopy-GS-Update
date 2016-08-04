@@ -46,6 +46,7 @@ public class Level : MonoBehaviour
         loader.LoadLevel(levelData);
         levelState.typeTotals = loader.Configuration.Counts;
         levelState.score = 0;
+        levelState.initialShotCount = loader.LevelData.ShotCount;
         levelState.remainingBubbles = loader.LevelData.ShotCount;
         levelState.starValues = loader.LevelData.StarValues;
 
@@ -89,7 +90,6 @@ public class Level : MonoBehaviour
     private void OnBubbleDestroyed(BubbleDestroyedEvent gameEvent)
     {
         levelState.UpdateTypeTotals(gameEvent.bubble.GetComponent<BubbleAttachments>().Model.type, -1);
-        levelState.score += gameEvent.score;
         levelState.NotifyListeners();
     }
 
@@ -103,6 +103,7 @@ public class Level : MonoBehaviour
             }
         }
 
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(true));
         UpdateUserScoreAndStars();
 
         var stars = GlobalState.Instance.Services.Get<UserStateService>().levels[levelState.levelNumber].stars;
@@ -112,32 +113,40 @@ public class Level : MonoBehaviour
             title = "Level Won",
             mainText = ("Score: " + levelState.score.ToString() + "\n" +
                         "Stars: " + stars.ToString()),
-            closeActions = new List<Action> { DispatchLevelWon },
-            affirmativeActions = new List<Action> { DispatchLevelWon }
+            closeActions = new List<Action> { DispatchReturnToMap },
+            affirmativeActions = new List<Action> { DispatchReturnToMap }
         });
     }
 
     private void UpdateUserScoreAndStars()
     {
-        var user = GlobalState.Instance.Services.Get<UserStateService>();
+        var user = GlobalState.User;
+        var highScore = Math.Max(levelState.score, user.levels[levelState.levelNumber].score);
 
-        if (user.levels[levelState.levelNumber].score < levelState.score)
+        // Only set data if we have to so we can avoid dispatching extra calls to GS
+        if (user.levels[levelState.levelNumber].score < highScore)
         {
-            user.levels[levelState.levelNumber].score = levelState.score;
+            user.levels[levelState.levelNumber].score = highScore;
+        }
 
-            for (int starIndex = levelState.starValues.Length - 1; starIndex >= 0; starIndex--)
+        for (int starIndex = levelState.starValues.Length - 1; starIndex >= 0; starIndex--)
+        {
+            if (highScore >= levelState.starValues[starIndex])
             {
-                if (levelState.score >= levelState.starValues[starIndex])
+                var newStars = (starIndex + 1);
+
+                if (user.levels[levelState.levelNumber].stars < newStars)
                 {
-                    user.levels[levelState.levelNumber].stars = (starIndex + 1);
-                    break;
+                    user.levels[levelState.levelNumber].stars = newStars;
                 }
+
+                break;
             }
         }
     }
 
-    private void DispatchLevelWon()
+    private void DispatchReturnToMap()
     {
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(true));
+        GlobalState.Instance.Services.Get<EventService>().Dispatch(new ReturnToMapEvent());
     }
 }

@@ -9,6 +9,7 @@ using System.Collections;
 public class GlobalState : SingletonBehaviour<GlobalState>
 {
     public static EventService EventService { get { return Instance.Services.Get<EventService>(); } }
+    public static UserStateService User { get { return Instance.Services.Get<UserStateService>(); } }
 
     public GameConfig Config { get { return config; } }
     public ServiceRepository Services { get { return services; } }

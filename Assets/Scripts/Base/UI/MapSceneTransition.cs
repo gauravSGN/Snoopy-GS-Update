@@ -22,8 +22,8 @@ public class MapSceneTransition : MonoBehaviour
         if (GlobalState.Instance.Services.Get<UserStateService>().purchasables.hearts.quantity > 0)
         {
             var sceneData = GlobalState.Instance.Services.Get<SceneService>();
-
             var levelData = GlobalState.Instance.Services.Get<AssetService>().LoadAsset<TextAsset>(levelAssetName);
+
             if (levelData != null)
             {
                 sceneData.NextLevelData = levelData.text;

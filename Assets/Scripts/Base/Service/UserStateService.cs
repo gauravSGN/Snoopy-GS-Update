@@ -7,7 +7,9 @@ namespace Service
         long currentLevel { get; set; }
         long maxLevel { get; set; }
         long hasPaid { get; set; }
-        Purchasables purchasables { get; }
+
         Levels levels { get; }
+        Settings settings { get; }
+        Purchasables purchasables { get; }
     }
 }

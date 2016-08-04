@@ -1,6 +1,8 @@
+using System;
 using Service;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 namespace UI.Popup
@@ -16,17 +18,11 @@ namespace UI.Popup
         [SerializeField]
         private GameObject[] starPositions;
 
-        private bool transitionOnClose;
         private PreLevelPopupConfig config;
-
-        public void Transition()
-        {
-            transitionOnClose = true;
-            Close();
-        }
 
         override public void Setup(PopupConfig genericConfig)
         {
+            base.Setup(genericConfig);
             config = genericConfig as PreLevelPopupConfig;
 
             bannerText.text = "Level " + config.level.ToString();
@@ -35,20 +31,9 @@ namespace UI.Popup
             {
                 starPositions[starIndex].GetComponent<Image>().sprite = filledStar;
             }
-        }
 
-        override protected void OnCloseTweenComplete(AbstractGoTween tween)
-        {
-            base.OnCloseTweenComplete(tween);
-
-            if (transitionOnClose)
-            {
-                SceneManager.LoadScene(config.nextScene);
-            }
-            else
-            {
-                GlobalState.Instance.Services.Get<SceneService>().Reset();
-            }
+            config.closeActions = new List<Action> { () => GlobalState.Instance.Services.Get<SceneService>().Reset() };
+            config.affirmativeActions = new List<Action> { () => SceneManager.LoadScene(config.nextScene) };
         }
     }
 }

@@ -35,8 +35,9 @@ namespace State
             }
         }
 
-        public Purchasables purchasables { get; private set; }
         public Levels levels { get; private set; }
+        public Settings settings { get; private set; }
+        public Purchasables purchasables { get; private set; }
 
         public User() : base(GS.Api.State)
         {
@@ -44,6 +45,7 @@ namespace State
 
             levels = new Levels((Data)GS.Api.State[LEVELS], UpdateAndNotifyListenersCallback);
 
+            settings = new Settings(null, NotifyListenersCallback);
             purchasables = new Purchasables(null, NotifyListenersCallback);
         }
 

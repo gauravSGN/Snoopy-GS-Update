@@ -232,7 +232,7 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11469342, guid: 8fe870826113e420299f84c2f87f1c10, type: 2}
+    - target: {fileID: 11479248, guid: 8fe870826113e420299f84c2f87f1c10, type: 2}
       propertyPath: level
       value: 
       objectReference: {fileID: 1197956594}
@@ -249,6 +249,47 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1879241764}
   m_Script: {fileID: 11500000, guid: 3108aae6f13a247bcb8a86a3e79e4540, type: 3}
+--- !u!1 &456451987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 456451989}
+  - 114: {fileID: 456451988}
+  m_Layer: 0
+  m_Name: ScoreController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &456451988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 456451987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89dffe36d5a9b43b3ad34b5dfdfa64ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: {fileID: 1197956594}
+--- !u!4 &456451989
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 456451987}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
 --- !u!20 &492632741 stripped
 Camera:
   m_PrefabParentObject: {fileID: 2057096, guid: 020adabb2fd5f4910bc30f78699e9379,
@@ -815,6 +856,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 11407028, guid: a38197215072b4e7da0c4d697bdb71aa, type: 2}
+      propertyPath: level
+      value: 
+      objectReference: {fileID: 1197956594}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a38197215072b4e7da0c4d697bdb71aa, type: 2}
   m_IsPrefabParent: 0

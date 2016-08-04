@@ -1,3 +1,4 @@
+using Model;
 using Snoopy.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +7,11 @@ using System;
 public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
 {
     private readonly BubbleQueueDefinition queueDefinition;
-    private readonly System.Random random = new System.Random();
     private readonly List<BubbleType> removedTypes = new List<BubbleType>();
 
     private BubbleQueueDefinition.Bucket currentBucket;
+    private RandomBag<BubbleType> bag = new RandomBag<BubbleType>();
     private int currentCount;
-    private List<BubbleType> randomizedBucket;
 
     public BucketBubbleQueue(LevelState state, BubbleQueueDefinition definition) : base(state)
     {
@@ -25,15 +25,14 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
     {
         ChangeBucket();
 
-        if (randomizedBucket.Count == 0)
+        if (bag.Empty)
         {
-            RefillRandomizedBucket();
+            RefillBag();
         }
 
         currentCount++;
-        var nextElement = randomizedBucket[0];
-        randomizedBucket.RemoveAt(0);
-        return nextElement;
+
+        return bag.Next();
     }
 
     override protected void RemoveInactiveTypes()
@@ -43,7 +42,7 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
         if (eliminatedTypes.Count > 0)
         {
             RemoveTypes(eliminatedTypes);
-            randomizedBucket = new List<BubbleType>();
+            bag.Clear();
 
             if ((currentBucket != queueDefinition.reserve) &&
                 (currentBucket.counts.Where( x => x > 0 ).ToList().Count < 3))
@@ -102,7 +101,7 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
     {
         currentBucket = GetNextBucket();
         currentCount = 0;
-        randomizedBucket = new List<BubbleType>();
+        bag.Clear();
     }
 
     private BubbleQueueDefinition.Bucket GetNextBucket()
@@ -150,23 +149,18 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
         return LAUNCHER_BUBBLE_TYPES.Contains(pair.Key) && (pair.Value == 0) && (!removedTypes.Contains(pair.Key));
     }
 
-    private void RefillRandomizedBucket()
+    private void RefillBag()
     {
         if (currentBucket.counts.Sum() > 0)
         {
             for (int index = 0, length = currentBucket.counts.Length; index < length; index++)
             {
-                for (int x = 0, count = currentBucket.counts[index]; x < count; x++)
-                {
-                    randomizedBucket.Add(LAUNCHER_BUBBLE_TYPES[index]);
-                }
+                bag.Add(LAUNCHER_BUBBLE_TYPES[index], currentBucket.counts[index]);
             }
-
-            randomizedBucket = randomizedBucket.OrderBy(item => random.Next()).ToList();
         }
         else
         {
-            randomizedBucket.Add(BubbleType.Blue);
+            bag.Add(BubbleType.Blue);
         }
     }
 }
