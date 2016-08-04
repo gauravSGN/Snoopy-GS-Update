@@ -32,33 +32,6 @@ namespace Scoring
             };
         }
 
-        static public List<T> ExtractCluster<T>(List<T> bubbles,
-                                                Func<T, IEnumerable<T>> neighbors,
-                                                Func<T, T, bool> comparator)
-        {
-            return ExtractCluster<T>(bubbles, neighbors, comparator, new List<T>(), bubbles[0]);
-        }
-
-        static public List<T> ExtractCluster<T>(List<T> bubbles,
-                                                Func<T, IEnumerable<T>> neighbors,
-                                                Func<T, T, bool> comparator,
-                                                List<T> cluster,
-                                                T next)
-        {
-            cluster.Add(next);
-            bubbles.Remove(next);
-
-            foreach (var neighbor in neighbors(next))
-            {
-                if (comparator(next, neighbor) && bubbles.Contains(neighbor) && !cluster.Contains(neighbor))
-                {
-                    ExtractCluster(bubbles, neighbors, comparator, cluster, neighbor);
-                }
-            }
-
-            return cluster;
-        }
-
         static public float ComputeClusterMultiplier(int count)
         {
             var config = GlobalState.Instance.Config.scoring;
@@ -75,8 +48,10 @@ namespace Scoring
         static private int ComputePopScore(LevelData data, BubbleFactory factory)
         {
             var basicTypes = GetTypeGroup(factory, BubbleCategory.Basic);
+            var shotScore = (data.ShotCount * factory.GetDefinitionByType(BubbleType.Blue).Score);
 
-            return data.Bubbles
+            return shotScore +
+                data.Bubbles
                 .Where(b => basicTypes.Contains(b.Type))
                 .Sum(b => factory.GetDefinitionByType(b.Type).Score);
         }
@@ -127,7 +102,7 @@ namespace Scoring
 
                 while (bubbleMap.Count > 0)
                 {
-                    total += ComputeClusterMultiplier((int)ExtractCluster(bubbleMap));
+                    total += ComputeClusterMultiplier(1 + (int)ExtractCluster(bubbleMap));
                     count++;
                 }
             }
@@ -209,14 +184,15 @@ namespace Scoring
 
         static private void ComputeRandomWeights(LevelData data)
         {
+            var count = data.Randoms.Length;
             randomWeights = new List<float[]>(data.Randoms.Length);
 
-            foreach (var random in data.Randoms)
+            for (var index = 0; index < count; index++)
             {
                 randomWeights.Add(null);
             }
 
-            for (int index = 0, count = data.Randoms.Length; index < count; index++)
+            for (var index = 0; index < count; index++)
             {
                 ComputeRandomWeights(data, index);
             }
