@@ -35,8 +35,7 @@ namespace PowerUps
             level = setLevel;
             level.levelState.AddListener(UpdateState);
 
-            var eventService = GlobalState.Instance.Services.Get<EventService>();
-            eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
+            GlobalState.EventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
         }
 
         public void SetDefinition(PowerUpDefinition setDefinition)
