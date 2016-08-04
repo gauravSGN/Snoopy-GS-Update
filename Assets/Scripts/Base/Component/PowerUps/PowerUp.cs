@@ -1,4 +1,5 @@
 using UnityEngine;
+using Service;
 
 namespace PowerUps
 {
@@ -22,6 +23,8 @@ namespace PowerUps
         [SerializeField]
         private int lastBubbleCount;
 
+        private bool allowInput;
+
         private PowerUpDefinition definition;
         private PowerUpController controller;
 
@@ -31,6 +34,9 @@ namespace PowerUps
             controller = setController;
             level = setLevel;
             level.levelState.AddListener(UpdateState);
+
+            var eventService = GlobalState.Instance.Services.Get<EventService>();
+            eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
         }
 
         public void SetDefinition(PowerUpDefinition setDefinition)
@@ -43,11 +49,16 @@ namespace PowerUps
 
         protected void OnMouseUp()
         {
-            if (progress >= 1.0f)
+            if (progress >= 1.0f && allowInput)
             {
                 controller.AddPowerUp(definition.Type);
                 Reset();
             }
+        }
+
+        private void OnInputToggle(InputToggleEvent gameEvent)
+        {
+            allowInput = gameEvent.enabled;
         }
 
         private void UpdateState(Observable levelState)
