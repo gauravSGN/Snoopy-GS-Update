@@ -69,6 +69,8 @@ public class GameConfig : ScriptableObject
         public int maxClusterSize;
         public float clusterCoefficient;
         public int remainingMovesValue;
+        public float popToDropFactor;
+        public float secondStarDivisor;
         public GoalScores[] goals;
     }
 

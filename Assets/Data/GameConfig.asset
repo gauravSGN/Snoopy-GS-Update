@@ -85,6 +85,8 @@ MonoBehaviour:
     maxClusterSize: 90
     clusterCoefficient: 0.1
     remainingMovesValue: 100
+    popToDropFactor: 0.75
+    secondStarDivisor: 2
     goals:
     - goalType: 0
       score: 500

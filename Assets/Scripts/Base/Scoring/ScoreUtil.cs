@@ -13,6 +13,8 @@ namespace Scoring
 
         static public int[] ComputeStarsForLevel(LevelData data, BubbleFactory factory)
         {
+            var config = GlobalState.Instance.Config.scoring;
+
             ComputeRandomWeights(data);
 
             var popScore = ComputePopScore(data, factory);
@@ -21,13 +23,17 @@ namespace Scoring
             var goalScore = ComputeGoalScore(data, factory);
             var clusterMultiplier = ComputeMeanClusterMultiplier(data, factory);
 
-            var baseScore = (int)Mathf.Round(popScore * 0.75f + dropScore * 0.25f + obstacleScore + goalScore);
-            var clusterBonus = (int)Mathf.Round((popScore * 0.75f) * (clusterMultiplier - 1.0f));
+            var baseScore = (int)Mathf.Round(popScore * config.popToDropFactor +
+                                             dropScore * (1.0f - config.popToDropFactor) +
+                                             obstacleScore +
+                                             goalScore);
+
+            var clusterBonus = (int)Mathf.Round((popScore * config.popToDropFactor) * (clusterMultiplier - 1.0f));
 
             return new[]
             {
                 (int)(popScore + obstacleScore + goalScore),
-                (int)Mathf.Round(baseScore + (clusterBonus / 2.0f)),
+                (int)Mathf.Round(baseScore + (clusterBonus / config.secondStarDivisor)),
                 (int)Mathf.Round(baseScore + clusterBonus),
             };
         }
