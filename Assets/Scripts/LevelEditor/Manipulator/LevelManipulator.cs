@@ -234,7 +234,13 @@ namespace LevelEditor
                 ShotCount = queue.ShotCount,
             };
 
-            LevelProperties.StarValues = ScoreUtil.ComputeStarsForLevel(data, BubbleFactory);
+            var newValues = ScoreUtil.ComputeStarsForLevel(data, BubbleFactory);
+            for (int index = 0, count = newValues.Length; index < count; index++)
+            {
+                newValues[index] = (int)(newValues[index] * LevelProperties.StarMultiplier);
+            }
+
+            LevelProperties.StarValues = newValues;
             LevelProperties.NotifyListeners();
 
             scoreCoroutine = null;
