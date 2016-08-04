@@ -20,7 +20,10 @@ namespace PowerUps
         private AnimationType effectType;
 
         [SerializeField]
-        private BubbleExplode.ScanType scanType;
+        private ScanType scanType;
+
+        [SerializeField]
+        private TextAsset scanDefinition;
 
         [SerializeField]
         private BubbleDefinition shooterDefinition;
@@ -81,7 +84,7 @@ namespace PowerUps
             model.definition = shooterDefinition;
 
             var explosion = bubble.AddComponent<BubbleExplode>();
-            explosion.Setup(scanType, effectType);
+            explosion.Setup(JsonUtility.FromJson<Model.Scan.ScanDefinition>(scanDefinition.ToString()), effectType);
 
             powerUpMask = 0;
         }
