@@ -9,17 +9,17 @@ namespace Scoring
 {
     static public class ScoreUtil
     {
-        static private Dictionary<int, BubbleData> bubbleMap;
+        static private List<float[]> randomWeights;
 
         static public int[] ComputeStarsForLevel(LevelData data, BubbleFactory factory)
         {
-            bubbleMap = data.Bubbles.ToDictionary((b) => b.Key);
+            ComputeRandomWeights(data);
 
             var popScore = ComputePopScore(data, factory);
             var dropScore = popScore * GlobalState.Instance.Config.scoring.dropMultiplier;
             var obstacleScore = ComputeObstacleScore(data, factory);
             var goalScore = ComputeGoalScore(data, factory);
-            var clusterMultiplier = ComputeClusterMultiplier(data, factory);
+            var clusterMultiplier = ComputeMeanClusterMultiplier(data, factory);
 
             var baseScore = (int)Mathf.Round(popScore * 0.75f + dropScore * 0.25f + obstacleScore + goalScore);
             var clusterBonus = (int)Mathf.Round((popScore * 0.75f) * (clusterMultiplier - 1.0f));
@@ -74,10 +74,7 @@ namespace Scoring
 
         static private int ComputePopScore(LevelData data, BubbleFactory factory)
         {
-            var basicTypes = factory.Bubbles
-                .Where(b => b.category == BubbleCategory.Basic)
-                .Select(d => d.Type)
-                .ToList();
+            var basicTypes = GetTypeGroup(factory, BubbleCategory.Basic);
 
             return data.Bubbles
                 .Where(b => basicTypes.Contains(b.Type))
@@ -86,10 +83,7 @@ namespace Scoring
 
         static private int ComputeObstacleScore(LevelData data, BubbleFactory factory)
         {
-            var obstacles = factory.Bubbles
-                .Where(b => b.category == BubbleCategory.Obstacle)
-                .Select(d => d.Type)
-                .ToList();
+            var obstacles = GetTypeGroup(factory, BubbleCategory.Obstacle);
 
             return data.Bubbles
                 .Where(b => obstacles.Contains(b.Type))
@@ -103,7 +97,7 @@ namespace Scoring
                 .SelectMany(b => b.modifiers)
                 .Where(m => m.type == BubbleModifierType.RescueTarget)
                 .Count();
-            
+
             return rescueTargets * GetGoalScore(GoalType.RescueBabies);
         }
 
@@ -120,72 +114,145 @@ namespace Scoring
             return 0;
         }
 
-        static private float ComputeClusterMultiplier(LevelData data, BubbleFactory factory)
+        static private float ComputeMeanClusterMultiplier(LevelData data, BubbleFactory factory)
         {
-            var basicTypes = factory.Bubbles
-                .Where(b => b.category == BubbleCategory.Basic)
-                .Select(d => d.Type)
-                .ToList();
-
-            var bubbles = data.Bubbles.Where(b => basicTypes.Contains(b.Type)).ToList();
-
-            var randomBubbles = bubbles
-                .Where(b => (b.modifiers != null) && (b.modifiers.Length > 0))
-                .Where(b => b.modifiers.Any(m => m.type == BubbleModifierType.Random))
-                .ToList();
-
-            var nonRandomBubbles = bubbles.Where(b => !randomBubbles.Contains(b)).ToList();
-
-            int count = 0;
+            var basicTypes = GetTypeGroup(factory, BubbleCategory.Basic);
+            var bubbleMap = new Dictionary<int, float>();
             float total = 0.0f;
+            int count = 0;
 
-            while (nonRandomBubbles.Count > 0)
+            foreach (var type in basicTypes)
             {
-                var cluster = ExtractCluster(
-                    nonRandomBubbles,
-                    GetNeighbors,
-                    (a, b) => a.Type == b.Type
-                );
+                PopulateBubbleMap(bubbleMap, data, type);
 
-                total += ComputeClusterMultiplier(cluster.Count);
-                count++;
-            }
-
-            while (randomBubbles.Count > 0)
-            {
-                var cluster = ExtractCluster(
-                    randomBubbles,
-                    GetNeighbors,
-                    (a, b) => a.modifiers.First(m => m.type == BubbleModifierType.Random).data ==
-                              b.modifiers.First(m => m.type == BubbleModifierType.Random).data
-                );
-
-                total += ComputeClusterMultiplier(cluster.Count);
-                count++;
-            }
-
-            return Mathf.Max(1.0f, total / Mathf.Max(1, count));
-        }
-
-        static private IEnumerable<BubbleData> GetNeighbors(BubbleData bubble)
-        {
-            var offset = (bubble.Y & 1) * 2 - 1;
-            var neighbors = new int[6];
-
-            neighbors[0] = BubbleData.GetKey(bubble.X + offset, bubble.Y - 1);
-            neighbors[1] = BubbleData.GetKey(bubble.X, bubble.Y - 1);
-            neighbors[2] = BubbleData.GetKey(bubble.X - 1, bubble.Y);
-            neighbors[3] = BubbleData.GetKey(bubble.X + 1, bubble.Y);
-            neighbors[4] = BubbleData.GetKey(bubble.X + offset, bubble.Y + 1);
-            neighbors[5] = BubbleData.GetKey(bubble.X, bubble.Y + 1);
-
-            foreach (var key in neighbors)
-            {
-                if (bubbleMap.ContainsKey(key))
+                while (bubbleMap.Count > 0)
                 {
-                    yield return bubbleMap[key];
+                    total += ComputeClusterMultiplier((int)ExtractCluster(bubbleMap));
+                    count++;
                 }
             }
+
+            return total / Mathf.Max(1, count);
+        }
+
+        static private float ExtractCluster(Dictionary<int, float> bubbleMap)
+        {
+            var max = 0.0f;
+            int key = 0;
+
+            foreach (var pair in bubbleMap)
+            {
+                if (pair.Value > max)
+                {
+                    max = pair.Value;
+                    key = pair.Key;
+                }
+            }
+
+            return ExtractCluster(bubbleMap, key, max);
+        }
+
+        static private float ExtractCluster(Dictionary<int, float> bubbleMap, int key, float current)
+        {
+            float value = 0.0f;
+
+            if (bubbleMap.ContainsKey(key) && (bubbleMap[key] <= current))
+            {
+                value = bubbleMap[key];
+                bubbleMap.Remove(key);
+
+                var x = key & ((1 << 4) - 1);
+                var y = key >> 4;
+                var offset = (y & 1) * 2 - 1;
+                var next = Mathf.Min(current, value);
+
+                value += ExtractCluster(bubbleMap, BubbleData.GetKey(x + offset, y - 1), next);
+                value += ExtractCluster(bubbleMap, BubbleData.GetKey(x, y - 1), next);
+                value += ExtractCluster(bubbleMap, BubbleData.GetKey(x - 1, y), next);
+                value += ExtractCluster(bubbleMap, BubbleData.GetKey(x + 1, y), next);
+                value += ExtractCluster(bubbleMap, BubbleData.GetKey(x + offset, y + 1), next);
+                value += ExtractCluster(bubbleMap, BubbleData.GetKey(x, y + 1), next);
+            }
+
+            return value;
+        }
+
+        static private void PopulateBubbleMap(Dictionary<int, float> bubbleMap, LevelData data, BubbleType type)
+        {
+            bubbleMap.Clear();
+
+            foreach (var bubble in data.Bubbles)
+            {
+                if ((bubble.modifiers != null) && (bubble.modifiers.Length > 0))
+                {
+                    var modifier = bubble.modifiers.FirstOrDefault(m => m.type == BubbleModifierType.Random);
+
+                    if (modifier != null)
+                    {
+                        var weight = randomWeights[int.Parse(modifier.data)][(int)type];
+
+                        if (weight > 0.0f)
+                        {
+                            bubbleMap.Add(bubble.Key, weight);
+                        }
+
+                        continue;
+                    }
+                }
+
+                if (bubble.Type == type)
+                {
+                    bubbleMap.Add(bubble.Key, 1.0f);
+                }
+            }
+        }
+
+        static private void ComputeRandomWeights(LevelData data)
+        {
+            randomWeights = new List<float[]>(data.Randoms.Length);
+
+            foreach (var random in data.Randoms)
+            {
+                randomWeights.Add(null);
+            }
+
+            for (int index = 0, count = data.Randoms.Length; index < count; index++)
+            {
+                ComputeRandomWeights(data, index);
+            }
+        }
+
+        static private void ComputeRandomWeights(LevelData data, int groupIndex)
+        {
+            var group = data.Randoms[groupIndex];
+            var count = group.weights.Length;
+
+            if (randomWeights[groupIndex] == null)
+            {
+                float sum = Mathf.Max(1.0f, group.weights.Sum());
+                randomWeights[groupIndex] = group.weights.Select(w => w / sum).ToArray();
+
+                foreach (var exclusion in group.exclusions)
+                {
+                    ComputeRandomWeights(data, exclusion);
+
+                    for (var index = 0; index < count; index++)
+                    {
+                        randomWeights[groupIndex][index] *= (1.0f - randomWeights[exclusion][index]);
+                    }
+                }
+
+                sum = randomWeights[groupIndex].Sum();
+                randomWeights[groupIndex] = randomWeights[groupIndex].Select(w => w / sum).ToArray();
+            }
+        }
+
+        static private List<BubbleType> GetTypeGroup(BubbleFactory factory, BubbleCategory category)
+        {
+            return factory.Bubbles
+                .Where(b => b.category == category)
+                .Select(d => d.Type)
+                .ToList();
         }
     }
 }
