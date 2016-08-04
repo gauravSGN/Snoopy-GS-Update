@@ -58,6 +58,7 @@ public class BubbleLauncher : MonoBehaviour
         aimLine.Fire += FireBubbleAt;
 
         var eventService = GlobalState.Instance.Services.Get<EventService>();
+        eventService.AddEventHandler<BubbleSettlingEvent>(OnBubbleSettleEvent);
         eventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
         eventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
         eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
@@ -182,10 +183,14 @@ public class BubbleLauncher : MonoBehaviour
         aimLine.Color = color;
     }
 
+    private void OnBubbleSettleEvent(BubbleSettlingEvent gameEvent)
+    {
+        ReadyNextBubble();
+    }
+
     private void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)
     {
         GlobalState.Instance.Services.Get<EventService>().Dispatch(new InputToggleEvent(true));
-        ReadyNextBubble();
     }
 
     private List<ModifyShot> ResetShotModifiers()
