@@ -1,5 +1,5 @@
 public enum ShotModifierType
 {
     PowerUp,
-    Booster,
+    RainbowBooster,
 }

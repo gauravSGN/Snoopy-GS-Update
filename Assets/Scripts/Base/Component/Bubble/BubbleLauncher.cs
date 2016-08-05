@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using Service;
 
 public class BubbleLauncher : MonoBehaviour
 {
@@ -24,6 +23,7 @@ public class BubbleLauncher : MonoBehaviour
     private GameObject[] nextBubbles;
     private BubbleType[] nextTypes;
     private List<ModifyShot> shotModifiers;
+    private HashSet<ShotModifierType> shotModifierTypes;
     private GameObject currentAnimation;
     private Vector2 direction;
     private bool inputAllowed;
@@ -40,6 +40,8 @@ public class BubbleLauncher : MonoBehaviour
     public void AddShotModifier(ModifyShot modifier, ShotModifierType type)
     {
         shotModifiers.Add(modifier);
+        shotModifierTypes.Add(type);
+
         SetAimLineColor();
 
         GlobalState.EventService.Dispatch(new AddShotModifierEvent(type));
@@ -55,7 +57,8 @@ public class BubbleLauncher : MonoBehaviour
     {
         nextBubbles = new GameObject[locations.Length];
         nextTypes = new BubbleType[locations.Length];
-        shotModifiers = ResetShotModifiers();
+
+        ResetShotModifiers();
 
         aimLine.Fire += FireBubbleAt;
 
@@ -122,7 +125,8 @@ public class BubbleLauncher : MonoBehaviour
         currentAnimation = null;
         direction = Vector2.zero;
 
-        shotModifiers = ResetShotModifiers();
+        ResetShotModifiers();
+
         level.levelState.bubbleQueue.RemoveListener(OnBubbleQueueChanged);
         level.levelState.bubbleQueue.GetNext();
     }
@@ -176,15 +180,21 @@ public class BubbleLauncher : MonoBehaviour
 
     private void SetAimLineColor()
     {
-        var color = nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.BaseColor;
+        var colors = new Color[] { nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.BaseColor };
 
-        // If we have anything more than the default modifier, change the aimline to white.
-        if (shotModifiers.Count > 1)
+        if (shotModifierTypes.Count > 0)
         {
-            color = Color.white;
+            if (shotModifierTypes.Contains(ShotModifierType.RainbowBooster))
+            {
+                colors = GlobalState.Instance.Config.boosters.rainbowColors;
+            }
+            else
+            {
+                colors[0] = Color.white;
+            }
         }
 
-        aimLine.Color = color;
+        aimLine.colors = colors;
     }
 
     private void OnBubbleSettleEvent(BubbleSettlingEvent gameEvent)
@@ -197,9 +207,10 @@ public class BubbleLauncher : MonoBehaviour
         GlobalState.EventService.Dispatch(new InputToggleEvent(true));
     }
 
-    private List<ModifyShot> ResetShotModifiers()
+    private void ResetShotModifiers()
     {
-        return new List<ModifyShot>{ AddBubbleSnap };
+        shotModifiers = new List<ModifyShot> { AddBubbleSnap };
+        shotModifierTypes = new HashSet<ShotModifierType>();
     }
 
     private void AddBubbleSnap(GameObject bubble)

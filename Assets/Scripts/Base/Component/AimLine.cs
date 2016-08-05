@@ -10,6 +10,8 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
 
     public event Action<Vector2> Fire;
 
+    public Color[] colors;
+
     [SerializeField]
     private GameObject launchOrigin;
 
@@ -24,12 +26,6 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
 
     public bool Aiming { get { return meshRenderer.enabled; } }
     public Vector3 Target { get { return aimTarget; } }
-
-    public Color Color
-    {
-        get { return meshRenderer.material.color; }
-        set { meshRenderer.material.color = value; }
-    }
 
     override public void Start()
     {
@@ -150,9 +146,14 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
 
     private void RebuildMesh()
     {
-        var vertices = new List<Vector3>();
-        var triangles = new List<int>();
+        var numberOfColors = colors.Length;
+        var reverseStartingColorIndex = (int)((aimlineConfig.moveSpeed * Time.realtimeSinceStartup) % numberOfColors);
+        var startingColorIndex = (numberOfColors - 1 - reverseStartingColorIndex);
+
         var uvs = new List<Vector2>();
+        var triangles = new List<int>();
+        var vertices = new List<Vector3>();
+        var vertexColors = new List<Color>();
 
         var halfSize = aimlineConfig.lineWidth / 2.0f;
         int vertexOffset = 0;
@@ -163,6 +164,13 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
             vertices.Add(new Vector3(point.x + halfSize, point.y + halfSize, 11.0f));
             vertices.Add(new Vector3(point.x - halfSize, point.y - halfSize, 11.0f));
             vertices.Add(new Vector3(point.x + halfSize, point.y - halfSize, 11.0f));
+
+            var colorIndex = ((vertexOffset / 4) + startingColorIndex) % numberOfColors;
+
+            for (var i = 0; i < 4; i++)
+            {
+                vertexColors.Add(colors[colorIndex]);
+            }
 
             triangles.Add(vertexOffset + 0);
             triangles.Add(vertexOffset + 1);
@@ -184,6 +192,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         {
             vertices = vertices.ToArray(),
             triangles = triangles.ToArray(),
+            colors = vertexColors.ToArray(),
             uv = uvs.ToArray(),
         };
     }

@@ -31,7 +31,7 @@ namespace Booster
             {
                 instantiatedOverlay = Instantiate(overlay);
 
-                launcher.AddShotModifier(ConvertToRainbow, ShotModifierType.Booster);
+                launcher.AddShotModifier(ConvertToRainbow, ShotModifierType.RainbowBooster);
                 launcher.SetModifierAnimation(instantiatedOverlay);
 
                 GlobalState.User.purchasables.boosters.rainbows--;
