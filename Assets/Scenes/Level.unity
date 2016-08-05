@@ -318,7 +318,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 344165833}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1611852005}
+        m_MethodName: Swap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &344165833
@@ -1117,6 +1128,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1611852004}
+  - 114: {fileID: 1611852006}
+  - 114: {fileID: 1611852005}
   m_Layer: 0
   m_Name: Bubbles
   m_TagString: Untagged
@@ -1137,6 +1150,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!114 &1611852005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1611852003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1afcb48238d640ac9427a9d3d431605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1611852006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1611852003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bf6ddc21f5d94bd7869d1404d03f820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blueSwapper: {fileID: 111682, guid: 4919fb77b37c74cb68043e0db1000003, type: 2}
+  yellowSwapper: {fileID: 111682, guid: 2b7042bdca000428ca68b5ba764c16ac, type: 2}
+  redSwapper: {fileID: 111682, guid: ffec7b716e6724d4e8a3f0e1642bce70, type: 2}
+  greenSwapper: {fileID: 111682, guid: ae6bbd83a94c74dbd870beffcd121714, type: 2}
+  pinkSwapper: {fileID: 111682, guid: d1b42e1c54b724525b4f9302065eccc5, type: 2}
+  purpleSwapper: {fileID: 111682, guid: f8d266860c7b0470eadb55944ab648fc, type: 2}
+  startupDelay: 0.5
 --- !u!1001 &1693346967
 Prefab:
   m_ObjectHideFlags: 0
