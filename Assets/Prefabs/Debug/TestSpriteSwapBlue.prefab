@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21253976}
   - 114: {fileID: 11460700}
   m_Layer: 0
-  m_Name: TestSpriteSwap
+  m_Name: TestSpriteSwapBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,8 +42,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: 9a1ca244414284e51bc62d243ad6ecb7, type: 3}
-  - {fileID: 21300000, guid: c3c1ca5f5a6a940918518f905e9c52c0, type: 3}
+  - {fileID: 21300000, guid: 454391067d6ba44e2af18d85406934f7, type: 3}
+  - {fileID: 21300000, guid: 11fc1bd1ce79d4bb8a647ece10420371, type: 3}
 --- !u!212 &21253976
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 50
-  m_Sprite: {fileID: 21300000, guid: 9a1ca244414284e51bc62d243ad6ecb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 454391067d6ba44e2af18d85406934f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
