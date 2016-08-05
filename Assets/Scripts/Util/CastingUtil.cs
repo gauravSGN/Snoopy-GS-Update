@@ -24,7 +24,6 @@ namespace Util
             var bubbleSize = GlobalState.Instance.Config.bubbles.size;
             var baseSize = bubbleSize * 0.2f;
             var basePosition = baseBubble.transform.position;
-
             var scans = new List<RaycastHit2D[]>();
 
             foreach (var location in scanLocations)

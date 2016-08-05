@@ -111,16 +111,17 @@ namespace PowerUps
 
         private ScanFunction GetScanFunction()
         {
+            var type = powerUpType;
+
             if (totalPowerUpsInUse == 3)
             {
-                powerUpType = PowerUpType.ThreeCombo;
+                type = PowerUpType.ThreeCombo;
             }
             else if (totalPowerUpsInUse >= 4)
             {
-                powerUpType = PowerUpType.FourCombo;
+                type = PowerUpType.FourCombo;
             }
 
-            var type = powerUpType;
             return () => { return CastingUtil.RelativeBubbleCast(bubble, scanMap.Map[type]); };
         }
     }
