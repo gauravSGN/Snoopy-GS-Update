@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
-using System.Linq;
 using System.Collections.Generic;
 using Reaction;
 using Service;
 using Animation;
 using Effects;
 using Model.Scan;
+using Util;
 
 public class BubbleExplode : MonoBehaviour
 {
@@ -33,7 +33,7 @@ public class BubbleExplode : MonoBehaviour
 
     public void OnSettling(GameEvent gameEvent)
     {
-        var hits = Scan(gameObject, scanDefinition);
+        var hits = CastingUtil.RelativeBubbleCast(gameObject, scanDefinition);
         var length = hits.Length;
 
         var bubbleDeath = gameObject.GetComponent<BubbleDeath>();
@@ -56,24 +56,5 @@ public class BubbleExplode : MonoBehaviour
                 }
             }
         }
-    }
-
-    private static RaycastHit2D[] Scan(GameObject baseBubble, ScanDefinition scanLocations)
-    {
-        var bubbleSize = GlobalState.Instance.Config.bubbles.size;
-        var baseSize = bubbleSize * 0.2f;
-        var basePosition = baseBubble.transform.position;
-
-        var scans = new List<RaycastHit2D[]>();
-
-        foreach (var location in scanLocations)
-        {
-            var origin = new Vector2(basePosition.x + (location.x * bubbleSize),
-                                     basePosition.y + (location.y * bubbleSize));
-
-            scans.Add(Physics2D.CircleCastAll(origin, baseSize, Vector2.zero, 0.0f));
-        }
-
-        return scans.Aggregate(new RaycastHit2D[0], (acc, scan) => acc.Concat(scan).ToArray()).ToArray();
     }
 }

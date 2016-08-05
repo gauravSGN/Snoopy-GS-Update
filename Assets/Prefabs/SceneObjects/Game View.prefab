@@ -1269,7 +1269,7 @@ MonoBehaviour:
   launcher: {fileID: 11405814}
   shooterType: 2
   effectType: 1
-  scanType: 1
+  scanMap: {fileID: 11400000, guid: c0558009aa1644c56addfcefebe448bf, type: 2}
   shooterDefinition: {fileID: 11400000, guid: bba73c2f691f64f03a9dec439e7afa8e, type: 2}
 --- !u!114 &11450880
 MonoBehaviour:

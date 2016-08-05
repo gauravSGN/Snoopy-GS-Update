@@ -20,10 +20,7 @@ namespace PowerUps
         private AnimationType effectType;
 
         [SerializeField]
-        private ScanType scanType;
-
-        [SerializeField]
-        private TextAsset scanDefinition;
+        private PowerUpScanMap scanMap;
 
         [SerializeField]
         private BubbleDefinition shooterDefinition;
@@ -41,6 +38,7 @@ namespace PowerUps
         public void Setup(float[] fillData)
         {
             animationService = GlobalState.Instance.Services.Get<AnimationService>();
+            scanMap.Load();
             var level = gameObject.GetComponentInParent<Level>();
             var anchorLength = anchors.Length;
             var anchorIndex = 0;
@@ -84,7 +82,7 @@ namespace PowerUps
             model.definition = shooterDefinition;
 
             var explosion = bubble.AddComponent<BubbleExplode>();
-            explosion.Setup(JsonUtility.FromJson<Model.Scan.ScanDefinition>(scanDefinition.ToString()), effectType);
+            explosion.Setup(scanMap.Map[(PowerUpType)powerUpMask], effectType);
 
             powerUpMask = 0;
         }
