@@ -96,6 +96,7 @@ GameObject:
   - 114: {fileID: 11476056}
   - 33: {fileID: 3376374}
   - 23: {fileID: 2305550}
+  - 114: {fileID: 11488436}
   m_Layer: 0
   m_Name: AimLine
   m_TagString: Untagged
@@ -943,7 +944,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
 --- !u!23 &2387848
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -1269,6 +1270,7 @@ MonoBehaviour:
   shooterType: 2
   effectType: 1
   scanType: 1
+  shooterDefinition: {fileID: 11400000, guid: bba73c2f691f64f03a9dec439e7afa8e, type: 2}
 --- !u!114 &11450880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1410,6 +1412,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2757f37f6d254d86aa8450e0725a580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11488436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bdb43f1b3dac4a3a8ad3862329992ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortingLayerName: Default
+  SortingOrder: -5
 --- !u!114 &11490304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1574,7 +1589,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -999
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
