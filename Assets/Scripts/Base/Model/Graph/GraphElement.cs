@@ -5,6 +5,14 @@ namespace Graph
 {
     abstract public class GraphElement<T> : GraphNode where T : GraphElement<T>
     {
+        protected readonly List<T> neighbors = new List<T>();
+
+        [SerializeField]
+        private bool isRoot;
+
+        [SerializeField]
+        private uint distanceFromRoot;
+
         public bool IsRoot
         {
             get { return isRoot; }
@@ -17,15 +25,6 @@ namespace Graph
             set { distanceFromRoot = value; }
         }
 
-        [SerializeField]
-        protected int numberOfNeighbors;
-
-        [SerializeField]
-        private bool isRoot;
-
-        [SerializeField]
-        private uint distanceFromRoot;
-
         public IEnumerable<GraphNode> Neighbors
         {
             get
@@ -37,7 +36,7 @@ namespace Graph
             }
         }
 
-        protected readonly List<T> neighbors = new List<T>();
+        public int NumberOfNeighbors { get { return neighbors.Count; } }
 
         public GraphElement()
         {
@@ -50,8 +49,6 @@ namespace Graph
             {
                 neighbors.Add(node);
                 node.Connect((T)this);
-
-                numberOfNeighbors = neighbors.Count;
             }
         }
 
@@ -61,8 +58,6 @@ namespace Graph
             {
                 neighbors.Remove(node);
                 node.Disconnect((T)this);
-
-                numberOfNeighbors = neighbors.Count;
             }
         }
 

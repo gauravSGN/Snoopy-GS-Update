@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1d598c8f1285471d9ba9720ea457449, type: 3}
+  m_Name: RainbowBubbleDefinition
+  m_EditorClassIdentifier: 
+  category: 3
+  type: 100
+  color: 63
+  baseColor: {r: 1, g: 0, b: 0.76551723, a: 1}
+  prefab: {fileID: 152662, guid: a929ca0091ff74a09b3504864c041a77, type: 2}
+  actsAsRoot: 0
+  activatible: 1
+  score: 50
+  defaultAnimations:
+  - name: 0
+    list: 03000000
+  - name: 1
+    list: 

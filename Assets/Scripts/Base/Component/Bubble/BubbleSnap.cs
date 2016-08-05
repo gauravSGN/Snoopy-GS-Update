@@ -78,6 +78,7 @@ public class BubbleSnap : MonoBehaviour
         GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleSettlingEvent());
 
         GetComponent<BubbleAttachments>().Model.CheckForMatches();
+
         GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleSettledEvent { shooter = gameObject });
     }
 
