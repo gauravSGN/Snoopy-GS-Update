@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Service;
 using System;
 
-public class AimLine : MonoBehaviour, UpdateReceiver
+public class AimLine : InitializableBehaviour, UpdateReceiver
 {
     private const int LAYER_MASK = (1 << (int)Layers.GameObjects | 1 << (int)Layers.Walls);
     private const int GAME_OBJECT_MASK = 1 << (int)Layers.GameObjects;
@@ -31,26 +31,31 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         set { meshRenderer.material.color = value; }
     }
 
-    public void OnUpdate()
-    {
-        RebuildMesh();
-    }
-
-    protected void OnEnable()
+    override public void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         meshFilter = GetComponent<MeshFilter>();
 
         meshFilter.mesh = new Mesh();
+        // Start disabled so Aiming is in correct state
+        meshRenderer.enabled = false;
+
+        base.Start();
+    }
+
+    public void OnUpdate()
+    {
+        RebuildMesh();
+    }
+
+    override public void Initialize()
+    {
         aimlineConfig = GlobalState.Instance.Config.aimline;
 
         eventTrigger.StartAiming += OnStartAiming;
         eventTrigger.StopAiming += OnStopAiming;
         eventTrigger.MoveTarget += OnMoveTarget;
         eventTrigger.Fire += OnFire;
-
-        // Start disabled so Aiming is in correct state
-        meshRenderer.enabled = false;
     }
 
     private void OnStartAiming()

@@ -27,9 +27,15 @@ public class GlobalState : SingletonBehaviour<GlobalState>
 
     override protected void Awake()
     {
-        Services.RegisterFromJson(servicesJSON.text);
-
         base.Awake();
+
+        if (Instance == this)
+        {
+            Services.RegisterFromJson(servicesJSON.text);
+
+            GSDescriptorFactory.CreateByPlatform(Application.platform, gsDescriptorJSON).Initialize();
+            Application.targetFrameRate = 60;
+        }
     }
 
     public void RunCoroutine(IEnumerator enumerator)
@@ -37,16 +43,6 @@ public class GlobalState : SingletonBehaviour<GlobalState>
         if (Instance == this)
         {
             StartCoroutine(enumerator);
-        }
-    }
-
-    // Initialize things in Start if they will dispatch events
-    protected void Start()
-    {
-        if (Instance == this)
-        {
-            GSDescriptorFactory.CreateByPlatform(Application.platform, gsDescriptorJSON).Initialize();
-            Application.targetFrameRate = 60;
         }
     }
 

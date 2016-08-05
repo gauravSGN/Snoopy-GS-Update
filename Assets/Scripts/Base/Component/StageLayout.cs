@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class StageLayout : MonoBehaviour
+public class StageLayout : InitializableBehaviour
 {
     [SerializeField]
     private Camera gameCamera;
@@ -17,7 +17,7 @@ public class StageLayout : MonoBehaviour
     [SerializeField]
     private float wallScale;
 
-    protected void OnEnable()
+    override public void Initialize()
     {
         SetWallLocation(leftWall, -1.0f);
         SetWallLocation(rightWall, 1.0f);
