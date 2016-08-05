@@ -14,6 +14,7 @@ namespace Model
         virtual public float[] PowerUpFills { get { return powerUpFills; } }
         virtual public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
         virtual public int[] StarValues { get { return starValues; } }
+        virtual public float StarMultiplier { get { return starMultiplier; } }
         virtual public BubbleQueueDefinition Queue { get { return queue; } }
         virtual public RandomBubbleDefinition[] Randoms { get { return randoms; } }
 
@@ -33,6 +34,9 @@ namespace Model
 
         [SerializeField]
         protected int[] starValues = new int[3];
+
+        [SerializeField]
+        protected float starMultiplier = 1.0f;
 
         [SerializeField]
         protected BubbleQueueDefinition queue;

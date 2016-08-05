@@ -37,6 +37,12 @@ namespace LevelEditor
             set { starValues = value; }
         }
 
+        public new float StarMultiplier
+        {
+            get { return base.StarMultiplier; }
+            set { starMultiplier = value; }
+        }
+
         public new BubbleQueueDefinition Queue
         {
             get { return base.Queue; }

@@ -82,7 +82,7 @@ namespace Scoring
             while (bubbleList.Count > 0)
             {
                 var cluster = ExtractCluster(bubbleList);
-                var multiplier = ComputeClusterMultiplier(cluster.Count);
+                var multiplier = ScoreUtil.ComputeClusterMultiplier(cluster.Count);
 
                 foreach (var bubble in cluster)
                 {
@@ -145,18 +145,6 @@ namespace Scoring
             }
 
             return cluster;
-        }
-
-        private float ComputeClusterMultiplier(int count)
-        {
-            var multiplier = 1.0f;
-
-            if (count >= config.minClusterSize)
-            {
-                multiplier += Mathf.Min(config.maxClusterSize, count) * config.clusterCoefficient;
-            }
-
-            return multiplier;
         }
 
         private void AddToScore(int value)

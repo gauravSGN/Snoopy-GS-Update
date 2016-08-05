@@ -24,6 +24,7 @@ namespace LevelEditor.Manipulator
         public void Perform(LevelManipulator manipulator, int x, int y)
         {
             PlaceBubble(manipulator, x, y, manipulator.BubbleType);
+            manipulator.RecomputeScores();
         }
 
         public void PerformAlternate(LevelManipulator manipulator, int x, int y)

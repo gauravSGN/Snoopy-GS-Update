@@ -20,6 +20,7 @@ namespace LevelEditor.Manipulator
             }
 
             GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelModifiedEvent());
+            manipulator.RecomputeScores();
         }
 
         public void PerformAlternate(LevelManipulator manipulator, int x, int y)
