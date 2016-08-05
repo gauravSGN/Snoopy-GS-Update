@@ -45,6 +45,12 @@ public static class CustomAssetCreator
         CreateAThing<PowerUpFactory>();
     }
 
+    [MenuItem("Assets/Create/Power Up/Power Up Scan Map")]
+    public static void CreatePowerUpScanMap()
+    {
+        CreateAThing<PowerUpScanMap>();
+    }
+
     [MenuItem("Assets/Create/Animation/Animation Definition")]
     public static void CreateAnimationDefinition()
     {

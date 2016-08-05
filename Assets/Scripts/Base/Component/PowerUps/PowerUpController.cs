@@ -1,7 +1,9 @@
-﻿using UnityEngine;
-using System.Linq;
-using Animation;
+﻿using Util;
 using Service;
+using Animation;
+using UnityEngine;
+using System.Linq;
+using ScanFunction = Util.CastingUtil.ScanFunction;
 
 namespace PowerUps
 {
@@ -20,13 +22,14 @@ namespace PowerUps
         private AnimationType effectType;
 
         [SerializeField]
-        private BubbleExplode.ScanType scanType;
+        private PowerUpScanMap scanMap;
 
         [SerializeField]
         private BubbleDefinition shooterDefinition;
 
         private Transform[] anchors;
-        private int powerUpMask;
+        private PowerUpType powerUpType;
+        private int totalPowerUpsInUse;
         private AnimationService animationService;
 
         void Awake()
@@ -38,6 +41,7 @@ namespace PowerUps
         public void Setup(float[] fillData)
         {
             animationService = GlobalState.Instance.Services.Get<AnimationService>();
+            scanMap.Load();
             var level = gameObject.GetComponentInParent<Level>();
             var anchorLength = anchors.Length;
             var anchorIndex = 0;
@@ -64,13 +68,14 @@ namespace PowerUps
 
         public void AddPowerUp(PowerUpType type)
         {
-            if (powerUpMask == 0)
+            if (powerUpType == 0)
             {
                 launcher.AddShotModifier(AddScan);
             }
 
             launcher.SetModifierAnimation(animationService.CreateByType(shooterType));
-            powerUpMask |= (int)type;
+            powerUpType |= type;
+            totalPowerUpsInUse += 1;
         }
 
         public void AddScan(GameObject bubble)
@@ -81,9 +86,10 @@ namespace PowerUps
             model.definition = shooterDefinition;
 
             var explosion = bubble.AddComponent<BubbleExplode>();
-            explosion.Setup(scanType, effectType);
+            explosion.Setup(GetScanFunction(bubble), effectType);
 
-            powerUpMask = 0;
+            powerUpType = 0;
+            totalPowerUpsInUse = 0;
         }
 
         // Just set objects active/inactive until we have an animation
@@ -101,6 +107,22 @@ namespace PowerUps
             {
                 anchors[i].gameObject.SetActive(true);
             }
+        }
+
+        private ScanFunction GetScanFunction(GameObject bubble)
+        {
+            var type = powerUpType;
+
+            if (totalPowerUpsInUse == 3)
+            {
+                type = PowerUpType.ThreeCombo;
+            }
+            else if (totalPowerUpsInUse >= 4)
+            {
+                type = PowerUpType.FourCombo;
+            }
+
+            return () => { return CastingUtil.RelativeBubbleCast(bubble, scanMap.Map[type]); };
         }
     }
 }
