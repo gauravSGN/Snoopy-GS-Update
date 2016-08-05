@@ -3,7 +3,7 @@ using Service;
 using Animation;
 using UnityEngine;
 using System.Linq;
-using ScanFunction = CastingUtil.ScanFunction;
+using ScanFunction = Util.CastingUtil.ScanFunction;
 
 namespace PowerUps
 {
@@ -86,7 +86,7 @@ namespace PowerUps
             model.definition = shooterDefinition;
 
             var explosion = bubble.AddComponent<BubbleExplode>();
-            explosion.Setup(GetScanFunction(), effectType);
+            explosion.Setup(GetScanFunction(bubble), effectType);
 
             powerUpType = 0;
             totalPowerUpsInUse = 0;
@@ -109,7 +109,7 @@ namespace PowerUps
             }
         }
 
-        private ScanFunction GetScanFunction()
+        private ScanFunction GetScanFunction(GameObject bubble)
         {
             var type = powerUpType;
 
