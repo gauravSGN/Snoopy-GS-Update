@@ -10,6 +10,8 @@
     Pink = 4,
     Purple = 5,
 
+    Rainbow = 100,
+
     Rock = 1000,
     Cloud = 1001,
 }

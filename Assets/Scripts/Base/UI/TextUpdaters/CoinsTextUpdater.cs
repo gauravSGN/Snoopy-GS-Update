@@ -1,6 +1,4 @@
-using State;
 using Service;
-using UnityEngine;
 
 public class CoinsTextUpdater : UITextUpdater
 {

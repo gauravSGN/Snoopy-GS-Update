@@ -3,4 +3,5 @@
     Basic,
     Modes,
     Obstacle,
+    Booster,
 }

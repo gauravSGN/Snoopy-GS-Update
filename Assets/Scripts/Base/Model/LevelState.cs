@@ -15,4 +15,10 @@ public class LevelState : Observable
         typeTotals[type] = typeTotals.ContainsKey(type) ? typeTotals[type] + delta : delta;
         NotifyListeners();
     }
+
+    public void DecrementRemainingBubbles()
+    {
+        remainingBubbles--;
+        NotifyListeners();
+    }
 }

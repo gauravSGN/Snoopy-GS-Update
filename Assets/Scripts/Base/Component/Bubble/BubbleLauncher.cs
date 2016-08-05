@@ -46,7 +46,7 @@ public class BubbleLauncher : MonoBehaviour
     public void SetModifierAnimation(GameObject bubbleAnimation)
     {
         currentAnimation = bubbleAnimation;
-        currentAnimation.transform.parent = nextBubbles[0].transform;
+        UpdateCurrentAnimationTransform();
     }
 
     protected void Start()
@@ -164,7 +164,7 @@ public class BubbleLauncher : MonoBehaviour
 
         if (currentAnimation != null)
         {
-            currentAnimation.transform.parent = nextBubbles[0].transform;
+            UpdateCurrentAnimationTransform();
         }
 
         SetAimLineColor();
@@ -223,5 +223,11 @@ public class BubbleLauncher : MonoBehaviour
     private void OnInputToggle(InputToggleEvent gameEvent)
     {
         inputAllowed = gameEvent.enabled;
+    }
+
+    private void UpdateCurrentAnimationTransform()
+    {
+        currentAnimation.transform.SetParent(nextBubbles[0].transform);
+        currentAnimation.transform.localPosition = Vector3.back;
     }
 }
