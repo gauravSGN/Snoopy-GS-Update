@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using Goal;
 using System;
-using Goal;
+using UnityEngine;
 
 public class GameConfig : ScriptableObject
 {
@@ -74,10 +74,17 @@ public class GameConfig : ScriptableObject
         public GoalScores[] goals;
     }
 
+    [Serializable]
+    public class BoosterConfig
+    {
+        public Color[] rainbowColors;
+    }
+
     public BubbleConfig bubbles;
     public ReactionConfig reactions;
     public ImpactEffectConfig impactEffect;
     public AimlineConfig aimline;
     public PurchasableConfig purchasables;
     public ScoringConfig scoring;
+    public BoosterConfig boosters;
 }

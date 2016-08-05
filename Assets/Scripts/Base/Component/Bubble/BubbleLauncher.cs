@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using Service;
 
 public class BubbleLauncher : MonoBehaviour
 {
@@ -24,6 +23,7 @@ public class BubbleLauncher : MonoBehaviour
     private GameObject[] nextBubbles;
     private BubbleType[] nextTypes;
     private List<ModifyShot> shotModifiers;
+    private HashSet<ShotModifierType> shotModifierTypes;
     private GameObject currentAnimation;
     private Vector2 direction;
     private bool inputAllowed;
@@ -37,10 +37,14 @@ public class BubbleLauncher : MonoBehaviour
         }
     }
 
-    public void AddShotModifier(ModifyShot modifier)
+    public void AddShotModifier(ModifyShot modifier, ShotModifierType type)
     {
         shotModifiers.Add(modifier);
+        shotModifierTypes.Add(type);
+
         SetAimLineColor();
+
+        GlobalState.EventService.Dispatch(new AddShotModifierEvent(type));
     }
 
     public void SetModifierAnimation(GameObject bubbleAnimation)
@@ -53,15 +57,18 @@ public class BubbleLauncher : MonoBehaviour
     {
         nextBubbles = new GameObject[locations.Length];
         nextTypes = new BubbleType[locations.Length];
-        shotModifiers = ResetShotModifiers();
+
+        ResetShotModifiers();
 
         aimLine.Fire += FireBubbleAt;
 
-        var eventService = GlobalState.Instance.Services.Get<EventService>();
+        var eventService = GlobalState.EventService;
+
         eventService.AddEventHandler<BubbleSettlingEvent>(OnBubbleSettleEvent);
         eventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
         eventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
         eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
+
         inputAllowed = true;
     }
 
@@ -99,8 +106,8 @@ public class BubbleLauncher : MonoBehaviour
 
         direction = (point - (Vector2)locations[0].transform.position).normalized * launchSpeed;
         characterController.OnAnimationFire += OnAnimationFireBubble;
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new InputToggleEvent(false));
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleFiringEvent());
+        GlobalState.EventService.Dispatch(new InputToggleEvent(false));
+        GlobalState.EventService.Dispatch(new BubbleFiringEvent());
     }
 
     private void OnAnimationFireBubble()
@@ -112,13 +119,14 @@ public class BubbleLauncher : MonoBehaviour
         rigidBody.gravityScale = 0.0f;
         rigidBody.isKinematic = false;
 
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleFiredEvent(nextBubbles[0]));
+        GlobalState.EventService.Dispatch(new BubbleFiredEvent(nextBubbles[0]));
 
         nextBubbles[0] = null;
         currentAnimation = null;
         direction = Vector2.zero;
 
-        shotModifiers = ResetShotModifiers();
+        ResetShotModifiers();
+
         level.levelState.bubbleQueue.RemoveListener(OnBubbleQueueChanged);
         level.levelState.bubbleQueue.GetNext();
     }
@@ -172,15 +180,21 @@ public class BubbleLauncher : MonoBehaviour
 
     private void SetAimLineColor()
     {
-        var color = nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.BaseColor;
+        var colors = new Color[] { nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.BaseColor };
 
-        // If we have anything more than the default modifier, change the aimline to white.
-        if (shotModifiers.Count > 1)
+        if (shotModifierTypes.Count > 0)
         {
-            color = Color.white;
+            if (shotModifierTypes.Contains(ShotModifierType.RainbowBooster))
+            {
+                colors = GlobalState.Instance.Config.boosters.rainbowColors;
+            }
+            else
+            {
+                colors[0] = Color.white;
+            }
         }
 
-        aimLine.Color = color;
+        aimLine.colors = colors;
     }
 
     private void OnBubbleSettleEvent(BubbleSettlingEvent gameEvent)
@@ -190,12 +204,13 @@ public class BubbleLauncher : MonoBehaviour
 
     private void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)
     {
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new InputToggleEvent(true));
+        GlobalState.EventService.Dispatch(new InputToggleEvent(true));
     }
 
-    private List<ModifyShot> ResetShotModifiers()
+    private void ResetShotModifiers()
     {
-        return new List<ModifyShot>{ AddBubbleSnap };
+        shotModifiers = new List<ModifyShot> { AddBubbleSnap };
+        shotModifierTypes = new HashSet<ShotModifierType>();
     }
 
     private void AddBubbleSnap(GameObject bubble)

@@ -70,7 +70,7 @@ namespace PowerUps
         {
             if (powerUpType == 0)
             {
-                launcher.AddShotModifier(AddScan);
+                launcher.AddShotModifier(AddScan, ShotModifierType.PowerUp);
             }
 
             launcher.SetModifierAnimation(animationService.CreateByType(shooterType));
