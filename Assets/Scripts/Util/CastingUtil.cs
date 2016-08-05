@@ -7,6 +7,8 @@ namespace Util
 {
     public static class CastingUtil
     {
+        public delegate RaycastHit2D[] ScanFunction();
+
         public static RaycastHit2D[] BoundsBoxCast(Bounds bounds, int layers)
         {
             var origin = bounds.center;

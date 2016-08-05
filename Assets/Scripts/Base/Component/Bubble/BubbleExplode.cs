@@ -4,25 +4,23 @@ using Reaction;
 using Service;
 using Animation;
 using Effects;
-using Model.Scan;
-using Util;
+using ScanFunction = Util.CastingUtil.ScanFunction;
 
 public class BubbleExplode : MonoBehaviour
 {
-    [SerializeField]
-    private AnimationType deathAnimationType;
+    private ScanFunction scanFunction;
 
     [SerializeField]
-    private ScanDefinition scanDefinition;
+    private AnimationType deathAnimationType;
 
     public void Start()
     {
         GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleSettlingEvent>(OnSettling);
     }
 
-    public void Setup(ScanDefinition definition, AnimationType animation)
+    public void Setup(ScanFunction callback, AnimationType animation)
     {
-        scanDefinition = definition;
+        scanFunction = callback;
         deathAnimationType = animation;
     }
 
@@ -33,7 +31,7 @@ public class BubbleExplode : MonoBehaviour
 
     public void OnSettling(GameEvent gameEvent)
     {
-        var hits = CastingUtil.RelativeBubbleCast(gameObject, scanDefinition);
+        var hits = scanFunction();
         var length = hits.Length;
 
         var bubbleDeath = gameObject.GetComponent<BubbleDeath>();

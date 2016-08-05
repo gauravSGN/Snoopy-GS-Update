@@ -12,12 +12,11 @@ namespace PowerUps
         Pink = 16,
         Purple = 32,
 
-
         BlueYellow = 3,
         BlueRed = 5,
         BlueGreen = 9,
         BluePink = 17,
-        BluePurple = 18,
+        BluePurple = 33,
         YellowRed = 6,
         YellowGreen = 10,
         YellowPink = 18,

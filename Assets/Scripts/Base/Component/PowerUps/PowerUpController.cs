@@ -1,7 +1,9 @@
-﻿using UnityEngine;
-using System.Linq;
-using Animation;
+﻿using Util;
 using Service;
+using Animation;
+using UnityEngine;
+using System.Linq;
+using ScanFunction = CastingUtil.ScanFunction;
 
 namespace PowerUps
 {
@@ -26,7 +28,8 @@ namespace PowerUps
         private BubbleDefinition shooterDefinition;
 
         private Transform[] anchors;
-        private int powerUpMask;
+        private PowerUpType powerUpType;
+        private int totalPowerUpsInUse;
         private AnimationService animationService;
 
         void Awake()
@@ -65,13 +68,14 @@ namespace PowerUps
 
         public void AddPowerUp(PowerUpType type)
         {
-            if (powerUpMask == 0)
+            if (powerUpType == 0)
             {
                 launcher.AddShotModifier(AddScan);
             }
 
             launcher.SetModifierAnimation(animationService.CreateByType(shooterType));
-            powerUpMask |= (int)type;
+            powerUpType |= type;
+            totalPowerUpsInUse += 1;
         }
 
         public void AddScan(GameObject bubble)
@@ -82,9 +86,10 @@ namespace PowerUps
             model.definition = shooterDefinition;
 
             var explosion = bubble.AddComponent<BubbleExplode>();
-            explosion.Setup(scanMap.Map[(PowerUpType)powerUpMask], effectType);
+            explosion.Setup(GetScanFunction(), effectType);
 
-            powerUpMask = 0;
+            powerUpType = 0;
+            totalPowerUpsInUse = 0;
         }
 
         // Just set objects active/inactive until we have an animation
@@ -102,6 +107,21 @@ namespace PowerUps
             {
                 anchors[i].gameObject.SetActive(true);
             }
+        }
+
+        private ScanFunction GetScanFunction()
+        {
+            if (totalPowerUpsInUse == 3)
+            {
+                powerUpType = PowerUpType.ThreeCombo;
+            }
+            else if (totalPowerUpsInUse >= 4)
+            {
+                powerUpType = PowerUpType.FourCombo;
+            }
+
+            var type = powerUpType;
+            return () => { return CastingUtil.RelativeBubbleCast(bubble, scanMap.Map[type]); };
         }
     }
 }
