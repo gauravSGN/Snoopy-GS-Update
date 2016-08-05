@@ -274,6 +274,7 @@ GameObject:
   - 222: {fileID: 22220774}
   - 114: {fileID: 11415434}
   - 114: {fileID: 11451220}
+  - 114: {fileID: 11453698}
   m_Layer: 31
   m_Name: Booster 1
   m_TagString: Untagged
@@ -927,6 +928,19 @@ MonoBehaviour:
   launcher: {fileID: 0}
   level: {fileID: 0}
   shooterDefinition: {fileID: 11400000, guid: b340add30ae88423ba2b03c6f8a17b4b, type: 2}
+  boosterButton: {fileID: 11415434}
+--- !u!114 &11453698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8e08564c7114474b871603e9851bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 11415434}
 --- !u!114 &11459052
 MonoBehaviour:
   m_ObjectHideFlags: 1

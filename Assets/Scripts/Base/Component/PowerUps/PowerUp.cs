@@ -36,6 +36,7 @@ namespace PowerUps
             level.levelState.AddListener(UpdateState);
 
             GlobalState.EventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
+            GlobalState.EventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
         }
 
         public void SetDefinition(PowerUpDefinition setDefinition)
@@ -58,6 +59,11 @@ namespace PowerUps
         private void OnInputToggle(InputToggleEvent gameEvent)
         {
             allowInput = gameEvent.enabled;
+        }
+
+        private void OnAddShotModifier(AddShotModifierEvent gameEvent)
+        {
+            allowInput = (gameEvent.type == ShotModifierType.PowerUp);
         }
 
         private void UpdateState(Observable levelState)

@@ -1,5 +1,6 @@
 using Reaction;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Booster
 {
@@ -17,6 +18,9 @@ namespace Booster
         [SerializeField]
         private BubbleDefinition shooterDefinition;
 
+        [SerializeField]
+        private Button boosterButton;
+
         private GameObject instantiatedOverlay;
 
         public void Activate()
@@ -27,12 +31,22 @@ namespace Booster
             {
                 instantiatedOverlay = Instantiate(overlay);
 
-                launcher.AddShotModifier(ConvertToRainbow);
+                launcher.AddShotModifier(ConvertToRainbow, ShotModifierType.Booster);
                 launcher.SetModifierAnimation(instantiatedOverlay);
 
                 GlobalState.User.purchasables.boosters.rainbows--;
                 level.levelState.DecrementRemainingBubbles();
             }
+        }
+
+        protected void Start()
+        {
+            GlobalState.EventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
+        }
+
+        private void OnAddShotModifier(AddShotModifierEvent gameEvent)
+        {
+            boosterButton.interactable = false;
         }
 
         private void ConvertToRainbow(GameObject bubble)
