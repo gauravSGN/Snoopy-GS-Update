@@ -9,9 +9,6 @@ namespace PowerUps
         private GameObject glow;
 
         [SerializeField]
-        private Level level;
-
-        [SerializeField]
         private float max;
 
         [SerializeField]
@@ -23,16 +20,19 @@ namespace PowerUps
         [SerializeField]
         private int lastBubbleCount;
 
+        private Level level;
+        private AimLine aimline;
         private bool allowInput;
 
         private PowerUpDefinition definition;
         private PowerUpController controller;
 
-        public void Setup(float setMax, PowerUpController setController, Level setLevel)
+        public void Setup(float setMax, PowerUpController setController, Level setLevel, AimLine setAimline)
         {
             max = setMax;
             controller = setController;
             level = setLevel;
+            aimline = setAimline;
             level.levelState.AddListener(UpdateState);
 
             GlobalState.EventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
@@ -52,6 +52,10 @@ namespace PowerUps
             if (progress >= 1.0f && allowInput)
             {
                 controller.AddPowerUp(definition.Type);
+
+                aimline.MaxReflections = GlobalState.Instance.Config.aimline.maxExtendedReflections;
+                aimline.ReflectionDistance = GlobalState.Instance.Config.aimline.extendedReflectionDistance;
+
                 Reset();
             }
         }
