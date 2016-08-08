@@ -39,7 +39,11 @@ public class GameConfig : ScriptableObject
         public float lineWidth;
         public float dotSpacing;
         public float moveSpeed;
-        public float wallBounceDistance;
+
+        public int maxReflections;
+        public int maxExtendedReflections;
+        public float reflectionDistance;
+        public float extendedReflectionDistance;
 
         public float colliderAdjustment;
     }

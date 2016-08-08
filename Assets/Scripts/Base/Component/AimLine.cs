@@ -26,6 +26,8 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
 
     public bool Aiming { get { return meshRenderer.enabled; } }
     public Vector3 Target { get { return aimTarget; } }
+    public int MaxReflections { get; set; }
+    public float ReflectionDistance { get; set; }
 
     override public void Start()
     {
@@ -47,6 +49,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
     override public void Initialize()
     {
         aimlineConfig = GlobalState.Instance.Config.aimline;
+        ResetReflections();
 
         eventTrigger.StartAiming += OnStartAiming;
         eventTrigger.StopAiming += OnStopAiming;
@@ -78,6 +81,14 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         {
             Fire(aimTarget);
         }
+
+        ResetReflections();
+    }
+
+    private void ResetReflections()
+    {
+        MaxReflections = aimlineConfig.maxReflections;
+        ReflectionDistance = aimlineConfig.reflectionDistance;
     }
 
     private void GeneratePoints()
@@ -88,7 +99,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         var distance = aimlineConfig.length - config.bubbles.size;
         var direction = (aimTarget - origin).normalized;
         var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale;
-        int reflections = 1;
+        int reflections = MaxReflections;
 
         points.Clear();
         points.Add(origin + config.bubbles.size * direction * 2.0f);
@@ -132,7 +143,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
                     break;
                 }
 
-                distance = aimlineConfig.wallBounceDistance;
+                distance = ReflectionDistance;
                 direction = new Vector2(-direction.x, direction.y);
 
                 continue;

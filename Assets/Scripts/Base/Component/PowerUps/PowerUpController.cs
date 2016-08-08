@@ -27,6 +27,9 @@ namespace PowerUps
         [SerializeField]
         private BubbleDefinition shooterDefinition;
 
+        [SerializeField]
+        private AimLine aimline;
+
         private Transform[] anchors;
         private PowerUpType powerUpType;
         private int totalPowerUpsInUse;
@@ -74,6 +77,10 @@ namespace PowerUps
             }
 
             launcher.SetModifierAnimation(animationService.CreateByType(shooterType));
+
+            aimline.MaxReflections = GlobalState.Instance.Config.aimline.maxExtendedReflections;
+            aimline.ReflectionDistance = GlobalState.Instance.Config.aimline.extendedReflectionDistance;
+
             powerUpType |= type;
             totalPowerUpsInUse += 1;
         }

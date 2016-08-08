@@ -9,9 +9,6 @@ namespace PowerUps
         private GameObject glow;
 
         [SerializeField]
-        private Level level;
-
-        [SerializeField]
         private float max;
 
         [SerializeField]
@@ -23,6 +20,7 @@ namespace PowerUps
         [SerializeField]
         private int lastBubbleCount;
 
+        private Level level;
         private bool allowInput;
 
         private PowerUpDefinition definition;
@@ -52,6 +50,7 @@ namespace PowerUps
             if (progress >= 1.0f && allowInput)
             {
                 controller.AddPowerUp(definition.Type);
+
                 Reset();
             }
         }

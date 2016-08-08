@@ -56,7 +56,10 @@ MonoBehaviour:
     lineWidth: 0.167
     dotSpacing: 0.2
     moveSpeed: 2
-    wallBounceDistance: 0.5
+    maxReflections: 1
+    maxExtendedReflections: 3
+    reflectionDistance: 0.5
+    extendedReflectionDistance: 5
     colliderAdjustment: 1.4
   purchasables:
     maxHearts: 5
