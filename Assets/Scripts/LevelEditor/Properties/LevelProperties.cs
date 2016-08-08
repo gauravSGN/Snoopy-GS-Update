@@ -1,5 +1,7 @@
-﻿using UnityEngine;
-using Model;
+﻿using Model;
+using UnityEngine;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace LevelEditor.Properties
 {
@@ -32,6 +34,8 @@ namespace LevelEditor.Properties
             }
         }
 
+        public bool EnableExtendedAimline { get; set; }
+
         private float starMultiplier = 1.0f;
 
         public LevelProperties()
@@ -45,6 +49,9 @@ namespace LevelEditor.Properties
             StarValues = data.StarValues;
             starMultiplier = data.StarMultiplier;
             PowerUpFills = data.PowerUpFills;
+
+            EnableExtendedAimline = (data.Modifiers != null) &&
+                                    data.Modifiers.Any(m => m.Type == LevelModifierType.ExtendedAimline);
         }
 
         public void ToLevelData(MutableLevelData data)
@@ -52,6 +59,16 @@ namespace LevelEditor.Properties
             data.StarValues = StarValues;
             data.StarMultiplier = starMultiplier;
             data.PowerUpFills = PowerUpFills;
+
+            // TODO: We should probably create a real system for managing modifiers once we have more than this one.
+            var modifiers = new List<LevelModifierData>();
+
+            if (EnableExtendedAimline)
+            {
+                modifiers.Add(new LevelModifierData(LevelModifierType.ExtendedAimline, null));
+            }
+
+            data.Modifiers = modifiers.ToArray();
         }
     }
 }

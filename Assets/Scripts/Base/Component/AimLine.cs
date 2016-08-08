@@ -25,6 +25,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
     private MeshFilter meshFilter;
     private int maxReflections;
     private float reflectionDistance;
+    private bool extended;
 
     public bool Aiming { get { return meshRenderer.enabled; } }
     public Vector3 Target { get { return aimTarget; } }
@@ -48,14 +49,19 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
 
     public void EnableExtendedAimline()
     {
-        maxReflections = aimlineConfig.maxExtendedReflections;
-        reflectionDistance = aimlineConfig.extendedReflectionDistance;
+        extended = true;
+
+        if (aimlineConfig != null)
+        {
+            maxReflections = aimlineConfig.maxExtendedReflections;
+            reflectionDistance = aimlineConfig.extendedReflectionDistance;
+        }
     }
 
     override public void Initialize()
     {
         aimlineConfig = GlobalState.Instance.Config.aimline;
-        ResetReflections();
+        ResetReflections(extended);
 
         eventTrigger.StartAiming += OnStartAiming;
         eventTrigger.StopAiming += OnStopAiming;
@@ -88,13 +94,15 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
             Fire(aimTarget);
         }
 
-        ResetReflections();
+        ResetReflections(false);
     }
 
-    private void ResetReflections()
+    private void ResetReflections(bool extend)
     {
-        maxReflections = aimlineConfig.maxReflections;
-        reflectionDistance = aimlineConfig.reflectionDistance;
+        maxReflections = extend ? aimlineConfig.maxExtendedReflections : aimlineConfig.maxReflections;
+        reflectionDistance = extend ? aimlineConfig.extendedReflectionDistance : aimlineConfig.reflectionDistance;
+
+        extended = false;
     }
 
     private void GeneratePoints()

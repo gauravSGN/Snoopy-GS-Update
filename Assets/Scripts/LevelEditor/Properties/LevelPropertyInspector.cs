@@ -23,6 +23,9 @@ namespace LevelEditor.Properties
         [SerializeField]
         private GameObject floatPrefab;
 
+        [SerializeField]
+        private GameObject boolPrefab;
+
         private readonly Dictionary<Type, GameObject> prefabMap = new Dictionary<Type, GameObject>();
 
         protected void Start()
@@ -108,6 +111,7 @@ namespace LevelEditor.Properties
         {
             prefabMap[typeof(int)] = integerPrefab;
             prefabMap[typeof(float)] = floatPrefab;
+            prefabMap[typeof(bool)] = boolPrefab;
         }
     }
 }
