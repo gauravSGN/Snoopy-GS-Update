@@ -22,6 +22,7 @@ namespace Util
         public static RaycastHit2D[] RelativeBubbleCast(GameObject baseBubble, ScanDefinition scanLocations)
         {
             var bubbleSize = GlobalState.Instance.Config.bubbles.size;
+            var yBubbleSize = bubbleSize * MathUtil.COS_30_DEGREES;
             var baseSize = bubbleSize * 0.2f;
             var basePosition = baseBubble.transform.position;
             var scans = new List<RaycastHit2D[]>();
@@ -29,7 +30,7 @@ namespace Util
             foreach (var location in scanLocations)
             {
                 var origin = new Vector2(basePosition.x + (location.x * bubbleSize),
-                                        basePosition.y + (location.y * bubbleSize));
+                                        basePosition.y + (location.y * yBubbleSize));
 
                 scans.Add(Physics2D.CircleCastAll(origin, baseSize, Vector2.zero, 0.0f));
             }
