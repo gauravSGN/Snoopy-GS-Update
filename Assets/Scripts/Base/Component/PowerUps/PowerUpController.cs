@@ -56,7 +56,7 @@ namespace PowerUps
                     if (fillData[index] > 0.0f)
                     {
                         var powerUp = powerUpFactory.CreateByType((PowerUpType)(1 << index));
-                        powerUp.GetComponent<PowerUp>().Setup(fillData[index], this, level, aimline);
+                        powerUp.GetComponent<PowerUp>().Setup(fillData[index], this, level);
                         powerUp.transform.parent = anchors[anchorIndex];
                         powerUp.transform.localPosition = Vector3.zero;
                         anchorIndex++;
@@ -77,6 +77,10 @@ namespace PowerUps
             }
 
             launcher.SetModifierAnimation(animationService.CreateByType(shooterType));
+
+            aimline.MaxReflections = GlobalState.Instance.Config.aimline.maxExtendedReflections;
+            aimline.ReflectionDistance = GlobalState.Instance.Config.aimline.extendedReflectionDistance;
+
             powerUpType |= type;
             totalPowerUpsInUse += 1;
         }
