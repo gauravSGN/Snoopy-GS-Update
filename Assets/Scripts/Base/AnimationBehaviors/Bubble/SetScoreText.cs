@@ -2,19 +2,29 @@ using UnityEngine;
 
 public class SetScoreText : StateMachineBehaviour
 {
+    private int previousScore = -1;
+    private BubbleScore bubbleScore;
+    private TextMesh textMesh;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        var gameObject = animator.gameObject;
-        var parent = gameObject.transform.parent;
-
-        if (parent != null)
+        if (bubbleScore == null)
         {
-            var textMesh = gameObject.GetComponent<TextMesh>();
+            var gameObject = animator.gameObject;
+            var parent = gameObject.transform.parent;
 
-            textMesh.text = parent.GetComponent<BubbleScore>().Score.ToString();
+            textMesh = gameObject.GetComponent<TextMesh>();
+            bubbleScore = parent.GetComponent<BubbleScore>();
+
             textMesh.color = parent.GetComponent<BubbleAttachments>().Model.definition.BaseColor;
 
             gameObject.transform.SetParent(null, true);
+        }
+
+        if (bubbleScore.Score != previousScore)
+        {
+            textMesh.text = bubbleScore.Score.ToString();
+            previousScore = bubbleScore.Score;
         }
     }
 }

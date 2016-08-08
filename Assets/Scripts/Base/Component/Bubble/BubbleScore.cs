@@ -7,6 +7,7 @@ using UnityEngine;
 public class BubbleScore : MonoBehaviour
 {
     private Bubble model;
+    private bool playedEffect;
 
     public int Score { get; private set; }
 
@@ -29,13 +30,18 @@ public class BubbleScore : MonoBehaviour
     {
         if (gameEvent.bubble == model)
         {
-            Score = gameEvent.score;
+            Score += gameEvent.score;
 
-            var bubbleDestroyedEvent = new BubbleDestroyedEvent(model.definition.Score, gameObject);
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(bubbleDestroyedEvent);
+            if (!playedEffect)
+            {
+                playedEffect = true;
 
-            var effectController = gameObject.GetComponent<BubbleEffectController>();
-            effectController.AddEffect(AnimationEffect.Play(gameObject, AnimationType.ScoreText));
+                var bubbleDestroyedEvent = new BubbleDestroyedEvent(model.definition.Score, gameObject);
+                GlobalState.Instance.Services.Get<EventService>().Dispatch(bubbleDestroyedEvent);
+
+                var effectController = gameObject.GetComponent<BubbleEffectController>();
+                effectController.AddEffect(AnimationEffect.Play(gameObject, AnimationType.ScoreText));
+            }
         }
     }
 }
