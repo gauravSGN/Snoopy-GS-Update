@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using Service;
 using System;
 
-public class AimLine : MonoBehaviour, UpdateReceiver
+public class AimLine : InitializableBehaviour, UpdateReceiver
 {
     private const int LAYER_MASK = (1 << (int)Layers.GameObjects | 1 << (int)Layers.Walls);
     private const int GAME_OBJECT_MASK = 1 << (int)Layers.GameObjects;
 
     public event Action<Vector2> Fire;
+
+    public Color[] colors;
 
     [SerializeField]
     private GameObject launchOrigin;
@@ -24,11 +26,19 @@ public class AimLine : MonoBehaviour, UpdateReceiver
 
     public bool Aiming { get { return meshRenderer.enabled; } }
     public Vector3 Target { get { return aimTarget; } }
+    public int MaxReflections { get; set; }
+    public float ReflectionDistance { get; set; }
 
-    public Color Color
+    override public void Start()
     {
-        get { return meshRenderer.material.color; }
-        set { meshRenderer.material.color = value; }
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshFilter = GetComponent<MeshFilter>();
+
+        meshFilter.mesh = new Mesh();
+        // Start disabled so Aiming is in correct state
+        meshRenderer.enabled = false;
+
+        base.Start();
     }
 
     public void OnUpdate()
@@ -36,21 +46,15 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         RebuildMesh();
     }
 
-    protected void OnEnable()
+    override public void Initialize()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        meshFilter = GetComponent<MeshFilter>();
-
-        meshFilter.mesh = new Mesh();
         aimlineConfig = GlobalState.Instance.Config.aimline;
+        ResetReflections();
 
         eventTrigger.StartAiming += OnStartAiming;
         eventTrigger.StopAiming += OnStopAiming;
         eventTrigger.MoveTarget += OnMoveTarget;
         eventTrigger.Fire += OnFire;
-
-        // Start disabled so Aiming is in correct state
-        meshRenderer.enabled = false;
     }
 
     private void OnStartAiming()
@@ -77,6 +81,14 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         {
             Fire(aimTarget);
         }
+
+        ResetReflections();
+    }
+
+    private void ResetReflections()
+    {
+        MaxReflections = aimlineConfig.maxReflections;
+        ReflectionDistance = aimlineConfig.reflectionDistance;
     }
 
     private void GeneratePoints()
@@ -87,7 +99,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         var distance = aimlineConfig.length - config.bubbles.size;
         var direction = (aimTarget - origin).normalized;
         var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale;
-        int reflections = 1;
+        int reflections = MaxReflections;
 
         points.Clear();
         points.Add(origin + config.bubbles.size * direction * 2.0f);
@@ -131,7 +143,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
                     break;
                 }
 
-                distance = aimlineConfig.wallBounceDistance;
+                distance = ReflectionDistance;
                 direction = new Vector2(-direction.x, direction.y);
 
                 continue;
@@ -145,9 +157,14 @@ public class AimLine : MonoBehaviour, UpdateReceiver
 
     private void RebuildMesh()
     {
-        var vertices = new List<Vector3>();
-        var triangles = new List<int>();
+        var numberOfColors = colors.Length;
+        var reverseStartingColorIndex = (int)((aimlineConfig.moveSpeed * Time.realtimeSinceStartup) % numberOfColors);
+        var startingColorIndex = (numberOfColors - 1 - reverseStartingColorIndex);
+
         var uvs = new List<Vector2>();
+        var triangles = new List<int>();
+        var vertices = new List<Vector3>();
+        var vertexColors = new List<Color>();
 
         var halfSize = aimlineConfig.lineWidth / 2.0f;
         int vertexOffset = 0;
@@ -158,6 +175,13 @@ public class AimLine : MonoBehaviour, UpdateReceiver
             vertices.Add(new Vector3(point.x + halfSize, point.y + halfSize, 11.0f));
             vertices.Add(new Vector3(point.x - halfSize, point.y - halfSize, 11.0f));
             vertices.Add(new Vector3(point.x + halfSize, point.y - halfSize, 11.0f));
+
+            var colorIndex = ((vertexOffset / 4) + startingColorIndex) % numberOfColors;
+
+            for (var i = 0; i < 4; i++)
+            {
+                vertexColors.Add(colors[colorIndex]);
+            }
 
             triangles.Add(vertexOffset + 0);
             triangles.Add(vertexOffset + 1);
@@ -179,6 +203,7 @@ public class AimLine : MonoBehaviour, UpdateReceiver
         {
             vertices = vertices.ToArray(),
             triangles = triangles.ToArray(),
+            colors = vertexColors.ToArray(),
             uv = uvs.ToArray(),
         };
     }

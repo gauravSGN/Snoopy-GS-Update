@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 
 #if UNITY_EDITOR
@@ -12,7 +11,7 @@ using UnityEditor.Callbacks;
 /*
  * Provides an instantiator for 2D prefabs that renders them in scene view without creating an instance.  This allows
  * the prefab to be freely modified and all PrefabInstance2D usages will be updated appropriately.
- * 
+ *
  * For reference, see:
  * http://framebunker.com/blog/poor-mans-nested-prefabs/
  * http://gamedev.stackexchange.com/questions/75016/how-can-i-manually-draw-a-sprite-in-unity

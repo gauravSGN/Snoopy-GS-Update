@@ -9,9 +9,6 @@ namespace PowerUps
         private GameObject glow;
 
         [SerializeField]
-        private Level level;
-
-        [SerializeField]
         private float max;
 
         [SerializeField]
@@ -23,6 +20,7 @@ namespace PowerUps
         [SerializeField]
         private int lastBubbleCount;
 
+        private Level level;
         private bool allowInput;
 
         private PowerUpDefinition definition;
@@ -36,6 +34,7 @@ namespace PowerUps
             level.levelState.AddListener(UpdateState);
 
             GlobalState.EventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
+            GlobalState.EventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
         }
 
         public void SetDefinition(PowerUpDefinition setDefinition)
@@ -51,6 +50,7 @@ namespace PowerUps
             if (progress >= 1.0f && allowInput)
             {
                 controller.AddPowerUp(definition.Type);
+
                 Reset();
             }
         }
@@ -58,6 +58,11 @@ namespace PowerUps
         private void OnInputToggle(InputToggleEvent gameEvent)
         {
             allowInput = gameEvent.enabled;
+        }
+
+        private void OnAddShotModifier(AddShotModifierEvent gameEvent)
+        {
+            allowInput = (gameEvent.type == ShotModifierType.PowerUp);
         }
 
         private void UpdateState(Observable levelState)

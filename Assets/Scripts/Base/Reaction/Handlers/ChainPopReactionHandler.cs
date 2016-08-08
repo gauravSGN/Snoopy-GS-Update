@@ -35,6 +35,7 @@ namespace Reaction
         private List<Bubble> GetAdjacentBubbles(List<Bubble> adjacentList, Bubble current)
         {
             adjacentList.Add(current);
+
             foreach (Bubble neighbor in current.Neighbors)
             {
                 if ((neighbor.type == current.type) && !adjacentList.Contains(neighbor))

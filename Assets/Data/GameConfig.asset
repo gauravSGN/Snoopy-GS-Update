@@ -56,7 +56,10 @@ MonoBehaviour:
     lineWidth: 0.167
     dotSpacing: 0.2
     moveSpeed: 2
-    wallBounceDistance: 0.5
+    maxReflections: 1
+    maxExtendedReflections: 3
+    reflectionDistance: 0.5
+    extendedReflectionDistance: 5
     colliderAdjustment: 1.4
   purchasables:
     maxHearts: 5
@@ -90,3 +93,11 @@ MonoBehaviour:
     goals:
     - goalType: 0
       score: 500
+  boosters:
+    rainbowColors:
+    - {r: 0.20392157, g: 0.5176471, b: 0.84705883, a: 1}
+    - {r: 0.06666667, g: 0.58431375, b: 0.16470589, a: 1}
+    - {r: 0.90588236, g: 0.27450982, b: 0.6313726, a: 1}
+    - {r: 0.5372549, g: 0.12156863, b: 0.76862746, a: 1}
+    - {r: 0.8235294, g: 0.1764706, b: 0.16862746, a: 1}
+    - {r: 0.91764706, g: 0.5686275, b: 0.08235294, a: 1}
