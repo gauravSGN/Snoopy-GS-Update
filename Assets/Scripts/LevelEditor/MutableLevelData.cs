@@ -54,5 +54,11 @@ namespace LevelEditor
             get { return base.Randoms; }
             set { randoms = value; }
         }
+
+        public new LevelModifierData[] Modifiers
+        {
+            get { return base.Modifiers; }
+            set { modifiers = value; }
+        }
     }
 }

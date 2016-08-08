@@ -1,12 +1,24 @@
+using Util;
+using Model;
 using System;
 using Service;
 using UI.Popup;
+using Modifiers;
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Level : MonoBehaviour
 {
+    private class ModifierFactory : AttributeDrivenFactory<LevelModifier, LevelModifierAttribute, LevelModifierType>
+    {
+        override protected LevelModifierType GetKeyFromAttribute(LevelModifierAttribute attribute)
+        {
+            return attribute.ModifierType;
+        }
+    }
+
     public readonly LevelState levelState = new LevelState();
     public BubbleFactory bubbleFactory;
 
@@ -19,6 +31,8 @@ public class Level : MonoBehaviour
     [SerializeField]
     private SpriteRenderer background;
 
+    private readonly List<LevelModifier> modifiers = new List<LevelModifier>();
+    private readonly ModifierFactory modifierFactory = new ModifierFactory();
     private string levelData;
 
     protected void Start()
@@ -55,11 +69,20 @@ public class Level : MonoBehaviour
 
         levelState.NotifyListeners();
 
+        if (loader.LevelData.Modifiers != null)
+        {
+            foreach (var modifier in loader.LevelData.Modifiers)
+            {
+                AddModifier(modifier.Type, modifier.Data);
+            }
+        }
+
         var eventService = GlobalState.Instance.Services.Get<EventService>();
 
         eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
         eventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
         eventService.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
+        eventService.AddEventHandler<AddLevelModifierEvent>(e => AddModifier(e.type, e.data));
 
         var assetService = GlobalState.Instance.Services.Get<AssetService>();
 
@@ -147,5 +170,16 @@ public class Level : MonoBehaviour
     private void DispatchReturnToMap()
     {
         GlobalState.Instance.Services.Get<EventService>().Dispatch(new ReturnToMapEvent());
+    }
+
+    private void AddModifier(LevelModifierType type, string data)
+    {
+        var modifier = modifierFactory.Create(type);
+
+        if (modifier != null)
+        {
+            modifiers.Add(modifier);
+            modifier.SetData(data);
+        }
     }
 }

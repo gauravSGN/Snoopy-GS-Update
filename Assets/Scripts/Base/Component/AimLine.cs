@@ -23,11 +23,11 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
     private GameConfig.AimlineConfig aimlineConfig;
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
+    private int maxReflections;
+    private float reflectionDistance;
 
     public bool Aiming { get { return meshRenderer.enabled; } }
     public Vector3 Target { get { return aimTarget; } }
-    public int MaxReflections { get; set; }
-    public float ReflectionDistance { get; set; }
 
     override public void Start()
     {
@@ -44,6 +44,12 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
     public void OnUpdate()
     {
         RebuildMesh();
+    }
+
+    public void EnableExtendedAimline()
+    {
+        maxReflections = aimlineConfig.maxExtendedReflections;
+        reflectionDistance = aimlineConfig.extendedReflectionDistance;
     }
 
     override public void Initialize()
@@ -87,8 +93,8 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
 
     private void ResetReflections()
     {
-        MaxReflections = aimlineConfig.maxReflections;
-        ReflectionDistance = aimlineConfig.reflectionDistance;
+        maxReflections = aimlineConfig.maxReflections;
+        reflectionDistance = aimlineConfig.reflectionDistance;
     }
 
     private void GeneratePoints()
@@ -99,7 +105,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         var distance = aimlineConfig.length - config.bubbles.size;
         var direction = (aimTarget - origin).normalized;
         var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale;
-        int reflections = MaxReflections;
+        int reflections = maxReflections;
 
         points.Clear();
         points.Add(origin + config.bubbles.size * direction * 2.0f);
@@ -143,7 +149,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
                     break;
                 }
 
-                distance = ReflectionDistance;
+                distance = reflectionDistance;
                 direction = new Vector2(-direction.x, direction.y);
 
                 continue;
