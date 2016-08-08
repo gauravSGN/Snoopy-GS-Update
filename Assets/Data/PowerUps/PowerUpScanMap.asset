@@ -41,7 +41,7 @@ MonoBehaviour:
   - type: 18
     asset: {fileID: 4900000, guid: 3d6bb360ac15e46d8b52ecae5d558a54, type: 3}
   - type: 34
-    asset: {fileID: 4900000, guid: 6053da2ab31cf4611a50cd257903de8e, type: 3}
+    asset: {fileID: 4900000, guid: 9710f1b025d9f42dfaa4425f133c8b49, type: 3}
   - type: 12
     asset: {fileID: 4900000, guid: 6053da2ab31cf4611a50cd257903de8e, type: 3}
   - type: 20
@@ -50,7 +50,7 @@ MonoBehaviour:
     asset: {fileID: 4900000, guid: 6053da2ab31cf4611a50cd257903de8e, type: 3}
   - type: 24
     asset: {fileID: 4900000, guid: 6053da2ab31cf4611a50cd257903de8e, type: 3}
-  - type: 34
+  - type: 40
     asset: {fileID: 4900000, guid: 6053da2ab31cf4611a50cd257903de8e, type: 3}
   - type: 48
     asset: {fileID: 4900000, guid: 6053da2ab31cf4611a50cd257903de8e, type: 3}
