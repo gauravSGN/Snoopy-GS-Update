@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "wxXoPimNZlMZdLAWWSfTU/5AZAA", "spine": "3.2.01", "width": 326.31, "height": 370 },
+"skeleton": { "hash": "hG1O2lLa2TnKY+pg3uz6GuqfAvU", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "placement_ctrl_reset", "parent": "root" },
@@ -47,7 +47,7 @@
 			"kite_edge_spin_0002": { "width": 186, "height": 294 }
 		},
 		"kite_outline_glowing": {
-			"kite_outline_glowing": { "width": 271, "height": 370 }
+			"kite_outline_glowing": { "scaleX": 1.362, "scaleY": 1.362, "width": 190, "height": 259 }
 		},
 		"tracers": {
 			"tracers/powerup_spinLine_0001": { "width": 342, "height": 73 },
@@ -212,6 +212,11 @@
 				]
 			},
 			"kite_edge_spin_0001": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.4, "color": "ffffffff" },
+					{ "time": 2.4333, "color": "ffffff00" }
+				],
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 1.5333, "name": "kite_edge_spin_0001" },
@@ -233,7 +238,7 @@
 					{ "time": 2.3, "name": "kite_edge_spin_0001" },
 					{ "time": 2.3333, "name": "kite_edge_spin_0002" },
 					{ "time": 2.3666, "name": "kite_edge_spin_0001" },
-					{ "time": 2.4, "name": null }
+					{ "time": 2.4333, "name": null }
 				]
 			},
 			"kite_outline_glowing": {
