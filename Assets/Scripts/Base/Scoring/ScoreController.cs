@@ -18,6 +18,7 @@ namespace Scoring
         private Level level;
 
         private readonly ReactionDict handlers = new ReactionDict();
+        private readonly HashSet<Bubble> handledBubbles = new HashSet<Bubble>();
 
         private readonly List<Tuple<ReactionPriority, Bubble>> pending = new List<Tuple<ReactionPriority, Bubble>>();
         private GameConfig.ScoringConfig config;
@@ -31,6 +32,7 @@ namespace Scoring
             eventService.AddPooledEvent<BubbleScoreEvent>(new BubbleScoreEvent(null, 0));
 
             handlers[ReactionPriority.Pop] = HandlePoppedBubbles;
+            handlers[ReactionPriority.GenericPop] = HandlePoppedBubbles;
             handlers[ReactionPriority.Cull] = HandleCulledBubbles;
 
             eventService.AddEventHandler<BubbleReactionEvent>(OnBubbleReaction);
@@ -46,7 +48,11 @@ namespace Scoring
 
         private void OnBubbleReaction(BubbleReactionEvent gameEvent)
         {
-            pending.Add(new Tuple<ReactionPriority, Bubble>(gameEvent.priority, gameEvent.bubble));
+            if (!handledBubbles.Contains(gameEvent.bubble))
+            {
+                pending.Add(new Tuple<ReactionPriority, Bubble>(gameEvent.priority, gameEvent.bubble));
+                handledBubbles.Add(gameEvent.bubble);
+            }
         }
 
         private void OnStartReactions(StartReactionsEvent gameEvent)
@@ -57,6 +63,7 @@ namespace Scoring
             }
 
             pending.Clear();
+            handledBubbles.Clear();
         }
 
         private void OnGoalIncrement(GoalIncrementEvent gameEvent)
@@ -83,6 +90,11 @@ namespace Scoring
             {
                 var cluster = ExtractCluster(bubbleList);
                 var multiplier = ScoreUtil.ComputeClusterMultiplier(cluster.Count);
+
+                if (cluster[0].definition.category != BubbleCategory.Basic)
+                {
+                    multiplier = 1.0f;
+                }
 
                 foreach (var bubble in cluster)
                 {
