@@ -17,6 +17,7 @@ namespace Model
         virtual public float StarMultiplier { get { return starMultiplier; } }
         virtual public BubbleQueueDefinition Queue { get { return queue; } }
         virtual public RandomBubbleDefinition[] Randoms { get { return randoms; } }
+        virtual public LevelModifierData[] Modifiers { get { return modifiers; } }
 
         public List<LevelGoal> goals;
 
@@ -43,5 +44,8 @@ namespace Model
 
         [SerializeField]
         protected RandomBubbleDefinition[] randoms;
+
+        [SerializeField]
+        protected LevelModifierData[] modifiers;
     }
 }

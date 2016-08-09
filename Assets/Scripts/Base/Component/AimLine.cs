@@ -5,6 +5,13 @@ using System;
 
 public class AimLine : InitializableBehaviour, UpdateReceiver
 {
+    [Serializable]
+    public struct Settings
+    {
+        public int maxReflections;
+        public float reflectionDistance;
+    }
+
     private const int LAYER_MASK = (1 << (int)Layers.GameObjects | 1 << (int)Layers.Walls);
     private const int GAME_OBJECT_MASK = 1 << (int)Layers.GameObjects;
 
@@ -23,11 +30,10 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
     private GameConfig.AimlineConfig aimlineConfig;
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
+    private Settings? settings;
 
     public bool Aiming { get { return meshRenderer.enabled; } }
     public Vector3 Target { get { return aimTarget; } }
-    public int MaxReflections { get; set; }
-    public float ReflectionDistance { get; set; }
 
     override public void Start()
     {
@@ -46,10 +52,19 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         RebuildMesh();
     }
 
+    public void ModifyAimline(Settings newSettings)
+    {
+        settings = newSettings;
+    }
+
     override public void Initialize()
     {
         aimlineConfig = GlobalState.Instance.Config.aimline;
-        ResetReflections();
+
+        if (!settings.HasValue)
+        {
+            ResetReflections();
+        }
 
         eventTrigger.StartAiming += OnStartAiming;
         eventTrigger.StopAiming += OnStopAiming;
@@ -87,8 +102,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
 
     private void ResetReflections()
     {
-        MaxReflections = aimlineConfig.maxReflections;
-        ReflectionDistance = aimlineConfig.reflectionDistance;
+        settings = aimlineConfig.normal;
     }
 
     private void GeneratePoints()
@@ -99,7 +113,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         var distance = aimlineConfig.length - config.bubbles.size;
         var direction = (aimTarget - origin).normalized;
         var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale;
-        int reflections = MaxReflections;
+        int reflections = settings.Value.maxReflections;
 
         points.Clear();
         points.Add(origin + config.bubbles.size * direction * 2.0f);
@@ -143,7 +157,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
                     break;
                 }
 
-                distance = ReflectionDistance;
+                distance = settings.Value.reflectionDistance;
                 direction = new Vector2(-direction.x, direction.y);
 
                 continue;

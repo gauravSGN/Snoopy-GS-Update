@@ -77,9 +77,7 @@ namespace PowerUps
             if (powerUpType == PowerUpType.Empty)
             {
                 launcher.AddShotModifier(AddScan, ShotModifierType.PowerUp);
-
-                aimline.MaxReflections = GlobalState.Instance.Config.aimline.maxExtendedReflections;
-                aimline.ReflectionDistance = GlobalState.Instance.Config.aimline.extendedReflectionDistance;
+                aimline.ModifyAimline(GlobalState.Instance.Config.aimline.extended);
             }
 
             launcher.SetModifierAnimation(animationService.CreateByType(shooterType));

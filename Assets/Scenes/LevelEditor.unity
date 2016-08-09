@@ -1661,6 +1661,7 @@ MonoBehaviour:
   propertyName: LevelProperties
   integerPrefab: {fileID: 147784, guid: db7b6089fad8048938b96c677e5311d1, type: 2}
   floatPrefab: {fileID: 125830, guid: a20f91240b46444f4bddde6de0649d83, type: 2}
+  boolPrefab: {fileID: 145698, guid: a5741e192d911449f99f6acdf4d0cb30, type: 2}
 --- !u!1 &362182879
 GameObject:
   m_ObjectHideFlags: 0
@@ -6999,7 +7000,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1070934946}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.9999999
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
