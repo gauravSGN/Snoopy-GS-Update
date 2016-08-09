@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scans:
   - type: 1
-    asset: {fileID: 4900000, guid: ce26b5c83b05b4217a105d3c1abd862f, type: 3}
+    asset: {fileID: 4900000, guid: 6053da2ab31cf4611a50cd257903de8e, type: 3}
   - type: 2
     asset: {fileID: 4900000, guid: 6053da2ab31cf4611a50cd257903de8e, type: 3}
   - type: 4
@@ -23,7 +23,7 @@ MonoBehaviour:
   - type: 16
     asset: {fileID: 4900000, guid: 6053da2ab31cf4611a50cd257903de8e, type: 3}
   - type: 32
-    asset: {fileID: 4900000, guid: 6053da2ab31cf4611a50cd257903de8e, type: 3}
+    asset: {fileID: 4900000, guid: ce26b5c83b05b4217a105d3c1abd862f, type: 3}
   - type: 3
     asset: {fileID: 4900000, guid: 9710f1b025d9f42dfaa4425f133c8b49, type: 3}
   - type: 5
