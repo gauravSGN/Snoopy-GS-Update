@@ -9,6 +9,9 @@ namespace PowerUps
 {
     public class PowerUpController : MonoBehaviour
     {
+        private const int THREE_COMBO_ROWS = 3;
+        private const int FOUR_COMBO_ROWS = 5;
+
         [SerializeField]
         private PowerUpFactory powerUpFactory;
 
@@ -119,17 +122,30 @@ namespace PowerUps
         private ScanFunction GetScanFunction(GameObject bubble)
         {
             var type = powerUpType;
+            ScanFunction scanFunction;
 
             if (totalPowerUpsInUse == 3)
             {
                 type = PowerUpType.ThreeCombo;
+                scanFunction = () =>
+                {
+                    return CastingUtil.FullRowBubbleCast(bubble, THREE_COMBO_ROWS, THREE_COMBO_ROWS);
+                };
             }
             else if (totalPowerUpsInUse >= 4)
             {
                 type = PowerUpType.FourCombo;
+                scanFunction = () =>
+                {
+                    return CastingUtil.FullRowBubbleCast(bubble, FOUR_COMBO_ROWS, FOUR_COMBO_ROWS);
+                };
+            }
+            else
+            {
+                scanFunction = () => { return CastingUtil.RelativeBubbleCast(bubble, scanMap.Map[type]); };
             }
 
-            return () => { return CastingUtil.RelativeBubbleCast(bubble, scanMap.Map[type]); };
+            return scanFunction;
         }
     }
 }
