@@ -33,6 +33,7 @@ namespace Scoring
 
             handlers[ReactionPriority.Pop] = HandlePoppedBubbles;
             handlers[ReactionPriority.GenericPop] = HandlePoppedBubbles;
+            handlers[ReactionPriority.PowerUp] = HandlePoppedBubbles;
             handlers[ReactionPriority.Cull] = HandleCulledBubbles;
 
             eventService.AddEventHandler<BubbleReactionEvent>(OnBubbleReaction);
