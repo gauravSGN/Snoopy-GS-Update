@@ -72,6 +72,22 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         eventTrigger.Fire += OnFire;
     }
 
+    #if UNITY_EDITOR
+    public void DebugExtendAimLine()
+    {
+        if(settings.Value.reflectionDistance == aimlineConfig.extended.reflectionDistance &&
+            settings.Value.maxReflections == aimlineConfig.extended.maxReflections)
+        {
+            ModifyAimline(aimlineConfig.normal);
+        }
+        else
+        {
+            ModifyAimline(aimlineConfig.extended);
+        }
+        GeneratePoints();
+    }
+    #endif
+
     private void OnStartAiming()
     {
         meshRenderer.enabled = true;
