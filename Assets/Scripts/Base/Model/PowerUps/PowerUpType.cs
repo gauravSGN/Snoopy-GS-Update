@@ -5,6 +5,7 @@ namespace PowerUps
     [Flags]
     public enum PowerUpType
     {
+        Empty = 0,
         Blue = 1,
         Yellow = 2,
         Red = 4,

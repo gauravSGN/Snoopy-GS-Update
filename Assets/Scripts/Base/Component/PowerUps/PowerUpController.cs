@@ -9,6 +9,9 @@ namespace PowerUps
 {
     public class PowerUpController : MonoBehaviour
     {
+        private const int THREE_COMBO_ROWS = 3;
+        private const int FOUR_COMBO_ROWS = 5;
+
         [SerializeField]
         private PowerUpFactory powerUpFactory;
 
@@ -71,15 +74,15 @@ namespace PowerUps
 
         public void AddPowerUp(PowerUpType type)
         {
-            if (powerUpType == 0)
+            if (powerUpType == PowerUpType.Empty)
             {
                 launcher.AddShotModifier(AddScan, ShotModifierType.PowerUp);
+
+                aimline.MaxReflections = GlobalState.Instance.Config.aimline.maxExtendedReflections;
+                aimline.ReflectionDistance = GlobalState.Instance.Config.aimline.extendedReflectionDistance;
             }
 
             launcher.SetModifierAnimation(animationService.CreateByType(shooterType));
-
-            aimline.MaxReflections = GlobalState.Instance.Config.aimline.maxExtendedReflections;
-            aimline.ReflectionDistance = GlobalState.Instance.Config.aimline.extendedReflectionDistance;
 
             powerUpType |= type;
             totalPowerUpsInUse += 1;
@@ -118,18 +121,29 @@ namespace PowerUps
 
         private ScanFunction GetScanFunction(GameObject bubble)
         {
-            var type = powerUpType;
+            ScanFunction scanFunction;
 
             if (totalPowerUpsInUse == 3)
             {
-                type = PowerUpType.ThreeCombo;
+                scanFunction = () =>
+                {
+                    return CastingUtil.FullRowBubbleCast(bubble, THREE_COMBO_ROWS, THREE_COMBO_ROWS);
+                };
             }
             else if (totalPowerUpsInUse >= 4)
             {
-                type = PowerUpType.FourCombo;
+                scanFunction = () =>
+                {
+                    return CastingUtil.FullRowBubbleCast(bubble, FOUR_COMBO_ROWS, FOUR_COMBO_ROWS);
+                };
+            }
+            else
+            {
+                var type = powerUpType;
+                scanFunction = () => { return CastingUtil.RelativeBubbleCast(bubble, scanMap.Map[type]); };
             }
 
-            return () => { return CastingUtil.RelativeBubbleCast(bubble, scanMap.Map[type]); };
+            return scanFunction;
         }
     }
 }

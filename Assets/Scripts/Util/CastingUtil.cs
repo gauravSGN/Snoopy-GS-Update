@@ -22,6 +22,7 @@ namespace Util
         public static RaycastHit2D[] RelativeBubbleCast(GameObject baseBubble, ScanDefinition scanLocations)
         {
             var bubbleSize = GlobalState.Instance.Config.bubbles.size;
+            var yBubbleSize = bubbleSize * MathUtil.COS_30_DEGREES;
             var baseSize = bubbleSize * 0.2f;
             var basePosition = baseBubble.transform.position;
             var scans = new List<RaycastHit2D[]>();
@@ -29,12 +30,38 @@ namespace Util
             foreach (var location in scanLocations)
             {
                 var origin = new Vector2(basePosition.x + (location.x * bubbleSize),
-                                        basePosition.y + (location.y * bubbleSize));
+                                        basePosition.y + (location.y * yBubbleSize));
 
                 scans.Add(Physics2D.CircleCastAll(origin, baseSize, Vector2.zero, 0.0f));
             }
 
-            return scans.Aggregate(new RaycastHit2D[0], (acc, scan) => acc.Concat(scan).ToArray()).ToArray();
+            return AggregateScans(scans);
+        }
+
+        public static RaycastHit2D[] FullRowBubbleCast(GameObject baseBubble, int rowsBelow, int rowsAbove)
+        {
+            var bubbleSize = GlobalState.Instance.Config.bubbles.size;
+            var xOffset = GlobalState.Instance.Config.bubbles.numPerRow * bubbleSize;
+            var yOffset = bubbleSize * MathUtil.COS_30_DEGREES;
+            var basePosition = baseBubble.transform.position;
+            basePosition.y -= rowsBelow * yOffset;
+
+            var start = new Vector2(basePosition.x - xOffset, basePosition.y);
+            var end = new Vector2(basePosition.x + xOffset, basePosition.y);
+            var scans = new List<RaycastHit2D[]>();
+
+            for (int row = -rowsBelow; row <= rowsAbove; row++)
+            {
+                scans.Add(Physics2D.LinecastAll(start, end));
+                start.y = end.y = start.y + yOffset;
+            }
+
+            return AggregateScans(scans);
+        }
+
+        private static RaycastHit2D[] AggregateScans(List<RaycastHit2D[]> scans)
+        {
+            return scans.SelectMany(scan => scan).ToArray();
         }
     }
 }

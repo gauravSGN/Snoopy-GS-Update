@@ -9,7 +9,7 @@ namespace Model.Scan
     public sealed class ScanDefinition : IEnumerable<Vector2>
     {
         [SerializeField]
-        private string name;
+        public string name;
 
         [SerializeField]
         private Vector2[] locations;
