@@ -19,6 +19,7 @@ MonoBehaviour:
   actsAsRoot: 0
   activatible: 1
   score: 10
+  matchThreshold: 3
   defaultAnimations:
   - name: 0
     list: 03000000

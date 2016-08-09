@@ -48,7 +48,7 @@ public class Bubble : GraphElement<Bubble>
             }
         }
 
-        if (bubbleList.Count >= 3)
+        if (bubbleList.Count >= definition.MatchThreshold)
         {
             foreach (var bubble in bubbleList)
             {

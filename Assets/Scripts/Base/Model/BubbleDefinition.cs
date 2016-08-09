@@ -13,6 +13,8 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
     public bool ActsAsRoot { get { return actsAsRoot; } }
     public bool Activatible { get { return activatible; } }
     public int Score { get { return score; } }
+    public int MatchThreshold { get { return matchThreshold; } }
+
     public Dictionary<BubbleDeathType, List<AnimationType>> AnimationMap
     {
         get
@@ -61,6 +63,9 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
 
     [SerializeField]
     private int score;
+
+    [SerializeField]
+    private int matchThreshold;
 
     [SerializeField]
     private List<NamedAnimationList> defaultAnimations;
