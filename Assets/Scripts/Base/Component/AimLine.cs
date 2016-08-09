@@ -5,6 +5,13 @@ using System;
 
 public class AimLine : InitializableBehaviour, UpdateReceiver
 {
+    [Serializable]
+    public struct Settings
+    {
+        public int maxReflections;
+        public float reflectionDistance;
+    }
+
     private const int LAYER_MASK = (1 << (int)Layers.GameObjects | 1 << (int)Layers.Walls);
     private const int GAME_OBJECT_MASK = 1 << (int)Layers.GameObjects;
 
@@ -23,9 +30,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
     private GameConfig.AimlineConfig aimlineConfig;
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
-    private int maxReflections;
-    private float reflectionDistance;
-    private bool extended;
+    private Settings? settings;
 
     public bool Aiming { get { return meshRenderer.enabled; } }
     public Vector3 Target { get { return aimTarget; } }
@@ -47,21 +52,19 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         RebuildMesh();
     }
 
-    public void EnableExtendedAimline()
+    public void ModifyAimline(Settings newSettings)
     {
-        extended = true;
-
-        if (aimlineConfig != null)
-        {
-            maxReflections = aimlineConfig.maxExtendedReflections;
-            reflectionDistance = aimlineConfig.extendedReflectionDistance;
-        }
+        settings = newSettings;
     }
 
     override public void Initialize()
     {
         aimlineConfig = GlobalState.Instance.Config.aimline;
-        ResetReflections(extended);
+
+        if (!settings.HasValue)
+        {
+            ResetReflections();
+        }
 
         eventTrigger.StartAiming += OnStartAiming;
         eventTrigger.StopAiming += OnStopAiming;
@@ -94,15 +97,12 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
             Fire(aimTarget);
         }
 
-        ResetReflections(false);
+        ResetReflections();
     }
 
-    private void ResetReflections(bool extend)
+    private void ResetReflections()
     {
-        maxReflections = extend ? aimlineConfig.maxExtendedReflections : aimlineConfig.maxReflections;
-        reflectionDistance = extend ? aimlineConfig.extendedReflectionDistance : aimlineConfig.reflectionDistance;
-
-        extended = false;
+        settings = aimlineConfig.normal;
     }
 
     private void GeneratePoints()
@@ -113,7 +113,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         var distance = aimlineConfig.length - config.bubbles.size;
         var direction = (aimTarget - origin).normalized;
         var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale;
-        int reflections = maxReflections;
+        int reflections = settings.Value.maxReflections;
 
         points.Clear();
         points.Add(origin + config.bubbles.size * direction * 2.0f);
@@ -157,7 +157,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
                     break;
                 }
 
-                distance = reflectionDistance;
+                distance = settings.Value.reflectionDistance;
                 direction = new Vector2(-direction.x, direction.y);
 
                 continue;

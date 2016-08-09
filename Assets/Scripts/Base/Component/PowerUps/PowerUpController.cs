@@ -77,7 +77,7 @@ namespace PowerUps
             if (powerUpType == PowerUpType.Empty)
             {
                 launcher.AddShotModifier(AddScan, ShotModifierType.PowerUp);
-                aimline.EnableExtendedAimline();
+                aimline.ModifyAimline(GlobalState.Instance.Config.aimline.extended);
             }
 
             launcher.SetModifierAnimation(animationService.CreateByType(shooterType));

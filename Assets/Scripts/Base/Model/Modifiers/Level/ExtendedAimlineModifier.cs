@@ -24,7 +24,7 @@ namespace Modifiers
 
         private void OnReadyForNextBubble(ReadyForNextBubbleEvent gameEvent)
         {
-            aimline.EnableExtendedAimline();
+            aimline.ModifyAimline(GlobalState.Instance.Config.aimline.extended);
         }
     }
 }

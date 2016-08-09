@@ -40,10 +40,8 @@ public class GameConfig : ScriptableObject
         public float dotSpacing;
         public float moveSpeed;
 
-        public int maxReflections;
-        public int maxExtendedReflections;
-        public float reflectionDistance;
-        public float extendedReflectionDistance;
+        public AimLine.Settings normal;
+        public AimLine.Settings extended;
 
         public float colliderAdjustment;
     }
