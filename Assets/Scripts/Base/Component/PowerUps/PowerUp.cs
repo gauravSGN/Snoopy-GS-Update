@@ -45,7 +45,7 @@ namespace PowerUps
             }
         }
 
-        protected void OnMouseUp()
+        public void AddPowerUp()
         {
             if (progress >= 1.0f && allowInput)
             {
