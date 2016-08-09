@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "ctryaH8E/SCQbwCzqXAk3DZvSLE", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
+"skeleton": { "hash": "+UbP2c+5gegPE6suczSttM00REs", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "placement_ctrl_reset", "parent": "root" },
@@ -749,8 +749,13 @@
 			},
 			"kite_bubble_opening_ctrl": {
 				"translate": [
-					{ "time": 0, "x": 0, "y": -50 },
-					{ "time": 0.1, "x": 0, "y": -5.47 }
+					{
+						"time": 0,
+						"x": 0,
+						"y": -50,
+						"curve": [ 0.21, 0.25, 0.75, 1 ]
+					},
+					{ "time": 0.2, "x": 0, "y": -5.47 }
 				],
 				"scale": [
 					{ "time": 0, "x": 1, "y": 1 },
