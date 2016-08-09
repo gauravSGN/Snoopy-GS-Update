@@ -11,6 +11,27 @@ Kite_glowing
   orig: 225, 293
   offset: 0, 0
   index: -1
+charged_bubble_yellowkite
+  rotate: false
+  xy: 645, 243
+  size: 101, 96
+  orig: 101, 96
+  offset: 0, 0
+  index: -1
+charged_bubble_yellowkiteOpen01
+  rotate: false
+  xy: 536, 50
+  size: 111, 112
+  orig: 111, 112
+  offset: 0, 0
+  index: -1
+charged_bubble_yellowkiteOpen02
+  rotate: false
+  xy: 536, 164
+  size: 107, 128
+  orig: 107, 128
+  offset: 0, 0
+  index: -1
 kite_edge_spin_0001
   rotate: false
   xy: 878, 682
