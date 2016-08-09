@@ -1455,15 +1455,15 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 11407028, guid: a38197215072b4e7da0c4d697bdb71aa, type: 2}
+      propertyPath: level
+      value: 
+      objectReference: {fileID: 1197956594}
     - target: {fileID: 11451220, guid: a38197215072b4e7da0c4d697bdb71aa, type: 2}
       propertyPath: launcher
       value: 
       objectReference: {fileID: 443704579}
     - target: {fileID: 11451220, guid: a38197215072b4e7da0c4d697bdb71aa, type: 2}
-      propertyPath: level
-      value: 
-      objectReference: {fileID: 1197956594}
-    - target: {fileID: 11407028, guid: a38197215072b4e7da0c4d697bdb71aa, type: 2}
       propertyPath: level
       value: 
       objectReference: {fileID: 1197956594}

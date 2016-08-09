@@ -113,8 +113,6 @@ GameObject:
   - 224: {fileID: 22461462}
   - 222: {fileID: 22217284}
   - 114: {fileID: 11410376}
-  - 114: {fileID: 11418856}
-  - 114: {fileID: 11425164}
   m_Layer: 31
   m_Name: Buy Button
   m_TagString: Untagged
@@ -275,8 +273,9 @@ GameObject:
   - 114: {fileID: 11415434}
   - 114: {fileID: 11451220}
   - 114: {fileID: 11453698}
+  - 114: {fileID: 11462000}
   m_Layer: 31
-  m_Name: Booster 1
+  m_Name: Beach Ball Booster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -570,59 +569,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11451220}
-        m_MethodName: Activate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &11418856
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 11410376}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11425164}
-        m_MethodName: BuyRainbows
+        m_MethodName: ActivateOrBuy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -688,19 +635,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11425164
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26aa4bf440be44ba0b949039f3000ec3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfBoosters: 5
-  coinCost: 25
 --- !u!114 &11426004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -929,6 +863,7 @@ MonoBehaviour:
   level: {fileID: 0}
   shooterDefinition: {fileID: 11400000, guid: b340add30ae88423ba2b03c6f8a17b4b, type: 2}
   boosterButton: {fileID: 11415434}
+  purchaseBoosters: {fileID: 11462000}
 --- !u!114 &11453698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -968,6 +903,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11462000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26aa4bf440be44ba0b949039f3000ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfBoosters: 5
+  coinCost: 25
 --- !u!114 &11463638
 MonoBehaviour:
   m_ObjectHideFlags: 1
