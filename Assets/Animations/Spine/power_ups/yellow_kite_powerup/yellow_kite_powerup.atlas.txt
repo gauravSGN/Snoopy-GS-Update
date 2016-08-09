@@ -1,0 +1,181 @@
+
+yellow_kite_powerup.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Kite_glowing
+  rotate: false
+  xy: 586, 341
+  size: 225, 293
+  orig: 225, 293
+  offset: 0, 0
+  index: -1
+charged_bubble_yellowkite
+  rotate: false
+  xy: 645, 243
+  size: 101, 96
+  orig: 101, 96
+  offset: 0, 0
+  index: -1
+charged_bubble_yellowkiteOpen01
+  rotate: false
+  xy: 536, 50
+  size: 111, 112
+  orig: 111, 112
+  offset: 0, 0
+  index: -1
+charged_bubble_yellowkiteOpen02
+  rotate: false
+  xy: 536, 164
+  size: 107, 128
+  orig: 107, 128
+  offset: 0, 0
+  index: -1
+kite_edge_spin_0001
+  rotate: false
+  xy: 878, 682
+  size: 186, 294
+  orig: 186, 294
+  offset: 0, 0
+  index: -1
+kite_edge_spin_0002
+  rotate: false
+  xy: 1066, 682
+  size: 186, 294
+  orig: 186, 294
+  offset: 0, 0
+  index: -1
+kite_outline_glowing
+  rotate: false
+  xy: 344, 33
+  size: 190, 259
+  orig: 190, 259
+  offset: 0, 0
+  index: -1
+shultz_spinners/Kite_schultz_swirl_0001
+  rotate: false
+  xy: 2, 636
+  size: 290, 340
+  orig: 290, 340
+  offset: 0, 0
+  index: -1
+shultz_spinners/Kite_schultz_swirl_0002
+  rotate: false
+  xy: 2, 294
+  size: 290, 340
+  orig: 290, 340
+  offset: 0, 0
+  index: -1
+shultz_spinners/Kite_schultz_swirl_0003
+  rotate: false
+  xy: 294, 636
+  size: 290, 340
+  orig: 290, 340
+  offset: 0, 0
+  index: -1
+shultz_spinners/Kite_schultz_swirl_0004
+  rotate: false
+  xy: 294, 294
+  size: 290, 340
+  orig: 290, 340
+  offset: 0, 0
+  index: -1
+shultz_spinners/Kite_schultz_swirl_0005
+  rotate: true
+  xy: 2, 2
+  size: 290, 340
+  orig: 290, 340
+  offset: 0, 0
+  index: -1
+shultz_spinners/Kite_schultz_swirl_0006
+  rotate: false
+  xy: 586, 636
+  size: 290, 340
+  orig: 290, 340
+  offset: 0, 0
+  index: -1
+tracers/powerup_spinLine_0001
+  rotate: false
+  xy: 1254, 903
+  size: 342, 73
+  orig: 342, 73
+  offset: 0, 0
+  index: -1
+tracers/powerup_spinLine_0002
+  rotate: false
+  xy: 1254, 828
+  size: 342, 73
+  orig: 342, 73
+  offset: 0, 0
+  index: -1
+tracers/powerup_spinLine_0003
+  rotate: false
+  xy: 1598, 903
+  size: 342, 73
+  orig: 342, 73
+  offset: 0, 0
+  index: -1
+tracers/powerup_spinLine_0004
+  rotate: false
+  xy: 1254, 753
+  size: 342, 73
+  orig: 342, 73
+  offset: 0, 0
+  index: -1
+tracers/powerup_spinLine_0005
+  rotate: false
+  xy: 1598, 828
+  size: 342, 73
+  orig: 342, 73
+  offset: 0, 0
+  index: -1
+tracers/powerup_spinLine_0006
+  rotate: false
+  xy: 1598, 753
+  size: 342, 73
+  orig: 342, 73
+  offset: 0, 0
+  index: -1
+tracers/powerup_spinLine_0007
+  rotate: false
+  xy: 1254, 678
+  size: 342, 73
+  orig: 342, 73
+  offset: 0, 0
+  index: -1
+tracers/powerup_spinLine_0008
+  rotate: false
+  xy: 1598, 678
+  size: 342, 73
+  orig: 342, 73
+  offset: 0, 0
+  index: -1
+tracers/powerup_spinLine_0009
+  rotate: false
+  xy: 878, 607
+  size: 342, 73
+  orig: 342, 73
+  offset: 0, 0
+  index: -1
+tracers/powerup_spinLine_0010
+  rotate: false
+  xy: 1222, 603
+  size: 342, 73
+  orig: 342, 73
+  offset: 0, 0
+  index: -1
+tracers/powerup_spinLine_0011
+  rotate: false
+  xy: 1566, 603
+  size: 342, 73
+  orig: 342, 73
+  offset: 0, 0
+  index: -1
+tracers/powerup_spinLine_0012
+  rotate: true
+  xy: 1942, 634
+  size: 342, 73
+  orig: 342, 73
+  offset: 0, 0
+  index: -1

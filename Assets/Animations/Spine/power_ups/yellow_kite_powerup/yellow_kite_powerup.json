@@ -1,0 +1,771 @@
+{
+"skeleton": { "hash": "+UbP2c+5gegPE6suczSttM00REs", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "placement_ctrl_reset", "parent": "root" },
+	{ "name": "whole_motion_ctrl", "parent": "placement_ctrl_reset" },
+	{ "name": "master_scale_ctrl", "parent": "whole_motion_ctrl" },
+	{ "name": "edge_spin_ctrl", "parent": "master_scale_ctrl" },
+	{ "name": "kite_bubble_opening_ctrl", "parent": "whole_motion_ctrl" },
+	{ "name": "kite_glowing_pc_ctrl", "parent": "master_scale_ctrl", "length": 58.07, "rotation": 89.99, "y": -120 },
+	{ "name": "outer_glow_scale_ctrl", "parent": "master_scale_ctrl" },
+	{ "name": "tornado_spin_01_ctrl", "parent": "master_scale_ctrl" },
+	{ "name": "tracers_spin_01_ctrl", "parent": "master_scale_ctrl", "y": 136.24, "scaleX": 0.338, "scaleY": 0.338 },
+	{ "name": "tracers_spin_02_ctrl", "parent": "master_scale_ctrl", "y": 105.1, "scaleX": 0.556, "scaleY": 0.556 },
+	{ "name": "tracers_spin_03_ctrl", "parent": "master_scale_ctrl", "y": 25.57, "scaleX": 0.954, "scaleY": 1.065 },
+	{ "name": "tracers_spin_04_ctrl", "parent": "master_scale_ctrl", "y": -77.84, "scaleX": 0.725, "scaleY": 0.861 },
+	{ "name": "tracers_spin_05_ctrl", "parent": "master_scale_ctrl", "y": -109.2, "scaleX": 0.404, "scaleY": 0.404 },
+	{ "name": "tracers_spin_06_ctrl", "parent": "master_scale_ctrl", "y": -128.19, "scaleX": 0.259, "scaleY": 0.259 }
+],
+"slots": [
+	{ "name": "InGame_mocukup_750_1334_Snoopy", "bone": "root" },
+	{ "name": "Kite_glowing", "bone": "kite_glowing_pc_ctrl", "attachment": "Kite_glowing" },
+	{ "name": "kite_outline_glowing", "bone": "outer_glow_scale_ctrl", "attachment": "kite_outline_glowing" },
+	{ "name": "kite_edge_spin_0001", "bone": "edge_spin_ctrl", "attachment": "kite_edge_spin_0001" },
+	{ "name": "Schultz_swirls", "bone": "tornado_spin_01_ctrl" },
+	{ "name": "tracers", "bone": "tracers_spin_01_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
+	{ "name": "tracers2", "bone": "tracers_spin_02_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
+	{ "name": "tracers3", "bone": "tracers_spin_03_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
+	{ "name": "tracers4", "bone": "tracers_spin_04_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
+	{ "name": "tracers5", "bone": "tracers_spin_05_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
+	{ "name": "tracers6", "bone": "tracers_spin_06_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
+	{ "name": "charged_bubble_yellowkite", "bone": "kite_bubble_opening_ctrl", "attachment": "charged_bubble_yellowkite" },
+	{ "name": "charged_bubble_yellowkiteOpen01", "bone": "kite_bubble_opening_ctrl", "attachment": "charged_bubble_yellowkiteOpen01" },
+	{ "name": "charged_bubble_yellowkiteOpen02", "bone": "kite_bubble_opening_ctrl", "attachment": "charged_bubble_yellowkiteOpen02" }
+],
+"skins": {
+	"default": {
+		"Kite_glowing": {
+			"Kite_glowing": { "x": 120, "rotation": -89.99, "width": 225, "height": 293 }
+		},
+		"Schultz_swirls": {
+			"shultz_spinners/Kite_schultz_swirl_0001": { "width": 290, "height": 340 },
+			"shultz_spinners/Kite_schultz_swirl_0002": { "width": 290, "height": 340 },
+			"shultz_spinners/Kite_schultz_swirl_0003": { "width": 290, "height": 340 },
+			"shultz_spinners/Kite_schultz_swirl_0004": { "width": 290, "height": 340 },
+			"shultz_spinners/Kite_schultz_swirl_0005": { "width": 290, "height": 340 },
+			"shultz_spinners/Kite_schultz_swirl_0006": { "width": 290, "height": 340 }
+		},
+		"charged_bubble_yellowkite": {
+			"charged_bubble_yellowkite": { "width": 101, "height": 96 }
+		},
+		"charged_bubble_yellowkiteOpen01": {
+			"charged_bubble_yellowkiteOpen01": { "width": 111, "height": 112 }
+		},
+		"charged_bubble_yellowkiteOpen02": {
+			"charged_bubble_yellowkiteOpen02": { "width": 107, "height": 128 }
+		},
+		"kite_edge_spin_0001": {
+			"kite_edge_spin_0001": { "width": 186, "height": 294 },
+			"kite_edge_spin_0002": { "width": 186, "height": 294 }
+		},
+		"kite_outline_glowing": {
+			"kite_outline_glowing": { "scaleX": 1.362, "scaleY": 1.362, "width": 190, "height": 259 }
+		},
+		"tracers": {
+			"tracers/powerup_spinLine_0001": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0002": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0003": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0004": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0005": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0006": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0007": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0008": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0009": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0010": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0011": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0012": { "width": 342, "height": 73 }
+		},
+		"tracers2": {
+			"tracers/powerup_spinLine_0001": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0002": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0003": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0004": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0005": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0006": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0007": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0008": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0009": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0010": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0011": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0012": { "width": 342, "height": 73 }
+		},
+		"tracers3": {
+			"tracers/powerup_spinLine_0001": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0002": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0003": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0004": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0005": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0006": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0007": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0008": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0009": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0010": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0011": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0012": { "width": 342, "height": 73 }
+		},
+		"tracers4": {
+			"tracers/powerup_spinLine_0001": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0002": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0003": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0004": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0005": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0006": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0007": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0008": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0009": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0010": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0011": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0012": { "width": 342, "height": 73 }
+		},
+		"tracers5": {
+			"tracers/powerup_spinLine_0001": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0002": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0003": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0004": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0005": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0006": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0007": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0008": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0009": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0010": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0011": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0012": { "width": 342, "height": 73 }
+		},
+		"tracers6": {
+			"tracers/powerup_spinLine_0001": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0002": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0003": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0004": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0005": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0006": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0007": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0008": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0009": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0010": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0011": { "width": 342, "height": 73 },
+			"tracers/powerup_spinLine_0012": { "width": 342, "height": 73 }
+		}
+	}
+},
+"events": {
+	"start_kite_sparkle_vfx01": {}
+},
+"animations": {
+	"yellow_kite_AoE": {
+		"slots": {
+			"InGame_mocukup_750_1334_Snoopy": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"Kite_glowing": {
+				"color": [
+					{ "time": 0, "color": "ffffff00", "curve": "stepped" },
+					{
+						"time": 0.1666,
+						"color": "ffffff00",
+						"curve": [ 0.25, 0, 0.322, 0.93 ]
+					},
+					{ "time": 0.2, "color": "ffffffff", "curve": "stepped" },
+					{
+						"time": 2.3333,
+						"color": "ffffffff",
+						"curve": [ 0.167, 0.03, 0.211, 0.97 ]
+					},
+					{ "time": 2.5666, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.0333, "name": "Kite_glowing" },
+					{ "time": 2.6, "name": null }
+				]
+			},
+			"Schultz_swirls": {
+				"color": [
+					{ "time": 0, "color": "ffffff00", "curve": "stepped" },
+					{ "time": 1.5, "color": "ffffff00" },
+					{ "time": 1.6333, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.4, "color": "ffffffff" },
+					{ "time": 2.5, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "shultz_spinners/Kite_schultz_swirl_0001" },
+					{ "time": 1.5, "name": "shultz_spinners/Kite_schultz_swirl_0001" },
+					{ "time": 1.5333, "name": "shultz_spinners/Kite_schultz_swirl_0002" },
+					{ "time": 1.5666, "name": "shultz_spinners/Kite_schultz_swirl_0003" },
+					{ "time": 1.6, "name": "shultz_spinners/Kite_schultz_swirl_0004" },
+					{ "time": 1.6333, "name": "shultz_spinners/Kite_schultz_swirl_0005" },
+					{ "time": 1.6666, "name": "shultz_spinners/Kite_schultz_swirl_0006" },
+					{ "time": 1.7, "name": "shultz_spinners/Kite_schultz_swirl_0001" },
+					{ "time": 1.7333, "name": "shultz_spinners/Kite_schultz_swirl_0002" },
+					{ "time": 1.7666, "name": "shultz_spinners/Kite_schultz_swirl_0003" },
+					{ "time": 1.8, "name": "shultz_spinners/Kite_schultz_swirl_0004" },
+					{ "time": 1.8333, "name": "shultz_spinners/Kite_schultz_swirl_0005" },
+					{ "time": 1.8666, "name": "shultz_spinners/Kite_schultz_swirl_0006" },
+					{ "time": 1.9, "name": "shultz_spinners/Kite_schultz_swirl_0001" },
+					{ "time": 1.9333, "name": "shultz_spinners/Kite_schultz_swirl_0002" },
+					{ "time": 1.9666, "name": "shultz_spinners/Kite_schultz_swirl_0003" },
+					{ "time": 2, "name": "shultz_spinners/Kite_schultz_swirl_0004" },
+					{ "time": 2.0333, "name": "shultz_spinners/Kite_schultz_swirl_0005" },
+					{ "time": 2.0666, "name": "shultz_spinners/Kite_schultz_swirl_0006" },
+					{ "time": 2.1, "name": "shultz_spinners/Kite_schultz_swirl_0001" },
+					{ "time": 2.1333, "name": "shultz_spinners/Kite_schultz_swirl_0002" },
+					{ "time": 2.1666, "name": "shultz_spinners/Kite_schultz_swirl_0003" },
+					{ "time": 2.2, "name": "shultz_spinners/Kite_schultz_swirl_0004" },
+					{ "time": 2.2333, "name": "shultz_spinners/Kite_schultz_swirl_0005" },
+					{ "time": 2.2666, "name": "shultz_spinners/Kite_schultz_swirl_0006" },
+					{ "time": 2.3, "name": "shultz_spinners/Kite_schultz_swirl_0001" },
+					{ "time": 2.3333, "name": "shultz_spinners/Kite_schultz_swirl_0002" },
+					{ "time": 2.3666, "name": "shultz_spinners/Kite_schultz_swirl_0003" },
+					{ "time": 2.4, "name": "shultz_spinners/Kite_schultz_swirl_0004" },
+					{ "time": 2.4333, "name": "shultz_spinners/Kite_schultz_swirl_0005" },
+					{ "time": 2.4666, "name": "shultz_spinners/Kite_schultz_swirl_0006" },
+					{ "time": 2.5333, "name": null }
+				]
+			},
+			"charged_bubble_yellowkite": {
+				"attachment": [
+					{ "time": 0, "name": "charged_bubble_yellowkite" },
+					{ "time": 0.0666, "name": null }
+				]
+			},
+			"charged_bubble_yellowkiteOpen01": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.0666, "name": "charged_bubble_yellowkiteOpen01" },
+					{ "time": 0.1333, "name": null }
+				]
+			},
+			"charged_bubble_yellowkiteOpen02": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.1333, "name": "charged_bubble_yellowkiteOpen02" },
+					{ "time": 0.2, "name": null }
+				]
+			},
+			"kite_edge_spin_0001": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.3666, "color": "ffffffff" },
+					{ "time": 2.4, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.5, "name": null },
+					{ "time": 1.5333, "name": "kite_edge_spin_0001" },
+					{ "time": 1.6333, "name": "kite_edge_spin_0002" },
+					{ "time": 1.7, "name": "kite_edge_spin_0001" },
+					{ "time": 1.7666, "name": "kite_edge_spin_0002" },
+					{ "time": 1.8333, "name": "kite_edge_spin_0001" },
+					{ "time": 1.9, "name": "kite_edge_spin_0002" },
+					{ "time": 1.9666, "name": "kite_edge_spin_0001" },
+					{ "time": 2, "name": "kite_edge_spin_0002" },
+					{ "time": 2.0333, "name": "kite_edge_spin_0001" },
+					{ "time": 2.0666, "name": "kite_edge_spin_0002" },
+					{ "time": 2.1, "name": "kite_edge_spin_0001" },
+					{ "time": 2.1333, "name": "kite_edge_spin_0002" },
+					{ "time": 2.1666, "name": "kite_edge_spin_0001" },
+					{ "time": 2.2, "name": "kite_edge_spin_0002" },
+					{ "time": 2.2333, "name": "kite_edge_spin_0001" },
+					{ "time": 2.2666, "name": "kite_edge_spin_0002" },
+					{ "time": 2.3, "name": "kite_edge_spin_0001" },
+					{ "time": 2.3333, "name": "kite_edge_spin_0002" },
+					{ "time": 2.3666, "name": "kite_edge_spin_0001" },
+					{ "time": 2.4333, "name": null }
+				]
+			},
+			"kite_outline_glowing": {
+				"color": [
+					{ "time": 0, "color": "ffffff00", "curve": "stepped" },
+					{
+						"time": 1.1333,
+						"color": "ffffff00",
+						"curve": [ 0.25, 0, 0.492, 0.98 ]
+					},
+					{ "time": 2.3333, "color": "ffffffff", "curve": "stepped" },
+					{
+						"time": 2.5666,
+						"color": "ffffffff",
+						"curve": [ 0.407, 0.08, 0.607, 0.88 ]
+					},
+					{ "time": 3.2, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.1, "name": null },
+					{ "time": 1.1333, "name": "kite_outline_glowing" },
+					{ "time": 3.2333, "name": null }
+				]
+			},
+			"tracers": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.7333, "name": null },
+					{ "time": 0.7666, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 0.8, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 0.8333, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 0.8666, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 0.9, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 0.9333, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 0.9666, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.0333, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.0666, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.1, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.1333, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.1666, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.2, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.2333, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 1.2666, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 1.3, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 1.3333, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 1.3666, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.4, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.4333, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.4666, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.5, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.5333, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.5666, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.6, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.6333, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 1.6666, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 1.7, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 1.7333, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 1.7666, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.8, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.8333, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.8666, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.9, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.9333, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.9666, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 2, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 2.0333, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 2.0666, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 2.1, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 2.1333, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 2.1666, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 2.2, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 2.2333, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 2.2666, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 2.3, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 2.3333, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 2.3666, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 2.4, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 2.4333, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 2.4666, "name": null }
+				]
+			},
+			"tracers2": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.2333, "name": null },
+					{ "time": 1.2666, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.3, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.3333, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 1.3666, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 1.4, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 1.4333, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 1.4666, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.5, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.5333, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.5666, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.6, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.6333, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.6666, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.7, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.7333, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 1.7666, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 1.8, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 1.8333, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 1.8666, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.9, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.9333, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.9666, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 2, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 2.0333, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 2.0666, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 2.1, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 2.1333, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 2.1666, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 2.2, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 2.2333, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 2.2666, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 2.3, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 2.3333, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 2.3666, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 2.4, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 2.4333, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 2.4666, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 2.5, "name": null }
+				]
+			},
+			"tracers3": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.2333, "name": null },
+					{ "time": 1.2666, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.3, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.3333, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.3666, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.4, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.4333, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.4666, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.5, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 1.5333, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 1.5666, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 1.6, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 1.6333, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.6666, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.7, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.7333, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.7666, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.8, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.8333, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.8666, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.9, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 1.9333, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 1.9666, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 2, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 2.0333, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 2.0666, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 2.1, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 2.1333, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 2.1666, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 2.2, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 2.2333, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 2.2666, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 2.3, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 2.3333, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 2.3666, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 2.4, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 2.4333, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 2.4666, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 2.5, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 2.5333, "name": null }
+				]
+			},
+			"tracers4": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.8, "name": null },
+					{ "time": 0.8333, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 0.8666, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 0.9, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 0.9333, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 0.9666, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.0333, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.0666, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.1, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.1333, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.1666, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 1.2, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 1.2333, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 1.2666, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 1.3, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.3333, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.3666, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.4, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.4333, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.4666, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.5, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.5333, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.5666, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 1.6, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 1.6333, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 1.6666, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 1.7, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.7333, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.7666, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.8, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.8333, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.8666, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.9, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.9333, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.9666, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 2, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 2.0333, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 2.0666, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 2.1, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 2.1333, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 2.1666, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 2.2, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 2.2333, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 2.2666, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 2.3, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 2.3333, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 2.3666, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 2.4, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 2.4333, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 2.4666, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 2.5, "name": null }
+				]
+			},
+			"tracers5": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.0666, "name": null },
+					{ "time": 1.1, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.1333, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.1666, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.2, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.2333, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.2666, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.3, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.3333, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.3666, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 1.4, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 1.4333, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 1.4666, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 1.5, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.5333, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.5666, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.6, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.6333, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.6666, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.7, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.7333, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.7666, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 1.8, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 1.8333, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 1.8666, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 1.9, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.9333, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.9666, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 2, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 2.0333, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 2.0666, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 2.1, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 2.1333, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 2.1666, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 2.2, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 2.2333, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 2.2666, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 2.3, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 2.3333, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 2.3666, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 2.4, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 2.4333, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 2.4666, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 2.5, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 2.5333, "name": null }
+				]
+			},
+			"tracers6": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.9333, "name": null },
+					{ "time": 0.9666, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 1, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.0333, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.0666, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.1, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.1333, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.1666, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.2, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.2333, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.2666, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 1.3, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 1.3333, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 1.3666, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 1.4, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.4333, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.4666, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.5, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.5333, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.5666, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 1.6, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 1.6333, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 1.6666, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 1.7, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 1.7333, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 1.7666, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 1.8, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 1.8333, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 1.8666, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 1.9, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 1.9333, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 1.9666, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 2, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 2.0333, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 2.0666, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 2.1, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 2.1333, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 2.1666, "name": "tracers/powerup_spinLine_0006" },
+					{ "time": 2.2, "name": "tracers/powerup_spinLine_0007" },
+					{ "time": 2.2333, "name": "tracers/powerup_spinLine_0008" },
+					{ "time": 2.2666, "name": "tracers/powerup_spinLine_0009" },
+					{ "time": 2.3, "name": "tracers/powerup_spinLine_0010" },
+					{ "time": 2.3333, "name": "tracers/powerup_spinLine_0011" },
+					{ "time": 2.3666, "name": "tracers/powerup_spinLine_0012" },
+					{ "time": 2.4, "name": "tracers/powerup_spinLine_0001" },
+					{ "time": 2.4333, "name": "tracers/powerup_spinLine_0002" },
+					{ "time": 2.4666, "name": "tracers/powerup_spinLine_0003" },
+					{ "time": 2.5, "name": "tracers/powerup_spinLine_0004" },
+					{ "time": 2.5333, "name": "tracers/powerup_spinLine_0005" },
+					{ "time": 2.5666, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"master_scale_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 0.559, "y": 0.559 },
+					{
+						"time": 0.0333,
+						"x": 0.399,
+						"y": 0.399,
+						"curve": [ 0.072, 0.16, 0.315, 0.84 ]
+					},
+					{
+						"time": 0.8,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.223, 0.29, 0.75, 1 ]
+					},
+					{
+						"time": 2.3333,
+						"x": 1.06,
+						"y": 1.06,
+						"curve": [ 0.167, 0.03, 0.211, 0.97 ]
+					},
+					{ "time": 2.5666, "x": 1, "y": 1 }
+				]
+			},
+			"kite_glowing_pc_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{
+						"time": 0.1666,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.53, 0, 0.826, 0.93 ]
+					},
+					{
+						"time": 0.6,
+						"x": 1,
+						"y": 0.064,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.9,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.25, 0, 0.78, 0.7 ]
+					},
+					{
+						"time": 1.1666,
+						"x": 1,
+						"y": 0.053,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.3,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.4,
+						"x": 1,
+						"y": 0.053,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.4666,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.5333,
+						"x": 1,
+						"y": 0.053,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.6,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.6666,
+						"x": 1,
+						"y": 0.053,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.7333,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.7666,
+						"x": 1,
+						"y": 0.053,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.8,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.8333,
+						"x": 1,
+						"y": 0.053,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 1.8666, "x": 1, "y": 1 }
+				]
+			},
+			"outer_glow_scale_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 0.906, "y": 0.906, "curve": "stepped" },
+					{
+						"time": 1.1333,
+						"x": 0.906,
+						"y": 0.906,
+						"curve": [ 0.25, 0, 0.492, 0.98 ]
+					},
+					{ "time": 2.3333, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 2.5666, "x": 1, "y": 1 }
+				]
+			},
+			"whole_motion_ctrl": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 10,
+						"curve": [ 0.185, 0.29, 0.564, 0.96 ]
+					},
+					{ "time": 1.3333, "x": 0, "y": 30.53 }
+				]
+			},
+			"kite_bubble_opening_ctrl": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": -50,
+						"curve": [ 0.21, 0.25, 0.75, 1 ]
+					},
+					{ "time": 0.2, "x": 0, "y": -5.47 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.2, "x": 1.35, "y": 1.35 }
+				]
+			}
+		},
+		"events": [
+			{ "time": 1.3666, "name": "start_kite_sparkle_vfx01" }
+		]
+	}
+}
+}
