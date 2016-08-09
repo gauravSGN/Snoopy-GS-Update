@@ -11,8 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d598c8f1285471d9ba9720ea457449, type: 3}
   m_Name: CeilingDefinition
   m_EditorClassIdentifier: 
+  category: 0
   type: -1
+  color: 0
   baseColor: {r: 0, g: 0, b: 0, a: 0}
   prefab: {fileID: 145018, guid: 319f12374266e473ab6dcb2aafed0f57, type: 2}
   actsAsRoot: 1
+  activatible: 0
   score: 0
+  matchThreshold: 999999
+  defaultAnimations: []
