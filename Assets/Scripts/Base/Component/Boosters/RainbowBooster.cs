@@ -1,5 +1,6 @@
 using Reaction;
 using UnityEngine;
+using UI.Callbacks;
 using UnityEngine.UI;
 
 namespace Booster
@@ -21,13 +22,19 @@ namespace Booster
         [SerializeField]
         private Button boosterButton;
 
+        [SerializeField]
+        private PurchaseBoosters purchaseBoosters;
+
         private GameObject instantiatedOverlay;
 
-        public void Activate()
+        public void ActivateOrBuy()
         {
-            if ((instantiatedOverlay == null) &&
-                (level.levelState.remainingBubbles >= 2) &&
-                (GlobalState.User.purchasables.boosters.rainbows > 0))
+            if (GlobalState.User.purchasables.boosters.rainbows == 0)
+            {
+                purchaseBoosters.BuyRainbows();
+            }
+            else if ((instantiatedOverlay == null) &&
+                     (level.levelState.remainingBubbles >= 2))
             {
                 instantiatedOverlay = Instantiate(overlay);
 
