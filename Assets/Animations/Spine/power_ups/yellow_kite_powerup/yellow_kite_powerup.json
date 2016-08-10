@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "+UbP2c+5gegPE6suczSttM00REs", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
+"skeleton": { "hash": "XG6XVl45NitTyoJeoy/oF3Jxx3Q", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "placement_ctrl_reset", "parent": "root" },
@@ -9,6 +9,7 @@
 	{ "name": "kite_bubble_opening_ctrl", "parent": "whole_motion_ctrl" },
 	{ "name": "kite_glowing_pc_ctrl", "parent": "master_scale_ctrl", "length": 58.07, "rotation": 89.99, "y": -120 },
 	{ "name": "outer_glow_scale_ctrl", "parent": "master_scale_ctrl" },
+	{ "name": "outer_glow_scale_ctrl2", "parent": "master_scale_ctrl" },
 	{ "name": "tornado_spin_01_ctrl", "parent": "master_scale_ctrl" },
 	{ "name": "tracers_spin_01_ctrl", "parent": "master_scale_ctrl", "y": 136.24, "scaleX": 0.338, "scaleY": 0.338 },
 	{ "name": "tracers_spin_02_ctrl", "parent": "master_scale_ctrl", "y": 105.1, "scaleX": 0.556, "scaleY": 0.556 },
@@ -21,6 +22,7 @@
 	{ "name": "InGame_mocukup_750_1334_Snoopy", "bone": "root" },
 	{ "name": "Kite_glowing", "bone": "kite_glowing_pc_ctrl", "attachment": "Kite_glowing" },
 	{ "name": "kite_outline_glowing", "bone": "outer_glow_scale_ctrl", "attachment": "kite_outline_glowing" },
+	{ "name": "kite_outline_glowing2", "bone": "outer_glow_scale_ctrl2" },
 	{ "name": "kite_edge_spin_0001", "bone": "edge_spin_ctrl", "attachment": "kite_edge_spin_0001" },
 	{ "name": "Schultz_swirls", "bone": "tornado_spin_01_ctrl" },
 	{ "name": "tracers", "bone": "tracers_spin_01_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
@@ -29,9 +31,9 @@
 	{ "name": "tracers4", "bone": "tracers_spin_04_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
 	{ "name": "tracers5", "bone": "tracers_spin_05_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
 	{ "name": "tracers6", "bone": "tracers_spin_06_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
-	{ "name": "charged_bubble_yellowkite", "bone": "kite_bubble_opening_ctrl", "attachment": "charged_bubble_yellowkite" },
-	{ "name": "charged_bubble_yellowkiteOpen01", "bone": "kite_bubble_opening_ctrl", "attachment": "charged_bubble_yellowkiteOpen01" },
-	{ "name": "charged_bubble_yellowkiteOpen02", "bone": "kite_bubble_opening_ctrl", "attachment": "charged_bubble_yellowkiteOpen02" }
+	{ "name": "charged_bubble_yellowkite", "bone": "kite_bubble_opening_ctrl" },
+	{ "name": "charged_bubble_yellowkiteOpen01", "bone": "kite_bubble_opening_ctrl" },
+	{ "name": "charged_bubble_yellowkiteOpen02", "bone": "kite_bubble_opening_ctrl" }
 ],
 "skins": {
 	"default": {
@@ -60,6 +62,9 @@
 			"kite_edge_spin_0002": { "width": 186, "height": 294 }
 		},
 		"kite_outline_glowing": {
+			"kite_outline_glowing": { "scaleX": 1.362, "scaleY": 1.362, "width": 190, "height": 259 }
+		},
+		"kite_outline_glowing2": {
 			"kite_outline_glowing": { "scaleX": 1.362, "scaleY": 1.362, "width": 190, "height": 259 }
 		},
 		"tracers": {
@@ -149,7 +154,7 @@
 	}
 },
 "events": {
-	"start_kite_sparkle_vfx01": {}
+	"StartKiteSparkle01": {}
 },
 "animations": {
 	"yellow_kite_AoE": {
@@ -283,11 +288,12 @@
 						"color": "ffffff00",
 						"curve": [ 0.25, 0, 0.492, 0.98 ]
 					},
-					{ "time": 2.3333, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.3333, "color": "ffffffff" },
+					{ "time": 2.4, "color": "ffffff00" },
 					{
 						"time": 2.5666,
 						"color": "ffffffff",
-						"curve": [ 0.407, 0.08, 0.607, 0.88 ]
+						"curve": [ 0.407, 0.08, 0.609, 0.88 ]
 					},
 					{ "time": 3.2, "color": "ffffff00" }
 				],
@@ -296,6 +302,26 @@
 					{ "time": 1.1, "name": null },
 					{ "time": 1.1333, "name": "kite_outline_glowing" },
 					{ "time": 3.2333, "name": null }
+				]
+			},
+			"kite_outline_glowing2": {
+				"color": [
+					{ "time": 0, "color": "ffffff00", "curve": "stepped" },
+					{ "time": 2.3333, "color": "ffffff00" },
+					{ "time": 2.3666, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.5333, "color": "ffffffff", "curve": "stepped" },
+					{
+						"time": 2.5666,
+						"color": "ffffffff",
+						"curve": [ 0.407, 0.08, 0.609, 0.88 ]
+					},
+					{ "time": 3.3, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2.3333, "name": null },
+					{ "time": 2.3666, "name": "kite_outline_glowing" },
+					{ "time": 3.3333, "name": null }
 				]
 			},
 			"tracers": {
@@ -738,33 +764,33 @@
 			},
 			"whole_motion_ctrl": {
 				"translate": [
-					{
-						"time": 0,
-						"x": 0,
-						"y": 10,
-						"curve": [ 0.185, 0.29, 0.564, 0.96 ]
-					},
-					{ "time": 1.3333, "x": 0, "y": 30.53 }
+					{ "time": 0, "x": 0, "y": 10 }
 				]
 			},
 			"kite_bubble_opening_ctrl": {
 				"translate": [
-					{
-						"time": 0,
-						"x": 0,
-						"y": -50,
-						"curve": [ 0.21, 0.25, 0.75, 1 ]
-					},
-					{ "time": 0.2, "x": 0, "y": -5.47 }
+					{ "time": 0, "x": 0, "y": -10 }
 				],
 				"scale": [
 					{ "time": 0, "x": 1, "y": 1 },
 					{ "time": 0.2, "x": 1.35, "y": 1.35 }
 				]
+			},
+			"outer_glow_scale_ctrl2": {
+				"scale": [
+					{ "time": 0, "x": 0.2, "y": 0.21, "curve": "stepped" },
+					{
+						"time": 2.3666,
+						"x": 0.2,
+						"y": 0.21,
+						"curve": [ 0.25, 0, 0.429, 0.9 ]
+					},
+					{ "time": 2.5333, "x": 1, "y": 1 }
+				]
 			}
 		},
 		"events": [
-			{ "time": 1.3666, "name": "start_kite_sparkle_vfx01" }
+			{ "time": 1.3666, "name": "StartKiteSparkle01" }
 		]
 	}
 }
