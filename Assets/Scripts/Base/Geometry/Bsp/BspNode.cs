@@ -2,24 +2,24 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace Geometry.Bsp
+namespace Geometry.BSP
 {
-    sealed public class BspNode
+    sealed public class BSPNode
     {
         public Polygon Polygon { get; private set; }
-        public BspNode Front { get; private set; }
-        public BspNode Back { get; private set; }
+        public BSPNode Front { get; private set; }
+        public BSPNode Back { get; private set; }
         public bool IsLeaf { get { return (Front == null) && (Back == null); } }
 
-        public BspNode(Polygon polygon)
+        public BSPNode(Polygon polygon)
         {
             Polygon = polygon;
         }
 
         public void Cull()
         {
-            Front = new BspNode(new Polygon(Polygon.Vertices, new int[0]));
-            Back = new BspNode(new Polygon(Polygon.Vertices, Polygon.Indices));
+            Front = new BSPNode(new Polygon(Polygon.Vertices, new int[0]));
+            Back = new BSPNode(new Polygon(Polygon.Vertices, Polygon.Indices));
         }
 
         public bool Split(Vector2 start, Vector2 end)
@@ -92,8 +92,8 @@ namespace Geometry.Bsp
             var inside = CreateSubPolygon(WalkEdges(startIndex + 1, endIndex), secondIntersect, start, end, firstIntersect);
             var outside = CreateSubPolygon(WalkEdges(endIndex + 1, startIndex), firstIntersect, end, start, secondIntersect);
 
-            Front = new BspNode(new Polygon(Polygon.Vertices, inside.ToArray()));
-            Back = new BspNode(new Polygon(Polygon.Vertices, outside.ToArray()));
+            Front = new BSPNode(new Polygon(Polygon.Vertices, inside.ToArray()));
+            Back = new BSPNode(new Polygon(Polygon.Vertices, outside.ToArray()));
         }
 
         private int FindDivisionPoint(Vector2 start, Vector2 end)

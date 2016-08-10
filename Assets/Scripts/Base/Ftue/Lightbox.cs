@@ -1,10 +1,10 @@
 ﻿using Geometry;
-using Geometry.Bsp;
+using Geometry.BSP;
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace Ftue
+namespace FTUE
 {
     sealed public class Lightbox : MonoBehaviour
     {
@@ -77,7 +77,7 @@ namespace Ftue
 
         private List<Polygon> SubtractPolygon(Polygon start, Polygon toRemove)
         {
-            var tree = new BspTree(start);
+            var tree = new BSPTree(start);
             tree.Subtract(toRemove);
             return tree.GetFrontLeaves();
         }

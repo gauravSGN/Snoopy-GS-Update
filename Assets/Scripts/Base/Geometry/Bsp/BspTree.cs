@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace Geometry.Bsp
+namespace Geometry.BSP
 {
-    sealed public class BspTree
+    sealed public class BSPTree
     {
-        private BspNode root;
+        private BSPNode root;
 
-        public BspNode Root { get { return root; } }
+        public BSPNode Root { get { return root; } }
 
-        public BspTree(Polygon polygon)
+        public BSPTree(Polygon polygon)
         {
-            root = new BspNode(polygon);
+            root = new BSPNode(polygon);
         }
 
         public List<Polygon> GetFrontLeaves()
@@ -45,7 +45,7 @@ namespace Geometry.Bsp
             }
         }
 
-        private List<Polygon> GetFrontLeaves(List<Polygon> leaves, BspNode node)
+        private List<Polygon> GetFrontLeaves(List<Polygon> leaves, BSPNode node)
         {
             if (node.Front != null)
             {
