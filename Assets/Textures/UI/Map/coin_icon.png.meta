@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 013e8e94b51044aa99e75de76d87051f
-timeCreated: 1467836506
+guid: 173d74a41202941df8b370b5e9dfddf1
+timeCreated: 1470852444
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -32,7 +32,7 @@ TextureImporter:
     filterMode: -1
     aniso: 0
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
@@ -51,7 +51,7 @@ TextureImporter:
   spriteSheet:
     sprites: []
     outline: []
-  spritePackingTag: 
+  spritePackingTag: map_ui
   userData: 
   assetBundleName: 
   assetBundleVariant: 
