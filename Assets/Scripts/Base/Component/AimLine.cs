@@ -72,6 +72,21 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         eventTrigger.Fire += OnFire;
     }
 
+    #if UNITY_EDITOR
+    public void DebugExtendAimLine()
+    {
+        if (settings.Value.Equals(aimlineConfig.extended))
+        {
+            ModifyAimline(aimlineConfig.normal);
+        }
+        else
+        {
+            ModifyAimline(aimlineConfig.extended);
+        }
+        GeneratePoints();
+    }
+    #endif
+
     private void OnStartAiming()
     {
         meshRenderer.enabled = true;
