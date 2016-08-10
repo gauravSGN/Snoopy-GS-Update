@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "XG6XVl45NitTyoJeoy/oF3Jxx3Q", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
+"skeleton": { "hash": "/hdv+nBIZXrESiwYuphii3o0Zao", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "placement_ctrl_reset", "parent": "root" },
@@ -23,7 +23,7 @@
 	{ "name": "Kite_glowing", "bone": "kite_glowing_pc_ctrl", "attachment": "Kite_glowing" },
 	{ "name": "kite_outline_glowing", "bone": "outer_glow_scale_ctrl", "attachment": "kite_outline_glowing" },
 	{ "name": "kite_outline_glowing2", "bone": "outer_glow_scale_ctrl2" },
-	{ "name": "kite_edge_spin_0001", "bone": "edge_spin_ctrl", "attachment": "kite_edge_spin_0001" },
+	{ "name": "kite_edge_spin_0001", "bone": "edge_spin_ctrl" },
 	{ "name": "Schultz_swirls", "bone": "tornado_spin_01_ctrl" },
 	{ "name": "tracers", "bone": "tracers_spin_01_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
 	{ "name": "tracers2", "bone": "tracers_spin_02_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
@@ -33,7 +33,8 @@
 	{ "name": "tracers6", "bone": "tracers_spin_06_ctrl", "attachment": "tracers/powerup_spinLine_0001" },
 	{ "name": "charged_bubble_yellowkite", "bone": "kite_bubble_opening_ctrl" },
 	{ "name": "charged_bubble_yellowkiteOpen01", "bone": "kite_bubble_opening_ctrl" },
-	{ "name": "charged_bubble_yellowkiteOpen02", "bone": "kite_bubble_opening_ctrl" }
+	{ "name": "charged_bubble_yellowkiteOpen02", "bone": "kite_bubble_opening_ctrl" },
+	{ "name": "kite_edge_spin_0002", "bone": "edge_spin_ctrl", "attachment": "kite_edge_spin_0002" }
 ],
 "skins": {
 	"default": {
@@ -58,7 +59,9 @@
 			"charged_bubble_yellowkiteOpen02": { "width": 107, "height": 128 }
 		},
 		"kite_edge_spin_0001": {
-			"kite_edge_spin_0001": { "width": 186, "height": 294 },
+			"kite_edge_spin_0001": { "width": 186, "height": 294 }
+		},
+		"kite_edge_spin_0002": {
 			"kite_edge_spin_0002": { "width": 186, "height": 294 }
 		},
 		"kite_outline_glowing": {
@@ -232,12 +235,14 @@
 			"charged_bubble_yellowkite": {
 				"attachment": [
 					{ "time": 0, "name": "charged_bubble_yellowkite" },
+					{ "time": 0.0333, "name": "charged_bubble_yellowkite" },
 					{ "time": 0.0666, "name": null }
 				]
 			},
 			"charged_bubble_yellowkiteOpen01": {
 				"attachment": [
 					{ "time": 0, "name": null },
+					{ "time": 0.0333, "name": null },
 					{ "time": 0.0666, "name": "charged_bubble_yellowkiteOpen01" },
 					{ "time": 0.1333, "name": null }
 				]
@@ -245,6 +250,7 @@
 			"charged_bubble_yellowkiteOpen02": {
 				"attachment": [
 					{ "time": 0, "name": null },
+					{ "time": 0.1, "name": null },
 					{ "time": 0.1333, "name": "charged_bubble_yellowkiteOpen02" },
 					{ "time": 0.2, "name": null }
 				]
@@ -259,25 +265,49 @@
 					{ "time": 0, "name": null },
 					{ "time": 1.5, "name": null },
 					{ "time": 1.5333, "name": "kite_edge_spin_0001" },
-					{ "time": 1.6333, "name": "kite_edge_spin_0002" },
-					{ "time": 1.7, "name": "kite_edge_spin_0001" },
-					{ "time": 1.7666, "name": "kite_edge_spin_0002" },
-					{ "time": 1.8333, "name": "kite_edge_spin_0001" },
-					{ "time": 1.9, "name": "kite_edge_spin_0002" },
-					{ "time": 1.9666, "name": "kite_edge_spin_0001" },
-					{ "time": 2, "name": "kite_edge_spin_0002" },
-					{ "time": 2.0333, "name": "kite_edge_spin_0001" },
-					{ "time": 2.0666, "name": "kite_edge_spin_0002" },
-					{ "time": 2.1, "name": "kite_edge_spin_0001" },
-					{ "time": 2.1333, "name": "kite_edge_spin_0002" },
-					{ "time": 2.1666, "name": "kite_edge_spin_0001" },
-					{ "time": 2.2, "name": "kite_edge_spin_0002" },
-					{ "time": 2.2333, "name": "kite_edge_spin_0001" },
-					{ "time": 2.2666, "name": "kite_edge_spin_0002" },
-					{ "time": 2.3, "name": "kite_edge_spin_0001" },
-					{ "time": 2.3333, "name": "kite_edge_spin_0002" },
-					{ "time": 2.3666, "name": "kite_edge_spin_0001" },
+					{ "time": 1.6666, "name": null },
+					{ "time": 1.7666, "name": "kite_edge_spin_0001" },
+					{ "time": 1.8666, "name": null },
+					{ "time": 1.9333, "name": "kite_edge_spin_0001" },
+					{ "time": 1.9666, "name": null },
+					{ "time": 2, "name": "kite_edge_spin_0001" },
+					{ "time": 2.0333, "name": null },
+					{ "time": 2.0666, "name": "kite_edge_spin_0001" },
+					{ "time": 2.1, "name": null },
+					{ "time": 2.1333, "name": "kite_edge_spin_0001" },
+					{ "time": 2.1666, "name": null },
+					{ "time": 2.2, "name": "kite_edge_spin_0001" },
+					{ "time": 2.2333, "name": null },
+					{ "time": 2.2666, "name": "kite_edge_spin_0001" },
+					{ "time": 2.3, "name": null },
+					{ "time": 2.3333, "name": "kite_edge_spin_0001" },
+					{ "time": 2.3666, "name": null },
+					{ "time": 2.4, "name": "kite_edge_spin_0001" },
 					{ "time": 2.4333, "name": null }
+				]
+			},
+			"kite_edge_spin_0002": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.6333, "name": null },
+					{ "time": 1.6666, "name": "kite_edge_spin_0002" },
+					{ "time": 1.7666, "name": null },
+					{ "time": 1.8666, "name": "kite_edge_spin_0002" },
+					{ "time": 1.9333, "name": null },
+					{ "time": 1.9666, "name": "kite_edge_spin_0002" },
+					{ "time": 2, "name": null },
+					{ "time": 2.0333, "name": "kite_edge_spin_0002" },
+					{ "time": 2.0666, "name": null },
+					{ "time": 2.1, "name": "kite_edge_spin_0002" },
+					{ "time": 2.1333, "name": null },
+					{ "time": 2.1666, "name": "kite_edge_spin_0002" },
+					{ "time": 2.2, "name": null },
+					{ "time": 2.2333, "name": "kite_edge_spin_0002" },
+					{ "time": 2.2666, "name": null },
+					{ "time": 2.3, "name": "kite_edge_spin_0002" },
+					{ "time": 2.3333, "name": null },
+					{ "time": 2.3666, "name": "kite_edge_spin_0002" },
+					{ "time": 2.4, "name": null }
 				]
 			},
 			"kite_outline_glowing": {
@@ -764,12 +794,12 @@
 			},
 			"whole_motion_ctrl": {
 				"translate": [
-					{ "time": 0, "x": 0, "y": 10 }
+					{ "time": 0, "x": 0, "y": 0 }
 				]
 			},
 			"kite_bubble_opening_ctrl": {
 				"translate": [
-					{ "time": 0, "x": 0, "y": -10 }
+					{ "time": 0, "x": 0, "y": 0 }
 				],
 				"scale": [
 					{ "time": 0, "x": 1, "y": 1 },
@@ -786,6 +816,17 @@
 						"curve": [ 0.25, 0, 0.429, 0.9 ]
 					},
 					{ "time": 2.5333, "x": 1, "y": 1 }
+				]
+			},
+			"placement_ctrl_reset": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.25, 0, 0.456, 0.96 ]
+					},
+					{ "time": 0.3333, "x": 0, "y": 53.69 }
 				]
 			}
 		},
