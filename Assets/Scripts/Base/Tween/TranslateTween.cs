@@ -24,22 +24,43 @@ public class TranslateTween : MonoBehaviour
         PositionTo
     };
 
-    public void PlayTo(Action<AbstractGoTween> onComplete = null)
+    // Overloads with no args are so Unity button callbacks can show these functions in editor
+    public void PlayTo()
+    {
+        PlayTo(null);
+    }
+
+    public void PlayTo(Action<AbstractGoTween> onComplete)
     {
         PlayTween(xOffset, yOffset, TweenMethod.PositionTo, onComplete);
     }
 
-    public void PlayToBack(Action<AbstractGoTween> onComplete = null)
+    public void PlayToBack()
+    {
+        PlayToBack(null);
+    }
+
+    public void PlayToBack(Action<AbstractGoTween> onComplete)
     {
         PlayTween(-xOffset, -yOffset, TweenMethod.PositionTo, onComplete);
     }
 
-    public void PlayFrom(Action<AbstractGoTween> onComplete = null)
+    public void PlayFrom()
+    {
+        PlayFrom(null);
+    }
+
+    public void PlayFrom(Action<AbstractGoTween> onComplete)
     {
         PlayTween(-xOffset, -yOffset, TweenMethod.PositionFrom, onComplete);
     }
 
-    public void PlayFromBack(Action<AbstractGoTween> onComplete = null)
+    public void PlayFromBack()
+    {
+        PlayFromBack(null);
+    }
+
+    public void PlayFromBack(Action<AbstractGoTween> onComplete)
     {
         PlayTween(xOffset, yOffset, TweenMethod.PositionFrom, onComplete);
     }
