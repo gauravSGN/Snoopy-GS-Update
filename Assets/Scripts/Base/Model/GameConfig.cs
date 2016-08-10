@@ -82,6 +82,12 @@ public class GameConfig : ScriptableObject
         public Color[] rainbowColors;
     }
 
+    [Serializable]
+    public class LevelConfig
+    {
+        public int maxLevel;
+    }
+
     public BubbleConfig bubbles;
     public ReactionConfig reactions;
     public ImpactEffectConfig impactEffect;
@@ -89,4 +95,5 @@ public class GameConfig : ScriptableObject
     public PurchasableConfig purchasables;
     public ScoringConfig scoring;
     public BoosterConfig boosters;
+    public LevelConfig level;
 }

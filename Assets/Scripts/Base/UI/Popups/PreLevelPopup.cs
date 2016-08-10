@@ -33,7 +33,13 @@ namespace UI.Popup
             }
 
             config.closeActions = new List<Action> { () => GlobalState.Instance.Services.Get<SceneService>().Reset() };
-            config.affirmativeActions = new List<Action> { () => SceneManager.LoadScene(config.nextScene) };
+            config.affirmativeActions = new List<Action> { TransitionToLevel };
+        }
+
+        private void TransitionToLevel()
+        {
+            GlobalState.User.currentLevel = config.level;
+            SceneManager.LoadScene(config.nextScene);
         }
     }
 }

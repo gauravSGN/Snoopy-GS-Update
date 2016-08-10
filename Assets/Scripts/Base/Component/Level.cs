@@ -126,7 +126,7 @@ public class Level : MonoBehaviour
         }
 
         GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(true));
-        UpdateUserScoreAndStars();
+        UpdateUser();
 
         var stars = GlobalState.Instance.Services.Get<UserStateService>().levels[levelState.levelNumber].stars;
 
@@ -140,7 +140,7 @@ public class Level : MonoBehaviour
         });
     }
 
-    private void UpdateUserScoreAndStars()
+    private void UpdateUser()
     {
         var user = GlobalState.User;
         var highScore = Math.Max(levelState.score, user.levels[levelState.levelNumber].score);
@@ -164,6 +164,11 @@ public class Level : MonoBehaviour
 
                 break;
             }
+        }
+
+        if (levelState.levelNumber == user.maxLevel)
+        {
+            user.maxLevel++;
         }
     }
 
