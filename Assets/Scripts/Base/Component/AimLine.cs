@@ -75,8 +75,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
     #if UNITY_EDITOR
     public void DebugExtendAimLine()
     {
-        if(settings.Value.reflectionDistance == aimlineConfig.extended.reflectionDistance &&
-            settings.Value.maxReflections == aimlineConfig.extended.maxReflections)
+        if (settings.Value.Equals(aimlineConfig.extended))
         {
             ModifyAimline(aimlineConfig.normal);
         }
