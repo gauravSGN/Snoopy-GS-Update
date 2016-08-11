@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c497b31e3b8241cea4f374bac7dd388, type: 3}
   m_Name: YellowDiamondExplosionDefinition
   m_EditorClassIdentifier: 
-  type: 2
+  type: 4
   prefab: {fileID: 115932, guid: 630086cbcafd24736acb89efbbc8fbbd, type: 2}
-  controller: {fileID: 22100000, guid: 4f961ae838df14164b2c5cd54d8a2411, type: 2}
+  controller: {fileID: 22100000, guid: f79d3f4ae1e734e94ba12eb10efd5e7b, type: 2}
