@@ -1,9 +1,10 @@
-﻿namespace Animation
+namespace Animation
 {
     public enum AnimationType
     {
         ScoreText,
         BlueExplosion,
+        YellowDiamondExplosion,
         BlueShooter,
         BluePop,
         YellowPop,

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Name: AnimationFactory
   m_EditorClassIdentifier: 
   definitions:
-  - {fileID: 11400000, guid: 6f152a639fe174a17be10d18d4ad7957, type: 2}
-  - {fileID: 11400000, guid: 78e1140b5ab6f44d3b8606eeb4169d47, type: 2}
   - {fileID: 11400000, guid: fb95555e7460847ac93a1a7a171775d5, type: 2}
+  - {fileID: 11400000, guid: 6f152a639fe174a17be10d18d4ad7957, type: 2}
+  - {fileID: 11400000, guid: a685317baa7ed4fa787cf086291c7d60, type: 2}
+  - {fileID: 11400000, guid: 78e1140b5ab6f44d3b8606eeb4169d47, type: 2}
   - {fileID: 11400000, guid: bda36f9c7492b46d4bee06f725b00b09, type: 2}
   - {fileID: 11400000, guid: cb605d311fc7744b1b7f7b7397af927a, type: 2}
   - {fileID: 11400000, guid: 552b543b2bee34bec8a5b8ef2c593f1e, type: 2}
