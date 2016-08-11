@@ -48,14 +48,14 @@ namespace UI.Callbacks
                         () =>
                         {
                             GlobalState.User.purchasables.hearts.quantity--;
-                            SceneManager.LoadScene(StringConstants.Scenes.MAP);
+                            GlobalState.EventService.Dispatch(new TransitionToReturnSceneEvent());
                         }
                     }
                 });
             }
             else
             {
-                SceneManager.LoadScene(StringConstants.Scenes.MAP);
+                GlobalState.EventService.Dispatch(new TransitionToReturnSceneEvent());
             }
         }
     }

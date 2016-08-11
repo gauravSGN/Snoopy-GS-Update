@@ -114,7 +114,7 @@ namespace LevelEditor
 
             Instantiate(returnPrefab);
 
-            SceneManager.LoadScene("Level");
+            GlobalState.Instance.Services.Get<SceneService>().TransitionToScene(StringConstants.Scenes.LEVEL);
         }
 
         public void ConfirmAction(Action action)

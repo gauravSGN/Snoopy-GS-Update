@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using Service;
 
 namespace LevelEditor
 {
@@ -9,7 +7,7 @@ namespace LevelEditor
     {
         public void Return()
         {
-            SceneManager.LoadScene(GlobalState.Instance.Services.Get<SceneService>().ReturnScene);
+            GlobalState.EventService.Dispatch(new TransitionToReturnSceneEvent());
         }
 
         protected void OnLevelWasLoaded(int level)

@@ -5,7 +5,6 @@ using Service;
 using UI.Popup;
 using Modifiers;
 using UnityEngine;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -77,7 +76,7 @@ public class Level : MonoBehaviour
             }
         }
 
-        var eventService = GlobalState.Instance.Services.Get<EventService>();
+        var eventService = GlobalState.EventService;
 
         eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
         eventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
@@ -96,11 +95,8 @@ public class Level : MonoBehaviour
 
     private void OnAssetLoadingComplete()
     {
-        var assetService = GlobalState.Instance.Services.Get<AssetService>();
-        var eventService = GlobalState.Instance.Services.Get<EventService>();
-
-        assetService.OnComplete -= OnAssetLoadingComplete;
-        eventService.Dispatch(new LevelLoadedEvent());
+        GlobalState.Instance.Services.Get<AssetService>().OnComplete -= OnAssetLoadingComplete;
+        GlobalState.EventService.Dispatch(new LevelLoadedEvent());
     }
 
     private void OnBubbleFired(BubbleFiredEvent gameEvent)
@@ -125,7 +121,7 @@ public class Level : MonoBehaviour
             }
         }
 
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(true));
+        GlobalState.EventService.Dispatch(new LevelCompleteEvent(true));
         UpdateUser();
 
         var stars = GlobalState.Instance.Services.Get<UserStateService>().levels[levelState.levelNumber].stars;
@@ -174,7 +170,7 @@ public class Level : MonoBehaviour
 
     private void DispatchReturnToMap()
     {
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new ReturnToMapEvent());
+        GlobalState.EventService.Dispatch(new TransitionToReturnSceneEvent());
     }
 
     private void AddModifier(LevelModifierType type, string data)

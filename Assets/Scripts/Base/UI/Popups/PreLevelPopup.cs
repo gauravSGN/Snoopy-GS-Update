@@ -3,7 +3,6 @@ using Service;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 namespace UI.Popup
 {
@@ -39,7 +38,7 @@ namespace UI.Popup
         private void TransitionToLevel()
         {
             GlobalState.User.currentLevel = config.level;
-            SceneManager.LoadScene(config.nextScene);
+            GlobalState.Instance.Services.Get<SceneService>().TransitionToScene(config.nextScene);
         }
     }
 }
