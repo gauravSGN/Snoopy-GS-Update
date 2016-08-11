@@ -102,6 +102,7 @@ GameObject:
   - 222: {fileID: 189536568}
   - 114: {fileID: 189536570}
   - 61: {fileID: 189536567}
+  - 114: {fileID: 189536571}
   m_Layer: 31
   m_Name: Scroll View
   m_TagString: Untagged
@@ -190,6 +191,19 @@ MonoBehaviour:
   m_Script: {fileID: -146154839, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &189536571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 189536565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec3e79136ca643a4ac16d18ca345b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollRect: {fileID: 189536569}
+  scrollingContent: {fileID: 1690557490}
 --- !u!1001 &360325178
 Prefab:
   m_ObjectHideFlags: 0

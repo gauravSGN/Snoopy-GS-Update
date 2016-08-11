@@ -1,4 +1,5 @@
 using gs;
+using System;
 using Service;
 using Data = System.Collections.Generic.IDictionary<string, object>;
 
@@ -20,7 +21,7 @@ namespace State
         public long maxLevel
         {
             get { return GetValue<long>(MAX_LEVEL, 1); }
-            set { SetValue<long>(MAX_LEVEL, value); }
+            set { SetValue<long>(MAX_LEVEL, Math.Min(value, GlobalState.Instance.Config.level.maxLevel)); }
         }
 
         public long hasPaid
