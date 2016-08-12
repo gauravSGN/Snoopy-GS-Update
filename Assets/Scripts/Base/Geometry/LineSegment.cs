@@ -16,7 +16,7 @@ namespace Geometry
         {
             var product = (end - start).Cross(point - start);
 
-            if (Mathf.Abs(product) <= 0.01f)
+            if (Mathf.Abs(product) <= 1.0f)
             {
                 return PointClassification.Colinear;
             }
