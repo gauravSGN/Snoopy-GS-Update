@@ -22,7 +22,10 @@ namespace PowerUps
         private AnimationType shooterType;
 
         [SerializeField]
-        private AnimationType effectType;
+        private AnimationType deathEffectType;
+
+        [SerializeField]
+        private AnimationType explosionEffectType;
 
         [SerializeField]
         private PowerUpScanMap scanMap;
@@ -60,7 +63,7 @@ namespace PowerUps
                     {
                         var powerUp = powerUpFactory.CreateByType((PowerUpType)(1 << index));
                         powerUp.GetComponent<PowerUp>().Setup(fillData[index], this, level);
-                        powerUp.transform.parent = anchors[anchorIndex];
+                        powerUp.transform.SetParent(anchors[anchorIndex], false);
                         powerUp.transform.localPosition = Vector3.zero;
                         anchorIndex++;
                     }
@@ -94,7 +97,7 @@ namespace PowerUps
             model.definition = shooterDefinition;
 
             var explosion = bubble.AddComponent<BubbleExplode>();
-            explosion.Setup(GetScanFunction(bubble), effectType);
+            explosion.Setup(GetScanFunction(bubble), deathEffectType, explosionEffectType);
 
             powerUpType = 0;
             totalPowerUpsInUse = 0;

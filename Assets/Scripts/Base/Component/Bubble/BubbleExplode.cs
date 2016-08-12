@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using Reaction;
 using Service;
 using Animation;
@@ -13,20 +12,14 @@ public class BubbleExplode : MonoBehaviour
     [SerializeField]
     private AnimationType deathAnimationType;
 
-    public void Start()
-    {
-        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleSettlingEvent>(OnSettling);
-    }
+    [SerializeField]
+    private AnimationType explosionAnimationType;
 
-    public void Setup(ScanFunction callback, AnimationType animation)
+    public void Setup(ScanFunction callback, AnimationType deathAnimation,AnimationType explosionAnimation)
     {
         scanFunction = callback;
-        deathAnimationType = animation;
-    }
-
-    protected void OnDestroy()
-    {
-        GlobalState.Instance.Services.Get<EventService>().RemoveEventHandler<BubbleSettlingEvent>(OnSettling);
+        deathAnimationType = deathAnimation;
+        explosionAnimationType = explosionAnimation;
     }
 
     public void OnSettling(GameEvent gameEvent)
@@ -34,13 +27,11 @@ public class BubbleExplode : MonoBehaviour
         var hits = scanFunction();
         var length = hits.Length;
 
-        var bubbleDeath = gameObject.GetComponent<BubbleDeath>();
-        bubbleDeath.AddEffect(AnimationEffect.Play(gameObject, deathAnimationType), BubbleDeathType.Pop);
+        var effectController = gameObject.GetComponent<BubbleEffectController>();
+        effectController.AddEffect(AnimationEffect.Play(gameObject, explosionAnimationType));
 
         if (length > 0)
         {
-            var bubbleList = new List<Bubble>();
-
             for (int index = 0; index < length; index++)
             {
                 var bubble = hits[index].collider.gameObject;
@@ -49,10 +40,30 @@ public class BubbleExplode : MonoBehaviour
                 if ((bubble.tag == StringConstants.Tags.BUBBLES) &&
                     (bubbleAttachments.Model.Active || bubble == gameObject))
                 {
-                    bubbleList.Add(bubbleAttachments.Model);
-                    BubbleReactionEvent.Dispatch(ReactionPriority.PowerUp, bubbleAttachments.Model);
+                    AddReaction(bubble, bubbleAttachments.Model);
                 }
             }
         }
+    }
+
+    protected void Start()
+    {
+        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleSettlingEvent>(OnSettling);
+    }
+
+    protected void OnDestroy()
+    {
+        GlobalState.Instance.Services.Get<EventService>().RemoveEventHandler<BubbleSettlingEvent>(OnSettling);
+    }
+
+    private void AddReaction(GameObject bubble, Bubble model)
+    {
+        if (deathAnimationType != AnimationType.None)
+        {
+            var bubbleDeath = bubble.GetComponent<BubbleDeath>();
+            bubbleDeath.AddEffect(AnimationEffect.Play(bubble, deathAnimationType), BubbleDeathType.Pop);
+        }
+
+        BubbleReactionEvent.Dispatch(ReactionPriority.PowerUp, model);
     }
 }
