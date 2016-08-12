@@ -14,7 +14,7 @@
         },
         {
             "interfaceName": "Service.SceneService, Assembly-CSharp",
-            "className": "Service.SceneTransitionData, Assembly-CSharp"
+            "className": "Service.SceneHandler, Assembly-CSharp"
         },
         {
             "interfaceName": "Service.AnimationService, Assembly-CSharp",

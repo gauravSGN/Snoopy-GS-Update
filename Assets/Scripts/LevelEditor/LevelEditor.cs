@@ -108,13 +108,13 @@ namespace LevelEditor
             LevelEditorState.Instance.LevelFilename = filename;
             LevelEditorState.Instance.LevelData = manipulator.SaveLevel();
 
-            var sceneData = GlobalState.Instance.Services.Get<SceneService>();
-            sceneData.NextLevelData = LevelEditorState.Instance.LevelData;
-            sceneData.ReturnScene = LevelEditorConstants.SCENE_NAME;
+            var sceneService = GlobalState.Instance.Services.Get<SceneService>();
+            sceneService.NextLevelData = LevelEditorState.Instance.LevelData;
+            sceneService.ReturnScene = LevelEditorConstants.SCENE_NAME;
 
             Instantiate(returnPrefab);
 
-            SceneManager.LoadScene("Level");
+            sceneService.TransitionToScene(StringConstants.Scenes.LEVEL);
         }
 
         public void ConfirmAction(Action action)

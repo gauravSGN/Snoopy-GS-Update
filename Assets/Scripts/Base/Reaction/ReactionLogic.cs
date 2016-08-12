@@ -95,7 +95,7 @@ namespace Reaction
 
         private void DispatchReturnToMap()
         {
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new ReturnToMapEvent());
+            GlobalState.Instance.Services.Get<EventService>().Dispatch(new TransitionToReturnSceneEvent());
         }
     }
 }

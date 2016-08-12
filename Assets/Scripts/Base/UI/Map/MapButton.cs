@@ -70,6 +70,17 @@ namespace UI.Map
                 {
                     GlobalState.EventService.Dispatch<SnapMapToLocationEvent>(new SnapMapToLocationEvent((RectTransform)transform));
                 }
+
+                if (user.maxLevel == levelNumber)
+                {
+                    var previousMapButton = transform.parent.Find((levelNumber - 1).ToString());
+                    var previousMapButtonTransform = previousMapButton ? previousMapButton.transform : null;
+
+                    var gameEvent = new SetPlayerAvatarPositionEvent((RectTransform)previousMapButtonTransform,
+                                                                     (RectTransform)transform);
+
+                    GlobalState.EventService.Dispatch<SetPlayerAvatarPositionEvent>(gameEvent);
+                }
             }
             else
             {
