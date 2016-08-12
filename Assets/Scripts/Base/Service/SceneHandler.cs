@@ -1,5 +1,7 @@
 ﻿using Event;
 using System;
+using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +31,15 @@ namespace Service
         public void TransitionToScene(string sceneName)
         {
             SceneManager.LoadScene(sceneName);
+            GlobalState.Instance.RunCoroutine(InvokePostTransitionCallbacks());
+        }
+
+        // What is better than this?
+        // Maybe the SceneManager.sceneLoaded callbacks in 5.4 will work?
+        // https://docs.unity3d.com/ScriptReference/SceneManagement.SceneManager-sceneLoaded.html
+        private IEnumerator InvokePostTransitionCallbacks()
+        {
+            yield return 1;
 
             foreach (var callback in PostTransitionCallbacks)
             {

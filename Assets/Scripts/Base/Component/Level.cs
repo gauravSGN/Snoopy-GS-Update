@@ -165,12 +165,20 @@ public class Level : MonoBehaviour
         if (levelState.levelNumber == user.maxLevel)
         {
             user.maxLevel++;
+
+            var sceneService = GlobalState.Instance.Services.Get<SceneService>();
+            sceneService.PostTransitionCallbacks.Add(DispatchMovePlayerAvatar);
         }
     }
 
     private void DispatchReturnToMap()
     {
         GlobalState.EventService.Dispatch(new TransitionToReturnSceneEvent());
+    }
+
+    private void DispatchMovePlayerAvatar()
+    {
+        GlobalState.EventService.Dispatch(new MovePlayerAvatarEvent());
     }
 
     private void AddModifier(LevelModifierType type, string data)
