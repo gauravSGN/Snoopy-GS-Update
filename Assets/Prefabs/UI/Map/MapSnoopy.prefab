@@ -39,7 +39,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   skeletonDataAsset: {fileID: 11400000, guid: 6f140cfddda8f4ffea4919252a1a28d4, type: 2}
   initialSkinName: default
-  startingAnimation: snoopy_turn_04
+  startingAnimation: snoopy_turn_default
   startingLoop: 1
   timeScale: 1
   freeze: 0
