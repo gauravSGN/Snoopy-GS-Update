@@ -1,9 +1,8 @@
 using Reaction;
 using Service;
 
-public class BubbleReactionEvent : GameEvent
+public class BubbleReactionEvent : ReactionEvent
 {
-    public ReactionPriority priority;
     public Bubble bubble;
 
     public static void Dispatch(ReactionPriority priority, Bubble bubble)

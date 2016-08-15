@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
 namespace Util
 {
@@ -13,7 +11,7 @@ namespace Util
 
         abstract protected KeyType GetKeyFromAttribute(AttributeType attribute);
 
-        public BaseType Create(KeyType key)
+        public BaseType Create(KeyType key, bool passKey = false)
         {
             if (validTypes == null)
             {
@@ -24,7 +22,14 @@ namespace Util
 
             if (validTypes.ContainsKey(key))
             {
-                result = Activator.CreateInstance(validTypes[key]) as BaseType;
+                if (passKey)
+                {
+                    result = Activator.CreateInstance(validTypes[key], key) as BaseType;
+                }
+                else
+                {
+                    result = Activator.CreateInstance(validTypes[key]) as BaseType;
+                }
             }
 
             return result;

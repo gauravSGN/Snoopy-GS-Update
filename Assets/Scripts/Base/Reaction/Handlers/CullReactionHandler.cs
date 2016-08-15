@@ -4,8 +4,10 @@ using System.Collections.Generic;
 namespace Reaction
 {
     [ReactionHandlerAttribute(ReactionPriority.Cull)]
-    public class CullReactionHandler : ReactionHandler
+    public class CullReactionHandler : BubbleReactionHandler
     {
+        public CullReactionHandler(ReactionPriority priority) : base(priority) { }
+
         public override IEnumerator HandleActions()
         {
             var bubbles = scheduledBubbles;
