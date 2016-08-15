@@ -1,0 +1,51 @@
+{
+"skeleton": { "hash": "hE3agRzX8monA2U80MCt0a5q/g8", "spine": "3.2.01", "width": 0, "height": 0, "images": "" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "scale/move_ctrl", "parent": "root" },
+	{ "name": "pop_explode_pcs_ctrl", "parent": "scale/move_ctrl", "y": -28 }
+],
+"slots": [
+	{ "name": "pop_parts", "bone": "pop_explode_pcs_ctrl" }
+],
+"skins": {
+	"default": {
+		"pop_parts": {
+			"images/explode_pcs/pop_pc_0001": { "x": 0.95, "y": 26.74, "width": 30, "height": 30 },
+			"images/explode_pcs/pop_pc_0002": { "y": 27.47, "width": 62, "height": 62 },
+			"images/explode_pcs/pop_pc_0003": { "y": 26.19, "width": 66, "height": 66 },
+			"images/explode_pcs/pop_pc_0004": { "y": 23.67, "width": 68, "height": 68 },
+			"images/explode_pcs/pop_pc_0005": { "y": 18.79, "width": 72, "height": 72 },
+			"images/explode_pcs/pop_pc_0007": { "y": 12.13, "width": 80, "height": 80 },
+			"images/explode_pcs/pop_pc_0009": { "y": 7.25, "width": 86, "height": 86 },
+			"images/explode_pcs/pop_pc_0011": { "y": 0.14, "width": 96, "height": 96 },
+			"images/explode_pcs/pop_pc_0012": { "y": -2.15, "width": 100, "height": 100 },
+			"images/explode_pcs/pop_pc_0013": { "y": -4.15, "width": 106, "height": 106 },
+			"images/explode_pcs/pop_pc_0014": { "y": -1.23, "width": 106, "height": 106 }
+		}
+	}
+},
+"animations": {
+	"Bubble_Pop_VFX": {
+		"slots": {
+			"pop_parts": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.0333, "name": "images/explode_pcs/pop_pc_0001" },
+					{ "time": 0.0666, "name": "images/explode_pcs/pop_pc_0002" },
+					{ "time": 0.1, "name": "images/explode_pcs/pop_pc_0003" },
+					{ "time": 0.1333, "name": "images/explode_pcs/pop_pc_0004" },
+					{ "time": 0.1666, "name": "images/explode_pcs/pop_pc_0005" },
+					{ "time": 0.2333, "name": "images/explode_pcs/pop_pc_0007" },
+					{ "time": 0.3, "name": "images/explode_pcs/pop_pc_0009" },
+					{ "time": 0.3666, "name": "images/explode_pcs/pop_pc_0011" },
+					{ "time": 0.4, "name": "images/explode_pcs/pop_pc_0012" },
+					{ "time": 0.4333, "name": "images/explode_pcs/pop_pc_0013" },
+					{ "time": 0.4666, "name": "images/explode_pcs/pop_pc_0014" },
+					{ "time": 0.5, "name": null }
+				]
+			}
+		}
+	}
+}
+}
