@@ -20,5 +20,6 @@ public class LevelState : Observable
     {
         remainingBubbles--;
         NotifyListeners();
+        GlobalState.EventService.Dispatch(new ShotsRemainingEvent(remainingBubbles));
     }
 }
