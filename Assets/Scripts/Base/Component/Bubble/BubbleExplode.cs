@@ -15,7 +15,7 @@ public class BubbleExplode : MonoBehaviour
     [SerializeField]
     private AnimationType explosionAnimationType;
 
-    public void Setup(ScanFunction callback, AnimationType deathAnimation,AnimationType explosionAnimation)
+    public void Setup(ScanFunction callback, AnimationType deathAnimation, AnimationType explosionAnimation)
     {
         scanFunction = callback;
         deathAnimationType = deathAnimation;
