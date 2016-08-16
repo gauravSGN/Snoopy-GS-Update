@@ -16,8 +16,6 @@ public class SetScoreText : StateMachineBehaviour
             textMesh = gameObject.GetComponent<TextMesh>();
             bubbleScore = parent.GetComponent<BubbleScore>();
 
-            textMesh.color = parent.GetComponent<BubbleAttachments>().Model.definition.BaseColor;
-
             gameObject.transform.SetParent(null, true);
         }
 
