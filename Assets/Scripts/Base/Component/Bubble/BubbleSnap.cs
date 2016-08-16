@@ -31,7 +31,7 @@ public class BubbleSnap : MonoBehaviour
             var gameObjectLayer = 1 << (int)Layers.GameObjects;
             var velocity = (Vector3)rigidBody.velocity.normalized;
             var position = transform.position;
-            var radius = config.bubbles.size / 2.0f;
+            var radius = config.bubbles.size / 3.0f;
 
             velocity = new Vector3(Mathf.Abs(velocity.x) * Mathf.Sign(position.x), velocity.y);
             position -= velocity * radius;
