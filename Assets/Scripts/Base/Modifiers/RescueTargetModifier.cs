@@ -76,7 +76,7 @@ namespace Modifiers
         private void OnLevelLoaded(LevelLoadedEvent gameEvent)
         {
             var config = GlobalState.Instance.Config.woodstock;
-            var snoopyPosition = GameObject.Find("Snoopy").transform.position;
+            var targetPosition = GameObject.Find("Bird Landing Target").transform.localPosition;
             var landingSpots = new List<Vector3>();
             var count = targets.Count;
             var majorRadius = config.majorLandingRadius;
@@ -89,9 +89,9 @@ namespace Modifiers
                 var angle = index * theta + Random.Range(-spread, spread);
 
                 landingSpots.Add(new Vector3(
-                    snoopyPosition.x + majorRadius * Mathf.Cos(angle),
-                    snoopyPosition.y + minorRadius * Mathf.Sin(angle),
-                    snoopyPosition.z + Mathf.Sin(angle)
+                    targetPosition.x + majorRadius * Mathf.Cos(angle),
+                    targetPosition.y + minorRadius * Mathf.Sin(angle),
+                    targetPosition.z + Mathf.Sin(angle)
                 ));
             }
 
