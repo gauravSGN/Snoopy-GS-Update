@@ -2,9 +2,14 @@
 {
     public enum AnimationType
     {
-        ScoreText = 0,
-        BlueExplosion = 1,
-        BlueShooter = 2,
-        GreenPop = 3
+        ScoreText,
+        BlueExplosion,
+        BlueShooter,
+        BluePop,
+        YellowPop,
+        RedPop,
+        GreenPop,
+        PinkPop,
+        PurplePop,
     }
 }
