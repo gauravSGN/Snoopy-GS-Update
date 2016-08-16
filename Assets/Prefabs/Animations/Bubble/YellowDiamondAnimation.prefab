@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11452122}
   - 114: {fileID: 11469834}
   - 114: {fileID: 11481248}
+  - 114: {fileID: 11410156}
   m_Layer: 0
   m_Name: YellowDiamondAnimation
   m_TagString: Untagged
@@ -88,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -146,6 +147,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11410156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8c88f0a4f134eaf92fc671220a19cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11452122
 MonoBehaviour:
   m_ObjectHideFlags: 1

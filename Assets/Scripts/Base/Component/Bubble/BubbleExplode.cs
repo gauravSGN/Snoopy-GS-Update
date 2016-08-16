@@ -27,8 +27,7 @@ public class BubbleExplode : MonoBehaviour
         var hits = scanFunction();
         var length = hits.Length;
 
-        var effectController = gameObject.GetComponent<BubbleEffectController>();
-        effectController.AddEffect(AnimationEffect.Play(gameObject, explosionAnimationType));
+        AnimationReactionEvent.Dispatch(ReactionPriority.PreReactionAnimation, explosionAnimationType, gameObject);
 
         if (length > 0)
         {

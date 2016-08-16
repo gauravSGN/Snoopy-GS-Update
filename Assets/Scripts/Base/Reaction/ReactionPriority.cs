@@ -2,6 +2,7 @@ namespace Reaction
 {
     public enum ReactionPriority
     {
+        PreReactionAnimation = 5,
         PowerUp = 9,
         Pop = 10,
         GenericPop = 11,
