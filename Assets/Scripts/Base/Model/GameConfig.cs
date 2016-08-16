@@ -88,6 +88,15 @@ public class GameConfig : ScriptableObject
         public int maxLevel;
     }
 
+    [Serializable]
+    public class WoodstockConfig
+    {
+        public float majorLandingRadius;
+        public float minorLandingRadius;
+        public float landingSpread;
+        public float flightSpeed;
+    }
+
     public BubbleConfig bubbles;
     public ReactionConfig reactions;
     public ImpactEffectConfig impactEffect;
@@ -96,4 +105,5 @@ public class GameConfig : ScriptableObject
     public ScoringConfig scoring;
     public BoosterConfig boosters;
     public LevelConfig level;
+    public WoodstockConfig woodstock;
 }
