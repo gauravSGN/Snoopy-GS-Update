@@ -57,7 +57,7 @@ namespace Snoopy.Characters
         private IEnumerator FlyToGround()
         {
             var myTransform = transform;
-            var delta = (myTransform.position - LandingSpot);
+            var delta = (myTransform.localPosition - LandingSpot);
             var distance = delta.magnitude;
             delta /= distance;
             var speed = GlobalState.Instance.Config.woodstock.flightSpeed;
@@ -65,7 +65,7 @@ namespace Snoopy.Characters
             while (distance > 0.0f)
             {
                 distance = Mathf.Max(0.0f, distance - Time.deltaTime * speed);
-                myTransform.position = LandingSpot + delta * distance;
+                myTransform.localPosition = LandingSpot + delta * distance;
                 yield return null;
             }
 
