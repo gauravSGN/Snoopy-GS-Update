@@ -947,6 +947,13 @@ Prefab:
     - target: {fileID: 431746, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
       propertyPath: m_LocalPosition.y
       value: -2.31
+    - target: {fileID: 11493900, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: shooterType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493900, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: explosionEffectType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
