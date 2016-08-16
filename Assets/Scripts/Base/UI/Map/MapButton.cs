@@ -22,6 +22,9 @@ namespace UI.Map
         [SerializeField]
         private GameObject[] starPositions;
 
+        [SerializeField]
+        private Image buttonIcon;
+
         public void Click(string nextScene = "")
         {
             if (GlobalState.Instance.Services.Get<UserStateService>().purchasables.hearts.quantity > 0)
@@ -85,6 +88,7 @@ namespace UI.Map
             else
             {
                 button.interactable = false;
+                buttonIcon.enabled = false;
             }
         }
     }
