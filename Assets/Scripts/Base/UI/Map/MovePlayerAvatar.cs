@@ -14,6 +14,7 @@ namespace UI.Map
         private AnimationCurve easeCurve;
 
         private Transform origin;
+        private Transform destination;
 
         protected void Start()
         {
@@ -24,10 +25,11 @@ namespace UI.Map
         private void OnSetPlayerAvatarPosition(SetPlayerAvatarPositionEvent gameEvent)
         {
             origin = gameEvent.origin;
+            destination = gameEvent.destination;
 
             transform.SetParent(gameEvent.destination.parent, false);
-            transform.localPosition = new Vector3(gameEvent.destination.localPosition.x,
-                                                  gameEvent.destination.localPosition.y + yPadding);
+            transform.localPosition = new Vector3(destination.localPosition.x,
+                                                  destination.localPosition.y + yPadding);
         }
 
         private void OnMovePlayerAvatar(MovePlayerAvatarEvent gameEvent)
@@ -37,6 +39,17 @@ namespace UI.Map
                 GoTween tween = transform.localPositionFrom(travelTime, origin.localPosition);
                 tween.easeCurve = easeCurve;
                 tween.easeType = GoEaseType.AnimationCurve;
+                tween.setOnCompleteHandler(OnAvatarMoveComplete);
+            }
+        }
+
+        private void OnAvatarMoveComplete(AbstractGoTween tween)
+        {
+            var mapButtonComponent = destination.GetComponent<MapButton>();
+
+            if (mapButtonComponent != null)
+            {
+                mapButtonComponent.Click();
             }
         }
     }
