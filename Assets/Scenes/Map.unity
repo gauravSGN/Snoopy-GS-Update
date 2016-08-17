@@ -1212,6 +1212,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 11411926, guid: 2d1da813d57174f96b643d1513171da1, type: 2}
+      propertyPath: startingAnimation
+      value: snoopy_map_idle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d1da813d57174f96b643d1513171da1, type: 2}
   m_IsPrefabParent: 0
