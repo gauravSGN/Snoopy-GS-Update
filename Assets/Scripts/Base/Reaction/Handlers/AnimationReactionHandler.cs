@@ -13,14 +13,6 @@ namespace Reaction
 
         public AnimationReactionHandler(ReactionPriority priority) : base(priority) { }
 
-        override protected void OnReactionEvent(AnimationReactionEvent gameEvent)
-        {
-            if (gameEvent.priority == priority)
-            {
-                scheduledAnimations.Add(BlockingAnimationEffect.Play(gameEvent.gameObject, gameEvent.animationType));
-            }
-        }
-
         override public IEnumerator HandleActions()
         {
             var playingAnimations = scheduledAnimations;
