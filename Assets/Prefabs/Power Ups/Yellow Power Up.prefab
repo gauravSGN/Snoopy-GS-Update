@@ -182,7 +182,7 @@ MonoBehaviour:
   filledIcon: {fileID: 107016}
   fillImage: {fileID: 11490208}
   fillLine: {fileID: 143304}
-  secondsToFill: 1
+  secondsToFill: 0.75
   max: 0
   current: 0
   progress: 0

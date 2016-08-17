@@ -6,6 +6,8 @@ namespace PowerUps
 {
     public class PowerUp : MonoBehaviour
     {
+        private const float FULL_SILHOUETTE = 1.0f;
+
         [SerializeField]
         private Button button;
 
@@ -116,7 +118,7 @@ namespace PowerUps
             var fillLineTransform = (RectTransform)fillLine.transform;
             fillLineTransform.localPosition = new Vector3(fillLineTransform.localPosition.x, 0);
 
-            fillImage.fillAmount = 1.0f;
+            fillImage.fillAmount = FULL_SILHOUETTE;
             progress = 0.0f;
             current += 1.0f;
         }
@@ -125,17 +127,17 @@ namespace PowerUps
         {
             if (currentFillTime <= 0.01f)
             {
+                var fillLineTransform = (RectTransform)fillLine.transform;
+
                 filledIcon.SetActive(true);
 
                 while (currentFillTime < secondsToFill)
                 {
                     currentFillTime += Time.deltaTime;
                     fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount,
-                                                      (1.0f - progress), (currentFillTime / secondsToFill));
+                                                      (FULL_SILHOUETTE - progress), (currentFillTime / secondsToFill));
 
-                    var fillLineTransform = (RectTransform)fillLine.transform;
-                    var newY = (1.0f - fillImage.fillAmount) * fillLineTransform.rect.height;
-
+                    var newY = (FULL_SILHOUETTE - fillImage.fillAmount) * fillLineTransform.rect.height;
                     fillLineTransform.localPosition = new Vector3(fillLineTransform.localPosition.x, newY);
 
                     yield return null;
