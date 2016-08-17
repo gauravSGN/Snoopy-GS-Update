@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c497b31e3b8241cea4f374bac7dd388, type: 3}
-  m_Name: GreenPopDefinition
+  m_Name: PurplePopDefinition
   m_EditorClassIdentifier: 
-  type: 6
+  type: 8
   prefab: {fileID: 179220, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
-  controller: {fileID: 22100000, guid: cb3fa8febf7974f678363e3849e8deb3, type: 2}
+  controller: {fileID: 22100000, guid: 957c4da979607428db597c0020e2529b, type: 2}

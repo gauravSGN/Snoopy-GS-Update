@@ -22,6 +22,6 @@ MonoBehaviour:
   matchThreshold: 3
   defaultAnimations:
   - name: 0
-    list: 03000000
+    list: 08000000
   - name: 1
     list: 
