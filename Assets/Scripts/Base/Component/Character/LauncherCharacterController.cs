@@ -49,7 +49,6 @@ public class LauncherCharacterController : MonoBehaviour
     private void OnBubbleFired(BubbleFiredEvent bubbleFiredEvent)
     {
         launcherAnimator.SetFloat(ANGLE, 90f);
-        skeleton.FlipX = false;
     }
 
     private void OnMoveTarget(Vector2 target)
