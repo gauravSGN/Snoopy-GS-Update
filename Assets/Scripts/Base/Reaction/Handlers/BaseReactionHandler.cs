@@ -1,4 +1,3 @@
-using Service;
 using System.Collections;
 
 namespace Reaction
@@ -14,8 +13,7 @@ namespace Reaction
         public BaseReactionHandler(ReactionPriority priority)
         {
             this.priority = priority;
-            var eventService = GlobalState.Instance.Services.Get<EventService>();
-            eventService.AddEventHandler<EventType>(OnReactionEvent);
+            GlobalState.EventService.AddEventHandler<EventType>(OnReactionEvent);
         }
     }
 }
