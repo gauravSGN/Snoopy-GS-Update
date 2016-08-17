@@ -99,13 +99,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2ec965ab4e82545298b7e374b482bbd6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b50caae09e1d4faba2cf674f77d1652, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -190,15 +190,15 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 1280}
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 250
+  m_ScaleFactor: 0.45
+  m_ReferenceResolution: {x: 750, y: 1334}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
+  m_MatchWidthOrHeight: 1
+  m_PhysicalUnit: 1
+  m_FallbackScreenDPI: 326
+  m_DefaultSpriteDPI: 326
   m_DynamicPixelsPerUnit: 1
 --- !u!114 &11452996
 MonoBehaviour:
@@ -252,7 +252,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -313,10 +313,10 @@ RectTransform:
   - {fileID: 22427588}
   m_Father: {fileID: 22419188}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0.25080687, y: 0.08826317}
-  m_AnchorMax: {x: 0.7447696, y: 0.12524562}
-  m_AnchoredPosition: {x: 0.555189, y: 22.924088}
-  m_SizeDelta: {x: -38.28772, y: 35.265167}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1.444809, y: -592.0762}
+  m_SizeDelta: {x: 395.71228, y: 93.26514}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22435680
 RectTransform:
@@ -349,10 +349,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 22419188}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061034792, y: 0}
-  m_SizeDelta: {x: 0.000061035, y: -0.00012207}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1.4448, y: 328.44}
+  m_SizeDelta: {x: 2048, y: 2048}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &100100000
 Prefab:
