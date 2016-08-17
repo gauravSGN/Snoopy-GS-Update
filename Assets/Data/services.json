@@ -25,6 +25,14 @@
             "className": "State.User, Assembly-CSharp"
         },
         {
+            "interfaceName": "Service.TransformService, Assembly-CSharp",
+            "className": "Registry.TransformRegistry, Assembly-CSharp"
+        },
+        {
+            "interfaceName": "Service.BlockadeService, Assembly-CSharp",
+            "className": "Registry.BlockadeRegistry, Assembly-CSharp"
+        },
+        {
             "interfaceName": "Service.PopupService, Assembly-CSharp",
             "className": "UI.Popup.PopupManager, Assembly-CSharp"
         }
