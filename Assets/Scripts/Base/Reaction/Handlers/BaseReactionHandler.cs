@@ -10,7 +10,7 @@ namespace Reaction
         abstract public IEnumerator HandleActions();
         abstract protected void OnReactionEvent(EventType gameEvent);
 
-        public BaseReactionHandler(ReactionPriority priority)
+        public void Setup(ReactionPriority priority)
         {
             this.priority = priority;
             GlobalState.EventService.AddEventHandler<EventType>(OnReactionEvent);

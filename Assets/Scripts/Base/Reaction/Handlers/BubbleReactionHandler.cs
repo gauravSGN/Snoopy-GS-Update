@@ -8,8 +8,6 @@ namespace Reaction
 
         override public int Count { get { return scheduledBubbles.Count; } }
 
-        public BubbleReactionHandler(ReactionPriority priority) : base(priority) { }
-
         override protected void OnReactionEvent(BubbleReactionEvent gameEvent)
         {
             if (gameEvent.priority == priority)

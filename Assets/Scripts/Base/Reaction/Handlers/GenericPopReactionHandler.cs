@@ -9,8 +9,6 @@ namespace Reaction
     [ReactionHandlerAttribute(ReactionPriority.PhysicsDestroy)]
     public class GenericPopReactionHandler : BubbleReactionHandler
     {
-        public GenericPopReactionHandler(ReactionPriority priority) : base(priority) { }
-
         public override IEnumerator HandleActions()
         {
             var bubbles = scheduledBubbles;

@@ -6,8 +6,6 @@ namespace Reaction
     [ReactionHandlerAttribute(ReactionPriority.Cull)]
     public class CullReactionHandler : BubbleReactionHandler
     {
-        public CullReactionHandler(ReactionPriority priority) : base(priority) { }
-
         public override IEnumerator HandleActions()
         {
             var bubbles = scheduledBubbles;

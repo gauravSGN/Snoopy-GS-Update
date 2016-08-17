@@ -11,7 +11,7 @@ namespace Util
 
         abstract protected KeyType GetKeyFromAttribute(AttributeType attribute);
 
-        public BaseType Create(KeyType key, bool passKey = false)
+        public BaseType Create(KeyType key)
         {
             if (validTypes == null)
             {
@@ -22,14 +22,7 @@ namespace Util
 
             if (validTypes.ContainsKey(key))
             {
-                if (passKey)
-                {
-                    result = Activator.CreateInstance(validTypes[key], key) as BaseType;
-                }
-                else
-                {
-                    result = Activator.CreateInstance(validTypes[key]) as BaseType;
-                }
+                result = Activator.CreateInstance(validTypes[key]) as BaseType;
             }
 
             return result;

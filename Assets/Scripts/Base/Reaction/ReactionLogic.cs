@@ -26,17 +26,17 @@ namespace Reaction
 
         protected void Start()
         {
-            var eventService = GlobalState.Instance.Services.Get<EventService>();
-            eventService.AddEventHandler<BubbleSettledEvent>(OnBubbleSettled);
+            GlobalState.EventService.AddEventHandler<BubbleSettledEvent>(OnBubbleSettled);
 
             var factory = new ReactionHandlerFactory();
 
             foreach (var priority in EnumExtensions.GetValues<ReactionPriority>())
             {
-                var handler = factory.Create(priority, true);
+                var handler = factory.Create(priority);
 
                 if (handler != null)
                 {
+                    handler.Setup(priority);
                     handlers.Add(priority, handler);
                 }
             }

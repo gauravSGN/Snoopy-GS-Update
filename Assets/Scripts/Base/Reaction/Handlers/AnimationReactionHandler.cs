@@ -11,8 +11,6 @@ namespace Reaction
 
         override public int Count { get { return scheduledAnimations.Count; } }
 
-        public AnimationReactionHandler(ReactionPriority priority) : base(priority) { }
-
         override public IEnumerator HandleActions()
         {
             var playingAnimations = scheduledAnimations;
