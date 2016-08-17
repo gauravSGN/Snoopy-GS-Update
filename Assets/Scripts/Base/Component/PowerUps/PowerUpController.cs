@@ -60,7 +60,7 @@ namespace PowerUps
                     {
                         var powerUp = powerUpFactory.CreateByType((PowerUpType)(1 << index));
                         powerUp.GetComponent<PowerUp>().Setup(fillData[index], this, level);
-                        powerUp.transform.parent = anchors[anchorIndex];
+                        powerUp.transform.SetParent(anchors[anchorIndex]);
                         powerUp.transform.localPosition = Vector3.zero;
                         anchorIndex++;
                     }
