@@ -4,13 +4,6 @@ size: 2048,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-1960s-GR_012
-  rotate: false
-  xy: 1338, 689
-  size: 385, 333
-  orig: 385, 333
-  offset: 0, 0
-  index: -1
 InGame_mocukup_750_1334_Snoopy
   rotate: true
   xy: 2, 272
@@ -19,169 +12,190 @@ InGame_mocukup_750_1334_Snoopy
   offset: 0, 0
   index: -1
 arm_lower_02_L
-  rotate: true
-  xy: 412, 120
+  rotate: false
+  xy: 479, 92
   size: 33, 57
   orig: 33, 57
   offset: 0, 0
   index: -1
 arm_lower_02_R
   rotate: true
-  xy: 310, 62
+  xy: 674, 228
   size: 34, 53
   orig: 34, 53
   offset: 0, 0
   index: -1
 arm_lower_03_L
   rotate: false
-  xy: 2014, 825
+  xy: 517, 153
   size: 32, 57
   orig: 32, 57
   offset: 0, 0
   index: -1
+arm_lower_04_L
+  rotate: false
+  xy: 479, 151
+  size: 36, 59
+  orig: 36, 59
+  offset: 0, 0
+  index: -1
 arm_lower_L
   rotate: true
-  xy: 365, 65
+  xy: 1828, 942
   size: 31, 48
   orig: 31, 48
   offset: 0, 0
   index: -1
-arm_upper_L
+arm_upper_02_L
   rotate: true
-  xy: 1913, 814
+  xy: 614, 228
+  size: 34, 58
+  orig: 34, 58
+  offset: 0, 0
+  index: -1
+arm_upper_L
+  rotate: false
+  xy: 1440, 408
   size: 34, 59
   orig: 34, 59
   offset: 0, 0
   index: -1
 arm_upper_R
   rotate: true
-  xy: 1656, 576
+  xy: 504, 212
   size: 41, 48
   orig: 41, 48
   offset: 0, 0
   index: -1
 blur_feet_01
-  rotate: true
-  xy: 1725, 706
+  rotate: false
+  xy: 1492, 640
   size: 97, 125
   orig: 97, 125
   offset: 0, 0
   index: -1
 blur_feet_02
   rotate: false
-  xy: 1557, 571
+  xy: 1618, 817
   size: 97, 116
   orig: 97, 116
   offset: 0, 0
   index: -1
 brow_L
   rotate: false
-  xy: 1913, 805
+  xy: 554, 214
   size: 11, 7
   orig: 11, 7
   offset: 0, 0
   index: -1
 brow_R
   rotate: false
-  xy: 1999, 842
+  xy: 479, 56
   size: 13, 6
   orig: 13, 6
   offset: 0, 0
   index: -1
 charge_arms_01
   rotate: false
-  xy: 1420, 356
+  xy: 1492, 767
   size: 124, 166
   orig: 124, 166
   offset: 0, 0
   index: -1
 charge_arms_02
   rotate: false
-  xy: 1420, 524
+  xy: 221, 47
   size: 135, 163
   orig: 135, 163
   offset: 0, 0
   index: -1
 ear_L
   rotate: true
-  xy: 504, 206
+  xy: 1789, 941
   size: 40, 37
   orig: 40, 37
   offset: 0, 0
   index: -1
 ear_R
   rotate: true
-  xy: 1617, 530
+  xy: 1440, 367
   size: 39, 27
   orig: 39, 27
   offset: 0, 0
   index: -1
 eye_L
   rotate: false
-  xy: 251, 2
+  xy: 1473, 597
   size: 9, 10
   orig: 9, 10
   offset: 0, 0
   index: -1
 eye_R
   rotate: false
-  xy: 1546, 511
+  xy: 1573, 627
   size: 9, 11
   orig: 9, 11
   offset: 0, 0
   index: -1
+eye_closed_nuetral
+  rotate: true
+  xy: 1717, 916
+  size: 17, 7
+  orig: 17, 7
+  offset: 0, 0
+  index: -1
 eye_surprise_R
   rotate: false
-  xy: 1518, 328
+  xy: 1408, 299
   size: 23, 26
   orig: 23, 26
   offset: 0, 0
   index: -1
 foot_L
-  rotate: true
-  xy: 1852, 707
+  rotate: false
+  xy: 1338, 327
   size: 96, 33
   orig: 96, 33
   offset: 0, 0
   index: -1
 foot_R
   rotate: false
-  xy: 1420, 320
+  xy: 1618, 781
   size: 96, 34
   orig: 96, 34
   offset: 0, 0
   index: -1
 hair
   rotate: true
-  xy: 1887, 751
+  xy: 1591, 713
   size: 52, 26
   orig: 52, 26
   offset: 0, 0
   index: -1
 head
   rotate: false
-  xy: 1913, 884
+  xy: 1338, 469
   size: 133, 138
   orig: 133, 138
   offset: 0, 0
   index: -1
 head_profile
   rotate: false
-  xy: 156, 64
+  xy: 1338, 609
   size: 152, 139
   orig: 152, 139
   offset: 0, 0
   index: -1
 kite
   rotate: false
-  xy: 2, 20
+  xy: 1338, 750
   size: 152, 183
   orig: 152, 183
   offset: 0, 0
   index: -1
 kite string
   rotate: false
-  xy: 2, 248
+  xy: 1338, 1017
   size: 541, 5
   orig: 541, 5
   offset: 0, 0
@@ -195,112 +209,126 @@ kite string glowing
   index: -1
 kite string glowing 02
   rotate: false
-  xy: 2, 205
+  xy: 2, 212
   size: 500, 41
   orig: 500, 41
   offset: 0, 0
   index: -1
 kite_bobbin
   rotate: true
-  xy: 1913, 850
+  xy: 1729, 983
   size: 32, 99
   orig: 32, 99
   offset: 0, 0
   index: -1
 kite_brace
   rotate: true
-  xy: 719, 264
+  xy: 554, 264
   size: 6, 168
   orig: 6, 168
   offset: 0, 0
   index: -1
 kite_glowing2
-  rotate: false
-  xy: 1725, 805
+  rotate: true
+  xy: 2, 24
   size: 186, 217
   orig: 186, 217
   offset: 0, 0
   index: -1
 kite_string glowing 03
-  rotate: true
-  xy: 1338, 298
+  rotate: false
+  xy: 1338, 935
   size: 389, 80
   orig: 389, 80
   offset: 0, 0
   index: -1
+kite_string_glowing_tangle
+  rotate: true
+  xy: 358, 56
+  size: 154, 119
+  orig: 154, 119
+  offset: 0, 0
+  index: -1
 leg_L
   rotate: true
-  xy: 1557, 530
+  xy: 1729, 942
   size: 39, 58
   orig: 39, 58
   offset: 0, 0
   index: -1
 leg_R
-  rotate: false
-  xy: 210, 4
+  rotate: true
+  xy: 554, 223
   size: 39, 58
   orig: 39, 58
   offset: 0, 0
   index: -1
 mouth
   rotate: false
-  xy: 1338, 274
+  xy: 1492, 616
   size: 79, 22
   orig: 79, 22
   offset: 0, 0
   index: -1
+mouth_side_smile
+  rotate: false
+  xy: 167, 4
+  size: 52, 18
+  orig: 52, 18
+  offset: 0, 0
+  index: -1
 mouth_squiggleFrown_side
   rotate: false
-  xy: 2, 2
+  xy: 221, 29
   size: 52, 16
   orig: 52, 16
   offset: 0, 0
   index: -1
 neck
-  rotate: false
-  xy: 251, 14
+  rotate: true
+  xy: 1830, 975
   size: 40, 48
   orig: 40, 48
   offset: 0, 0
   index: -1
 nose
   rotate: false
-  xy: 1974, 822
+  xy: 479, 64
   size: 23, 26
   orig: 23, 26
   offset: 0, 0
   index: -1
 shadow
   rotate: false
-  xy: 554, 250
+  xy: 2, 2
   size: 163, 20
   orig: 163, 20
   offset: 0, 0
   index: -1
 shirt
   rotate: false
-  xy: 310, 98
+  xy: 1338, 362
   size: 100, 105
   orig: 100, 105
   offset: 0, 0
   index: -1
 short_L
-  rotate: true
-  xy: 1656, 619
+  rotate: false
+  xy: 358, 2
   size: 68, 52
   orig: 68, 52
   offset: 0, 0
   index: -1
 short_R
-  rotate: true
-  xy: 156, 2
+  rotate: false
+  xy: 428, 2
   size: 60, 52
   orig: 60, 52
   offset: 0, 0
   index: -1
 sleeve_stetched
   rotate: false
-  xy: 412, 155
+  xy: 1338, 277
   size: 68, 48
   orig: 68, 48
   offset: 0, 0
