@@ -7,7 +7,7 @@ namespace Reaction
     [ReactionHandlerAttribute(ReactionPriority.PowerUp)]
     [ReactionHandlerAttribute(ReactionPriority.GenericPop)]
     [ReactionHandlerAttribute(ReactionPriority.PhysicsDestroy)]
-    public class GenericPopReactionHandler : ReactionHandler
+    public class GenericPopReactionHandler : BubbleReactionHandler
     {
         public override IEnumerator HandleActions()
         {

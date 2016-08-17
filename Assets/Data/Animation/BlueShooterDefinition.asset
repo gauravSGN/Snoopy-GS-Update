@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c497b31e3b8241cea4f374bac7dd388, type: 3}
   m_Name: BlueShooterDefinition
   m_EditorClassIdentifier: 
-  type: 2
+  type: 3
   prefab: {fileID: 189414, guid: e83c22c5a064640db95d5ee667daf179, type: 2}
   controller: {fileID: 22100000, guid: 8517bf4d7b7b244058d1957e2d01273a, type: 2}

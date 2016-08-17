@@ -1,5 +1,4 @@
 using System;
-using Service;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -31,14 +30,14 @@ namespace UI.Popup
                 starPositions[starIndex].GetComponent<Image>().sprite = filledStar;
             }
 
-            config.closeActions = new List<Action> { () => GlobalState.Instance.Services.Get<SceneService>().Reset() };
+            config.closeActions = new List<Action> { () => GlobalState.SceneService.Reset() };
             config.affirmativeActions = new List<Action> { TransitionToLevel };
         }
 
         private void TransitionToLevel()
         {
             GlobalState.User.currentLevel = config.level;
-            GlobalState.Instance.Services.Get<SceneService>().TransitionToScene(config.nextScene);
+            GlobalState.SceneService.TransitionToScene(config.nextScene);
         }
     }
 }

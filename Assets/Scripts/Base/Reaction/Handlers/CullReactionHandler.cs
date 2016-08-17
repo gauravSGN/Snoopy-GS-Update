@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Reaction
 {
     [ReactionHandlerAttribute(ReactionPriority.Cull)]
-    public class CullReactionHandler : ReactionHandler
+    public class CullReactionHandler : BubbleReactionHandler
     {
         public override IEnumerator HandleActions()
         {

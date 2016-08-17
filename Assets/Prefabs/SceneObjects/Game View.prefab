@@ -1479,8 +1479,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpFactory: {fileID: 11400000, guid: fcf96848466bd4a74a7ab983e31ba1b4, type: 2}
   launcher: {fileID: 11405814}
-  shooterType: 2
-  effectType: 1
+  shooterType: 3
+  deathEffectType: -1
+  explosionEffectType: 2
   scanMap: {fileID: 11400000, guid: c0558009aa1644c56addfcefebe448bf, type: 2}
   shooterDefinition: {fileID: 11400000, guid: bba73c2f691f64f03a9dec439e7afa8e, type: 2}
   aimline: {fileID: 11476056}

@@ -5,7 +5,6 @@ using PowerUps;
 using Util;
 using Model;
 using System.Linq;
-using Service;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -97,7 +96,7 @@ public class LevelLoader : MonoBehaviour
 
         foreach (var goal in level.goals)
         {
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new GoalCreatedEvent(goal));
+            GlobalState.EventService.Dispatch(new GoalCreatedEvent(goal));
         }
     }
 

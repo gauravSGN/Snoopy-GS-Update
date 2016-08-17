@@ -2,7 +2,6 @@ using gs;
 using gs.data;
 using UnityEngine;
 using System.Collections.Generic;
-using Service;
 
 namespace Config
 {
@@ -32,8 +31,8 @@ namespace Config
                 GS.Api.OnStorageLow += OnStorageLow;
                 GS.Api.OnStorageAvailable += OnStorageAvailable;
 
-                GlobalState.Instance.Services.Get<UserStateService>().purchasables.hearts.Replenish();
-                GlobalState.Instance.Services.Get<EventService>().Dispatch(new GSInitializedEvent(this));
+                GlobalState.User.purchasables.hearts.Replenish();
+                GlobalState.EventService.Dispatch(new GSInitializedEvent(this));
             });
         }
 

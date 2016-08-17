@@ -1,4 +1,3 @@
-using Service;
 using UnityEngine;
 
 public class BoostersTextUpdater : UITextUpdater
@@ -13,11 +12,9 @@ public class BoostersTextUpdater : UITextUpdater
     {
         base.Start();
 
-        var user = GlobalState.Instance.Services.Get<UserStateService>();
-
-        if (user != null)
+        if (GlobalState.User != null)
         {
-            Target = user.purchasables.boosters;
+            Target = GlobalState.User.purchasables.boosters;
         }
     }
 

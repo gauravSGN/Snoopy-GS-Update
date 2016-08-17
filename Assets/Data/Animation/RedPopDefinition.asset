@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c497b31e3b8241cea4f374bac7dd388, type: 3}
   m_Name: RedPopDefinition
   m_EditorClassIdentifier: 
-  type: 5
+  type: 6
   prefab: {fileID: 179220, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
   controller: {fileID: 22100000, guid: 106110bada190431f9e158736f27250a, type: 2}

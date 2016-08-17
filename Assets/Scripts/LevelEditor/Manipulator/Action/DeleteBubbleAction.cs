@@ -1,5 +1,4 @@
 ﻿using Model;
-using Service;
 using UnityEngine;
 
 namespace LevelEditor.Manipulator
@@ -19,7 +18,7 @@ namespace LevelEditor.Manipulator
                 manipulator.Views.Remove(key);
             }
 
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelModifiedEvent());
+            GlobalState.EventService.Dispatch(new LevelModifiedEvent());
             manipulator.RecomputeScores();
         }
 

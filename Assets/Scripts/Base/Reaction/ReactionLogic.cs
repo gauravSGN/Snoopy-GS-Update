@@ -1,6 +1,5 @@
 using Util;
 using System;
-using Service;
 using UI.Popup;
 using System.Linq;
 using UnityEngine;
@@ -26,10 +25,7 @@ namespace Reaction
 
         protected void Start()
         {
-            var eventService = GlobalState.Instance.Services.Get<EventService>();
-
-            eventService.AddEventHandler<BubbleSettledEvent>(OnBubbleSettled);
-            eventService.AddEventHandler<BubbleReactionEvent>(OnBubbleReactionEvent);
+            GlobalState.EventService.AddEventHandler<BubbleSettledEvent>(OnBubbleSettled);
 
             var factory = new ReactionHandlerFactory();
 
@@ -39,18 +35,9 @@ namespace Reaction
 
                 if (handler != null)
                 {
+                    handler.Setup(priority);
                     handlers.Add(priority, handler);
                 }
-            }
-        }
-
-        private void OnBubbleReactionEvent(BubbleReactionEvent gameEvent)
-        {
-            ReactionHandler handler;
-
-            if (handlers.TryGetValue(gameEvent.priority, out handler))
-            {
-                handler.Schedule(gameEvent);
             }
         }
 
@@ -74,28 +61,28 @@ namespace Reaction
 
             if (GetComponent<Level>().levelState.remainingBubbles <= 0)
             {
-                GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelCompleteEvent(false));
+                GlobalState.EventService.Dispatch(new LevelCompleteEvent(false));
 
-                var userState = GlobalState.Instance.Services.Get<UserStateService>();
-                userState.purchasables.hearts.quantity--;
 
-                GlobalState.Instance.Services.Get<PopupService>().Enqueue(new GenericPopupConfig
+                GlobalState.User.purchasables.hearts.quantity--;
+
+                GlobalState.PopupService.Enqueue(new GenericPopupConfig
                 {
                     title = "Level Lost",
-                    mainText = "Hearts Left: " + userState.purchasables.hearts.quantity.ToString(),
+                    mainText = "Hearts Left: " + GlobalState.User.purchasables.hearts.quantity.ToString(),
                     closeActions = new List<Action> { DispatchReturnToMap },
                     affirmativeActions = new List<Action> { DispatchReturnToMap }
                 });
             }
             else
             {
-                GlobalState.Instance.Services.Get<EventService>().Dispatch(new ReadyForNextBubbleEvent());
+                GlobalState.EventService.Dispatch(new ReadyForNextBubbleEvent());
             }
         }
 
         private void DispatchReturnToMap()
         {
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new TransitionToReturnSceneEvent());
+            GlobalState.EventService.Dispatch(new TransitionToReturnSceneEvent());
         }
     }
 }

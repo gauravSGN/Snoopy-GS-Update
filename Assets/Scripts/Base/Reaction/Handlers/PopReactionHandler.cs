@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Reaction
 {
     [ReactionHandlerAttribute(ReactionPriority.Pop)]
-    public class PopReactionHandler : ReactionHandler
+    public class PopReactionHandler : BubbleReactionHandler
     {
         public override IEnumerator HandleActions()
         {

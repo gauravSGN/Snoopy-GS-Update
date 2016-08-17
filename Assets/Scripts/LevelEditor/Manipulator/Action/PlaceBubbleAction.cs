@@ -1,8 +1,6 @@
 ﻿using Model;
 using UnityEngine;
 using UnityEngine.UI;
-using Util;
-using Service;
 
 namespace LevelEditor.Manipulator
 {
@@ -64,7 +62,7 @@ namespace LevelEditor.Manipulator
 
                 manipulator.BubbleFactory.ApplyEditorModifiers(instance, model);
 
-                GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelModifiedEvent());
+                GlobalState.EventService.Dispatch(new LevelModifiedEvent());
             }
         }
     }

@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using Effects;
-using Service;
 
 public class BubbleSnap : MonoBehaviour
 {
@@ -75,11 +74,11 @@ public class BubbleSnap : MonoBehaviour
         gameObject.layer = (int)Layers.GameObjects;
 
         Destroy(this);
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleSettlingEvent());
+        GlobalState.EventService.Dispatch(new BubbleSettlingEvent());
 
         GetComponent<BubbleAttachments>().Model.CheckForMatches();
 
-        GlobalState.Instance.Services.Get<EventService>().Dispatch(new BubbleSettledEvent { shooter = gameObject });
+        GlobalState.EventService.Dispatch(new BubbleSettledEvent { shooter = gameObject });
     }
 
     private void AdjustToGrid()

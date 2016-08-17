@@ -16,7 +16,7 @@ namespace Goal
         protected void CompleteGoal()
         {
             Complete = true;
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new GoalCompleteEvent(this));
+            GlobalState.EventService.Dispatch(new GoalCompleteEvent(this));
         }
 
         protected int GetScoreForGoalType(GoalType goalType)

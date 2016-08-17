@@ -1,4 +1,4 @@
-﻿using Util;
+using Util;
 using Service;
 using Animation;
 using UnityEngine;
@@ -22,7 +22,10 @@ namespace PowerUps
         private AnimationType shooterType;
 
         [SerializeField]
-        private AnimationType effectType;
+        private AnimationType deathEffectType;
+
+        [SerializeField]
+        private AnimationType explosionEffectType;
 
         [SerializeField]
         private PowerUpScanMap scanMap;
@@ -46,7 +49,7 @@ namespace PowerUps
 
         public void Setup(float[] fillData)
         {
-            animationService = GlobalState.Instance.Services.Get<AnimationService>();
+            animationService = GlobalState.AnimationService;
             scanMap.Load();
             var level = gameObject.GetComponentInParent<Level>();
             var anchorLength = anchors.Length;
@@ -94,7 +97,7 @@ namespace PowerUps
             model.definition = shooterDefinition;
 
             var explosion = bubble.AddComponent<BubbleExplode>();
-            explosion.Setup(GetScanFunction(bubble), effectType);
+            explosion.Setup(GetScanFunction(bubble), deathEffectType, explosionEffectType);
 
             powerUpType = 0;
             totalPowerUpsInUse = 0;

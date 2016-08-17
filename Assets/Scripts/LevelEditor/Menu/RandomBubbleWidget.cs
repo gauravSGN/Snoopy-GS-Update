@@ -4,7 +4,6 @@ using System.Linq;
 using System.Collections.Generic;
 using LevelEditor.Manipulator;
 using Model;
-using Service;
 
 namespace LevelEditor.Menu
 {
@@ -26,7 +25,7 @@ namespace LevelEditor.Menu
 
         public GameObject CreateWidget(BubbleData bubble)
         {
-            prefab = prefab ?? GlobalState.Instance.Services.Get<AssetService>().LoadAsset<GameObject>(PREFAB_PATH);
+            prefab = prefab ?? GlobalState.AssetService.LoadAsset<GameObject>(PREFAB_PATH);
             definition = CreateDefinition(bubble);
             data = bubble;
 
@@ -149,7 +148,7 @@ namespace LevelEditor.Menu
                 Manipulator.Randoms.Add(definition);
             }
 
-            GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new RandomBubblesChangedEvent());
+            GlobalState.EventService.Dispatch(new RandomBubblesChangedEvent());
 
             var modifier = data.modifiers.First(m => m.type == BubbleModifierType.Random);
             modifier.data = Manipulator.Randoms.IndexOf(match).ToString();

@@ -5,7 +5,7 @@ using Graph;
 namespace Reaction
 {
     [ReactionHandlerAttribute(ReactionPriority.ChainPop)]
-    public class ChainPopReactionHandler : ReactionHandler
+    public class ChainPopReactionHandler : BubbleReactionHandler
     {
         public override IEnumerator HandleActions()
         {

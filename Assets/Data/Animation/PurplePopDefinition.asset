@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c497b31e3b8241cea4f374bac7dd388, type: 3}
   m_Name: PurplePopDefinition
   m_EditorClassIdentifier: 
-  type: 8
+  type: 9
   prefab: {fileID: 179220, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
   controller: {fileID: 22100000, guid: 957c4da979607428db597c0020e2529b, type: 2}

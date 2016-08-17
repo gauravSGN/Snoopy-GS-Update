@@ -1,10 +1,8 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Model;
 using LevelEditor.Manipulator;
 using Util;
-using Service;
 
 namespace LevelEditor
 {
@@ -18,7 +16,7 @@ namespace LevelEditor
         {
             if (Instance == this)
             {
-                GlobalState.Instance.Services.Get<EventService>().AddEventHandler<ClearLevelEvent>(OnClearLevel);
+                GlobalState.EventService.AddEventHandler<ClearLevelEvent>(OnClearLevel);
             }
         }
 

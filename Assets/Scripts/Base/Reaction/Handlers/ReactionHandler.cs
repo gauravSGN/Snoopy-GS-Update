@@ -1,19 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+using System.Collections;
 
 namespace Reaction
 {
-    public abstract class ReactionHandler
+    public interface ReactionHandler
     {
-        protected List<Bubble> scheduledBubbles = new List<Bubble>();
-
-        public int Count { get { return scheduledBubbles.Count; } }
-
-        public void Schedule(BubbleReactionEvent gameEvent)
-        {
-            scheduledBubbles.Add(gameEvent.bubble);
-        }
-
-        public abstract IEnumerator HandleActions();
+        int Count { get; }
+        void Setup(ReactionPriority priority);
+        IEnumerator HandleActions();
     }
 }

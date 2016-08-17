@@ -10,6 +10,13 @@ public class GlobalState : SingletonBehaviour<GlobalState>
 {
     public static EventService EventService { get { return Instance.Services.Get<EventService>(); } }
     public static UserStateService User { get { return Instance.Services.Get<UserStateService>(); } }
+    public static PopupService PopupService { get { return Instance.Services.Get<PopupService>(); } }
+    public static SceneService SceneService { get { return Instance.Services.Get<SceneService>(); } }
+    public static UpdateService UpdateService { get { return Instance.Services.Get<UpdateService>(); } }
+    public static AssetService AssetService { get { return Instance.Services.Get<AssetService>(); } }
+    public static AnimationService AnimationService { get { return Instance.Services.Get<AnimationService>(); } }
+    public static InitializerService InitializerService { get { return Instance.Services.Get<InitializerService>(); } }
+    public static TopUIService TopUIService { get { return Instance.Services.Get<TopUIService>(); } }
 
     public GameConfig Config { get { return config; } }
     public ServiceRepository Services { get { return services; } }

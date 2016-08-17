@@ -4,7 +4,6 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using LevelEditor.Manipulator;
-using Service;
 using Model;
 
 #if UNITY_EDITOR
@@ -40,9 +39,8 @@ namespace LevelEditor
         {
             InitializeGroups();
 
-            var eventService = GlobalState.Instance.Services.Get<EventService>();
-            eventService.AddEventHandler<RandomBubblesChangedEvent>((e) => InitializeGroups());
-            eventService.AddEventHandler<LevelModifiedEvent>((e) => UpdateGroupCounts());
+            GlobalState.EventService.AddEventHandler<RandomBubblesChangedEvent>((e) => InitializeGroups());
+            GlobalState.EventService.AddEventHandler<LevelModifiedEvent>((e) => UpdateGroupCounts());
         }
 
         public void AddGroup()

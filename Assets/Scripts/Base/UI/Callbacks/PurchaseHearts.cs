@@ -1,4 +1,3 @@
-using Service;
 using UnityEngine;
 
 namespace UI.Callbacks
@@ -13,7 +12,7 @@ namespace UI.Callbacks
 
         public void Buy()
         {
-            var user = GlobalState.Instance.Services.Get<UserStateService>();
+            var user = GlobalState.User;
 
             if ((user.purchasables.hearts.quantity < GlobalState.Instance.Config.purchasables.maxHearts) &&
                 (user.purchasables.coins.quantity >= coinCost))

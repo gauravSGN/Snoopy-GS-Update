@@ -1,5 +1,4 @@
-﻿using Service;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InitializableBehaviour : MonoBehaviour, Initializable
 {
@@ -25,7 +24,7 @@ public class InitializableBehaviour : MonoBehaviour, Initializable
 
     protected void RegisterForInitialization(params Initializable[] dependencies)
     {
-        GlobalState.Instance.Services.Get<InitializerService>().Register(this, dependencies);
+        GlobalState.InitializerService.Register(this, dependencies);
     }
 
     private void Awake()

@@ -1,7 +1,6 @@
 using UnityEngine;
 using Spine;
 using Spine.Unity;
-using Service;
 using System;
 
 public class LauncherCharacterController : MonoBehaviour
@@ -37,9 +36,8 @@ public class LauncherCharacterController : MonoBehaviour
         launcherAnimator.SetFloat(ANGLE, 90.0f);
         eventTrigger.MoveTarget += OnMoveTarget;
 
-        var eventService = GlobalState.Instance.Services.Get<EventService>();
-        eventService.AddEventHandler<BubbleFiringEvent>(OnBubbleFiring);
-        eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
+        GlobalState.EventService.AddEventHandler<BubbleFiringEvent>(OnBubbleFiring);
+        GlobalState.EventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
     }
 
     private void OnBubbleFiring(BubbleFiringEvent bubbleFiringEvent)
