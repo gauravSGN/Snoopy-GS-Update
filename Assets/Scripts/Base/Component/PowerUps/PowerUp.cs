@@ -1,12 +1,33 @@
 using UnityEngine;
-using Service;
+using UnityEngine.UI;
+using System.Collections;
 
 namespace PowerUps
 {
     public class PowerUp : MonoBehaviour
     {
+        private const float FULL_SILHOUETTE = 1.0f;
+
+        [SerializeField]
+        private Button button;
+
         [SerializeField]
         private GameObject glow;
+
+        [SerializeField]
+        private GameObject filledBackground;
+
+        [SerializeField]
+        private GameObject filledIcon;
+
+        [SerializeField]
+        private Image fillImage;
+
+        [SerializeField]
+        private GameObject fillLine;
+
+        [SerializeField]
+        private float secondsToFill;
 
         [SerializeField]
         private float max;
@@ -20,8 +41,9 @@ namespace PowerUps
         [SerializeField]
         private int lastBubbleCount;
 
+        private float currentFillTime;
+
         private Level level;
-        private bool allowInput;
 
         private PowerUpDefinition definition;
         private PowerUpController controller;
@@ -47,22 +69,21 @@ namespace PowerUps
 
         public void AddPowerUp()
         {
-            if (progress >= 1.0f && allowInput)
+            if (button.interactable && (progress >= 1.0f))
             {
                 controller.AddPowerUp(definition.Type);
-
                 Reset();
             }
         }
 
         private void OnInputToggle(InputToggleEvent gameEvent)
         {
-            allowInput = gameEvent.enabled;
+            button.interactable = gameEvent.enabled;
         }
 
         private void OnAddShotModifier(AddShotModifierEvent gameEvent)
         {
-            allowInput = (gameEvent.type == ShotModifierType.PowerUp);
+            button.interactable = (gameEvent.type == ShotModifierType.PowerUp);
         }
 
         private void UpdateState(Observable levelState)
@@ -75,6 +96,7 @@ namespace PowerUps
                 {
                     var fillRate = ((max - current) - progress) / Mathf.Max(1, currentBubbleCount);
                     progress += (lastBubbleCount - currentBubbleCount) * fillRate;
+                    StartCoroutine(UpdateFillImage());
                 }
 
                 lastBubbleCount = currentBubbleCount;
@@ -82,15 +104,52 @@ namespace PowerUps
                 if (!glow.activeSelf && (progress >= 1.0f))
                 {
                     glow.SetActive(true);
+                    filledBackground.SetActive(false);
                 }
             }
         }
 
         private void Reset()
         {
+            filledIcon.SetActive(false);
             glow.SetActive(false);
+            filledBackground.SetActive(true);
+
+            var fillLineTransform = (RectTransform)fillLine.transform;
+            fillLineTransform.localPosition = new Vector3(fillLineTransform.localPosition.x, 0);
+
+            fillImage.fillAmount = FULL_SILHOUETTE;
             progress = 0.0f;
             current += 1.0f;
+        }
+
+        private IEnumerator UpdateFillImage()
+        {
+            if (currentFillTime <= 0.01f)
+            {
+                var fillLineTransform = (RectTransform)fillLine.transform;
+
+                filledIcon.SetActive(true);
+
+                while (currentFillTime < secondsToFill)
+                {
+                    currentFillTime += Time.deltaTime;
+                    fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount,
+                                                      (FULL_SILHOUETTE - progress), (currentFillTime / secondsToFill));
+
+                    var newY = (FULL_SILHOUETTE - fillImage.fillAmount) * fillLineTransform.rect.height;
+                    fillLineTransform.localPosition = new Vector3(fillLineTransform.localPosition.x, newY);
+
+                    yield return null;
+                }
+
+                currentFillTime = 0.0f;
+
+                if (progress < 1.0f)
+                {
+                    filledIcon.SetActive(false);
+                }
+            }
         }
     }
 }
