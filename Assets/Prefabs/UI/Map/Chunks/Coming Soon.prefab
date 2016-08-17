@@ -1950,6 +1950,7 @@ MonoBehaviour:
   - {fileID: 108766}
   - {fileID: 156116}
   - {fileID: 196624}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11400580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2914,6 +2915,7 @@ MonoBehaviour:
   - {fileID: 121044}
   - {fileID: 143220}
   - {fileID: 166518}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11418890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3384,6 +3386,7 @@ MonoBehaviour:
   - {fileID: 158386}
   - {fileID: 141234}
   - {fileID: 135758}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11431698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3444,6 +3447,7 @@ MonoBehaviour:
   - {fileID: 108424}
   - {fileID: 104742}
   - {fileID: 141294}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11433346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3752,6 +3756,7 @@ MonoBehaviour:
   - {fileID: 140120}
   - {fileID: 111580}
   - {fileID: 135424}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11438984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3798,6 +3803,7 @@ MonoBehaviour:
   - {fileID: 142134}
   - {fileID: 138596}
   - {fileID: 116578}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11439380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4105,6 +4111,7 @@ MonoBehaviour:
   - {fileID: 166102}
   - {fileID: 183084}
   - {fileID: 173598}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11446410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4544,6 +4551,7 @@ MonoBehaviour:
   - {fileID: 196340}
   - {fileID: 141398}
   - {fileID: 150366}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11455082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4927,6 +4935,7 @@ MonoBehaviour:
   - {fileID: 101120}
   - {fileID: 128440}
   - {fileID: 191300}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11463388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5041,7 +5050,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: feaba2444040846ae9f18d9b523cf6a3, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -5221,6 +5230,7 @@ MonoBehaviour:
   - {fileID: 124904}
   - {fileID: 130052}
   - {fileID: 194914}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11467872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5526,6 +5536,7 @@ MonoBehaviour:
   - {fileID: 101304}
   - {fileID: 100308}
   - {fileID: 100706}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11474572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5626,6 +5637,7 @@ MonoBehaviour:
   - {fileID: 144508}
   - {fileID: 184074}
   - {fileID: 111422}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11476558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5767,6 +5779,7 @@ MonoBehaviour:
   - {fileID: 174082}
   - {fileID: 148400}
   - {fileID: 106082}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11480976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5786,6 +5799,7 @@ MonoBehaviour:
   - {fileID: 180932}
   - {fileID: 131580}
   - {fileID: 195012}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11481000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5913,6 +5927,7 @@ MonoBehaviour:
   - {fileID: 189606}
   - {fileID: 147614}
   - {fileID: 140852}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11483048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6019,6 +6034,7 @@ MonoBehaviour:
   - {fileID: 169286}
   - {fileID: 110314}
   - {fileID: 159678}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11484476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6358,6 +6374,7 @@ MonoBehaviour:
   - {fileID: 158964}
   - {fileID: 123434}
   - {fileID: 114456}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11489706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6564,6 +6581,7 @@ MonoBehaviour:
   - {fileID: 150766}
   - {fileID: 199998}
   - {fileID: 140106}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11494604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6597,6 +6615,7 @@ MonoBehaviour:
   - {fileID: 141498}
   - {fileID: 196494}
   - {fileID: 136688}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11495666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6630,6 +6649,7 @@ MonoBehaviour:
   - {fileID: 110592}
   - {fileID: 115878}
   - {fileID: 130556}
+  buttonIcon: {fileID: 0}
 --- !u!114 &11496252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8914,15 +8934,15 @@ RectTransform:
   m_GameObject: {fileID: 159220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.25, y: 4.25, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 22422118}
   m_RootOrder: 4
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.100097656, y: 0}
-  m_SizeDelta: {x: -0.19995, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 477, y: 0.000061035}
+  m_SizeDelta: {x: 804.80005, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22473768
 RectTransform:

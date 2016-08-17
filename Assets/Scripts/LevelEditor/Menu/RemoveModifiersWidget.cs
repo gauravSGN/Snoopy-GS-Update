@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using LevelEditor.Manipulator;
 using Model;
-using Service;
 
 namespace LevelEditor.Menu
 {

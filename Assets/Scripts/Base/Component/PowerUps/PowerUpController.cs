@@ -1,4 +1,4 @@
-﻿using Util;
+using Util;
 using Service;
 using Animation;
 using UnityEngine;
@@ -63,7 +63,7 @@ namespace PowerUps
                     {
                         var powerUp = powerUpFactory.CreateByType((PowerUpType)(1 << index));
                         powerUp.GetComponent<PowerUp>().Setup(fillData[index], this, level);
-                        powerUp.transform.SetParent(anchors[anchorIndex], false);
+                        powerUp.transform.SetParent(anchors[anchorIndex]);
                         powerUp.transform.localPosition = Vector3.zero;
                         anchorIndex++;
                     }
