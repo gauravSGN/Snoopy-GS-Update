@@ -1,5 +1,4 @@
 using Reaction;
-using Service;
 using Animation;
 using UnityEngine;
 
@@ -10,12 +9,12 @@ public class AnimationReactionEvent : ReactionEvent
 
     public static void Dispatch(ReactionPriority priority, AnimationType animationType, GameObject gameObject)
     {
-        var gameEvent = GlobalState.Instance.Services.Get<EventService>().GetPooledEvent<AnimationReactionEvent>();
+        var gameEvent = GlobalState.EventService.GetPooledEvent<AnimationReactionEvent>();
 
         gameEvent.priority = priority;
         gameEvent.gameObject = gameObject;
         gameEvent.animationType = animationType;
 
-        GlobalState.Instance.Services.Get<EventService>().DispatchPooled(gameEvent);
+        GlobalState.EventService.DispatchPooled(gameEvent);
     }
 }

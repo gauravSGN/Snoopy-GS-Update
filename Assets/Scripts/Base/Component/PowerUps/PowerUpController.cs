@@ -49,7 +49,7 @@ namespace PowerUps
 
         public void Setup(float[] fillData)
         {
-            animationService = GlobalState.Instance.Services.Get<AnimationService>();
+            animationService = GlobalState.AnimationService;
             scanMap.Load();
             var level = gameObject.GetComponentInParent<Level>();
             var anchorLength = anchors.Length;

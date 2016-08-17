@@ -72,7 +72,7 @@ namespace LevelEditor
             var placer = new PlaceBubbleAction();
 
             randoms = new List<RandomBubbleDefinition>(levelData.Randoms ?? new RandomBubbleDefinition[0]);
-            GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new RandomBubblesChangedEvent());
+            GlobalState.EventService.Dispatch(new RandomBubblesChangedEvent());
 
             foreach (var bubble in levelData.Bubbles)
             {
@@ -93,8 +93,8 @@ namespace LevelEditor
 
             Background = levelData.Background;
 
-            GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelModifiedEvent());
-            GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelEditorLoadEvent());
+            GlobalState.EventService.Dispatch(new LevelModifiedEvent());
+            GlobalState.EventService.Dispatch(new LevelEditorLoadEvent());
         }
 
         public string SaveLevel()
@@ -159,7 +159,7 @@ namespace LevelEditor
                 undoBuffer.RemoveAt(undoBuffer.Count - 1);
 
                 RestoreState(previousState);
-                GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelModifiedEvent());
+                GlobalState.EventService.Dispatch(new LevelModifiedEvent());
             }
         }
 
@@ -171,7 +171,7 @@ namespace LevelEditor
                 redoBuffer.RemoveAt(redoBuffer.Count - 1);
 
                 RestoreState(nextState);
-                GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelModifiedEvent());
+                GlobalState.EventService.Dispatch(new LevelModifiedEvent());
             }
         }
 

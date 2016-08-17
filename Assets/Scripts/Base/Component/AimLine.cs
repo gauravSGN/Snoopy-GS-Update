@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using Service;
 using System;
 
 public class AimLine : InitializableBehaviour, UpdateReceiver
@@ -90,13 +89,13 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
     private void OnStartAiming()
     {
         meshRenderer.enabled = true;
-        GlobalState.Instance.Services.Get<UpdateService>().Updates.Add(this);
+        GlobalState.UpdateService.Updates.Add(this);
     }
 
     private void OnStopAiming()
     {
         meshRenderer.enabled = false;
-        GlobalState.Instance.Services.Get<UpdateService>().Updates.Remove(this);
+        GlobalState.UpdateService.Updates.Remove(this);
     }
 
     private void OnMoveTarget(Vector2 target)

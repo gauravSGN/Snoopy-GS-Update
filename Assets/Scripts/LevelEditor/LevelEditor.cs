@@ -2,8 +2,6 @@
 using System.IO;
 using UnityEngine;
 using LevelEditor.Manipulator;
-using UnityEngine.SceneManagement;
-using Service;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -43,7 +41,7 @@ namespace LevelEditor
             {
                 filename = null;
                 ClearBoard();
-                GlobalState.Instance.Services.Get<Service.EventService>().Dispatch(new LevelEditorLoadEvent());
+                GlobalState.EventService.Dispatch(new LevelEditorLoadEvent());
             });
         }
 
@@ -108,13 +106,12 @@ namespace LevelEditor
             LevelEditorState.Instance.LevelFilename = filename;
             LevelEditorState.Instance.LevelData = manipulator.SaveLevel();
 
-            var sceneService = GlobalState.Instance.Services.Get<SceneService>();
-            sceneService.NextLevelData = LevelEditorState.Instance.LevelData;
-            sceneService.ReturnScene = LevelEditorConstants.SCENE_NAME;
+            GlobalState.SceneService.NextLevelData = LevelEditorState.Instance.LevelData;
+            GlobalState.SceneService.ReturnScene = LevelEditorConstants.SCENE_NAME;
 
             Instantiate(returnPrefab);
 
-            sceneService.TransitionToScene(StringConstants.Scenes.LEVEL);
+            GlobalState.SceneService.TransitionToScene(StringConstants.Scenes.LEVEL);
         }
 
         public void ConfirmAction(Action action)
@@ -129,7 +126,7 @@ namespace LevelEditor
 
         private void ClearBoard()
         {
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new ClearLevelEvent());
+            GlobalState.EventService.Dispatch(new ClearLevelEvent());
             var clearAction = manipulator.ActionFactory.Create(ManipulatorActionType.Clear);
             clearAction.Perform(manipulator, 0, 0);
         }

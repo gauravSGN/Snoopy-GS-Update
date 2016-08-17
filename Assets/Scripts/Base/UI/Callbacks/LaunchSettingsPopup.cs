@@ -4,7 +4,6 @@ using Service;
 using UI.Popup;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 namespace UI.Callbacks
 {
@@ -17,7 +16,7 @@ namespace UI.Callbacks
         {
             if (level != null)
             {
-                GlobalState.Instance.Services.Get<PopupService>().Enqueue(new SettingsPopupConfig
+                GlobalState.PopupService.Enqueue(new SettingsPopupConfig
                 {
                     title = "Pause",
                     affirmativeActions = new List<Action> { LaunchLevelLossConfirmationPopup },
@@ -27,7 +26,7 @@ namespace UI.Callbacks
 
         public void DisplaySettings()
         {
-            GlobalState.Instance.Services.Get<PopupService>().Enqueue(new SettingsPopupConfig
+            GlobalState.PopupService.Enqueue(new SettingsPopupConfig
             {
                 title = "Settings",
                 userID = "ID: " + GS.Api.ClientId,
@@ -39,7 +38,7 @@ namespace UI.Callbacks
         {
             if (level.levelState.remainingBubbles != level.levelState.initialShotCount)
             {
-                GlobalState.Instance.Services.Get<PopupService>().Enqueue(new GenericPopupConfig
+                GlobalState.PopupService.Enqueue(new GenericPopupConfig
                 {
                     title = "Exit?",
                     mainText = "You will lose a life if you exit!",

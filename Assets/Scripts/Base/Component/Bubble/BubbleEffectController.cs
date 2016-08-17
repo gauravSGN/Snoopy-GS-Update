@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using Service;
 
 public class BubbleEffectController : MonoBehaviour, UpdateReceiver
 {
@@ -11,7 +10,7 @@ public class BubbleEffectController : MonoBehaviour, UpdateReceiver
 
     public void OnDestroy()
     {
-        GlobalState.Instance.Services.Get<UpdateService>().Updates.Remove(this);
+        GlobalState.UpdateService.Updates.Remove(this);
     }
 
     public void OnUpdate()
@@ -34,7 +33,7 @@ public class BubbleEffectController : MonoBehaviour, UpdateReceiver
 
         if (effects.Count == 0)
         {
-            GlobalState.Instance.Services.Get<UpdateService>().Updates.Remove(this);
+            GlobalState.UpdateService.Updates.Remove(this);
         }
     }
 
@@ -44,7 +43,7 @@ public class BubbleEffectController : MonoBehaviour, UpdateReceiver
 
         if (effects.Count == 1)
         {
-            GlobalState.Instance.Services.Get<UpdateService>().Updates.Add(this);
+            GlobalState.UpdateService.Updates.Add(this);
         }
     }
 }

@@ -1,5 +1,4 @@
 using State;
-using Service;
 using UnityEngine;
 
 public class HeartsTextUpdater : UITextUpdater
@@ -11,11 +10,9 @@ public class HeartsTextUpdater : UITextUpdater
     {
         base.Start();
 
-        var user = GlobalState.Instance.Services.Get<UserStateService>();
-
-        if (user != null)
+        if (GlobalState.User != null)
         {
-            Target = user.purchasables.hearts;
+            Target = GlobalState.User.purchasables.hearts;
         }
     }
 

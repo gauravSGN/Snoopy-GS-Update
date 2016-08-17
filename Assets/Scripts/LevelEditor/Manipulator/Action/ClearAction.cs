@@ -1,5 +1,4 @@
-﻿using Service;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace LevelEditor.Manipulator
 {
@@ -17,7 +16,7 @@ namespace LevelEditor.Manipulator
             manipulator.Models.Clear();
             manipulator.Views.Clear();
 
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new LevelModifiedEvent());
+            GlobalState.EventService.Dispatch(new LevelModifiedEvent());
         }
 
         public void PerformAlternate(LevelManipulator manipulator, int x, int y)

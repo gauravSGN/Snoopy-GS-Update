@@ -1,5 +1,4 @@
 using Reaction;
-using Service;
 
 public class BubbleReactionEvent : ReactionEvent
 {
@@ -7,11 +6,11 @@ public class BubbleReactionEvent : ReactionEvent
 
     public static void Dispatch(ReactionPriority priority, Bubble bubble)
     {
-        var gameEvent = GlobalState.Instance.Services.Get<EventService>().GetPooledEvent<BubbleReactionEvent>();
+        var gameEvent = GlobalState.EventService.GetPooledEvent<BubbleReactionEvent>();
 
         gameEvent.priority = priority;
         gameEvent.bubble = bubble;
 
-        GlobalState.Instance.Services.Get<EventService>().DispatchPooled(gameEvent);
+        GlobalState.EventService.DispatchPooled(gameEvent);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using Service;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,7 +14,7 @@ public class AimLineEventTrigger : EventTrigger
 
     public void Start()
     {
-        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<InputToggleEvent>(OnInputToggle);
+        GlobalState.EventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
     }
 
     override public void OnDrag(PointerEventData data)

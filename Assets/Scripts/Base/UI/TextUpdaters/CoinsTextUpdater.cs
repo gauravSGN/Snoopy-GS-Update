@@ -1,16 +1,12 @@
-using Service;
-
 public class CoinsTextUpdater : UITextUpdater
 {
     override protected void Start()
     {
         base.Start();
 
-        var user = GlobalState.Instance.Services.Get<UserStateService>();
-
-        if (user != null)
+        if (GlobalState.User != null)
         {
-            Target = user.purchasables.coins;
+            Target = GlobalState.User.purchasables.coins;
         }
     }
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using Reaction;
-using Service;
 using Animation;
 using Effects;
 using ScanFunction = Util.CastingUtil.ScanFunction;
@@ -47,12 +46,12 @@ public class BubbleExplode : MonoBehaviour
 
     protected void Start()
     {
-        GlobalState.Instance.Services.Get<EventService>().AddEventHandler<BubbleSettlingEvent>(OnSettling);
+        GlobalState.EventService.AddEventHandler<BubbleSettlingEvent>(OnSettling);
     }
 
     protected void OnDestroy()
     {
-        GlobalState.Instance.Services.Get<EventService>().RemoveEventHandler<BubbleSettlingEvent>(OnSettling);
+        GlobalState.EventService.RemoveEventHandler<BubbleSettlingEvent>(OnSettling);
     }
 
     private void AddReaction(GameObject bubble, Bubble model)

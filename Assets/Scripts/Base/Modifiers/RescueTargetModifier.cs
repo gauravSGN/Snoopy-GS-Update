@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Model;
-using Service;
 using Snoopy.Characters;
 using System.Collections.Generic;
 
@@ -37,7 +36,7 @@ namespace Modifiers
 
         override protected void ModifyEditorObject(GameObject target, BubbleData.ModifierData data)
         {
-            sprite = sprite ?? GlobalState.Instance.Services.Get<AssetService>().LoadAsset<Sprite>(SPRITE_PATH);
+            sprite = sprite ?? GlobalState.AssetService.LoadAsset<Sprite>(SPRITE_PATH);
 
             var rescueSprite = CreateRescueSprite(target);
             var image = rescueSprite.AddComponent<Image>();
@@ -61,7 +60,7 @@ namespace Modifiers
 
         private void CreateInstance(GameObject parent)
         {
-            prefab = prefab ?? GlobalState.Instance.Services.Get<AssetService>().LoadAsset<GameObject>(PREFAB_PATH);
+            prefab = prefab ?? GlobalState.AssetService.LoadAsset<GameObject>(PREFAB_PATH);
 
             var instance = GameObject.Instantiate(prefab);
             var target = instance.GetComponent<WoodstockEventHandler>();

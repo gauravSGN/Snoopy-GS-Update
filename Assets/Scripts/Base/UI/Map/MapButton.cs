@@ -1,5 +1,4 @@
-﻿using Service;
-using UI.Popup;
+﻿using UI.Popup;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,10 +26,10 @@ namespace UI.Map
 
         public void Click(string nextScene = "")
         {
-            if (GlobalState.Instance.Services.Get<UserStateService>().purchasables.hearts.quantity > 0)
+            if (GlobalState.User.purchasables.hearts.quantity > 0)
             {
-                var sceneData = GlobalState.Instance.Services.Get<SceneService>();
-                var levelData = GlobalState.Instance.Services.Get<AssetService>().LoadAsset<TextAsset>(levelAssetName);
+                var sceneData = GlobalState.SceneService;
+                var levelData = GlobalState.AssetService.LoadAsset<TextAsset>(levelAssetName);
 
                 if (levelData != null)
                 {
@@ -45,11 +44,11 @@ namespace UI.Map
                     nextScene = StringConstants.Scenes.LEVEL;
                 }
 
-                GlobalState.Instance.Services.Get<PopupService>().Enqueue(new PreLevelPopupConfig
+                GlobalState.PopupService.Enqueue(new PreLevelPopupConfig
                 {
                     level = levelNumber,
                     nextScene = nextScene,
-                    stars = GlobalState.Instance.Services.Get<UserStateService>().levels[levelNumber].stars,
+                    stars = GlobalState.User.levels[levelNumber].stars,
                 });
             }
         }

@@ -1,7 +1,6 @@
 using Util;
 using Model;
 using System;
-using Service;
 using UI.Popup;
 using Modifiers;
 using UnityEngine;
@@ -36,7 +35,7 @@ public class Level : MonoBehaviour
 
     protected void Start()
     {
-        var sceneData = GlobalState.Instance.Services.Get<SceneService>();
+        var sceneData = GlobalState.SceneService;
 
         if (!string.IsNullOrEmpty(sceneData.NextLevelData))
         {
@@ -45,7 +44,7 @@ public class Level : MonoBehaviour
         }
         else if (levelAssetPath != null)
         {
-            levelData = GlobalState.Instance.Services.Get<AssetService>().LoadAsset<TextAsset>(levelAssetPath).text;
+            levelData = GlobalState.AssetService.LoadAsset<TextAsset>(levelAssetPath).text;
         }
 
         levelState.levelNumber = sceneData.LevelNumber;
@@ -76,26 +75,22 @@ public class Level : MonoBehaviour
             }
         }
 
-        var eventService = GlobalState.EventService;
+        GlobalState.EventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
+        GlobalState.EventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
+        GlobalState.EventService.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
+        GlobalState.EventService.AddEventHandler<AddLevelModifierEvent>(e => AddModifier(e.type, e.data));
 
-        eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
-        eventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
-        eventService.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
-        eventService.AddEventHandler<AddLevelModifierEvent>(e => AddModifier(e.type, e.data));
-
-        var assetService = GlobalState.Instance.Services.Get<AssetService>();
-
-        assetService.LoadAssetAsync<Sprite>(loader.LevelData.Background, delegate(Sprite sprite)
+        GlobalState.AssetService.LoadAssetAsync<Sprite>(loader.LevelData.Background, delegate(Sprite sprite)
             {
                 background.sprite = sprite;
             });
 
-        assetService.OnComplete += OnAssetLoadingComplete;
+        GlobalState.AssetService.OnComplete += OnAssetLoadingComplete;
     }
 
     private void OnAssetLoadingComplete()
     {
-        GlobalState.Instance.Services.Get<AssetService>().OnComplete -= OnAssetLoadingComplete;
+        GlobalState.AssetService.OnComplete -= OnAssetLoadingComplete;
         GlobalState.EventService.Dispatch(new LevelLoadedEvent());
     }
 
@@ -124,9 +119,9 @@ public class Level : MonoBehaviour
         GlobalState.EventService.Dispatch(new LevelCompleteEvent(true));
         UpdateUser();
 
-        var stars = GlobalState.Instance.Services.Get<UserStateService>().levels[levelState.levelNumber].stars;
+        var stars = GlobalState.User.levels[levelState.levelNumber].stars;
 
-        GlobalState.Instance.Services.Get<PopupService>().Enqueue(new GenericPopupConfig
+        GlobalState.PopupService.Enqueue(new GenericPopupConfig
         {
             title = "Level Won",
             mainText = ("Score: " + levelState.score.ToString() + "\n" +
@@ -166,8 +161,7 @@ public class Level : MonoBehaviour
         {
             user.maxLevel++;
 
-            var sceneService = GlobalState.Instance.Services.Get<SceneService>();
-            sceneService.PostTransitionCallbacks.Add(DispatchMovePlayerAvatar);
+            GlobalState.SceneService.PostTransitionCallbacks.Add(DispatchMovePlayerAvatar);
         }
     }
 

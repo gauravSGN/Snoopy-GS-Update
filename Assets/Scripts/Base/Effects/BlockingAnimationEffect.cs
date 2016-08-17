@@ -2,7 +2,6 @@ using UnityEngine;
 using System;
 using System.Collections;
 using Animation;
-using Service;
 
 namespace Effects
 {
@@ -12,7 +11,7 @@ namespace Effects
         {
             yield return null;
 
-            var animation = GlobalState.Instance.Services.Get<AnimationService>().CreateByType(type);
+            var animation = GlobalState.AnimationService.CreateByType(type);
             var transform = animation.transform;
 
             transform.SetParent(bubble.transform);

@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using LevelEditor.Manipulator;
 using Model;
-using Service;
 
 namespace LevelEditor.Menu
 {
@@ -23,7 +22,7 @@ namespace LevelEditor.Menu
 
         public GameObject CreateWidget(BubbleData bubble)
         {
-            prefab = prefab ?? GlobalState.Instance.Services.Get<AssetService>().LoadAsset<GameObject>(PREFAB_PATH);
+            prefab = prefab ?? GlobalState.AssetService.LoadAsset<GameObject>(PREFAB_PATH);
             data = bubble;
 
             var instance = GameObject.Instantiate(prefab);

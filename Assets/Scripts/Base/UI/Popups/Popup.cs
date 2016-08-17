@@ -1,4 +1,3 @@
-using Service;
 using UnityEngine;
 
 namespace UI.Popup
@@ -17,7 +16,7 @@ namespace UI.Popup
         {
             gameObject.SetActive(true);
             GetComponent<TranslateTween>().PlayFrom();
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new PopupDisplayedEvent(this));
+            GlobalState.EventService.Dispatch(new PopupDisplayedEvent(this));
         }
 
         virtual public void Affirmative()
@@ -45,7 +44,7 @@ namespace UI.Popup
                 }
             }
 
-            GlobalState.Instance.Services.Get<EventService>().Dispatch(new PopupClosedEvent(this));
+            GlobalState.EventService.Dispatch(new PopupClosedEvent(this));
             Destroy(gameObject);
         }
 

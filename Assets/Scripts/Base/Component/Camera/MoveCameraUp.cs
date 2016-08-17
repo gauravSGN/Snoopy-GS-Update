@@ -1,5 +1,4 @@
-﻿using Service;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class MoveCameraUp : BaseMoveCamera
@@ -11,8 +10,7 @@ public class MoveCameraUp : BaseMoveCamera
     {
         base.Start();
 
-        var eventService = GlobalState.Instance.Services.Get<EventService>();
-        eventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
+        GlobalState.EventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
     override protected IEnumerator MoveGameView()
