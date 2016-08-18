@@ -7,12 +7,12 @@ namespace Snoopy.Characters
 {
     sealed public class WoodstockEventHandler : MonoBehaviour
     {
-        private const string CELEBRATION_PATH = "Sequences/RescueCelebration/RescueCelebrationSequence";
-
         [SerializeField]
         private Animator animator;
 
+        [SerializeField]
         private GameObject celebration;
+
         private Transform gameView;
 
         public Bubble Model { get; set; }
@@ -28,8 +28,6 @@ namespace Snoopy.Characters
             var eventService = GlobalState.EventService;
             eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
             eventService.AddEventHandler<ShotsRemainingEvent>(OnShotsRemaining);
-
-            celebration = GlobalState.Instance.Services.Get<AssetService>().LoadAsset<GameObject>(CELEBRATION_PATH);
         }
 
         public void OnDestroy()
@@ -45,7 +43,10 @@ namespace Snoopy.Characters
 
             StartCoroutine(FlyToGround());
 
-            var celebrationInstance = Instantiate(celebration, transform.position, Quaternion.identity);
+            if (celebration != null)
+            {
+                Instantiate(celebration, transform.position, Quaternion.identity);
+            }
         }
 
         private void OnLevelComplete(LevelCompleteEvent gameEvent)
