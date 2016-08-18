@@ -92,7 +92,7 @@ public class BubbleLauncher : MonoBehaviour
 
     private void CreateBubbles()
     {
-        var offset = new Vector3(0, -GlobalState.GameConfig.bubbles.size / 2);
+        var offset = new Vector3(0, -GlobalState.Instance.Config.bubbles.size / 2);
 
         for (var index = 0; index < nextBubbles.Length; index++)
         {
