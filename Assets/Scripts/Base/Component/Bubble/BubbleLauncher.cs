@@ -32,7 +32,6 @@ public class BubbleLauncher : MonoBehaviour
 
     public void CycleQueue()
     {
-        Debug.Log("swap");
         if (!aimLine.Aiming && inputAllowed)
         {
             CycleLocalQueue();
