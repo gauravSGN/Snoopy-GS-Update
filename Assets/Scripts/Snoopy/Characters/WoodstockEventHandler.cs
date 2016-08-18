@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Service;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,9 +7,12 @@ namespace Snoopy.Characters
 {
     sealed public class WoodstockEventHandler : MonoBehaviour
     {
+        private const string CELEBRATION_PATH = "Sequences/RescueCelebration/RescueCelebrationSequence";
+
         [SerializeField]
         private Animator animator;
 
+        private GameObject celebration;
         private Transform gameView;
 
         public Bubble Model { get; set; }
@@ -24,6 +28,8 @@ namespace Snoopy.Characters
             var eventService = GlobalState.EventService;
             eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
             eventService.AddEventHandler<ShotsRemainingEvent>(OnShotsRemaining);
+
+            celebration = GlobalState.Instance.Services.Get<AssetService>().LoadAsset<GameObject>(CELEBRATION_PATH);
         }
 
         public void OnDestroy()
@@ -38,6 +44,8 @@ namespace Snoopy.Characters
             animator.SetBool("HasEscaped", true);
 
             StartCoroutine(FlyToGround());
+
+            var celebrationInstance = Instantiate(celebration, transform.position, Quaternion.identity);
         }
 
         private void OnLevelComplete(LevelCompleteEvent gameEvent)
