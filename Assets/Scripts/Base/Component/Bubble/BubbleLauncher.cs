@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class BubbleLauncher : MonoBehaviour
@@ -27,9 +28,11 @@ public class BubbleLauncher : MonoBehaviour
     private GameObject currentAnimation;
     private Vector2 direction;
     private bool inputAllowed;
+    private AudioSource launchSound;
 
     public void CycleQueue()
     {
+        Debug.Log("swap");
         if (!aimLine.Aiming && inputAllowed)
         {
             CycleLocalQueue();
@@ -70,6 +73,8 @@ public class BubbleLauncher : MonoBehaviour
         eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
 
         inputAllowed = true;
+
+        launchSound = GetComponent<AudioSource>();
     }
 
     private void OnLevelLoaded(LevelLoadedEvent gameEvent)
@@ -129,6 +134,8 @@ public class BubbleLauncher : MonoBehaviour
 
         level.levelState.bubbleQueue.RemoveListener(OnBubbleQueueChanged);
         level.levelState.bubbleQueue.GetNext();
+
+        launchSound.Play();
     }
 
     private void ReadyNextBubble()
@@ -142,7 +149,25 @@ public class BubbleLauncher : MonoBehaviour
     private void MoveBubbleToLocation(int index)
     {
         nextBubbles[index].transform.parent = locations[index].transform;
-        nextBubbles[index].transform.localPosition = Vector3.zero;
+        StartCoroutine(MoveBubbleRoutine(nextBubbles[index].transform, locations[index].transform));
+    }
+
+    public IEnumerator MoveBubbleRoutine(Transform bubbleTransform, Transform target)
+    {
+        if(bubbleTransform != null)
+        {
+            float time = 0f;
+            float totalTime = 0.15f;
+            Vector3 start = new Vector3(bubbleTransform.position.x, bubbleTransform.position.y, -1f);
+            Vector3 end = new Vector3(target.position.x, target.position.y, -1f);
+            while(time <= totalTime)
+            {
+                time += Time.deltaTime;
+                bubbleTransform.position = Vector3.Slerp(start, end, (time/totalTime));
+                yield return null;
+            }
+            bubbleTransform.localPosition = Vector3.zero;
+        }
     }
 
     private void CycleLocalQueue()
