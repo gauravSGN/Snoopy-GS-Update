@@ -101,7 +101,7 @@ public class BubbleLauncher : MonoBehaviour
                 nextTypes[index] = level.levelState.bubbleQueue.Peek(index);
                 nextBubbles[index] = level.bubbleFactory.CreateByType(nextTypes[index]);
                 nextBubbles[index].transform.parent = locations[index].transform;
-                nextBubbles[index].transform.position =  locations[index].transform.position + offset;
+                nextBubbles[index].transform.position = locations[index].transform.position + offset;
                 MoveBubbleToLocation(index);
             }
         }
