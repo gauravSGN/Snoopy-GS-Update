@@ -17,6 +17,7 @@ public class GlobalState : SingletonBehaviour<GlobalState>
     public static AnimationService AnimationService { get { return Instance.Services.Get<AnimationService>(); } }
     public static InitializerService InitializerService { get { return Instance.Services.Get<InitializerService>(); } }
     public static TopUIService TopUIService { get { return Instance.Services.Get<TopUIService>(); } }
+    public static GameConfig GameConfig { get { return Instance.Config; } }
 
     public GameConfig Config { get { return config; } }
     public ServiceRepository Services { get { return services; } }
