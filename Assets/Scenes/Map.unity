@@ -421,6 +421,10 @@ Prefab:
       propertyPath: m_Name
       value: Coming Soon Loader
       objectReference: {fileID: 0}
+    - target: {fileID: 11497616, guid: 989609277b90f4c1eaa85f4c753307a9, type: 2}
+      propertyPath: mapType
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 989609277b90f4c1eaa85f4c753307a9, type: 2}
   m_IsPrefabParent: 0
@@ -511,6 +515,10 @@ Prefab:
     - target: {fileID: 112230, guid: 989609277b90f4c1eaa85f4c753307a9, type: 2}
       propertyPath: m_Name
       value: Loader - World 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497616, guid: 989609277b90f4c1eaa85f4c753307a9, type: 2}
+      propertyPath: mapType
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 989609277b90f4c1eaa85f4c753307a9, type: 2}
