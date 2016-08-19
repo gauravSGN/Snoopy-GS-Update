@@ -17,6 +17,9 @@ namespace Scoring
         [SerializeField]
         private Level level;
 
+        [SerializeField]
+        private GameObject multiplierCallout;
+
         private readonly ReactionDict handlers = new ReactionDict();
         private readonly HashSet<Bubble> handledBubbles = new HashSet<Bubble>();
 
@@ -91,10 +94,20 @@ namespace Scoring
             {
                 var cluster = ExtractCluster(bubbleList);
                 var multiplier = ScoreUtil.ComputeClusterMultiplier(cluster.Count);
+                var clusterScore = (int)(cluster[0].definition.Score * cluster.Count * multiplier);
 
                 if (cluster[0].definition.category != BubbleCategory.Basic)
                 {
                     multiplier = 1.0f;
+                }
+
+                ScoreMultiplierCallout callout = null;
+                if ((multiplier >= 2.0f) && (multiplierCallout != null))
+                {
+                    var instance = Instantiate(multiplierCallout);
+                    instance.GetComponent<TextMesh>().color = cluster[0].definition.BaseColor;
+                    callout = instance.GetComponent<ScoreMultiplierCallout>();
+                    callout.Initialize();
                 }
 
                 foreach (var bubble in cluster)
@@ -102,7 +115,12 @@ namespace Scoring
                     ShowBubbleScore(bubble, bubble.definition.Score);
                 }
 
-                totalScore += (int)(cluster[0].definition.Score * cluster.Count * multiplier);
+                if (callout != null)
+                {
+                    callout.Show((int)Mathf.Floor(multiplier), clusterScore);
+                }
+
+                totalScore += clusterScore;
             }
 
             AddToScore(totalScore);
