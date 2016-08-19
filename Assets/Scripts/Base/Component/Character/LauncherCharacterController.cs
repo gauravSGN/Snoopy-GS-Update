@@ -34,10 +34,16 @@ public class LauncherCharacterController : MonoBehaviour
         skeleton = gameObject.GetComponent<SkeletonAnimator>().Skeleton;
 
         launcherAnimator.SetFloat(ANGLE, 90.0f);
+        eventTrigger.StartAiming += OnStartAiming;
+        eventTrigger.StopAiming += OnStopAiming;
         eventTrigger.MoveTarget += OnMoveTarget;
+
 
         GlobalState.EventService.AddEventHandler<BubbleFiringEvent>(OnBubbleFiring);
         GlobalState.EventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
+        GlobalState.EventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
+        GlobalState.EventService.AddEventHandler<ShotsRemainingEvent>(OnShotsRemaining);
+
     }
 
     private void OnBubbleFiring(BubbleFiringEvent bubbleFiringEvent)
@@ -51,14 +57,36 @@ public class LauncherCharacterController : MonoBehaviour
         launcherAnimator.SetFloat(ANGLE, 90f);
     }
 
-    private void OnMoveTarget(Vector2 target)
+    private void OnStartAiming()
     {
         launcherAnimator.SetBool(AIMING, true);
+    }
 
+    private void OnStopAiming()
+    {
+        launcherAnimator.SetBool(AIMING, false);
+    }
+
+    private void OnMoveTarget(Vector2 target)
+    {
         var direction = (target - (Vector2)launchOrigin.transform.position).normalized;
         var angle = Vector2.Angle(Vector2.up, direction);
 
         skeleton.FlipX = direction.x > 0.01f;
         launcherAnimator.SetFloat(ANGLE, angle);
+    }
+
+    private void OnShotsRemaining(ShotsRemainingEvent gameEvent)
+    {
+        if (gameEvent.shots == 10)
+        {
+            launcherAnimator.SetBool("LosingLevel", true);
+        }
+    }
+
+    private void OnLevelComplete(LevelCompleteEvent gameEvent)
+    {
+        launcherAnimator.SetBool("WonLevel", gameEvent.Won);
+        launcherAnimator.SetBool("LostLevel", !gameEvent.Won);
     }
 }
