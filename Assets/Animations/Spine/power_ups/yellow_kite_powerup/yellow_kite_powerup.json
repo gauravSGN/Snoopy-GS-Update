@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "/hdv+nBIZXrESiwYuphii3o0Zao", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
+"skeleton": { "hash": "OShC3ZQJ0oAkHEN/kfKnDHyczys", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "placement_ctrl_reset", "parent": "root" },
@@ -34,7 +34,8 @@
 	{ "name": "charged_bubble_yellowkite", "bone": "kite_bubble_opening_ctrl" },
 	{ "name": "charged_bubble_yellowkiteOpen01", "bone": "kite_bubble_opening_ctrl" },
 	{ "name": "charged_bubble_yellowkiteOpen02", "bone": "kite_bubble_opening_ctrl" },
-	{ "name": "kite_edge_spin_0002", "bone": "edge_spin_ctrl", "attachment": "kite_edge_spin_0002" }
+	{ "name": "kite_edge_spin_0002", "bone": "edge_spin_ctrl", "attachment": "kite_edge_spin_0002" },
+	{ "name": "charged bubble glow", "bone": "kite_bubble_opening_ctrl" }
 ],
 "skins": {
 	"default": {
@@ -49,14 +50,17 @@
 			"shultz_spinners/Kite_schultz_swirl_0005": { "width": 290, "height": 340 },
 			"shultz_spinners/Kite_schultz_swirl_0006": { "width": 290, "height": 340 }
 		},
+		"charged bubble glow": {
+			"charged bubble glow": { "width": 134, "height": 129 }
+		},
 		"charged_bubble_yellowkite": {
-			"charged_bubble_yellowkite": { "width": 101, "height": 96 }
+			"charged bubble copy": { "width": 73, "height": 68 }
 		},
 		"charged_bubble_yellowkiteOpen01": {
-			"charged_bubble_yellowkiteOpen01": { "width": 111, "height": 112 }
+			"stage 2": { "width": 106, "height": 107 }
 		},
 		"charged_bubble_yellowkiteOpen02": {
-			"charged_bubble_yellowkiteOpen02": { "width": 107, "height": 128 }
+			"stage 3": { "width": 102, "height": 122 }
 		},
 		"kite_edge_spin_0001": {
 			"kite_edge_spin_0001": { "width": 186, "height": 294 }
@@ -232,18 +236,30 @@
 					{ "time": 2.5333, "name": null }
 				]
 			},
+			"charged bubble glow": {
+				"color": [
+					{
+						"time": 0,
+						"color": "ffffffff",
+						"curve": [ 0.807, 0, 0.93, 0.64 ]
+					},
+					{ "time": 0.2, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "charged bubble glow" },
+					{ "time": 0.2333, "name": null }
+				]
+			},
 			"charged_bubble_yellowkite": {
 				"attachment": [
-					{ "time": 0, "name": "charged_bubble_yellowkite" },
-					{ "time": 0.0333, "name": "charged_bubble_yellowkite" },
-					{ "time": 0.0666, "name": null }
+					{ "time": 0, "name": "charged bubble copy" },
+					{ "time": 0.0333, "name": null }
 				]
 			},
 			"charged_bubble_yellowkiteOpen01": {
 				"attachment": [
 					{ "time": 0, "name": null },
-					{ "time": 0.0333, "name": null },
-					{ "time": 0.0666, "name": "charged_bubble_yellowkiteOpen01" },
+					{ "time": 0.0333, "name": "stage 2" },
 					{ "time": 0.1333, "name": null }
 				]
 			},
@@ -251,7 +267,7 @@
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 0.1, "name": null },
-					{ "time": 0.1333, "name": "charged_bubble_yellowkiteOpen02" },
+					{ "time": 0.1333, "name": "stage 3" },
 					{ "time": 0.2, "name": null }
 				]
 			},
@@ -830,6 +846,14 @@
 				]
 			}
 		},
+		"drawOrder": [
+			{
+				"time": 0,
+				"offsets": [
+					{ "slot": "charged bubble glow", "offset": -15 }
+				]
+			}
+		],
 		"events": [
 			{ "time": 1.3666, "name": "StartKiteSparkle01" }
 		]
