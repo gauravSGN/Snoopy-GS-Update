@@ -8,6 +8,10 @@ public class LauncherCharacterController : MonoBehaviour
     private const string ANGLE = "Angle";
     private const string AIMING = "Aiming";
     private const string FIRING = "Firing";
+    private const string LOSING_LEVEL = "LosingLevel";
+    private const string LOST_LEVEL = "LostLevel";
+    private const string WON_LEVEL = "WonLevel";
+    private const string SWAP = "Swap";
 
     public event Action OnAnimationFire;
 
@@ -26,6 +30,11 @@ public class LauncherCharacterController : MonoBehaviour
         {
             OnAnimationFire();
         }
+    }
+
+    public void CycleQueueAnimation()
+    {
+        launcherAnimator.SetTrigger(SWAP);
     }
 
     protected void Start()
@@ -80,13 +89,13 @@ public class LauncherCharacterController : MonoBehaviour
     {
         if (gameEvent.shots == 10)
         {
-            launcherAnimator.SetBool("LosingLevel", true);
+            launcherAnimator.SetBool(LOSING_LEVEL, true);
         }
     }
 
     private void OnLevelComplete(LevelCompleteEvent gameEvent)
     {
-        launcherAnimator.SetBool("WonLevel", gameEvent.Won);
-        launcherAnimator.SetBool("LostLevel", !gameEvent.Won);
+        launcherAnimator.SetBool(WON_LEVEL, gameEvent.Won);
+        launcherAnimator.SetBool(LOST_LEVEL, !gameEvent.Won);
     }
 }
