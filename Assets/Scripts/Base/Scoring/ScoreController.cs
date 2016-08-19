@@ -99,7 +99,7 @@ namespace Scoring
 
                 foreach (var bubble in cluster)
                 {
-                    ShowBubbleScore(bubble, (int)(bubble.definition.Score * Mathf.Floor(multiplier)));
+                    ShowBubbleScore(bubble, bubble.definition.Score);
                 }
 
                 totalScore += (int)(cluster[0].definition.Score * cluster.Count * multiplier);
