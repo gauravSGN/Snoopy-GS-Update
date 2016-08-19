@@ -169,19 +169,31 @@ public class BubbleLauncher : MonoBehaviour
 
     public IEnumerator MoveBubbleRoutine(Transform bubbleTransform, Transform target)
     {
-        if(bubbleTransform != null)
+        if (bubbleTransform != null)
         {
             float time = 0f;
             float totalTime = 0.15f;
             Vector3 start = new Vector3(bubbleTransform.position.x, bubbleTransform.position.y, -1f);
             Vector3 end = new Vector3(target.position.x, target.position.y, -1f);
-            while(time <= totalTime)
+
+            while (time <= totalTime)
             {
-                time += Time.deltaTime;
-                bubbleTransform.position = Vector3.Slerp(start, end, (time/totalTime));
-                yield return null;
+                if (bubbleTransform != null)
+                {
+                    time += Time.deltaTime;
+                    bubbleTransform.position = Vector3.Slerp(start, end, (time/totalTime));
+                    yield return null;
+                }
+                else
+                {
+                    break;
+                }
             }
-            bubbleTransform.localPosition = Vector3.zero;
+
+            if (bubbleTransform != null)
+            {
+                bubbleTransform.localPosition = Vector3.zero;
+            }
         }
     }
 
