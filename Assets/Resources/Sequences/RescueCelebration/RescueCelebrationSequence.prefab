@@ -29,6 +29,7 @@ GameObject:
   - 4: {fileID: 409294}
   - 114: {fileID: 11475334}
   - 114: {fileID: 11452974}
+  - 114: {fileID: 11498346}
   m_Layer: 0
   m_Name: RescueCelebrationSequence
   m_TagString: Untagged
@@ -129,6 +130,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d277b8ff5ef451495db8cab36db2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11498346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7adf7cc5fb8414d138215267ca53daae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startOnComplete: []
 --- !u!222 &22288266
 CanvasRenderer:
   m_ObjectHideFlags: 1
