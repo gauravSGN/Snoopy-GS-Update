@@ -7,8 +7,11 @@ namespace Event
 {
     public class EventDispatcher : EventService
     {
+        private int dispatchesInProgress;
+
         private readonly HandlerDict pools = new HandlerDict();
         private readonly List<HandlerDict> handlerDictList = new List<HandlerDict>();
+        private readonly HashSet<List<object>> handlerListsToClean = new HashSet<List<object>>();
 
         public EventDispatcher()
         {
@@ -47,6 +50,7 @@ namespace Event
                     if (index >= 0)
                     {
                         handlerList[index] = null;
+                        handlerListsToClean.Add(handlerList);
                     }
                 }
             }
@@ -55,6 +59,8 @@ namespace Event
         public void Dispatch<T>(T gameEvent) where T : GameEvent
         {
             var eventType = typeof(T);
+
+            dispatchesInProgress++;
 
             foreach (var handlers in handlerDictList)
             {
@@ -69,10 +75,11 @@ namespace Event
                             (handlerList[handlerIndex] as Action<T>).Invoke(gameEvent);
                         }
                     }
-
-                    handlerList.RemoveAll(h => (h == null));
                 }
             }
+
+            dispatchesInProgress--;
+            CleanModifiedHandlerLists();
         }
 
         public void DispatchPooled<T>(T gameEvent) where T : GameEvent
@@ -115,6 +122,19 @@ namespace Event
             if (!list.Contains(item))
             {
                 list.Add(item);
+            }
+        }
+
+        private void CleanModifiedHandlerLists()
+        {
+            if ((dispatchesInProgress == 0) && (handlerListsToClean.Count > 0))
+            {
+                foreach (var handlerList in handlerListsToClean)
+                {
+                    handlerList.RemoveAll(h => (h == null));
+                }
+
+                handlerListsToClean.Clear();
             }
         }
     }
