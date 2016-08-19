@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 8
   prefab: {fileID: 179220, guid: 9357d476de77d44a28e079697bf81b38, type: 2}
-  controller: {fileID: 22100000, guid: c61967c19107f4a7ba642ede14740287, type: 2}
+  controller: {fileID: 22100000, guid: 63d6fb614a90a4eed87f1212ed8aeac5, type: 2}
