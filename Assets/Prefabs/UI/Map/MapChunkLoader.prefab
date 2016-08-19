@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 2275
+  m_MinWidth: 2480
   m_MinHeight: 1280
   m_PreferredWidth: -1
   m_PreferredHeight: -1
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadOnStart: 1
   mapChunkFactory: {fileID: 11400000, guid: 3009c46fae6a9485fb1eb0dded367105, type: 2}
-  mapType: 0
+  mapType: -1
 --- !u!224 &22404762
 RectTransform:
   m_ObjectHideFlags: 1
