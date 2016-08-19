@@ -35,6 +35,7 @@ public class BubbleLauncher : MonoBehaviour
     {
         if (!aimLine.Aiming && inputAllowed)
         {
+            GlobalState.EventService.Dispatch(new InputToggleEvent(false));
             CycleLocalQueue();
             level.levelState.bubbleQueue.Rotate(nextBubbles.Length);
             SetAimLineColor();
