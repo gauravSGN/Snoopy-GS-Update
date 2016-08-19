@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -36,6 +37,7 @@ public class BubbleLauncher : MonoBehaviour
         {
             CycleLocalQueue();
             level.levelState.bubbleQueue.Rotate(nextBubbles.Length);
+            SetAimLineColor();
         }
     }
 
@@ -90,12 +92,16 @@ public class BubbleLauncher : MonoBehaviour
 
     private void CreateBubbles()
     {
+        var offset = new Vector3(0, -GlobalState.Instance.Config.bubbles.size / 2);
+
         for (var index = 0; index < nextBubbles.Length; index++)
         {
             if (nextBubbles[index] == null)
             {
                 nextTypes[index] = level.levelState.bubbleQueue.Peek(index);
                 nextBubbles[index] = level.bubbleFactory.CreateByType(nextTypes[index]);
+                nextBubbles[index].transform.parent = locations[index].transform;
+                nextBubbles[index].transform.position = locations[index].transform.position + offset;
                 MoveBubbleToLocation(index);
             }
         }
@@ -141,8 +147,16 @@ public class BubbleLauncher : MonoBehaviour
     {
         level.levelState.bubbleQueue.AddListener(OnBubbleQueueChanged);
         CycleLocalQueue();
+
+        if ((level.levelState.remainingBubbles < nextBubbles.Length) && (nextBubbles.Length != 0))
+        {
+            Array.Resize(ref nextBubbles, Mathf.Max(0, level.levelState.remainingBubbles));
+            Array.Resize(ref nextTypes, Mathf.Max(0, level.levelState.remainingBubbles));
+        }
+
         OnBubbleQueueChanged((Observable)level.levelState.bubbleQueue);
         characterController.OnAnimationFire -= OnAnimationFireBubble;
+        SetAimLineColor();
     }
 
     private void MoveBubbleToLocation(int index)
@@ -198,27 +212,28 @@ public class BubbleLauncher : MonoBehaviour
         {
             UpdateCurrentAnimationTransform();
         }
-
-        SetAimLineColor();
     }
 
     private void SetAimLineColor()
     {
-        var colors = new Color[] { nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.BaseColor };
-
-        if (shotModifierTypes.Count > 0)
+        if (nextBubbles.Length > 0)
         {
-            if (shotModifierTypes.Contains(ShotModifierType.RainbowBooster))
-            {
-                colors = GlobalState.Instance.Config.boosters.rainbowColors;
-            }
-            else
-            {
-                colors[0] = Color.white;
-            }
-        }
+            var colors = new Color[] { nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.BaseColor };
 
-        aimLine.colors = colors;
+            if (shotModifierTypes.Count > 0)
+            {
+                if (shotModifierTypes.Contains(ShotModifierType.RainbowBooster))
+                {
+                    colors = GlobalState.Instance.Config.boosters.rainbowColors;
+                }
+                else
+                {
+                    colors[0] = Color.white;
+                }
+            }
+
+            aimLine.colors = colors;
+        }
     }
 
     private void OnBubbleSettleEvent(BubbleSettlingEvent gameEvent)
