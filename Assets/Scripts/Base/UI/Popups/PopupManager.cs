@@ -1,5 +1,6 @@
 ﻿using System;
 using Service;
+using Registry;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -35,6 +36,11 @@ namespace UI.Popup
             }
         }
 
+        private bool PopupsBlocked
+        {
+            get { return GlobalState.Instance.Services.Get<BlockadeService>().PopupsBlocked; }
+        }
+
         public void Enqueue(PopupConfig config)
         {
             popupQueue.Enqueue(config, (int)config.Priority);
@@ -43,15 +49,17 @@ namespace UI.Popup
 
         protected void Start()
         {
-            GlobalState.EventService.AddEventHandler<PopupDisplayedEvent>(OnPopupDisplayed, Event.HandlerDictType.Persistent);
-            GlobalState.EventService.AddEventHandler<PopupClosedEvent>(OnPopupClosed, Event.HandlerDictType.Persistent);
+            var eventService = GlobalState.EventService;
+            eventService.AddEventHandler<PopupDisplayedEvent>(OnPopupDisplayed, Event.HandlerDictType.Persistent);
+            eventService.AddEventHandler<PopupClosedEvent>(OnPopupClosed, Event.HandlerDictType.Persistent);
+            eventService.AddEventHandler<BlockadeEvent.PopupsUnblocked>(OnPopupsUnblocked, Event.HandlerDictType.Persistent);
 
             GlobalState.Instance.Services.SetInstance<PopupService>(this);
         }
 
         private void ShowNextPopup()
         {
-            if (PopupsEnabled && (popupQueue.Count > 0))
+            if (PopupsEnabled && !PopupsBlocked && (popupQueue.Count > 0))
             {
                 var config = popupQueue.Peek();
 
@@ -88,6 +96,11 @@ namespace UI.Popup
 
             ShowNextPopup();
             UpdatePopupOverlay();
+        }
+
+        private void OnPopupsUnblocked(BlockadeEvent.PopupsUnblocked gameEvent)
+        {
+            ShowNextPopup();
         }
 
         private void UpdatePopupOverlay()
