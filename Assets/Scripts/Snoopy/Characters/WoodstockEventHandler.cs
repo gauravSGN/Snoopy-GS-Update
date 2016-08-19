@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Service;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,6 +9,9 @@ namespace Snoopy.Characters
     {
         [SerializeField]
         private Animator animator;
+
+        [SerializeField]
+        private GameObject celebration;
 
         private Transform gameView;
 
@@ -38,6 +42,11 @@ namespace Snoopy.Characters
             animator.SetBool("HasEscaped", true);
 
             StartCoroutine(FlyToGround());
+
+            if (celebration != null)
+            {
+                Instantiate(celebration, transform.position, Quaternion.identity);
+            }
         }
 
         private void OnLevelComplete(LevelCompleteEvent gameEvent)

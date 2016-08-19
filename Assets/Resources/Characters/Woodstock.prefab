@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 9559750}
+  celebration: {fileID: 150618, guid: 30b9370ee10da49fe93d3c37345e3deb, type: 2}
 --- !u!114 &11466688
 MonoBehaviour:
   m_ObjectHideFlags: 1
