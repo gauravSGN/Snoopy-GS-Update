@@ -38,6 +38,7 @@ public class BubbleLauncher : MonoBehaviour
             CycleLocalQueue();
             level.levelState.bubbleQueue.Rotate(nextBubbles.Length);
             SetAimLineColor();
+            characterController.CycleQueueAnimation();
         }
     }
 

@@ -808,6 +808,10 @@ Prefab:
       propertyPath: loader
       value: 
       objectReference: {fileID: 1499581533}
+    - target: {fileID: 9593344, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 33bd281ab251f4eb3adc07c09e5deeba, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
   m_IsPrefabParent: 0
