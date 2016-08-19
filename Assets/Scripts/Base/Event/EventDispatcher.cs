@@ -42,10 +42,11 @@ namespace Event
                 if (handlers.ContainsKey(eventType))
                 {
                     var handlerList = handlers[eventType];
+                    var index = handlerList.IndexOf(handler);
 
-                    if (handlerList.Contains(handler))
+                    if (index >= 0)
                     {
-                        handlerList.Remove(handler);
+                        handlerList[index] = null;
                     }
                 }
             }
@@ -61,10 +62,15 @@ namespace Event
                 {
                     var handlerList = handlers[eventType];
 
-                    foreach (var handler in handlerList)
+                    for (int handlerIndex = 0, maxIndex = handlerList.Count; handlerIndex < maxIndex; handlerIndex++)
                     {
-                        (handler as Action<T>).Invoke(gameEvent);
+                        if (handlerList[handlerIndex] != null)
+                        {
+                            (handlerList[handlerIndex] as Action<T>).Invoke(gameEvent);
+                        }
                     }
+
+                    handlerList.RemoveAll(h => (h == null));
                 }
             }
         }

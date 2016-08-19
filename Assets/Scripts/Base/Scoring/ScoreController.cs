@@ -39,7 +39,7 @@ namespace Scoring
             eventService.AddEventHandler<BubbleReactionEvent>(OnBubbleReaction);
             eventService.AddEventHandler<StartReactionsEvent>(OnStartReactions);
             eventService.AddEventHandler<GoalIncrementEvent>(OnGoalIncrement);
-            eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
+            eventService.AddEventHandler<PreLevelCompleteEvent>(OnPreLevelComplete);
         }
 
         public void OnDestroy()
@@ -77,7 +77,7 @@ namespace Scoring
             }
         }
 
-        private void OnLevelComplete(LevelCompleteEvent gameEvent)
+        private void OnPreLevelComplete(PreLevelCompleteEvent gameEvent)
         {
             AddToScore(level.levelState.remainingBubbles * config.remainingMovesValue);
         }

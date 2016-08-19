@@ -1,11 +1,8 @@
 using Util;
-using System;
-using UI.Popup;
 using System.Linq;
 using UnityEngine;
 using ExtensionMethods;
 using System.Collections;
-using System.Collections.Generic;
 using HandlerDict = System.Collections.Generic.SortedDictionary<Reaction.ReactionPriority, Reaction.ReactionHandler>;
 
 namespace Reaction
@@ -59,30 +56,7 @@ namespace Reaction
                 yield break;
             }
 
-            if (GetComponent<Level>().levelState.remainingBubbles <= 0)
-            {
-                GlobalState.EventService.Dispatch(new LevelCompleteEvent(false));
-
-
-                GlobalState.User.purchasables.hearts.quantity--;
-
-                GlobalState.PopupService.Enqueue(new GenericPopupConfig
-                {
-                    title = "Level Lost",
-                    mainText = "Hearts Left: " + GlobalState.User.purchasables.hearts.quantity.ToString(),
-                    closeActions = new List<Action> { DispatchReturnToMap },
-                    affirmativeActions = new List<Action> { DispatchReturnToMap }
-                });
-            }
-            else
-            {
-                GlobalState.EventService.Dispatch(new ReadyForNextBubbleEvent());
-            }
-        }
-
-        private void DispatchReturnToMap()
-        {
-            GlobalState.EventService.Dispatch(new TransitionToReturnSceneEvent());
+            GlobalState.EventService.Dispatch(new Event.ReactionsFinishedEvent());
         }
     }
 }

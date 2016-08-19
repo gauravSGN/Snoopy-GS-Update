@@ -69,7 +69,6 @@ public class BubbleLauncher : MonoBehaviour
         var eventService = GlobalState.EventService;
 
         eventService.AddEventHandler<BubbleSettlingEvent>(OnBubbleSettleEvent);
-        eventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
         eventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
         eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
 
@@ -100,8 +99,11 @@ public class BubbleLauncher : MonoBehaviour
             {
                 nextTypes[index] = level.levelState.bubbleQueue.Peek(index);
                 nextBubbles[index] = level.bubbleFactory.CreateByType(nextTypes[index]);
+
                 nextBubbles[index].transform.parent = locations[index].transform;
                 nextBubbles[index].transform.position = locations[index].transform.position + offset;
+                nextBubbles[index].layer = (int)Layers.Default;
+
                 MoveBubbleToLocation(index);
             }
         }
@@ -167,19 +169,31 @@ public class BubbleLauncher : MonoBehaviour
 
     public IEnumerator MoveBubbleRoutine(Transform bubbleTransform, Transform target)
     {
-        if(bubbleTransform != null)
+        if (bubbleTransform != null)
         {
             float time = 0f;
             float totalTime = 0.15f;
             Vector3 start = new Vector3(bubbleTransform.position.x, bubbleTransform.position.y, -1f);
             Vector3 end = new Vector3(target.position.x, target.position.y, -1f);
-            while(time <= totalTime)
+
+            while (time <= totalTime)
             {
-                time += Time.deltaTime;
-                bubbleTransform.position = Vector3.Slerp(start, end, (time/totalTime));
-                yield return null;
+                if (bubbleTransform != null)
+                {
+                    time += Time.deltaTime;
+                    bubbleTransform.position = Vector3.Slerp(start, end, (time/totalTime));
+                    yield return null;
+                }
+                else
+                {
+                    break;
+                }
             }
-            bubbleTransform.localPosition = Vector3.zero;
+
+            if (bubbleTransform != null)
+            {
+                bubbleTransform.localPosition = Vector3.zero;
+            }
         }
     }
 
@@ -239,11 +253,6 @@ public class BubbleLauncher : MonoBehaviour
     private void OnBubbleSettleEvent(BubbleSettlingEvent gameEvent)
     {
         ReadyNextBubble();
-    }
-
-    private void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)
-    {
-        GlobalState.EventService.Dispatch(new InputToggleEvent(true));
     }
 
     private void ResetShotModifiers()
