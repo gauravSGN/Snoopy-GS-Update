@@ -20,8 +20,22 @@ public class BubbleAttachments : MonoBehaviour
         model.OnDisconnected += DisconnectedHandler;
     }
 
+    protected void Start()
+    {
+        if (Model.type != BubbleType.Ceiling)
+        {
+            GlobalState.EventService.AddEventHandler<CullAllBubblesEvent>(OnCullAllBubbles);
+        }
+    }
+
+    protected void OnDestroy()
+    {
+        RemoveHandlers();
+    }
+
     private void RemoveHandlers()
     {
+        GlobalState.EventService.RemoveEventHandler<CullAllBubblesEvent>(OnCullAllBubbles);
         Model.OnPopped -= PoppedHandler;
         Model.OnDisconnected -= DisconnectedHandler;
     }
@@ -32,7 +46,7 @@ public class BubbleAttachments : MonoBehaviour
 
         gameObject.layer = (int)Layers.IgnoreRayCast;
         var death = gameObject.GetComponent<BubbleDeath>();
-        if(death != null)
+        if (death != null)
         {
             StartCoroutine(death.TriggerDeathEffects(BubbleDeathType.Pop));
         }
@@ -49,5 +63,13 @@ public class BubbleAttachments : MonoBehaviour
         rigidBody.isKinematic = false;
         rigidBody.AddForce(new Vector3(Random.Range(reactionsConfig.cullMinXForce, reactionsConfig.cullMaxXForce),
                                        Random.Range(reactionsConfig.cullMinYForce, reactionsConfig.cullMaxYForce)));
+    }
+
+    private void OnCullAllBubbles(CullAllBubblesEvent gameEvent)
+    {
+        if (gameObject.layer == (int)Layers.GameObjects)
+        {
+            Model.RemoveFromGraph();
+        }
     }
 }

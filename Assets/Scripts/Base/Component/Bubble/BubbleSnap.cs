@@ -10,7 +10,6 @@ public class BubbleSnap : MonoBehaviour
 
     protected void Start()
     {
-        gameObject.layer = (int)Layers.Default;
         rigidBody = GetComponent<Rigidbody2D>();
         collider = GetComponent<CircleCollider2D>();
 
