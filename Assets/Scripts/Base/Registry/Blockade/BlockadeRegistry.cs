@@ -9,8 +9,8 @@ namespace Registry
     {
         private struct EventMapping
         {
-            public Action OnBlock;
-            public Action OnUnblock;
+            public readonly Action OnBlock;
+            public readonly Action OnUnblock;
 
             public EventMapping(Action onBlock, Action onUnblock)
             {
