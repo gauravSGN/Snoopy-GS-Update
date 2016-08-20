@@ -89,6 +89,7 @@ public class Level : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
+        bubbleFactory.ResetModifiers();
         loader.LoadLevel(levelData);
         levelState.typeTotals = loader.Configuration.Counts;
         levelState.score = 0;
