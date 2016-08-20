@@ -114,12 +114,12 @@ public class Level : MonoBehaviour
         GlobalState.EventService.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
         GlobalState.EventService.AddEventHandler<AddLevelModifierEvent>(e => AddModifier(e.type, e.data));
 
+        GlobalState.AssetService.OnComplete += OnAssetLoadingComplete;
+
         GlobalState.AssetService.LoadAssetAsync<Sprite>(loader.LevelData.Background, delegate(Sprite sprite)
             {
                 background.sprite = sprite;
             });
-
-        GlobalState.AssetService.OnComplete += OnAssetLoadingComplete;
     }
 
     private void OnAssetLoadingComplete()
