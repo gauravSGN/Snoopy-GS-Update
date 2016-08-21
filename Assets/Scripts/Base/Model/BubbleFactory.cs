@@ -37,6 +37,11 @@ public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
     private List<BubbleModifier> bubbleModifiers;
     private LevelConfiguration configuration;
 
+    public void ResetModifiers()
+    {
+        bubbleModifiers = null;
+    }
+
     public GameObject Create(BubbleData data)
     {
         PopulateModifiers();

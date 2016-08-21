@@ -44,7 +44,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   Priority: 128
@@ -117,8 +117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - {fileID: 8300000, guid: 661499cd740da441eb2e8e41451d56db, type: 3}
-  - {fileID: 8300000, guid: 6a174126a1f03493bac3b54d6c2ca4ba, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   condition: 1
   bubbleMatchThreshold: 10
   chanceToPlay: 1
@@ -134,9 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - {fileID: 8300000, guid: 376547fb352424bd99628d96d15e21e8, type: 3}
-  - {fileID: 8300000, guid: 71e217932548d44caa74840b11013d64, type: 3}
-  - {fileID: 8300000, guid: 0632d4fe660fe44daaf6aaf96da82685, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   condition: 0
   bubbleMatchThreshold: 0
   chanceToPlay: 0.1

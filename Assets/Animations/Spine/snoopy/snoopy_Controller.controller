@@ -2215,43 +2215,43 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Firing
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Swap
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Aiming
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: LosingLevel
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: LostLevel
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: WonLevel
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -2351,6 +2351,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99964be2b6d394c03a4a103039254523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11494274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2017793ff8940401dae7a3a7ca51bbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11495198
@@ -3991,7 +4002,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110166820}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 11494274}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 0
@@ -4387,25 +4399,25 @@ AnimatorStateMachine:
   - {fileID: 110998956}
   m_StateMachineTransitions:
     data:
-      first: {fileID: 110789286}
+      first: {fileID: 110732414}
       second:
-      - {fileID: 110914704}
-    data:
-      first: {fileID: 110759106}
-      second:
-      - {fileID: 110909198}
-    data:
-      first: {fileID: 110700698}
-      second:
-      - {fileID: 110946422}
+      - {fileID: 110998610}
     data:
       first: {fileID: 110741976}
       second:
       - {fileID: 110968908}
     data:
-      first: {fileID: 110732414}
+      first: {fileID: 110700698}
       second:
-      - {fileID: 110998610}
+      - {fileID: 110946422}
+    data:
+      first: {fileID: 110759106}
+      second:
+      - {fileID: 110909198}
+    data:
+      first: {fileID: 110789286}
+      second:
+      - {fileID: 110914704}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 180, y: -216, z: 0}
   m_EntryPosition: {x: 168, y: 120, z: 0}
@@ -4571,16 +4583,6 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions:
     data:
-      first: {fileID: 110701880}
-      second:
-      - {fileID: 110902072}
-    data:
-      first: {fileID: 110769550}
-      second:
-      - {fileID: 110987834}
-      - {fileID: 110961998}
-      - {fileID: 110930358}
-    data:
       first: {fileID: 110794236}
       second:
       - {fileID: 110980156}
@@ -4588,6 +4590,16 @@ AnimatorStateMachine:
       - {fileID: 110903484}
       - {fileID: 110976810}
       - {fileID: 110985380}
+    data:
+      first: {fileID: 110769550}
+      second:
+      - {fileID: 110987834}
+      - {fileID: 110961998}
+      - {fileID: 110930358}
+    data:
+      first: {fileID: 110701880}
+      second:
+      - {fileID: 110902072}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 696, y: -444, z: 0}
   m_EntryPosition: {x: 720, y: -36, z: 0}
@@ -4623,21 +4635,21 @@ AnimatorStateMachine:
   - {fileID: 110987640}
   m_StateMachineTransitions:
     data:
-      first: {fileID: 110725150}
+      first: {fileID: 110769714}
       second:
-      - {fileID: 110942648}
-    data:
-      first: {fileID: 110701480}
-      second:
-      - {fileID: 110960674}
+      - {fileID: 110952266}
     data:
       first: {fileID: 110725596}
       second:
       - {fileID: 110979206}
     data:
-      first: {fileID: 110769714}
+      first: {fileID: 110701480}
       second:
-      - {fileID: 110952266}
+      - {fileID: 110960674}
+    data:
+      first: {fileID: 110725150}
+      second:
+      - {fileID: 110942648}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -84, y: -156, z: 0}
   m_EntryPosition: {x: 60, y: 120, z: 0}
