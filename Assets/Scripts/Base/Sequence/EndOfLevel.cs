@@ -12,11 +12,12 @@ namespace Sequence
         [SerializeField]
         private Level level;
 
+        // Note: Reenabling input happens within the Launcher Character's state machine to
+        // account for animation and transition times.
         protected void Start()
         {
             GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
             GlobalState.EventService.AddEventHandler<PreLevelCompleteEvent>(OnPreLevelComplete);
-            GlobalState.EventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
         }
 
         private void OnReactionsFinished(ReactionsFinishedEvent gameEvent)
@@ -35,11 +36,6 @@ namespace Sequence
             {
                 ContinueLevel();
             }
-        }
-
-        private void OnReadyForNextBubble(ReadyForNextBubbleEvent gameEvent)
-        {
-            GlobalState.EventService.Dispatch(new InputToggleEvent(true));
         }
 
         private void OnPreLevelComplete(PreLevelCompleteEvent gameEvent)
