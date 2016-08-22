@@ -14,6 +14,7 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
     public bool Activatible { get { return activatible; } }
     public int Score { get { return score; } }
     public int MatchThreshold { get { return matchThreshold; } }
+    public BubbleSounds Sounds { get { return sounds; } }
 
     public Dictionary<BubbleDeathType, List<AnimationType>> AnimationMap
     {
@@ -38,6 +39,12 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
     {
         public BubbleDeathType name;
         public List<AnimationType> list;
+    }
+
+    [Serializable]
+    public struct BubbleSounds
+    {
+        public AudioClip impact;
     }
 
     [SerializeField]
@@ -69,6 +76,9 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
 
     [SerializeField]
     private List<NamedAnimationList> defaultAnimations;
+
+    [SerializeField]
+    private BubbleSounds sounds;
 
     private Dictionary<BubbleDeathType, List<AnimationType>> animationMap;
 }

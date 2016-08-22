@@ -75,7 +75,17 @@ public class BubbleSnap : MonoBehaviour
         Destroy(this);
         GlobalState.EventService.Dispatch(new BubbleSettlingEvent());
 
-        GetComponent<BubbleAttachments>().Model.CheckForMatches();
+        var model = GetComponent<BubbleAttachments>().Model;
+
+        if (!model.CheckForMatches())
+        {
+            var player = GetComponent<BubbleSoundPlayer>();
+
+            if (player != null)
+            {
+                player.Play(model.definition.Sounds.impact);
+            }
+        }
 
         GlobalState.EventService.Dispatch(new BubbleSettledEvent { shooter = gameObject });
     }

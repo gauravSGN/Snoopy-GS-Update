@@ -25,3 +25,5 @@ MonoBehaviour:
     list: 04000000
   - name: 1
     list: 
+  sounds:
+    impact: {fileID: 8300000, guid: b8ae649c07a954c3ea618993b77f2172, type: 3}
