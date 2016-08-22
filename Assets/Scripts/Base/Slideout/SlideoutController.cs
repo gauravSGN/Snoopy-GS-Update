@@ -22,8 +22,6 @@ namespace Slideout
         {
             if ((queue.Count > 0) && !Blocked)
             {
-                Debug.Log(string.Format("Showing slideout ({0} in queue)", queue.Count));
-
                 var prefab = queue.Peek();
                 var instance = Instantiate(prefab);
                 instance.transform.SetParent(transform, false);
@@ -47,8 +45,6 @@ namespace Slideout
 
         private void OnSlideoutComplete(SlideoutInstance slideout)
         {
-            Debug.Log("Slideout completed");
-
             slideout.OnComplete -= OnSlideoutComplete;
             queue.Dequeue();
 
