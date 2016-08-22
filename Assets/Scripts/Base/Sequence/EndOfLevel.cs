@@ -16,7 +16,6 @@ namespace Sequence
         {
             GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
             GlobalState.EventService.AddEventHandler<PreLevelCompleteEvent>(OnPreLevelComplete);
-            GlobalState.EventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
         }
 
         private void OnReactionsFinished(ReactionsFinishedEvent gameEvent)
@@ -35,11 +34,6 @@ namespace Sequence
             {
                 ContinueLevel();
             }
-        }
-
-        private void OnReadyForNextBubble(ReadyForNextBubbleEvent gameEvent)
-        {
-            GlobalState.EventService.Dispatch(new InputToggleEvent(true));
         }
 
         private void OnPreLevelComplete(PreLevelCompleteEvent gameEvent)
