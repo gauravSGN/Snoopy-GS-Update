@@ -34,7 +34,7 @@ public class Bubble : GraphElement<Bubble>
         BubbleReactionEvent.Dispatch(ReactionPriority.Cull, this);
     }
 
-    public void CheckForMatches()
+    public bool CheckForMatches()
     {
         var bubbleList = new List<Bubble>();
         bubbleList.Add(this);
@@ -48,13 +48,17 @@ public class Bubble : GraphElement<Bubble>
             }
         }
 
-        if (bubbleList.Count >= definition.MatchThreshold)
+        var matchMade = bubbleList.Count >= definition.MatchThreshold;
+
+        if (matchMade)
         {
             foreach (var bubble in bubbleList)
             {
                 BubbleReactionEvent.Dispatch(ReactionPriority.Pop, bubble);
             }
         }
+
+        return matchMade;
     }
 
     public bool IsMatching(Bubble bubble)
