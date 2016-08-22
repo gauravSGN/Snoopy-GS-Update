@@ -12,6 +12,8 @@ namespace Sequence
         [SerializeField]
         private Level level;
 
+        // Note: Reenabling input happens within the Launcher Character's state machine to
+        // account for animation and transition times.
         protected void Start()
         {
             GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);

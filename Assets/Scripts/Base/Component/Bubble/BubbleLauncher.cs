@@ -3,8 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-// Note: Enabling input happens within the Launcher Character's state machine to
-// account for animation and transition times.
 public class BubbleLauncher : MonoBehaviour
 {
     public delegate void ModifyShot(GameObject bubble);
