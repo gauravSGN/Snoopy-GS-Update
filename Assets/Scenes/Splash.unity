@@ -278,10 +278,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1134976088}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0.026, y: 0.25}
-  m_AnchorMax: {x: 0.9681946, y: 0.75}
-  m_AnchoredPosition: {x: 0.000009775162, y: 1.5999999}
-  m_SizeDelta: {x: 0, y: -0.8}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1.7, y: 0.7}
+  m_SizeDelta: {x: 450.5, y: 102.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397385276
 MonoBehaviour:
@@ -302,9 +302,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 13720fa367c2c47fa81024701e3790a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 00ae7a1bb35344fff94deaaa6fb98ddc, type: 3}
   m_Type: 3
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
   m_FillAmount: 0
@@ -653,15 +653,15 @@ RectTransform:
   m_GameObject: {fileID: 1339170321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.5250034, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1134976088}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0, y: 0}
+  m_SizeDelta: {x: 253.1, y: 147.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1339170323
 MonoBehaviour:
@@ -694,7 +694,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 8d19b52bc8b5b40438ab2d96940bd046, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d7ce285ea16614bc0b23dafe7952b73b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -780,7 +780,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2103803446
 RectTransform:
   m_ObjectHideFlags: 0
