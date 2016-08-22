@@ -11,25 +11,18 @@ Kite_glowing
   orig: 225, 293
   offset: 0, 0
   index: -1
-charged_bubble_yellowkite
+charged bubble copy
   rotate: false
-  xy: 645, 243
-  size: 101, 96
-  orig: 101, 96
+  xy: 1057, 537
+  size: 73, 68
+  orig: 73, 68
   offset: 0, 0
   index: -1
-charged_bubble_yellowkiteOpen01
+charged bubble glow
   rotate: false
-  xy: 536, 50
-  size: 111, 112
-  orig: 111, 112
-  offset: 0, 0
-  index: -1
-charged_bubble_yellowkiteOpen02
-  rotate: false
-  xy: 536, 164
-  size: 107, 128
-  orig: 107, 128
+  xy: 813, 476
+  size: 134, 129
+  orig: 134, 129
   offset: 0, 0
   index: -1
 kite_edge_spin_0001
@@ -93,6 +86,20 @@ shultz_spinners/Kite_schultz_swirl_0006
   xy: 586, 636
   size: 290, 340
   orig: 290, 340
+  offset: 0, 0
+  index: -1
+stage 2
+  rotate: false
+  xy: 949, 498
+  size: 106, 107
+  orig: 106, 107
+  offset: 0, 0
+  index: -1
+stage 3
+  rotate: false
+  xy: 813, 352
+  size: 102, 122
+  orig: 102, 122
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0001
