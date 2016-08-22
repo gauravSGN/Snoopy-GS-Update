@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 414138}
   - 114: {fileID: 11429148}
+  - 114: {fileID: 11448004}
   m_Layer: 0
   m_Name: Woodstock
   m_TagString: Untagged
@@ -28,6 +29,7 @@ GameObject:
   - 23: {fileID: 2307180}
   - 95: {fileID: 9559750}
   - 114: {fileID: 11466688}
+  - 114: {fileID: 11407714}
   m_Layer: 0
   m_Name: Woodstock Spine Controller
   m_TagString: Untagged
@@ -144,6 +146,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11407714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f4b8c3a18fa4a5ebc1beed5ebd30b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11429148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,6 +171,17 @@ MonoBehaviour:
   animator: {fileID: 9559750}
   trail: {fileID: 133200}
   celebration: {fileID: 150618, guid: 30b9370ee10da49fe93d3c37345e3deb, type: 2}
+--- !u!114 &11448004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f4b8c3a18fa4a5ebc1beed5ebd30b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11452136
 MonoBehaviour:
   m_ObjectHideFlags: 1

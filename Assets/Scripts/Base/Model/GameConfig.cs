@@ -95,6 +95,8 @@ public class GameConfig : ScriptableObject
         public float minorLandingRadius;
         public float landingSpread;
         public float flightSpeed;
+        public float bumpScale;
+        public float bumpDuration;
     }
 
     public BubbleConfig bubbles;
