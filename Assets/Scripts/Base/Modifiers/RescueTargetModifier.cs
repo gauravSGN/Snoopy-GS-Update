@@ -11,18 +11,16 @@ namespace Modifiers
     {
         private const string SPRITE_PATH = "Textures/Modifiers/woodstock";
         private const string PREFAB_PATH = "Characters/Woodstock";
+        private const string SLIDEOUT_PATH = "Slideouts/SaveBirdsObjectiveSlideout";
 
         private Sprite sprite;
         private GameObject prefab;
+        private GameObject slideout;
+        private bool introComplete;
 
         private readonly List<WoodstockEventHandler> targets = new List<WoodstockEventHandler>();
 
         override public BubbleModifierType ModifierType { get { return BubbleModifierType.RescueTarget; } }
-
-        public RescueTargetModifier()
-        {
-            GlobalState.EventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
-        }
 
         override protected void ModifyBubbleData(BubbleData bubbleData, BubbleData.ModifierData data)
         {
@@ -70,10 +68,20 @@ namespace Modifiers
             instance.transform.SetParent(parent.transform, false);
 
             targets.Add(target);
+
+            if (targets.Count == 1)
+            {
+                GlobalState.AssetService.LoadAssetAsync<GameObject>(SLIDEOUT_PATH, OnSlideoutLoaded);
+
+                GlobalState.EventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
+                GlobalState.EventService.AddEventHandler<IntroScrollCompleteEvent>(OnIntroScrollComplete);
+            }
         }
 
         private void OnLevelLoaded(LevelLoadedEvent gameEvent)
         {
+            GlobalState.EventService.RemoveEventHandler<LevelLoadedEvent>(OnLevelLoaded);
+
             var config = GlobalState.Instance.Config.woodstock;
             var targetPosition = GameObject.Find("Bird Landing Target").transform.localPosition;
             var landingSpots = new List<Vector3>();
@@ -101,6 +109,29 @@ namespace Modifiers
 
                 targets[index].LandingSpot = landingSpots[next];
                 landingSpots.RemoveAt(next);
+            }
+        }
+
+        private void OnIntroScrollComplete(IntroScrollCompleteEvent gameEvent)
+        {
+            GlobalState.EventService.RemoveEventHandler<IntroScrollCompleteEvent>(OnIntroScrollComplete);
+
+            introComplete = true;
+
+            ShowSlideout();
+        }
+
+        private void OnSlideoutLoaded(GameObject prefab)
+        {
+            slideout = prefab;
+            ShowSlideout();
+        }
+
+        private void ShowSlideout()
+        {
+            if (introComplete && (slideout != null))
+            {
+                GlobalState.EventService.Dispatch(new Slideout.ShowSlideoutEvent(slideout));
             }
         }
     }
