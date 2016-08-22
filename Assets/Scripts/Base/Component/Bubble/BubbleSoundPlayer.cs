@@ -13,7 +13,7 @@ sealed public class BubbleSoundPlayer : MonoBehaviour
 
     public void Play(AudioClip clip)
     {
-        if (clip != null)
+        if ((clip != null) && GlobalState.User.settings.sfxOn)
         {
             source.Stop();
             source.clip = clip;
