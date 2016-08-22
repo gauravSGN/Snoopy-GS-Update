@@ -76,7 +76,7 @@ TextureImporter:
         - {x: 159.5, y: -34.5}
         - {x: 164.5, y: -24.5}
     outline: []
-  spritePackingTag: popup
+  spritePackingTag: loading
   userData: 
   assetBundleName: 
   assetBundleVariant: 
