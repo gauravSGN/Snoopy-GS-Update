@@ -11,6 +11,9 @@ namespace Snoopy.Characters
         private Animator animator;
 
         [SerializeField]
+        private GameObject trail;
+
+        [SerializeField]
         private GameObject celebration;
 
         private Transform gameView;
@@ -40,6 +43,7 @@ namespace Snoopy.Characters
         {
             transform.SetParent(gameView, true);
             animator.SetBool("HasEscaped", true);
+            trail.SetActive(true);
 
             StartCoroutine(FlyToGround());
 
@@ -79,6 +83,7 @@ namespace Snoopy.Characters
             }
 
             animator.SetBool("OnGround", true);
+            trail.SetActive(false);
         }
     }
 }

@@ -125,3 +125,5 @@ MonoBehaviour:
     minorLandingRadius: 0.25
     landingSpread: 0.25
     flightSpeed: 1.5
+    bumpScale: 1.1
+    bumpDuration: 0.05
