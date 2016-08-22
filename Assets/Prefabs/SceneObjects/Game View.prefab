@@ -1222,6 +1222,9 @@ MonoBehaviour:
   level: {fileID: 11450880}
   aimLine: {fileID: 11476056}
   characterController: {fileID: 11420210}
+  launchSound: {fileID: 8300000, guid: 21d9a45c69234435cb04f19e7d943204, type: 3}
+  swapSound: {fileID: 8300000, guid: 2fc399d57bb4d4edfa25c495027da990, type: 3}
+  swapFailSound: {fileID: 8300000, guid: 29a1850433b8b4fd39e7eead4e073150, type: 3}
 --- !u!114 &11410878
 MonoBehaviour:
   m_ObjectHideFlags: 1
