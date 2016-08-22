@@ -108,6 +108,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22478370}
+  - 114: {fileID: 11445524}
+  - 95: {fileID: 9510246}
   m_Layer: 5
   m_Name: SaveBirdsObjectiveSlideout
   m_TagString: Untagged
@@ -184,6 +186,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &9510246
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162818}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 34332d41314a045ddbe15f98a1d52b6c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11410138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -291,6 +310,17 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &11445524
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e199965c176074f50a03e9ffa0f9226a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11446240
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -40,5 +40,7 @@ public class LevelIntroScroll : MonoBehaviour
 
         GameObjectUtil.EnableObjects(disableOnScroll);
         powerUpController.ShowPowerUps();
+
+        GlobalState.EventService.Dispatch(new IntroScrollCompleteEvent());
     }
 }
