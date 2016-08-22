@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "OShC3ZQJ0oAkHEN/kfKnDHyczys", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
+"skeleton": { "hash": "XAP0wd//kunirK1RB8r1qjgMw+g", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "placement_ctrl_reset", "parent": "root" },
@@ -161,6 +161,8 @@
 	}
 },
 "events": {
+	"FinishBlocking": {},
+	"ItemReturn": {},
 	"StartKiteSparkle01": {}
 },
 "animations": {
@@ -855,7 +857,9 @@
 			}
 		],
 		"events": [
-			{ "time": 1.3666, "name": "StartKiteSparkle01" }
+			{ "time": 1.3666, "name": "StartKiteSparkle01" },
+			{ "time": 2.5, "name": "FinishBlocking" },
+			{ "time": 3.1666, "name": "ItemReturn" }
 		]
 	}
 }
