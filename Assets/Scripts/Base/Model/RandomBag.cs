@@ -15,8 +15,7 @@ namespace Model
 
         public RandomBag(IEnumerable<T> items)
         {
-            this.items.AddRange(items);
-            needsShuffle = true;
+            AddRange(items);
         }
 
         public void Add(T item)
@@ -32,6 +31,12 @@ namespace Model
                 items.Add(item);
             }
 
+            needsShuffle = true;
+        }
+
+        public void AddRange(IEnumerable<T> items)
+        {
+            this.items.AddRange(items);
             needsShuffle = true;
         }
 

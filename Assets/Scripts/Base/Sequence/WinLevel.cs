@@ -1,6 +1,8 @@
 using Event;
 using System;
 using UI.Popup;
+using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Sequence
@@ -25,6 +27,26 @@ namespace Sequence
         private void OnCullAllBubblesComplete(ReactionsFinishedEvent gameEvent)
         {
             GlobalState.EventService.RemoveEventHandler<ReactionsFinishedEvent>(OnCullAllBubblesComplete);
+            GlobalState.EventService.Dispatch(new PrepareForBubblePartyEvent());
+            GlobalState.Instance.RunCoroutine(BubbleParty());
+        }
+
+        private IEnumerator BubbleParty()
+        {
+            var bubblePartyConfig = GlobalState.Instance.Config.bubbleParty;
+
+            // Put back the ball the character was holding
+            levelState.remainingBubbles++;
+            levelState.NotifyListeners();
+
+            yield return new WaitForSeconds(GlobalState.Instance.Config.winSequence.delayBeforeBubbleParty);
+
+            while (levelState.remainingBubbles > 0)
+            {
+                yield return new WaitForSeconds(bubblePartyConfig.delayBetweenBubbles);
+                GlobalState.EventService.Dispatch(new FirePartyBubbleEvent());
+            }
+
             GlobalState.PopupService.EnqueueWithDelay(1.0f, new GenericPopupConfig
             {
                 title = "Level Won",

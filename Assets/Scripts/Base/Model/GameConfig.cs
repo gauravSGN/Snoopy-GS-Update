@@ -23,6 +23,23 @@ public class GameConfig : ScriptableObject
     }
 
     [Serializable]
+    public class BubblePartyConfig
+    {
+        public float minXForce;
+        public float maxXForce;
+        public float minYForce;
+        public float maxYForce;
+        public float delayBetweenBubbles;
+    }
+
+    [Serializable]
+    public class WinSequenceConfig
+    {
+        public float delayBeforeBubbleParty;
+        public float delayBeforePopup;
+    }
+
+    [Serializable]
     public class ImpactEffectConfig
     {
         public float duration;
@@ -108,4 +125,6 @@ public class GameConfig : ScriptableObject
     public BoosterConfig boosters;
     public LevelConfig level;
     public WoodstockConfig woodstock;
+    public BubblePartyConfig bubbleParty;
+    public WinSequenceConfig winSequence;
 }

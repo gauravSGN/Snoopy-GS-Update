@@ -5,6 +5,5 @@
     public LevelCompleteEvent(bool won)
     {
         Won = won;
-        GlobalState.EventService.Dispatch(new PreLevelCompleteEvent());
     }
 }

@@ -87,14 +87,29 @@ public class BubbleLauncher : MonoBehaviour
         aimLine.Fire += FireBubbleAt;
 
         var eventService = GlobalState.EventService;
-
         eventService.AddEventHandler<BubbleSettlingEvent>(OnBubbleSettleEvent);
         eventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
         eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
+        eventService.AddEventHandler<PrepareForBubblePartyEvent>(OnPrepareForBubbleParty);
 
         inputAllowed = true;
 
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void OnPrepareForBubbleParty(PrepareForBubblePartyEvent gameEvent)
+    {
+        var eventService = GlobalState.EventService;
+        eventService.RemoveEventHandler<BubbleSettlingEvent>(OnBubbleSettleEvent);
+        eventService.RemoveEventHandler<LevelLoadedEvent>(OnLevelLoaded);
+        eventService.RemoveEventHandler<InputToggleEvent>(OnInputToggle);
+        eventService.RemoveEventHandler<PrepareForBubblePartyEvent>(OnPrepareForBubbleParty);
+        level.levelState.bubbleQueue.RemoveListener(OnBubbleQueueChanged);
+
+        foreach (var bubble in nextBubbles)
+        {
+            Destroy(bubble);
+        }
     }
 
     private void OnLevelLoaded(LevelLoadedEvent gameEvent)
