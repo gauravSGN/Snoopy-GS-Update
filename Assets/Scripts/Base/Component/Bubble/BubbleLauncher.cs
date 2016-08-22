@@ -22,6 +22,15 @@ public class BubbleLauncher : MonoBehaviour
     [SerializeField]
     private LauncherCharacterController characterController;
 
+    [SerializeField]
+    private AudioClip launchSound;
+
+    [SerializeField]
+    private AudioClip swapSound;
+
+    [SerializeField]
+    private AudioClip swapFailSound;
+
     private GameObject[] nextBubbles;
     private BubbleType[] nextTypes;
     private List<ModifyShot> shotModifiers;
@@ -29,7 +38,7 @@ public class BubbleLauncher : MonoBehaviour
     private GameObject currentAnimation;
     private Vector2 direction;
     private bool inputAllowed;
-    private AudioSource launchSound;
+    private AudioSource audioSource;
 
     public void CycleQueue()
     {
@@ -40,6 +49,15 @@ public class BubbleLauncher : MonoBehaviour
             level.levelState.bubbleQueue.Rotate(nextBubbles.Length);
             SetAimLineColor();
             characterController.CycleQueueAnimation();
+
+            if (nextBubbles.Length > 1)
+            {
+                PlaySound(swapSound);
+            }
+            else
+            {
+                PlaySound(swapFailSound);
+            }
         }
     }
 
@@ -76,7 +94,7 @@ public class BubbleLauncher : MonoBehaviour
 
         inputAllowed = true;
 
-        launchSound = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnLevelLoaded(LevelLoadedEvent gameEvent)
@@ -144,7 +162,7 @@ public class BubbleLauncher : MonoBehaviour
         level.levelState.bubbleQueue.RemoveListener(OnBubbleQueueChanged);
         level.levelState.bubbleQueue.GetNext();
 
-        launchSound.Play();
+        PlaySound(launchSound);
     }
 
     private void ReadyNextBubble()
@@ -294,5 +312,11 @@ public class BubbleLauncher : MonoBehaviour
     {
         currentAnimation.transform.SetParent(nextBubbles[0].transform);
         currentAnimation.transform.localPosition = Vector3.back;
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 }
