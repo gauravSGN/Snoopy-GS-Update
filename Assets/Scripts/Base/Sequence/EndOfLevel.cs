@@ -1,9 +1,5 @@
 using Event;
-using System;
-using UI.Popup;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Sequence
 {
@@ -12,8 +8,8 @@ namespace Sequence
         [SerializeField]
         private Level level;
 
-        // Note: Reenabling input happens within the Launcher Character's state machine to
-        // account for animation and transition times.
+        private BaseSequence<LevelState> winOrLoseSequence;
+
         protected void Start()
         {
             GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
@@ -24,23 +20,22 @@ namespace Sequence
         {
             if (level.AllGoalsCompleted)
             {
-                GlobalState.EventService.RemoveEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
-                WinLevel();
+                winOrLoseSequence = new WinLevel();
             }
             else if (level.levelState.remainingBubbles <= 0)
             {
+                winOrLoseSequence = new LoseLevel();
+            }
+
+            if (winOrLoseSequence != null)
+            {
                 GlobalState.EventService.RemoveEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
-                LoseLevel();
+                winOrLoseSequence.Begin(level.levelState);
             }
             else
             {
                 ContinueLevel();
             }
-        }
-
-        private void OnPreLevelComplete(PreLevelCompleteEvent gameEvent)
-        {
-            // kick off bubble shower and other sequences
         }
 
         private void WinLevel()
@@ -85,17 +80,12 @@ namespace Sequence
         private void ContinueLevel()
         {
             GlobalState.EventService.Dispatch(new ReadyForNextBubbleEvent());
+            GlobalState.EventService.Dispatch(new InputToggleEvent(true));
         }
 
         private void DispatchReturnToMap()
         {
             GlobalState.EventService.Dispatch(new TransitionToReturnSceneEvent());
-        }
-
-        private IEnumerator ShowPopupAfterDelay(float delay, PopupConfig config)
-        {
-            yield return new WaitForSeconds(delay);
-            GlobalState.PopupService.Enqueue(config);
         }
     }
 }

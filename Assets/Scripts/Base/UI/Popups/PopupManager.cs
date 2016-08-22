@@ -2,6 +2,7 @@
 using Service;
 using Registry;
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace UI.Popup
@@ -45,6 +46,11 @@ namespace UI.Popup
         {
             popupQueue.Enqueue(config, (int)config.Priority);
             ShowNextPopup();
+        }
+
+        public void EnqueueWithDelay(float delay, PopupConfig config)
+        {
+            StartCoroutine(DelayedEnqueue(delay, config));
         }
 
         protected void Start()
@@ -109,6 +115,12 @@ namespace UI.Popup
 
             popupOverlay.gameObject.SetActive(maxSiblingIndex > 0);
             popupOverlay.gameObject.transform.SetSiblingIndex(Math.Max(0, maxSiblingIndex - 1));
+        }
+
+        private IEnumerator DelayedEnqueue(float delay, PopupConfig config)
+        {
+            yield return new WaitForSeconds(delay);
+            Enqueue(config);
         }
     }
 }
