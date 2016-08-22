@@ -84,6 +84,20 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 1
+  - time: 2.5
+    functionName: FinishBlocking
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 1
+  - time: 3.1666
+    functionName: ItemReturn
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 1
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
