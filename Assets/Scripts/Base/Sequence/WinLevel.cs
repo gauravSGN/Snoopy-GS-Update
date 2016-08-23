@@ -42,6 +42,10 @@ namespace Sequence
             GlobalState.EventService.AddEventHandler<SequenceItemCompleteEvent>(OnWinTextAnimationComplete);
             GlobalState.EventService.Dispatch(new PrepareForBubblePartyEvent());
 
+            // Put back the ball the character was holding
+            levelState.remainingBubbles++;
+            levelState.NotifyListeners();
+
             StartCoroutine(RunActionAfterDelay(config.delayBeforeWinTextAnimation, () =>
             {
                 winTextAnimation = Instantiate(winTextAnimationPrefab);
@@ -54,17 +58,17 @@ namespace Sequence
             if (gameEvent.item == winTextAnimation)
             {
                 GlobalState.EventService.RemoveEventHandler<SequenceItemCompleteEvent>(OnWinTextAnimationComplete);
-                GlobalState.Instance.RunCoroutine(BubbleParty());
+                StartCoroutine(RunActionAfterDelay(config.delayBeforeCelebration, () =>
+                {
+                    GlobalState.EventService.Dispatch(new Sequence.StartWinAnimationsEvent());
+                    GlobalState.Instance.RunCoroutine(BubbleParty());
+                }));
             }
         }
 
         private IEnumerator BubbleParty()
         {
             var delayBetweenBubbles = GlobalState.Instance.Config.bubbleParty.delayBetweenBubbles;
-
-            // Put back the ball the character was holding
-            levelState.remainingBubbles++;
-            levelState.NotifyListeners();
 
             yield return new WaitForSeconds(config.delayBeforeBubbleParty);
 
