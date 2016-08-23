@@ -16,8 +16,6 @@ namespace Sequence
 
         private bool readyToContinue = false;
 
-        // Note: Reenabling input happens within the Launcher Character's state machine to
-        // account for animation and transition times.
         protected void Start()
         {
             GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
@@ -42,6 +40,8 @@ namespace Sequence
             }
         }
 
+        // Only continue with the level if both the reaction queue and the launcher
+        // character's animations are complete.
         private void ContinueLevel()
         {
             if (readyToContinue)
