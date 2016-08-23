@@ -19,6 +19,8 @@ public class WeightedBubbleQueue : BaseBubbleQueue, BubbleQueue
     private readonly Random rng = new Random();
     private int counter = 0;
 
+    public int ExtrasCount { get { return 10; } }
+
     public WeightedBubbleQueue(LevelState state) : base(state)
     {
         foreach (var type in LAUNCHER_BUBBLE_TYPES)
@@ -28,6 +30,11 @@ public class WeightedBubbleQueue : BaseBubbleQueue, BubbleQueue
 
         RemoveInactiveTypes();
         BuildQueue();
+    }
+
+    public void SwitchToExtras()
+    {
+        // Nothing to do for this queue type
     }
 
     override protected BubbleType GenerateElement()

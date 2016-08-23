@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace UI.Popup
 {
-    abstract public class Popup : MonoBehaviour
+    public class Popup : MonoBehaviour
     {
         private bool affirmativeClick;
         private PopupConfig genericConfig;

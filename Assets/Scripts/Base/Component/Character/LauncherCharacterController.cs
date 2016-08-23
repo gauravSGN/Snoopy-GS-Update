@@ -52,6 +52,7 @@ public class LauncherCharacterController : MonoBehaviour
         eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
         eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
         eventService.AddEventHandler<LowMovesEvent>(OnLowMoves);
+        eventService.AddEventHandler<PurchasedExtraMovesEvent>(OnPurchasedExtraMoves);
     }
 
     private void OnBubbleFiring(BubbleFiringEvent bubbleFiringEvent)
@@ -93,5 +94,10 @@ public class LauncherCharacterController : MonoBehaviour
     {
         launcherAnimator.SetBool(WON_LEVEL, gameEvent.Won);
         launcherAnimator.SetBool(LOST_LEVEL, !gameEvent.Won);
+    }
+
+    private void OnPurchasedExtraMoves(PurchasedExtraMovesEvent gameEvent)
+    {
+        launcherAnimator.SetBool(LOST_LEVEL, false);
     }
 }

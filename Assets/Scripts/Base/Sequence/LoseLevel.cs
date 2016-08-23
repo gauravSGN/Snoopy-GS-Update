@@ -14,14 +14,36 @@ namespace Sequence
 
                 GlobalState.User.purchasables.hearts.quantity--;
 
-                GlobalState.PopupService.EnqueueWithDelay(1.0f, new GenericPopupConfig
+                GlobalState.PopupService.EnqueueWithDelay(1.0f, new StandalonePopupConfig(PopupType.OutOfMoves)
                 {
-                    title = "Level Lost",
-                    mainText = "Hearts Left: " + GlobalState.User.purchasables.hearts.quantity.ToString(),
-                    closeActions = new List<Action> { TransitionToReturnScene },
-                    affirmativeActions = new List<Action> { TransitionToReturnScene }
+                    closeActions = new List<Action> { EndLevel },
+                    affirmativeActions = new List<Action> { BuyMoreMoves },
                 });
             }));
+        }
+
+        private void EndLevel()
+        {
+            GlobalState.PopupService.Enqueue(new GenericPopupConfig
+            {
+                title = "Level Lost",
+                mainText = "Hearts Left: " + GlobalState.User.purchasables.hearts.quantity.ToString(),
+                closeActions = new List<Action> { TransitionToReturnScene },
+                affirmativeActions = new List<Action> { TransitionToReturnScene },
+            });
+       }
+
+        private void BuyMoreMoves()
+        {
+            var coins = GlobalState.User.purchasables.coins;
+
+            if (coins.quantity < 40)
+            {
+                // TODO: Show store flow here?
+            }
+
+            coins.quantity = Math.Max(0, coins.quantity - 40);
+            GlobalState.EventService.Dispatch(new PurchasedExtraMovesEvent());
         }
     }
 }

@@ -56,6 +56,12 @@ public class LevelState : Observable
         }
     }
 
+    public void AddRemainingBubbles(int count)
+    {
+        remainingBubbles += count;
+        NotifyListeners();
+    }
+
     private IEnumerator ShowLowMovesSlideout()
     {
         while (slideout == null)

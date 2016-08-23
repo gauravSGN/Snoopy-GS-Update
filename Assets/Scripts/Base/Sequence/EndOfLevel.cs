@@ -18,8 +18,10 @@ namespace Sequence
 
         protected void Start()
         {
-            GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
-            GlobalState.EventService.AddEventHandler<FiringAnimationCompleteEvent>(OnFiringAnimationComplete);
+            var eventService = GlobalState.EventService;
+            eventService.AddEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
+            eventService.AddEventHandler<FiringAnimationCompleteEvent>(OnFiringAnimationComplete);
+            eventService.AddEventHandler<PurchasedExtraMovesEvent>(OnPurchasedExtraMoves);
         }
 
         private void OnReactionsFinished(ReactionsFinishedEvent gameEvent)
@@ -59,6 +61,11 @@ namespace Sequence
         private void OnFiringAnimationComplete(FiringAnimationCompleteEvent gameEvent)
         {
             ContinueLevel();
+        }
+
+        private void OnPurchasedExtraMoves(PurchasedExtraMovesEvent gameEvent)
+        {
+            GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
         }
     }
 }
