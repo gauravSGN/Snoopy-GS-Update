@@ -43,8 +43,6 @@ public class BubblePartyLauncher : MonoBehaviour
 
     private GameObject CreateNextBubble()
     {
-        var offset = new Vector3(0, -GlobalState.Instance.Config.bubbles.size / 2);
-
         if (bubbleTypePicker.Empty)
         {
             bubbleTypePicker.AddRange(possibleBubbleTypes);
@@ -53,7 +51,7 @@ public class BubblePartyLauncher : MonoBehaviour
         var bubble = level.bubbleFactory.CreateByType(bubbleTypePicker.Next());
 
         bubble.transform.parent = launchLocation.transform;
-        bubble.transform.position = launchLocation.transform.position + offset;
+        bubble.transform.position = launchLocation.transform.position;
         bubble.layer = (int)Layers.Default;
         bubble.AddComponent<BubbleParty>();
 

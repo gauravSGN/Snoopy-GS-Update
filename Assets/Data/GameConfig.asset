@@ -129,7 +129,7 @@ MonoBehaviour:
     bumpDuration: 0.05
   bubbleParty:
     minXForce: -10
-    maxXForce: 10
+    maxXForce: 20
     minYForce: 45
     maxYForce: 55
     delayBetweenBubbles: 0.1
