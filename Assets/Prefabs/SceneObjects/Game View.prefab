@@ -329,7 +329,7 @@ GameObject:
   - 114: {fileID: 11405814}
   - 114: {fileID: 11499892}
   - 82: {fileID: 8231136}
-  - 114: {fileID: 11409128}
+  - 114: {fileID: 11461936}
   m_Layer: 0
   m_Name: Launcher
   m_TagString: Untagged
@@ -1401,6 +1401,20 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11461936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 227cdac0876bd439b95bb31d486b0f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: {fileID: 11450880}
+  launchLocation: {fileID: 143398}
+  launchSound: {fileID: 8231136}
 --- !u!114 &11462800
 MonoBehaviour:
   m_ObjectHideFlags: 1
