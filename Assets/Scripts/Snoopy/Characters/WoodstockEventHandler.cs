@@ -39,13 +39,16 @@ namespace Snoopy.Characters
             Model.OnDisconnected -= OnPoppedHandler;
         }
 
+        public void StartFlyDown()
+        {
+            trail.SetActive(true);
+            StartCoroutine(FlyToGround());
+        }
+
         private void OnPoppedHandler(Bubble bubble)
         {
             transform.SetParent(gameView, true);
             animator.SetBool("HasEscaped", true);
-            trail.SetActive(true);
-
-            StartCoroutine(FlyToGround());
 
             if (celebration != null)
             {

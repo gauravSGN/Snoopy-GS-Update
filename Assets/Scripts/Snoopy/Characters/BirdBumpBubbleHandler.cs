@@ -2,25 +2,32 @@
 using System.Collections;
 using System.Collections.Generic;
 
-sealed public class BirdBumpBubbleHandler : MonoBehaviour
+namespace Snoopy.Characters
 {
-    private Transform parentBubble;
-
-    public void BirdBumpBubble()
+    sealed public class BirdBumpBubbleHandler : MonoBehaviour
     {
-        parentBubble = parentBubble ?? transform.parent.parent;
+        private Transform parentBubble;
+        private Vector3 originalScale;
 
-        StartCoroutine(DoBumpEffect());
-    }
+        public void Start()
+        {
+            parentBubble = transform.parent.parent;
+            originalScale = parentBubble.localScale;
+        }
 
-    private IEnumerator DoBumpEffect()
-    {
-        var originalScale = parentBubble.localScale;
-        var config = GlobalState.Instance.Config.woodstock;
+        public void BirdBumpBubble()
+        {
+            StartCoroutine(DoBumpEffect());
+        }
 
-        parentBubble.localScale *= config.bumpScale;
-        yield return new WaitForSeconds(config.bumpDuration);
+        private IEnumerator DoBumpEffect()
+        {
+            var config = GlobalState.Instance.Config.woodstock;
 
-        parentBubble.localScale = originalScale;
+            parentBubble.localScale = originalScale * config.bumpScale;
+            yield return new WaitForSeconds(config.bumpDuration);
+
+            parentBubble.localScale = originalScale;
+        }
     }
 }
