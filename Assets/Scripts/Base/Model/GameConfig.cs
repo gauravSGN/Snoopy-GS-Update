@@ -37,7 +37,9 @@ public class GameConfig : ScriptableObject
     {
         public float delayBeforeCullAll;
         public float delayBeforeWinTextAnimation;
+        public float delayBeforeCelebration;
         public float delayBeforeBubbleParty;
+        public float delayBeforeSlideOut;
         public float delayBeforePopup;
     }
 

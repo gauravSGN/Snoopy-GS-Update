@@ -14,11 +14,12 @@ namespace Sequence
         [SerializeField]
         private LoseLevel loseLevelSequence;
 
-        // Note: Reenabling input happens within the Launcher Character's state machine to
-        // account for animation and transition times.
+        private bool readyToContinue = false;
+
         protected void Start()
         {
             GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
+            GlobalState.EventService.AddEventHandler<FiringAnimationCompleteEvent>(OnFiringAnimationComplete);
         }
 
         private void OnReactionsFinished(ReactionsFinishedEvent gameEvent)
@@ -39,10 +40,25 @@ namespace Sequence
             }
         }
 
+        // Only continue with the level if both the reaction queue and the launcher
+        // character's animations are complete.
         private void ContinueLevel()
         {
-            GlobalState.EventService.Dispatch(new ReadyForNextBubbleEvent());
-            GlobalState.EventService.Dispatch(new InputToggleEvent(true));
+            if (readyToContinue)
+            {
+                GlobalState.EventService.Dispatch(new ReadyForNextBubbleEvent());
+                GlobalState.EventService.Dispatch(new InputToggleEvent(true));
+                readyToContinue = false;
+            }
+            else
+            {
+                readyToContinue = true;
+            }
+        }
+
+        private void OnFiringAnimationComplete(FiringAnimationCompleteEvent gameEvent)
+        {
+            ContinueLevel();
         }
     }
 }

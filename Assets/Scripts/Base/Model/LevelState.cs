@@ -14,6 +14,7 @@ public class LevelState : Observable
     public BubbleQueue bubbleQueue;
     public Dictionary<BubbleType, int> typeTotals = new Dictionary<BubbleType, int>();
     public Dictionary<BubbleType, int> initialTypeTotals = new Dictionary<BubbleType, int>();
+    public bool preparedForBubbleParty;
 
     private GameObject slideout;
     private bool loadingSlideout;
@@ -48,7 +49,7 @@ public class LevelState : Observable
 
         GlobalState.EventService.Dispatch(new ShotsRemainingEvent(remainingBubbles));
 
-        if (remainingBubbles == GlobalState.Instance.Config.level.lowMovesThreshold)
+        if (!preparedForBubbleParty && (remainingBubbles == GlobalState.Instance.Config.level.lowMovesThreshold))
         {
             GlobalState.EventService.Dispatch(new LowMovesEvent(remainingBubbles));
             GlobalState.Instance.RunCoroutine(ShowLowMovesSlideout());

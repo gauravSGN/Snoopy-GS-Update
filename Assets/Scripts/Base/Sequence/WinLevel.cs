@@ -1,5 +1,6 @@
 using Event;
 using System;
+using Slideout;
 using UI.Popup;
 using UnityEngine;
 using System.Collections;
@@ -13,16 +14,28 @@ namespace Sequence
         private Canvas canvas;
 
         [SerializeField]
+        private GameObject winSliderPrefab;
+
+        [SerializeField]
         private GameObject winTextAnimationPrefab;
 
+        [SerializeField]
+        private AudioClip winLevelMusic;
+
+        [SerializeField]
+        private AudioSource backgroundMusicSource;
+
         private LevelState levelState;
-        private GameObject winTextAnimation;
+        private GameObject currentItem;
         private GameConfig.WinSequenceConfig config;
 
         override public void Begin(LevelState parameters)
         {
             this.levelState = parameters;
             config = GlobalState.Instance.Config.winSequence;
+
+            backgroundMusicSource.clip = winLevelMusic;
+            backgroundMusicSource.Play();
 
             StartCoroutine(RunActionAfterDelay(config.delayBeforeCullAll, () =>
             {
@@ -42,29 +55,39 @@ namespace Sequence
             GlobalState.EventService.AddEventHandler<SequenceItemCompleteEvent>(OnWinTextAnimationComplete);
             GlobalState.EventService.Dispatch(new PrepareForBubblePartyEvent());
 
+            // Put back the ball the character was holding and prepare to party
+            levelState.remainingBubbles++;
+            levelState.NotifyListeners();
+            levelState.preparedForBubbleParty = true;
+
             StartCoroutine(RunActionAfterDelay(config.delayBeforeWinTextAnimation, () =>
             {
-                winTextAnimation = Instantiate(winTextAnimationPrefab);
-                winTextAnimation.transform.SetParent(canvas.transform, false);
+                currentItem = Instantiate(winTextAnimationPrefab);
+                currentItem.transform.SetParent(canvas.transform, false);
             }));
         }
 
         private void OnWinTextAnimationComplete(SequenceItemCompleteEvent gameEvent)
         {
-            if (gameEvent.item == winTextAnimation)
+            if (gameEvent.item == currentItem)
             {
                 GlobalState.EventService.RemoveEventHandler<SequenceItemCompleteEvent>(OnWinTextAnimationComplete);
-                GlobalState.Instance.RunCoroutine(BubbleParty());
+
+                Destroy(currentItem);
+                currentItem = null;
+
+                StartCoroutine(RunActionAfterDelay(config.delayBeforeCelebration, () =>
+                {
+                    GlobalState.EventService.Dispatch(new Sequence.StartWinAnimationsEvent());
+                    GlobalState.Instance.RunCoroutine(BubbleParty());
+                }));
+
             }
         }
 
         private IEnumerator BubbleParty()
         {
             var delayBetweenBubbles = GlobalState.Instance.Config.bubbleParty.delayBetweenBubbles;
-
-            // Put back the ball the character was holding
-            levelState.remainingBubbles++;
-            levelState.NotifyListeners();
 
             yield return new WaitForSeconds(config.delayBeforeBubbleParty);
 
@@ -74,14 +97,33 @@ namespace Sequence
                 GlobalState.EventService.Dispatch(new FirePartyBubbleEvent());
             }
 
-            GlobalState.PopupService.EnqueueWithDelay(config.delayBeforePopup, new GenericPopupConfig
+            StartCoroutine(RunActionAfterDelay(config.delayBeforeSlideOut, () =>
             {
-                title = "Level Won",
-                mainText = ("Score: " + levelState.score.ToString() + "\n" +
-                            "Stars: " + GlobalState.User.levels[levelState.levelNumber].stars.ToString()),
-                closeActions = new List<Action> { TransitionToReturnScene },
-                affirmativeActions = new List<Action> { TransitionToReturnScene }
-            });
+                GlobalState.EventService.AddEventHandler<SlideoutCompleteEvent>(OnSlideoutComplete);
+                GlobalState.EventService.AddEventHandler<SlideoutStartEvent>(OnSlideoutStart);
+                GlobalState.EventService.Dispatch(new ShowSlideoutEvent(winSliderPrefab));
+            }));
+        }
+
+        private void OnSlideoutStart(SlideoutStartEvent gameEvent)
+        {
+            currentItem = gameEvent.instance;
+            GlobalState.EventService.RemoveEventHandler<SlideoutStartEvent>(OnSlideoutStart);
+        }
+
+        private void OnSlideoutComplete(SlideoutCompleteEvent gameEvent)
+        {
+            if (gameEvent.instance == currentItem)
+            {
+                GlobalState.PopupService.EnqueueWithDelay(config.delayBeforePopup, new GenericPopupConfig
+                {
+                    title = "Level Won",
+                    mainText = ("Score: " + levelState.score.ToString() + "\n" +
+                                "Stars: " + GlobalState.User.levels[levelState.levelNumber].stars.ToString()),
+                    closeActions = new List<Action> { TransitionToReturnScene },
+                    affirmativeActions = new List<Action> { TransitionToReturnScene }
+                });
+            }
         }
 
         private void UpdateUser()
