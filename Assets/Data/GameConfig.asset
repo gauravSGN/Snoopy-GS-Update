@@ -127,3 +127,14 @@ MonoBehaviour:
     flightSpeed: 1.5
     bumpScale: 1.1
     bumpDuration: 0.05
+  bubbleParty:
+    minXForce: -10
+    maxXForce: 20
+    minYForce: 45
+    maxYForce: 55
+    delayBetweenBubbles: 0.1
+  winSequence:
+    delayBeforeCullAll: 0.5
+    delayBeforeWinTextAnimation: 1.5
+    delayBeforeBubbleParty: 0.5
+    delayBeforePopup: 2

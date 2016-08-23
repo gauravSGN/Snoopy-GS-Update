@@ -280,6 +280,8 @@ GameObject:
   - 114: {fileID: 11462800}
   - 114: {fileID: 11465266}
   - 114: {fileID: 11419320}
+  - 114: {fileID: 11484244}
+  - 114: {fileID: 11488844}
   m_Layer: 0
   m_Name: Game View
   m_TagString: Untagged
@@ -329,6 +331,7 @@ GameObject:
   - 114: {fileID: 11405814}
   - 114: {fileID: 11499892}
   - 82: {fileID: 8231136}
+  - 114: {fileID: 11461936}
   m_Layer: 0
   m_Name: Launcher
   m_TagString: Untagged
@@ -833,7 +836,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.08, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1276,6 +1279,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 11450880}
+  winLevelSequence: {fileID: 11484244}
+  loseLevelSequence: {fileID: 11488844}
 --- !u!114 &11420210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1400,6 +1405,20 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11461936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 227cdac0876bd439b95bb31d486b0f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: {fileID: 11450880}
+  launchLocation: {fileID: 143398}
+  launchSound: {fileID: 8231136}
 --- !u!114 &11462800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1471,6 +1490,19 @@ MonoBehaviour:
   colors: []
   launchOrigin: {fileID: 105830}
   eventTrigger: {fileID: 11466544}
+--- !u!114 &11484244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d65e6431a420644a3b2b5178932da49c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winTextAnimationPrefab: {fileID: 137564, guid: 4368ac2296443434182f1740add3346e,
+    type: 2}
 --- !u!114 &11485482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1540,6 +1572,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortingLayerName: Default
   SortingOrder: -5
+--- !u!114 &11488844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1bfc3bec74e8402d8e966e9f18f7577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11490304
 MonoBehaviour:
   m_ObjectHideFlags: 1
