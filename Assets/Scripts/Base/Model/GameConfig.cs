@@ -108,6 +108,7 @@ public class GameConfig : ScriptableObject
     {
         public int maxLevel;
         public int lowMovesThreshold;
+        public float levelLostDelay;
     }
 
     [Serializable]

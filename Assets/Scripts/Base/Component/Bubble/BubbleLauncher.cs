@@ -91,6 +91,7 @@ public class BubbleLauncher : MonoBehaviour
         eventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
         eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
         eventService.AddEventHandler<PrepareForBubblePartyEvent>(OnPrepareForBubbleParty);
+        eventService.AddEventHandler<PurchasedExtraMovesEvent>(OnPurchasedExtraMoves);
 
         inputAllowed = true;
 
@@ -104,6 +105,7 @@ public class BubbleLauncher : MonoBehaviour
         eventService.RemoveEventHandler<LevelLoadedEvent>(OnLevelLoaded);
         eventService.RemoveEventHandler<InputToggleEvent>(OnInputToggle);
         eventService.RemoveEventHandler<PrepareForBubblePartyEvent>(OnPrepareForBubbleParty);
+        eventService.RemoveEventHandler<PurchasedExtraMovesEvent>(OnPurchasedExtraMoves);
         level.levelState.bubbleQueue.RemoveListener(OnBubbleQueueChanged);
 
         foreach (var bubble in nextBubbles)
@@ -316,6 +318,21 @@ public class BubbleLauncher : MonoBehaviour
 
         CreateBubbles();
         SetAimLineColor();
+    }
+
+    private void OnPurchasedExtraMoves(PurchasedExtraMovesEvent gameEvent)
+    {
+        var queue = level.levelState.bubbleQueue;
+
+        queue.SwitchToExtras();
+        level.levelState.AddRemainingBubbles(10);
+
+        nextBubbles = new GameObject[locations.Length];
+        nextTypes = new BubbleType[locations.Length];
+        CreateBubbles();
+        SetAimLineColor();
+
+        GlobalState.EventService.Dispatch(new InputToggleEvent(true));
     }
 
     private void OnInputToggle(InputToggleEvent gameEvent)
