@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-abstract public class BaseBubbleQueue : Observable, BubbleQueue
+abstract public class BaseBubbleQueue : Observable
 {
     public const int MAX_QUEUE_SIZE = 4;
 

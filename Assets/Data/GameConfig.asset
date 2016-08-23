@@ -121,6 +121,7 @@ MonoBehaviour:
   level:
     maxLevel: 20
     lowMovesThreshold: 10
+    levelLostDelay: 1
   woodstock:
     majorLandingRadius: 1
     minorLandingRadius: 0.25

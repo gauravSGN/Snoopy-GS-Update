@@ -5,5 +5,6 @@ namespace UI.Popup
         Generic,
         PreLevel,
         Settings,
+        OutOfMoves,
     }
 }

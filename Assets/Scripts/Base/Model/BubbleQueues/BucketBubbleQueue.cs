@@ -13,12 +13,20 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
     private RandomBag<BubbleType> bag = new RandomBag<BubbleType>();
     private int currentCount;
 
+    public int ExtrasCount { get { return queueDefinition.extras.length; } }
+
     public BucketBubbleQueue(LevelState state, BubbleQueueDefinition definition) : base(state)
     {
         queueDefinition = definition;
         SetCurrentBucket();
         RemoveTypes(GetEliminatedTypes());
         BuildQueue();
+    }
+
+    public void SwitchToExtras()
+    {
+        currentBucket = queueDefinition.extras;
+        SetCurrentBucket();
     }
 
     override protected BubbleType GenerateElement()
