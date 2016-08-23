@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 747871df33df74844b56b026722f19f8
-timeCreated: 1471979100
+guid: dedb1672f61c44163bd966c7214a8d38
+timeCreated: 1471975742
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -26,13 +26,13 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -3
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 0
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
@@ -41,17 +41,17 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 4
-  spritePivot: {x: 0, y: 0.5}
-  spriteBorder: {x: 65, y: 26, z: 27, w: 26}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 250
   alphaIsTransparency: 1
-  textureType: 8
+  textureType: 5
   buildTargetSettings: []
   spriteSheet:
     sprites: []
     outline: []
-  spritePackingTag: hud
+  spritePackingTag: 
   userData: 
   assetBundleName: 
   assetBundleVariant: 
