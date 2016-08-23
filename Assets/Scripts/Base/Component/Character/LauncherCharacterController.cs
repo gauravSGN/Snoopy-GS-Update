@@ -47,12 +47,11 @@ public class LauncherCharacterController : MonoBehaviour
         eventTrigger.StopAiming += OnStopAiming;
         eventTrigger.MoveTarget += OnMoveTarget;
 
-
-        GlobalState.EventService.AddEventHandler<BubbleFiringEvent>(OnBubbleFiring);
-        GlobalState.EventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
-        GlobalState.EventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
-        GlobalState.EventService.AddEventHandler<ShotsRemainingEvent>(OnShotsRemaining);
-
+        var eventService = GlobalState.EventService;
+        eventService.AddEventHandler<BubbleFiringEvent>(OnBubbleFiring);
+        eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
+        eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
+        eventService.AddEventHandler<LowMovesEvent>(OnLowMoves);
     }
 
     private void OnBubbleFiring(BubbleFiringEvent bubbleFiringEvent)
@@ -85,12 +84,9 @@ public class LauncherCharacterController : MonoBehaviour
         launcherAnimator.SetFloat(ANGLE, angle);
     }
 
-    private void OnShotsRemaining(ShotsRemainingEvent gameEvent)
+    private void OnLowMoves(LowMovesEvent gameEvent)
     {
-        if (gameEvent.shots == 10)
-        {
-            launcherAnimator.SetBool(LOSING_LEVEL, true);
-        }
+        launcherAnimator.SetBool(LOSING_LEVEL, true);
     }
 
     private void OnLevelComplete(LevelCompleteEvent gameEvent)

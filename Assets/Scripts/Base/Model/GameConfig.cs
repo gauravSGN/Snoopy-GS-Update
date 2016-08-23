@@ -105,6 +105,7 @@ public class GameConfig : ScriptableObject
     public class LevelConfig
     {
         public int maxLevel;
+        public int lowMovesThreshold;
     }
 
     [Serializable]

@@ -120,6 +120,7 @@ MonoBehaviour:
     - {r: 0.91764706, g: 0.5686275, b: 0.08235294, a: 1}
   level:
     maxLevel: 20
+    lowMovesThreshold: 10
   woodstock:
     majorLandingRadius: 1
     minorLandingRadius: 0.25

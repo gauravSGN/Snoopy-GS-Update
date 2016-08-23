@@ -30,7 +30,7 @@ namespace Snoopy.Characters
 
             var eventService = GlobalState.EventService;
             eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
-            eventService.AddEventHandler<ShotsRemainingEvent>(OnShotsRemaining);
+            eventService.AddEventHandler<LowMovesEvent>(OnLowMoves);
         }
 
         public void OnDestroy()
@@ -59,12 +59,9 @@ namespace Snoopy.Characters
             animator.SetBool("LostLevel", !gameEvent.Won);
         }
 
-        private void OnShotsRemaining(ShotsRemainingEvent gameEvent)
+        private void OnLowMoves(LowMovesEvent gameEvent)
         {
-            if (gameEvent.shots == 10)
-            {
-                animator.SetBool("LosingLevel", true);
-            }
+            animator.SetBool("LosingLevel", true);
         }
 
         private IEnumerator FlyToGround()
