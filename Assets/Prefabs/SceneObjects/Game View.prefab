@@ -1608,6 +1608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65e6431a420644a3b2b5178932da49c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   winTextAnimationPrefab: {fileID: 137564, guid: 4368ac2296443434182f1740add3346e,
     type: 2}
 --- !u!114 &11485482
