@@ -793,6 +793,14 @@ Prefab:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1394572486}
+    - target: {fileID: 11484244, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: backgroundMusicSource
+      value: 
+      objectReference: {fileID: 1467090099}
+    - target: {fileID: 3371928, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 11465266, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
       propertyPath: scrollBound
       value: 
@@ -801,10 +809,6 @@ Prefab:
       propertyPath: viewBoundary
       value: 
       objectReference: {fileID: 1737783979}
-    - target: {fileID: 3371928, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 11450880, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
       propertyPath: loader
       value: 
@@ -957,6 +961,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2de8874721f44cca90388b95487d7f4, type: 2}
   m_IsPrefabParent: 0
+--- !u!82 &1467090099 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 8204896, guid: a2de8874721f44cca90388b95487d7f4,
+    type: 2}
+  m_PrefabInternal: {fileID: 1467090098}
 --- !u!1 &1474195160 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 178964, guid: 2947feb3705924576b2dcb378370bbec, type: 2}

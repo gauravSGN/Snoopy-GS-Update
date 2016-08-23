@@ -19,6 +19,12 @@ namespace Sequence
         [SerializeField]
         private GameObject winTextAnimationPrefab;
 
+        [SerializeField]
+        private AudioClip winLevelMusic;
+
+        [SerializeField]
+        private AudioSource backgroundMusicSource;
+
         private LevelState levelState;
         private GameObject currentItem;
         private GameConfig.WinSequenceConfig config;
@@ -27,6 +33,9 @@ namespace Sequence
         {
             this.levelState = parameters;
             config = GlobalState.Instance.Config.winSequence;
+
+            backgroundMusicSource.clip = winLevelMusic;
+            backgroundMusicSource.Play();
 
             StartCoroutine(RunActionAfterDelay(config.delayBeforeCullAll, () =>
             {

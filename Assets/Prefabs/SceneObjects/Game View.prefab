@@ -1612,6 +1612,8 @@ MonoBehaviour:
   winSliderPrefab: {fileID: 162818, guid: 322d870d69ba74003b7a4097902496dc, type: 2}
   winTextAnimationPrefab: {fileID: 137564, guid: 4368ac2296443434182f1740add3346e,
     type: 2}
+  winLevelMusic: {fileID: 8300000, guid: aa6a050f265ba4f83a5c50d59ef2d9bb, type: 3}
+  backgroundMusicSource: {fileID: 0}
 --- !u!114 &11485482
 MonoBehaviour:
   m_ObjectHideFlags: 1
