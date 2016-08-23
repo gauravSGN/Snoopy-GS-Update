@@ -58,14 +58,7 @@ namespace Sequence
 
         private void OnFiringAnimationComplete(FiringAnimationCompleteEvent gameEvent)
         {
-            if (readyToContinue)
-            {
-                ContinueLevel();
-            }
-            else
-            {
-                readyToContinue = true;
-            }
+            ContinueLevel();
         }
     }
 }

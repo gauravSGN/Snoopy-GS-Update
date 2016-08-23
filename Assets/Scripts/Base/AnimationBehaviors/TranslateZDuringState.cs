@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ScaleZDuringState : StateMachineBehaviour
+public class TranslateZDuringState : StateMachineBehaviour
 {
     [SerializeField]
     private float z;

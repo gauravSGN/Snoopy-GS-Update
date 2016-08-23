@@ -670,6 +670,17 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!114 &11416154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1821783706ef4497583f6a1634d70eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11417702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -696,6 +707,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionType: 0
   flipX: 0
+--- !u!114 &11453760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca86bc2baad3a46208e5bdfdcb3fab55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  z: -0.1
 --- !u!114 &11470026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -886,7 +909,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110156638}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 11453760}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -912,6 +936,7 @@ AnimatorState:
   - {fileID: 110173116}
   m_StateMachineBehaviours:
   - {fileID: 11417702}
+  - {fileID: 11416154}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
