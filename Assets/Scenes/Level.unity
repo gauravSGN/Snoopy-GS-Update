@@ -259,7 +259,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22493568, guid: 8fe870826113e420299f84c2f87f1c10, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 48
+      value: 93
       objectReference: {fileID: 0}
     - target: {fileID: 22493568, guid: 8fe870826113e420299f84c2f87f1c10, type: 2}
       propertyPath: m_AnchorMin.x
@@ -285,11 +285,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11403826, guid: 8fe870826113e420299f84c2f87f1c10, type: 2}
+    - target: {fileID: 11479248, guid: 8fe870826113e420299f84c2f87f1c10, type: 2}
       propertyPath: level
       value: 
       objectReference: {fileID: 1197956594}
-    - target: {fileID: 11479248, guid: 8fe870826113e420299f84c2f87f1c10, type: 2}
+    - target: {fileID: 11403826, guid: 8fe870826113e420299f84c2f87f1c10, type: 2}
       propertyPath: level
       value: 
       objectReference: {fileID: 1197956594}
@@ -864,10 +864,6 @@ Prefab:
       propertyPath: backgroundMusicSource
       value: 
       objectReference: {fileID: 1467090099}
-    - target: {fileID: 3371928, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 11465266, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
       propertyPath: scrollBound
       value: 
@@ -876,6 +872,10 @@ Prefab:
       propertyPath: viewBoundary
       value: 
       objectReference: {fileID: 1737783979}
+    - target: {fileID: 3371928, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 11450880, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
       propertyPath: loader
       value: 
@@ -931,7 +931,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 250
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 1280}
+  m_ReferenceResolution: {x: 750, y: 1334}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
