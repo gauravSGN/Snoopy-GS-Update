@@ -19,4 +19,9 @@ MonoBehaviour:
   actsAsRoot: 0
   activatible: 1
   score: 0
+  matchThreshold: 0
   defaultAnimations: []
+  sounds:
+    impact: {fileID: 0}
+    match: {fileID: 8300000, guid: d1156df44eed144e9942c5b72f2ad4cd, type: 3}
+    cull: {fileID: 8300000, guid: fd86216e4e27d466ba5267b69d216944, type: 3}

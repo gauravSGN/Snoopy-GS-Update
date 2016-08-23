@@ -41,6 +41,21 @@ public class BubbleDeath : MonoBehaviour
             deactivateOnDeath[i].SetActive(false);
         }
 
+        var model = GetComponent<BubbleAttachments>().Model;
+        var player = GetComponent<BubbleSoundPlayer>();
+
+        if (player != null)
+        {
+            if (activateList == activateOnPop)
+            {
+                player.Play(model.definition.Sounds.match);
+            }
+            else
+            {
+                player.Play(model.definition.Sounds.cull);
+            }
+        }
+
         yield return new WaitForSeconds(deathDelay);
         Destroy(destroyOnFinish);
     }

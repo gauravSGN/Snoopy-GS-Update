@@ -45,6 +45,8 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
     public struct BubbleSounds
     {
         public AudioClip impact;
+        public AudioClip match;
+        public AudioClip cull;
     }
 
     [SerializeField]
