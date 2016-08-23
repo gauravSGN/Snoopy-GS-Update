@@ -9,45 +9,72 @@ namespace Sequence
 {
     public class WinLevel : BaseSequence<LevelState>
     {
+        [SerializeField]
+        private Canvas canvas;
+
+        [SerializeField]
+        private GameObject winTextAnimationPrefab;
+
         private LevelState levelState;
+        private GameObject winTextAnimation;
+        private GameConfig.WinSequenceConfig config;
 
         override public void Begin(LevelState parameters)
         {
             this.levelState = parameters;
+            config = GlobalState.Instance.Config.winSequence;
 
-            GlobalState.EventService.Dispatch(new LevelCompleteEvent(true));
-            UpdateUser();
+            StartCoroutine(RunActionAfterDelay(config.delayBeforeCullAll, () =>
+            {
+                GlobalState.EventService.Dispatch(new LevelCompleteEvent(true));
+                UpdateUser();
 
-            GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnCullAllBubblesComplete);
+                GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnCullAllBubblesComplete);
 
-            GlobalState.EventService.Dispatch(new CullAllBubblesEvent());
-            GlobalState.EventService.Dispatch(new BubbleSettledEvent());
+                GlobalState.EventService.Dispatch(new CullAllBubblesEvent());
+                GlobalState.EventService.Dispatch(new BubbleSettledEvent());
+            }));
         }
 
         private void OnCullAllBubblesComplete(ReactionsFinishedEvent gameEvent)
         {
             GlobalState.EventService.RemoveEventHandler<ReactionsFinishedEvent>(OnCullAllBubblesComplete);
+            GlobalState.EventService.AddEventHandler<SequenceItemCompleteEvent>(OnWinTextAnimationComplete);
             GlobalState.EventService.Dispatch(new PrepareForBubblePartyEvent());
-            GlobalState.Instance.RunCoroutine(BubbleParty());
+
+            StartCoroutine(RunActionAfterDelay(config.delayBeforeWinTextAnimation, () =>
+            {
+                winTextAnimation = Instantiate(winTextAnimationPrefab);
+                winTextAnimation.transform.SetParent(canvas.transform, false);
+            }));
+        }
+
+        private void OnWinTextAnimationComplete(SequenceItemCompleteEvent gameEvent)
+        {
+            if (gameEvent.item == winTextAnimation)
+            {
+                GlobalState.EventService.RemoveEventHandler<SequenceItemCompleteEvent>(OnWinTextAnimationComplete);
+                GlobalState.Instance.RunCoroutine(BubbleParty());
+            }
         }
 
         private IEnumerator BubbleParty()
         {
-            var bubblePartyConfig = GlobalState.Instance.Config.bubbleParty;
+            var delayBetweenBubbles = GlobalState.Instance.Config.bubbleParty.delayBetweenBubbles;
 
             // Put back the ball the character was holding
             levelState.remainingBubbles++;
             levelState.NotifyListeners();
 
-            yield return new WaitForSeconds(GlobalState.Instance.Config.winSequence.delayBeforeBubbleParty);
+            yield return new WaitForSeconds(config.delayBeforeBubbleParty);
 
             while (levelState.remainingBubbles > 0)
             {
-                yield return new WaitForSeconds(bubblePartyConfig.delayBetweenBubbles);
+                yield return new WaitForSeconds(delayBetweenBubbles);
                 GlobalState.EventService.Dispatch(new FirePartyBubbleEvent());
             }
 
-            GlobalState.PopupService.EnqueueWithDelay(1.0f, new GenericPopupConfig
+            GlobalState.PopupService.EnqueueWithDelay(config.delayBeforePopup, new GenericPopupConfig
             {
                 title = "Level Won",
                 mainText = ("Score: " + levelState.score.ToString() + "\n" +

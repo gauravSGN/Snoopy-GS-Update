@@ -134,5 +134,7 @@ MonoBehaviour:
     maxYForce: 55
     delayBetweenBubbles: 0.1
   winSequence:
+    delayBeforeCullAll: 0.5
+    delayBeforeWinTextAnimation: 1.5
     delayBeforeBubbleParty: 0.5
-    delayBeforePopup: 1
+    delayBeforePopup: 2

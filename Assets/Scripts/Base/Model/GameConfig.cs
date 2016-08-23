@@ -35,6 +35,8 @@ public class GameConfig : ScriptableObject
     [Serializable]
     public class WinSequenceConfig
     {
+        public float delayBeforeCullAll;
+        public float delayBeforeWinTextAnimation;
         public float delayBeforeBubbleParty;
         public float delayBeforePopup;
     }

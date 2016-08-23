@@ -8,7 +8,11 @@ namespace Sequence
         [SerializeField]
         private Level level;
 
-        private BaseSequence<LevelState> winOrLoseSequence;
+        [SerializeField]
+        private WinLevel winLevelSequence;
+
+        [SerializeField]
+        private LoseLevel loseLevelSequence;
 
         // Note: Reenabling input happens within the Launcher Character's state machine to
         // account for animation and transition times.
@@ -21,17 +25,13 @@ namespace Sequence
         {
             if (level.AllGoalsCompleted)
             {
-                winOrLoseSequence = new WinLevel();
+                GlobalState.EventService.RemoveEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
+                winLevelSequence.Begin(level.levelState);
             }
             else if (level.levelState.remainingBubbles <= 0)
             {
-                winOrLoseSequence = new LoseLevel();
-            }
-
-            if (winOrLoseSequence != null)
-            {
                 GlobalState.EventService.RemoveEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
-                winOrLoseSequence.Begin(level.levelState);
+                loseLevelSequence.Begin(level.levelState);
             }
             else
             {
@@ -43,11 +43,6 @@ namespace Sequence
         {
             GlobalState.EventService.Dispatch(new ReadyForNextBubbleEvent());
             GlobalState.EventService.Dispatch(new InputToggleEvent(true));
-        }
-
-        private void DispatchReturnToMap()
-        {
-            GlobalState.EventService.Dispatch(new TransitionToReturnSceneEvent());
         }
     }
 }
