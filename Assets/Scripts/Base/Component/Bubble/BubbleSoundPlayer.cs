@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 [RequireComponent(typeof(AudioSource))]
 sealed public class BubbleSoundPlayer : MonoBehaviour

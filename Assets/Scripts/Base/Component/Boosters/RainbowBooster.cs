@@ -25,6 +25,9 @@ namespace Booster
         [SerializeField]
         private PurchaseBoosters purchaseBoosters;
 
+        [SerializeField]
+        private AudioSource equipSound;
+
         private GameObject instantiatedOverlay;
 
         public void ActivateOrBuy()
@@ -43,6 +46,8 @@ namespace Booster
 
                 GlobalState.User.purchasables.boosters.rainbows--;
                 level.levelState.DecrementRemainingBubbles();
+
+                equipSound.Play();
             }
         }
 

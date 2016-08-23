@@ -41,6 +41,9 @@ namespace PowerUps
         [SerializeField]
         private int lastBubbleCount;
 
+        [SerializeField]
+        private AudioSource filledSound;
+
         private float currentFillTime;
 
         private Level level;
@@ -105,6 +108,7 @@ namespace PowerUps
                 {
                     glow.SetActive(true);
                     filledBackground.SetActive(false);
+                    filledSound.Play();
                 }
             }
         }
