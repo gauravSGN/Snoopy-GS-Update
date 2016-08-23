@@ -8,13 +8,13 @@ namespace Sequence
     {
         override public void Begin(LevelState parameters)
         {
-            StartCoroutine(RunActionAfterDelay(2.0f, () =>
+            StartCoroutine(RunActionAfterDelay(GlobalState.Instance.Config.level.levelLostDelay, () =>
             {
                 GlobalState.EventService.Dispatch(new LevelCompleteEvent(false));
 
                 GlobalState.User.purchasables.hearts.quantity--;
 
-                GlobalState.PopupService.EnqueueWithDelay(1.0f, new StandalonePopupConfig(PopupType.OutOfMoves)
+                GlobalState.PopupService.Enqueue(new StandalonePopupConfig(PopupType.OutOfMoves)
                 {
                     closeActions = new List<Action> { EndLevel },
                     affirmativeActions = new List<Action> { BuyMoreMoves },
