@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "Juh1wbjS9FCmUj9CCsDmU96QgVY", "spine": "3.2.01", "width": 167.14, "height": 307.5 },
+"skeleton": { "hash": "79Tw7geqGIIS6OM6x/mIZIg/L9I", "spine": "3.2.01", "width": 167.14, "height": 307.5 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "placement_ALL_CTRL", "parent": "root" },
@@ -463,7 +463,9 @@
 	}
 },
 "events": {
-	"CatchKite": {}
+	"CatchKite": {},
+	"MoveToFront": {},
+	"ReturnToBack": {}
 },
 "animations": {
 	"Charge": {
@@ -2120,6 +2122,10 @@
 					{ "slot": "ear_L2", "offset": -21 }
 				]
 			}
+		],
+		"events": [
+			{ "time": 0.4666, "name": "MoveToFront" },
+			{ "time": 0.9666, "name": "ReturnToBack" }
 		]
 	},
 	"Enter": {
