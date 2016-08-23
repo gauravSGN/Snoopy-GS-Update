@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-
-namespace Registry
+﻿namespace Registry
 {
     public interface Blockade
     {
