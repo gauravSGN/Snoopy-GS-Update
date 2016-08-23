@@ -36,6 +36,9 @@ namespace PowerUps
         [SerializeField]
         private AimLine aimline;
 
+        [SerializeField]
+        private GameObject fillCharacter;
+
         private Transform[] anchors;
         private PowerUpType powerUpType;
         private int totalPowerUpsInUse;
@@ -62,7 +65,7 @@ namespace PowerUps
                     if (fillData[index] > 0.0f)
                     {
                         var powerUp = powerUpFactory.CreateByType((PowerUpType)(1 << index));
-                        powerUp.GetComponent<PowerUp>().Setup(fillData[index], this, level);
+                        powerUp.GetComponent<PowerUp>().Setup(fillData[index], this, level, fillCharacter);
                         powerUp.transform.SetParent(anchors[anchorIndex]);
                         powerUp.transform.localPosition = Vector3.zero;
                         anchorIndex++;
