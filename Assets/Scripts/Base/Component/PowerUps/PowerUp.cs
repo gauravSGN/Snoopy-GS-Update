@@ -27,6 +27,9 @@ namespace PowerUps
         private GameObject fillLine;
 
         [SerializeField]
+        private Animator characterAnimator;
+
+        [SerializeField]
         private float secondsToFill;
 
         [SerializeField]
@@ -51,12 +54,13 @@ namespace PowerUps
         private PowerUpDefinition definition;
         private PowerUpController controller;
 
-        public void Setup(float setMax, PowerUpController setController, Level setLevel)
+        public void Setup(float setMax, PowerUpController setController, Level setLevel, GameObject character)
         {
             max = setMax;
             controller = setController;
             level = setLevel;
             level.levelState.AddListener(UpdateState);
+            characterAnimator = character.GetComponent<Animator>();
 
             GlobalState.EventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
             GlobalState.EventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
@@ -75,8 +79,16 @@ namespace PowerUps
             if (button.interactable && (progress >= 1.0f))
             {
                 controller.AddPowerUp(definition.Type);
+                characterAnimator.SetTrigger("AddPowerUp");
+                GlobalState.EventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
                 Reset();
             }
+        }
+
+        private void OnReadyForNextBubble(ReadyForNextBubbleEvent gameEvent)
+        {
+            characterAnimator.SetTrigger("Finish");
+            GlobalState.EventService.RemoveEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
         }
 
         private void OnInputToggle(InputToggleEvent gameEvent)
