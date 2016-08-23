@@ -42,7 +42,7 @@ namespace Sequence
                 // TODO: Show store flow here?
             }
 
-            coins.quantity = Math.Max(0, coins.quantity - 40);
+            coins.quantity -= 40;
             GlobalState.EventService.Dispatch(new PurchasedExtraMovesEvent());
         }
     }
