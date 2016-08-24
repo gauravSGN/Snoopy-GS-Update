@@ -105,10 +105,11 @@ namespace PowerUps
             powerUpType = 0;
             totalPowerUpsInUse = 0;
         }
-         public void OverrideLaunchSound(AudioClip soundOverride)
-         {
-             launcher.SetLaunchSoundOverride(soundOverride);
-         }
+
+        public void OverrideLaunchSound(AudioClip soundOverride)
+        {
+            launcher.SetLaunchSoundOverride(soundOverride);
+        }
 
         // Just set objects active/inactive until we have an animation
         public void HidePowerUps()
