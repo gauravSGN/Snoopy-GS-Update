@@ -7,5 +7,6 @@ namespace UI.Popup
         Settings,
         OutOfMoves,
         WinLevel,
+        LoseLevel,
     }
 }
