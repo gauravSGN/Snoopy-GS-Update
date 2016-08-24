@@ -47,6 +47,7 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
         public AudioClip impact;
         public AudioClip match;
         public AudioClip cull;
+        public AudioClip bounce;
     }
 
     [SerializeField]
