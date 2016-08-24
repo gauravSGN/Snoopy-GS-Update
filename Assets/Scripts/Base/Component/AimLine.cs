@@ -156,13 +156,12 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
                 }
             }
 
-            points.Add(points[index] + distance * direction);
-
             if ((hit.collider != null) &&
                 (reflections > 0) &&
                 (hit.collider.gameObject.tag != StringConstants.Tags.BUBBLES))
             {
                 // We've hit a wall
+                points.Add(CalculateReflectionPoint(points[index], direction, distance));
                 --reflections;
                 index++;
 
@@ -180,10 +179,25 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
                 continue;
             }
 
+            points.Add(points[index] + distance * direction);
+
             break;
         }
 
         points[0] = origin;
+    }
+
+    private Vector3 CalculateReflectionPoint(Vector3 origin, Vector3 direction, float distance)
+    {
+        var launchSpeed = GlobalState.Instance.Config.aimline.launchSpeed;
+
+        var x = origin.x + direction.x * distance;
+
+        var stepSize = launchSpeed * Time.fixedDeltaTime;
+        var steps = Mathf.Ceil(distance / stepSize);
+        var y = origin.y + direction.y * stepSize * steps;
+
+        return new Vector3(x, y);
     }
 
     private void RebuildMesh()

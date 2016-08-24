@@ -71,6 +71,7 @@ MonoBehaviour:
     lineWidth: 0.167
     dotSpacing: 0.2
     moveSpeed: 2
+    launchSpeed: 6.5
     normal:
       maxReflections: 1
       reflectionDistance: 0.5

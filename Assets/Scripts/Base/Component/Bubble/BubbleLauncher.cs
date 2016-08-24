@@ -11,9 +11,6 @@ public class BubbleLauncher : MonoBehaviour
     private GameObject[] locations;
 
     [SerializeField]
-    private float launchSpeed;
-
-    [SerializeField]
     private Level level;
 
     [SerializeField]
@@ -153,6 +150,7 @@ public class BubbleLauncher : MonoBehaviour
             modifier(nextBubbles[0]);
         }
 
+        var launchSpeed = GlobalState.Instance.Config.aimline.launchSpeed;
         direction = (point - (Vector2)locations[0].transform.position).normalized * launchSpeed;
         characterController.OnAnimationFire += OnAnimationFireBubble;
         GlobalState.EventService.Dispatch(new InputToggleEvent(false));
