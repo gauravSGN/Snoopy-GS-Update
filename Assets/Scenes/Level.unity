@@ -397,7 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 1197956594}
-  multiplierCallout: {fileID: 130462, guid: c7538d80d22714ee7a68e4ed3fcd1ade, type: 2}
+  multiplierCallout: {fileID: 167504, guid: f8aa43f98f47141bc86611f4a6c3058a, type: 2}
 --- !u!4 &456451989
 Transform:
   m_ObjectHideFlags: 0

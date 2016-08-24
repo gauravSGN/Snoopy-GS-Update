@@ -104,9 +104,7 @@ namespace Scoring
                 ScoreMultiplierCallout callout = null;
                 if ((multiplier >= 2.0f) && (multiplierCallout != null))
                 {
-                    var instance = Instantiate(multiplierCallout);
-                    instance.GetComponent<TextMesh>().color = cluster[0].definition.BaseColor;
-                    callout = instance.GetComponent<ScoreMultiplierCallout>();
+                    callout = Instantiate(multiplierCallout).GetComponent<ScoreMultiplierCallout>();
                     callout.Initialize();
                 }
 
@@ -117,7 +115,7 @@ namespace Scoring
 
                 if (callout != null)
                 {
-                    callout.Show((int)Mathf.Floor(multiplier), clusterScore);
+                    callout.Show((int)Mathf.Floor(multiplier), clusterScore, cluster[0].definition.BaseColor);
                 }
 
                 totalScore += clusterScore;
