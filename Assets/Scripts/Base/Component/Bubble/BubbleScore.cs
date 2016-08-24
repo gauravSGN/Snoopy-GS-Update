@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class BubbleScore : MonoBehaviour
 {
-    private Bubble model;
     private bool playedEffect;
 
     public int Score { get; private set; }
+    public Bubble Model { get; private set; }
 
     public void Start()
     {
@@ -22,12 +22,12 @@ public class BubbleScore : MonoBehaviour
 
     public void SetModel(Bubble bubbleModel)
     {
-        model = bubbleModel;
+        Model = bubbleModel;
     }
 
     private void OnBubbleScore(BubbleScoreEvent gameEvent)
     {
-        if (gameEvent.bubble == model)
+        if (gameEvent.bubble == Model)
         {
             Score += gameEvent.score;
 
@@ -35,7 +35,7 @@ public class BubbleScore : MonoBehaviour
             {
                 playedEffect = true;
 
-                var bubbleDestroyedEvent = new BubbleDestroyedEvent(model.definition.Score, gameObject);
+                var bubbleDestroyedEvent = new BubbleDestroyedEvent(Model.definition.Score, gameObject);
                 GlobalState.EventService.Dispatch(bubbleDestroyedEvent);
 
                 var effectController = gameObject.GetComponent<BubbleEffectController>();

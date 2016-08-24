@@ -3,5 +3,6 @@
     public enum TransformUsage
     {
         RescueGoalIcon,
+        ScoreContainer,
     }
 }
