@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 193d047b2c7fb4b5388c2e87b7de3372
-timeCreated: 1467836508
+guid: dedb1672f61c44163bd966c7214a8d38
+timeCreated: 1471975742
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -26,7 +26,7 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -3
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteSheet:
     sprites: []
     outline: []
-  spritePackingTag: hud
+  spritePackingTag: 
   userData: 
   assetBundleName: 
   assetBundleVariant: 
