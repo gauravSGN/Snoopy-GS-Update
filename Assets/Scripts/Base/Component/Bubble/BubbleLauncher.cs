@@ -36,6 +36,7 @@ public class BubbleLauncher : MonoBehaviour
     private Vector2 direction;
     private bool inputAllowed;
     private AudioSource audioSource;
+    private AudioClip launchSoundOverride;
 
     public void CycleQueue()
     {
@@ -72,6 +73,11 @@ public class BubbleLauncher : MonoBehaviour
     {
         currentAnimation = bubbleAnimation;
         UpdateCurrentAnimationTransform();
+    }
+
+    public void SetLaunchSoundOverride(AudioClip overrideClip)
+    {
+        launchSoundOverride = overrideClip;
     }
 
     protected void Start()
@@ -177,11 +183,12 @@ public class BubbleLauncher : MonoBehaviour
         level.levelState.bubbleQueue.RemoveListener(OnBubbleQueueChanged);
         level.levelState.bubbleQueue.GetNext();
 
-        PlaySound(launchSound);
+        PlaySound(launchSoundOverride ?? launchSound);
     }
 
     private void ReadyNextBubble()
     {
+        launchSoundOverride = null;
         level.levelState.bubbleQueue.AddListener(OnBubbleQueueChanged);
         CycleLocalQueue();
 

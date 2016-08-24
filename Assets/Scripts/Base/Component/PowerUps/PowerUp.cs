@@ -78,6 +78,10 @@ namespace PowerUps
         {
             if (button.interactable && (progress >= 1.0f))
             {
+                if (definition.LaunchSound != null)
+                {
+                    controller.OverrideLaunchSound(definition.LaunchSound);
+                }
                 controller.AddPowerUp(definition.Type);
                 characterAnimator.SetTrigger("AddPowerUp");
                 GlobalState.EventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
