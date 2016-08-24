@@ -40,7 +40,6 @@ namespace Sequence
             StartCoroutine(RunActionAfterDelay(config.delayBeforeCullAll, () =>
             {
                 GlobalState.EventService.Dispatch(new LevelCompleteEvent(true));
-                UpdateUser();
 
                 GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnCullAllBubblesComplete);
 
@@ -115,6 +114,7 @@ namespace Sequence
         {
             if (gameEvent.instance == currentItem)
             {
+                UpdateUser();
                 GlobalState.PopupService.EnqueueWithDelay(config.delayBeforePopup, new GenericPopupConfig
                 {
                     title = "Level Won",

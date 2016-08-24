@@ -60,6 +60,7 @@ public class GameConfig : ScriptableObject
         public float lineWidth;
         public float dotSpacing;
         public float moveSpeed;
+        public float launchSpeed;
 
         public AimLine.Settings normal;
         public AimLine.Settings extended;
