@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-
-namespace UI.Popup
+﻿namespace UI.Popup
 {
     public class StandalonePopupConfig : PopupConfig
     {

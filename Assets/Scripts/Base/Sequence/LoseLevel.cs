@@ -24,12 +24,10 @@ namespace Sequence
 
         private void EndLevel()
         {
-            GlobalState.PopupService.Enqueue(new GenericPopupConfig
+            GlobalState.PopupService.Enqueue(new StandalonePopupConfig(PopupType.LoseLevel)
             {
-                title = "Level Lost",
-                mainText = "Hearts Left: " + GlobalState.User.purchasables.hearts.quantity.ToString(),
                 closeActions = new List<Action> { TransitionToReturnScene },
-                affirmativeActions = new List<Action> { TransitionToReturnScene },
+                affirmativeActions = new List<Action> { RestartLevel },
             });
        }
 
@@ -44,6 +42,11 @@ namespace Sequence
 
             coins.quantity -= 40;
             GlobalState.EventService.Dispatch(new PurchasedExtraMovesEvent());
+        }
+
+        private void RestartLevel()
+        {
+            GlobalState.SceneService.TransitionToScene(StringConstants.Scenes.LEVEL);
         }
     }
 }
