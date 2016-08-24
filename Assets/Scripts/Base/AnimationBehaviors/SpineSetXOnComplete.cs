@@ -28,7 +28,6 @@ public class SpineSetXOnComplete : StateMachineBehaviour
         SetX(animator, TransitionType.Exit);
     }
 
-
     private void SetX(Animator animator, TransitionType transition)
     {
         if (transitionType == transition)
