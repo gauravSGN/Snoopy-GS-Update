@@ -7,14 +7,16 @@ public class BubbleSnap : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
     private new CircleCollider2D collider;
+    private BubbleAttachments attachments;
 
     protected void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         collider = GetComponent<CircleCollider2D>();
+        attachments = GetComponent<BubbleAttachments>();
 
         collider.radius *= GlobalState.Instance.Config.bubbles.shotColliderScale;
-        GetComponent<BubbleAttachments>().Model.Active = true;
+        attachments.Model.Active = true;
     }
 
     protected void OnCollisionEnter2D(Collision2D collision)
@@ -40,6 +42,10 @@ public class BubbleSnap : MonoBehaviour
             {
                 transform.position = position - velocity * radius;
                 SnapIntoPlace();
+            }
+            else
+            {
+                PlaySound(attachments.Model.definition.Sounds.bounce);
             }
         }
     }
@@ -75,16 +81,9 @@ public class BubbleSnap : MonoBehaviour
         Destroy(this);
         GlobalState.EventService.Dispatch(new BubbleSettlingEvent());
 
-        var model = GetComponent<BubbleAttachments>().Model;
-
-        if (!model.CheckForMatches())
+        if (!attachments.Model.CheckForMatches())
         {
-            var player = GetComponent<BubbleSoundPlayer>();
-
-            if (player != null)
-            {
-                player.Play(model.definition.Sounds.impact);
-            }
+            PlaySound(attachments.Model.definition.Sounds.impact);
         }
 
         GlobalState.EventService.Dispatch(new BubbleSettledEvent { shooter = gameObject });
@@ -108,11 +107,9 @@ public class BubbleSnap : MonoBehaviour
 
     private void AttachToBubble(GameObject bubble)
     {
-        var attachment = GetComponent<BubbleAttachments>();
-
-        attachment.Attach(bubble);
-        attachment.Model.MinimizeDistanceFromRoot();
-        attachment.Model.SortNeighbors();
+        attachments.Attach(bubble);
+        attachments.Model.MinimizeDistanceFromRoot();
+        attachments.Model.SortNeighbors();
     }
 
     private IEnumerable<Collider2D> NearbyBubbles(Vector2 location)
@@ -164,6 +161,16 @@ public class BubbleSnap : MonoBehaviour
                     bubblePosition.y + Mathf.Sin(index * theta) * bubbleSize
                 );
             }
+        }
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        var player = GetComponent<BubbleSoundPlayer>();
+
+        if (player != null)
+        {
+            player.Play(clip);
         }
     }
 }
