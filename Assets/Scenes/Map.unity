@@ -652,6 +652,22 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11497248, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_ReferencePixelsPerUnit
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497248, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_ReferenceResolution.x
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497248, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_ReferenceResolution.y
+      value: 1334
+      objectReference: {fileID: 0}
+    - target: {fileID: 178964, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
   m_IsPrefabParent: 0
