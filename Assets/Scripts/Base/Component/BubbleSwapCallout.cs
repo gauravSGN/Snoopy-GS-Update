@@ -22,27 +22,25 @@ sealed public class BubbleSwapCallout : MonoBehaviour
     {
         StopAllCoroutines();
 
-        StartCoroutine(gameEvent.idle ? PlayIdle() : PlayActive());
-    }
+        var targetAlpha = gameEvent.idle ? 1.0f : 0.0f;
+        var fader = FadeAlpha(1.0f - targetAlpha, targetAlpha, 1.0f);
 
-    private IEnumerator PlayIdle()
-    {
-        StartCoroutine(FadeAlpha(0.0f, 1.0f, 1.0f));
-
-        while (true)
+        if (gameEvent.idle)
         {
-            ApplyRotation();
-            yield return null;
+            StartCoroutine(fader);
+            StartCoroutine(Spin(fader, c => true));
+        }
+        else
+        {
+            StartCoroutine(Spin(fader, c => c.MoveNext()));
         }
     }
 
-    private IEnumerator PlayActive()
+    private IEnumerator Spin(IEnumerator coroutine, System.Func<IEnumerator, bool> predicate)
     {
-        var coroutine = FadeAlpha(1.0f, 0.0f, 1.0f);
-
-        while (coroutine.MoveNext())
+        while (predicate(coroutine))
         {
-            ApplyRotation();
+            myTransform.localRotation *= Quaternion.AngleAxis(rotateSpeed * Time.deltaTime, Vector3.forward);
             yield return null;
         }
     }
@@ -63,10 +61,5 @@ sealed public class BubbleSwapCallout : MonoBehaviour
                 sprite.color = new Color(1.0f, 1.0f, 1.0f, alpha);
             }
         } while (time <= duration);
-    }
-
-    private void ApplyRotation()
-    {
-        myTransform.localRotation *= Quaternion.AngleAxis(rotateSpeed * Time.deltaTime, Vector3.forward);
     }
 }
