@@ -121,13 +121,16 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
 
     private void GeneratePoints()
     {
-        Vector3 origin = launchOrigin.transform.position;
+        Vector3 origin = transform.position;
         var config = GlobalState.Instance.Config;
         int index = 0;
         var distance = aimlineConfig.length - config.bubbles.size;
-        var direction = (aimTarget - origin).normalized;
+        var direction = (aimTarget - origin);
         var shooterRadius = config.bubbles.size * config.bubbles.shotColliderScale;
         int reflections = settings.Value.maxReflections;
+
+        direction.z = 0.0f;
+        direction.Normalize();
 
         points.Clear();
         points.Add(origin + config.bubbles.size * direction * 2.0f);
@@ -238,7 +241,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
 
     private IEnumerable<Vector2> GetPointsOnAimLine()
     {
-        var origin = launchOrigin.transform.position - launchOrigin.transform.localPosition;
+        var origin = transform.position - transform.localPosition;
         float offset = ((aimlineConfig.moveSpeed * Time.realtimeSinceStartup) % 1.0f) * aimlineConfig.dotSpacing;
         var count = points.Count - 1;
 
