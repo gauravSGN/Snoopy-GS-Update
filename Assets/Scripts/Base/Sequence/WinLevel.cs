@@ -115,11 +115,14 @@ namespace Sequence
             if (gameEvent.instance == currentItem)
             {
                 UpdateUser();
-                GlobalState.PopupService.EnqueueWithDelay(config.delayBeforePopup, new GenericPopupConfig
+
+                var userLevelData = GlobalState.User.levels[levelState.levelNumber];
+
+                GlobalState.PopupService.EnqueueWithDelay(config.delayBeforePopup, new WinLevelPopupConfig
                 {
-                    title = "Level Won",
-                    mainText = ("Score: " + levelState.score.ToString() + "\n" +
-                                "Stars: " + GlobalState.User.levels[levelState.levelNumber].stars.ToString()),
+                    score = levelState.score,
+                    stars = userLevelData.stars,
+                    topScore = userLevelData.score,
                     closeActions = new List<Action> { TransitionToReturnScene },
                     affirmativeActions = new List<Action> { TransitionToReturnScene }
                 });

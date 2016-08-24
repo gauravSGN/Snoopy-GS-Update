@@ -8,6 +8,7 @@ namespace PowerUps
         public PowerUpType Type { get { return type; } }
         public GameObject Prefab { get { return prefab; } }
         public BubbleType BubbleType { get { return bubbleType; } }
+        public AudioClip LaunchSound { get { return launchSound; } }
 
         [SerializeField]
         private PowerUpType type;
@@ -17,5 +18,8 @@ namespace PowerUps
 
         [SerializeField]
         private GameObject prefab;
+
+        [SerializeField]
+        private AudioClip launchSound;
     }
 }

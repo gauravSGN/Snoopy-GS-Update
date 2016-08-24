@@ -40,7 +40,6 @@ public class Level : MonoBehaviour
         if (!string.IsNullOrEmpty(sceneData.NextLevelData))
         {
             levelData = sceneData.NextLevelData;
-            sceneData.NextLevelData = null;
         }
         else if (levelAssetPath != null)
         {

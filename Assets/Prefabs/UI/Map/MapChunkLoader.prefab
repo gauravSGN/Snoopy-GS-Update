@@ -47,9 +47,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 1280, y: -640}
+  m_Offset: {x: 1334, y: -667}
   serializedVersion: 2
-  m_Size: {x: 900, y: 1280}
+  m_Size: {x: 900, y: 1334}
 --- !u!114 &11406416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -62,8 +62,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: 2480
-  m_MinHeight: 1280
+  m_MinWidth: 2645
+  m_MinHeight: 1334
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0510482c7f2c74966b968324bcfa8a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadOnStart: 1
+  loadOnStart: 0
   mapChunkFactory: {fileID: 11400000, guid: 3009c46fae6a9485fb1eb0dded367105, type: 2}
   mapType: -1
 --- !u!224 &22404762
