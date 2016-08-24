@@ -181,7 +181,7 @@ GameObject:
   - 224: {fileID: 22490422}
   - 222: {fileID: 22251202}
   m_Layer: 5
-  m_Name: Right Group1
+  m_Name: Left Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -947,7 +947,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 37.999996, y: -0.0000333786}
+  m_AnchoredPosition: {x: 35.2, y: -0.0000333786}
   m_SizeDelta: {x: 57, y: 62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22468610
@@ -1003,7 +1003,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -148.49995, y: -22.50003}
+  m_AnchoredPosition: {x: -151.5, y: -22.50003}
   m_SizeDelta: {x: 128.5, y: 58}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &22479334
