@@ -6,5 +6,6 @@ namespace UI.Popup
         PreLevel,
         Settings,
         OutOfMoves,
+        WinLevel,
     }
 }
