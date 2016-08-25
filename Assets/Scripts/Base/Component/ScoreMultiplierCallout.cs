@@ -31,7 +31,7 @@ public class ScoreMultiplierCallout : MonoBehaviour
         text.text = string.Format(string.Join("\n", lines), multiplier, score);
 
         GetComponent<MoveToRegisteredCanvas>().MoveToCanvas();
-        StartCoroutine(DestroyAfterSeconds(lingerTime));
+        Destroy(gameObject, lingerTime);
     }
 
     private void OnBubbleDestroyed(BubbleDestroyedEvent gameEvent)
@@ -41,11 +41,5 @@ public class ScoreMultiplierCallout : MonoBehaviour
         counter++;
         xAverage = ((xAverage * (counter - 1)) + position.x) / counter;
         yMin = (counter == 1) ? position.y : Mathf.Min(yMin, position.y);
-    }
-
-    private IEnumerator DestroyAfterSeconds(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        Destroy(gameObject);
     }
 }

@@ -95,7 +95,7 @@ namespace PowerUps
         public void AddScan(GameObject bubble)
         {
             // Make bubble unmatchable
-            var model = bubble.GetComponent<BubbleAttachments>().Model;
+            var model = bubble.GetComponent<BubbleModelBehaviour>().Model;
             model.type = BubbleType.Colorless;
             model.definition = shooterDefinition;
 

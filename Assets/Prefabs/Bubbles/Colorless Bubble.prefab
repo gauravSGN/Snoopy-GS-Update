@@ -33,6 +33,7 @@ GameObject:
   - 114: {fileID: 11448766}
   - 82: {fileID: 8226870}
   - 114: {fileID: 11451358}
+  - 114: {fileID: 11453290}
   m_Layer: 10
   m_Name: Colorless Bubble
   m_TagString: Bubble
@@ -347,6 +348,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 350fb0c9432f3404297a65541fb32860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11453290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d52afb44843459fb9a4e5e993cde83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11457120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -358,11 +370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16693cfbf03d14e2ca9961a01ed44bd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model:
-    isRoot: 0
-    distanceFromRoot: 2147483647
-    type: 0
-    definition: {fileID: 0}
 --- !u!198 &19828320
 ParticleSystem:
   m_ObjectHideFlags: 1

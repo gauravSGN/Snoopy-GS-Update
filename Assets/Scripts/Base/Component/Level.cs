@@ -96,13 +96,13 @@ public class Level : MonoBehaviour
 
     private void OnBubbleFired(BubbleFiredEvent gameEvent)
     {
-        levelState.UpdateTypeTotals(gameEvent.bubble.GetComponent<BubbleAttachments>().Model.type, 1);
+        levelState.UpdateTypeTotals(gameEvent.bubble.GetComponent<BubbleModelBehaviour>().Model.type, 1);
         levelState.DecrementRemainingBubbles();
     }
 
     private void OnBubbleDestroyed(BubbleDestroyedEvent gameEvent)
     {
-        levelState.UpdateTypeTotals(gameEvent.bubble.GetComponent<BubbleAttachments>().Model.type, -1);
+        levelState.UpdateTypeTotals(gameEvent.bubble.GetComponent<BubbleModelBehaviour>().Model.type, -1);
         levelState.NotifyListeners();
     }
 

@@ -20,6 +20,8 @@ public class GameConfig : ScriptableObject
         public float cullMaxXForce;
         public float cullMinYForce;
         public float cullMaxYForce;
+        public float cullMinDistance;
+        public float cullMaxDistance;
     }
 
     [Serializable]

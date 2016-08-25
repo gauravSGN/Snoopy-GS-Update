@@ -64,7 +64,7 @@ namespace Modifiers
             var target = instance.GetComponent<WoodstockEventHandler>();
 
             instance.name = "Rescue Target";
-            target.Model = parent.GetComponent<BubbleAttachments>().Model;
+            target.Model = parent.GetComponent<BubbleModelBehaviour>().Model;
             instance.transform.SetParent(parent.transform, false);
 
             targets.Add(target);

@@ -21,6 +21,8 @@ MonoBehaviour:
     cullMaxXForce: 10
     cullMinYForce: -5
     cullMaxYForce: 5
+    cullMinDistance: 1
+    cullMaxDistance: 3
   impactEffect:
     duration: 0.15
     distance: 0.1

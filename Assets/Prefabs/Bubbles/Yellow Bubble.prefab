@@ -34,6 +34,7 @@ GameObject:
   - 114: {fileID: 11486032}
   - 82: {fileID: 8204368}
   - 114: {fileID: 11460054}
+  - 114: {fileID: 11463174}
   m_Layer: 10
   m_Name: Yellow Bubble
   m_TagString: Bubble
@@ -240,6 +241,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 350fb0c9432f3404297a65541fb32860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11463174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a23041f53334d1ab7dde34dcd51dfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11473434

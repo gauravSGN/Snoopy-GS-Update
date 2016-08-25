@@ -20,7 +20,7 @@ public class LevelIntroScroll : MonoBehaviour
     public void ScrollTo(float yPos)
     {
         var targetY = Mathf.Min(yPos, scrollBound.position.y);
-        GameObjectUtil.DisableObjects(disableOnScroll);
+        GameObjectUtil.SetActive(disableOnScroll, false);
         StartCoroutine(DoScroll(targetY));
     }
 
@@ -38,7 +38,7 @@ public class LevelIntroScroll : MonoBehaviour
         transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
         launcherGroup.transform.position = finalLauncherPosition;
 
-        GameObjectUtil.EnableObjects(disableOnScroll);
+        GameObjectUtil.SetActive(disableOnScroll, true);
         powerUpController.ShowPowerUps();
 
         GlobalState.EventService.Dispatch(new IntroScrollCompleteEvent());
