@@ -32,6 +32,7 @@ GameObject:
   - 114: {fileID: 11433174}
   - 82: {fileID: 8293854}
   - 114: {fileID: 11422630}
+  - 114: {fileID: 11400180}
   m_Layer: 10
   m_Name: Red Bubble
   m_TagString: Bubble
@@ -204,6 +205,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &11400180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a23041f53334d1ab7dde34dcd51dfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11416386
 MonoBehaviour:
   m_ObjectHideFlags: 1

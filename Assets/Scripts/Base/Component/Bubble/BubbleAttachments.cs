@@ -55,14 +55,6 @@ public class BubbleAttachments : MonoBehaviour
     private void DisconnectedHandler(Bubble bubble)
     {
         RemoveHandlers();
-
-        var rigidBody = GetComponent<Rigidbody2D>();
-        gameObject.layer = (int)Layers.FallingObjects;
-
-        var reactionsConfig = GlobalState.Instance.Config.reactions;
-        rigidBody.isKinematic = false;
-        rigidBody.AddForce(new Vector3(Random.Range(reactionsConfig.cullMinXForce, reactionsConfig.cullMaxXForce),
-                                       Random.Range(reactionsConfig.cullMinYForce, reactionsConfig.cullMaxYForce)));
     }
 
     private void OnCullAllBubbles(CullAllBubblesEvent gameEvent)
