@@ -809,62 +809,9 @@ Prefab:
       propertyPath: loader
       value: 
       objectReference: {fileID: 1499581533}
-    - target: {fileID: 468256, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 466092, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 416752, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 470580, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 21263644, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 21292922, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
   m_IsPrefabParent: 0
---- !u!212 &1365751415 stripped
-SpriteRenderer:
-  m_PrefabParentObject: {fileID: 21263644, guid: 020adabb2fd5f4910bc30f78699e9379,
-    type: 2}
-  m_PrefabInternal: {fileID: 1365751414}
---- !u!212 &1365751416 stripped
-SpriteRenderer:
-  m_PrefabParentObject: {fileID: 21292922, guid: 020adabb2fd5f4910bc30f78699e9379,
-    type: 2}
-  m_PrefabInternal: {fileID: 1365751414}
---- !u!1 &1365751417 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 116278, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
-  m_PrefabInternal: {fileID: 1365751414}
---- !u!114 &1365751418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1365751417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab0cf312b981d4569a740942377722e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: -90
-  sprites:
-  - {fileID: 1365751416}
-  - {fileID: 1365751415}
 --- !u!1 &1394572483
 GameObject:
   m_ObjectHideFlags: 0
