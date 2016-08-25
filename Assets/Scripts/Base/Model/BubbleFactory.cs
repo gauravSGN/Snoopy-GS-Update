@@ -1,10 +1,9 @@
-using System.Collections.Generic;
-using UnityEngine;
 using Util;
 using Model;
 using Effects;
-using Animation;
 using Modifiers;
+using UnityEngine;
+using System.Collections.Generic;
 
 public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
 {
