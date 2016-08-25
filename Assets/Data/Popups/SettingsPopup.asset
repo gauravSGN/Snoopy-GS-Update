@@ -13,3 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   prefab: {fileID: 156006, guid: 9c6825d438f984783a3f41ca36f83da5, type: 2}
+  displaySound: {fileID: 8300000, guid: b58f369c380f8400dbc25f5421749cd5, type: 3}
