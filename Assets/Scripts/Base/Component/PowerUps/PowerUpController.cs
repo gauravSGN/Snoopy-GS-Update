@@ -4,6 +4,7 @@ using Animation;
 using UnityEngine;
 using System.Linq;
 using ScanFunction = Util.CastingUtil.ScanFunction;
+using System.Collections.Generic;
 
 namespace PowerUps
 {
@@ -40,6 +41,7 @@ namespace PowerUps
         private GameObject fillCharacter;
 
         private Transform[] anchors;
+        private List<PowerUp> powerUps;
         private PowerUpType powerUpType;
         private int totalPowerUpsInUse;
         private AnimationService animationService;
@@ -48,6 +50,13 @@ namespace PowerUps
         {
             var transforms = gameObject.GetComponentsInChildren<Transform>();
             anchors = transforms.Where(child => child != gameObject.transform).ToArray();
+
+            powerUps = new List<PowerUp>();
+        }
+
+        void Start()
+        {
+            GlobalState.EventService.AddEventHandler<PrepareForBubblePartyEvent>(PrepareForBubbleParty);
         }
 
         public void Setup(float[] fillData)
@@ -65,10 +74,12 @@ namespace PowerUps
                     if (fillData[index] > 0.0f)
                     {
                         var powerUp = powerUpFactory.CreateByType((PowerUpType)(1 << index));
-                        powerUp.GetComponent<PowerUp>().Setup(fillData[index], this, level, fillCharacter);
+                        var powerUpComponent = powerUp.GetComponent<PowerUp>();
+                        powerUpComponent.Setup(fillData[index], this, level, fillCharacter);
                         powerUp.transform.SetParent(anchors[anchorIndex]);
                         powerUp.transform.localPosition = Vector3.zero;
                         anchorIndex++;
+                        powerUps.Add(powerUpComponent);
                     }
                 }
                 else
@@ -114,17 +125,17 @@ namespace PowerUps
         // Just set objects active/inactive until we have an animation
         public void HidePowerUps()
         {
-            for (int i = 0, count = anchors.Length; i < count; ++i)
+            for (int i = 0, count = powerUps.Count; i < count; ++i)
             {
-                anchors[i].gameObject.SetActive(false);
+                powerUps[i].Hide();
             }
         }
 
         public void ShowPowerUps()
         {
-            for (int i = 0, count = anchors.Length; i < count; ++i)
+            for (int i = 0, count = powerUps.Count; i < count; ++i)
             {
-                anchors[i].gameObject.SetActive(true);
+                powerUps[i].Show();
             }
         }
 
@@ -153,6 +164,11 @@ namespace PowerUps
             }
 
             return scanFunction;
+        }
+
+        private void PrepareForBubbleParty(PrepareForBubblePartyEvent partyEvent)
+        {
+            HidePowerUps();
         }
     }
 }
