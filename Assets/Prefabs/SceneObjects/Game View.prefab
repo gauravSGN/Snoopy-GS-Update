@@ -113,7 +113,7 @@ GameObject:
   - 95: {fileID: 9593344}
   - 114: {fileID: 11413650}
   - 114: {fileID: 11495642}
-  - 114: {fileID: 11420210}
+  - 114: {fileID: 11423860}
   m_Layer: 0
   m_Name: Snoopy
   m_TagString: Untagged
@@ -160,6 +160,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 413250}
   - 114: {fileID: 11427498}
+  - 114: {fileID: 11458244}
   m_Layer: 0
   m_Name: Arrows
   m_TagString: Untagged
@@ -1132,8 +1133,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 2100000, guid: 327b2ba1aa3b14df29574986c46c9245, type: 2}
+  m_Materials: []
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1458,7 +1458,7 @@ MonoBehaviour:
   - {fileID: 143398}
   level: {fileID: 11450880}
   aimLine: {fileID: 11476056}
-  characterController: {fileID: 11420210}
+  characterController: {fileID: 11423860}
   launchSound: {fileID: 8300000, guid: 21d9a45c69234435cb04f19e7d943204, type: 3}
   swapSound: {fileID: 8300000, guid: 2fc399d57bb4d4edfa25c495027da990, type: 3}
   swapFailSound: {fileID: 8300000, guid: 29a1850433b8b4fd39e7eead4e073150, type: 3}
@@ -1500,7 +1500,7 @@ MonoBehaviour:
   frontFacing: 0
   logErrors: 0
   disableRenderingOnOverride: 1
-  layerMixModes: 
+  layerMixModes: 00000000
 --- !u!114 &11415686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1536,6 +1536,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e998f99ad4a3426490ec8035546d460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11423860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f73eebcc63a4946ad9c1dd9d418ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   eventTrigger: {fileID: 11466544}
