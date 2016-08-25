@@ -52,7 +52,7 @@ public class BubbleDeath : MonoBehaviour
 
         if (player != null)
         {
-            var sounds = GetComponent<BubbleAttachments>().Model.definition.Sounds;
+            var sounds = GetComponent<BubbleModelBehaviour>().Model.definition.Sounds;
             player.Play((type == BubbleDeathType.Pop) ? sounds.match : sounds.cull);
         }
 

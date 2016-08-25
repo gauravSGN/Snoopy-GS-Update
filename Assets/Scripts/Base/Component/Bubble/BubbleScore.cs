@@ -3,26 +3,22 @@ using Effects;
 using Animation;
 using UnityEngine;
 
-public class BubbleScore : MonoBehaviour
+public class BubbleScore : BubbleModelBehaviour
 {
     private bool playedEffect;
 
     public int Score { get; private set; }
-    public Bubble Model { get; private set; }
 
     public void Start()
     {
         GlobalState.EventService.AddEventHandler<BubbleScoreEvent>(OnBubbleScore);
     }
 
-    public void OnDestroy()
+    override public void OnDestroy()
     {
-        GlobalState.EventService.RemoveEventHandler<BubbleScoreEvent>(OnBubbleScore);
-    }
+        base.OnDestroy();
 
-    public void SetModel(Bubble bubbleModel)
-    {
-        Model = bubbleModel;
+        GlobalState.EventService.RemoveEventHandler<BubbleScoreEvent>(OnBubbleScore);
     }
 
     private void OnBubbleScore(BubbleScoreEvent gameEvent)

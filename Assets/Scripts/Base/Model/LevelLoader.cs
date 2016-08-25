@@ -69,7 +69,7 @@ public class LevelLoader : MonoBehaviour
         foreach (var bubble in level.Bubbles)
         {
             bubbleMap[bubble.Key] = CreateBubbleAndSetPosition(bubble);
-            bubble.model = bubbleMap[bubble.Key].GetComponent<BubbleAttachments>().Model;
+            bubble.model = bubbleMap[bubble.Key].GetComponent<BubbleModelBehaviour>().Model;
 
             if (!configuration.Counts.ContainsKey(bubble.model.type))
             {
@@ -84,7 +84,7 @@ public class LevelLoader : MonoBehaviour
 
         foreach (var pair in bubbleMap)
         {
-            pair.Value.GetComponent<BubbleAttachments>().Model.SortNeighbors();
+            pair.Value.GetComponent<BubbleModelBehaviour>().Model.SortNeighbors();
         }
 
         CreateGoals(level);
@@ -137,7 +137,7 @@ public class LevelLoader : MonoBehaviour
 
         foreach (var pair in ceilingBubbleMap)
         {
-            var model = pair.Value.GetComponent<BubbleAttachments>().Model;
+            var model = pair.Value.GetComponent<BubbleModelBehaviour>().Model;
             model.DistanceFromRoot = 0;
             model.PropagateRootDistance();
         }
@@ -147,7 +147,7 @@ public class LevelLoader : MonoBehaviour
     {
         foreach (var pair in bubbleMap)
         {
-            var model = pair.Value.GetComponent<BubbleAttachments>().Model;
+            var model = pair.Value.GetComponent<BubbleModelBehaviour>().Model;
 
             if (model.IsRoot)
             {

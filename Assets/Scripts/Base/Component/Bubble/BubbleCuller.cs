@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-sealed public class BubbleCuller : MonoBehaviour
+sealed public class BubbleCuller : BubbleModelBehaviour
 {
-    private Bubble model;
     private Rigidbody2D rigidBody;
 
     public void Start()
@@ -11,21 +10,14 @@ sealed public class BubbleCuller : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    public void SetModel(Bubble model)
+    override protected void AddListeners()
     {
-        this.model = model;
-
-        model.OnDisconnected += OnDisconnected;
+        Model.OnDisconnected += OnDisconnected;
     }
 
-    public void OnDestroy()
+    override protected void RemoveListeners()
     {
-        RemoveListeners();
-    }
-
-    private void RemoveListeners()
-    {
-        model.OnDisconnected -= OnDisconnected;
+        Model.OnDisconnected -= OnDisconnected;
     }
 
     private void OnDisconnected(Bubble bubble)

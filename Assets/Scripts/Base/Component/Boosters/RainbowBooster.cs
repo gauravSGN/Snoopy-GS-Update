@@ -63,7 +63,7 @@ namespace Booster
 
         private void ConvertToRainbow(GameObject bubble)
         {
-            var model = bubble.GetComponent<BubbleAttachments>().Model;
+            var model = bubble.GetComponent<BubbleModelBehaviour>().Model;
 
             model.type = BubbleType.Rainbow;
             model.definition = shooterDefinition;

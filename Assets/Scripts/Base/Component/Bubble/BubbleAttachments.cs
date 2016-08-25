@@ -1,23 +1,24 @@
 using UnityEngine;
 
-public class BubbleAttachments : MonoBehaviour
+public class BubbleAttachments : BubbleModelBehaviour
 {
-    public Bubble Model { get { return model; } }
-
-    [SerializeField]
-    private Bubble model;
-
     public void Attach(GameObject other)
     {
-        Model.Connect(other.GetComponent<BubbleAttachments>().Model);
+        Model.Connect(other.GetComponent<BubbleModelBehaviour>().Model);
     }
 
-    public void SetModel(Bubble model)
+    protected override void AddListeners()
     {
-        this.model = model;
+        Model.OnPopped += PoppedHandler;
+        Model.OnDisconnected += DisconnectedHandler;
+    }
 
-        model.OnPopped += PoppedHandler;
-        model.OnDisconnected += DisconnectedHandler;
+    protected override void RemoveListeners()
+    {
+        Model.OnPopped -= PoppedHandler;
+        Model.OnDisconnected -= DisconnectedHandler;
+
+        GlobalState.EventService.RemoveEventHandler<CullAllBubblesEvent>(OnCullAllBubbles);
     }
 
     protected void Start()
@@ -28,21 +29,9 @@ public class BubbleAttachments : MonoBehaviour
         }
     }
 
-    protected void OnDestroy()
-    {
-        RemoveHandlers();
-    }
-
-    private void RemoveHandlers()
-    {
-        GlobalState.EventService.RemoveEventHandler<CullAllBubblesEvent>(OnCullAllBubbles);
-        Model.OnPopped -= PoppedHandler;
-        Model.OnDisconnected -= DisconnectedHandler;
-    }
-
     private void PoppedHandler(Bubble bubble)
     {
-        RemoveHandlers();
+        RemoveListeners();
 
         gameObject.layer = (int)Layers.IgnoreRayCast;
         BubbleDeath.KillBubble(gameObject, BubbleDeathType.Pop);
@@ -50,7 +39,7 @@ public class BubbleAttachments : MonoBehaviour
 
     private void DisconnectedHandler(Bubble bubble)
     {
-        RemoveHandlers();
+        RemoveListeners();
     }
 
     private void OnCullAllBubbles(CullAllBubblesEvent gameEvent)
