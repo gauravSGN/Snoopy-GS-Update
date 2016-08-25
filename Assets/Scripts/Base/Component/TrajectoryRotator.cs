@@ -3,12 +3,20 @@ using System.Collections.Generic;
 
 sealed public class TrajectoryRotator : MonoBehaviour, UpdateReceiver
 {
+    [SerializeField]
+    private float offset;
+
+    [SerializeField]
+    private bool invert;
+
     private Transform myTransform;
     private Vector3 lastPosition;
+    private ParticleSystem system;
 
     public void Awake()
     {
         myTransform = transform;
+        system = GetComponent<ParticleSystem>();
     }
 
     public void OnEnable()
@@ -37,9 +45,10 @@ sealed public class TrajectoryRotator : MonoBehaviour, UpdateReceiver
 
         if (delta.sqrMagnitude > Mathf.Epsilon)
         {
-            var angle = Mathf.Atan2(delta.y, delta.x);
+            var angle = (Mathf.Rad2Deg * Mathf.Atan2(delta.y, delta.x) + offset) * (invert ? -1.0f : 1.0f);
 
-            myTransform.rotation = Quaternion.AngleAxis(Mathf.Rad2Deg * angle, Vector3.forward);
+            myTransform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            system.startRotation = angle * Mathf.Deg2Rad;
             lastPosition = position;
         }
     }

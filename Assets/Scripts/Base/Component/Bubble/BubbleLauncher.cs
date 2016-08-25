@@ -28,6 +28,9 @@ public class BubbleLauncher : MonoBehaviour
     [SerializeField]
     private AudioClip swapFailSound;
 
+    [SerializeField]
+    private GameObject shooterTrail;
+
     private GameObject[] nextBubbles;
     private BubbleType[] nextTypes;
     private List<ModifyShot> shotModifiers;
@@ -162,6 +165,10 @@ public class BubbleLauncher : MonoBehaviour
         direction = (point - (Vector2)locations[0].transform.position).normalized * launchSpeed;
         characterController.OnAnimationFire += OnAnimationFireBubble;
         GlobalState.EventService.Dispatch(new BubbleFiringEvent());
+
+        shooterTrail.transform.SetParent(nextBubbles[0].transform, false);
+        shooterTrail.transform.localPosition = Vector3.zero;
+        shooterTrail.SetActive(true);
     }
 
     private void OnAnimationFireBubble()
