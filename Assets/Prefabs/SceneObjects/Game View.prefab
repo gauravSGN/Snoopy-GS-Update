@@ -113,7 +113,7 @@ GameObject:
   - 95: {fileID: 9593344}
   - 114: {fileID: 11413650}
   - 114: {fileID: 11495642}
-  - 114: {fileID: 11420210}
+  - 114: {fileID: 11423860}
   m_Layer: 0
   m_Name: Snoopy
   m_TagString: Untagged
@@ -160,6 +160,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 413250}
   - 114: {fileID: 11427498}
+  - 114: {fileID: 11458244}
   m_Layer: 0
   m_Name: Arrows
   m_TagString: Untagged
@@ -249,6 +250,8 @@ GameObject:
   - 23: {fileID: 2378436}
   - 95: {fileID: 9595598}
   - 114: {fileID: 11443298}
+  - 114: {fileID: 11415686}
+  - 114: {fileID: 11419746}
   m_Layer: 0
   m_Name: Charlie Brown
   m_TagString: Untagged
@@ -1024,7 +1027,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6, y: -0, z: 0.05}
+  m_LocalPosition: {x: -0.7, y: -0, z: 0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -1130,8 +1133,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 2100000, guid: 327b2ba1aa3b14df29574986c46c9245, type: 2}
+  m_Materials: []
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1456,7 +1458,7 @@ MonoBehaviour:
   - {fileID: 143398}
   level: {fileID: 11450880}
   aimLine: {fileID: 11476056}
-  characterController: {fileID: 11420210}
+  characterController: {fileID: 11423860}
   launchSound: {fileID: 8300000, guid: 21d9a45c69234435cb04f19e7d943204, type: 3}
   swapSound: {fileID: 8300000, guid: 2fc399d57bb4d4edfa25c495027da990, type: 3}
   swapFailSound: {fileID: 8300000, guid: 29a1850433b8b4fd39e7eead4e073150, type: 3}
@@ -1499,6 +1501,18 @@ MonoBehaviour:
   logErrors: 0
   disableRenderingOnOverride: 1
   layerMixModes: 00000000
+--- !u!114 &11415686
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33540edda4dcb4bbc832eb70801774c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zTranslation: -0.1
 --- !u!114 &11419320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1513,7 +1527,18 @@ MonoBehaviour:
   level: {fileID: 11450880}
   winLevelSequence: {fileID: 11484244}
   loseLevelSequence: {fileID: 11488844}
---- !u!114 &11420210
+--- !u!114 &11419746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e998f99ad4a3426490ec8035546d460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11423860
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1676,6 +1701,21 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11458244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0cf312b981d4569a740942377722e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: -90
+  sprites:
+  - {fileID: 21292922}
+  - {fileID: 21263644}
 --- !u!114 &11461936
 MonoBehaviour:
   m_ObjectHideFlags: 1

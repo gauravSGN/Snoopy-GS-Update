@@ -151,6 +151,8 @@ public class BubbleLauncher : MonoBehaviour
 
     private void FireBubbleAt(Vector2 point)
     {
+        GlobalState.EventService.Dispatch(new InputToggleEvent(false));
+
         foreach (var modifier in shotModifiers)
         {
             modifier(nextBubbles[0]);
@@ -159,7 +161,6 @@ public class BubbleLauncher : MonoBehaviour
         var launchSpeed = GlobalState.Instance.Config.aimline.launchSpeed;
         direction = (point - (Vector2)locations[0].transform.position).normalized * launchSpeed;
         characterController.OnAnimationFire += OnAnimationFireBubble;
-        GlobalState.EventService.Dispatch(new InputToggleEvent(false));
         GlobalState.EventService.Dispatch(new BubbleFiringEvent());
     }
 
