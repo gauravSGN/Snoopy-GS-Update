@@ -119,6 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usage: 0
+  moveOnAwake: 1
+  useTargetAsParent: 0
 --- !u!114 &11475334
 MonoBehaviour:
   m_ObjectHideFlags: 1

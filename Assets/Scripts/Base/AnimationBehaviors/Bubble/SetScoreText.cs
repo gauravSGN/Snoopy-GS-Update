@@ -1,28 +1,18 @@
+using Service;
+using Registry;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SetScoreText : StateMachineBehaviour
 {
-    private int previousScore = -1;
-    private BubbleScore bubbleScore;
-    private TextMesh textMesh;
-
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (bubbleScore == null)
-        {
-            var gameObject = animator.gameObject;
-            var parent = gameObject.transform.parent;
+        var gameObject = animator.gameObject;
+        var parent = gameObject.transform.parent;
+        var bubbleScore = parent.GetComponent<BubbleScore>();
 
-            textMesh = gameObject.GetComponent<TextMesh>();
-            bubbleScore = parent.GetComponent<BubbleScore>();
+        gameObject.GetComponent<Text>().text = bubbleScore.Score.ToString();
 
-            gameObject.transform.SetParent(null, true);
-        }
-
-        if (bubbleScore.Score != previousScore)
-        {
-            textMesh.text = bubbleScore.Score.ToString();
-            previousScore = bubbleScore.Score;
-        }
+        gameObject.GetComponent<MoveToRegisteredCanvas>().MoveToCanvas();
     }
 }
