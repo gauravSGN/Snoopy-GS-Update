@@ -28,6 +28,9 @@ public class BubbleLauncher : MonoBehaviour
     [SerializeField]
     private AudioClip swapFailSound;
 
+    [SerializeField]
+    private GameObject shooterTrailPrefab;
+
     private GameObject[] nextBubbles;
     private BubbleType[] nextTypes;
     private List<ModifyShot> shotModifiers;
@@ -37,6 +40,7 @@ public class BubbleLauncher : MonoBehaviour
     private bool inputAllowed;
     private AudioSource audioSource;
     private AudioClip launchSoundOverride;
+    private GameObject shooterTrail;
 
     public void CycleQueue()
     {
@@ -84,6 +88,8 @@ public class BubbleLauncher : MonoBehaviour
     {
         nextBubbles = new GameObject[locations.Length];
         nextTypes = new BubbleType[locations.Length];
+        shooterTrail = Instantiate(shooterTrailPrefab);
+        shooterTrail.transform.SetParent(transform, false);
 
         ResetShotModifiers();
 
@@ -172,6 +178,10 @@ public class BubbleLauncher : MonoBehaviour
         rigidBody.velocity = direction;
         rigidBody.gravityScale = 0.0f;
         rigidBody.isKinematic = false;
+
+        shooterTrail.transform.SetParent(nextBubbles[0].transform, false);
+        shooterTrail.transform.localPosition = Vector3.forward;
+        shooterTrail.SetActive(true);
 
         GlobalState.EventService.Dispatch(new BubbleFiredEvent(nextBubbles[0]));
 
@@ -295,6 +305,9 @@ public class BubbleLauncher : MonoBehaviour
 
     private void OnBubbleSettleEvent(BubbleSettlingEvent gameEvent)
     {
+        shooterTrail.SetActive(false);
+        shooterTrail.transform.SetParent(transform, false);
+
         ReadyNextBubble();
     }
 
