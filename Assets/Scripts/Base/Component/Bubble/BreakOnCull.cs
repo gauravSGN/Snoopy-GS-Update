@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-
-public class BreakOnCull : BubbleModelBehaviour
+﻿public class BreakOnCull : BubbleModelBehaviour
 {
     override protected void AddListeners()
     {
@@ -16,6 +13,7 @@ public class BreakOnCull : BubbleModelBehaviour
     private void OnDisconnected(Bubble bubble)
     {
         RemoveListeners();
+        gameObject.layer = (int)Layers.FallingObjects;
 
         BubbleDeath.KillBubble(gameObject, BubbleDeathType.Cull);
     }
