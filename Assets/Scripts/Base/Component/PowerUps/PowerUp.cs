@@ -78,6 +78,8 @@ namespace PowerUps
         {
             if (button.interactable && (progress >= 1.0f))
             {
+                GlobalState.EventService.Dispatch<InputToggleEvent>(new InputToggleEvent(false));
+
                 if (definition.LaunchSound != null)
                 {
                     controller.OverrideLaunchSound(definition.LaunchSound);

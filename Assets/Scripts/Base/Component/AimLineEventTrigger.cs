@@ -60,7 +60,7 @@ public class AimLineEventTrigger : EventTrigger
     {
         if (data.button == PointerEventData.InputButton.Left)
         {
-            if (hovering)
+            if (hovering && aiming)
             {
                 Fire();
             }
@@ -79,7 +79,12 @@ public class AimLineEventTrigger : EventTrigger
 
     private void OnInputToggle(InputToggleEvent gameEvent)
     {
-        StopAiming();
+        if (aiming)
+        {
+            StopAiming();
+
+            aiming = false;
+        }
 
         gameObject.SetActive(gameEvent.enabled);
     }
