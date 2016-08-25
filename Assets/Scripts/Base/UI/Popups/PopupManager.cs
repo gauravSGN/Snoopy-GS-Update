@@ -81,6 +81,15 @@ namespace UI.Popup
                     var component = popup.gameObject.GetComponent<Popup>();
                     component.Setup(config);
                     component.Display();
+
+                    var definition = popupFactory.GetDefinitionByType(config.Type);
+
+                    if (definition.DisplaySound != null)
+                    {
+                        var soundSource = popup.gameObject.AddComponent<AudioSource>();
+                        soundSource.clip = definition.DisplaySound;
+                        soundSource.Play();
+                    }
                 }
             }
         }
