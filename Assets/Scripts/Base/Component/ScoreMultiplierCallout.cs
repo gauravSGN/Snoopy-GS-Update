@@ -22,15 +22,13 @@ public class ScoreMultiplierCallout : MonoBehaviour
         GlobalState.EventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
     }
 
-    public void Show(int multiplier, int score, Color color)
+    public void Show(int multiplier, int score)
     {
         GlobalState.EventService.RemoveEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
 
         transform.position = new Vector3(xAverage, yMin, transform.position.z);
 
         text.text = string.Format(string.Join("\n", lines), multiplier, score);
-        GetComponent<Outline>().effectColor = color;
-        GetComponent<Shadow>().effectColor = color;
 
         GetComponent<MoveToRegisteredCanvas>().MoveToCanvas();
         StartCoroutine(DestroyAfterSeconds(lingerTime));

@@ -11,10 +11,6 @@ public class SetScoreText : StateMachineBehaviour
         var parent = gameObject.transform.parent;
         var bubbleScore = parent.GetComponent<BubbleScore>();
 
-        var color = bubbleScore.Model.definition.BaseColor;
-        gameObject.GetComponent<Outline>().effectColor = color;
-        gameObject.GetComponent<Shadow>().effectColor = color;
-
         gameObject.GetComponent<Text>().text = bubbleScore.Score.ToString();
 
         gameObject.GetComponent<MoveToRegisteredCanvas>().MoveToCanvas();

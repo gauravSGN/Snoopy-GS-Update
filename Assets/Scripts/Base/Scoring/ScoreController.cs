@@ -115,7 +115,7 @@ namespace Scoring
 
                 if (callout != null)
                 {
-                    callout.Show((int)Mathf.Floor(multiplier), clusterScore, cluster[0].definition.BaseColor);
+                    callout.Show((int)Mathf.Floor(multiplier), clusterScore);
                 }
 
                 totalScore += clusterScore;
