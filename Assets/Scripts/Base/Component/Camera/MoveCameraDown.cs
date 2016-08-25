@@ -10,7 +10,7 @@ public class MoveCameraDown : BaseMoveCamera
 
     override protected IEnumerator MoveGameView()
     {
-        GameObjectUtil.DisableObjects(disableOnMove);
+        GameObjectUtil.SetActive(disableOnMove, false);
 
         yield return new WaitForSeconds(startDelay);
 
@@ -22,6 +22,6 @@ public class MoveCameraDown : BaseMoveCamera
             yield return null;
         }
 
-        GameObjectUtil.EnableObjects(disableOnMove);
+        GameObjectUtil.SetActive(disableOnMove, true);
     }
 }

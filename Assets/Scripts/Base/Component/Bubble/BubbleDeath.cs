@@ -21,9 +21,23 @@ public class BubbleDeath : MonoBehaviour
 
     private Dictionary<BubbleDeathType, List<IEnumerator>> effectDictionary;
 
-    public IEnumerator TriggerDeathEffects(BubbleDeathType type)
+    public static void KillBubble(GameObject bubble, BubbleDeathType type)
     {
-        var activateList = type == BubbleDeathType.Pop ? activateOnPop : activateOnCull;
+        var death = bubble.GetComponent<BubbleDeath>();
+
+        if (death != null)
+        {
+            bubble.GetComponent<Rigidbody2D>().isKinematic = true;
+            death.TriggerDeathEffects(type);
+        }
+        else
+        {
+            Destroy(bubble);
+        }
+    }
+
+    public void TriggerDeathEffects(BubbleDeathType type)
+    {
         var effectController = gameObject.GetComponent<BubbleEffectController>();
 
         for (int i = 0, length = effectDictionary[type].Count; i < length; i++)
@@ -31,33 +45,18 @@ public class BubbleDeath : MonoBehaviour
             effectController.AddEffect(effectDictionary[type][i]);
         }
 
-        for (int i = 0; i < activateList.Count; ++i)
-        {
-            activateList[i].SetActive(true);
-        }
+        GameObjectUtil.SetActive((type == BubbleDeathType.Pop) ? activateOnPop : activateOnCull, true);
+        GameObjectUtil.SetActive(deactivateOnDeath, false);
 
-        for (int i = 0; i < deactivateOnDeath.Count; ++i)
-        {
-            deactivateOnDeath[i].SetActive(false);
-        }
-
-        var model = GetComponent<BubbleAttachments>().Model;
         var player = GetComponent<BubbleSoundPlayer>();
 
         if (player != null)
         {
-            if (activateList == activateOnPop)
-            {
-                player.Play(model.definition.Sounds.match);
-            }
-            else
-            {
-                player.Play(model.definition.Sounds.cull);
-            }
+            var sounds = GetComponent<BubbleAttachments>().Model.definition.Sounds;
+            player.Play((type == BubbleDeathType.Pop) ? sounds.match : sounds.cull);
         }
 
-        yield return new WaitForSeconds(deathDelay);
-        Destroy(destroyOnFinish);
+        Destroy(destroyOnFinish, deathDelay);
     }
 
     public void AddEffect(IEnumerator effect, BubbleDeathType type)

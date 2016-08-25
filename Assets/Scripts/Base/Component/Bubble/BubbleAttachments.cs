@@ -45,11 +45,7 @@ public class BubbleAttachments : MonoBehaviour
         RemoveHandlers();
 
         gameObject.layer = (int)Layers.IgnoreRayCast;
-        var death = gameObject.GetComponent<BubbleDeath>();
-        if (death != null)
-        {
-            StartCoroutine(death.TriggerDeathEffects(BubbleDeathType.Pop));
-        }
+        BubbleDeath.KillBubble(gameObject, BubbleDeathType.Pop);
     }
 
     private void DisconnectedHandler(Bubble bubble)

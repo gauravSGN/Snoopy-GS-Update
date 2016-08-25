@@ -15,7 +15,7 @@ public class MoveCameraUp : BaseMoveCamera
 
     override protected IEnumerator MoveGameView()
     {
-        GameObjectUtil.DisableObjects(disableOnMove);
+        GameObjectUtil.SetActive(disableOnMove, false);
 
         yield return new WaitForSeconds(startDelay);
 
@@ -34,7 +34,7 @@ public class MoveCameraUp : BaseMoveCamera
             transform.position = new Vector3(transform.position.x, maxY, transform.position.z);
         }
 
-        GameObjectUtil.EnableObjects(disableOnMove);
+        GameObjectUtil.SetActive(disableOnMove, true);
     }
 
     private void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)

@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
+using System.Collections;
 
 sealed public class BubbleCuller : MonoBehaviour
 {
     private Bubble model;
+    private Rigidbody2D rigidBody;
+
+    public void Start()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+    }
 
     public void SetModel(Bubble model)
     {
@@ -28,16 +34,26 @@ sealed public class BubbleCuller : MonoBehaviour
 
         var config = GlobalState.Instance.Config.reactions;
 
-        var rigidBody = GetComponent<Rigidbody2D>();
         gameObject.layer = (int)Layers.FallingObjects;
 
         var xForce = Random.Range(config.cullMinXForce, config.cullMaxXForce);
         var yForce = Random.Range(config.cullMinYForce, config.cullMaxYForce);
+        var force = new Vector2(xForce, yForce);
 
         rigidBody.isKinematic = false;
-        rigidBody.AddForce(new Vector2(xForce, yForce));
+        rigidBody.AddForce(force);
 
         var distance = Random.Range(config.cullMinDistance, config.cullMaxDistance);
-        var gravity = Physics2D.gravity;
+        var acceleration = Physics2D.gravity + force / (rigidBody.mass / Time.fixedDeltaTime);
+        var timeToLive = Mathf.Sqrt(distance / Mathf.Sqrt(acceleration.sqrMagnitude / 4.0f));
+
+        StartCoroutine(PopAfterSeconds(timeToLive));
+    }
+
+    private IEnumerator PopAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        BubbleDeath.KillBubble(gameObject, BubbleDeathType.Cull);
     }
 }
