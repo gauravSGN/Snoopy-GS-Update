@@ -7,12 +7,12 @@ public class ChainPopAdjacent : MonoBehaviour
 {
     protected void Start()
     {
-        GetComponent<BubbleAttachments>().Model.OnSnap += OnSnapHandler;
+        GetComponent<BubbleModelBehaviour>().Model.OnSnap += OnSnapHandler;
     }
 
     protected void OnDestroy()
     {
-        GetComponent<BubbleAttachments>().Model.OnSnap -= OnSnapHandler;
+        GetComponent<BubbleModelBehaviour>().Model.OnSnap -= OnSnapHandler;
     }
 
     private void OnSnapHandler(Bubble bubble)

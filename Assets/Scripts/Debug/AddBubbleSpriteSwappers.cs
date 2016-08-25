@@ -52,7 +52,6 @@ public class AddBubbleSpriteSwappers : MonoBehaviour
 
     private bool CheckColor(GameObject go)
     {
-        var attachments = go.GetComponent<BubbleAttachments>();
-        return attachments.Model.type == currentType;
+        return go.GetComponent<BubbleModelBehaviour>().Model.type == currentType;
     }
 }

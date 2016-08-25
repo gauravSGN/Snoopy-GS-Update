@@ -274,7 +274,7 @@ public class BubbleLauncher : MonoBehaviour
     {
         if (nextBubbles.Length > 0)
         {
-            var colors = new Color[] { nextBubbles[0].GetComponent<BubbleAttachments>().Model.definition.BaseColor };
+            var colors = new[] { nextBubbles[0].GetComponent<BubbleModelBehaviour>().Model.definition.BaseColor };
 
             if (shotModifierTypes.Count > 0)
             {

@@ -29,7 +29,7 @@ public class PhysicsDestroy : MonoBehaviour
     {
         if ((collider.gameObject.tag == StringConstants.Tags.BUBBLES) && collider.gameObject.GetComponent<BubbleSnap>())
         {
-            var model = gameObject.GetComponent<BubbleAttachments>().Model;
+            var model = gameObject.GetComponent<BubbleModelBehaviour>().Model;
             BubbleReactionEvent.Dispatch(ReactionPriority.PhysicsDestroy, model);
         }
     }
