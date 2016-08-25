@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ScoreMultiplierCallout : MonoBehaviour
 {
     [SerializeField]
-    private TextMesh textMesh;
+    private Text text;
+
+    [SerializeField]
+    private float lingerTime;
 
     [SerializeField]
     private string[] lines;
@@ -23,9 +27,11 @@ public class ScoreMultiplierCallout : MonoBehaviour
         GlobalState.EventService.RemoveEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
 
         transform.position = new Vector3(xAverage, yMin, transform.position.z);
-        textMesh.text = string.Format(string.Join("\n", lines), multiplier, score);
 
-        StartCoroutine(DestroyAfterSeconds(1.0f));
+        text.text = string.Format(string.Join("\n", lines), multiplier, score);
+
+        GetComponent<MoveToRegisteredCanvas>().MoveToCanvas();
+        StartCoroutine(DestroyAfterSeconds(lingerTime));
     }
 
     private void OnBubbleDestroyed(BubbleDestroyedEvent gameEvent)

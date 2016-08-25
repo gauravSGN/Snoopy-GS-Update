@@ -8,7 +8,21 @@ public class MoveToRegisteredCanvas : MonoBehaviour
     [SerializeField]
     private TransformUsage usage;
 
+    [SerializeField]
+    private bool moveOnAwake;
+
+    [SerializeField]
+    private bool useTargetAsParent;
+
     public void Start()
+    {
+        if (moveOnAwake)
+        {
+            MoveToCanvas();
+        }
+    }
+
+    public void MoveToCanvas()
     {
         StartCoroutine(Move());
     }
@@ -23,13 +37,13 @@ public class MoveToRegisteredCanvas : MonoBehaviour
             target = GlobalState.Instance.Services.Get<TransformService>().Get(usage);
         }
 
-        var canvas = target.GetComponentInParent<Canvas>();
-
-        if (canvas != null)
+        if (!useTargetAsParent)
         {
-            var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-            transform.SetParent(canvas.transform, false);
-            transform.position = screenPoint;
+            target = target.GetComponentInParent<Canvas>().transform;
         }
+
+        var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
+        transform.SetParent(target, false);
+        transform.position = screenPoint;
     }
 }
