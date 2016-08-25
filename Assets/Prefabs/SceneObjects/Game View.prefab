@@ -59,6 +59,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 464372}
+  - 82: {fileID: 8216118}
+  - 114: {fileID: 11433114}
   m_Layer: 0
   m_Name: Launch Origin
   m_TagString: Untagged
@@ -1313,6 +1315,80 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190438}
   m_Enabled: 1
+--- !u!82 &8216118
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105830}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &8231136
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1593,6 +1669,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11433114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48db109803d534513bb834d17b8bc6da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelStartSound: {fileID: 8300000, guid: 3640c2fb4dd96447588ae4730faaaab1, type: 3}
+  winSound: {fileID: 8300000, guid: 197aaeff94282443a939dbad6df85dd8, type: 3}
+  loseSound: {fileID: 8300000, guid: b781a8e7f77fc430c9f93d821437ebd1, type: 3}
+  launchSounds:
+  - {fileID: 8300000, guid: ffb57063b7ba14c6588c12d08a09ff0f, type: 3}
+  - {fileID: 8300000, guid: 98cca425a2a7a469b934723aab1f444d, type: 3}
+  - {fileID: 8300000, guid: f2676fcc57490470d843c703c5b550be, type: 3}
 --- !u!114 &11436572
 MonoBehaviour:
   m_ObjectHideFlags: 1
