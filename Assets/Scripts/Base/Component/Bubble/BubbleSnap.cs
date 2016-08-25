@@ -78,8 +78,8 @@ public class BubbleSnap : MonoBehaviour
         collider.radius /= GlobalState.Instance.Config.bubbles.shotColliderScale;
         gameObject.layer = (int)Layers.GameObjects;
 
-        Destroy(this);
         GlobalState.EventService.Dispatch(new BubbleSettlingEvent());
+        Destroy(this);
 
         if (!attachments.Model.CheckForMatches())
         {
