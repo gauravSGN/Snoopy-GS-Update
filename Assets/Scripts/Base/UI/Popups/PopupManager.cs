@@ -82,7 +82,7 @@ namespace UI.Popup
                     component.Setup(config);
                     component.Display();
 
-                    var definition = (PopupDefinition)popupFactory.GetDefinitionByType(config.Type);
+                    var definition = popupFactory.GetDefinitionByType(config.Type);
 
                     if (definition.DisplaySound != null)
                     {
