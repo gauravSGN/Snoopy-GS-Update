@@ -39,10 +39,10 @@ sealed public class BubbleCuller : BubbleModelBehaviour
         var acceleration = Physics2D.gravity + force / (rigidBody.mass / Time.fixedDeltaTime);
         var timeToLive = Mathf.Sqrt(distance / Mathf.Sqrt(acceleration.sqrMagnitude / 4.0f));
 
-        StartCoroutine(PopAfterSeconds(timeToLive));
+        StartCoroutine(CullAfterSeconds(timeToLive));
     }
 
-    private IEnumerator PopAfterSeconds(float seconds)
+    private IEnumerator CullAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
 
