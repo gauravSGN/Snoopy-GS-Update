@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 414138}
   - 114: {fileID: 11429148}
   - 114: {fileID: 11448004}
+  - 82: {fileID: 8296152}
   m_Layer: 0
   m_Name: Woodstock
   m_TagString: Untagged
@@ -130,6 +131,80 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124566}
   m_Mesh: {fileID: 0}
+--- !u!82 &8296152
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114434}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &9559750
 Animator:
   serializedVersion: 3
@@ -172,6 +247,8 @@ MonoBehaviour:
   animator: {fileID: 9559750}
   trail: {fileID: 133200}
   celebration: {fileID: 150618, guid: 30b9370ee10da49fe93d3c37345e3deb, type: 2}
+  escapeSound: {fileID: 8300000, guid: f5846956dea164644949636a2bae2bcb, type: 3}
+  loseSound: {fileID: 8300000, guid: 5a5c06a9dfa1a4ec5a5ee473bab66b03, type: 3}
 --- !u!114 &11439978
 MonoBehaviour:
   m_ObjectHideFlags: 1
