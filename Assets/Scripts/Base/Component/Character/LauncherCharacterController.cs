@@ -76,6 +76,11 @@ public class LauncherCharacterController : MonoBehaviour
         launcherAnimator.SetBool(AIMING, false);
     }
 
+    private void OnReadyForNextBubble(ReadyForNextBubbleEvent gameEvent)
+    {
+        launcherAnimator.SetBool(AIMING, false);
+    }
+
     private void OnMoveTarget(Vector2 target)
     {
         var direction = (target - (Vector2)launchOrigin.transform.position).normalized;

@@ -1500,7 +1500,7 @@ MonoBehaviour:
   frontFacing: 0
   logErrors: 0
   disableRenderingOnOverride: 1
-  layerMixModes: 00000000
+  layerMixModes: 
 --- !u!114 &11415686
 MonoBehaviour:
   m_ObjectHideFlags: 1
