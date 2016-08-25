@@ -7,6 +7,7 @@ namespace PowerUps
     public class PowerUp : MonoBehaviour
     {
         private const float FULL_SILHOUETTE = 1.0f;
+        private const float TRANSITION_TIME = 0.2f;
 
         [SerializeField]
         private Button button;
@@ -47,6 +48,12 @@ namespace PowerUps
         [SerializeField]
         private AudioSource filledSound;
 
+        [SerializeField]
+        private AnimationCurve hideCurve = AnimationCurve.Linear(0, 1, 1, 0);
+
+        [SerializeField]
+        private AnimationCurve showCurve = AnimationCurve.Linear(0, 0, 1, 1);
+
         private float currentFillTime;
 
         private Level level;
@@ -85,16 +92,27 @@ namespace PowerUps
                     controller.OverrideLaunchSound(definition.LaunchSound);
                 }
                 controller.AddPowerUp(definition.Type);
-                characterAnimator.SetTrigger("AddPowerUp");
                 GlobalState.EventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
                 Reset();
+                StartCoroutine(ShowCharacter());
             }
+        }
+
+        public void Hide()
+        {
+            StartCoroutine(HideShow(hideCurve));
+        }
+
+        public void Show()
+        {
+            StartCoroutine(HideShow(showCurve));
         }
 
         private void OnReadyForNextBubble(ReadyForNextBubbleEvent gameEvent)
         {
             characterAnimator.SetTrigger("Finish");
             GlobalState.EventService.RemoveEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
+            Show();
         }
 
         private void OnInputToggle(InputToggleEvent gameEvent)
@@ -172,6 +190,27 @@ namespace PowerUps
                     filledIcon.SetActive(false);
                 }
             }
+        }
+
+        private IEnumerator HideShow(AnimationCurve curve)
+        {
+            float time = 0f;
+            float newValue;
+            while (time <= TRANSITION_TIME)
+            {
+                time += Time.deltaTime;
+                newValue = curve.Evaluate(time/TRANSITION_TIME);
+                transform.localScale = new Vector3(newValue, newValue, 1);
+                yield return null;
+            }
+            newValue= curve.Evaluate(1f);
+            transform.localScale = new Vector3(newValue, newValue, 1);
+        }
+
+        private IEnumerator ShowCharacter()
+        {
+            yield return StartCoroutine(HideShow(hideCurve));
+            characterAnimator.SetTrigger("AddPowerUp");
         }
     }
 }
