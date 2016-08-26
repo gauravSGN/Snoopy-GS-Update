@@ -75,8 +75,11 @@ namespace PowerUps
             characterAnimator = character.GetComponent<Animator>();
             ownAnimator = GetComponent<Animator>();
 
-            GlobalState.EventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
-            GlobalState.EventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
+            var eventService = GlobalState.EventService;
+
+            eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
+            eventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
+            eventService.AddEventHandler<PrepareForBubblePartyEvent>(OnPrepareForBubbleParty);
         }
 
         public void SetDefinition(PowerUpDefinition setDefinition)
@@ -205,14 +208,16 @@ namespace PowerUps
         {
             float time = 0f;
             float newValue;
+
             while (time <= TRANSITION_TIME)
             {
                 time += Time.deltaTime;
-                newValue = curve.Evaluate(time/TRANSITION_TIME);
+                newValue = curve.Evaluate(time / TRANSITION_TIME);
                 transform.localScale = new Vector3(newValue, newValue, 1);
                 yield return null;
             }
-            newValue= curve.Evaluate(1f);
+
+            newValue = curve.Evaluate(1f);
             transform.localScale = new Vector3(newValue, newValue, 1);
         }
 
@@ -220,6 +225,12 @@ namespace PowerUps
         {
             yield return StartCoroutine(HideShow(hideCurve));
             characterAnimator.SetTrigger("AddPowerUp");
+        }
+
+        private void OnPrepareForBubbleParty(PrepareForBubblePartyEvent partyEvent)
+        {
+            Hide();
+            ownAnimator.SetTrigger("Fired");
         }
     }
 }

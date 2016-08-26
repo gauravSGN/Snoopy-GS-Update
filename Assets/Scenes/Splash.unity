@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0.10980393, g: 0.78823537, b: 0.21960786, a: 1}
-  m_EffectDistance: {x: 1, y: -1.2}
+  m_EffectDistance: {x: 1, y: -2.2}
   m_UseGraphicAlpha: 1
 --- !u!114 &582815897
 MonoBehaviour:
@@ -490,13 +490,13 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 61
-    m_FontStyle: 1
+    m_Font: {fileID: 12800000, guid: fad1dce54c91141fb82af1101d68f181, type: 3}
+    m_FontSize: 85
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 61
-    m_Alignment: 4
+    m_MaxSize: 85
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0.10980393, g: 0.78823537, b: 0.21960786, a: 1}
-  m_EffectDistance: {x: 1, y: -2.2}
+  m_EffectDistance: {x: 1, y: -3.2}
   m_UseGraphicAlpha: 1
 --- !u!1 &756726974
 GameObject:
