@@ -150,7 +150,7 @@ public class BubbleLauncher : MonoBehaviour
                 nextBubbles[index].transform.position = locations[index].transform.position + offset;
                 nextBubbles[index].layer = (int)Layers.Default;
 
-                MoveBubbleToLocation(index);
+                StartCoroutine(MoveBubbleRoutine(nextBubbles[index].transform, locations[index].transform, 0.0f));
             }
         }
     }
@@ -214,33 +214,31 @@ public class BubbleLauncher : MonoBehaviour
         SetAimLineColor();
     }
 
-    private void MoveBubbleToLocation(int index)
+    private void MoveBubbleWithArc(int index)
     {
-        nextBubbles[index].transform.parent = locations[index].transform;
-        StartCoroutine(MoveBubbleRoutine(nextBubbles[index].transform, locations[index].transform));
+        nextBubbles[index].transform.SetParent(locations[index].transform, true);
+        StartCoroutine(MoveBubbleRoutine(nextBubbles[index].transform, locations[index].transform, 0.25f));
     }
 
-    public IEnumerator MoveBubbleRoutine(Transform bubbleTransform, Transform target)
+    public IEnumerator MoveBubbleRoutine(Transform bubbleTransform, Transform target, float arcOffset)
     {
         if (bubbleTransform != null)
         {
-            float time = 0f;
-            float totalTime = 0.15f;
-            Vector3 start = new Vector3(bubbleTransform.position.x, bubbleTransform.position.y, -1f);
-            Vector3 end = new Vector3(target.position.x, target.position.y, -1f);
+            var time = 0f;
+            var totalTime = 0.15f;
+            var start = new Vector3(bubbleTransform.position.x, bubbleTransform.position.y);
+            var end = new Vector3(target.position.x, target.position.y);
+            var midpoint = ((start + end) / 2.0f) + (Vector3.Cross(end - start, Vector3.forward) * arcOffset);
 
-            while (time <= totalTime)
+            start -= midpoint;
+            end -= midpoint;
+            midpoint += Vector3.back;
+
+            while ((bubbleTransform != null) && (time <= totalTime))
             {
-                if (bubbleTransform != null)
-                {
-                    time += Time.deltaTime;
-                    bubbleTransform.position = Vector3.Slerp(start, end, (time/totalTime));
-                    yield return null;
-                }
-                else
-                {
-                    break;
-                }
+                time += Time.deltaTime;
+                bubbleTransform.position = midpoint + Vector3.Slerp(start, end, (time / totalTime));
+                yield return null;
             }
 
             if (bubbleTransform != null)
@@ -263,7 +261,7 @@ public class BubbleLauncher : MonoBehaviour
 
             if (nextBubbles[index] != null)
             {
-                MoveBubbleToLocation(index);
+                MoveBubbleWithArc(index);
             }
         }
 
@@ -272,7 +270,7 @@ public class BubbleLauncher : MonoBehaviour
 
         if (first != null)
         {
-            MoveBubbleToLocation(lastIndex);
+            MoveBubbleWithArc(lastIndex);
         }
 
         if (currentAnimation != null)
