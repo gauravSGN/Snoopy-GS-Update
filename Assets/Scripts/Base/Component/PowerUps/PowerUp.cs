@@ -49,6 +49,9 @@ namespace PowerUps
         private AudioSource filledSound;
 
         [SerializeField]
+        private AudioSource castSound;
+
+        [SerializeField]
         private AnimationCurve hideCurve = AnimationCurve.Linear(0, 1, 1, 0);
 
         [SerializeField]
@@ -85,6 +88,7 @@ namespace PowerUps
         {
             if (button.interactable && (progress >= 1.0f))
             {
+                castSound.Play();
                 GlobalState.EventService.Dispatch<InputToggleEvent>(new InputToggleEvent(false));
 
                 if (definition.LaunchSound != null)
