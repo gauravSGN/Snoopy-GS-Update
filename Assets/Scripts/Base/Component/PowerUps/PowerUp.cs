@@ -49,6 +49,9 @@ namespace PowerUps
         private AudioSource filledSound;
 
         [SerializeField]
+        private AudioSource castSound;
+
+        [SerializeField]
         private AnimationCurve hideCurve = AnimationCurve.Linear(0, 1, 1, 0);
 
         [SerializeField]
@@ -60,6 +63,7 @@ namespace PowerUps
 
         private PowerUpDefinition definition;
         private PowerUpController controller;
+        private Animator ownAnimator;
 
         public void Setup(float setMax, PowerUpController setController, Level setLevel, GameObject character)
         {
@@ -68,6 +72,7 @@ namespace PowerUps
             level = setLevel;
             level.levelState.AddListener(UpdateState);
             characterAnimator = character.GetComponent<Animator>();
+            ownAnimator = GetComponent<Animator>();
 
             GlobalState.EventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
             GlobalState.EventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
@@ -85,6 +90,7 @@ namespace PowerUps
         {
             if (button.interactable && (progress >= 1.0f))
             {
+                castSound.Play();
                 GlobalState.EventService.Dispatch<InputToggleEvent>(new InputToggleEvent(false));
 
                 if (definition.LaunchSound != null)
@@ -142,6 +148,7 @@ namespace PowerUps
 
                 if (!glow.activeSelf && (progress >= 1.0f))
                 {
+                    ownAnimator.SetTrigger("Charged");
                     glow.SetActive(true);
                     filledBackground.SetActive(false);
                     filledSound.Play();
@@ -151,6 +158,7 @@ namespace PowerUps
 
         private void Reset()
         {
+            ownAnimator.SetTrigger("Fired");
             filledIcon.SetActive(false);
             glow.SetActive(false);
             filledBackground.SetActive(true);
