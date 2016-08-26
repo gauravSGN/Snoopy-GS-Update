@@ -3,13 +3,6 @@ using System.Collections;
 
 sealed public class BubbleCuller : BubbleModelBehaviour
 {
-    private Rigidbody2D rigidBody;
-
-    public void Start()
-    {
-        rigidBody = GetComponent<Rigidbody2D>();
-    }
-
     override protected void AddListeners()
     {
         Model.OnDisconnected += OnDisconnected;
@@ -24,27 +17,38 @@ sealed public class BubbleCuller : BubbleModelBehaviour
     {
         RemoveListeners();
 
-        var config = GlobalState.Instance.Config.reactions;
-
         gameObject.layer = (int)Layers.FallingObjects;
 
+        var rigidBody = GetComponent<Rigidbody2D>();
+        var config = GlobalState.Instance.Config.reactions;
         var xForce = Random.Range(config.cullMinXForce, config.cullMaxXForce);
         var yForce = Random.Range(config.cullMinYForce, config.cullMaxYForce);
-        var force = new Vector2(xForce, yForce);
 
         rigidBody.isKinematic = false;
-        rigidBody.AddForce(force);
+        rigidBody.AddForce(new Vector2(xForce, yForce));
 
-        var distance = Random.Range(config.cullMinDistance, config.cullMaxDistance);
-        var acceleration = Physics2D.gravity + force / (rigidBody.mass / Time.fixedDeltaTime);
-        var timeToLive = Mathf.Sqrt(distance / Mathf.Sqrt(acceleration.sqrMagnitude / 4.0f));
-
-        StartCoroutine(CullAfterSeconds(timeToLive));
+        StartCoroutine(CullAfterFallingDistance(Random.Range(config.cullMinDistance, config.cullMaxDistance)));
     }
 
-    private IEnumerator CullAfterSeconds(float seconds)
+    private IEnumerator CullAfterFallingDistance(float distance)
     {
-        yield return new WaitForSeconds(seconds);
+        var total = 0.0f;
+        var myTransform = transform;
+        var lastPosition = myTransform.localPosition;
+
+        while (total < distance)
+        {
+            var position = myTransform.localPosition;
+
+            if (position.y < lastPosition.y)
+            {
+                gameObject.layer = (int)Layers.FallingObjects;
+                total += (position - lastPosition).magnitude;
+            }
+
+            lastPosition = position;
+            yield return null;
+        }
 
         BubbleDeath.KillBubble(gameObject, BubbleDeathType.Cull);
     }
