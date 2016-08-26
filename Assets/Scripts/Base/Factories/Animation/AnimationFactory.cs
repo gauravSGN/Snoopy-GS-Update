@@ -9,7 +9,12 @@ namespace Animation
         {
             var definition = GetDefinitionByType(type);
             var instance = Instantiate(definition.Prefab);
-            instance.GetComponent<Animator>().runtimeAnimatorController = definition.Controller;
+
+            if (definition.Controller != null)
+            {
+                instance.GetComponent<Animator>().runtimeAnimatorController = definition.Controller;
+            }
+
             return instance;
         }
     }
