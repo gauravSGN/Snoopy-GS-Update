@@ -85,17 +85,14 @@ namespace Snoopy.Characters
         private IEnumerator FlyToGround()
         {
             var myTransform = transform;
-            var delta = (myTransform.localPosition - LandingSpot);
-            var distance = delta.magnitude;
-            delta /= distance;
             var speed = GlobalState.Instance.Config.woodstock.flightSpeed;
+            var path = new Paths.WindingPath(myTransform.localPosition, LandingSpot);
 
-            while (distance > 0.0f)
+            do
             {
-                distance = Mathf.Max(0.0f, distance - Time.deltaTime * speed);
-                myTransform.localPosition = LandingSpot + delta * distance;
+                myTransform.localPosition = path.Advance(speed * Time.deltaTime);
                 yield return null;
-            }
+            } while (!path.Complete);
 
             animator.SetBool("OnGround", true);
             trail.SetActive(false);
