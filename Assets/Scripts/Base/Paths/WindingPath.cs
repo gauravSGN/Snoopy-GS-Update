@@ -5,7 +5,7 @@ namespace Paths
 {
     sealed public class WindingPath
     {
-        private struct ControlPoint
+        private class ControlPoint
         {
             public Vector3 position;
             public Vector3 tangent;
@@ -47,8 +47,8 @@ namespace Paths
                 var inv = 1.0f - t;
 
                 return controls[0] * inv * inv * inv +
-                       controls[1] * t * inv * inv +
-                       controls[2] * t * t * inv +
+                       controls[1] * 3.0f * t * inv * inv +
+                       controls[2] * 3.0f * t * t * inv +
                        controls[3] * t * t * t;
             }
         }
@@ -60,8 +60,11 @@ namespace Paths
 
         public WindingPath(Vector3 start, Vector3 end)
         {
-            points.Add(new ControlPoint { position = start, tangent = Vector3.down });
-            points.Add(new ControlPoint { position = end, tangent = Vector3.down });
+            points.Add(new ControlPoint { position = start });
+            points.Add(new ControlPoint { position = end });
+
+            Subdivide();
+            ComputeTangents();
 
             current.Initialize(points, 0);
         }
@@ -84,6 +87,33 @@ namespace Paths
             }
 
             return current.Evaluate();
+        }
+
+        private void Subdivide()
+        {
+            var midpoint = (points[0].position + points[1].position) / 2.0f;
+            points.Insert(1, new ControlPoint { position = midpoint });
+        }
+
+        private void ComputeTangents()
+        {
+            var count = points.Count;
+
+            points[0].tangent = GenerateTangent(points[0].position, points[1].position);
+            points[count - 1].tangent = GenerateTangent(points[count - 2].position, points[count - 1].position);
+
+            for (var i = 1; i < count - 1; i++)
+            {
+                points[i].tangent = GenerateTangent(points[i - 1].position, points[i + 1].position);
+            }
+        }
+
+        private Vector3 GenerateTangent(Vector3 start, Vector3 end)
+        {
+            var normal = (end - start).normalized;
+            var rotation = Quaternion.AngleAxis(Random.Range(-45.0f, 45.0f), Vector3.forward);
+
+            return rotation * normal;
         }
     }
 }
