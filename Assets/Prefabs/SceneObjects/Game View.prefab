@@ -260,7 +260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &133898
 GameObject:
   m_ObjectHideFlags: 1
@@ -870,7 +870,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.3389992e-10, y: 0.2940136, z: -1}
+  m_LocalPosition: {x: 4.3389992e-10, y: 0.2940136, z: -0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2023,7 +2023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpFactory: {fileID: 11400000, guid: fcf96848466bd4a74a7ab983e31ba1b4, type: 2}
   launcher: {fileID: 11405814}
-  shooterType: 3
+  shooterType: 10
   deathEffectType: -1
   explosionEffectType: 2
   scanMap: {fileID: 11400000, guid: c0558009aa1644c56addfcefebe448bf, type: 2}

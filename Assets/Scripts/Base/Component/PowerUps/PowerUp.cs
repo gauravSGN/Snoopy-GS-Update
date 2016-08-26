@@ -71,6 +71,7 @@ namespace PowerUps
             controller = setController;
             level = setLevel;
             level.levelState.AddListener(UpdateState);
+            character.SetActive(true);
             characterAnimator = character.GetComponent<Animator>();
             ownAnimator = GetComponent<Animator>();
 

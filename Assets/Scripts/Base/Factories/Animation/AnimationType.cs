@@ -13,5 +13,6 @@ namespace Animation
         GreenPop,
         PinkPop,
         PurplePop,
+        YellowShooter,
     }
 }
