@@ -2,6 +2,7 @@
 using Service;
 using Registry;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,6 +10,12 @@ namespace UI.Popup
 {
     public class PopupManager : MonoBehaviour, PopupService
     {
+        [SerializeField]
+        private float fadeTime;
+
+        [SerializeField]
+        private Color overlayColor;
+
         [SerializeField]
         private Canvas parentCanvas;
 
@@ -121,15 +128,48 @@ namespace UI.Popup
         private void UpdatePopupOverlay()
         {
             var maxSiblingIndex = parentCanvas.transform.childCount - 1;
+            var overlayActive = (maxSiblingIndex > 0);
+            var currentlyActive = popupOverlay.gameObject.activeInHierarchy;
 
-            popupOverlay.gameObject.SetActive(maxSiblingIndex > 0);
             popupOverlay.gameObject.transform.SetSiblingIndex(Math.Max(0, maxSiblingIndex - 1));
+
+            if (!currentlyActive && overlayActive)
+            {
+                popupOverlay.GetComponent<Image>().color = overlayColor;
+                popupOverlay.gameObject.SetActive(true);
+            }
+            else if (currentlyActive && !overlayActive)
+            {
+                StartCoroutine(FadeOverlay());
+            }
         }
 
         private IEnumerator DelayedEnqueue(float delay, PopupConfig config)
         {
             yield return new WaitForSeconds(delay);
             Enqueue(config);
+        }
+
+        private IEnumerator FadeOverlay()
+        {
+            var time = 0.0f;
+            var overlayImage = popupOverlay.GetComponent<Image>();
+
+            if (overlayImage != null)
+            {
+                while (time < fadeTime)
+                {
+                    time += Time.deltaTime;
+
+                    var color = overlayImage.color;
+                    color.a = Mathf.Lerp(color.a, 0, (time / fadeTime));
+                    overlayImage.color = color;
+
+                    yield return null;
+                }
+            }
+
+            popupOverlay.gameObject.SetActive(false);
         }
     }
 }
