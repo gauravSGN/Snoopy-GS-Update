@@ -360,7 +360,7 @@ public class BubbleLauncher : MonoBehaviour
     private void UpdateCurrentAnimationTransform()
     {
         currentAnimation.transform.SetParent(nextBubbles[0].transform);
-        currentAnimation.transform.localPosition = Vector3.back;
+        currentAnimation.transform.localPosition = new Vector3(0, 0, -0.01f);
     }
 
     private void PlaySound(AudioClip clip)

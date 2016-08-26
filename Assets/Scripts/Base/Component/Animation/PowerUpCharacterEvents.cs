@@ -12,6 +12,7 @@ public class PowerUpCharacterEvents : MonoBehaviour
     {
         origin = gameObject.transform.localPosition;
         gameObject.transform.localPosition = new Vector3(origin.x, origin.y, origin.z + zTranslation);
+        GlobalState.EventService.Dispatch<PowerUpChargeEvent>(new PowerUpChargeEvent());
     }
 
     public void ReturnToBack()
