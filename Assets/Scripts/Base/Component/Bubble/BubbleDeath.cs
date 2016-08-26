@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Animation;
+using Effects;
 
 public class BubbleDeath : MonoBehaviour
 {
@@ -23,6 +25,9 @@ public class BubbleDeath : MonoBehaviour
 
     public static void KillBubble(GameObject bubble, BubbleDeathType type)
     {
+        var effectController = bubble.GetComponent<BubbleEffectController>();
+        effectController.AddEffect(AnimationEffect.Play(bubble, AnimationType.ScoreText));
+
         var death = bubble.GetComponent<BubbleDeath>();
 
         if (death != null)

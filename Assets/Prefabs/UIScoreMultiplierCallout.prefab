@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 11474122}
-  lingerTime: 2
+  lingerTime: 1
   lines:
   - x{0} Bonus!
   - '{1}'
