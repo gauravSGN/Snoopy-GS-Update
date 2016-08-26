@@ -54,11 +54,6 @@ namespace PowerUps
             powerUps = new List<PowerUp>();
         }
 
-        void Start()
-        {
-            GlobalState.EventService.AddEventHandler<PrepareForBubblePartyEvent>(PrepareForBubbleParty);
-        }
-
         public void Setup(float[] fillData)
         {
             animationService = GlobalState.AnimationService;
@@ -164,11 +159,6 @@ namespace PowerUps
             }
 
             return scanFunction;
-        }
-
-        private void PrepareForBubbleParty(PrepareForBubblePartyEvent partyEvent)
-        {
-            HidePowerUps();
         }
     }
 }
