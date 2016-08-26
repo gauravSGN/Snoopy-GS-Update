@@ -25,8 +25,11 @@ public class BubbleDeath : MonoBehaviour
 
     public static void KillBubble(GameObject bubble, BubbleDeathType type)
     {
-        var effectController = bubble.GetComponent<BubbleEffectController>();
-        effectController.AddEffect(AnimationEffect.Play(bubble, AnimationType.ScoreText));
+        if(bubble.GetComponent<BubbleScore>().Score > 0)
+        {
+            var effectController = bubble.GetComponent<BubbleEffectController>();
+            effectController.AddEffect(AnimationEffect.Play(bubble, AnimationType.ScoreText));
+        }
 
         var death = bubble.GetComponent<BubbleDeath>();
 
