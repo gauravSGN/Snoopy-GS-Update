@@ -63,6 +63,7 @@ namespace PowerUps
 
         private PowerUpDefinition definition;
         private PowerUpController controller;
+        private Animator ownAnimator;
 
         public void Setup(float setMax, PowerUpController setController, Level setLevel, GameObject character)
         {
@@ -71,6 +72,7 @@ namespace PowerUps
             level = setLevel;
             level.levelState.AddListener(UpdateState);
             characterAnimator = character.GetComponent<Animator>();
+            ownAnimator = GetComponent<Animator>();
 
             GlobalState.EventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
             GlobalState.EventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
@@ -146,6 +148,7 @@ namespace PowerUps
 
                 if (!glow.activeSelf && (progress >= 1.0f))
                 {
+                    ownAnimator.SetTrigger("Charged");
                     glow.SetActive(true);
                     filledBackground.SetActive(false);
                     filledSound.Play();
@@ -155,6 +158,7 @@ namespace PowerUps
 
         private void Reset()
         {
+            ownAnimator.SetTrigger("Fired");
             filledIcon.SetActive(false);
             glow.SetActive(false);
             filledBackground.SetActive(true);
