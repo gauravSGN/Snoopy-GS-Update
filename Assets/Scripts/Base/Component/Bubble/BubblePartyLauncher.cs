@@ -34,8 +34,13 @@ public class BubblePartyLauncher : MonoBehaviour
         var bubblePartyConfig = GlobalState.Instance.Config.bubbleParty;
 
         rigidBody.isKinematic = false;
-        rigidBody.AddForce(new Vector3(UnityEngine.Random.Range(bubblePartyConfig.minXForce, bubblePartyConfig.maxXForce),
-                                       UnityEngine.Random.Range(bubblePartyConfig.minYForce, bubblePartyConfig.maxYForce)));
+        rigidBody.AddForce(new Vector3(Random.Range(bubblePartyConfig.minXForce, bubblePartyConfig.maxXForce),
+                                       Random.Range(bubblePartyConfig.minYForce, bubblePartyConfig.maxYForce)));
+
+        nextBubble.GetComponent<BubbleModelBehaviour>().Model.MakeBubbleFall();
+
+        // Put it on the default layer since we don't want it to get culled by the floor as soon as it comes out.
+        nextBubble.layer = (int)Layers.Default;
 
         launchSound.Play();
         level.levelState.DecrementRemainingBubbles();
