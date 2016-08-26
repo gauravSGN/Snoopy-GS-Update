@@ -67,6 +67,7 @@ GameObject:
   - 114: {fileID: 11489826}
   - 114: {fileID: 11439542}
   - 114: {fileID: 11407326}
+  - 114: {fileID: 11434790}
   m_Layer: 0
   m_Name: GlobalState
   m_TagString: Untagged
@@ -152,6 +153,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dedd082d270734722aebe95623f919ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11434790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72cb55dc46a6c477c91cda041818b25c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11439542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.016219724, g: 0.18676168, b: 0.2205882, a: 0.678}
+  m_Color: {r: 0.016219724, g: 0.18676168, b: 0.2205882, a: 0.8235294}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -228,6 +240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff140046f43a14b9e89e8901f6940184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeTime: 0.25
+  overlayColor: {r: 0.015686275, g: 0.18431373, b: 0.21960784, a: 0.8235294}
   parentCanvas: {fileID: 22395300}
   popupFactory: {fileID: 11400000, guid: c27f602a5925f41c4954c0dd21d0faa0, type: 2}
   popupOverlay: {fileID: 133352}
