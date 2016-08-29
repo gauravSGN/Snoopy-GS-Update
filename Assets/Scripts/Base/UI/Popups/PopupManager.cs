@@ -62,10 +62,10 @@ namespace UI.Popup
 
         protected void Start()
         {
-            var eventService = GlobalState.EventService;
-            eventService.AddEventHandler<PopupDisplayedEvent>(OnPopupDisplayed, Event.HandlerDictType.Persistent);
-            eventService.AddEventHandler<PopupClosedEvent>(OnPopupClosed, Event.HandlerDictType.Persistent);
-            eventService.AddEventHandler<BlockadeEvent.PopupsUnblocked>(OnPopupsUnblocked, Event.HandlerDictType.Persistent);
+            var service = GlobalState.EventService;
+            service.AddEventHandler<PopupDisplayedEvent>(OnPopupDisplayed, Event.HandlerDictType.Persistent);
+            service.AddEventHandler<PopupClosedEvent>(OnPopupClosed, Event.HandlerDictType.Persistent);
+            service.AddEventHandler<BlockadeEvent.PopupsUnblocked>(OnPopupsUnblocked, Event.HandlerDictType.Persistent);
 
             GlobalState.Instance.Services.SetInstance<PopupService>(this);
         }
