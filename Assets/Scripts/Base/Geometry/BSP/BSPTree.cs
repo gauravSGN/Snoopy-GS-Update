@@ -5,25 +5,16 @@ namespace Geometry.BSP
 {
     sealed public class BSPTree
     {
-        private BSPNode root;
-
-        public BSPNode Root { get { return root; } }
+        public BSPNode Root { get; private set; }
 
         public BSPTree(Polygon polygon)
         {
-            root = new BSPNode(polygon);
+            Root = new BSPNode(polygon);
         }
 
         public List<Polygon> GetFrontLeaves()
         {
-            if (root.IsLeaf)
-            {
-                return new List<Polygon> { root.Polygon };
-            }
-            else
-            {
-                return GetFrontLeaves(new List<Polygon>(), root);
-            }
+            return Root.IsLeaf ? new List<Polygon> { Root.Polygon } : GetFrontLeaves(new List<Polygon>(), Root);
         }
 
         public void Subtract(Polygon polygon)
@@ -32,16 +23,16 @@ namespace Geometry.BSP
 
             for (int index = 0, count = polygon.Indices.Length; index < count; index++)
             {
-                result |= root.Split(
+                result |= Root.Split(
                     polygon.Vertices[polygon.Indices[(index + 1) % count]],
                     polygon.Vertices[polygon.Indices[index]]
                 );
             }
 
             // Entire polygon was outside of the visible area
-            if (!result && root.IsLeaf)
+            if (!result && Root.IsLeaf)
             {
-                root.Cull();
+                Root.Cull();
             }
         }
 

@@ -59,8 +59,6 @@ namespace PowerUps
 
         private float currentFillTime;
 
-        private Level level;
-
         private PowerUpDefinition definition;
         private PowerUpController controller;
         private Animator ownAnimator;
@@ -69,8 +67,7 @@ namespace PowerUps
         {
             max = setMax;
             controller = setController;
-            level = setLevel;
-            level.levelState.AddListener(UpdateState);
+            setLevel.levelState.AddListener(UpdateState);
             character.SetActive(true);
             characterAnimator = character.GetComponent<Animator>();
             ownAnimator = GetComponent<Animator>();

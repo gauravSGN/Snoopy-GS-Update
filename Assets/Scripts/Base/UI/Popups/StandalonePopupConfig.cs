@@ -2,7 +2,7 @@
 {
     public class StandalonePopupConfig : PopupConfig
     {
-        private PopupType type;
+        private readonly PopupType type;
 
         override public PopupType Type { get { return type; } }
 
