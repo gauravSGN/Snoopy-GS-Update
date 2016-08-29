@@ -13,4 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 8
   bubbleType: 3
-  prefab: {fileID: 197960, guid: 283efdc4a919d4b53a09b69271a0a29f, type: 2}
+  prefab: {fileID: 109286, guid: a5e0df4319a284fb7a5c761499f0bc8b, type: 2}
+  launchSound: {fileID: 8300000, guid: 34b7fea54e3e44f07a20e0f1b98f6e18, type: 3}
