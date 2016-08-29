@@ -28,20 +28,17 @@ public class BubbleExplode : MonoBehaviour
 
         AnimationReactionEvent.Dispatch(ReactionPriority.PreReactionAnimation, explosionAnimationType, gameObject);
 
-        if (length > 0)
+        for (int index = 0; index < length; index++)
         {
-            for (int index = 0; index < length; index++)
+            var bubble = hits[index].collider.gameObject;
+
+            if (bubble.tag == StringConstants.Tags.BUBBLES)
             {
-                var bubble = hits[index].collider.gameObject;
+                var model = bubble.GetComponent<BubbleModelBehaviour>().Model;
 
-                if (bubble.tag == StringConstants.Tags.BUBBLES)
+                if (model.Active || (bubble == gameObject))
                 {
-                    var model = bubble.GetComponent<BubbleModelBehaviour>().Model;
-
-                    if (model.Active || (bubble == gameObject))
-                    {
-                        AddReaction(bubble, model);
-                    }
+                    AddReaction(bubble, model);
                 }
             }
         }

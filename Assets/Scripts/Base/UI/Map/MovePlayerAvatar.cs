@@ -55,7 +55,7 @@ namespace UI.Map
 
             if (mapButtonComponent != null)
             {
-                mapButtonComponent.Click();
+                mapButtonComponent.Click(string.Empty);
             }
         }
     }

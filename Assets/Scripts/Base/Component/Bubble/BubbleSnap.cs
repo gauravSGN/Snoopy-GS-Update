@@ -36,9 +36,9 @@ public class BubbleSnap : MonoBehaviour
             velocity = new Vector3(Mathf.Abs(velocity.x) * Mathf.Sign(position.x), velocity.y);
             position -= velocity * radius;
 
-            var collider = Physics2D.OverlapCircle(position, radius, gameObjectLayer);
+            var otherCollider = Physics2D.OverlapCircle(position, radius, gameObjectLayer);
 
-            if (collider != null)
+            if (otherCollider != null)
             {
                 transform.position = position - velocity * radius;
                 SnapIntoPlace();

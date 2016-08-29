@@ -11,12 +11,10 @@ namespace UI.Popup
         [SerializeField]
         private Text mainText;
 
-        private GenericPopupConfig config;
-
         override public void Setup(PopupConfig genericConfig)
         {
             base.Setup(genericConfig);
-            config = genericConfig as GenericPopupConfig;
+            var config = genericConfig as GenericPopupConfig;
 
             bannerText.text = config.title;
             mainText.text = config.mainText;

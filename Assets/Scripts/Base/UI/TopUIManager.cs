@@ -9,8 +9,6 @@ public class TopUIManager : MonoBehaviour, TopUIService
     [SerializeField]
     private GameObject loadingPrefab;
 
-    private GameObject loadingScreenInstance;
-
     public void Start()
     {
         GlobalState.Instance.Services.SetInstance<TopUIService>(this);
@@ -18,7 +16,7 @@ public class TopUIManager : MonoBehaviour, TopUIService
 
     public void ShowLoading(AsyncOperation op)
     {
-        loadingScreenInstance = Instantiate(loadingPrefab);
+        var loadingScreenInstance = Instantiate(loadingPrefab);
         AsyncLoadingFill fill = loadingScreenInstance.GetComponent<AsyncLoadingFill>();
         fill.StartFill(op, DestroyWhenDone);
     }

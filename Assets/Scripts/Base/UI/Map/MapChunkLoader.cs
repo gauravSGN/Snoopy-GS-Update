@@ -55,8 +55,8 @@ namespace UI.Map
 
         protected void OnTriggerEnter2D(Collider2D collider)
         {
-            DispatchChunkEvent<UnloadMapChunksEvent>(new int[] { (MapChunkID - CHUNKS_TO_BUFFER - 1),
-                                                                 (MapChunkID + CHUNKS_TO_BUFFER + 1) });
+            DispatchChunkEvent<UnloadMapChunksEvent>(new[] { (MapChunkID - CHUNKS_TO_BUFFER - 1),
+                                                             (MapChunkID + CHUNKS_TO_BUFFER + 1) });
 
             DispatchChunkEvent<LoadMapChunksEvent>(Enumerable.Range((MapChunkID - CHUNKS_TO_BUFFER),
                                                                     (CHUNKS_TO_BUFFER * 2) + 1).ToArray());

@@ -24,7 +24,7 @@ namespace UI.Map
         [SerializeField]
         private Image buttonIcon;
 
-        public void Click(string nextScene = "")
+        public void Click(string nextScene)
         {
             if (GlobalState.User.purchasables.hearts.quantity > 0)
             {
@@ -70,7 +70,7 @@ namespace UI.Map
 
                 if (user.currentLevel == levelNumber)
                 {
-                    GlobalState.EventService.Dispatch<SnapMapToLocationEvent>(new SnapMapToLocationEvent((RectTransform)transform));
+                    GlobalState.EventService.Dispatch(new SnapMapToLocationEvent((RectTransform)transform));
                 }
 
                 if (user.maxLevel == levelNumber)
@@ -81,7 +81,7 @@ namespace UI.Map
                     var gameEvent = new SetPlayerAvatarPositionEvent((RectTransform)previousMapButtonTransform,
                                                                      (RectTransform)transform);
 
-                    GlobalState.EventService.Dispatch<SetPlayerAvatarPositionEvent>(gameEvent);
+                    GlobalState.EventService.Dispatch(gameEvent);
                 }
             }
             else

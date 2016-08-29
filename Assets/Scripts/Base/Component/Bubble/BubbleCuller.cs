@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-sealed public class BubbleCuller : BubbleModelBehaviour
+public class BubbleCuller : BubbleModelBehaviour
 {
     override protected void AddListeners()
     {
@@ -13,12 +13,8 @@ sealed public class BubbleCuller : BubbleModelBehaviour
         Model.OnDisconnected -= OnDisconnected;
     }
 
-    private void OnDisconnected(Bubble bubble)
+    virtual protected void CullBubble(Bubble bubble)
     {
-        RemoveListeners();
-
-        gameObject.layer = (int)Layers.FallingObjects;
-
         var rigidBody = GetComponent<Rigidbody2D>();
         var config = GlobalState.Instance.Config.reactions;
         var xForce = Random.Range(config.cullMinXForce, config.cullMaxXForce);
@@ -28,6 +24,15 @@ sealed public class BubbleCuller : BubbleModelBehaviour
         rigidBody.AddForce(new Vector2(xForce, yForce));
 
         StartCoroutine(CullAfterFallingDistance(Random.Range(config.cullMinDistance, config.cullMaxDistance)));
+    }
+
+    private void OnDisconnected(Bubble bubble)
+    {
+        RemoveListeners();
+
+        gameObject.layer = (int)Layers.FallingObjects;
+
+        CullBubble(bubble);
     }
 
     private IEnumerator CullAfterFallingDistance(float distance)
