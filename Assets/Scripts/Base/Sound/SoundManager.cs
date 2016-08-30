@@ -1,6 +1,7 @@
 ﻿using System;
 using Service;
 using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Sound
@@ -60,6 +61,12 @@ namespace Sound
 
             GlobalState.EventService.AddEventHandler<PlaySoundEvent>(OnPlaySound, Event.HandlerDictType.Persistent);
             GlobalState.EventService.AddEventHandler<PlayMusicEvent>(OnPlayMusic, Event.HandlerDictType.Persistent);
+
+            var settings = GlobalState.User.settings;
+            SoundMuted = !settings.sfxOn;
+            MusicMuted = !settings.musicOn;
+
+            settings.AddListener(OnSettingsChanged);
         }
 
         public void OnUpdate()
@@ -232,6 +239,32 @@ namespace Sound
         private void OnPlayMusic(PlayMusicEvent gameEvent)
         {
             PlayMusic(gameEvent.clip, gameEvent.loop);
+        }
+
+        private void StopChannels(Predicate<AudioSource> predicate)
+        {
+            foreach (var channel in activeChannels.Where(predicate))
+            {
+                channel.Stop();
+            }
+        }
+
+        private void OnSettingsChanged(Observable target)
+        {
+            var settings = target as State.Settings;
+
+            if (!SoundMuted && !settings.sfxOn)
+            {
+                StopChannels(c => c != musicChannel);
+            }
+
+            if (!MusicMuted && !settings.musicOn)
+            {
+                StopMusic();
+            }
+
+            SoundMuted = !settings.sfxOn;
+            MusicMuted = !settings.musicOn;
         }
     }
 }
