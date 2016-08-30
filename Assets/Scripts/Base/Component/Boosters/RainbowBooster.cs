@@ -45,7 +45,6 @@ namespace Booster
                 launcher.SetModifierAnimation(instantiatedOverlay);
 
                 GlobalState.User.purchasables.boosters.rainbows--;
-                level.levelState.DecrementRemainingBubbles();
 
                 equipSound.Play();
             }
