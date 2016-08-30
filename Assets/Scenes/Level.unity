@@ -428,14 +428,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultMusic.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultSounds.Array.size
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 436150, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -467,70 +459,6 @@ Prefab:
     - target: {fileID: 436150, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultSounds.Array.data[1].type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultSounds.Array.data[2].type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultSounds.Array.data[0].resource
-      value: SFX/Bubble/sfx_snoopypop_bubble_fire
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultSounds.Array.data[1].resource
-      value: SFX/Bubble/sfx_snoopypop_bubble_swap
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultSounds.Array.data[2].resource
-      value: SFX/Bubble/sfx_snoopypop_bubble_last_move_noswap
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultSounds.Array.data[3].type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultSounds.Array.data[3].resource
-      value: SFX/PowerUp/sfx_snoopypop_power_up_filled
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultSounds.Array.data[4].type
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultSounds.Array.data[4].resource
-      value: SFX/PowerUp/sfx_snoopypop_power_up_entrance_cast
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultMusic.Array.data[1].type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultMusic.Array.data[2].type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultMusic.Array.data[3].type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultMusic.Array.data[3].resource
-      value: Music/Level_Win_ Stinger
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultMusic.Array.data[2].resource
-      value: Music/Final VS Save the Birds
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultMusic.Array.data[1].resource
-      value: Music/Final VS Map 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11438342, guid: 2947feb3705924576b2dcb378370bbec, type: 2}
-      propertyPath: defaultMusic.Array.data[0].resource
-      value: Music/Level_Win_ Stinger
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2947feb3705924576b2dcb378370bbec, type: 2}

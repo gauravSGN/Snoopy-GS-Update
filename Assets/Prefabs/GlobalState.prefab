@@ -84,6 +84,7 @@ GameObject:
   - 114: {fileID: 11439542}
   - 114: {fileID: 11407326}
   - 114: {fileID: 11434790}
+  - 114: {fileID: 114000014265090840}
   m_Layer: 0
   m_Name: GlobalState
   m_TagString: Untagged
@@ -206,8 +207,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialChannelCount: 8
-  defaultSounds: []
-  defaultMusic: []
+  defaultSounds:
+  - type: 0
+    resource: SFX/Bubble/sfx_snoopypop_bubble_fire
+  - type: 1
+    resource: SFX/Bubble/sfx_snoopypop_bubble_swap
+  - type: 2
+    resource: SFX/Bubble/sfx_snoopypop_bubble_last_move_noswap
+  - type: 3
+    resource: SFX/PowerUp/sfx_snoopypop_power_up_filled
+  - type: 4
+    resource: SFX/PowerUp/sfx_snoopypop_power_up_entrance_cast
+  defaultMusic:
+  - type: 0
+    resource: Music/Linus and Lucy 30 Second Clip
+  - type: 1
+    resource: Music/Final VS Map 1
+  - type: 2
+    resource: Music/Final VS Save the Birds
+  - type: 3
+    resource: Music/Level_Win_ Stinger
 --- !u!114 &11439542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -407,3 +426,14 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 178964}
   m_IsPrefabParent: 1
+--- !u!114 &114000014265090840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72cb55dc46a6c477c91cda041818b25c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
