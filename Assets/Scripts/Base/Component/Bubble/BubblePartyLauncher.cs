@@ -13,8 +13,8 @@ public class BubblePartyLauncher : MonoBehaviour
     [SerializeField]
     private AudioSource launchSound;
 
-    private List<BubbleType> possibleBubbleTypes = new List<BubbleType>();
-    private RandomBag<BubbleType> bubbleTypePicker = new RandomBag<BubbleType>();
+    private readonly List<BubbleType> possibleBubbleTypes = new List<BubbleType>();
+    private readonly RandomBag<BubbleType> bubbleTypePicker = new RandomBag<BubbleType>();
 
     protected void Start()
     {

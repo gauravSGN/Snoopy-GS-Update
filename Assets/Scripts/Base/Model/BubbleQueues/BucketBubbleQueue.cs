@@ -10,7 +10,7 @@ public class BucketBubbleQueue : BaseBubbleQueue, BubbleQueue
     private readonly List<BubbleType> removedTypes = new List<BubbleType>();
 
     private BubbleQueueDefinition.Bucket currentBucket;
-    private RandomBag<BubbleType> bag = new RandomBag<BubbleType>();
+    private readonly RandomBag<BubbleType> bag = new RandomBag<BubbleType>();
     private int currentCount;
 
     public int ExtrasCount { get { return queueDefinition.extras.length; } }

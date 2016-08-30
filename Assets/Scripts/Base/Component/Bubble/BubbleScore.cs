@@ -33,6 +33,9 @@ public class BubbleScore : BubbleModelBehaviour
 
                 var bubbleDestroyedEvent = new BubbleDestroyedEvent(Model.definition.Score, gameObject);
                 GlobalState.EventService.Dispatch(bubbleDestroyedEvent);
+
+                var effectController = gameObject.GetComponent<BubbleEffectController>();
+                effectController.AddEffect(AnimationEffect.Play(gameObject, AnimationType.ScoreText));
             }
         }
     }

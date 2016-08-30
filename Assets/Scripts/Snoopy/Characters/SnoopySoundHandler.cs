@@ -18,7 +18,7 @@ public class SnoopySoundHandler : MonoBehaviour
     private AudioSource audioSource;
     private System.Random randomGenerator;
 
-    void Start()
+    public void Start()
     {
         randomGenerator = new System.Random();
 

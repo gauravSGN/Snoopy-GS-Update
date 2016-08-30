@@ -33,7 +33,7 @@ namespace Reaction
         {
             if (gameEvent.priority == priority)
             {
-                scheduledAnimations.Add(BlockingAnimationEffect.Play(gameEvent.gameObject, gameEvent.animationType));
+                scheduledAnimations.Add(AnimationEffect.PlayBlocking(gameEvent.gameObject, gameEvent.animationType));
             }
         }
     }
