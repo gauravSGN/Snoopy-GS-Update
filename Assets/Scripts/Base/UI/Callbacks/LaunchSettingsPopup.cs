@@ -1,6 +1,5 @@
 using gs;
 using System;
-using Service;
 using UI.Popup;
 using UnityEngine;
 using System.Collections.Generic;
@@ -38,10 +37,8 @@ namespace UI.Callbacks
         {
             if (level.levelState.remainingBubbles != level.levelState.initialShotCount)
             {
-                GlobalState.PopupService.Enqueue(new GenericPopupConfig
+                GlobalState.PopupService.Enqueue(new StandalonePopupConfig(PopupType.QuitLevel)
                 {
-                    title = "Exit?",
-                    mainText = "You will lose a life if you exit!",
                     affirmativeActions = new List<Action>
                     {
                         () =>

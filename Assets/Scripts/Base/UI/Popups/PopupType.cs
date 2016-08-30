@@ -8,5 +8,6 @@ namespace UI.Popup
         OutOfMoves,
         WinLevel,
         LoseLevel,
+        QuitLevel,
     }
 }

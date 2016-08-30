@@ -118,6 +118,7 @@ namespace PowerUps
         private void OnReadyForNextBubble(ReadyForNextBubbleEvent gameEvent)
         {
             characterAnimator.SetTrigger("Finish");
+            characterAnimator.ResetTrigger("AddPowerUp");
             GlobalState.EventService.RemoveEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
             Show();
         }
