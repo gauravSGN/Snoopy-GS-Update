@@ -12,8 +12,6 @@ namespace Sequence
             {
                 GlobalState.EventService.Dispatch(new LevelCompleteEvent(false));
 
-                GlobalState.User.purchasables.hearts.quantity--;
-
                 GlobalState.PopupService.Enqueue(new StandalonePopupConfig(PopupType.OutOfMoves)
                 {
                     closeActions = new List<Action> { EndLevel },
@@ -24,6 +22,8 @@ namespace Sequence
 
         private void EndLevel()
         {
+            GlobalState.User.purchasables.hearts.quantity--;
+
             GlobalState.PopupService.Enqueue(new StandalonePopupConfig(PopupType.LoseLevel)
             {
                 closeActions = new List<Action> { TransitionToReturnScene },

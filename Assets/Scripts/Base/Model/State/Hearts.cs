@@ -64,23 +64,6 @@ namespace State
         {
         }
 
-        public IEnumerator ReplenishOverTime()
-        {
-            if (!replenishing && (quantity < GlobalState.Instance.Config.purchasables.maxHearts))
-            {
-                replenishing = true;
-
-                while (secondsUntilNextHeart > 0)
-                {
-                    yield return new WaitForSeconds(1);
-                    NotifyListeners();
-                }
-
-                replenishing = false;
-                quantity++;
-            }
-        }
-
         public void Replenish()
         {
             var secondsPerHeart = GlobalState.Instance.Config.purchasables.secondsPerHeart;
@@ -96,6 +79,23 @@ namespace State
             }
 
             GlobalState.Instance.RunCoroutine(ReplenishOverTime());
+        }
+
+        private IEnumerator ReplenishOverTime()
+        {
+            if (!replenishing && (quantity < GlobalState.Instance.Config.purchasables.maxHearts))
+            {
+                replenishing = true;
+
+                while (secondsUntilNextHeart > 0)
+                {
+                    yield return new WaitForSeconds(1);
+                    NotifyListeners();
+                }
+
+                replenishing = false;
+                quantity++;
+            }
         }
     }
 }
