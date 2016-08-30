@@ -46,12 +46,6 @@ namespace PowerUps
         private int lastBubbleCount;
 
         [SerializeField]
-        private AudioSource filledSound;
-
-        [SerializeField]
-        private AudioSource castSound;
-
-        [SerializeField]
         private AnimationCurve hideCurve = AnimationCurve.Linear(0, 1, 1, 0);
 
         [SerializeField]
@@ -91,7 +85,7 @@ namespace PowerUps
         {
             if (button.interactable && (progress >= 1.0f))
             {
-                castSound.Play();
+                Sound.PlaySoundEvent.Dispatch(Sound.SoundType.PowerUpCast);
                 GlobalState.EventService.Dispatch<InputToggleEvent>(new InputToggleEvent(false));
 
                 if (definition.LaunchSound != null)
@@ -153,7 +147,7 @@ namespace PowerUps
                     ownAnimator.SetTrigger("Charged");
                     glow.SetActive(true);
                     filledBackground.SetActive(false);
-                    filledSound.Play();
+                    Sound.PlaySoundEvent.Dispatch(Sound.SoundType.PowerUpFill);
                 }
             }
         }

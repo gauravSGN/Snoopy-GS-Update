@@ -3,6 +3,7 @@ using Service;
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace Sound
 {
@@ -64,6 +65,7 @@ namespace Sound
             MusicMuted = !settings.musicOn;
 
             settings.AddListener(OnSettingsChanged);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         public void OnUpdate()
@@ -139,24 +141,29 @@ namespace Sound
 
         public void PreloadSound(SoundType type)
         {
-            GetSoundByType(type);
+            soundLookup = soundLookup ?? BuildLookup<SoundEntry, SoundType>(defaultSounds);
+            LoadClipAsync(soundLookup, type);
+        }
+
+        public void PreloadMusic(MusicType type)
+        {
+            musicLookup = musicLookup ?? BuildLookup<MusicEntry, MusicType>(defaultMusic);
+            LoadClipAsync(musicLookup, type);
         }
 
         public AudioClip GetSoundByType(SoundType type)
         {
             soundLookup = soundLookup ?? BuildLookup<SoundEntry, SoundType>(defaultSounds);
-
             return LoadClipByType(soundLookup, type);
         }
 
         public AudioClip GetMusicByType(MusicType type)
         {
             musicLookup = musicLookup ?? BuildLookup<MusicEntry, MusicType>(defaultMusic);
-
             return LoadClipByType(musicLookup, type);
         }
 
-        private void OnLevelWasLoaded(int level)
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             soundCache.Clear();
         }
@@ -186,6 +193,19 @@ namespace Sound
             }
 
             return soundCache.ContainsKey(name) ? soundCache[name] : null;
+        }
+
+        private void LoadClipAsync<T>(Dictionary<T, string> lookup, T type)
+        {
+            string name = null;
+
+            if (lookup.TryGetValue(type, out name))
+            {
+                if (!soundCache.ContainsKey(name))
+                {
+                    GlobalState.AssetService.LoadAssetAsync<AudioClip>(name, c => soundCache.Add(name, c));
+                }
+            }
         }
 
         private AudioSource CreateChannel()

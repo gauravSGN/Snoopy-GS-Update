@@ -82,6 +82,7 @@ public class Level : MonoBehaviour
 
         GlobalState.AssetService.OnComplete += OnAssetLoadingComplete;
 
+        GlobalState.SoundService.PreloadMusic(Sound.MusicType.RescueLevel);
         GlobalState.AssetService.LoadAssetAsync<Sprite>(loader.LevelData.Background, delegate(Sprite sprite)
             {
                 background.sprite = sprite;
@@ -91,6 +92,8 @@ public class Level : MonoBehaviour
     private void OnAssetLoadingComplete()
     {
         GlobalState.AssetService.OnComplete -= OnAssetLoadingComplete;
+
+        GlobalState.EventService.Dispatch(new Sound.PlayMusicEvent(Sound.MusicType.RescueLevel, true));
         GlobalState.EventService.Dispatch(new LevelLoadedEvent());
     }
 

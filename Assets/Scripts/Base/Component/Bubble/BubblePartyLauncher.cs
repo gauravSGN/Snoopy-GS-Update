@@ -10,9 +10,6 @@ public class BubblePartyLauncher : MonoBehaviour
     [SerializeField]
     private GameObject launchLocation;
 
-    [SerializeField]
-    private AudioSource launchSound;
-
     private readonly List<BubbleType> possibleBubbleTypes = new List<BubbleType>();
     private readonly RandomBag<BubbleType> bubbleTypePicker = new RandomBag<BubbleType>();
 
@@ -42,7 +39,7 @@ public class BubblePartyLauncher : MonoBehaviour
         // Put it on the default layer since we don't want it to get culled by the floor as soon as it comes out.
         nextBubble.layer = (int)Layers.Default;
 
-        launchSound.Play();
+        Sound.PlaySoundEvent.Dispatch(Sound.SoundType.LaunchBubble);
         level.levelState.DecrementRemainingBubbles();
     }
 

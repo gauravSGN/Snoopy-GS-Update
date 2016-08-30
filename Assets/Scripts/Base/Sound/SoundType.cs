@@ -5,5 +5,7 @@
         LaunchBubble,
         SwapBubbles,
         FailSwapBubbles,
+        PowerUpFill,
+        PowerUpCast,
     }
 }

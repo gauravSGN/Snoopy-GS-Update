@@ -19,6 +19,7 @@ namespace Service
         void StopMusic();
 
         void PreloadSound(SoundType type);
+        void PreloadMusic(MusicType type);
 
         AudioClip GetSoundByType(SoundType type);
         AudioClip GetMusicByType(MusicType type);
