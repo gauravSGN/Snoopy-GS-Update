@@ -7,5 +7,6 @@
         FailSwapBubbles,
         PowerUpFill,
         PowerUpCast,
+        UnlockLevel,
     }
 }
