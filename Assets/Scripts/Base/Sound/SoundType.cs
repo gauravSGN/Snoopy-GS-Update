@@ -2,5 +2,8 @@
 {
     public enum SoundType
     {
+        LaunchBubble,
+        SwapBubbles,
+        FailSwapBubbles,
     }
 }

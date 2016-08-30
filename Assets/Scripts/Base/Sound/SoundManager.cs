@@ -40,7 +40,6 @@ namespace Sound
         private readonly List<AudioSource> freeChannels = new List<AudioSource>();
         private readonly List<AudioSource> activeChannels = new List<AudioSource>();
 
-        private AssetService assetService;
         private AudioSource musicChannel;
 
         public bool SoundMuted { get; private set; }
@@ -50,8 +49,6 @@ namespace Sound
 
         public void Start()
         {
-            assetService = GlobalState.AssetService;
-
             while (freeChannels.Count < initialChannelCount)
             {
                 freeChannels.Add(CreateChannel());
@@ -184,7 +181,7 @@ namespace Sound
             {
                 if (!soundCache.ContainsKey(name))
                 {
-                    soundCache.Add(name, assetService.LoadAsset<AudioClip>(name));
+                    soundCache.Add(name, GlobalState.AssetService.LoadAsset<AudioClip>(name));
                 }
             }
 
@@ -241,7 +238,7 @@ namespace Sound
             PlayMusic(gameEvent.clip, gameEvent.loop);
         }
 
-        private void StopChannels(Predicate<AudioSource> predicate)
+        private void StopChannels(Func<AudioSource, bool> predicate)
         {
             foreach (var channel in activeChannels.Where(predicate))
             {

@@ -26,7 +26,7 @@ namespace Booster
         private PurchaseBoosters purchaseBoosters;
 
         [SerializeField]
-        private AudioSource equipSound;
+        private AudioClip equipSound;
 
         private GameObject instantiatedOverlay;
 
@@ -46,7 +46,7 @@ namespace Booster
 
                 GlobalState.User.purchasables.boosters.rainbows--;
 
-                equipSound.Play();
+                Sound.PlaySoundEvent.Dispatch(equipSound);
             }
         }
 

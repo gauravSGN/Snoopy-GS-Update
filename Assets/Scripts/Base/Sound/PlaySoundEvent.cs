@@ -6,14 +6,22 @@ namespace Sound
     {
         public AudioClip clip;
 
-        public PlaySoundEvent(AudioClip clip)
+        public static void Dispatch(AudioClip clip)
         {
-            this.clip = clip;
+            var gameEvent = GlobalState.EventService.GetPooledEvent<PlaySoundEvent>();
+
+            gameEvent.clip = clip;
+
+            GlobalState.EventService.DispatchPooled(gameEvent);
         }
 
-        public PlaySoundEvent(SoundType type)
+        public static void Dispatch(SoundType type)
         {
-            clip = GlobalState.SoundService.GetSoundByType(type);
+            var gameEvent = GlobalState.EventService.GetPooledEvent<PlaySoundEvent>();
+
+            gameEvent.clip = GlobalState.SoundService.GetSoundByType(type);
+
+            GlobalState.EventService.DispatchPooled(gameEvent);
         }
     }
 }
