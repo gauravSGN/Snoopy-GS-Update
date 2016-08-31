@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scans:
   - type: 1
-    asset: {fileID: 4900000, guid: 6053da2ab31cf4611a50cd257903de8e, type: 3}
+    asset: {fileID: 4900000, guid: ef5d3a87a1c574f4796db7b42e4dadd9, type: 3}
   - type: 2
     asset: {fileID: 4900000, guid: 6053da2ab31cf4611a50cd257903de8e, type: 3}
   - type: 4

@@ -15,13 +15,11 @@ namespace UI.Map
 
         private Transform origin;
         private Transform destination;
-        private AudioSource levelUnlockSound;
 
         protected void Start()
         {
             GlobalState.EventService.AddEventHandler<MovePlayerAvatarEvent>(OnMovePlayerAvatar);
             GlobalState.EventService.AddEventHandler<SetPlayerAvatarPositionEvent>(OnSetPlayerAvatarPosition);
-            levelUnlockSound = GetComponent<AudioSource>();
         }
 
         private void OnSetPlayerAvatarPosition(SetPlayerAvatarPositionEvent gameEvent)
@@ -47,10 +45,8 @@ namespace UI.Map
 
         private void OnAvatarMoveComplete(AbstractGoTween tween)
         {
-            if(levelUnlockSound != null)
-            {
-                levelUnlockSound.Play();
-            }
+            Sound.PlaySoundEvent.Dispatch(Sound.SoundType.UnlockLevel);
+
             var mapButtonComponent = destination.GetComponent<MapButton>();
 
             if (mapButtonComponent != null)

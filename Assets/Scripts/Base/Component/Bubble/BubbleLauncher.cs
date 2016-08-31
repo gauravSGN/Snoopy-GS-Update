@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+﻿using Sound;
 using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -20,15 +21,6 @@ public class BubbleLauncher : MonoBehaviour
     private LauncherCharacterController characterController;
 
     [SerializeField]
-    private AudioClip launchSound;
-
-    [SerializeField]
-    private AudioClip swapSound;
-
-    [SerializeField]
-    private AudioClip swapFailSound;
-
-    [SerializeField]
     private GameObject shooterTrailPrefab;
 
     private GameObject[] nextBubbles;
@@ -38,7 +30,6 @@ public class BubbleLauncher : MonoBehaviour
     private GameObject currentAnimation;
     private Vector2 direction;
     private bool inputAllowed;
-    private AudioSource audioSource;
     private AudioClip launchSoundOverride;
     private GameObject shooterTrail;
 
@@ -52,14 +43,7 @@ public class BubbleLauncher : MonoBehaviour
             SetAimLineColor();
             characterController.CycleQueueAnimation();
 
-            if (nextBubbles.Length > 1)
-            {
-                PlaySound(swapSound);
-            }
-            else
-            {
-                PlaySound(swapFailSound);
-            }
+            PlaySoundEvent.Dispatch((nextBubbles.Length > 1) ? SoundType.SwapBubbles : SoundType.FailSwapBubbles);
         }
     }
 
@@ -102,9 +86,12 @@ public class BubbleLauncher : MonoBehaviour
         eventService.AddEventHandler<PrepareForBubblePartyEvent>(OnPrepareForBubbleParty);
         eventService.AddEventHandler<PurchasedExtraMovesEvent>(OnPurchasedExtraMoves);
 
-        inputAllowed = true;
+        var soundService = GlobalState.SoundService;
+        soundService.PreloadSound(SoundType.LaunchBubble);
+        soundService.PreloadSound(SoundType.SwapBubbles);
+        soundService.PreloadSound(SoundType.FailSwapBubbles);
 
-        audioSource = GetComponent<AudioSource>();
+        inputAllowed = true;
     }
 
     private void OnPrepareForBubbleParty(PrepareForBubblePartyEvent gameEvent)
@@ -194,7 +181,14 @@ public class BubbleLauncher : MonoBehaviour
         level.levelState.bubbleQueue.RemoveListener(OnBubbleQueueChanged);
         level.levelState.bubbleQueue.GetNext();
 
-        PlaySound(launchSoundOverride ?? launchSound);
+        if (launchSoundOverride != null)
+        {
+            PlaySoundEvent.Dispatch(launchSoundOverride);
+        }
+        else
+        {
+            PlaySoundEvent.Dispatch(SoundType.LaunchBubble);
+        }
     }
 
     private void ReadyNextBubble()
@@ -361,11 +355,5 @@ public class BubbleLauncher : MonoBehaviour
     {
         currentAnimation.transform.SetParent(nextBubbles[0].transform);
         currentAnimation.transform.localPosition = new Vector3(0, 0, -0.01f);
-    }
-
-    private void PlaySound(AudioClip clip)
-    {
-        audioSource.clip = clip;
-        audioSource.Play();
     }
 }
