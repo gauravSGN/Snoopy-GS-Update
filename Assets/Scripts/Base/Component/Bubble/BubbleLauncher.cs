@@ -95,7 +95,7 @@ public class BubbleLauncher : MonoBehaviour
         inputAllowed = true;
     }
 
-    private void OnPrepareForBubbleParty(PrepareForBubblePartyEvent gameEvent)
+    private void OnPrepareForBubbleParty()
     {
         var eventService = GlobalState.EventService;
         eventService.RemoveEventHandler<BubbleSettlingEvent>(OnBubbleSettleEvent);
@@ -111,7 +111,7 @@ public class BubbleLauncher : MonoBehaviour
         }
     }
 
-    private void OnLevelLoaded(LevelLoadedEvent gameEvent)
+    private void OnLevelLoaded()
     {
         CreateBubbles();
         SetAimLineColor();
@@ -296,7 +296,7 @@ public class BubbleLauncher : MonoBehaviour
         }
     }
 
-    private void OnBubbleSettleEvent(BubbleSettlingEvent gameEvent)
+    private void OnBubbleSettleEvent()
     {
         shooterTrail.SetActive(false);
         shooterTrail.transform.SetParent(transform, false);
@@ -332,7 +332,7 @@ public class BubbleLauncher : MonoBehaviour
         SetAimLineColor();
     }
 
-    private void OnPurchasedExtraMoves(PurchasedExtraMovesEvent gameEvent)
+    private void OnPurchasedExtraMoves()
     {
         var queue = level.levelState.bubbleQueue;
 

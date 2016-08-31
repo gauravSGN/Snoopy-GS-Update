@@ -48,7 +48,7 @@ namespace Service
             ResetCallbacks();
         }
 
-        private void OnTransitionToReturnScene(TransitionToReturnSceneEvent gameEvent)
+        private void OnTransitionToReturnScene()
         {
             TransitionToScene(ReturnScene);
         }

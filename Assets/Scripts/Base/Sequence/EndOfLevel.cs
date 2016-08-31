@@ -27,12 +27,12 @@ namespace Sequence
 
             var eventService = GlobalState.EventService;
             eventService.AddEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
-            eventService.AddEventHandler<FiringAnimationCompleteEvent>(OnFiringAnimationComplete);
+            eventService.AddEventHandler<FiringAnimationCompleteEvent>(ContinueLevel);
             eventService.AddEventHandler<PurchasedExtraMovesEvent>(OnPurchasedExtraMoves);
             eventService.AddEventHandler<BubbleFiringEvent>(OnBubbleFiring);
         }
 
-        private void OnReactionsFinished(ReactionsFinishedEvent gameEvent)
+        private void OnReactionsFinished()
         {
             if (level.AllGoalsCompleted)
             {
@@ -72,17 +72,12 @@ namespace Sequence
             sequence.Begin(level.levelState);
         }
 
-        private void OnFiringAnimationComplete(FiringAnimationCompleteEvent gameEvent)
-        {
-            ContinueLevel();
-        }
-
-        private void OnPurchasedExtraMoves(PurchasedExtraMovesEvent gameEvent)
+        private void OnPurchasedExtraMoves()
         {
             GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnReactionsFinished);
         }
 
-        private void OnBubbleFiring(BubbleFiringEvent gameEvent)
+        private void OnBubbleFiring()
         {
             blockade.Add(this);
         }

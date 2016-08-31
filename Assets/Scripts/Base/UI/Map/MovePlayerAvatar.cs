@@ -32,7 +32,7 @@ namespace UI.Map
                                                   destination.localPosition.y + yPadding);
         }
 
-        private void OnMovePlayerAvatar(MovePlayerAvatarEvent gameEvent)
+        private void OnMovePlayerAvatar()
         {
             if (origin != null)
             {
