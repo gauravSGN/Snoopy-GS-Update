@@ -2,82 +2,54 @@ using Util;
 using System;
 using Service;
 using System.Collections.Generic;
-using HandlerDict = System.Collections.Generic.Dictionary<System.Type, System.Collections.Generic.List<object>>;
+using UnityEngine.SceneManagement;
 
 namespace Event
 {
     public class EventDispatcher : EventService
     {
         private int dispatchesInProgress;
+        private EventRegistry[] registries = new EventRegistry[2];
 
         private readonly ObjectPool<GameEvent> eventPool = new ObjectPool<GameEvent>();
-        private readonly List<HandlerDict> handlerDictList = new List<HandlerDict>();
         private readonly HashSet<List<object>> handlerListsToClean = new HashSet<List<object>>();
+
+        public EventRegistry Transient { get; private set; }
+        public EventRegistry Persistent { get; private set; }
 
         public EventDispatcher()
         {
-            foreach (var handlerDictType in EnumExtensions.GetValues<HandlerDictType>())
-            {
-                handlerDictList.Insert((int)handlerDictType, new HandlerDict());
-            }
-        }
+            registries[0] = Transient = new EventRegistry();
+            registries[1] = Persistent = new EventRegistry();
 
-        public void Reset()
-        {
-            handlerDictList[(int)HandlerDictType.Transient].Clear();
-            eventPool.Clear();
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         public void AddEventHandler<T>(Action<T> handler) where T : GameEvent
         {
-            AddEventHandler<T>(handler, HandlerDictType.Transient);
-        }
-
-        public void AddEventHandler<T>(Action<T> handler, HandlerDictType handlerDictType) where T : GameEvent
-        {
-            DictionaryInsert(handlerDictList[(int)handlerDictType], typeof(T), handler);
+            Transient.AddEventHandler<T>(handler);
         }
 
         public void RemoveEventHandler<T>(Action<T> handler) where T : GameEvent
         {
-            var eventType = typeof(T);
-
-            foreach (var handlers in handlerDictList)
+            foreach (var registry in registries)
             {
-                if (handlers.ContainsKey(eventType))
-                {
-                    var handlerList = handlers[eventType];
-                    var index = handlerList.IndexOf(handler);
+                var listToClean = registry.RemoveEventHandler<T>(handler);
 
-                    if (index >= 0)
-                    {
-                        handlerList[index] = null;
-                        handlerListsToClean.Add(handlerList);
-                    }
+                if (listToClean != null)
+                {
+                    handlerListsToClean.Add(listToClean);
                 }
             }
         }
 
         public void Dispatch<T>(T gameEvent) where T : GameEvent
         {
-            var eventType = typeof(T);
-
             dispatchesInProgress++;
 
-            foreach (var handlers in handlerDictList)
+            foreach (var registry in registries)
             {
-                if (handlers.ContainsKey(eventType))
-                {
-                    var handlerList = handlers[eventType];
-
-                    for (int handlerIndex = 0, maxIndex = handlerList.Count; handlerIndex < maxIndex; handlerIndex++)
-                    {
-                        if (handlerList[handlerIndex] != null)
-                        {
-                            (handlerList[handlerIndex] as Action<T>).Invoke(gameEvent);
-                        }
-                    }
-                }
+                registry.Dispatch<T>(gameEvent);
             }
 
             dispatchesInProgress--;
@@ -100,20 +72,6 @@ namespace Event
             eventPool.Release(gameEvent);
         }
 
-        private void DictionaryInsert<K, V>(Dictionary<K, List<V>> dictionary, K key, V item)
-        {
-            if (!dictionary.ContainsKey(key))
-            {
-                dictionary.Add(key, new List<V>());
-            }
-
-            var list = dictionary[key];
-            if (!list.Contains(item))
-            {
-                list.Add(item);
-            }
-        }
-
         private void CleanModifiedHandlerLists()
         {
             if ((dispatchesInProgress == 0) && (handlerListsToClean.Count > 0))
@@ -126,6 +84,11 @@ namespace Event
                 handlerListsToClean.Clear();
             }
         }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            Transient.Clear();
+            eventPool.Clear();
+        }
     }
 }
-

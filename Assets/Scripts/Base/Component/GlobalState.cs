@@ -1,9 +1,8 @@
 using Util;
 using Config;
-using UnityEngine;
 using Service;
+using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 // The GlobalState prefab needs to be in every scene that uses it for the
 // scene editor to work without coming from a different scene.
@@ -45,8 +44,6 @@ public class GlobalState : SingletonBehaviour<GlobalState>
             GSDescriptorFactory.CreateByPlatform(Application.platform, gsDescriptorJSON).Initialize();
             Application.targetFrameRate = 60;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
-
-            SceneManager.sceneLoaded += OnSceneLoaded;
         }
     }
 
@@ -55,15 +52,6 @@ public class GlobalState : SingletonBehaviour<GlobalState>
         if (Instance == this)
         {
             StartCoroutine(enumerator);
-        }
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (this == Instance)
-        {
-            Services.Get<EventService>().Reset();
-            Services.Get<UpdateService>().Reset();
         }
     }
 }

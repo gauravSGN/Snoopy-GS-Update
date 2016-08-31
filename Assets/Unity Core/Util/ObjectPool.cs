@@ -1,118 +1,71 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Utility.Memory
+namespace Util
 {
-    public class ObjectPool
+    sealed public class ObjectPool<T>
     {
-        public class ObjectPoolKeyCollisionException : System.Exception
-        {
-            public ObjectPoolKeyCollisionException()
-            {
-            }
+        private readonly Dictionary<Type, Queue<T>> items = new Dictionary<Type, Queue<T>>();
 
-            public ObjectPoolKeyCollisionException(string message) : base(message)
-            {
-            }
+        private static U DefaultAllocator<U>(Type type) where U : T
+        {
+            return (U)Activator.CreateInstance(type);
         }
 
-        private Dictionary<string, Queue<GameObject>> instancePool;
-        private Dictionary<string, int> keyToIDMap;
-
-        private Transform instanceParent;
-
-        public Transform InstanceParent
+        public void Clear()
         {
-            get{ return null; }
-            set{ instanceParent = value; }
+            items.Clear();
         }
 
-        public ObjectPool()
+        public T Get()
         {
-            instancePool = new Dictionary<string, Queue<GameObject>>();
-            keyToIDMap = new Dictionary<string, int>();
+            return Get(typeof(T));
         }
 
-        public void Preallocate(GameObject prefab, int count, Transform parent = null)
+        public T Get(Type type)
         {
-            if(instanceParent == null)
-            {
-                instanceParent = parent;
-            }
-
-            if(instancePool.ContainsKey(prefab.name) == false)
-            {
-                AddToPool(prefab);
-            }
-            for(int i = 0; i < count; ++i)
-            {
-                GameObject instance = GameObject.Instantiate(prefab) as GameObject;
-                if(parent != null)
-                {
-                    instance.transform.SetParent(parent, false);
-                }
-                instance.name = prefab.name;
-                instancePool[prefab.name].Enqueue(instance);
-            }
+            Func<Type, T> allocator = DefaultAllocator<T>;
+            return Get(type, allocator);
         }
 
-        private void AddToPool(GameObject prefab)
+        public T Get(Type type, Func<Type, T> allocator)
         {
-            instancePool.Add(prefab.name, new Queue<GameObject>());
-            keyToIDMap.Add(prefab.name, prefab.GetInstanceID());
+            Queue<T> instances;
+
+            if (items.TryGetValue(type, out instances) && (instances.Count > 0))
+            {
+                return instances.Dequeue();
+            }
+
+            return allocator(type);
         }
 
-        public GameObject GetInstance(GameObject prefab)
+        public U Get<U>() where U : T
         {
-            string key = prefab.name;
-            GameObject instance = null;
-            if(instancePool.ContainsKey(key))
-            {
-                CheckKeyCollision(prefab);
-                if(instancePool[key].Count > 0)
-                {
-                    instance = instancePool[key].Dequeue();
-                }
-            }
-            else
-            {
-                AddToPool(prefab);
-            }
-
-            if(instance == null)
-            {
-                instance = GameObject.Instantiate(prefab) as GameObject;
-                instance.name = key;
-            }
-            if(instanceParent != null && instance.transform.parent != instanceParent)
-            {
-                instance.transform.parent = instanceParent;
-            }
-            return instance;
+            return Get<U>(typeof(U));
         }
 
-        public void StashInstance(GameObject instance)
+        public U Get<U>(Type type) where U : T
         {
-            instancePool[instance.name].Enqueue(instance);
+            Func<Type, U> allocator = DefaultAllocator<U>;
+            return Get<U>(type, allocator);
         }
 
-        public void ClearAllInstances()
+        public U Get<U>(Type type, Func<Type, U> allocator) where U : T
         {
-            foreach (KeyValuePair<string, Queue<GameObject>> kvp in instancePool)
-            {
-                Queue<GameObject> toClear = kvp.Value;
-                instancePool.Remove(kvp.Key);
-                toClear.Clear();
-            }
-            keyToIDMap.Clear();
+            return (U)Get(type, t => (T)allocator(t));
         }
 
-        private void CheckKeyCollision(GameObject prefab)
+        public void Release(T item)
         {
-            if(keyToIDMap[prefab.name] != prefab.GetInstanceID())
+            var itemType = item.GetType();
+
+            if (!items.ContainsKey(itemType))
             {
-                throw new ObjectPoolKeyCollisionException("Collision for key " + prefab.name);
+                items.Add(itemType, new Queue<T>());
             }
+
+            items[itemType].Enqueue(item);
         }
     }
 }
