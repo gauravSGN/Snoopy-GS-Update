@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
  * Spine Runtimes Software License
  * Version 2.3
  * 
@@ -28,33 +28,47 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
-using UnityEngine;
 
-namespace Spine.Unity {
-	public delegate void UpdateBonesDelegate (ISkeletonAnimation animatedSkeletonComponent);
+using System;
 
-	/// <summary>A Spine-Unity Component that animates a Skeleton but not necessarily with a Spine.AnimationState.</summary>
-	public interface ISkeletonAnimation {
-		event UpdateBonesDelegate UpdateLocal;
-		event UpdateBonesDelegate UpdateWorld;
-		event UpdateBonesDelegate UpdateComplete;
+namespace Spine {
+	public class PathConstraintData {
+		internal String name;
+		internal ExposedList<BoneData> bones = new ExposedList<BoneData>();
+		internal SlotData target;
+		internal PositionMode positionMode;
+		internal SpacingMode spacingMode;
+		internal RotateMode rotateMode;
+		internal float offsetRotation;
+		internal float position, spacing, rotateMix, translateMix;
 
-		void LateUpdate ();
-		Skeleton Skeleton { get; }
+		public ExposedList<BoneData> Bones { get { return bones; } }
+		public SlotData Target { get { return target; } set { target = value; } }			
+		public PositionMode PositionMode { get { return positionMode; } set { positionMode = value; } }
+		public SpacingMode SpacingMode { get { return spacingMode; } set { spacingMode = value; } }
+		public RotateMode RotateMode { get { return rotateMode; } set { rotateMode = value; } }
+		public float OffsetRotation { get { return offsetRotation; } set { offsetRotation = value; } }
+		public float Position { get { return position; } set { position = value; } }
+		public float Spacing { get { return spacing; } set { spacing = value; } }
+		public float RotateMix { get { return rotateMix; } set { rotateMix = value; } }
+		public float TranslateMix { get { return translateMix; } set { translateMix = value; } }
+		public String Name { get { return name; } }
+
+		public PathConstraintData (String name) {
+			if (name == null) throw new ArgumentNullException("name", "name cannot be null.");
+			this.name = name;
+		}
+	}
+	
+	public enum PositionMode {
+		Fixed, Percent        
 	}
 
-	/// <summary>A Spine-Unity Component that manages a Spine.Skeleton instance, instantiated from a SkeletonDataAsset.</summary>
-	public interface ISkeletonComponent {
-		/// <summary>Gets the SkeletonDataAsset of the Spine Component.</summary>
-		SkeletonDataAsset SkeletonDataAsset { get; }
-
-		/// <summary>Gets the Spine.Skeleton instance of the Spine Component. This is equivalent to SkeletonRenderer's .skeleton.</summary>
-		Skeleton Skeleton { get; }
+	public enum SpacingMode {
+		Length, Fixed, Percent
 	}
 
-	/// <summary>A Spine-Unity Component that uses a Spine.AnimationState to animate its skeleton.</summary>
-	public interface IAnimationStateComponent {
-		/// <summary>Gets the Spine.AnimationState of the animated Spine Component. This is equivalent to SkeletonAnimation.state.</summary>
-		AnimationState AnimationState { get; }
+	public enum RotateMode {
+		Tangent, Chain, ChainScale
 	}
 }
