@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Util;
+using System;
 using Service;
 using UnityEngine;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace Sound
 
         private Dictionary<SoundType, string> soundLookup;
         private Dictionary<MusicType, string> musicLookup;
-        private readonly Dictionary<string, AudioClip> soundCache = new Dictionary<string, AudioClip>();
+        private ObjectCache<string, AudioClip> soundCache;
 
         private readonly List<AudioSource> freeChannels = new List<AudioSource>();
         private readonly List<AudioSource> activeChannels = new List<AudioSource>();
@@ -46,10 +47,15 @@ namespace Sound
         public bool SoundMuted { get; private set; }
         public bool MusicMuted { get; private set; }
         public bool MusicPlaying { get { return musicChannel != null; } }
-        public int SoundsPlaying { get; private set; }
+        public int SoundsPlaying { get { return activeChannels.Count; } }
 
         public void Start()
         {
+            soundCache = new ObjectCache<string, AudioClip>
+            {
+                OnMissingKey = LoadClipCallback,
+            };
+
             while (freeChannels.Count < initialChannelCount)
             {
                 freeChannels.Add(CreateChannel());
@@ -165,6 +171,10 @@ namespace Sound
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            StopChannels(c => true);
+            freeChannels.AddRange(activeChannels);
+            activeChannels.Clear();
+
             soundCache.Clear();
         }
 
@@ -182,26 +192,16 @@ namespace Sound
 
         private AudioClip LoadClipByType<T>(Dictionary<T, string> lookup, T type)
         {
-            string name = null;
-
-            if (lookup.TryGetValue(type, out name))
-            {
-                if (!soundCache.ContainsKey(name))
-                {
-                    soundCache.Add(name, GlobalState.AssetService.LoadAsset<AudioClip>(name));
-                }
-            }
-
-            return soundCache.ContainsKey(name) ? soundCache[name] : null;
+            return lookup.ContainsKey(type) ? soundCache.Get(lookup[type]) : null;
         }
 
         private void LoadClipAsync<T>(Dictionary<T, string> lookup, T type)
         {
-            string name = null;
+            string name;
 
             if (lookup.TryGetValue(type, out name))
             {
-                if (!soundCache.ContainsKey(name))
+                if (!soundCache.Contains(name))
                 {
                     GlobalState.AssetService.LoadAssetAsync<AudioClip>(name, c => soundCache.Add(name, c));
                 }
@@ -282,6 +282,11 @@ namespace Sound
 
             SoundMuted = !settings.sfxOn;
             MusicMuted = !settings.musicOn;
+        }
+
+        private AudioClip LoadClipCallback(string path)
+        {
+            return GlobalState.AssetService.LoadAsset<AudioClip>(path);
         }
     }
 }
