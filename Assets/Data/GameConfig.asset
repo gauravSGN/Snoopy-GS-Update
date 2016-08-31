@@ -141,7 +141,7 @@ MonoBehaviour:
   winSequence:
     delayBeforeCullAll: 0.5
     delayBeforeWinTextAnimation: 1
-    delayBeforeCelebration: 0.1
-    delayBeforeBubbleParty: 0.5
+    delayBeforeCelebration: 0
+    delayBeforeBubbleParty: 0
     delayBeforeSlideOut: 1.5
     delayBeforePopup: 0.5

@@ -56,6 +56,8 @@ namespace Sequence
             {
                 currentItem = Instantiate(winTextAnimationPrefab);
                 currentItem.transform.SetParent(canvas.transform, false);
+
+                GlobalState.EventService.AddEventHandler<StartBubblePartyEvent>(OnStartBubbleParty);
             }));
         }
 
@@ -70,11 +72,15 @@ namespace Sequence
 
                 StartCoroutine(RunActionAfterDelay(config.delayBeforeCelebration, () =>
                 {
-                    GlobalState.EventService.Dispatch(new Sequence.StartWinAnimationsEvent());
-                    GlobalState.Instance.RunCoroutine(BubbleParty());
+                    GlobalState.EventService.Dispatch(new StartWinAnimationsEvent());
                 }));
-
             }
+        }
+
+        private void OnStartBubbleParty(StartBubblePartyEvent gameEvent)
+        {
+            GlobalState.EventService.RemoveEventHandler<StartBubblePartyEvent>(OnStartBubbleParty);
+            GlobalState.Instance.RunCoroutine(BubbleParty());
         }
 
         private IEnumerator BubbleParty()
