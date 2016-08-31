@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "XAP0wd//kunirK1RB8r1qjgMw+g", "spine": "3.2.01", "width": 326.31, "height": 352.84 },
+"skeleton": { "hash": "PmMpFK631SzZ0F35Bkr5tqoB96Q", "spine": "3.4.02", "width": 326.31, "height": 352.84 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "placement_ctrl_reset", "parent": "root" },
