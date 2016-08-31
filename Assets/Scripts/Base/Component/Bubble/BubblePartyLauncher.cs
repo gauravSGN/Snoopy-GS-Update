@@ -1,4 +1,5 @@
 using Model;
+using Sequence;
 using UnityEngine;
 using System.Collections.Generic;
 

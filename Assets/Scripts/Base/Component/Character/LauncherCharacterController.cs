@@ -1,7 +1,7 @@
-using UnityEngine;
 using Spine;
-using Spine.Unity;
 using System;
+using UnityEngine;
+using Spine.Unity;
 
 public class LauncherCharacterController : MonoBehaviour
 {
@@ -35,6 +35,11 @@ public class LauncherCharacterController : MonoBehaviour
     public void CycleQueueAnimation()
     {
         launcherAnimator.SetTrigger(SWAP);
+    }
+
+    public void StartBubbleParty()
+    {
+        Sequence.StartBubblePartyEvent.Dispatch();
     }
 
     protected void Start()
