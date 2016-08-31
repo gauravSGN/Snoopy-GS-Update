@@ -1,3 +1,4 @@
+using Util;
 using System;
 using Service;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace Event
     {
         private int dispatchesInProgress;
 
-        private readonly HandlerDict pools = new HandlerDict();
+        private readonly ObjectPool<GameEvent> eventPool = new ObjectPool<GameEvent>();
         private readonly List<HandlerDict> handlerDictList = new List<HandlerDict>();
         private readonly HashSet<List<object>> handlerListsToClean = new HashSet<List<object>>();
 
@@ -24,6 +25,7 @@ namespace Event
         public void Reset()
         {
             handlerDictList[(int)HandlerDictType.Transient].Clear();
+            eventPool.Clear();
         }
 
         public void AddEventHandler<T>(Action<T> handler) where T : GameEvent
@@ -90,25 +92,12 @@ namespace Event
 
         public T GetPooledEvent<T>() where T : GameEvent
         {
-            var eventType = typeof(T);
-            T gameEvent;
-
-            if (pools.ContainsKey(eventType) && (pools[eventType].Count > 0))
-            {
-                gameEvent = (T)pools[eventType][0];
-                pools[eventType].RemoveAt(0);
-            }
-            else
-            {
-                gameEvent = (T)Activator.CreateInstance(eventType);
-            }
-
-            return gameEvent;
+            return eventPool.Get<T>();
         }
 
         public void AddPooledEvent<T>(T gameEvent) where T : GameEvent
         {
-            DictionaryInsert(pools, typeof(T), gameEvent);
+            eventPool.Release(gameEvent);
         }
 
         private void DictionaryInsert<K, V>(Dictionary<K, List<V>> dictionary, K key, V item)
