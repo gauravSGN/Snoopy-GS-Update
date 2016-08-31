@@ -27,8 +27,6 @@ namespace Snoopy.Characters
         public Bubble Model { get; set; }
         public Vector3 LandingSpot { get; set; }
 
-        private AudioSource audioSource;
-
         public void Start()
         {
             gameView = GameObject.Find("Game View").transform;
@@ -39,8 +37,6 @@ namespace Snoopy.Characters
             var eventService = GlobalState.EventService;
             eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
             eventService.AddEventHandler<LowMovesEvent>(OnLowMoves);
-
-            audioSource = GetComponent<AudioSource>();
         }
 
         public void OnDestroy()
@@ -64,16 +60,18 @@ namespace Snoopy.Characters
             {
                 Instantiate(celebration, transform.position, Quaternion.identity);
             }
-            PlaySound(escapeSound);
+
+            Sound.PlaySoundEvent.Dispatch(escapeSound);
         }
 
         private void OnLevelComplete(LevelCompleteEvent gameEvent)
         {
             animator.SetBool("WonLevel", gameEvent.Won);
             animator.SetBool("LostLevel", !gameEvent.Won);
+
             if (!gameEvent.Won)
             {
-                PlaySound(loseSound);
+                Sound.PlaySoundEvent.Dispatch(loseSound);
             }
         }
 
@@ -96,12 +94,6 @@ namespace Snoopy.Characters
 
             animator.SetBool("OnGround", true);
             trail.SetActive(false);
-        }
-
-        private void PlaySound(AudioClip clip)
-        {
-            audioSource.clip = clip;
-            audioSource.Play();
         }
     }
 }

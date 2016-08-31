@@ -45,7 +45,7 @@ public class BubbleSnap : MonoBehaviour
             }
             else
             {
-                PlaySound(attachments.Model.definition.Sounds.bounce);
+                Sound.PlaySoundEvent.Dispatch(attachments.Model.definition.Sounds.bounce);
             }
         }
     }
@@ -83,7 +83,7 @@ public class BubbleSnap : MonoBehaviour
 
         if (!attachments.Model.CheckForMatches())
         {
-            PlaySound(attachments.Model.definition.Sounds.impact);
+            Sound.PlaySoundEvent.Dispatch(attachments.Model.definition.Sounds.impact);
         }
 
         GlobalState.EventService.Dispatch(new BubbleSettledEvent { shooter = gameObject });
@@ -161,16 +161,6 @@ public class BubbleSnap : MonoBehaviour
                     bubblePosition.y + Mathf.Sin(index * theta) * bubbleSize
                 );
             }
-        }
-    }
-
-    private void PlaySound(AudioClip clip)
-    {
-        var player = GetComponent<BubbleSoundPlayer>();
-
-        if (player != null)
-        {
-            player.Play(clip);
         }
     }
 }

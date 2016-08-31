@@ -50,13 +50,8 @@ public class BubbleDeath : MonoBehaviour
         GameObjectUtil.SetActive((type == BubbleDeathType.Pop) ? activateOnPop : activateOnCull, true);
         GameObjectUtil.SetActive(deactivateOnDeath, false);
 
-        var player = GetComponent<BubbleSoundPlayer>();
-
-        if (player != null)
-        {
-            var sounds = GetComponent<BubbleModelBehaviour>().Model.definition.Sounds;
-            player.Play((type == BubbleDeathType.Pop) ? sounds.match : sounds.cull);
-        }
+        var sounds = GetComponent<BubbleModelBehaviour>().Model.definition.Sounds;
+        Sound.PlaySoundEvent.Dispatch((type == BubbleDeathType.Pop) ? sounds.match : sounds.cull);
 
         Destroy(destroyOnFinish, deathDelay);
     }
