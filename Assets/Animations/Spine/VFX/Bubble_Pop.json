@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "hE3agRzX8monA2U80MCt0a5q/g8", "spine": "3.2.01", "width": 0, "height": 0, "images": "" },
+"skeleton": { "hash": "xDK3Ik7bmi2m+o3l1KKnLhP7hUE", "spine": "3.4.02", "width": 0, "height": 0, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "scale/move_ctrl", "parent": "root" },
