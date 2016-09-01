@@ -38,7 +38,7 @@ namespace Reaction
             }
         }
 
-        private void OnBubbleSettled(BubbleSettledEvent gameEvent)
+        private void OnBubbleSettled()
         {
             StartCoroutine(ProcessReactions());
         }

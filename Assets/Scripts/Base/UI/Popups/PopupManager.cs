@@ -65,7 +65,7 @@ namespace UI.Popup
             var service = GlobalState.EventService;
             service.Persistent.AddEventHandler<PopupDisplayedEvent>(OnPopupDisplayed);
             service.Persistent.AddEventHandler<PopupClosedEvent>(OnPopupClosed);
-            service.Persistent.AddEventHandler<BlockadeEvent.PopupsUnblocked>(OnPopupsUnblocked);
+            service.Persistent.AddEventHandler<BlockadeEvent.PopupsUnblocked>(ShowNextPopup);
 
             GlobalState.Instance.Services.SetInstance<PopupService>(this);
         }
@@ -118,11 +118,6 @@ namespace UI.Popup
 
             ShowNextPopup();
             UpdatePopupOverlay();
-        }
-
-        private void OnPopupsUnblocked(BlockadeEvent.PopupsUnblocked gameEvent)
-        {
-            ShowNextPopup();
         }
 
         private void UpdatePopupOverlay()

@@ -17,15 +17,10 @@ public class BubblePartyLauncher : MonoBehaviour
     protected void Start()
     {
         GlobalState.EventService.AddEventHandler<FirePartyBubbleEvent>(OnFirePartyBubble);
-        GlobalState.EventService.AddEventHandler<PrepareForBubblePartyEvent>(OnPrepareForBubbleParty);
+        GlobalState.EventService.AddEventHandler<PrepareForBubblePartyEvent>(FindPossibleBubbleTypes);
     }
 
-    private void OnPrepareForBubbleParty(PrepareForBubblePartyEvent gameEvent)
-    {
-        FindPossibleBubbleTypes();
-    }
-
-    private void OnFirePartyBubble(FirePartyBubbleEvent gameEvent)
+    private void OnFirePartyBubble()
     {
         var nextBubble = CreateNextBubble();
         var rigidBody = nextBubble.GetComponent<Rigidbody2D>();

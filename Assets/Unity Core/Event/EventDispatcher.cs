@@ -1,6 +1,7 @@
 using Util;
 using System;
 using Service;
+using Event.Invocation;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +13,7 @@ namespace Event
         private EventRegistry[] registries = new EventRegistry[2];
 
         private readonly ObjectPool<GameEvent> eventPool = new ObjectPool<GameEvent>();
-        private readonly HashSet<List<object>> handlerListsToClean = new HashSet<List<object>>();
+        private readonly HashSet<List<Invoker>> handlerListsToClean = new HashSet<List<Invoker>>();
 
         public EventRegistry Transient { get; private set; }
         public EventRegistry Persistent { get; private set; }
@@ -25,22 +26,24 @@ namespace Event
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
+        public void AddEventHandler<T>(Action handler) where T : GameEvent
+        {
+            Transient.AddEventHandler<T>(handler);
+        }
+
         public void AddEventHandler<T>(Action<T> handler) where T : GameEvent
         {
             Transient.AddEventHandler<T>(handler);
         }
 
+        public void RemoveEventHandler<T>(Action handler) where T : GameEvent
+        {
+            RemoveEventHandlers(typeof(T), handler);
+        }
+
         public void RemoveEventHandler<T>(Action<T> handler) where T : GameEvent
         {
-            foreach (var registry in registries)
-            {
-                var listToClean = registry.RemoveEventHandler<T>(handler);
-
-                if (listToClean != null)
-                {
-                    handlerListsToClean.Add(listToClean);
-                }
-            }
+            RemoveEventHandlers(typeof(T), handler);
         }
 
         public void Dispatch<T>(T gameEvent) where T : GameEvent
@@ -70,6 +73,19 @@ namespace Event
         public void AddPooledEvent<T>(T gameEvent) where T : GameEvent
         {
             eventPool.Release(gameEvent);
+        }
+
+        private void RemoveEventHandlers(Type eventType, object handler)
+        {
+            foreach (var registry in registries)
+            {
+                var listToClean = registry.RemoveEventHandler(eventType, handler);
+
+                if (listToClean != null)
+                {
+                    handlerListsToClean.Add(listToClean);
+                }
+            }
         }
 
         private void CleanModifiedHandlerLists()

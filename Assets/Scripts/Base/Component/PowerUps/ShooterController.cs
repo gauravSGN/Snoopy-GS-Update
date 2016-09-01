@@ -11,7 +11,7 @@ namespace PowerUps
             eventService.AddEventHandler<PowerUpChargeEvent>(OnCharge);
         }
 
-        private void OnBubbleSettled(BubbleSettledEvent gameEvent)
+        private void OnBubbleSettled()
         {
             gameObject.SetActive(false);
             transform.parent.GetComponentInChildren<SpriteRenderer>().enabled = false;
@@ -23,7 +23,7 @@ namespace PowerUps
             Destroy(gameObject);
         }
 
-        private void OnCharge(PowerUpChargeEvent gameEvent)
+        private void OnCharge()
         {
             foreach (Transform child in transform)
             {

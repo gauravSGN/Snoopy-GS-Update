@@ -59,7 +59,7 @@ namespace Scoring
             }
         }
 
-        private void OnStartReactions(StartReactionsEvent gameEvent)
+        private void OnStartReactions()
         {
             foreach (var pair in handlers)
             {
@@ -80,7 +80,7 @@ namespace Scoring
             }
         }
 
-        private void FirePartyBubbleEvent(FirePartyBubbleEvent gameEvent)
+        private void FirePartyBubbleEvent()
         {
             AddToScore(config.remainingMovesValue);
         }

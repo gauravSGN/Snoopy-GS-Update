@@ -75,7 +75,7 @@ namespace Snoopy.Characters
             }
         }
 
-        private void OnLowMoves(LowMovesEvent gameEvent)
+        private void OnLowMoves()
         {
             animator.SetBool("LosingLevel", true);
         }
