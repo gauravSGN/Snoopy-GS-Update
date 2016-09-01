@@ -37,13 +37,19 @@ public class MoveToRegisteredCanvas : MonoBehaviour
             target = GlobalState.Instance.Services.Get<TransformService>().Get(usage);
         }
 
+        var canvas = target.GetComponentInParent<Canvas>();
+
         if (!useTargetAsParent)
         {
-            target = target.GetComponentInParent<Canvas>().transform;
+            target = canvas.transform;
         }
 
-        var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-        transform.SetParent(target, false);
-        transform.position = screenPoint;
+        transform.SetParent(target, true);
+
+        if (canvas.renderMode != RenderMode.WorldSpace)
+        {
+            var screenPoint = (canvas.worldCamera ?? Camera.main).WorldToScreenPoint(transform.position);
+            transform.position = screenPoint;
+        }
     }
 }
