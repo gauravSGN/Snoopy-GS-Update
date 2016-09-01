@@ -41,7 +41,7 @@ namespace Sequence
             }));
         }
 
-        private void OnCullAllBubblesComplete(ReactionsFinishedEvent gameEvent)
+        private void OnCullAllBubblesComplete()
         {
             GlobalState.EventService.RemoveEventHandler<ReactionsFinishedEvent>(OnCullAllBubblesComplete);
             GlobalState.EventService.AddEventHandler<SequenceItemCompleteEvent>(OnWinTextAnimationComplete);

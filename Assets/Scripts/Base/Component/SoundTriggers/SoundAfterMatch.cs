@@ -33,12 +33,12 @@ public class SoundAfterMatch : MonoBehaviour
         GlobalState.EventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubbleEvent);
     }
 
-    void OnBubbleReactionEvent(BubbleReactionEvent gameEvent)
+    void OnBubbleReactionEvent()
     {
         counter++;
     }
 
-    void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)
+    void OnReadyForNextBubbleEvent()
     {
         if (ConditionMet() && (UnityEngine.Random.value <= chanceToPlay))
         {

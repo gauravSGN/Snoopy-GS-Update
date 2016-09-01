@@ -31,12 +31,12 @@ public class SnoopySoundHandler : MonoBehaviour
         Sound.PlaySoundEvent.Dispatch(gameEvent.Won ? winSound : loseSound);
     }
 
-    private void OnBubbleFired(BubbleFiredEvent firedEvent)
+    private void OnBubbleFired()
     {
         Sound.PlaySoundEvent.Dispatch(launchSounds[randomGenerator.Next(launchSounds.Length)]);
     }
 
-    private void OnLevelStart(IntroScrollCompleteEvent scrollEvent)
+    private void OnLevelStart()
     {
         Sound.PlaySoundEvent.Dispatch(levelStartSound);
     }

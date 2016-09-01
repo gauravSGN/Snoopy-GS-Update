@@ -1,43 +1,50 @@
-﻿using System;
+﻿using Util;
+using System;
+using System.Linq;
+using Event.Invocation;
 using System.Collections.Generic;
 
 namespace Event
 {
     sealed public class EventRegistry
     {
-        private readonly Dictionary<Type, List<object>> handlers = new Dictionary<Type, List<object>>();
+        private readonly Dictionary<Type, List<Invoker>> handlers = new Dictionary<Type, List<Invoker>>();
+        private readonly ObjectPool<Invoker> invokerPool = new ObjectPool<Invoker>();
 
         public void Clear()
         {
             handlers.Clear();
+            invokerPool.Clear();
+        }
+
+        public void AddEventHandler<T>(Action handler) where T : GameEvent
+        {
+            var invoker = invokerPool.Get<ParameterlessInvoker>();
+
+            invoker.Handler = handler;
+
+            RegisterInvoker(typeof(T), invoker);
         }
 
         public void AddEventHandler<T>(Action<T> handler) where T : GameEvent
         {
-            var eventType = typeof(T);
+            var invoker = invokerPool.Get<SpecificInvoker<T>>();
 
-            if (!handlers.ContainsKey(eventType))
-            {
-                handlers.Add(eventType, new List<object>());
-            }
+            invoker.Handler = handler;
 
-            var handlerList = handlers[eventType];
-
-            if (!handlerList.Contains(handler))
-            {
-                handlerList.Add(handler);
-            }
+            RegisterInvoker(typeof(T), invoker);
         }
 
-        public List<object> RemoveEventHandler<T>(Action<T> handler) where T : GameEvent
+        public List<Invoker> RemoveEventHandler(Type eventType, object handler)
         {
-            List<object> handlerList = null;
+            List<Invoker> handlerList = null;
 
-            if (handlers.TryGetValue(typeof(T), out handlerList))
+            if (handlers.TryGetValue(eventType, out handlerList))
             {
-                var index = handlerList.IndexOf(handler);
+                var index = handlerList.FindIndex(i => (i != null) && i.Target.Equals(handler));
                 if (index >= 0)
                 {
+                    invokerPool.Release(handlerList[index]);
                     handlerList[index] = null;
                 }
                 else
@@ -51,7 +58,7 @@ namespace Event
 
         public void Dispatch<T>(T gameEvent) where T : GameEvent
         {
-            List<object> handlerList = null;
+            List<Invoker> handlerList = null;
 
             if (handlers.TryGetValue(typeof(T), out handlerList))
             {
@@ -59,9 +66,28 @@ namespace Event
                 {
                     if (handlerList[handlerIndex] != null)
                     {
-                        (handlerList[handlerIndex] as Action<T>).Invoke(gameEvent);
+                        handlerList[handlerIndex].Invoke(gameEvent);
                     }
                 }
+            }
+        }
+
+        private void RegisterInvoker(Type eventType, Invoker invoker)
+        {
+            if (!handlers.ContainsKey(eventType))
+            {
+                handlers.Add(eventType, new List<Invoker>());
+            }
+
+            var handlerList = handlers[eventType];
+
+            if (!handlerList.Any(i => i.Target == invoker.Target))
+            {
+                handlerList.Add(invoker);
+            }
+            else
+            {
+                invokerPool.Release(invoker);
             }
         }
     }

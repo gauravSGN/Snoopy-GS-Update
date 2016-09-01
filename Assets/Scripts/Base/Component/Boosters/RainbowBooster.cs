@@ -55,7 +55,7 @@ namespace Booster
             GlobalState.EventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
         }
 
-        private void OnAddShotModifier(AddShotModifierEvent gameEvent)
+        private void OnAddShotModifier()
         {
             boosterButton.interactable = false;
         }

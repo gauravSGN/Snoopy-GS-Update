@@ -109,7 +109,7 @@ public class Level : MonoBehaviour
         levelState.NotifyListeners();
     }
 
-    private void OnGoalComplete(GoalCompleteEvent gameEvent)
+    private void OnGoalComplete()
     {
         foreach (var goal in loader.LevelData.goals)
         {
