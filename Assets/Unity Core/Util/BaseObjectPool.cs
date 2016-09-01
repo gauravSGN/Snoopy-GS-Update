@@ -30,7 +30,7 @@ namespace Util
             }
         }
 
-        public void Clear()
+        virtual public void Clear()
         {
             items.Clear();
         }

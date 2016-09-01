@@ -16,11 +16,13 @@ namespace Util
                 throw new System.ArgumentException("Trying to release an item not allocated by this pool.");
             }
 
-            item.transform.SetParent(null, false);
-            item.SetActive(false);
-
-            allocated.Remove(item);
             ReturnToPool(prefab, item);
+        }
+
+        override public void Clear()
+        {
+            base.Clear();
+            allocated.Clear();
         }
 
         override protected GameObject DefaultAllocator(GameObject key)
