@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 961cbb9fcdab14dc18c13e0e4a2c6e99
-timeCreated: 1471998181
+guid: ba6bc26200462473c9e52f8e6208ee5c
+timeCreated: 1472625483
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -23,37 +23,40 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 7
+  cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 2048
+  maxTextureSize: 512
   textureSettings:
-    filterMode: -1
+    filterMode: 1
     aniso: 0
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 2, z: 0, w: 2}
-  spritePixelsToUnits: 250
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 50
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
   textureType: 5
-  buildTargetSettings: []
+  buildTargetSettings:
+  - buildTarget: Web
+    maxTextureSize: 512
+    textureFormat: 5
+    compressionQuality: 50
+    allowsAlphaSplitting: 0
   spriteSheet:
-    serializedVersion: 2
     sprites: []
     outline: []
-  spritePackingTag: pre_level_popup
+  spritePackingTag: common_atlas
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -1,7 +1,7 @@
 using Util;
 using Config;
-using UnityEngine;
 using Service;
+using UnityEngine;
 using System.Collections;
 
 // The GlobalState prefab needs to be in every scene that uses it for the
@@ -52,15 +52,6 @@ public class GlobalState : SingletonBehaviour<GlobalState>
         if (Instance == this)
         {
             StartCoroutine(enumerator);
-        }
-    }
-
-    protected void OnLevelWasLoaded(int level)
-    {
-        if (this == Instance)
-        {
-            Services.Get<EventService>().Reset();
-            Services.Get<UpdateService>().Reset();
         }
     }
 }
