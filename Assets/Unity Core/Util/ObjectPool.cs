@@ -4,6 +4,21 @@ namespace Util
 {
     sealed public class ObjectPool<T> : BaseObjectPool<Type, T>
     {
+        public int Count<DerivedType>() where DerivedType : T
+        {
+            return Count(typeof(DerivedType));
+        }
+
+        public void Allocate<DerivedType>(int count) where DerivedType : T
+        {
+            Allocate(typeof(DerivedType), count);
+        }
+
+        public void Allocate<DerivedType>(int count, Allocator allocator) where DerivedType : T
+        {
+            Allocate(typeof(DerivedType), count, allocator);
+        }
+
         public T Get()
         {
             return Get(typeof(T));

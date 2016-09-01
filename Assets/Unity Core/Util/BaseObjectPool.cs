@@ -11,6 +11,25 @@ namespace Util
         abstract public void Release(BaseType item);
         abstract protected BaseType DefaultAllocator(KeyType key);
 
+        public int Count(KeyType key)
+        {
+            return items.ContainsKey(key) ? items[key].Count : 0;
+        }
+
+        public void Allocate(KeyType key, int count)
+        {
+            Allocator allocator = DefaultAllocator;
+            Allocate(key, count, allocator);
+        }
+
+        public void Allocate(KeyType key, int count, Allocator allocator)
+        {
+            for (var index = Count(key); index < count; index++)
+            {
+                Release(allocator(key));
+            }
+        }
+
         public void Clear()
         {
             items.Clear();
