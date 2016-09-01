@@ -16,8 +16,7 @@ namespace Service
         public SceneHandler()
         {
             ResetCallbacks();
-            GlobalState.EventService.AddEventHandler<TransitionToReturnSceneEvent>(OnTransitionToReturnScene,
-                                                                                   HandlerDictType.Persistent);
+            GlobalState.EventService.Persistent.AddEventHandler<TransitionToReturnSceneEvent>(OnTransitionToReturnScene);
         }
 
         public void Reset()

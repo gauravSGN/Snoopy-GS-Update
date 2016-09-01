@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using Service;
+﻿using Service;
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class UpdateDispatcher : MonoBehaviour, UpdateService
 {
@@ -30,16 +31,11 @@ public class UpdateDispatcher : MonoBehaviour, UpdateService
     public UpdateReceiverList<LateUpdateReceiver> LateUpdates { get { return lateUpdates; } }
     public UpdateReceiverList<FixedUpdateReceiver> FixedUpdates { get { return fixedUpdates; } }
 
-    public void Reset()
-    {
-        updates.receivers.Clear();
-        lateUpdates.receivers.Clear();
-        fixedUpdates.receivers.Clear();
-    }
-
     protected void Start()
     {
         GlobalState.Instance.Services.SetInstance<UpdateService>(this);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     protected void Update()
@@ -70,5 +66,12 @@ public class UpdateDispatcher : MonoBehaviour, UpdateService
         {
             receivers[index].OnFixedUpdate();
         }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        updates.receivers.Clear();
+        lateUpdates.receivers.Clear();
+        fixedUpdates.receivers.Clear();
     }
 }

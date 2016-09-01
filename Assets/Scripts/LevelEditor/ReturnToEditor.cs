@@ -5,12 +5,17 @@ namespace LevelEditor
 {
     public class ReturnToEditor : MonoBehaviour
     {
+        public void Start()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
         public void Return()
         {
             GlobalState.EventService.Dispatch(new TransitionToReturnSceneEvent());
         }
 
-        protected void OnLevelWasLoaded(int level)
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (SceneManager.GetActiveScene().name == LevelEditorConstants.SCENE_NAME)
             {
