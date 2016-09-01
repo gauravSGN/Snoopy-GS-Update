@@ -110,7 +110,7 @@ namespace PowerUps
             StartCoroutine(HideShow(showCurve));
         }
 
-        private void OnReadyForNextBubble(ReadyForNextBubbleEvent gameEvent)
+        private void OnReadyForNextBubble()
         {
             characterAnimator.SetTrigger("Finish");
             characterAnimator.ResetTrigger("AddPowerUp");
@@ -220,7 +220,7 @@ namespace PowerUps
             characterAnimator.SetTrigger("AddPowerUp");
         }
 
-        private void OnPrepareForBubbleParty(PrepareForBubblePartyEvent partyEvent)
+        private void OnPrepareForBubbleParty()
         {
             Hide();
             ownAnimator.SetTrigger("Fired");

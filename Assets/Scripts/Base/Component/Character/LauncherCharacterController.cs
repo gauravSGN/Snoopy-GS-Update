@@ -60,13 +60,13 @@ public class LauncherCharacterController : MonoBehaviour
         eventService.AddEventHandler<PurchasedExtraMovesEvent>(OnPurchasedExtraMoves);
     }
 
-    private void OnBubbleFiring(BubbleFiringEvent bubbleFiringEvent)
+    private void OnBubbleFiring()
     {
         launcherAnimator.SetBool(AIMING, false);
         launcherAnimator.SetTrigger(FIRING);
     }
 
-    private void OnBubbleFired(BubbleFiredEvent bubbleFiredEvent)
+    private void OnBubbleFired()
     {
         launcherAnimator.SetFloat(ANGLE, 90f);
     }
@@ -90,7 +90,7 @@ public class LauncherCharacterController : MonoBehaviour
         launcherAnimator.SetFloat(ANGLE, angle);
     }
 
-    private void OnLowMoves(LowMovesEvent gameEvent)
+    private void OnLowMoves()
     {
         launcherAnimator.SetBool(LOSING_LEVEL, true);
     }
@@ -101,7 +101,7 @@ public class LauncherCharacterController : MonoBehaviour
         launcherAnimator.SetBool(LOST_LEVEL, !gameEvent.Won);
     }
 
-    private void OnPurchasedExtraMoves(PurchasedExtraMovesEvent gameEvent)
+    private void OnPurchasedExtraMoves()
     {
         launcherAnimator.SetBool(LOST_LEVEL, false);
     }

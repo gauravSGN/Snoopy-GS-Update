@@ -8,7 +8,10 @@ namespace Service
         EventRegistry Transient { get; }
         EventRegistry Persistent { get; }
 
+        void AddEventHandler<T>(Action handler) where T : GameEvent;
         void AddEventHandler<T>(Action<T> handler) where T : GameEvent;
+
+        void RemoveEventHandler<T>(Action handler) where T : GameEvent;
         void RemoveEventHandler<T>(Action<T> handler) where T : GameEvent;
 
         void Dispatch<T>(T gameEvent) where T : GameEvent;

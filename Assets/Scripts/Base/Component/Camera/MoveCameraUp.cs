@@ -37,7 +37,7 @@ public class MoveCameraUp : BaseMoveCamera
         GameObjectUtil.SetActive(disableOnMove, true);
     }
 
-    private void OnReadyForNextBubbleEvent(ReadyForNextBubbleEvent gameEvent)
+    private void OnReadyForNextBubbleEvent()
     {
         if (!IsTouchingBubbles())
         {
