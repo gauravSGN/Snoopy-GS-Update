@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Event.Animation;
+using Animation;
 
 public class CompleteAnimation : StateMachineBehaviour
 {

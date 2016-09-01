@@ -41,19 +41,19 @@ namespace Util
             return (DerivedType)Get(key, wrapper);
         }
 
-        override public void Release(T item)
-        {
-            ReturnToPool(item.GetType(), item);
-        }
-
-        override protected T DefaultAllocator(Type key)
+        override public T DefaultAllocator(Type key)
         {
             return (T)Activator.CreateInstance(key);
         }
 
-        private DerivedType DefaultAllocator<DerivedType>(Type key)
+        public DerivedType DefaultAllocator<DerivedType>(Type key)
         {
             return (DerivedType)Activator.CreateInstance(key);
+        }
+
+        override public void Release(T item)
+        {
+            ReturnToPool(item.GetType(), item);
         }
     }
 }

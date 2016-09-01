@@ -8,8 +8,8 @@ namespace Util
 
         private readonly Dictionary<KeyType, Queue<BaseType>> items = new Dictionary<KeyType, Queue<BaseType>>();
 
+        abstract public BaseType DefaultAllocator(KeyType key);
         abstract public void Release(BaseType item);
-        abstract protected BaseType DefaultAllocator(KeyType key);
 
         public int Count(KeyType key)
         {

@@ -7,6 +7,15 @@ namespace Util
     {
         private readonly Dictionary<GameObject, GameObject> allocated = new Dictionary<GameObject, GameObject>();
 
+        override public GameObject DefaultAllocator(GameObject key)
+        {
+            var instance = GameObject.Instantiate(key);
+
+            allocated.Add(instance, key);
+
+            return instance;
+        }
+
         override public void Release(GameObject item)
         {
             GameObject prefab;
@@ -23,15 +32,6 @@ namespace Util
         {
             base.Clear();
             allocated.Clear();
-        }
-
-        override protected GameObject DefaultAllocator(GameObject key)
-        {
-            var instance = GameObject.Instantiate(key);
-
-            allocated.Add(instance, key);
-
-            return instance;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Event.Animation
+namespace Animation
 {
     sealed public class AnimationCompleteEvent : GameEvent
     {

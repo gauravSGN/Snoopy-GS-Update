@@ -44,12 +44,17 @@ public class MoveToRegisteredCanvas : MonoBehaviour
             target = canvas.transform;
         }
 
-        transform.SetParent(target, true);
+        var myTransform = transform;
+        var originalScale = myTransform.localScale;
+
+        myTransform.SetParent(target, true);
 
         if (canvas.renderMode != RenderMode.WorldSpace)
         {
-            var screenPoint = (canvas.worldCamera ?? Camera.main).WorldToScreenPoint(transform.position);
-            transform.position = screenPoint;
+            var screenPoint = (canvas.worldCamera ?? Camera.main).WorldToScreenPoint(myTransform.position);
+            myTransform.position = screenPoint;
         }
+
+        myTransform.localScale = originalScale;
     }
 }

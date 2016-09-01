@@ -1,6 +1,6 @@
 ﻿using Util;
 using UnityEngine;
-using Event.Animation;
+using Animation;
 using UnityEngine.SceneManagement;
 
 namespace Animation
@@ -13,6 +13,18 @@ namespace Animation
         public AnimationFactory()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        public void Preload(AnimationType type, int count)
+        {
+            var definition = GetDefinitionByType(type);
+
+            animationPool.Allocate(definition.Prefab, count, (prefab) =>
+            {
+                var instance = animationPool.DefaultAllocator(prefab);
+                HidePooledObject(instance);
+                return instance;
+            });
         }
 
         override public GameObject CreateByType(AnimationType type)
@@ -46,10 +58,15 @@ namespace Animation
         {
             var instance = gameEvent.gameObject;
 
-            instance.transform.SetParent(parent, false);
-            instance.SetActive(false);
+            HidePooledObject(instance);
 
             animationPool.Release(instance);
+        }
+
+        private void HidePooledObject(GameObject instance)
+        {
+            instance.transform.SetParent(parent, false);
+            instance.SetActive(false);
         }
     }
 }
