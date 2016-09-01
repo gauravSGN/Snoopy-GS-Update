@@ -63,8 +63,8 @@ namespace Sound
 
             GlobalState.Instance.Services.SetInstance<SoundService>(this);
 
-            GlobalState.EventService.AddEventHandler<PlaySoundEvent>(OnPlaySound, Event.HandlerDictType.Persistent);
-            GlobalState.EventService.AddEventHandler<PlayMusicEvent>(OnPlayMusic, Event.HandlerDictType.Persistent);
+            GlobalState.EventService.Persistent.AddEventHandler<PlaySoundEvent>(OnPlaySound);
+            GlobalState.EventService.Persistent.AddEventHandler<PlayMusicEvent>(OnPlayMusic);
 
             var settings = GlobalState.User.settings;
             SoundMuted = !settings.sfxOn;
