@@ -81,7 +81,7 @@ namespace Event
 
             var handlerList = handlers[eventType];
 
-            if (!handlerList.Any(i => i.Target == invoker.Target))
+            if (!handlerList.Any(i => (i != null) && (i.Target == invoker.Target)))
             {
                 handlerList.Add(invoker);
             }

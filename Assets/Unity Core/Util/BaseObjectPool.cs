@@ -60,7 +60,10 @@ namespace Util
                 items.Add(key, new Queue<BaseType>());
             }
 
-            items[key].Enqueue(item);
+            if (!items[key].Contains(item))
+            {
+                items[key].Enqueue(item);
+            }
         }
     }
 }

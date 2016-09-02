@@ -31,7 +31,6 @@ namespace Animation
         {
             var definition = GetDefinitionByType(type);
             var instance = animationPool.Get(definition.Prefab);
-            instance.SetActive(true);
 
             if (definition.Controller != null)
             {
@@ -51,13 +50,12 @@ namespace Animation
 
             parent = poolObject.transform;
 
-            GlobalState.EventService.AddEventHandler<AnimationCompleteEvent>(OnAnimationComplete);
+            GlobalState.EventService.Persistent.AddEventHandler<AnimationCompleteEvent>(OnAnimationComplete);
         }
 
         private void OnAnimationComplete(AnimationCompleteEvent gameEvent)
         {
             var instance = gameEvent.gameObject;
-
             HidePooledObject(instance);
 
             animationPool.Release(instance);
@@ -66,7 +64,6 @@ namespace Animation
         private void HidePooledObject(GameObject instance)
         {
             instance.transform.SetParent(parent, false);
-            instance.SetActive(false);
         }
     }
 }

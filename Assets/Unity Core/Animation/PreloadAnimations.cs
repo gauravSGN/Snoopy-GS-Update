@@ -19,10 +19,10 @@ namespace Animation
 
         public void Start()
         {
-            StartCoroutine(DoActualWork());
+            StartCoroutine(DoStuffNextFrame());
         }
 
-        private IEnumerator DoActualWork()
+        private IEnumerator DoStuffNextFrame()
         {
             yield return null;
 
