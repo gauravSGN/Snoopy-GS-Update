@@ -87,12 +87,20 @@ public class BubbleLauncher : MonoBehaviour
         eventService.AddEventHandler<PrepareForBubblePartyEvent>(OnPrepareForBubbleParty);
         eventService.AddEventHandler<PurchasedExtraMovesEvent>(OnPurchasedExtraMoves);
 
+        StartCoroutine(PreloadSounds());
+
+        inputAllowed = true;
+    }
+
+    private IEnumerator PreloadSounds()
+    {
+        // We can't count on the sound service being initialized yet, so we need to wait until next frame
+        yield return null;
+
         var soundService = GlobalState.SoundService;
         soundService.PreloadSound(SoundType.LaunchBubble);
         soundService.PreloadSound(SoundType.SwapBubbles);
         soundService.PreloadSound(SoundType.FailSwapBubbles);
-
-        inputAllowed = true;
     }
 
     private void OnPrepareForBubbleParty()
