@@ -1,20 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Util
 {
-    sealed public class ObjectPool<T>
+    sealed public class ObjectPool<T> : BaseObjectPool<Type, T>
     {
-        private readonly Dictionary<Type, Queue<T>> items = new Dictionary<Type, Queue<T>>();
-
-        private static U DefaultAllocator<U>(Type type) where U : T
+        public int Count<DerivedType>() where DerivedType : T
         {
-            return (U)Activator.CreateInstance(type);
+            return Count(typeof(DerivedType));
         }
 
-        public void Clear()
+        public void Allocate<DerivedType>(int count) where DerivedType : T
         {
-            items.Clear();
+            Allocate(typeof(DerivedType), count);
+        }
+
+        public void Allocate<DerivedType>(int count, Allocator allocator) where DerivedType : T
+        {
+            Allocate(typeof(DerivedType), count, allocator);
         }
 
         public T Get()
@@ -22,50 +24,36 @@ namespace Util
             return Get(typeof(T));
         }
 
-        public T Get(Type type)
-        {
-            Func<Type, T> allocator = DefaultAllocator<T>;
-            return Get(type, allocator);
-        }
-
-        public T Get(Type type, Func<Type, T> allocator)
-        {
-            Queue<T> instances;
-
-            if (items.TryGetValue(type, out instances) && (instances.Count > 0))
-            {
-                return instances.Dequeue();
-            }
-
-            return allocator(type);
-        }
-
         public U Get<U>() where U : T
         {
             return Get<U>(typeof(U));
         }
 
-        public U Get<U>(Type type) where U : T
+        public DerivedType Get<DerivedType>(Type key) where DerivedType : T
         {
-            Func<Type, U> allocator = DefaultAllocator<U>;
-            return Get<U>(type, allocator);
+            Func<Type, DerivedType> allocator = DefaultAllocator<DerivedType>;
+            return Get<DerivedType>(key, allocator);
         }
 
-        public U Get<U>(Type type, Func<Type, U> allocator) where U : T
+        public DerivedType Get<DerivedType>(Type key, System.Func<Type, DerivedType> allocator) where DerivedType : T
         {
-            return (U)Get(type, t => (T)allocator(t));
+            Allocator wrapper = (k) => (T)allocator(k);
+            return (DerivedType)Get(key, wrapper);
         }
 
-        public void Release(T item)
+        override public T DefaultAllocator(Type key)
         {
-            var itemType = item.GetType();
+            return (T)Activator.CreateInstance(key);
+        }
 
-            if (!items.ContainsKey(itemType))
-            {
-                items.Add(itemType, new Queue<T>());
-            }
+        public DerivedType DefaultAllocator<DerivedType>(Type key)
+        {
+            return (DerivedType)Activator.CreateInstance(key);
+        }
 
-            items[itemType].Enqueue(item);
+        override public void Release(T item)
+        {
+            ReturnToPool(item.GetType(), item);
         }
     }
 }
