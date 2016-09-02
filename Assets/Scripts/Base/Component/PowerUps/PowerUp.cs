@@ -2,6 +2,7 @@ using Sequence;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Registry;
 
 namespace PowerUps
 {
@@ -94,7 +95,7 @@ namespace PowerUps
                     controller.OverrideLaunchSound(definition.LaunchSound);
                 }
                 controller.AddPowerUp(definition.Type);
-                GlobalState.EventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
+                GlobalState.EventService.AddEventHandler<PowerUpItemReturnEvent>(OnItemReturn);
                 Reset();
                 StartCoroutine(ShowCharacter());
             }
@@ -110,11 +111,11 @@ namespace PowerUps
             StartCoroutine(HideShow(showCurve));
         }
 
-        private void OnReadyForNextBubble()
+        private void OnItemReturn()
         {
             characterAnimator.SetTrigger("Finish");
             characterAnimator.ResetTrigger("AddPowerUp");
-            GlobalState.EventService.RemoveEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
+            GlobalState.EventService.RemoveEventHandler<PowerUpItemReturnEvent>(OnItemReturn);
             Show();
         }
 
