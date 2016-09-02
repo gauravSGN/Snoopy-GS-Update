@@ -2667,6 +2667,7 @@ GameObject:
   - 223: {fileID: 223000012138970774}
   - 114: {fileID: 114000011880665904}
   - 114: {fileID: 114000012049497194}
+  - 114: {fileID: 114000013056297780}
   m_Layer: 5
   m_Name: HUD Canvas
   m_TagString: Untagged
@@ -4565,6 +4566,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000013056297780
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011335939276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4466a41fc35840f6acc88c0aa4bc62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  referenceWidth: 750
+  referenceHeight: 1334
+  matchHeight: 0
 --- !u!114 &114000013065886026
 MonoBehaviour:
   m_ObjectHideFlags: 1
