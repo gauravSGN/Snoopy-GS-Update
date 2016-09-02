@@ -1,6 +1,3 @@
-using System;
-using Data = System.Collections.Generic.IDictionary<string, object>;
-
 namespace State
 {
     public class LevelData : StateHandler
@@ -21,12 +18,6 @@ namespace State
         {
             get { return GetValue<long>("updatedAt", 0); }
             set { SetValue<long>("updatedAt", value); }
-        }
-
-        public LevelData(Data topLevelState) : this(topLevelState, null) {}
-
-        public LevelData(Data topLevelState, Action<Observable> initialListener) : base(topLevelState, initialListener)
-        {
         }
     }
 }

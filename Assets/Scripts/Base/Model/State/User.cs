@@ -7,7 +7,6 @@ namespace State
 {
     public class User : StateHandler, UserStateService
     {
-        private const string LEVELS = "levels";
         private const string HAS_PAID = "hasPaid";
         private const string MAX_LEVEL = "maxLevel";
         private const string CURRENT_LEVEL = "currentLevel";
@@ -40,19 +39,21 @@ namespace State
         public Settings settings { get; private set; }
         public Purchasables purchasables { get; private set; }
 
-        public User() : base(GS.Api.State)
+        public User()
         {
-            InitializeStateKeys();
-
-            levels = new Levels((Data)GS.Api.State[LEVELS], UpdateAndNotifyListenersCallback);
-
-            settings = new Settings(null, NotifyListenersCallback);
-            purchasables = new Purchasables(null, NotifyListenersCallback);
+            Initialize(GS.Api.State);
         }
 
-        override protected string[] GetStateKeys()
+        override public void Initialize(Data topLevelState)
         {
-            return new[] { LEVELS };
+            if (!initialized)
+            {
+                base.Initialize(topLevelState);
+
+                levels = BuildStateHandlerWithCallback<Levels>(GS.Api.State, UpdateAndNotifyListenersCallback);
+                settings = BuildStateHandler<Settings>();
+                purchasables = BuildStateHandler<Purchasables>();
+            }
         }
 
         override protected void SetValue<T>(string key, object value)

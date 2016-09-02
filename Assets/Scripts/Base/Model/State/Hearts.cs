@@ -2,7 +2,6 @@ using Util;
 using System;
 using UnityEngine;
 using System.Collections;
-using Data = System.Collections.Generic.IDictionary<string, object>;
 
 namespace State
 {
@@ -12,6 +11,8 @@ namespace State
 
         private const string QUANTITY = "quantity";
         private const string LAST_TIME_HEART_AWARDED = "lastTimeHeartAwarded";
+
+        override public string Key { get { return "hearts"; } }
 
         public long quantity
         {
@@ -56,12 +57,6 @@ namespace State
 
                 return secondsRemaining;
             }
-        }
-
-        public Hearts(Data topLevelState) : this(topLevelState, null) {}
-
-        public Hearts(Data topLevelState, Action<Observable> initialListener) : base(topLevelState, initialListener)
-        {
         }
 
         public void Replenish()

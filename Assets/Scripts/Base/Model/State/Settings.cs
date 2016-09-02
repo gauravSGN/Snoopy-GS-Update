@@ -1,6 +1,3 @@
-using System;
-using Data = System.Collections.Generic.IDictionary<string, object>;
-
 namespace State
 {
     public class Settings : PersistableStateHandler
@@ -18,13 +15,6 @@ namespace State
         {
             get { return GetValue<bool>(SFX_ON, true); }
             set { SetValue<bool>(SFX_ON, value); }
-        }
-
-        public Settings(Data topLevelState) : this(topLevelState, null) {}
-
-        public Settings(Data topLevelState, Action<Observable> initialListener)
-            : base(topLevelState, initialListener)
-        {
         }
     }
 }
