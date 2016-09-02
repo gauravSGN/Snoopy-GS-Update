@@ -1,33 +1,28 @@
-using System;
 using Data = System.Collections.Generic.IDictionary<string, object>;
 
 namespace State
 {
     public class Purchasables : PersistableStateHandler
     {
-        private const string COINS = "coins";
-        private const string HEARTS = "hearts";
-        private const string BOOSTERS = "boosters";
-
         public Coins coins { get; private set; }
         public Hearts hearts { get; private set; }
         public Boosters boosters { get; private set; }
 
-        public Purchasables(Data topLevelState) : this(topLevelState, null) {}
-
-        public Purchasables(Data topLevelState, Action<Observable> initialListener)
-            : base(topLevelState, initialListener)
+        override public void Initialize(Data topLevelState)
         {
-            InitializeStateKeys();
+            if (!initialized)
+            {
+                base.Initialize(topLevelState);
 
-            coins = new Coins((Data)state[COINS], SaveAndNotifyListenersCallback);
-            hearts = new Hearts((Data)state[HEARTS], SaveAndNotifyListenersCallback);
-            boosters = new Boosters((Data)state[BOOSTERS], SaveAndNotifyListenersCallback);
+                coins = BuildStateHandler<Coins>(state);
+                hearts = BuildStateHandler<Hearts>(state);
+                boosters = BuildStateHandler<Boosters>(state);
+            }
         }
 
-        override protected string[] GetStateKeys()
+        override protected T BuildStateHandler<T>(Data topLevelState)
         {
-            return new[] { COINS, HEARTS, BOOSTERS };
+            return BuildStateHandlerWithCallback<T>(topLevelState, SaveAndNotifyListenersCallback);
         }
     }
 }
