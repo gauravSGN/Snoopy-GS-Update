@@ -15,12 +15,13 @@ namespace Loading
         public event Action OnSceneReady;
         public event Action OnFinishedLoading;
 
+        private readonly List<IEnumerator> loadingRoutines = new List<IEnumerator>();
+        private UnityEngine.AsyncOperation asyncOp;
+
         public int LevelNumber { get; set; }
         public string NextLevelData { get; set; }
         public string ReturnScene { get; set; }
         public float Progress { get; private set; }
-
-        private UnityEngine.AsyncOperation asyncOp;
 
         public SceneHandler()
         {
@@ -52,6 +53,11 @@ namespace Loading
             {
                 asyncOp.allowSceneActivation = true;
             }
+        }
+
+        public void RunAtLoad(IEnumerator coroutine)
+        {
+            loadingRoutines.Add(coroutine);
         }
 
         private void OnTransitionToReturnScene()
@@ -94,8 +100,23 @@ namespace Loading
             yield return null;
 
             var assetService = GlobalState.AssetService;
-            while (assetService.IsLoading)
+
+            while (assetService.IsLoading || (loadingRoutines.Count > 0))
             {
+                var index = 0;
+
+                while (index < loadingRoutines.Count)
+                {
+                    if (!loadingRoutines[index].MoveNext())
+                    {
+                        loadingRoutines.RemoveAt(index);
+                    }
+                    else
+                    {
+                        index++;
+                    }
+                }
+
                 yield return null;
             }
 

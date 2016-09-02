@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 
 namespace Service
 {
@@ -17,5 +17,6 @@ namespace Service
         void Reset();
         void TransitionToScene(string sceneName, bool startImmediately = true);
         void AllowTransition();
+        void RunAtLoad(IEnumerator coroutine);
     }
 }
