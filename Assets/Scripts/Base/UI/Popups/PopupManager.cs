@@ -17,7 +17,7 @@ namespace UI.Popup
         private Color overlayColor;
 
         [SerializeField]
-        private Canvas parentCanvas;
+        private RectTransform popupParent;
 
         [SerializeField]
         private PopupFactory popupFactory;
@@ -81,7 +81,7 @@ namespace UI.Popup
                     popupQueue.Dequeue();
 
                     var popup = popupFactory.CreateByType(config.Type);
-                    popup.gameObject.transform.SetParent(parentCanvas.transform, false);
+                    popup.gameObject.transform.SetParent(popupParent, false);
 
                     UpdatePopupOverlay();
 
@@ -122,7 +122,7 @@ namespace UI.Popup
 
         private void UpdatePopupOverlay()
         {
-            var maxSiblingIndex = parentCanvas.transform.childCount - 1;
+            var maxSiblingIndex = popupParent.childCount - 1;
             var overlayActive = (maxSiblingIndex > 0);
             var currentlyActive = popupOverlay.gameObject.activeInHierarchy;
 
