@@ -12,7 +12,6 @@ namespace Service
         int LevelNumber { get; set; }
         string NextLevelData { get; set; }
         string ReturnScene { get; set; }
-        List<Action> PostTransitionCallbacks { get; set; }
         float Progress { get; }
 
         void Reset();

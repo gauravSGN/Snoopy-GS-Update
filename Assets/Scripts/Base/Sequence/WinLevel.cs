@@ -157,12 +157,13 @@ namespace Sequence
             if (levelState.levelNumber == user.maxLevel)
             {
                 user.maxLevel++;
-                GlobalState.SceneService.PostTransitionCallbacks.Add(DispatchMovePlayerAvatar);
+                GlobalState.SceneService.OnFinishedLoading += DispatchMovePlayerAvatar;
             }
         }
 
         private void DispatchMovePlayerAvatar()
         {
+            GlobalState.SceneService.OnFinishedLoading -= DispatchMovePlayerAvatar;
             GlobalState.EventService.Dispatch(new MovePlayerAvatarEvent());
         }
     }

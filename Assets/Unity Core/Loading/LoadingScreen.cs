@@ -30,7 +30,15 @@ namespace Namespace
 
         public void OnUpdate()
         {
-            fillImage.fillAmount = (GlobalState.AssetService.Progress + GlobalState.SceneService.Progress) / 2.0f;
+            var progress = GlobalState.SceneService.Progress;
+
+            var assetService = GlobalState.AssetService;
+            if (assetService.IsLoading)
+            {
+                progress = (progress + assetService.Progress) / 2.0f;
+            }
+
+            fillImage.fillAmount = progress;
         }
 
         private void OnStartLoadingScene()
