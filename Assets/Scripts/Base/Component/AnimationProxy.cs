@@ -12,6 +12,11 @@ public class AnimationProxy : MonoBehaviour, AnimationService
         return animationFactory.CreateByType(type);
     }
 
+    public void Preload(AnimationType type, int count)
+    {
+        animationFactory.Preload(type, count);
+    }
+
     protected void Start()
     {
         GlobalState.Instance.Services.SetInstance<AnimationService>(this);
