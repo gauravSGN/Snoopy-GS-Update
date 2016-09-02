@@ -889,6 +889,7 @@ Transform:
   m_Children:
   - {fileID: 450124}
   - {fileID: 492272}
+  - {fileID: 4000010956218164}
   m_Father: {fileID: 464372}
   m_RootOrder: 0
 --- !u!4 &460070
@@ -2690,6 +2691,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000011169742994
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000010956218164}
+  - 114: {fileID: 114000013665682114}
+  - 114: {fileID: 114000011702874232}
+  - 114: {fileID: 114000012026547598}
+  m_Layer: 0
+  m_Name: Charlie Return Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000011335939276
 GameObject:
   m_ObjectHideFlags: 1
@@ -4097,6 +4116,25 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000011702874232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011169742994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9cfd6a58b4648e0a796788310007f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionOffset: {x: 0, y: 0, z: 0}
+  color: {r: 0.084, g: 0.92156863, b: 0.216, a: 1}
+  showHistory: 0
+  maxHistory: 10
+  historyInterval: 0.1
+  historyFalloffColor: {r: 0, g: 0, b: 0, a: 1}
+  radius: 0.15
+  wireframe: 1
 --- !u!114 &114000011717300176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4248,6 +4286,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000012026547598
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011169742994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a631db1f3010493f9138ba27d0189a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usage: 2
 --- !u!114 &114000012049497194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4896,6 +4946,23 @@ MonoBehaviour:
   fields:
   - score
   level: {fileID: 11450880}
+--- !u!114 &114000013665682114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011169742994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1fd8daaed7b64148a34acb96ba14ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonRenderer: {fileID: 11443298}
+  boneName: Kite_Catcher_Bone
+  followZPosition: 1
+  followBoneRotation: 0
+  followSkeletonFlip: 0
+  initializeOnAwake: 1
 --- !u!114 &114000013670720732
 MonoBehaviour:
   m_ObjectHideFlags: 1
