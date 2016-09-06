@@ -257,7 +257,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 1.4
+      scalar: 1.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -583,8 +583,8 @@ ParticleSystem:
         m_RotationOrder: 0
       minMaxState: 3
     randomizeRotationDirection: 0
-    gravityModifier: 0.35
-    maxNumParticles: 75
+    gravityModifier: 0.3
+    maxNumParticles: 10
     size3D: 0
     rotation3D: 0
   ShapeModule:
@@ -612,7 +612,7 @@ ParticleSystem:
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 75
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -646,11 +646,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
       minMaxState: 0
-    cnt0: 8
+    cnt0: 10
     cnt1: 30
     cnt2: 30
     cnt3: 30
-    cntmax0: 8
+    cntmax0: 10
     cntmax1: 30
     cntmax2: 30
     cntmax3: 30
@@ -658,7 +658,7 @@ ParticleSystem:
     time1: 0
     time2: 0
     time3: 0
-    m_BurstCount: 0
+    m_BurstCount: 1
   SizeModule:
     enabled: 1
     curve:
@@ -1296,7 +1296,7 @@ ParticleSystem:
     enabled: 0
     multiplier: 1
   ClampVelocityModule:
-    enabled: 1
+    enabled: 0
     x:
       scalar: 1
       maxCurve:
@@ -1403,7 +1403,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     magnitude:
-      scalar: 1
+      scalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1439,7 +1439,7 @@ ParticleSystem:
       minMaxState: 0
     separateAxis: 0
     inWorldSpace: 0
-    dampen: 0.2
+    dampen: 0
   SizeBySpeedModule:
     enabled: 0
     curve:
@@ -2007,7 +2007,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7013b7236d55b4ba99f97a7c2b171c4e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2772813d22c9746c9baeb7014c275c77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1.2155437}
   m_FlipX: 0
   m_FlipY: 0
@@ -2088,7 +2088,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011907542972}
   serializedVersion: 2
-  lengthInSec: 1.5
+  lengthInSec: 1.2
   startDelay:
     scalar: 0
     maxCurve:
@@ -2487,7 +2487,7 @@ ParticleSystem:
       minMaxState: 3
     randomizeRotationDirection: 0
     gravityModifier: 0.1
-    maxNumParticles: 16
+    maxNumParticles: 12
     size3D: 0
     rotation3D: 0
   ShapeModule:
@@ -2549,11 +2549,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
       minMaxState: 0
-    cnt0: 50
+    cnt0: 12
     cnt1: 30
     cnt2: 30
     cnt3: 30
-    cntmax0: 50
+    cntmax0: 12
     cntmax1: 30
     cntmax2: 30
     cntmax3: 30
