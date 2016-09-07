@@ -9,6 +9,9 @@ namespace Service
         event Action<float> OnProgress;
         event Action OnComplete;
 
+        float Progress { get; }
+        bool IsLoading { get; }
+
         void UnloadUnusedAssets();
 
         T LoadAsset<T>(string assetName) where T : UnityEngine.Object;
