@@ -889,7 +889,7 @@ Transform:
   m_Children:
   - {fileID: 450124}
   - {fileID: 492272}
-  - {fileID: 4000010956218164}
+  - {fileID: 4000012474386510}
   m_Father: {fileID: 464372}
   m_RootOrder: 0
 --- !u!4 &460070
@@ -2698,7 +2698,7 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000010956218164}
+  - 4: {fileID: 4000010320784720}
   - 114: {fileID: 114000013665682114}
   - 114: {fileID: 114000011702874232}
   - 114: {fileID: 114000012026547598}
@@ -2927,6 +2927,23 @@ GameObject:
   - 114: {fileID: 114000011486911778}
   m_Layer: 5
   m_Name: Star 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000012147369992
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000012474386510}
+  - 114: {fileID: 114000011264950496}
+  - 114: {fileID: 114000010583137222}
+  m_Layer: 0
+  m_Name: Charlie Item Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3311,6 +3328,19 @@ Transform:
   - {fileID: 4000010957450322}
   m_Father: {fileID: 224000013469916352}
   m_RootOrder: 5
+--- !u!4 &4000010320784720
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011169742994}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!4 &4000010361825186
 Transform:
   m_ObjectHideFlags: 1
@@ -3363,6 +3393,19 @@ Transform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000010062567308}
+  m_RootOrder: 2
+--- !u!4 &4000012474386510
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012147369992}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.57808, y: 0.3092, z: 0.05000019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 454222}
   m_RootOrder: 2
 --- !u!4 &4000013007698862
 Transform:
@@ -3605,6 +3648,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: {fileID: 114000012779805326}
+--- !u!114 &114000010583137222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012147369992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a631db1f3010493f9138ba27d0189a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usage: 2
 --- !u!114 &114000010628230960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3823,6 +3878,23 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000011264950496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012147369992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1fd8daaed7b64148a34acb96ba14ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonRenderer: {fileID: 11443298}
+  boneName: Kite_Catcher_Bone
+  followZPosition: 1
+  followBoneRotation: 0
+  followSkeletonFlip: 0
+  initializeOnAwake: 1
 --- !u!114 &114000011266607900
 MonoBehaviour:
   m_ObjectHideFlags: 1

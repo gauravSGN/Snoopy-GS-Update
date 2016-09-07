@@ -95,7 +95,7 @@ namespace PowerUps
                     controller.OverrideLaunchSound(definition.LaunchSound);
                 }
                 controller.AddPowerUp(definition.Type);
-                GlobalState.EventService.AddEventHandler<PowerUpItemReturnEvent>(OnItemReturn);
+                GlobalState.EventService.AddEventHandler<PowerUpReturnEvent>(OnItemReturn);
                 Reset();
                 StartCoroutine(ShowCharacter());
             }
@@ -115,7 +115,6 @@ namespace PowerUps
         {
             characterAnimator.SetTrigger("Finish");
             characterAnimator.ResetTrigger("AddPowerUp");
-            GlobalState.EventService.RemoveEventHandler<PowerUpItemReturnEvent>(OnItemReturn);
             Show();
         }
 
