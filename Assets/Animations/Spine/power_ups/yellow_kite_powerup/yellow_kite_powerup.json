@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "iZedIpE1frosOyae3JQuicU4ZI8", "spine": "3.4.02", "width": 326.31, "height": 352.84 },
+"skeleton": { "hash": "hExQqrD+OD76ZXWUrRTbD6SycQ0", "spine": "3.4.02", "width": 750, "height": 1334 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "placement_ctrl_reset", "parent": "root" },
@@ -18,7 +18,7 @@
 	{ "name": "tracers_spin_06_ctrl", "parent": "master_scale_ctrl", "y": -128.19, "scaleX": 0.259, "scaleY": 0.259 }
 ],
 "slots": [
-	{ "name": "Peanuts_mockup_basic modev3_750_1334", "bone": "root" },
+	{ "name": "Peanuts_mockup_basic modev3_750_1334", "bone": "root", "attachment": "Peanuts_mockup_basic modev3_750_1334" },
 	{ "name": "InGame_mocukup_750_1334_Snoopy", "bone": "root" },
 	{ "name": "Kite_glowing", "bone": "kite_glowing_pc_ctrl", "attachment": "Kite_glowing" },
 	{ "name": "kite_outline_glowing", "bone": "outer_glow_scale_ctrl", "attachment": "kite_outline_glowing" },
@@ -356,21 +356,9 @@
 			"kite_outline_glowing": {
 				"color": [
 					{ "time": 0, "color": "ffffff00", "curve": "stepped" },
-					{
-						"time": 1.9333,
-						"color": "ffffff00",
-						"curve": [ 0.25, 0, 0.492, 0.98 ]
-					},
-					{
-						"time": 2.1,
-						"color": "ffffff7d",
-						"curve": [ 0.407, 0.08, 0.609, 0.88 ]
-					},
-					{
-						"time": 2.3,
-						"color": "ffffff9a",
-						"curve": [ 0.563, 0.02, 0.685, 0.23 ]
-					},
+					{ "time": 1.9333, "color": "ffffff00", "curve": "stepped" },
+					{ "time": 2.1, "color": "ffffff00", "curve": "stepped" },
+					{ "time": 2.3, "color": "ffffff00", "curve": "stepped" },
 					{ "time": 2.8333, "color": "ffffff00" }
 				],
 				"attachment": [
@@ -989,10 +977,8 @@
 		],
 		"events": [
 			{ "time": 0.7666, "name": "StartKiteSparkle01" },
-			{ "time": 1.5666, "name": "StartBubbleDestoy" },
-			{ "time": 1.8666, "name": "FinishBlocking" },
-			{ "time": 2.5666, "name": "StartRevealItem" },
-			{ "time": 2.9, "name": "ItemReturn" }
+			{ "time": 1.5666, "name": "FinishBlocking" },
+			{ "time": 2.5666, "name": "ItemReturn" }
 		]
 	}
 }

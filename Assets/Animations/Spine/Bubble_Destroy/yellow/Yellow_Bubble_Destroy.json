@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "UZvL4yBdagtCLRiO/x8SkC3huQ0", "spine": "3.4.02", "width": 94, "height": 94 },
+"skeleton": { "hash": "fxDG3A0oEMcLIqUaEqQg+Y9EsmI", "spine": "3.4.02", "width": 94, "height": 94 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "Main_ctrl", "parent": "root" }
@@ -83,8 +83,7 @@
 		},
 		"events": [
 			{ "time": 0.1666, "name": "StartBubbleTint" },
-			{ "time": 0.3666, "name": "EndBubbleTint" },
-			{ "time": 0.3666, "name": "StartBubbleBurst" }
+			{ "time": 0.3666, "name": "EndBubbleTint" }
 		]
 	}
 }
