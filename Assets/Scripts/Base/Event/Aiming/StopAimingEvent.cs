@@ -2,7 +2,7 @@
 {
     sealed public class StopAimingEvent : PooledEvent<StopAimingEvent>
     {
-        public static void Dispatch()
+        static public void Dispatch()
         {
             DispatchPooled();
         }
