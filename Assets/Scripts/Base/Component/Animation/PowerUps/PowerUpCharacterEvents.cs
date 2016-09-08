@@ -19,4 +19,14 @@ public class PowerUpCharacterEvents : MonoBehaviour
     {
         gameObject.transform.localPosition = origin;
     }
+
+    public void ReturnToKid()
+    {
+        GlobalState.EventService.Dispatch(new PowerUpReturningEvent());
+    }
+
+    public void CatchKite()
+    {
+        GlobalState.EventService.Dispatch(new PowerUpReturnedEvent());
+    }
 }

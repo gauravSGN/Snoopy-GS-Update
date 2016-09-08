@@ -2,11 +2,11 @@ using UnityEngine;
 using Spine;
 using Spine.Unity;
 
-public class SpineResetOnEnter : StateMachineBehaviour
+public class SpineResetOnTransition : SelectableTransitionBehaviour
 {
     private Skeleton skeleton;
 
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    override protected void OnSetTransition(Animator animator)
     {
         if (skeleton == null)
         {

@@ -93,8 +93,9 @@ namespace PowerUps
                 {
                     controller.OverrideLaunchSound(definition.LaunchSound);
                 }
+
                 controller.AddPowerUp(definition.Type);
-                GlobalState.EventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
+                GlobalState.EventService.AddEventHandler<PowerUpPrepareForReturnEvent>(OnItemReturn);
                 Reset();
                 StartCoroutine(ShowCharacter());
             }
@@ -110,11 +111,10 @@ namespace PowerUps
             StartCoroutine(HideShow(showCurve));
         }
 
-        private void OnReadyForNextBubble()
+        private void OnItemReturn()
         {
             characterAnimator.SetTrigger("Finish");
             characterAnimator.ResetTrigger("AddPowerUp");
-            GlobalState.EventService.RemoveEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
             Show();
         }
 

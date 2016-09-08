@@ -1,3 +1,4 @@
+using Sequence;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -5,6 +6,9 @@ public class PowerUpAnimationEvents : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> startKiteSparkle01;
+
+    [SerializeField]
+    private PowerUpReturnSequence returningItem;
 
     // Event names need to match exactly what is in the spine animation data or they
     // won't work without some extra manual intervention. I talked to Eric about more
@@ -15,5 +19,10 @@ public class PowerUpAnimationEvents : MonoBehaviour
         {
             particleSystem.SetActive(true);
         }
+    }
+
+    public void ItemReturn()
+    {
+        returningItem.Play();
     }
 }
