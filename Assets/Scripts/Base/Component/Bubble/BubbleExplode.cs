@@ -59,7 +59,7 @@ public class BubbleExplode : MonoBehaviour
         if (deathAnimationType != AnimationType.None)
         {
             var bubbleDeath = bubble.GetComponent<BubbleDeath>();
-            bubbleDeath.AddEffect(AnimationEffect.Play(bubble, deathAnimationType), BubbleDeathType.Pop);
+            bubbleDeath.ReplaceEffect(AnimationEffect.Play(bubble, deathAnimationType), BubbleDeathType.Pop);
         }
 
         BubbleReactionEvent.Dispatch(ReactionPriority.PowerUp, model);
