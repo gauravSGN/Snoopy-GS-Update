@@ -17,6 +17,12 @@ namespace Snoopy.Characters
         private GameObject celebration;
 
         [SerializeField]
+        private GameObject escapeEffects;
+
+        [SerializeField]
+        private float escapeEffectsDuration;
+
+        [SerializeField]
         private AudioClip escapeSound;
 
         [SerializeField]
@@ -55,6 +61,12 @@ namespace Snoopy.Characters
         {
             transform.SetParent(gameView, true);
             animator.SetBool("HasEscaped", true);
+
+            if (escapeEffects != null)
+            {
+                var effects = Instantiate(escapeEffects, transform.position, Quaternion.identity);
+                Destroy(effects, escapeEffectsDuration);
+            }
 
             if (celebration != null)
             {

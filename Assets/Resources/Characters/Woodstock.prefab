@@ -175,6 +175,8 @@ MonoBehaviour:
   animator: {fileID: 9559750}
   trail: {fileID: 133200}
   celebration: {fileID: 150618, guid: 30b9370ee10da49fe93d3c37345e3deb, type: 2}
+  escapeEffects: {fileID: 162076, guid: 6cab202c2008e4586ba9a80c40a09e20, type: 2}
+  escapeEffectsDuration: 5
   escapeSound: {fileID: 8300000, guid: f5846956dea164644949636a2bae2bcb, type: 3}
   loseSound: {fileID: 8300000, guid: 5a5c06a9dfa1a4ec5a5ee473bab66b03, type: 3}
 --- !u!114 &11439978
@@ -232,7 +234,6 @@ MonoBehaviour:
   pmaVertexColors: 1
   calculateNormals: 0
   calculateTangents: 0
-  frontFacing: 0
   logErrors: 0
   disableRenderingOnOverride: 1
   layerMixModes: 00000000
