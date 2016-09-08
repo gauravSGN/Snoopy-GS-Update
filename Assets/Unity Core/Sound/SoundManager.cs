@@ -46,7 +46,7 @@ namespace Sound
 
         public bool SoundMuted { get; private set; }
         public bool MusicMuted { get; private set; }
-        public bool MusicPlaying { get { return musicChannel != null; } }
+        public bool MusicPlaying { get { return musicChannel.isPlaying; } }
         public int SoundsPlaying { get { return activeChannels.Count; } }
 
         public void Start()
@@ -60,6 +60,8 @@ namespace Sound
             {
                 freeChannels.Add(CreateChannel());
             }
+
+            musicChannel = CreateChannel();
 
             GlobalState.Instance.Services.SetInstance<SoundService>(this);
 
@@ -89,11 +91,6 @@ namespace Sound
 
                     freeChannels.Add(channel);
                     activeChannels.RemoveAt(index);
-
-                    if (channel == musicChannel)
-                    {
-                        musicChannel = null;
-                    }
                 }
                 else
                 {
@@ -122,13 +119,12 @@ namespace Sound
 
         public void PlayMusic(AudioClip clip, bool loop)
         {
-            if (!MusicMuted)
-            {
-                StopMusic();
+            StopMusic();
 
-                musicChannel = PlayClip(clip);
-                musicChannel.loop = loop;
-            }
+            musicChannel.clip = clip;
+            musicChannel.loop = loop;
+
+            RestartMusic();
         }
 
         public void PlayMusic(MusicType type, bool loop)
@@ -138,10 +134,14 @@ namespace Sound
 
         public void StopMusic()
         {
-            if (musicChannel != null)
+            musicChannel.Stop();
+        }
+
+        public void RestartMusic()
+        {
+            if (!MusicMuted)
             {
-                musicChannel.Stop();
-                musicChannel = null;
+                musicChannel.Play();
             }
         }
 
@@ -269,6 +269,7 @@ namespace Sound
         private void OnSettingsChanged(Observable target)
         {
             var settings = target as State.Settings;
+            bool restartMusic = (MusicMuted && settings.musicOn);
 
             if (!SoundMuted && !settings.sfxOn)
             {
@@ -282,6 +283,11 @@ namespace Sound
 
             SoundMuted = !settings.sfxOn;
             MusicMuted = !settings.musicOn;
+
+            if (restartMusic)
+            {
+                RestartMusic();
+            }
         }
 
         private AudioClip LoadClipCallback(string path)
