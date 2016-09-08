@@ -7,19 +7,26 @@ public class RendererTransitionEnabler<Type> : SelectableTransitionBehaviour
     [SerializeField]
     private bool enable;
 
+    [SerializeField]
+    private bool delayForFrame;
+
     override protected void OnSetTransition(Animator animator)
     {
         var renderer = animator.gameObject.GetComponent<Type>();
 
         if (renderer != null)
         {
-            GlobalState.Instance.RunCoroutine(EnableEndOfFrame(renderer));
+            GlobalState.Instance.RunCoroutine(Enable(renderer));
         }
     }
 
-    private IEnumerator EnableEndOfFrame(Type renderer)
+    private IEnumerator Enable(Type renderer)
     {
-        yield return new WaitForEndOfFrame();
+        if (delayForFrame)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         renderer.enabled = enable;
     }
 }

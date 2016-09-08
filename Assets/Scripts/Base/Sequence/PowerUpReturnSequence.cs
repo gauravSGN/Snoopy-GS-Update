@@ -13,7 +13,7 @@ namespace Sequence
         [SerializeField]
         private float returnTime;
 
-        private SpriteRenderer item;
+        private SpriteRenderer itemRenderer;
         private Transform originalParent;
 
         public void Play()
@@ -21,8 +21,8 @@ namespace Sequence
             originalParent = transform.parent;
             transform.SetParent(null);
 
-            item = GetComponent<SpriteRenderer>();
-            item.enabled = true;
+            itemRenderer = GetComponent<SpriteRenderer>();
+            itemRenderer.enabled = true;
 
             var eventService = GlobalState.EventService;
             eventService.AddEventHandler<PowerUpReturningEvent>(OnReturning);
@@ -43,7 +43,7 @@ namespace Sequence
 
             transform.SetParent(originalParent);
             transform.localPosition = Vector3.forward;
-            item.enabled = false;
+            itemRenderer.enabled = false;
         }
 
         private IEnumerator ReturnToTarget(Transform target)
@@ -53,8 +53,6 @@ namespace Sequence
 
             while (runTime <= returnTime)
             {
-                yield return null;
-
                 var elapsedTime = Time.deltaTime;
                 var distance = speed * elapsedTime;
                 transform.position = Vector3.MoveTowards(transform.position, target.position, distance);
@@ -64,6 +62,8 @@ namespace Sequence
                     transform.SetParent(target.transform);
                     break;
                 }
+
+                yield return null;
 
                 runTime += elapsedTime;
             }

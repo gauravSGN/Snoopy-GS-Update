@@ -3848,7 +3848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usage: 2
-  returnTime: 0.4
+  returnTime: 0.45
 --- !u!212 &212000014099650360
 SpriteRenderer:
   m_ObjectHideFlags: 1
