@@ -17,6 +17,7 @@ namespace Service
         void PlayMusic(AudioClip clip, bool loop);
         void PlayMusic(MusicType type, bool loop);
         void StopMusic();
+        void RestartMusic();
 
         void PreloadSound(SoundType type);
         void PreloadMusic(MusicType type);
