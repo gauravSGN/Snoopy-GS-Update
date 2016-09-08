@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class RendererTransitionEnabler<Type> : BaseOnTransition
+public class RendererTransitionEnabler<Type> : SelectableTransitionBehaviour
     where Type : Renderer
 {
     [SerializeField]
@@ -13,8 +13,7 @@ public class RendererTransitionEnabler<Type> : BaseOnTransition
 
         if (renderer != null)
         {
-            GlobalState.Instance.StartCoroutine(EnableEndOfFrame(renderer));
-            // renderer.enabled = enable;
+            GlobalState.Instance.RunCoroutine(EnableEndOfFrame(renderer));
         }
     }
 

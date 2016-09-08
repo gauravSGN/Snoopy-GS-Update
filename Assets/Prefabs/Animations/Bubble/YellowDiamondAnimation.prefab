@@ -210,9 +210,7 @@ MonoBehaviour:
   startKiteSparkle01:
   - {fileID: 158142}
   - {fileID: 178174}
-  usage: 2
-  returningItem: {fileID: 1000010382223668}
-  returnTime: 0.425
+  returningItem: {fileID: 114000013966791310}
 --- !u!198 &19847580
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3817,6 +3815,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010240170860}
   - 212: {fileID: 212000014099650360}
+  - 114: {fileID: 114000013966791310}
   m_Layer: 0
   m_Name: Kite
   m_TagString: Untagged
@@ -3837,6 +3836,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 443920}
   m_RootOrder: 2
+--- !u!114 &114000013966791310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010382223668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da10e22db348e49f98a1d789bb1ef092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usage: 2
+  returnTime: 0.4
 --- !u!212 &212000014099650360
 SpriteRenderer:
   m_ObjectHideFlags: 1

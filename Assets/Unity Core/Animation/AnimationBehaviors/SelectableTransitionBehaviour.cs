@@ -1,6 +1,6 @@
 using UnityEngine;
 
-abstract public class BaseOnTransition : StateMachineBehaviour
+abstract public class SelectableTransitionBehaviour : StateMachineBehaviour
 {
     [SerializeField]
     private StateTransitionType transitionType;
@@ -19,7 +19,7 @@ abstract public class BaseOnTransition : StateMachineBehaviour
 
     protected void OnTransition(Animator animator, StateTransitionType transition)
     {
-        if (transitionType == transition)
+        if ((transitionType == transition) || (transitionType == StateTransitionType.EnterAndExit))
         {
             OnSetTransition(animator);
         }

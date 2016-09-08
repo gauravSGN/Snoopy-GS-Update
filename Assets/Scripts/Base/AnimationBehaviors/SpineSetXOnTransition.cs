@@ -2,7 +2,7 @@ using UnityEngine;
 using Spine;
 using Spine.Unity;
 
-public class SpineSetXOnComplete : BaseOnTransition
+public class SpineSetXOnTransition : SelectableTransitionBehaviour
 {
     [SerializeField]
     private bool flipX;
