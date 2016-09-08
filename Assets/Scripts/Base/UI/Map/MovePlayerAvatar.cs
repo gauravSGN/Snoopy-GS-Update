@@ -13,6 +13,9 @@ namespace UI.Map
         [SerializeField]
         private AnimationCurve easeCurve;
 
+        [SerializeField]
+        private GameObject unlockEffects;
+
         private Transform origin;
         private Transform destination;
 
@@ -36,6 +39,9 @@ namespace UI.Map
         {
             if (origin != null)
             {
+                var effectsInstance = Instantiate(unlockEffects);
+                effectsInstance.transform.SetParent(destination, false);
+
                 GoTween tween = transform.localPositionFrom(travelTime, origin.localPosition);
                 tween.easeCurve = easeCurve;
                 tween.easeType = GoEaseType.AnimationCurve;
