@@ -47,12 +47,12 @@ public class Level : MonoBehaviour
         }
 
         levelState.levelNumber = sceneData.LevelNumber;
-        StartCoroutine(LoadingCoroutine());
+        GlobalState.SceneService.RunAtLoad(LoadingCoroutine());
     }
 
     private IEnumerator LoadingCoroutine()
     {
-        yield return new WaitForEndOfFrame();
+        yield return null;
 
         bubbleFactory.ResetModifiers();
         loader.LoadLevel(levelData);

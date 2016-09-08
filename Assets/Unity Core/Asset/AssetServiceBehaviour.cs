@@ -11,6 +11,9 @@ namespace Asset
         public event Action<float> OnProgress;
         public event Action OnComplete;
 
+        public float Progress { get; private set; }
+        public bool IsLoading { get; private set; }
+
         private interface AsyncAssetRequest
         {
             ResourceRequest Request { get; }
@@ -94,6 +97,7 @@ namespace Asset
 
         private IEnumerator AsyncLoadRoutine()
         {
+            IsLoading = true;
             int numComplete = 0;
 
             while (requests.Count > 0)
@@ -120,14 +124,17 @@ namespace Asset
                     }
                 }
 
+                Progress = (progress + numComplete) / (float)(requests.Count + numComplete);
+
                 if (OnProgress != null)
                 {
-                    progress = (progress + numComplete) / (float)(requests.Count + numComplete);
-                    OnProgress.Invoke(progress);
+                    OnProgress.Invoke(Progress);
                 }
 
                 yield return null;
             }
+
+            IsLoading = false;
 
             if (OnComplete != null)
             {

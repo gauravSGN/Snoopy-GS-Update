@@ -5,16 +5,12 @@
             "className": "UpdateDispatcher, Assembly-CSharp"
         },
         {
-            "interfaceName": "Service.TopUIService, Assembly-CSharp",
-            "className": "TopUIManager, Assembly-CSharp"
-        },
-        {
             "interfaceName": "Service.EventService, Assembly-CSharp",
             "className": "Event.EventDispatcher, Assembly-CSharp"
         },
         {
             "interfaceName": "Service.SceneService, Assembly-CSharp",
-            "className": "Service.SceneHandler, Assembly-CSharp"
+            "className": "Loading.SceneHandler, Assembly-CSharp"
         },
         {
             "interfaceName": "Service.AnimationService, Assembly-CSharp",

@@ -3,9 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class AsyncSceneTransition : MonoBehaviour
 {
-    public void TriggerSceneTransition(string sceneName)
+    public void TriggerSceneTransition()
     {
-        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
-        GlobalState.TopUIService.ShowLoading(op);
+        GlobalState.SceneService.AllowTransition();
     }
 }
