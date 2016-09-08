@@ -1,3 +1,3 @@
-public class PowerUpReturnedEvent : GameEvent
+public class PowerUpPrepareForReturnEvent : GameEvent
 {
 }
