@@ -20,6 +20,9 @@ namespace PowerUps
         private BubbleLauncher launcher;
 
         [SerializeField]
+        private BubbleModifierController modifiers;
+
+        [SerializeField]
         private AnimationType shooterType;
 
         [SerializeField]
@@ -88,11 +91,11 @@ namespace PowerUps
         {
             if (powerUpType == PowerUpType.Empty)
             {
-                launcher.AddShotModifier(AddScan, ShotModifierType.PowerUp);
+                modifiers.Add(AddScan, ShotModifierType.PowerUp);
                 aimline.ModifyAimline(GlobalState.Instance.Config.aimline.extended);
             }
 
-            launcher.SetModifierAnimation(animationService.CreateByType(shooterType));
+            modifiers.SetAnimation(animationService.CreateByType(shooterType));
 
             powerUpType |= type;
             totalPowerUpsInUse += 1;

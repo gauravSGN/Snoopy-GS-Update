@@ -418,6 +418,9 @@ GameObject:
   - 114: {fileID: 11405814}
   - 114: {fileID: 11499892}
   - 114: {fileID: 11461936}
+  - 114: {fileID: 114000011469791366}
+  - 114: {fileID: 114000014025734430}
+  - 114: {fileID: 114000013022758048}
   m_Layer: 0
   m_Name: Launcher
   m_TagString: Untagged
@@ -905,6 +908,7 @@ Transform:
   m_Children:
   - {fileID: 464372}
   - {fileID: 468256}
+  - {fileID: 4000010026805520}
   m_Father: {fileID: 484112}
   m_RootOrder: 2
 --- !u!4 &462516
@@ -1393,13 +1397,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3108aae6f13a247bcb8a86a3e79e4540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locations:
-  - {fileID: 189344}
-  - {fileID: 143398}
   level: {fileID: 11450880}
   aimLine: {fileID: 11476056}
   characterController: {fileID: 11423860}
-  shooterTrailPrefab: {fileID: 190764, guid: bf14e5e1d51c346b08f6686dce6589c9, type: 2}
+  input: {fileID: 114000014025734430}
 --- !u!114 &11410878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1752,9 +1753,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82381c530053d44aca200da89d2caf1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colors: []
   launchOrigin: {fileID: 105830}
   eventTrigger: {fileID: 11466544}
+  modifiers: {fileID: 114000013022758048}
 --- !u!114 &11484244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1880,6 +1881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpFactory: {fileID: 11400000, guid: fcf96848466bd4a74a7ab983e31ba1b4, type: 2}
   launcher: {fileID: 11405814}
+  modifiers: {fileID: 114000013022758048}
   shooterType: 10
   deathEffectType: -1
   explosionEffectType: 2
@@ -3263,6 +3265,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000013976533314
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000010026805520}
+  - 114: {fileID: 114000010626262268}
+  m_Layer: 0
+  m_Name: Shooter Trail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000014062062828
 GameObject:
   m_ObjectHideFlags: 1
@@ -3312,6 +3330,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!4 &4000010026805520
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013976533314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 460070}
+  m_RootOrder: 2
 --- !u!4 &4000010062567308
 Transform:
   m_ObjectHideFlags: 1
@@ -3586,6 +3617,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usage: 2
+--- !u!114 &114000010626262268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013976533314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402ea869d8bfc46b1bfba163a8fd0860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trailPrefab: {fileID: 190764, guid: bf14e5e1d51c346b08f6686dce6589c9, type: 2}
 --- !u!114 &114000010628230960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3951,6 +3994,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000011469791366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1bfa741d1514bba968a0a1fa9bb952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locations:
+  - {fileID: 450124}
+  - {fileID: 468256}
+  level: {fileID: 11450880}
+  input: {fileID: 114000014025734430}
 --- !u!114 &114000011486911778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4378,8 +4437,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11405814}
-        m_MethodName: CycleQueue
+      - m_Target: {fileID: 114000011469791366}
+        m_MethodName: Cycle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4652,7 +4711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overlay: {fileID: 189414, guid: 79ffaf9d18aa1466d813bd907507d9ac, type: 2}
-  launcher: {fileID: 11405814}
+  modifiers: {fileID: 114000013022758048}
   level: {fileID: 11450880}
   shooterDefinition: {fileID: 11400000, guid: b340add30ae88423ba2b03c6f8a17b4b, type: 2}
   boosterButton: {fileID: 114000012779805326}
@@ -4699,6 +4758,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000013022758048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7623e525e95e3470092faff7ac2840b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013048008924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5036,6 +5106,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000014025734430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bb53cd50fd34f858d154562cfce5c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000014054139582
 MonoBehaviour:
   m_ObjectHideFlags: 1

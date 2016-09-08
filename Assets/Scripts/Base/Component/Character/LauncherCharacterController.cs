@@ -1,4 +1,5 @@
 using Spine;
+using Aiming;
 using System;
 using UnityEngine;
 using Spine.Unity;
@@ -32,11 +33,6 @@ public class LauncherCharacterController : MonoBehaviour
         }
     }
 
-    public void CycleQueueAnimation()
-    {
-        launcherAnimator.SetTrigger(SWAP);
-    }
-
     public void StartBubbleParty()
     {
         Sequence.StartBubblePartyEvent.Dispatch();
@@ -48,16 +44,17 @@ public class LauncherCharacterController : MonoBehaviour
         skeleton = gameObject.GetComponent<SkeletonAnimator>().Skeleton;
 
         launcherAnimator.SetFloat(ANGLE, 90.0f);
-        eventTrigger.StartAiming += OnStartAiming;
-        eventTrigger.StopAiming += OnStopAiming;
         eventTrigger.MoveTarget += OnMoveTarget;
 
         var eventService = GlobalState.EventService;
+        eventService.AddEventHandler<StartAimingEvent>(OnStartAiming);
+        eventService.AddEventHandler<StopAimingEvent>(OnStopAiming);
         eventService.AddEventHandler<BubbleFiringEvent>(OnBubbleFiring);
         eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
         eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
         eventService.AddEventHandler<LowMovesEvent>(OnLowMoves);
         eventService.AddEventHandler<PurchasedExtraMovesEvent>(OnPurchasedExtraMoves);
+        eventService.AddEventHandler<SwapBubblesEvent>(OnSwapBubbles);
     }
 
     private void OnBubbleFiring()
@@ -104,5 +101,10 @@ public class LauncherCharacterController : MonoBehaviour
     private void OnPurchasedExtraMoves()
     {
         launcherAnimator.SetBool(LOST_LEVEL, false);
+    }
+
+    private void OnSwapBubbles()
+    {
+        launcherAnimator.SetTrigger(SWAP);
     }
 }
