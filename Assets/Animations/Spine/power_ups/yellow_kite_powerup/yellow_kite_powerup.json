@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "hExQqrD+OD76ZXWUrRTbD6SycQ0", "spine": "3.4.02", "width": 750, "height": 1334 },
+"skeleton": { "hash": "M853+Rxm0vWxpi4qqIhwb33XbEc", "spine": "3.4.02", "width": 326.31, "height": 352.84 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "placement_ctrl_reset", "parent": "root" },
@@ -18,7 +18,7 @@
 	{ "name": "tracers_spin_06_ctrl", "parent": "master_scale_ctrl", "y": -128.19, "scaleX": 0.259, "scaleY": 0.259 }
 ],
 "slots": [
-	{ "name": "Peanuts_mockup_basic modev3_750_1334", "bone": "root", "attachment": "Peanuts_mockup_basic modev3_750_1334" },
+	{ "name": "Peanuts_mockup_basic modev3_750_1334", "bone": "root" },
 	{ "name": "InGame_mocukup_750_1334_Snoopy", "bone": "root" },
 	{ "name": "Kite_glowing", "bone": "kite_glowing_pc_ctrl", "attachment": "Kite_glowing" },
 	{ "name": "kite_outline_glowing", "bone": "outer_glow_scale_ctrl", "attachment": "kite_outline_glowing" },
@@ -40,9 +40,6 @@
 	"default": {
 		"Kite_glowing": {
 			"Kite_glowing": { "x": 120, "rotation": -89.99, "width": 225, "height": 293 }
-		},
-		"Peanuts_mockup_basic modev3_750_1334": {
-			"Peanuts_mockup_basic modev3_750_1334": { "x": -9.38, "y": -17.99, "width": 750, "height": 1334 }
 		},
 		"Schultz_swirls": {
 			"shultz_spinners/Kite_schultz_swirl_0001": { "width": 290, "height": 340 },

@@ -1,194 +1,187 @@
 
 yellow_kite_powerup.png
-size: 2048,2048
+size: 2048,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Kite_glowing
   rotate: false
-  xy: 294, 49
+  xy: 586, 341
   size: 225, 293
   orig: 225, 293
   offset: 0, 0
   index: -1
-Peanuts_mockup_basic modev3_750_1334
-  rotate: false
-  xy: 2, 686
-  size: 750, 1334
-  orig: 750, 1334
-  offset: 0, 0
-  index: -1
 charged bubble copy
   rotate: false
-  xy: 1447, 1691
+  xy: 1057, 537
   size: 73, 68
   orig: 73, 68
   offset: 0, 0
   index: -1
 charged bubble glow
-  rotate: true
-  xy: 942, 1202
+  rotate: false
+  xy: 813, 476
   size: 134, 129
   orig: 134, 129
   offset: 0, 0
   index: -1
 kite_edge_spin_0001
   rotate: false
-  xy: 754, 1042
+  xy: 878, 682
   size: 186, 294
   orig: 186, 294
   offset: 0, 0
   index: -1
 kite_edge_spin_0002
   rotate: false
-  xy: 1046, 1384
+  xy: 1066, 682
   size: 186, 294
   orig: 186, 294
   offset: 0, 0
   index: -1
 kite_outline_glowing
   rotate: false
-  xy: 1338, 1761
+  xy: 344, 33
   size: 190, 259
   orig: 190, 259
   offset: 0, 0
   index: -1
 shultz_spinners/Kite_schultz_swirl_0001
   rotate: false
-  xy: 2, 344
+  xy: 2, 636
   size: 290, 340
   orig: 290, 340
   offset: 0, 0
   index: -1
 shultz_spinners/Kite_schultz_swirl_0002
   rotate: false
-  xy: 754, 1680
+  xy: 2, 294
   size: 290, 340
   orig: 290, 340
   offset: 0, 0
   index: -1
 shultz_spinners/Kite_schultz_swirl_0003
   rotate: false
-  xy: 2, 2
+  xy: 294, 636
   size: 290, 340
   orig: 290, 340
   offset: 0, 0
   index: -1
 shultz_spinners/Kite_schultz_swirl_0004
   rotate: false
-  xy: 294, 344
+  xy: 294, 294
   size: 290, 340
   orig: 290, 340
   offset: 0, 0
   index: -1
 shultz_spinners/Kite_schultz_swirl_0005
-  rotate: false
-  xy: 754, 1338
+  rotate: true
+  xy: 2, 2
   size: 290, 340
   orig: 290, 340
   offset: 0, 0
   index: -1
 shultz_spinners/Kite_schultz_swirl_0006
   rotate: false
-  xy: 1046, 1680
+  xy: 586, 636
   size: 290, 340
   orig: 290, 340
   offset: 0, 0
   index: -1
 stage 2
-  rotate: true
-  xy: 1338, 1653
+  rotate: false
+  xy: 949, 498
   size: 106, 107
   orig: 106, 107
   offset: 0, 0
   index: -1
 stage 3
   rotate: false
-  xy: 942, 1078
+  xy: 813, 352
   size: 102, 122
   orig: 102, 122
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0001
-  rotate: true
-  xy: 754, 698
+  rotate: false
+  xy: 1254, 903
   size: 342, 73
   orig: 342, 73
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0002
   rotate: false
-  xy: 1530, 1947
+  xy: 1254, 828
   size: 342, 73
   orig: 342, 73
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0003
-  rotate: true
-  xy: 829, 698
+  rotate: false
+  xy: 1598, 903
   size: 342, 73
   orig: 342, 73
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0004
   rotate: false
-  xy: 1530, 1872
+  xy: 1254, 753
   size: 342, 73
   orig: 342, 73
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0005
   rotate: false
-  xy: 1530, 1797
+  xy: 1598, 828
   size: 342, 73
   orig: 342, 73
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0006
-  rotate: true
-  xy: 586, 342
+  rotate: false
+  xy: 1598, 753
   size: 342, 73
   orig: 342, 73
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0007
-  rotate: true
-  xy: 661, 342
+  rotate: false
+  xy: 1254, 678
   size: 342, 73
   orig: 342, 73
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0008
-  rotate: true
-  xy: 904, 698
+  rotate: false
+  xy: 1598, 678
   size: 342, 73
   orig: 342, 73
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0009
   rotate: false
-  xy: 1530, 1722
+  xy: 878, 607
   size: 342, 73
   orig: 342, 73
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0010
-  rotate: true
-  xy: 1874, 1678
+  rotate: false
+  xy: 1222, 603
   size: 342, 73
   orig: 342, 73
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0011
-  rotate: true
-  xy: 1949, 1678
+  rotate: false
+  xy: 1566, 603
   size: 342, 73
   orig: 342, 73
   offset: 0, 0
   index: -1
 tracers/powerup_spinLine_0012
   rotate: true
-  xy: 1234, 1336
+  xy: 1942, 634
   size: 342, 73
   orig: 342, 73
   offset: 0, 0
