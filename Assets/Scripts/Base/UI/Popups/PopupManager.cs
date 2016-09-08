@@ -93,9 +93,7 @@ namespace UI.Popup
 
                     if (definition.DisplaySound != null)
                     {
-                        var soundSource = popup.gameObject.AddComponent<AudioSource>();
-                        soundSource.clip = definition.DisplaySound;
-                        soundSource.Play();
+                        Sound.PlaySoundEvent.Dispatch(definition.DisplaySound);
                     }
                 }
             }

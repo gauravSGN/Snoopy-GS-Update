@@ -8,5 +8,6 @@
         PowerUpFill,
         PowerUpCast,
         UnlockLevel,
+        UIClick,
     }
 }

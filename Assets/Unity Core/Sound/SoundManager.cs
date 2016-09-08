@@ -269,6 +269,7 @@ namespace Sound
         private void OnSettingsChanged(Observable target)
         {
             var settings = target as State.Settings;
+            bool restartMusic = (MusicMuted && settings.musicOn);
 
             if (!SoundMuted && !settings.sfxOn)
             {
@@ -283,7 +284,10 @@ namespace Sound
             SoundMuted = !settings.sfxOn;
             MusicMuted = !settings.musicOn;
 
-            RestartMusic();
+            if (restartMusic)
+            {
+                RestartMusic();
+            }
         }
 
         private AudioClip LoadClipCallback(string path)
