@@ -9,14 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: yellow_kite_powerup_SkeletonData
+  m_Name: Yellow_Bubble_Destroy_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 9cc9a001115914a05bc0a20cd3659df4, type: 2}
-  scale: 0.004
-  skeletonJSON: {fileID: 4900000, guid: a6d9391d24576460bb3b2f86643741af, type: 3}
+  - {fileID: 11400000, guid: b114c3f1bc7244fed90b2cc136dd1a47, type: 2}
+  scale: 0.01
+  skeletonJSON: {fileID: 4900000, guid: 8f3e31d02cc1e42589ec5326592096e7, type: 3}
   fromAnimation: []
   toAnimation: []
   duration: []
-  defaultMix: 0
-  controller: {fileID: 9100000, guid: 54ccf18647f0844ef810eacf0f36942f, type: 2}
+  defaultMix: 0.2
+  controller: {fileID: 0}
