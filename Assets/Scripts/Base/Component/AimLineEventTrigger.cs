@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Aiming;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class AimLineEventTrigger : EventTrigger
 {
-    public event Action StartAiming;
-    public event Action StopAiming;
     public event Action<Vector2> MoveTarget;
     public event Action Fire;
 
@@ -33,7 +32,8 @@ public class AimLineEventTrigger : EventTrigger
             hovering = true;
 
             MoveTarget(GetCursorPosition(data));
-            StartAiming();
+
+            StartAimingEvent.Dispatch();
         }
     }
 
@@ -43,7 +43,7 @@ public class AimLineEventTrigger : EventTrigger
         {
             hovering = true;
             MoveTarget(GetCursorPosition(data));
-            StartAiming();
+            StartAimingEvent.Dispatch();
         }
     }
 
@@ -52,7 +52,7 @@ public class AimLineEventTrigger : EventTrigger
         if (aiming)
         {
             hovering = false;
-            StopAiming();
+            StopAimingEvent.Dispatch();
         }
     }
 
@@ -65,7 +65,7 @@ public class AimLineEventTrigger : EventTrigger
                 Fire();
             }
 
-            StopAiming();
+            StopAimingEvent.Dispatch();
 
             aiming = false;
             hovering = false;
@@ -81,7 +81,7 @@ public class AimLineEventTrigger : EventTrigger
     {
         if (aiming)
         {
-            StopAiming();
+            StopAimingEvent.Dispatch();
 
             aiming = false;
         }

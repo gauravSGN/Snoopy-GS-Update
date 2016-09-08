@@ -11,7 +11,7 @@ namespace Booster
         private GameObject overlay;
 
         [SerializeField]
-        private BubbleLauncher launcher;
+        private BubbleModifierController modifiers;
 
         [SerializeField]
         private Level level;
@@ -41,8 +41,8 @@ namespace Booster
             {
                 instantiatedOverlay = Instantiate(overlay);
 
-                launcher.AddShotModifier(ConvertToRainbow, ShotModifierType.RainbowBooster);
-                launcher.SetModifierAnimation(instantiatedOverlay);
+                modifiers.Add(ConvertToRainbow, ShotModifierType.RainbowBooster);
+                modifiers.SetAnimation(instantiatedOverlay);
 
                 GlobalState.User.purchasables.boosters.rainbows--;
 

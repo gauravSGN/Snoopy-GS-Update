@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using Aiming;
 using System;
+using UnityEngine;
+using System.Collections.Generic;
 
 public class AimLine : InitializableBehaviour, UpdateReceiver
 {
@@ -16,13 +17,14 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
 
     public event Action<Vector2> Fire;
 
-    public Color[] colors;
-
     [SerializeField]
     private GameObject launchOrigin;
 
     [SerializeField]
     private AimLineEventTrigger eventTrigger;
+
+    [SerializeField]
+    private BubbleModifierController modifiers;
 
     private Vector3 aimTarget;
     private readonly List<Vector3> points = new List<Vector3>();
@@ -30,6 +32,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
     private Settings? settings;
+    private Color[] colors;
 
     public bool Aiming { get { return meshRenderer.enabled; } }
     public Vector3 Target { get { return aimTarget; } }
@@ -65,8 +68,11 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
             ResetReflections();
         }
 
-        eventTrigger.StartAiming += OnStartAiming;
-        eventTrigger.StopAiming += OnStopAiming;
+        var eventService = GlobalState.EventService;
+        eventService.AddEventHandler<StartAimingEvent>(OnStartAiming);
+        eventService.AddEventHandler<StopAimingEvent>(OnStopAiming);
+        eventService.AddEventHandler<SetShooterBubbleEvent>(OnSetShooterBubble);
+
         eventTrigger.MoveTarget += OnMoveTarget;
         eventTrigger.Fire += OnFire;
     }
@@ -280,6 +286,28 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
             } while (segmentLength >= 0.0f);
 
             offset = -segmentLength;
+        }
+    }
+
+    private void OnSetShooterBubble(SetShooterBubbleEvent gameEvent)
+    {
+        if (gameEvent.bubble != null)
+        {
+            if (modifiers.Count > 0)
+            {
+                if (modifiers.Contains(ShotModifierType.RainbowBooster))
+                {
+                    colors = GlobalState.Instance.Config.boosters.rainbowColors;
+                }
+                else
+                {
+                    colors[0] = Color.white;
+                }
+            }
+            else
+            {
+                colors = new[] { gameEvent.bubble.GetComponent<BubbleModelBehaviour>().Model.definition.BaseColor };
+            }
         }
     }
 }
