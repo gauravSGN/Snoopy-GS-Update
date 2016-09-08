@@ -94,8 +94,9 @@ namespace PowerUps
                 {
                     controller.OverrideLaunchSound(definition.LaunchSound);
                 }
+
                 controller.AddPowerUp(definition.Type);
-                GlobalState.EventService.AddEventHandler<PowerUpReturnEvent>(OnItemReturn);
+                GlobalState.EventService.AddEventHandler<PowerUpPrepareForReturnEvent>(OnItemReturn);
                 Reset();
                 StartCoroutine(ShowCharacter());
             }

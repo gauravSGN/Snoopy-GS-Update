@@ -28,7 +28,7 @@ namespace Sequence
             eventService.AddEventHandler<PowerUpReturningEvent>(OnReturning);
             eventService.AddEventHandler<PowerUpReturnedEvent>(OnReturned);
 
-            eventService.Dispatch<PowerUpReturnEvent>(new PowerUpReturnEvent());
+            eventService.Dispatch<PowerUpPrepareForReturnEvent>(new PowerUpPrepareForReturnEvent());
         }
 
         private void OnReturning()
