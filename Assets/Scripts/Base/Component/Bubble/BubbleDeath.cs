@@ -67,6 +67,11 @@ public class BubbleDeath : MonoBehaviour
         effectDictionary[type].Add(effect);
     }
 
+    public void ReplaceEffect(IEnumerator effect, BubbleDeathType type)
+    {
+        effectDictionary[type] = new List<IEnumerator>() {effect};
+    }
+
     public void DeactivateObjectOnDeath(GameObject gameObject)
     {
         deactivateOnDeath.Add(gameObject);

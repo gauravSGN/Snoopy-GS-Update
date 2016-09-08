@@ -14,5 +14,6 @@ namespace Animation
         PinkPop,
         PurplePop,
         YellowShooter,
+        YellowPowerUpPop
     }
 }
