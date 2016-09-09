@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using Effects;
+using Animation;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
+using System.Collections;
 
 public class StarBarController : MonoBehaviour
 {
@@ -11,16 +14,16 @@ public class StarBarController : MonoBehaviour
     private Image fillImage;
 
     [SerializeField]
-    private Sprite inactiveStar;
+    private ParticleSystem scoreBarIncreaseVFX;
 
     [SerializeField]
-    private Sprite activeStar;
-
-    [SerializeField]
-    private List<Image> stars;
+    private GameObject[] stars;
 
     private int[] scores;
+    private int starCount;
+    private int lastScore = -1;
     private int currentStar = 0;
+    private float currentFillTime;
 
     protected void Start()
     {
@@ -34,7 +37,6 @@ public class StarBarController : MonoBehaviour
 
     private void PlaceStars()
     {
-        var starCount = Mathf.Min(scores.Length, stars.Count);
         float minX, maxX;
 
         minX = maxX = stars[0].transform.localPosition.x;
@@ -61,22 +63,66 @@ public class StarBarController : MonoBehaviour
         if (scores == null)
         {
             scores = level.levelState.starValues;
+            starCount = Math.Min(scores.Length, stars.Length);
             PlaceStars();
         }
 
-        var starCount = Mathf.Min(scores.Length, stars.Count);
         var score = level.levelState.score;
 
+        if (score > lastScore)
+        {
+            lastScore = score;
+
+            UpdateStarImages();
+            StartCoroutine(UpdateFillImage());
+        }
+    }
+
+    private void UpdateStarImages()
+    {
         for (var index = currentStar; index < starCount; index++)
         {
-            if (score >= scores[index])
+            if (lastScore >= scores[index])
             {
                 currentStar = index + 1;
-                stars[index].sprite = activeStar;
-                stars[index].SetNativeSize();
+                StartCoroutine(AnimationEffect.Play(stars[index], AnimationType.ActivateStar));
             }
         }
+    }
 
-        fillImage.fillAmount = Mathf.Clamp01((float)score / (float)scores[starCount - 1]);
+    private IEnumerator UpdateFillImage()
+    {
+        if (currentFillTime <= 0.01f)
+        {
+            var timeToFill = scoreBarIncreaseVFX.duration;
+            var vfxTransform = scoreBarIncreaseVFX.transform;
+            var fillImageWidth = fillImage.rectTransform.rect.width;
+
+            while (currentFillTime < timeToFill)
+            {
+                currentFillTime += Time.deltaTime;
+
+                var lastFillAmount = fillImage.fillAmount;
+                var endFillAmount = Mathf.Clamp01((float)lastScore / (float)scores[starCount - 1]);
+                var newFillAmount = Mathf.Lerp(lastFillAmount, endFillAmount, (currentFillTime / timeToFill));
+
+                fillImage.fillAmount = newFillAmount;
+
+                if (newFillAmount > lastFillAmount)
+                {
+                    vfxTransform.localPosition = new Vector3((newFillAmount * fillImageWidth),
+                                                             vfxTransform.localPosition.y);
+
+                    if (!scoreBarIncreaseVFX.isPlaying)
+                    {
+                        scoreBarIncreaseVFX.Play();
+                    }
+                }
+
+                yield return null;
+            }
+
+            currentFillTime = 0.0f;
+        }
     }
 }
