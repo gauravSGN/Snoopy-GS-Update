@@ -42,6 +42,8 @@ namespace UI.Map
                 var effectsInstance = Instantiate(unlockEffects);
                 effectsInstance.transform.SetParent(destination, false);
 
+                Sound.PlaySoundEvent.Dispatch(Sound.SoundType.UnlockLevel);
+
                 GoTween tween = transform.localPositionFrom(travelTime, origin.localPosition);
                 tween.easeCurve = easeCurve;
                 tween.easeType = GoEaseType.AnimationCurve;
@@ -51,8 +53,6 @@ namespace UI.Map
 
         private void OnAvatarMoveComplete(AbstractGoTween tween)
         {
-            Sound.PlaySoundEvent.Dispatch(Sound.SoundType.UnlockLevel);
-
             var mapButtonComponent = destination.GetComponent<MapButton>();
 
             if (mapButtonComponent != null)
