@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c497b31e3b8241cea4f374bac7dd388, type: 3}
   m_Name: ActivateStarDefinition
   m_EditorClassIdentifier: 
-  type: 11
+  type: 12
   prefab: {fileID: 1000013916989214, guid: 3c95cddd2054a44fabbb011a164668ce, type: 2}
   controller: {fileID: 0}
