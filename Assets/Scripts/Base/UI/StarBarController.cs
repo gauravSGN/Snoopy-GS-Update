@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Effects;
+using Animation;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class StarBarController : MonoBehaviour
 {
@@ -11,16 +12,10 @@ public class StarBarController : MonoBehaviour
     private Image fillImage;
 
     [SerializeField]
-    private Sprite inactiveStar;
-
-    [SerializeField]
-    private Sprite activeStar;
-
-    [SerializeField]
     private ParticleSystem scoreBarIncreaseVFX;
 
     [SerializeField]
-    private List<Image> stars;
+    private GameObject[] stars;
 
     private int[] scores;
     private int lastScore = -1;
@@ -38,7 +33,7 @@ public class StarBarController : MonoBehaviour
 
     private void PlaceStars()
     {
-        var starCount = Mathf.Min(scores.Length, stars.Count);
+        var starCount = Mathf.Min(scores.Length, stars.Length);
         float minX, maxX;
 
         minX = maxX = stars[0].transform.localPosition.x;
@@ -74,7 +69,7 @@ public class StarBarController : MonoBehaviour
         {
             lastScore = score;
 
-            var starCount = Mathf.Min(scores.Length, stars.Count);
+            var starCount = Mathf.Min(scores.Length, stars.Length);
 
             UpdateFillImage(score, starCount);
             UpdateStarImages(score, starCount);
@@ -88,8 +83,7 @@ public class StarBarController : MonoBehaviour
             if (score >= scores[index])
             {
                 currentStar = index + 1;
-                stars[index].sprite = activeStar;
-                stars[index].SetNativeSize();
+                StartCoroutine(AnimationEffect.Play(stars[index], AnimationType.ActivateStar));
             }
         }
     }
