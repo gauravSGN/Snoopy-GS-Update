@@ -17,9 +17,13 @@ public class StarBarController : MonoBehaviour
     private Sprite activeStar;
 
     [SerializeField]
+    private ParticleSystem scoreBarIncreaseVFX;
+
+    [SerializeField]
     private List<Image> stars;
 
     private int[] scores;
+    private int lastScore = -1;
     private int currentStar = 0;
 
     protected void Start()
@@ -64,9 +68,21 @@ public class StarBarController : MonoBehaviour
             PlaceStars();
         }
 
-        var starCount = Mathf.Min(scores.Length, stars.Count);
         var score = level.levelState.score;
 
+        if (score > lastScore)
+        {
+            lastScore = score;
+
+            var starCount = Mathf.Min(scores.Length, stars.Count);
+
+            UpdateFillImage(score, starCount);
+            UpdateStarImages(score, starCount);
+        }
+    }
+
+    private void UpdateStarImages(int score, int starCount)
+    {
         for (var index = currentStar; index < starCount; index++)
         {
             if (score >= scores[index])
@@ -76,7 +92,23 @@ public class StarBarController : MonoBehaviour
                 stars[index].SetNativeSize();
             }
         }
+    }
 
-        fillImage.fillAmount = Mathf.Clamp01((float)score / (float)scores[starCount - 1]);
+    private void UpdateFillImage(int score, int starCount)
+    {
+        var lastFillAmount = fillImage.fillAmount;
+        var newFillAmount = Mathf.Clamp01((float)score / (float)scores[starCount - 1]);
+
+        fillImage.fillAmount = newFillAmount;
+
+        if ((newFillAmount > lastFillAmount) || (newFillAmount >= 1.0))
+        {
+            var vfxTransform = scoreBarIncreaseVFX.transform;
+            var newX = (newFillAmount * fillImage.rectTransform.rect.width);
+
+            vfxTransform.localPosition = new Vector3(newX, vfxTransform.localPosition.y);
+
+            scoreBarIncreaseVFX.Play();
+        }
     }
 }
