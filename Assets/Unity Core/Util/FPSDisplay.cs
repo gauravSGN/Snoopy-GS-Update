@@ -7,6 +7,7 @@ public class FPSDisplay : MonoBehaviour
     [SerializeField]
     private float updateDelay;
 
+    private float wallTime;
     private float delayTimer;
     private int frames;
 
@@ -30,8 +31,10 @@ public class FPSDisplay : MonoBehaviour
 #if (DEBUG)
     public void Update()
     {
+        var deltaTime = Time.realtimeSinceStartup - wallTime;
+        wallTime = Time.realtimeSinceStartup;
         frames++;
-        delayTimer += Time.deltaTime;
+        delayTimer += deltaTime;
 
         if (delayTimer >= updateDelay)
         {
