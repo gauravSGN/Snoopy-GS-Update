@@ -8,7 +8,6 @@
 
         public TutorialProgressEvent(TutorialTrigger trigger)
         {
-            UnityEngine.Debug.Log(string.Format("TutorialProgressEvent: {0}", trigger));
             this.trigger = trigger;
         }
 

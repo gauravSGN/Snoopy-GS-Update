@@ -625,6 +625,8 @@ MonoBehaviour:
     trigger: 0
   - eventName: MovePlayerAvatarEvent, Assembly-CSharp
     trigger: 1
+  - eventName: FTUE.OutOfMovesEvent, Assembly-CSharp
+    trigger: 5
 --- !u!114 &114000014073887032
 MonoBehaviour:
   m_ObjectHideFlags: 1
