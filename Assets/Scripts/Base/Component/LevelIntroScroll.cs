@@ -1,12 +1,17 @@
-﻿using UnityEngine;
+﻿using PowerUps;
+using UnityEngine;
+using System.Linq;
 using System.Collections;
-using PowerUps;
 using System.Collections.Generic;
+using Util;
 
 public class LevelIntroScroll : MonoBehaviour
 {
     [SerializeField]
     private float scrollSpeed;
+
+    [SerializeField]
+    private float scrollDelay;
 
     [SerializeField]
     private Transform scrollBound;
@@ -17,11 +22,23 @@ public class LevelIntroScroll : MonoBehaviour
     [SerializeField]
     private List<GameObject> disableOnScroll;
 
-    public void ScrollTo(float yPos)
+    [SerializeField]
+    private Level level;
+
+    public void Start()
     {
-        var targetY = Mathf.Min(yPos, scrollBound.position.y);
+        GlobalState.EventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
+    }
+
+    private void OnLevelLoaded()
+    {
+        GlobalState.EventService.RemoveEventHandler<LevelLoadedEvent>(OnLevelLoaded);
+
+        var maxY = level.Loader.LevelData.Bubbles.Aggregate(1, (acc, b) => Mathf.Max(acc, b.Y));
+        var targetY = -(maxY - 11) * GlobalState.Instance.Config.bubbles.size * MathUtil.COS_30_DEGREES;
+
         GameObjectUtil.SetActive(disableOnScroll, false);
-        StartCoroutine(DoScroll(targetY));
+        StartCoroutine(DoScroll(Mathf.Min(targetY, scrollBound.position.y)));
     }
 
     private IEnumerator DoScroll(float targetY)
@@ -30,16 +47,20 @@ public class LevelIntroScroll : MonoBehaviour
         powerUpController.HidePowerUps();
 
         var finalLauncherPosition = launcherGroup.transform.localPosition + new Vector3(0f, targetY, 0f);
+        launcherGroup.transform.position = finalLauncherPosition;
 
-        while (transform.position.y > targetY)
+        var position = transform.position;
+        var y = position.y;
+
+        yield return new WaitForSeconds(scrollDelay);
+
+        while (y > targetY)
         {
-            transform.position = transform.position + new Vector3(0, -(scrollSpeed * Time.deltaTime), 0);
+            y = Mathf.Max(targetY, y - scrollSpeed * Time.deltaTime);
+            transform.position = new Vector3(position.x, y, position.z);
             launcherGroup.transform.position = finalLauncherPosition;
             yield return null;
         }
-
-        transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
-        launcherGroup.transform.position = finalLauncherPosition;
 
         GameObjectUtil.SetActive(disableOnScroll, true);
         powerUpController.ShowPowerUps();
