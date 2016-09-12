@@ -46,12 +46,14 @@ TextureImporter:
   spriteBorder: {x: 75, y: 0, z: 69, w: 0}
   spritePixelsToUnits: 250
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 5
   buildTargetSettings: []
   spriteSheet:
+    serializedVersion: 2
     sprites: []
     outline: []
-  spritePackingTag: popup
+  spritePackingTag: pre_level_popup
   userData: 
   assetBundleName: 
   assetBundleVariant: 
