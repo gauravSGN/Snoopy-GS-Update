@@ -47,10 +47,11 @@ public class BubbleDeath : MonoBehaviour
     public void TriggerDeathEffects(BubbleDeathType type)
     {
         var effectController = gameObject.GetComponent<BubbleEffectController>();
+        var effects = effectDictionary.ContainsKey(type) ? effectDictionary[type] : GetDefaultEffects(type);
 
-        for (int i = 0, length = effectDictionary[type].Count; i < length; i++)
+        foreach (var effect in effects)
         {
-            effectController.AddEffect(effectDictionary[type][i]);
+            effectController.AddEffect(effect);
         }
 
         GameObjectUtil.SetActive((type == BubbleDeathType.Pop) ? activateOnPop : activateOnCull, true);
@@ -64,12 +65,22 @@ public class BubbleDeath : MonoBehaviour
 
     public void AddEffect(IEnumerator effect, BubbleDeathType type)
     {
+        if (!effectDictionary.ContainsKey(type))
+        {
+            effectDictionary.Add(type, new List<IEnumerator>());
+        }
+
         effectDictionary[type].Add(effect);
     }
 
     public void ReplaceEffect(IEnumerator effect, BubbleDeathType type)
     {
-        effectDictionary[type] = new List<IEnumerator>() {effect};
+        if (effectDictionary.ContainsKey(type))
+        {
+            effectDictionary[type].Clear();
+        }
+
+        AddEffect(effect, type);
     }
 
     public void DeactivateObjectOnDeath(GameObject gameObject)
@@ -80,7 +91,21 @@ public class BubbleDeath : MonoBehaviour
     protected void Awake()
     {
         effectDictionary = new Dictionary<BubbleDeathType, List<IEnumerator>>();
-        effectDictionary[BubbleDeathType.Pop] = new List<IEnumerator>();
-        effectDictionary[BubbleDeathType.Cull] = new List<IEnumerator>();
+    }
+
+    private List<IEnumerator> GetDefaultEffects(BubbleDeathType type)
+    {
+        var effects = new List<IEnumerator>();
+        var animationMap = GetComponent<BubbleModelBehaviour>().Model.definition.AnimationMap;
+
+        if (animationMap.ContainsKey(type))
+        {
+            foreach (var animationType in animationMap[type])
+            {
+                effects.Add(AnimationEffect.Play(gameObject, animationType));
+            }
+        }
+
+        return effects;
     }
 }

@@ -24,6 +24,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 480676}
   - 95: {fileID: 9589340}
+  - 114: {fileID: 114000010334685458}
   m_Layer: 0
   m_Name: Beachball_shooter
   m_TagString: Untagged
@@ -2081,6 +2082,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 480676}
   m_RootOrder: 3
+--- !u!114 &114000010334685458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d277b8ff5ef451495db8cab36db2d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198000014174539454
 ParticleSystem:
   m_ObjectHideFlags: 1

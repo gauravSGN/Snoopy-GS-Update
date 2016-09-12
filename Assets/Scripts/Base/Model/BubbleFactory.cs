@@ -78,7 +78,6 @@ public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
             IsRoot = definition.ActsAsRoot,
         };
 
-        SetupBasePopEffects(instance, definition);
         instance.SendMessage("SetModel", model);
 
         return instance;
@@ -93,22 +92,6 @@ public class BubbleFactory : ScriptableFactory<BubbleType, BubbleDefinition>
             foreach (var modifier in bubbleModifiers)
             {
                 modifier.ApplyEditorModifications(data, instance);
-            }
-        }
-    }
-
-    private void SetupBasePopEffects(GameObject instance, BubbleDefinition definition)
-    {
-        var bubbleDeath = instance.GetComponent<BubbleDeath>();
-
-        if (bubbleDeath)
-        {
-            foreach (var pair in definition.AnimationMap)
-            {
-                foreach (var animationType in pair.Value)
-                {
-                    bubbleDeath.AddEffect(AnimationEffect.Play(instance, animationType), pair.Key);
-                }
             }
         }
     }
