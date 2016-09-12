@@ -17,13 +17,18 @@ namespace Event
             invokerPool.Clear();
         }
 
-        public void AddEventHandler<T>(Action handler) where T : GameEvent
+        public void AddEventHandler(Type eventType, Action handler)
         {
             var invoker = invokerPool.Get<ParameterlessInvoker>();
 
             invoker.Handler = handler;
 
-            RegisterInvoker(typeof(T), invoker);
+            RegisterInvoker(eventType, invoker);
+        }
+
+        public void AddEventHandler<T>(Action handler) where T : GameEvent
+        {
+            AddEventHandler(typeof(T), handler);
         }
 
         public void AddEventHandler<T>(Action<T> handler) where T : GameEvent

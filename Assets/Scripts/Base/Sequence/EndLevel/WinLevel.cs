@@ -122,6 +122,7 @@ namespace Sequence
                     score = levelState.score,
                     stars = userLevelData.stars,
                     topScore = userLevelData.score,
+                    level = levelState.levelNumber,
                     closeActions = new List<Action> { TransitionToReturnScene },
                     affirmativeActions = new List<Action> { TransitionToReturnScene }
                 });

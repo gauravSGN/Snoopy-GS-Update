@@ -1,3 +1,4 @@
+using FTUE;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +30,8 @@ namespace UI.Popup
 
             score.text = "Score: " + config.score.ToString("N0");
             topScore.text = "Top Score: " + config.topScore.ToString("N0");
+
+            GlobalState.EventService.Dispatch(new TutorialProgressEvent(TutorialTrigger.PostLevelPopup, config.level));
         }
     }
 }

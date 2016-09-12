@@ -10,6 +10,7 @@ namespace Sequence
         {
             StartCoroutine(RunActionAfterDelay(GlobalState.Instance.Config.level.levelLostDelay, () =>
             {
+                GlobalState.EventService.Dispatch(new FTUE.OutOfMovesEvent());
                 GlobalState.EventService.Dispatch(new LevelCompleteEvent(false));
 
                 GlobalState.PopupService.Enqueue(new StandalonePopupConfig(PopupType.OutOfMoves)

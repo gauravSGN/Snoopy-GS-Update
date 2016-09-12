@@ -77,7 +77,7 @@ sealed public class BubbleDispenser : MonoBehaviour
             }
         }
 
-        SetShooterBubbleEvent.Dispatch(nextBubbles[0]);
+        SetShooterBubbleEvent.Dispatch((nextBubbles.Length > 0) ? nextBubbles[0] : null);
     }
 
     private void CycleLocalQueue()

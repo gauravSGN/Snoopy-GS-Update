@@ -88,6 +88,7 @@ namespace PowerUps
             {
                 Sound.PlaySoundEvent.Dispatch(Sound.SoundType.PowerUpCast);
                 GlobalState.EventService.Dispatch<InputToggleEvent>(new InputToggleEvent(false));
+                GlobalState.EventService.Dispatch(new FTUE.PowerUpUsedEvent(definition.Type));
 
                 if (definition.LaunchSound != null)
                 {
@@ -145,6 +146,7 @@ namespace PowerUps
 
                 if (!glow.activeSelf && (progress >= 1.0f))
                 {
+                    GlobalState.EventService.Dispatch(new FTUE.PowerUpFilledEvent(definition.Type));
                     ownAnimator.SetTrigger("Charged");
                     glow.SetActive(true);
                     filledBackground.SetActive(false);
