@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 235fd19565f434c79a46ba0bedac7271
-timeCreated: 1468974466
+guid: 2adec62d89b6e4bd5a9e0463d1192ce5
+timeCreated: 1473712991
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -32,7 +32,7 @@ TextureImporter:
     filterMode: -1
     aniso: 0
     mipBias: -1
-    wrapMode: 0
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
@@ -43,15 +43,17 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 30, y: 22, z: 28, w: 17}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 250
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 5
   buildTargetSettings: []
   spriteSheet:
+    serializedVersion: 2
     sprites: []
     outline: []
-  spritePackingTag: popup
+  spritePackingTag: pre_level_popup
   userData: 
   assetBundleName: 
   assetBundleVariant: 

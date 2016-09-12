@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 2adec62d89b6e4bd5a9e0463d1192ce5
-timeCreated: 1473712991
+guid: 08d2121d261884a4692fdda71564b01f
+timeCreated: 1471893332
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -53,7 +53,7 @@ TextureImporter:
     serializedVersion: 2
     sprites: []
     outline: []
-  spritePackingTag: popup
+  spritePackingTag: pre_level_popup
   userData: 
   assetBundleName: 
   assetBundleVariant: 
