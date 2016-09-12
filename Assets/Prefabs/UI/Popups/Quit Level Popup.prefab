@@ -505,7 +505,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.7
-  m_Text: 'You will loose a life
+  m_Text: 'You will lose a life
 
     if you quit'
 --- !u!114 &11462004
