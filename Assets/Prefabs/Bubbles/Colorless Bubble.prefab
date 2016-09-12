@@ -116,7 +116,6 @@ GameObject:
   - 4: {fileID: 418404}
   - 198: {fileID: 19853080}
   - 199: {fileID: 19943830}
-  - 114: {fileID: 11448522}
   m_Layer: 0
   m_Name: Smoke_Ring
   m_TagString: Untagged
@@ -134,8 +133,6 @@ GameObject:
   - 4: {fileID: 499760}
   - 198: {fileID: 19841456}
   - 199: {fileID: 19955994}
-  - 114: {fileID: 11406158}
-  - 114: {fileID: 11454908}
   m_Layer: 0
   m_Name: explosion
   m_TagString: Untagged
@@ -285,17 +282,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.125
---- !u!114 &11406158
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 197346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11420236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -316,17 +302,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39efc2195f3bf411db9b076fd00405ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11448522
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11448766
@@ -357,17 +332,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3d52afb44843459fb9a4e5e993cde83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11454908
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 197346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11457120
