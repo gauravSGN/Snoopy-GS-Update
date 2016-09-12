@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c497b31e3b8241cea4f374bac7dd388, type: 3}
   m_Name: StarOnMapNodeDefinition
   m_EditorClassIdentifier: 
-  type: 13
+  type: 14
   prefab: {fileID: 1000012908139230, guid: dd8b42096b25d4369bcf5d062f29966b, type: 2}
   controller: {fileID: 0}
