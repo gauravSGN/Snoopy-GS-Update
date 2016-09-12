@@ -72,6 +72,7 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         eventService.AddEventHandler<StartAimingEvent>(OnStartAiming);
         eventService.AddEventHandler<StopAimingEvent>(OnStopAiming);
         eventService.AddEventHandler<SetShooterBubbleEvent>(OnSetShooterBubble);
+        eventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
 
         eventTrigger.MoveTarget += OnMoveTarget;
         eventTrigger.Fire += OnFire;
@@ -295,18 +296,26 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         {
             if (modifiers.Count > 0)
             {
-                if (modifiers.Contains(ShotModifierType.RainbowBooster))
-                {
-                    colors = GlobalState.Instance.Config.boosters.rainbowColors;
-                }
-                else
-                {
-                    colors[0] = Color.white;
-                }
+                OnAddShotModifier();
             }
             else
             {
                 colors = new[] { gameEvent.bubble.GetComponent<BubbleModelBehaviour>().Model.definition.BaseColor };
+            }
+        }
+    }
+
+    private void OnAddShotModifier()
+    {
+        if (modifiers.Count > 0)
+        {
+            if (modifiers.Contains(ShotModifierType.RainbowBooster))
+            {
+                colors = GlobalState.Instance.Config.boosters.rainbowColors;
+            }
+            else
+            {
+                colors[0] = Color.white;
             }
         }
     }
