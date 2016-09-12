@@ -30,9 +30,7 @@ namespace UI.Map
             origin = gameEvent.origin;
             destination = gameEvent.destination;
 
-            transform.SetParent(gameEvent.destination.parent, false);
-            transform.localPosition = new Vector3(destination.localPosition.x,
-                                                  destination.localPosition.y + yPadding);
+            transform.position = new Vector3(destination.position.x, destination.position.y);
         }
 
         private void OnMovePlayerAvatar()
@@ -44,7 +42,7 @@ namespace UI.Map
 
                 Sound.PlaySoundEvent.Dispatch(Sound.SoundType.UnlockLevel);
 
-                GoTween tween = transform.localPositionFrom(travelTime, origin.localPosition);
+                GoTween tween = transform.positionFrom(travelTime, origin.position);
                 tween.easeCurve = easeCurve;
                 tween.easeType = GoEaseType.AnimationCurve;
                 tween.setOnCompleteHandler(OnAvatarMoveComplete);

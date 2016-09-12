@@ -1,4 +1,5 @@
-﻿using UI.Popup;
+﻿using System;
+using UI.Popup;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,8 @@ namespace UI.Map
 {
     public class MapButton : MonoBehaviour
     {
+        private const string RESOURCE_PREFIX = "Levels/Level_";
+
         [SerializeField]
         private string levelAssetName;
 
@@ -53,6 +56,16 @@ namespace UI.Map
             }
         }
 
+        protected void Awake()
+        {
+            if (levelNumber == 0)
+            {
+                var parentName = gameObject.transform.parent.name;
+                levelNumber = Convert.ToInt32(parentName);
+                levelAssetName = RESOURCE_PREFIX + parentName;
+            }
+        }
+
         protected void Start()
         {
             buttonText.text = levelNumber.ToString();
@@ -75,10 +88,15 @@ namespace UI.Map
 
                 if (user.maxLevel == levelNumber)
                 {
-                    var previousMapButton = transform.parent.Find((levelNumber - 1).ToString());
-                    var previousMapButtonTransform = previousMapButton ? previousMapButton.transform : null;
+                    RectTransform previousMapButtonTransform = null;
+                    var previousMapButton = transform.parent.parent.Find((levelNumber - 1).ToString());
 
-                    var gameEvent = new SetPlayerAvatarPositionEvent((RectTransform)previousMapButtonTransform,
+                    if ((user.levels[levelNumber].score == 0) && previousMapButton)
+                    {
+                        previousMapButtonTransform = previousMapButton.transform as RectTransform;
+                    }
+
+                    var gameEvent = new SetPlayerAvatarPositionEvent(previousMapButtonTransform,
                                                                      (RectTransform)transform);
 
                     GlobalState.EventService.Dispatch(gameEvent);
