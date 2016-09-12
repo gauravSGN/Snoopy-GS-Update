@@ -40,6 +40,13 @@ public class ScoreMultiplierCallout : MonoBehaviour
 
         GetComponent<MoveToRegisteredCanvas>().MoveToCanvas();
 
+        while (transform.parent == null)
+        {
+            yield return null;
+        }
+
+        ClampToParent();
+
         var fadeTime = 0.2f;
         var timer = 0f;
         while (timer <= fadeTime)
@@ -76,5 +83,34 @@ public class ScoreMultiplierCallout : MonoBehaviour
         yMin = (counter == 1) ? position.y : Mathf.Min(yMin, position.y);
         // Hack for VS
         yMin += 1f;
+    }
+
+    private void ClampToParent()
+    {
+        var rectTransform = GetComponent<RectTransform>();
+        var parentRect = (rectTransform.parent as RectTransform).rect;
+        var myRect = rectTransform.rect;
+        var position = rectTransform.localPosition;
+
+        rectTransform.localPosition += new Vector3(
+            ComputeRectOffset(myRect.xMin + position.x, myRect.xMax + position.x, parentRect.xMin, parentRect.xMax),
+            ComputeRectOffset(myRect.yMin + position.y, myRect.yMax + position.y, parentRect.yMin, parentRect.yMax)
+        );
+    }
+
+    private float ComputeRectOffset(float min, float max, float minBounds, float maxBounds)
+    {
+        var offset = 0.0f;
+
+        if (min < minBounds)
+        {
+            offset = minBounds - min;
+        }
+        else if (max > maxBounds)
+        {
+            offset = maxBounds - max;
+        }
+
+        return offset;
     }
 }
