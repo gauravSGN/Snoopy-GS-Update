@@ -16,5 +16,6 @@ namespace Animation
         YellowShooter,
         YellowPowerUpPop,
         ActivateStar,
+        RainbowPop,
     }
 }
