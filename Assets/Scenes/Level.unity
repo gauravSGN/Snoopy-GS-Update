@@ -594,18 +594,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 3371928, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 11465266, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
-      propertyPath: scrollBound
-      value: 
-      objectReference: {fileID: 1737783979}
     - target: {fileID: 11490304, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
       propertyPath: viewBoundary
       value: 
       objectReference: {fileID: 1737783979}
+    - target: {fileID: 11465266, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: scrollBound
+      value: 
+      objectReference: {fileID: 1737783979}
+    - target: {fileID: 3371928, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 11450880, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
       propertyPath: loader
       value: 
