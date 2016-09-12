@@ -1,3 +1,4 @@
+using FTUE;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,6 +33,8 @@ namespace UI.Popup
 
             config.closeActions = new List<Action> { () => GlobalState.SceneService.Reset() };
             config.affirmativeActions = new List<Action> { TransitionToLevel };
+
+            GlobalState.EventService.Dispatch(new TutorialProgressEvent(TutorialTrigger.PreLevelPopup, config.level));
         }
 
         private void TransitionToLevel()
