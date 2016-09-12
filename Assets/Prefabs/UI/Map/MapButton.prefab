@@ -366,9 +366,9 @@ MonoBehaviour:
   button: {fileID: 114000013535682644}
   buttonText: {fileID: 114000012544699348}
   starPositions:
-  - {fileID: 1000013830584090}
-  - {fileID: 1000013475578924}
-  - {fileID: 1000012976595008}
+  - {fileID: 114000011418100258}
+  - {fileID: 114000013345092414}
+  - {fileID: 114000012603673678}
   buttonIcon: {fileID: 114000013904155492}
 --- !u!222 &222000010054514972
 CanvasRenderer:

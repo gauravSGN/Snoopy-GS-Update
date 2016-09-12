@@ -85,7 +85,7 @@ public class StarBarController : MonoBehaviour
             if (lastScore >= scores[index])
             {
                 currentStar = index + 1;
-                StartCoroutine(AnimationEffect.Play(stars[index], AnimationType.ActivateStar));
+                StartCoroutine(AnimationEffect.Play(stars[index], AnimationType.ActivateStarBarStar));
             }
         }
     }

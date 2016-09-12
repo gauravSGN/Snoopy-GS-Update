@@ -15,7 +15,8 @@ namespace Animation
         PurplePop,
         YellowShooter,
         YellowPowerUpPop,
-        ActivateStar,
+        ActivateStarBarStar,
         RainbowPop,
+        StarOnMapNode,
     }
 }

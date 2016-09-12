@@ -1,6 +1,5 @@
 ﻿using Util;
 using UnityEngine;
-using Animation;
 using UnityEngine.SceneManagement;
 
 namespace Animation

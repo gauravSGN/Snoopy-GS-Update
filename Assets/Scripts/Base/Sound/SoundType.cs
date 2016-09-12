@@ -9,5 +9,8 @@
         PowerUpCast,
         UnlockLevel,
         UIClick,
+        WinStars1,
+        WinStars2,
+        WinStars3,
     }
 }

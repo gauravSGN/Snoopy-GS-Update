@@ -5,9 +5,6 @@ namespace UI.Map
     public class MovePlayerAvatar : MonoBehaviour
     {
         [SerializeField]
-        private float yPadding;
-
-        [SerializeField]
         private float travelTime;
 
         [SerializeField]
@@ -51,12 +48,15 @@ namespace UI.Map
 
         private void OnAvatarMoveComplete(AbstractGoTween tween)
         {
-            var mapButtonComponent = destination.GetComponent<MapButton>();
-
-            if (mapButtonComponent != null)
+            Util.FrameUtil.AfterDelay(0.25f, () =>
             {
-                mapButtonComponent.Click(string.Empty);
-            }
+                var mapButtonComponent = destination.GetComponent<MapButton>();
+
+                if (mapButtonComponent != null)
+                {
+                    mapButtonComponent.Click(string.Empty);
+                }
+            });
         }
     }
 }
