@@ -8,8 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e0c30befb9a24c0495125fa16b4e297, type: 3}
-  m_Name: World1
+  m_Script: {fileID: 11500000, guid: 8c497b31e3b8241cea4f374bac7dd388, type: 3}
+  m_Name: StarOnMapNodeDefinition
   m_EditorClassIdentifier: 
-  type: 0
-  prefab: {fileID: 1000014211369818, guid: 78af83d43cd46417984d8623ce2bbd78, type: 2}
+  type: 14
+  prefab: {fileID: 1000012908139230, guid: dd8b42096b25d4369bcf5d062f29966b, type: 2}
+  controller: {fileID: 0}

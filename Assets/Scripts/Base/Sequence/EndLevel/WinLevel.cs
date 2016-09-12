@@ -19,6 +19,7 @@ namespace Sequence
         [SerializeField]
         private GameObject winTextAnimationPrefab;
 
+        private long oldStars;
         private LevelState levelState;
         private GameObject currentItem;
         private GameConfig.WinSequenceConfig config;
@@ -148,7 +149,9 @@ namespace Sequence
 
                     if (user.levels[levelState.levelNumber].stars < newStars)
                     {
+                        oldStars = user.levels[levelState.levelNumber].stars;
                         user.levels[levelState.levelNumber].stars = newStars;
+                        GlobalState.SceneService.OnFinishedLoading += DispatchAnimateStarsOnMapNode;
                     }
 
                     break;
@@ -166,6 +169,12 @@ namespace Sequence
         {
             GlobalState.SceneService.OnFinishedLoading -= DispatchMovePlayerAvatar;
             GlobalState.EventService.Dispatch(new MovePlayerAvatarEvent());
+        }
+
+        private void DispatchAnimateStarsOnMapNode()
+        {
+            GlobalState.SceneService.OnFinishedLoading -= DispatchAnimateStarsOnMapNode;
+            GlobalState.EventService.Dispatch(new AnimateStarsOnMapNodeEvent { oldStars = oldStars });
         }
     }
 }

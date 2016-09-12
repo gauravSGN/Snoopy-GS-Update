@@ -16,6 +16,11 @@ namespace Util
             GlobalState.Instance.RunCoroutine(RunOnNextFrame(action));
         }
 
+        static public void AfterDelay(float delayInSeconds, Action action)
+        {
+            GlobalState.Instance.RunCoroutine(RunAfterDelay(delayInSeconds, action));
+        }
+
         static private IEnumerator RunAtEndOfFrame(Action action)
         {
             yield return new WaitForEndOfFrame();
@@ -26,6 +31,13 @@ namespace Util
         static private IEnumerator RunOnNextFrame(Action action)
         {
             yield return null;
+
+            action();
+        }
+
+        static private IEnumerator RunAfterDelay(float delayInSeconds, Action action)
+        {
+            yield return new WaitForSeconds(delayInSeconds);
 
             action();
         }

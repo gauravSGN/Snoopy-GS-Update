@@ -197,6 +197,12 @@ MonoBehaviour:
     resource: SFX/Map/sfx_snoopypop_levelnode_unlock
   - type: 6
     resource: SFX/UI/sfx_snoopypop_ui_click
+  - type: 7
+    resource: SFX/UI/sfx_snoopypop_win_stars_1
+  - type: 8
+    resource: SFX/UI/sfx_snoopypop_win_stars_2
+  - type: 9
+    resource: SFX/UI/sfx_snoopypop_win_stars_3
   defaultMusic:
   - type: 0
     resource: Music/Linus and Lucy 30 Second Clip

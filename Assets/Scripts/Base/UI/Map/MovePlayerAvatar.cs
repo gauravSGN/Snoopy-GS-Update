@@ -5,9 +5,6 @@ namespace UI.Map
     public class MovePlayerAvatar : MonoBehaviour
     {
         [SerializeField]
-        private float yPadding;
-
-        [SerializeField]
         private float travelTime;
 
         [SerializeField]
@@ -30,9 +27,7 @@ namespace UI.Map
             origin = gameEvent.origin;
             destination = gameEvent.destination;
 
-            transform.SetParent(gameEvent.destination.parent, false);
-            transform.localPosition = new Vector3(destination.localPosition.x,
-                                                  destination.localPosition.y + yPadding);
+            transform.position = new Vector3(destination.position.x, destination.position.y);
         }
 
         private void OnMovePlayerAvatar()
@@ -44,7 +39,7 @@ namespace UI.Map
 
                 Sound.PlaySoundEvent.Dispatch(Sound.SoundType.UnlockLevel);
 
-                GoTween tween = transform.localPositionFrom(travelTime, origin.localPosition);
+                GoTween tween = transform.positionFrom(travelTime, origin.position);
                 tween.easeCurve = easeCurve;
                 tween.easeType = GoEaseType.AnimationCurve;
                 tween.setOnCompleteHandler(OnAvatarMoveComplete);
@@ -53,12 +48,15 @@ namespace UI.Map
 
         private void OnAvatarMoveComplete(AbstractGoTween tween)
         {
-            var mapButtonComponent = destination.GetComponent<MapButton>();
-
-            if (mapButtonComponent != null)
+            Util.FrameUtil.AfterDelay(0.25f, () =>
             {
-                mapButtonComponent.Click(string.Empty);
-            }
+                var mapButtonComponent = destination.GetComponent<MapButton>();
+
+                if (mapButtonComponent != null)
+                {
+                    mapButtonComponent.Click(string.Empty);
+                }
+            });
         }
     }
 }
