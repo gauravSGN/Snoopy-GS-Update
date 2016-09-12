@@ -33,6 +33,8 @@ public class Level : MonoBehaviour
     private readonly ModifierFactory modifierFactory = new ModifierFactory();
     private string levelData;
 
+    public LevelLoader Loader { get { return loader; } }
+
     protected void Start()
     {
         var sceneData = GlobalState.SceneService;
