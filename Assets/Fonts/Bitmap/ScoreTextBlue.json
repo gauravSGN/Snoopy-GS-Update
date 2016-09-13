@@ -1,0 +1,75 @@
+{
+    "lineHeight": 23,
+    "glyphs": [
+        {
+            "sequence": "0",
+            "position": { "x": 0, "y": 0 },
+            "size": { "x": 17, "y": 23 },
+            "offset": { "x": 0, "y": 0 },
+            "advance": 17
+        },
+        {
+            "sequence": "1",
+            "position": { "x": 0, "y": 36 },
+            "size": { "x": 17, "y": 22 },
+            "offset": { "x": 0, "y": 0 },
+            "advance": 17
+        },
+        {
+            "sequence": "2",
+            "position": { "x": 0, "y": 68 },
+            "size": { "x": 17, "y": 23 },
+            "offset": { "x": 0, "y": 0 },
+            "advance": 17
+        },
+        {
+            "sequence": "3",
+            "position": { "x": 0, "y": 104 },
+            "size": { "x": 17, "y": 22 },
+            "offset": { "x": 0, "y": 0 },
+            "advance": 17
+        },
+        {
+            "sequence": "4",
+            "position": { "x": 0, "y": 137 },
+            "size": { "x": 17, "y": 23 },
+            "offset": { "x": 0, "y": 0 },
+            "advance": 17
+        },
+        {
+            "sequence": "5",
+            "position": { "x": 0, "y": 173 },
+            "size": { "x": 17, "y": 22 },
+            "offset": { "x": 0, "y": 0 },
+            "advance": 17
+        },
+        {
+            "sequence": "6",
+            "position": { "x": 0, "y": 206 },
+            "size": { "x": 17, "y": 23 },
+            "offset": { "x": 0, "y": 0 },
+            "advance": 17
+        },
+        {
+            "sequence": "7",
+            "position": { "x": 0, "y": 241 },
+            "size": { "x": 17, "y": 22 },
+            "offset": { "x": 0, "y": 0 },
+            "advance": 17
+        },
+        {
+            "sequence": "8",
+            "position": { "x": 0, "y": 276 },
+            "size": { "x": 17, "y": 22 },
+            "offset": { "x": 0, "y": 0 },
+            "advance": 17
+        },
+        {
+            "sequence": "9",
+            "position": { "x": 0, "y": 309 },
+            "size": { "x": 17, "y": 23 },
+            "offset": { "x": 0, "y": 0 },
+            "advance": 17
+        }
+    ]
+}
