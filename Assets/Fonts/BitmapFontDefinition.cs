@@ -20,9 +20,13 @@ sealed public class BitmapFontDefinition : ScriptableObject
         public Dictionary<char, GlyphNode> next;
     }
 
+    [Serializable]
     sealed private class FontData
     {
+        [SerializeField]
         public List<Glyph> glyphs;
+
+        [SerializeField]
         public float lineHeight;
     }
 
@@ -35,6 +39,7 @@ sealed public class BitmapFontDefinition : ScriptableObject
     private GlyphNode root;
 
     public Texture2D Texture { get { return texture; } }
+    public float LineHeight { get; private set; }
 
     public Glyph GetNextGlyph(string input, int offset)
     {
@@ -63,11 +68,7 @@ sealed public class BitmapFontDefinition : ScriptableObject
         var fontData = JsonUtility.FromJson<FontData>(glyphData.text);
         var result = new GlyphNode();
 
-        if (fontData.glyphs == null)
-        {
-            Debug.LogWarning("Glyphs are still null");
-            return result;
-        }
+        LineHeight = fontData.lineHeight;
 
         foreach (var glyph in fontData.glyphs)
         {
