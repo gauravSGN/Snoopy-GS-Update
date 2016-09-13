@@ -39,7 +39,8 @@ namespace UI.Map
 
         public void Click(string nextScene)
         {
-            if (GlobalState.User.purchasables.hearts.quantity > 0)
+            if (!GlobalState.Instance.Services.Get<Service.BlockadeService>().InputBlocked &&
+                (GlobalState.User.purchasables.hearts.quantity > 0))
             {
                 var sceneData = GlobalState.SceneService;
                 var levelData = GlobalState.AssetService.LoadAsset<TextAsset>(levelAssetName);

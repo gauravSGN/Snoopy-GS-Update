@@ -10,5 +10,6 @@ namespace Registry
 
         Popups = 1 << 0,
         SceneChange = 1 << 1,
+        Input = 1 << 2,
     }
 }
