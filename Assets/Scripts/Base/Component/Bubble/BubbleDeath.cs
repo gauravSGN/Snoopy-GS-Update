@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Animation;
 using Effects;
+using Sequence;
 
 public class BubbleDeath : MonoBehaviour
 {
+    public bool dying = false;
+
     [SerializeField]
     private GameObject destroyOnFinish;
 
@@ -22,25 +25,21 @@ public class BubbleDeath : MonoBehaviour
     private List<GameObject> deactivateOnDeath;
 
     private Dictionary<BubbleDeathType, List<IEnumerator>> effectDictionary;
+    private List<GameObject> blockingList = new List<GameObject>();
 
     public static void KillBubble(GameObject bubble, BubbleDeathType type)
     {
-        if(bubble.GetComponent<BubbleScore>().Score > 0)
-        {
-            var effectController = bubble.GetComponent<BubbleEffectController>();
-            effectController.AddEffect(AnimationEffect.Play(bubble, AnimationType.ScoreText));
-        }
-
         var death = bubble.GetComponent<BubbleDeath>();
 
-        if (death != null)
+        if (death == null)
+        {
+            Destroy(bubble);
+        }
+        else if (!death.dying)
         {
             bubble.GetComponent<Rigidbody2D>().isKinematic = true;
             death.TriggerDeathEffects(type);
-        }
-        else
-        {
-            Destroy(bubble);
+            death.dying = true;
         }
     }
 
@@ -48,6 +47,8 @@ public class BubbleDeath : MonoBehaviour
     {
         var effectController = gameObject.GetComponent<BubbleEffectController>();
         var effects = effectDictionary.ContainsKey(type) ? effectDictionary[type] : GetDefaultEffects(type);
+
+        GlobalState.EventService.AddEventHandler<SequenceItemCompleteEvent>(OnItemComplete);
 
         foreach (var effect in effects)
         {
@@ -59,33 +60,38 @@ public class BubbleDeath : MonoBehaviour
 
         var sounds = GetComponent<BubbleModelBehaviour>().Model.definition.Sounds;
         Sound.PlaySoundEvent.Dispatch((type == BubbleDeathType.Pop) ? sounds.match : sounds.cull);
-
-        Destroy(destroyOnFinish, deathDelay);
     }
 
-    public void AddEffect(IEnumerator effect, BubbleDeathType type)
+
+
+    public void AddEffect(GameObject parent, AnimationType type, BubbleDeathType deathType)
     {
-        if (!effectDictionary.ContainsKey(type))
+        if (!effectDictionary.ContainsKey(deathType))
         {
-            effectDictionary.Add(type, new List<IEnumerator>());
+            effectDictionary.Add(deathType, new List<IEnumerator>());
         }
 
-        effectDictionary[type].Add(effect);
+        effectDictionary[deathType].Add(AnimationEffect.PlayAndRegister(parent, type, RegisterBlockers));
     }
 
-    public void ReplaceEffect(IEnumerator effect, BubbleDeathType type)
+    public void ReplaceEffect(GameObject parent, AnimationType type, BubbleDeathType deathType)
     {
-        if (effectDictionary.ContainsKey(type))
+        if (effectDictionary.ContainsKey(deathType))
         {
-            effectDictionary[type].Clear();
+            effectDictionary[deathType].Clear();
         }
 
-        AddEffect(effect, type);
+        AddEffect(parent, type, deathType);
     }
 
     public void DeactivateObjectOnDeath(GameObject gameObject)
     {
         deactivateOnDeath.Add(gameObject);
+    }
+
+    public void RegisterBlockers(GameObject blocker)
+    {
+        blockingList.Add(blocker);
     }
 
     protected void Awake()
@@ -102,10 +108,25 @@ public class BubbleDeath : MonoBehaviour
         {
             foreach (var animationType in animationMap[type])
             {
-                effects.Add(AnimationEffect.Play(gameObject, animationType));
+                effects.Add(AnimationEffect.PlayAndRegister(gameObject, animationType, RegisterBlockers));
             }
         }
 
         return effects;
+    }
+
+    private void OnItemComplete(SequenceItemCompleteEvent gameEvent)
+    {
+        if (blockingList.Remove(gameEvent.item) && (blockingList.Count == 0))
+        {
+            if (gameObject.GetComponent<BubbleScore>().Score > 0)
+            {
+                var effectController = gameObject.GetComponent<BubbleEffectController>();
+                effectController.AddEffect(AnimationEffect.Play(gameObject, AnimationType.ScoreText));
+            }
+
+            GlobalState.EventService.RemoveEventHandler<SequenceItemCompleteEvent>(OnItemComplete);
+            Destroy(destroyOnFinish, deathDelay);
+        }
     }
 }

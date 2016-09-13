@@ -7,6 +7,8 @@ namespace Effects
 {
     public static class AnimationEffect
     {
+        public delegate void Register(GameObject gameObject);
+
         public static IEnumerator Play(GameObject parent, AnimationType type)
         {
             yield return null;
@@ -36,6 +38,13 @@ namespace Effects
 
                 animationEvents.StopBlocking -= triggerFunction;
             }
+        }
+
+        public static IEnumerator PlayAndRegister(GameObject parent, AnimationType type, Register register)
+        {
+            yield return null;
+
+            register(CreateAnimation(parent, type));
         }
 
         private static GameObject CreateAnimation(GameObject parent, AnimationType type)
