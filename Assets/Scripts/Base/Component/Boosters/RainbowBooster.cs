@@ -34,6 +34,7 @@ namespace Booster
         {
             if (GlobalState.User.purchasables.boosters.rainbows == 0)
             {
+                Sound.PlaySoundEvent.Dispatch(Sound.SoundType.UIClick);
                 purchaseBoosters.BuyRainbows();
             }
             else if ((instantiatedOverlay == null) &&
