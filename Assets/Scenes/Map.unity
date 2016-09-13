@@ -250,6 +250,7 @@ GameObject:
   - 114: {fileID: 219873257}
   - 114: {fileID: 219873256}
   - 114: {fileID: 219873260}
+  - 114: {fileID: 219873261}
   m_Layer: 5
   m_Name: Settings Button
   m_TagString: Untagged
@@ -383,6 +384,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a492f95135414a429fe13694784b791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &219873261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 219873254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8e08564c7114474b871603e9851bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 219873257}
 --- !u!1001 &382377355
 Prefab:
   m_ObjectHideFlags: 0
@@ -519,11 +532,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22404762, guid: 989609277b90f4c1eaa85f4c753307a9, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 2367
       objectReference: {fileID: 0}
     - target: {fileID: 22404762, guid: 989609277b90f4c1eaa85f4c753307a9, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 1334
       objectReference: {fileID: 0}
     - target: {fileID: 22404762, guid: 989609277b90f4c1eaa85f4c753307a9, type: 2}
       propertyPath: m_AnchorMin.x
@@ -531,7 +544,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22404762, guid: 989609277b90f4c1eaa85f4c753307a9, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22404762, guid: 989609277b90f4c1eaa85f4c753307a9, type: 2}
       propertyPath: m_AnchorMax.x
@@ -539,7 +552,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22404762, guid: 989609277b90f4c1eaa85f4c753307a9, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22404762, guid: 989609277b90f4c1eaa85f4c753307a9, type: 2}
       propertyPath: m_Pivot.x

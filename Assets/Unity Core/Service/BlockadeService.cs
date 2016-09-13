@@ -6,6 +6,7 @@ namespace Service
     {
         bool PopupsBlocked { get; }
         bool SceneChangeBlocked { get; }
+        bool InputBlocked { get; }
 
         void Add(Blockade blockade);
         void Remove(Blockade blockade);

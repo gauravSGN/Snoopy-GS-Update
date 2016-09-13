@@ -1,8 +1,9 @@
+using Registry;
 using UnityEngine;
 
 namespace UI.Map
 {
-    public class MovePlayerAvatar : MonoBehaviour
+    public class MovePlayerAvatar : MonoBehaviour, Blockade
     {
         [SerializeField]
         private float travelTime;
@@ -15,6 +16,8 @@ namespace UI.Map
 
         private Transform origin;
         private Transform destination;
+
+        public BlockadeType BlockadeType { get { return BlockadeType.All; } }
 
         protected void Start()
         {
@@ -34,6 +37,8 @@ namespace UI.Map
         {
             if (origin != null)
             {
+                GlobalState.Instance.Services.Get<Service.BlockadeService>().Add(this);
+
                 var effectsInstance = Instantiate(unlockEffects);
                 effectsInstance.transform.SetParent(destination, false);
 
@@ -50,6 +55,8 @@ namespace UI.Map
         {
             Util.FrameUtil.AfterDelay(0.25f, () =>
             {
+                GlobalState.Instance.Services.Get<Service.BlockadeService>().Remove(this);
+
                 var mapButtonComponent = destination.GetComponent<MapButton>();
 
                 if (mapButtonComponent != null)

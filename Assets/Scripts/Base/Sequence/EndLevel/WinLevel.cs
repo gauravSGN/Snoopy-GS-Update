@@ -1,5 +1,6 @@
 using Event;
 using System;
+using Service;
 using Slideout;
 using UI.Popup;
 using UnityEngine;
@@ -23,30 +24,34 @@ namespace Sequence
         private LevelState levelState;
         private GameObject currentItem;
         private GameConfig.WinSequenceConfig config;
+        private EventService eventService;
 
         override public void Begin(LevelState parameters)
         {
             this.levelState = parameters;
             config = GlobalState.Instance.Config.winSequence;
 
-            GlobalState.EventService.Dispatch(new Sound.PlayMusicEvent(Sound.MusicType.WinLevel, true));
+            eventService = GlobalState.EventService;
+
+            eventService.Dispatch(new InputToggleEvent(false));
+            eventService.Dispatch(new Sound.PlayMusicEvent(Sound.MusicType.WinLevel, true));
 
             StartCoroutine(RunActionAfterDelay(config.delayBeforeCullAll, () =>
             {
-                GlobalState.EventService.Dispatch(new LevelCompleteEvent(true));
+                eventService.Dispatch(new LevelCompleteEvent(true));
 
-                GlobalState.EventService.AddEventHandler<ReactionsFinishedEvent>(OnCullAllBubblesComplete);
+                eventService.AddEventHandler<ReactionsFinishedEvent>(OnCullAllBubblesComplete);
 
-                GlobalState.EventService.Dispatch(new CullAllBubblesEvent());
-                GlobalState.EventService.Dispatch(new BubbleSettledEvent());
+                eventService.Dispatch(new CullAllBubblesEvent());
+                eventService.Dispatch(new BubbleSettledEvent());
             }));
         }
 
         private void OnCullAllBubblesComplete()
         {
-            GlobalState.EventService.RemoveEventHandler<ReactionsFinishedEvent>(OnCullAllBubblesComplete);
-            GlobalState.EventService.AddEventHandler<SequenceItemCompleteEvent>(OnWinTextAnimationComplete);
-            GlobalState.EventService.Dispatch(new PrepareForBubblePartyEvent());
+            eventService.RemoveEventHandler<ReactionsFinishedEvent>(OnCullAllBubblesComplete);
+            eventService.AddEventHandler<SequenceItemCompleteEvent>(OnWinTextAnimationComplete);
+            eventService.Dispatch(new PrepareForBubblePartyEvent());
 
             // Put back the ball the character was holding and prepare to party
             levelState.remainingBubbles++;
@@ -58,7 +63,7 @@ namespace Sequence
                 currentItem = Instantiate(winTextAnimationPrefab);
                 currentItem.transform.SetParent(canvas.transform, false);
 
-                GlobalState.EventService.AddEventHandler<StartBubblePartyEvent>(OnStartBubbleParty);
+                eventService.AddEventHandler<StartBubblePartyEvent>(OnStartBubbleParty);
             }));
         }
 
@@ -66,21 +71,21 @@ namespace Sequence
         {
             if (gameEvent.item == currentItem)
             {
-                GlobalState.EventService.RemoveEventHandler<SequenceItemCompleteEvent>(OnWinTextAnimationComplete);
+                eventService.RemoveEventHandler<SequenceItemCompleteEvent>(OnWinTextAnimationComplete);
 
                 Destroy(currentItem);
                 currentItem = null;
 
                 StartCoroutine(RunActionAfterDelay(config.delayBeforeCelebration, () =>
                 {
-                    GlobalState.EventService.Dispatch(new StartWinAnimationsEvent());
+                    eventService.Dispatch(new StartWinAnimationsEvent());
                 }));
             }
         }
 
         private void OnStartBubbleParty(StartBubblePartyEvent gameEvent)
         {
-            GlobalState.EventService.RemoveEventHandler<StartBubblePartyEvent>(OnStartBubbleParty);
+            eventService.RemoveEventHandler<StartBubblePartyEvent>(OnStartBubbleParty);
             GlobalState.Instance.RunCoroutine(BubbleParty());
         }
 
@@ -93,21 +98,21 @@ namespace Sequence
             while (levelState.remainingBubbles > 0)
             {
                 yield return new WaitForSeconds(delayBetweenBubbles);
-                GlobalState.EventService.Dispatch(new FirePartyBubbleEvent());
+                eventService.Dispatch(new FirePartyBubbleEvent());
             }
 
             StartCoroutine(RunActionAfterDelay(config.delayBeforeSlideOut, () =>
             {
-                GlobalState.EventService.AddEventHandler<SlideoutCompleteEvent>(OnSlideoutComplete);
-                GlobalState.EventService.AddEventHandler<SlideoutStartEvent>(OnSlideoutStart);
-                GlobalState.EventService.Dispatch(new ShowSlideoutEvent(winSliderPrefab));
+                eventService.AddEventHandler<SlideoutCompleteEvent>(OnSlideoutComplete);
+                eventService.AddEventHandler<SlideoutStartEvent>(OnSlideoutStart);
+                eventService.Dispatch(new ShowSlideoutEvent(winSliderPrefab));
             }));
         }
 
         private void OnSlideoutStart(SlideoutStartEvent gameEvent)
         {
             currentItem = gameEvent.instance;
-            GlobalState.EventService.RemoveEventHandler<SlideoutStartEvent>(OnSlideoutStart);
+            eventService.RemoveEventHandler<SlideoutStartEvent>(OnSlideoutStart);
         }
 
         private void OnSlideoutComplete(SlideoutCompleteEvent gameEvent)
@@ -168,13 +173,13 @@ namespace Sequence
         private void DispatchMovePlayerAvatar()
         {
             GlobalState.SceneService.OnFinishedLoading -= DispatchMovePlayerAvatar;
-            GlobalState.EventService.Dispatch(new MovePlayerAvatarEvent());
+            eventService.Dispatch(new MovePlayerAvatarEvent());
         }
 
         private void DispatchAnimateStarsOnMapNode()
         {
             GlobalState.SceneService.OnFinishedLoading -= DispatchAnimateStarsOnMapNode;
-            GlobalState.EventService.Dispatch(new AnimateStarsOnMapNodeEvent { oldStars = oldStars });
+            eventService.Dispatch(new AnimateStarsOnMapNodeEvent { oldStars = oldStars });
         }
     }
 }
