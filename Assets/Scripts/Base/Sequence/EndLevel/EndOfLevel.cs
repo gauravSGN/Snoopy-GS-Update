@@ -30,6 +30,11 @@ namespace Sequence
             eventService.AddEventHandler<FiringAnimationCompleteEvent>(ContinueLevel);
             eventService.AddEventHandler<PurchasedExtraMovesEvent>(OnPurchasedExtraMoves);
             eventService.AddEventHandler<BubbleFiringEvent>(OnBubbleFiring);
+
+            Util.FrameUtil.AtEndOfFrame(() =>
+            {
+                GlobalState.SoundService.PreloadMusic(Sound.MusicType.WinLevel);
+            });
         }
 
         private void OnReactionsFinished()
