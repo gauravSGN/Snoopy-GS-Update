@@ -20,6 +20,7 @@ sealed public class BitmapFontRenderer : MonoBehaviour
 
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
+    private Color previousColor;
 
     public string Text
     {
@@ -46,8 +47,19 @@ sealed public class BitmapFontRenderer : MonoBehaviour
 
     public void Update()
     {
-        var mesh = meshFilter.sharedMesh;
-        mesh.colors = mesh.vertices.Select(v => color).ToArray();
+        if (color != previousColor)
+        {
+            var mesh = meshFilter.sharedMesh;
+            var colors = mesh.colors;
+
+            for (int index = 0, count = colors.Length; index < count; index++)
+            {
+                colors[index] = color;
+            }
+
+            mesh.colors = colors;
+            previousColor = color;
+        }
     }
 
     private void RebuildMesh()
@@ -92,7 +104,8 @@ sealed public class BitmapFontRenderer : MonoBehaviour
 
             if (glyph == null)
             {
-                Debug.LogWarning(string.Format("Missing glyph for '{0}' in bitmap font for '{1}'", line.Substring(offset, 1), name));
+                Debug.LogWarning(string.Format("Missing glyph for '{0}' in bitmap font for '{1}'",
+                                               line.Substring(offset, 1), name));
                 return;
             }
 
