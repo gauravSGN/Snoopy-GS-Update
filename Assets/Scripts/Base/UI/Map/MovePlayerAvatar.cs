@@ -53,7 +53,7 @@ namespace UI.Map
 
         private void OnAvatarMoveComplete(AbstractGoTween tween)
         {
-            Util.FrameUtil.AfterDelay(0.25f, () =>
+            Util.FrameUtil.AfterDelay(0.5f, () =>
             {
                 GlobalState.Instance.Services.Get<Service.BlockadeService>().Remove(this);
 
