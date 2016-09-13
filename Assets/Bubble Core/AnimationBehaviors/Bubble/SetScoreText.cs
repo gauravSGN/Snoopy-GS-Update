@@ -11,8 +11,7 @@ public class SetScoreText : StateMachineBehaviour
         var parent = gameObject.transform.parent;
         var bubbleScore = parent.GetComponent<BubbleScore>();
 
-        gameObject.GetComponent<Text>().text = bubbleScore.Score.ToString();
-
-        gameObject.GetComponent<MoveToRegisteredCanvas>().MoveToCanvas();
+        gameObject.GetComponent<BitmapFontRenderer>().Text = bubbleScore.Score.ToString();
+        gameObject.transform.SetParent(null, true);
     }
 }

@@ -36,9 +36,13 @@ sealed public class BitmapFontDefinition : ScriptableObject
     [SerializeField]
     private Texture2D texture;
 
+    [SerializeField]
+    private Material material;
+
     private GlyphNode root;
 
     public Texture2D Texture { get { return texture; } }
+    public Material Material { get { return material; } }
     public float LineHeight { get; private set; }
 
     public Glyph GetNextGlyph(string input, int offset)

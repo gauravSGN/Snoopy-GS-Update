@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 
 [ExecuteInEditMode]
@@ -7,15 +8,28 @@ sealed public class BitmapFontRenderer : MonoBehaviour
     [SerializeField]
     private BitmapFontDefinition font;
 
-    [SerializeField]
-    private Material material;
-
     [Multiline]
     [SerializeField]
     private string text;
 
     [SerializeField]
     private float textScale = 1.0f;
+
+    [SerializeField]
+    private Color color = Color.white;
+
+    private MeshFilter meshFilter;
+    private MeshRenderer meshRenderer;
+
+    public string Text
+    {
+        get { return text; }
+        set
+        {
+            text = value;
+            RebuildMesh();
+        }
+    }
 
     public void OnValidate()
     {
@@ -30,8 +44,17 @@ sealed public class BitmapFontRenderer : MonoBehaviour
         OnValidate();
     }
 
+    public void Update()
+    {
+        var mesh = meshFilter.sharedMesh;
+        mesh.colors = mesh.vertices.Select(v => color).ToArray();
+    }
+
     private void RebuildMesh()
     {
+        meshFilter = GetComponent<MeshFilter>();
+        meshRenderer = GetComponent<MeshRenderer>();
+
         var lines = text.Split(new[] { '\n' });
         var vertices = new List<Vector3>();
         var uvs = new List<Vector2>();
@@ -44,14 +67,16 @@ sealed public class BitmapFontRenderer : MonoBehaviour
             y -= font.LineHeight;
         }
 
-        GetComponent<MeshFilter>().sharedMesh = new Mesh
+        meshFilter.sharedMesh = new Mesh
         {
             vertices = vertices.ToArray(),
             uv = uvs.ToArray(),
             triangles = triangles.ToArray(),
+            colors = vertices.Select(v => Color.white).ToArray(),
         };
 
-        material.mainTexture = font.Texture;
+        meshRenderer.sharedMaterial = font.Material;
+        meshRenderer.sharedMaterial.mainTexture = font.Texture;
     }
 
     private void RebuildLine(string line, List<Vector3> vertices, List<Vector2> uvs, List<int> triangles, float y)
