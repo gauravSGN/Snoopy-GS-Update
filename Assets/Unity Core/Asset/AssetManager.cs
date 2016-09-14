@@ -6,7 +6,7 @@ using Service;
 
 namespace Asset
 {
-    public class AssetServiceBehaviour : MonoBehaviour, AssetService
+    public class AssetManager : AssetService
     {
         public event Action<float> OnProgress;
         public event Action OnComplete;
@@ -37,18 +37,7 @@ namespace Asset
             }
         }
 
-        [SerializeField]
-        private List<AssetGroup> assetGroups;
-
-        private readonly Dictionary<string, string> assets = new Dictionary<string, string>();
         private readonly List<AsyncAssetRequest> requests = new List<AsyncAssetRequest>();
-
-        public void Start()
-        {
-            PopulateAssetTable();
-
-            GlobalState.Instance.Services.SetInstance<AssetService>(this);
-        }
 
         public void UnloadUnusedAssets()
         {
@@ -75,23 +64,7 @@ namespace Asset
 
             if (requests.Count == 1)
             {
-                StartCoroutine(AsyncLoadRoutine());
-            }
-        }
-
-        private void PopulateAssetTable()
-        {
-            var platform = ApplicationPlatform.Android;
-
-            foreach (var asset in assetGroups)
-            {
-                foreach (var substitution in asset.Substitutions)
-                {
-                    if (substitution.Platform == platform)
-                    {
-                        assets.Add(asset.AssetName, substitution.AssetName);
-                    }
-                }
+                GlobalState.Instance.RunCoroutine(AsyncLoadRoutine());
             }
         }
 

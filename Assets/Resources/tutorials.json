@@ -1,0 +1,24 @@
+{
+  "tutorials": [
+    {
+      "id": "Aim_match",
+      "trigger": 0,
+      "level": 1,
+      "skippable": false,
+      "config": "Aim_match_config",
+      "reward": null,
+      "text": "t_aimmatch"
+    }
+  ],
+  "rewardLists": [
+    {
+      "id": "test",
+      "rewards": [
+        {
+          "item": "beachball",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}

@@ -17,6 +17,9 @@ namespace Service
 
                 [SerializeField]
                 public string className;
+
+                [SerializeField]
+                public bool instantiate;
             }
 
             [SerializeField]
@@ -34,6 +37,7 @@ namespace Service
         public void RegisterFromJson(string json)
         {
             var registry = JsonUtility.FromJson<SerializedRegistry>(json);
+            var instantiateList = new List<Action>();
 
             foreach (var entry in registry.registry)
             {
@@ -41,27 +45,41 @@ namespace Service
                 var serviceType = Type.GetType(entry.className);
 
                 serviceTypes[interfaceType] = serviceType;
+
+                if (entry.instantiate)
+                {
+                    instantiateList.Add(() => { GetOrCreateService(interfaceType); });
+                }
+            }
+
+            foreach (var action in instantiateList)
+            {
+                action.Invoke();
             }
         }
 
         public T Get<T>() where T : SharedService
         {
-            var serviceType = typeof(T);
-            SharedService service = null;
-            Type type = null;
-
-            if (!instances.TryGetValue(serviceType, out service) && serviceTypes.TryGetValue(serviceType, out type))
-            {
-                service = (SharedService)Activator.CreateInstance(type);
-                instances.Add(serviceType, service);
-            }
-
-            return (T)service;
+            return (T)GetOrCreateService(typeof(T));
         }
 
         public void SetInstance<T>(T instance) where T : SharedService
         {
             instances[typeof(T)] = instance;
+        }
+
+        private SharedService GetOrCreateService(Type interfaceType)
+        {
+            SharedService service = null;
+            Type type = null;
+
+            if (!instances.TryGetValue(interfaceType, out service) && serviceTypes.TryGetValue(interfaceType, out type))
+            {
+                service = (SharedService)Activator.CreateInstance(type);
+                instances.Add(interfaceType, service);
+            }
+
+            return service;
         }
     }
 }
