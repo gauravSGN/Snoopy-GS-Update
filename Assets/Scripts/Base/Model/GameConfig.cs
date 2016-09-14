@@ -53,6 +53,8 @@ public class GameConfig : ScriptableObject
         public float radius;
 
         public AnimationCurve easing;
+
+        public AnimationCurve distanceScaling;
     }
 
     [Serializable]
