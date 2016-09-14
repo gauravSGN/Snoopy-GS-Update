@@ -68,6 +68,22 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
+    distanceScaling:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: -0.25
+        outSlope: -0.25
+        tangentMode: 10
+      - time: 1
+        value: 0.75
+        inSlope: -0.25
+        outSlope: -0.25
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
   aimline:
     length: 5
     lineWidth: 0.167
