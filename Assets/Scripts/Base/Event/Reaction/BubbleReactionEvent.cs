@@ -1,4 +1,5 @@
 using Reaction;
+using System;
 
 public class BubbleReactionEvent : ReactionEvent
 {
@@ -12,5 +13,10 @@ public class BubbleReactionEvent : ReactionEvent
         gameEvent.bubble = bubble;
 
         GlobalState.EventService.DispatchPooled(gameEvent);
+
+        if (Enum.IsDefined(typeof(ReactionPriority), priority + 1))
+        {
+             BubbleReactionEvent.Dispatch(priority + 1, bubble);
+        }
     }
 }

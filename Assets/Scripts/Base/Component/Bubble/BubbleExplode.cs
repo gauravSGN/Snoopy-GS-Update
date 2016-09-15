@@ -1,7 +1,6 @@
-using UnityEngine;
 using Reaction;
 using Animation;
-using Effects;
+using UnityEngine;
 using ScanFunction = Util.CastingUtil.ScanFunction;
 
 public class BubbleExplode : MonoBehaviour
@@ -59,7 +58,7 @@ public class BubbleExplode : MonoBehaviour
         if (deathAnimationType != AnimationType.None)
         {
             var bubbleDeath = bubble.GetComponent<BubbleDeath>();
-            bubbleDeath.ReplaceEffect(bubble, deathAnimationType, BubbleDeathType.Pop);
+            bubbleDeath.AddBlockingEffect(bubble, deathAnimationType, BubbleDeathType.Pop);
         }
 
         BubbleReactionEvent.Dispatch(ReactionPriority.PowerUp, model);
