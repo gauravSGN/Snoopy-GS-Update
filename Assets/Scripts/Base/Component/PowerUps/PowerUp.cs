@@ -10,6 +10,10 @@ namespace PowerUps
         private const float FULL_SILHOUETTE = 1.0f;
         private const float TRANSITION_TIME = 0.2f;
 
+        // Magic numbers to fake the visual fill so it is more clear when the power up is not ready
+        private const float MAGIC_LIMIT = 0.9999f;
+        private const float MAGIC_MAX = 0.9f;
+
         [SerializeField]
         private Button button;
 
@@ -181,8 +185,17 @@ namespace PowerUps
                 while (currentFillTime < secondsToFill)
                 {
                     currentFillTime += Time.deltaTime;
-                    fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount,
+                    if (progress <= MAGIC_LIMIT)
+                    {
+                        fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount,
+                                                      FULL_SILHOUETTE - (MAGIC_MAX * progress),
+                                                      (currentFillTime / secondsToFill));
+                    }
+                    else
+                    {
+                        fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount,
                                                       (FULL_SILHOUETTE - progress), (currentFillTime / secondsToFill));
+                    }
 
                     var newY = (FULL_SILHOUETTE - fillImage.fillAmount) * fillLineTransform.rect.height;
                     fillLineTransform.localPosition = new Vector3(fillLineTransform.localPosition.x, newY);
