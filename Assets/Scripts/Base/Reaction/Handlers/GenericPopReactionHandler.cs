@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using Graph;
+using System.Collections;
 using System.Collections.Generic;
-using Graph;
 
 namespace Reaction
 {
@@ -16,12 +16,12 @@ namespace Reaction
 
             yield return null;
 
-            GraphUtil.RemoveNodes(bubbles);
-
             for (int index = 0, count = bubbles.Count; index < count; index++)
             {
                 bubbles[index].PopBubble();
             }
+
+            GraphUtil.RemoveNodes(bubbles);
         }
     }
 }

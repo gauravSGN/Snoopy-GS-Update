@@ -7,15 +7,19 @@ public class ChainPopAdjacent : MonoBehaviour
 {
     protected void Start()
     {
-        GetComponent<BubbleModelBehaviour>().Model.OnSnap += OnSnapHandler;
+        var model = GetComponent<BubbleModelBehaviour>().Model;
+        model.OnSnap += PopAdjacent;
+        model.OnPopped += PopAdjacent;
     }
 
     protected void OnDestroy()
     {
-        GetComponent<BubbleModelBehaviour>().Model.OnSnap -= OnSnapHandler;
+        var model = GetComponent<BubbleModelBehaviour>().Model;
+        model.OnSnap -= PopAdjacent;
+        model.OnPopped -= PopAdjacent;
     }
 
-    private void OnSnapHandler(Bubble bubble)
+    private void PopAdjacent(Bubble bubble)
     {
         BubbleReactionEvent.Dispatch(ReactionPriority.ChainPop, bubble);
     }
