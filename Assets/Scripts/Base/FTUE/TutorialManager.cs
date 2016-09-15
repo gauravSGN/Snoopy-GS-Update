@@ -13,7 +13,6 @@ namespace FTUE
         private List<TutorialConfig.TutorialData> tutorials;
         private Dictionary<string, TutorialConfig.RewardList> rewards;
         private readonly TutorialRewardFactory rewardFactory = new TutorialRewardFactory();
-        private UserStateService user;
 
         public TutorialManager()
         {
@@ -22,7 +21,6 @@ namespace FTUE
 
             tutorials = config.tutorials;
             rewards = config.rewardLists.ToDictionary(rl => rl.id);
-            user = GlobalState.User;
 
             GlobalState.EventService.Persistent.AddEventHandler<TutorialProgressEvent>(OnTutorialProgress);
         }
@@ -43,7 +41,7 @@ namespace FTUE
         {
             return (tutorial.trigger == progress.trigger) &&
                    (tutorial.level == progress.level) &&
-                   !user.tutorials.HasCompleted(tutorial.id);
+                   !GlobalState.User.tutorials.HasCompleted(tutorial.id);
         }
 
         private void GiveRewards(string rewardID)
@@ -54,7 +52,6 @@ namespace FTUE
             {
                 foreach (var reward in rewardList.rewards)
                 {
-                    Debug.Log(string.Format("TutorialManager: Giving {0} of {1} as reward", reward.count, reward.item));
                     rewardFactory.Create(reward.item).Apply(reward.count);
                 }
             }
@@ -62,7 +59,7 @@ namespace FTUE
 
         private void ShowTutorial(TutorialConfig.TutorialData tutorial)
         {
-            user.tutorials.MarkCompleted(tutorial.id);
+            GlobalState.User.tutorials.MarkCompleted(tutorial.id);
 
             GlobalState.EventService.Dispatch(new ShowTutorialEvent(tutorial.id));
         }

@@ -12,6 +12,11 @@ namespace FTUE
             GlobalState.EventService.Persistent.AddEventHandler<ShowTutorialEvent>(OnShowTutorial);
         }
 
+        public void OnDestroy()
+        {
+            GlobalState.EventService.RemoveEventHandler<ShowTutorialEvent>(OnShowTutorial);
+        }
+
         private void OnShowTutorial(ShowTutorialEvent gameEvent)
         {
             overlay.SetActive(true);
@@ -22,7 +27,11 @@ namespace FTUE
 
         private void OnTutorialLoaded(GameObject prefab)
         {
-            Instantiate(prefab, transform);
+            if (prefab != null)
+            {
+                Instantiate(prefab, transform);
+            }
+
             overlay.SetActive(false);
         }
     }
