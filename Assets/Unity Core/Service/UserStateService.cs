@@ -11,5 +11,6 @@ namespace Service
         Levels levels { get; }
         Settings settings { get; }
         Purchasables purchasables { get; }
+        Tutorials tutorials { get; }
     }
 }
