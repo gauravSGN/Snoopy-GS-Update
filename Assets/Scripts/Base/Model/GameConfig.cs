@@ -127,6 +127,12 @@ public class GameConfig : ScriptableObject
         public float bumpDuration;
     }
 
+    [Serializable]
+    public class PowerUpConfig
+    {
+        public float popOrderDelay;
+    }
+
     public BubbleConfig bubbles;
     public ReactionConfig reactions;
     public ImpactEffectConfig impactEffect;
@@ -138,4 +144,5 @@ public class GameConfig : ScriptableObject
     public WoodstockConfig woodstock;
     public BubblePartyConfig bubbleParty;
     public WinSequenceConfig winSequence;
+    public PowerUpConfig powerUp;
 }

@@ -161,3 +161,5 @@ MonoBehaviour:
     delayBeforeBubbleParty: 0
     delayBeforeSlideOut: 1.5
     delayBeforePopup: 0.5
+  powerUp:
+    popOrderDelay: 0.15

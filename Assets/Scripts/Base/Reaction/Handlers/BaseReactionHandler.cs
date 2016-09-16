@@ -38,7 +38,7 @@ namespace Reaction
 
                 while (reaction.MoveNext())
                 {
-                    yield return null;
+                    yield return reaction.Current;
                 }
             }
         }

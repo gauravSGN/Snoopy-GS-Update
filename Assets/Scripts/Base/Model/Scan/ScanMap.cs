@@ -1,6 +1,7 @@
 using Core;
 using UnityEngine;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Model.Scan
 {
@@ -28,7 +29,8 @@ namespace Model.Scan
                 foreach (var scan in GetScans())
                 {
                     var json = scan.Item2.text;
-                    map[scan.Item1] = JsonUtility.FromJson<Model.Scan.ScanDefinition>(json);
+
+                    map[scan.Item1] = JsonConvert.DeserializeObject<Model.Scan.ScanDefinition>(json);
                 }
             }
         }

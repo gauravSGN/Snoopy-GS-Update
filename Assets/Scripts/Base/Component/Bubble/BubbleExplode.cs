@@ -24,8 +24,7 @@ public class BubbleExplode : MonoBehaviour
     public void OnSettling(GameEvent gameEvent)
     {
         var hitGroups = scanFunction();
-
-
+        var delay = GlobalState.Instance.Config.powerUp.popOrderDelay;
         AnimationReactionEvent.Dispatch(ReactionPriority.PreReactionAnimation, explosionAnimationType, gameObject);
 
         foreach (var hits in hitGroups)
@@ -50,7 +49,7 @@ public class BubbleExplode : MonoBehaviour
 
             if (bubbles.Count > 0)
             {
-                BubbleGroupReactionEvent.Dispatch(ReactionPriority.PowerUp, bubbles, 0.2f);
+                BubbleGroupReactionEvent.Dispatch(ReactionPriority.PowerUp, bubbles, delay);
             }
         }
     }

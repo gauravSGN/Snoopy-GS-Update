@@ -27,15 +27,20 @@ namespace Util
             var basePosition = baseBubble.transform.position;
             var scans = new List<RaycastHit2D[]>();
 
-            foreach (var location in scanLocations)
+            foreach (var scanGroup in scanLocations.locations)
             {
-                var origin = new Vector2(basePosition.x + (location.x * bubbleSize),
-                                        basePosition.y + (location.y * yBubbleSize));
+                var scan = new List<RaycastHit2D[]>();
 
-                scans.Add(Physics2D.CircleCastAll(origin, baseSize, Vector2.zero, 0.0f));
+                foreach (var location in scanGroup)
+                {
+                    var origin = new Vector2(basePosition.x + (location.x * bubbleSize),
+                                            basePosition.y + (location.y * yBubbleSize));
+
+                    scan.Add(Physics2D.CircleCastAll(origin, baseSize, Vector2.zero, 0.0f));
+                }
+
+                scans.Add(AggregateScans(scan));
             }
-
-            // return AggregateScans(scans);
 
             return scans;
         }

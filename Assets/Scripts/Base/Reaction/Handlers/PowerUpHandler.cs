@@ -15,16 +15,16 @@ namespace Reaction
 
             yield return null;
 
-            foreach (var groupReaction in groups)
+            foreach (var reaction in groups)
             {
-                GraphUtil.RemoveNodes(groupReaction.bubbles);
+                GraphUtil.RemoveNodes(reaction.bubbles);
 
-                for (int index = 0, count = groupReaction.bubbles.Count; index < count; index++)
+                foreach (var bubble in reaction.bubbles)
                 {
-                    groupReaction.bubbles[index].PopBubble();
+                    bubble.PopBubble();
                 }
 
-                yield return new WaitForSeconds(groupReaction.delay);
+                yield return new WaitForSeconds(reaction.delay);
             }
         }
     }
