@@ -43,6 +43,7 @@ public class GlobalState : SingletonBehaviour<GlobalState>
             GSDescriptorFactory.CreateByPlatform(Application.platform, gsDescriptorJSON).Initialize();
             Application.targetFrameRate = 60;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
+            Input.multiTouchEnabled = false;
         }
     }
 
