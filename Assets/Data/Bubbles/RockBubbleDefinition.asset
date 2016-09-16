@@ -22,10 +22,11 @@ MonoBehaviour:
   matchThreshold: 99999
   defaultAnimations:
   - name: 0
-    list: 04000000
-  - name: 1
     list: 
+  - name: 1
+    list: 0f000000
   sounds:
     impact: {fileID: 0}
     match: {fileID: 8300000, guid: 90cd326fee7c14d079de04ee1a608787, type: 3}
     cull: {fileID: 8300000, guid: 13cba3bf7145244749bc5db921f10f85, type: 3}
+    bounce: {fileID: 0}
