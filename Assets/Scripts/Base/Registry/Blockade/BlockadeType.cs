@@ -7,7 +7,7 @@ namespace Registry
     {
         All = -1,
         None = 0,
-        AllNonReaction = BlockadeType.Popups & BlockadeType.SceneChange & BlockadeType.Input,
+        AllNonReaction = BlockadeType.Popups | BlockadeType.SceneChange | BlockadeType.Input,
 
         Popups = 1 << 0,
         SceneChange = 1 << 1,

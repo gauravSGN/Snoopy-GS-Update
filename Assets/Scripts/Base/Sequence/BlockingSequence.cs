@@ -8,7 +8,7 @@ namespace Sequence
     abstract public class BlockingSequence : Blockade
     {
         protected readonly List<GameObject> pending = new List<GameObject>();
-        private static BlockadeService blockadeService;
+        private BlockadeService blockadeService;
 
         public bool Blocking { get { return pending.Count > 0; } }
 
@@ -19,11 +19,7 @@ namespace Sequence
         public BlockingSequence()
         {
             GlobalState.EventService.AddEventHandler<SequenceItemCompleteEvent>(OnItemComplete);
-
-            if (blockadeService == null)
-            {
-                blockadeService = GlobalState.Instance.Services.Get<BlockadeService>();
-            }
+            blockadeService = blockadeService ?? GlobalState.Instance.Services.Get<BlockadeService>();
         }
 
         public void Play()

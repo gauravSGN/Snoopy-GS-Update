@@ -10,7 +10,7 @@ namespace Reaction
         protected ReactionPriority priority;
         protected List<ReactionFunction> actions;
 
-        private static BlockadeService blockade;
+        private BlockadeService blockade;
 
         protected delegate IEnumerator ReactionFunction();
 
@@ -23,11 +23,7 @@ namespace Reaction
             this.priority = priority;
             actions = new List<ReactionFunction>() { Reaction, PostReaction };
             GlobalState.EventService.AddEventHandler<EventType>(OnReactionEvent);
-
-            if (blockade == null)
-            {
-                blockade = GlobalState.Instance.Services.Get<BlockadeService>();
-            }
+            blockade = blockade ?? GlobalState.Instance.Services.Get<BlockadeService>();
         }
 
         public IEnumerator HandleActions()
