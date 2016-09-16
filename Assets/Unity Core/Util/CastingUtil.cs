@@ -7,7 +7,7 @@ namespace Util
 {
     public static class CastingUtil
     {
-        public delegate RaycastHit2D[] ScanFunction();
+        public delegate List<RaycastHit2D[]> ScanFunction();
 
         public static RaycastHit2D[] BoundsBoxCast(Bounds bounds, int layers)
         {
@@ -19,7 +19,7 @@ namespace Util
         }
 
         // Several small casts to find bubbles in a shape specificed by the ScanDefinition.
-        public static RaycastHit2D[] RelativeBubbleCast(GameObject baseBubble, ScanDefinition scanLocations)
+        public static List<RaycastHit2D[]> RelativeBubbleCast(GameObject baseBubble, ScanDefinition scanLocations)
         {
             var bubbleSize = GlobalState.Instance.Config.bubbles.size;
             var yBubbleSize = bubbleSize * MathUtil.COS_30_DEGREES;
@@ -35,10 +35,12 @@ namespace Util
                 scans.Add(Physics2D.CircleCastAll(origin, baseSize, Vector2.zero, 0.0f));
             }
 
-            return AggregateScans(scans);
+            // return AggregateScans(scans);
+
+            return scans;
         }
 
-        public static RaycastHit2D[] FullRowBubbleCast(GameObject baseBubble, int rowsBelow, int rowsAbove)
+        public static List<RaycastHit2D[]> FullRowBubbleCast(GameObject baseBubble, int rowsBelow, int rowsAbove)
         {
             var bubbleSize = GlobalState.Instance.Config.bubbles.size;
             var xOffset = GlobalState.Instance.Config.bubbles.numPerRow * bubbleSize;
@@ -56,7 +58,8 @@ namespace Util
                 start.y = end.y = start.y + yOffset;
             }
 
-            return AggregateScans(scans);
+            // return AggregateScans(scans);
+            return scans;
         }
 
         private static RaycastHit2D[] AggregateScans(List<RaycastHit2D[]> scans)

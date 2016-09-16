@@ -1,6 +1,7 @@
 using Reaction;
 using Animation;
 using UnityEngine;
+using System.Collections.Generic;
 using ScanFunction = Util.CastingUtil.ScanFunction;
 
 public class BubbleExplode : MonoBehaviour
@@ -22,23 +23,34 @@ public class BubbleExplode : MonoBehaviour
 
     public void OnSettling(GameEvent gameEvent)
     {
-        var hits = scanFunction();
-        var length = hits.Length;
+        var hitGroups = scanFunction();
+
 
         AnimationReactionEvent.Dispatch(ReactionPriority.PreReactionAnimation, explosionAnimationType, gameObject);
 
-        for (int index = 0; index < length; index++)
+        foreach (var hits in hitGroups)
         {
-            var bubble = hits[index].collider.gameObject;
+            var bubbles = new List<Bubble>();
 
-            if (bubble.tag == StringConstants.Tags.BUBBLES)
+            foreach (var hit in hits)
             {
-                var model = bubble.GetComponent<BubbleModelBehaviour>().Model;
+                var bubble = hit.collider.gameObject;
 
-                if (model.Active || (bubble == gameObject))
+                if (bubble.tag == StringConstants.Tags.BUBBLES)
                 {
-                    AddReaction(bubble, model);
+                    var model = bubble.GetComponent<BubbleModelBehaviour>().Model;
+
+                    if (model.Active || (bubble == gameObject))
+                    {
+                        bubbles.Add(model);
+                        AddDeathAnimation(bubble, model);
+                    }
                 }
+            }
+
+            if (bubbles.Count > 0)
+            {
+                BubbleGroupReactionEvent.Dispatch(ReactionPriority.PowerUp, bubbles, 0.2f);
             }
         }
     }
@@ -53,14 +65,12 @@ public class BubbleExplode : MonoBehaviour
         GlobalState.EventService.RemoveEventHandler<BubbleSettlingEvent>(OnSettling);
     }
 
-    private void AddReaction(GameObject bubble, Bubble model)
+    private void AddDeathAnimation(GameObject bubble, Bubble model)
     {
         if (deathAnimationType != AnimationType.None)
         {
             var bubbleDeath = bubble.GetComponent<BubbleDeath>();
             bubbleDeath.AddBlockingEffect(bubble, deathAnimationType, BubbleDeathType.Pop);
         }
-
-        BubbleReactionEvent.Dispatch(ReactionPriority.PowerUp, model);
     }
 }

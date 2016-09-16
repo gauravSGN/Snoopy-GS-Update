@@ -39,11 +39,6 @@ namespace Sequence
             pending.Add(blocker);
         }
 
-        public void RegisterNonBlockers(GameObject gameObject)
-        {
-
-        }
-
         public void AddEffect(GameObject parent, AnimationType type, BubbleDeathType deathType, bool blocking)
         {
             if (!effectDictionary.ContainsKey(deathType))

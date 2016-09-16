@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace Reaction
 {
-    [ReactionHandlerAttribute(ReactionPriority.PowerUp)]
     [ReactionHandlerAttribute(ReactionPriority.GenericPop)]
     [ReactionHandlerAttribute(ReactionPriority.PhysicsDestroy)]
     public class GenericPopReactionHandler : BubbleReactionHandler
