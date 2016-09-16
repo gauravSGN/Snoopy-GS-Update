@@ -126,6 +126,8 @@ MonoBehaviour:
     remainingMovesValue: 100
     popToDropFactor: 0.75
     secondStarDivisor: 2
+    multiplierCalloutDelay: 0.5
+    multiplierCalloutFadeTime: 0.2
     goals:
     - goalType: 0
       score: 500
@@ -161,3 +163,5 @@ MonoBehaviour:
     delayBeforeBubbleParty: 0
     delayBeforeSlideOut: 1.5
     delayBeforePopup: 0.5
+  powerUp:
+    popOrderDelay: 0.15

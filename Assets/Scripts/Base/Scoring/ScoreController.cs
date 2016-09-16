@@ -26,6 +26,7 @@ namespace Scoring
         private readonly List<Tuple<ReactionPriority, Bubble>> pending = new List<Tuple<ReactionPriority, Bubble>>();
         private GameConfig.ScoringConfig config;
         private EventService eventService;
+        private ScoreMultiplierCallout pendingCallout;
 
         public void Start()
         {
@@ -40,9 +41,11 @@ namespace Scoring
             handlers[ReactionPriority.Cull] = HandleCulledBubbles;
 
             eventService.AddEventHandler<BubbleReactionEvent>(OnBubbleReaction);
+            eventService.AddEventHandler<BubbleGroupReactionEvent>(OnBubbleGroupReaction);
             eventService.AddEventHandler<StartReactionsEvent>(OnStartReactions);
             eventService.AddEventHandler<GoalIncrementEvent>(OnGoalIncrement);
             eventService.AddEventHandler<FirePartyBubbleEvent>(FirePartyBubbleEvent);
+            eventService.AddEventHandler<ScoreMultiplierCalloutEvent>(OnMultiplierCallout);
         }
 
         public void OnDestroy()
@@ -52,10 +55,23 @@ namespace Scoring
 
         private void OnBubbleReaction(BubbleReactionEvent gameEvent)
         {
-            if (!handledBubbles.Contains(gameEvent.bubble))
+            AddBubble(gameEvent.priority, gameEvent.bubble);
+        }
+
+        private void OnBubbleGroupReaction(BubbleGroupReactionEvent gameEvent)
+        {
+            foreach (var bubble in gameEvent.bubbles)
             {
-                pending.Add(new Tuple<ReactionPriority, Bubble>(gameEvent.priority, gameEvent.bubble));
-                handledBubbles.Add(gameEvent.bubble);
+                AddBubble(gameEvent.priority, bubble);
+            }
+        }
+
+        private void AddBubble(ReactionPriority priority, Bubble bubble)
+        {
+            if (!handledBubbles.Contains(bubble))
+            {
+                pending.Add(new Tuple<ReactionPriority, Bubble>(priority, bubble));
+                handledBubbles.Add(bubble);
             }
         }
 
@@ -105,7 +121,8 @@ namespace Scoring
                 if ((multiplier >= 2.0f) && (multiplierCallout != null))
                 {
                     callout = Instantiate(multiplierCallout).GetComponent<ScoreMultiplierCallout>();
-                    callout.Initialize();
+                    callout.Initialize((int)Mathf.Floor(multiplier), clusterScore);
+                    pendingCallout = callout;
                 }
 
                 foreach (var bubble in cluster)
@@ -113,15 +130,19 @@ namespace Scoring
                     ShowBubbleScore(bubble, bubble.definition.Score);
                 }
 
-                if (callout != null)
-                {
-                    callout.Show((int)Mathf.Floor(multiplier), clusterScore);
-                }
-
                 totalScore += clusterScore;
             }
 
             AddToScore(totalScore);
+        }
+
+        private void OnMultiplierCallout()
+        {
+            if (pendingCallout != null)
+            {
+                pendingCallout.Show();
+                pendingCallout = null;
+            }
         }
 
         private void HandleCulledBubbles(IEnumerable<Bubble> bubbles)

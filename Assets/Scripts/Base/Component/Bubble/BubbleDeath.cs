@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 using Animation;
-using Effects;
+using Sequence;
+using System.Collections.Generic;
 
 public class BubbleDeath : MonoBehaviour
 {
+    public bool dying = false;
+
     [SerializeField]
     private GameObject destroyOnFinish;
 
@@ -13,74 +14,45 @@ public class BubbleDeath : MonoBehaviour
     private float deathDelay;
 
     [SerializeField]
-    private List<GameObject> activateOnPop;
-
-    [SerializeField]
-    private List<GameObject> activateOnCull;
-
-    [SerializeField]
     private List<GameObject> deactivateOnDeath;
 
-    private Dictionary<BubbleDeathType, List<IEnumerator>> effectDictionary;
+    public BubbleDeathSequence DeathSequence { get; private set;}
 
     public static void KillBubble(GameObject bubble, BubbleDeathType type)
     {
-        if(bubble.GetComponent<BubbleScore>().Score > 0)
-        {
-            var effectController = bubble.GetComponent<BubbleEffectController>();
-            effectController.AddEffect(AnimationEffect.Play(bubble, AnimationType.ScoreText));
-        }
-
         var death = bubble.GetComponent<BubbleDeath>();
 
-        if (death != null)
-        {
-            bubble.GetComponent<Rigidbody2D>().isKinematic = true;
-            death.TriggerDeathEffects(type);
-        }
-        else
+        if (death == null)
         {
             Destroy(bubble);
         }
+        else if (!death.dying)
+        {
+            death.Die(type);
+        }
     }
 
-    public void TriggerDeathEffects(BubbleDeathType type)
+    public void Die(BubbleDeathType type)
     {
-        var effectController = gameObject.GetComponent<BubbleEffectController>();
-        var effects = effectDictionary.ContainsKey(type) ? effectDictionary[type] : GetDefaultEffects(type);
+        dying = true;
 
-        foreach (var effect in effects)
-        {
-            effectController.AddEffect(effect);
-        }
-
-        GameObjectUtil.SetActive((type == BubbleDeathType.Pop) ? activateOnPop : activateOnCull, true);
+        GetComponent<Rigidbody2D>().isKinematic = true;
         GameObjectUtil.SetActive(deactivateOnDeath, false);
 
         var sounds = GetComponent<BubbleModelBehaviour>().Model.definition.Sounds;
         Sound.PlaySoundEvent.Dispatch((type == BubbleDeathType.Pop) ? sounds.match : sounds.cull);
 
-        Destroy(destroyOnFinish, deathDelay);
+        DeathSequence.Play(type);
     }
 
-    public void AddEffect(IEnumerator effect, BubbleDeathType type)
+    public void AddEffect(GameObject parent, AnimationType type, BubbleDeathType deathType)
     {
-        if (!effectDictionary.ContainsKey(type))
-        {
-            effectDictionary.Add(type, new List<IEnumerator>());
-        }
-
-        effectDictionary[type].Add(effect);
+        DeathSequence.AddEffect(parent, type, deathType, false);
     }
 
-    public void ReplaceEffect(IEnumerator effect, BubbleDeathType type)
+    public void AddBlockingEffect(GameObject parent, AnimationType type, BubbleDeathType deathType)
     {
-        if (effectDictionary.ContainsKey(type))
-        {
-            effectDictionary[type].Clear();
-        }
-
-        AddEffect(effect, type);
+        DeathSequence.AddEffect(parent, type, deathType, true);
     }
 
     public void DeactivateObjectOnDeath(GameObject gameObject)
@@ -90,22 +62,6 @@ public class BubbleDeath : MonoBehaviour
 
     protected void Awake()
     {
-        effectDictionary = new Dictionary<BubbleDeathType, List<IEnumerator>>();
-    }
-
-    private List<IEnumerator> GetDefaultEffects(BubbleDeathType type)
-    {
-        var effects = new List<IEnumerator>();
-        var animationMap = GetComponent<BubbleModelBehaviour>().Model.definition.AnimationMap;
-
-        if (animationMap.ContainsKey(type))
-        {
-            foreach (var animationType in animationMap[type])
-            {
-                effects.Add(AnimationEffect.Play(gameObject, animationType));
-            }
-        }
-
-        return effects;
+        DeathSequence = new BubbleDeathSequence(gameObject);
     }
 }

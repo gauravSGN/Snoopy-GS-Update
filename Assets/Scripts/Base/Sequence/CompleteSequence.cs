@@ -2,13 +2,11 @@
 
 namespace Sequence
 {
-    sealed public class CompleteSequence : StateMachineBehaviour
+    sealed public class CompleteSequence : SelectableTransitionBehaviour
     {
-        public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        override protected void OnSetTransition(Animator animator)
         {
             GlobalState.EventService.Dispatch(new SequenceItemCompleteEvent(animator.gameObject));
-
-            base.OnStateEnter(animator, stateInfo, layerIndex);
         }
     }
 }

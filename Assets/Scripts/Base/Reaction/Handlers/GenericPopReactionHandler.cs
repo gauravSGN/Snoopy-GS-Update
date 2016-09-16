@@ -4,12 +4,11 @@ using System.Collections.Generic;
 
 namespace Reaction
 {
-    [ReactionHandlerAttribute(ReactionPriority.PowerUp)]
     [ReactionHandlerAttribute(ReactionPriority.GenericPop)]
     [ReactionHandlerAttribute(ReactionPriority.PhysicsDestroy)]
     public class GenericPopReactionHandler : BubbleReactionHandler
     {
-        public override IEnumerator HandleActions()
+        override protected IEnumerator Reaction()
         {
             var bubbles = scheduledBubbles;
             scheduledBubbles = new List<Bubble>();

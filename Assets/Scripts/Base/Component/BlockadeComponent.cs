@@ -9,9 +9,14 @@ public class BlockadeComponent : MonoBehaviour, Blockade
 
     public BlockadeType BlockadeType { get { return type; } }
 
-    public void Start()
+    public void OnEnable()
     {
         GlobalState.Instance.Services.Get<BlockadeService>().Add(this);
+    }
+
+    public void OnDisable()
+    {
+        OnDestroy();
     }
 
     public void OnDestroy()
