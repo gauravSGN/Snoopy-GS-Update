@@ -51,12 +51,9 @@ namespace Graph
             {
                 finder.Reset();
                 var connected = finder.IsConnectedToRoot(adjacent[0]);
+                RemoveVisitedNodes(finder, adjacent);
 
-                if (connected)
-                {
-                    RemoveVisitedNodes(finder, adjacent);
-                }
-                else
+                if (!connected)
                 {
                     CullVisitedNodes(finder, adjacent);
                 }
@@ -76,8 +73,6 @@ namespace Graph
 
         private static void CullVisitedNodes<T>(RootFinder finder, List<T> adjacent) where T : GraphElement<T>
         {
-            RemoveVisitedNodes(finder, adjacent);
-
             foreach (var node in finder.Visited)
             {
                 node.RemoveFromGraph();
