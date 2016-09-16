@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Sequence
 {
-    public class BubbleDeathSequence : BlockingSequence, Blockade
+    public class BubbleDeathSequence : BlockingSequence
     {
         private GameObject gameObject;
         private Dictionary<BubbleDeathType, List<IEnumerator>> effectDictionary;

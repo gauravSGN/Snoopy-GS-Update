@@ -63,7 +63,6 @@ namespace Util
                 start.y = end.y = start.y + yOffset;
             }
 
-            // return AggregateScans(scans);
             return scans;
         }
 

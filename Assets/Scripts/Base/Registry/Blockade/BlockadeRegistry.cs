@@ -29,7 +29,7 @@ namespace Registry
             { BlockadeType.Input, new EventMapping(Dispatch<BlockadeEvent.InputBlocked>,
                                                    Dispatch<BlockadeEvent.InputUnblocked>) },
             { BlockadeType.Reactions, new EventMapping(Dispatch<BlockadeEvent.ReactionsBlocked>,
-                                                   Dispatch<BlockadeEvent.ReactionsUnblocked>) },
+                                                       Dispatch<BlockadeEvent.ReactionsUnblocked>) },
         };
 
         public bool PopupsBlocked
