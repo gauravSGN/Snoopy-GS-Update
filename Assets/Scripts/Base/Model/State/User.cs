@@ -38,6 +38,7 @@ namespace State
         public Levels levels { get; private set; }
         public Settings settings { get; private set; }
         public Purchasables purchasables { get; private set; }
+        public Tutorials tutorials { get; private set; }
 
         public User()
         {
@@ -53,6 +54,7 @@ namespace State
                 levels = BuildStateHandlerWithCallback<Levels>(GS.Api.State, UpdateAndNotifyListenersCallback);
                 settings = BuildStateHandler<Settings>();
                 purchasables = BuildStateHandler<Purchasables>();
+                tutorials = BuildStateHandler<Tutorials>();
             }
         }
 

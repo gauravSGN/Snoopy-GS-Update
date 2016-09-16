@@ -42,7 +42,7 @@ namespace FTUE
 
         private void DispatchTrigger(TutorialTrigger trigger)
         {
-            GlobalState.EventService.Dispatch(new TutorialProgressEvent(trigger));
+            GlobalState.EventService.Dispatch(new TutorialProgressEvent(trigger, (int)GlobalState.User.currentLevel));
         }
 
         private void OnPowerUpFilled(PowerUpFilledEvent gameEvent)
