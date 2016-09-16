@@ -19,7 +19,7 @@ namespace Sequence
         private BlockadeService blockade;
         private bool readyToContinue = false;
 
-        public BlockadeType BlockadeType { get { return BlockadeType.All; } }
+        public BlockadeType BlockadeType { get { return BlockadeType.AllNonReaction; } }
 
         protected void Start()
         {

@@ -1,29 +1,38 @@
 using Effects;
+using Service;
+using Registry;
 using Animation;
 using UnityEngine;
-using Service;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace Sequence
 {
-    public class BubbleDeathSequence : BlockingSequence
+    public class BubbleDeathSequence : BlockingSequence, Blockade
     {
         private GameObject gameObject;
-
         private Dictionary<BubbleDeathType, List<IEnumerator>> effectDictionary;
         private BubbleEffectController effectController;
+
+        private static BlockadeService blockadeService;
+
+        public BlockadeType BlockadeType { get { return BlockadeType.Reactions; } }
 
         public BubbleDeathSequence(GameObject gameObject) : base()
         {
             this.gameObject = gameObject;
             effectController = gameObject.GetComponent<BubbleEffectController>();
             effectDictionary = new Dictionary<BubbleDeathType, List<IEnumerator>>();
+
+            if (blockadeService == null)
+            {
+                blockadeService = GlobalState.Instance.Services.Get<BlockadeService>();
+            }
         }
 
         public void Play(BubbleDeathType type)
         {
-            GlobalState.Instance.Services.Get<SequenceService>().AddBlockingSequence(this);
+            blockadeService.Add(this);
             var effects = effectDictionary.ContainsKey(type) ? effectDictionary[type] : GetDefaultEffects(type);
 
             foreach (var effect in effects)
@@ -35,6 +44,11 @@ namespace Sequence
         public void RegisterBlockers(GameObject blocker)
         {
             pending.Add(blocker);
+        }
+
+        public void RegisterNonBlockers(GameObject gameObject)
+        {
+
         }
 
         public void AddEffect(GameObject parent, AnimationType type, BubbleDeathType deathType, bool blocking)
@@ -52,6 +66,7 @@ namespace Sequence
 
         override protected void Complete(SequenceItemCompleteEvent gameEvent)
         {
+            blockadeService.Remove(this);
             if (gameObject.GetComponent<BubbleScore>().Score > 0)
             {
                 effectController.AddEffect(AnimationEffect.Play(gameObject, AnimationType.ScoreText));

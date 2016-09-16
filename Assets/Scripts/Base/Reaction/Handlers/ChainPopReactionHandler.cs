@@ -7,7 +7,7 @@ namespace Reaction
     [ReactionHandlerAttribute(ReactionPriority.ChainPop)]
     public class ChainPopReactionHandler : BubbleReactionHandler
     {
-        public override IEnumerator HandleActions()
+        override protected IEnumerator Reaction()
         {
             var bubbles = scheduledBubbles;
             scheduledBubbles = new List<Bubble>();

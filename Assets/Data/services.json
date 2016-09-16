@@ -37,10 +37,6 @@
             "className": "Asset.AssetManager, Assembly-CSharp"
         },
         {
-            "interfaceName": "Service.SequenceService, Assembly-CSharp",
-            "className": "Sequence.SequenceRegistry, Assembly-CSharp"
-        },
-        {
             "interfaceName": "Service.TutorialService, Assembly-CSharp",
             "className": "FTUE.TutorialManager, Assembly-CSharp",
             "instantiate": true

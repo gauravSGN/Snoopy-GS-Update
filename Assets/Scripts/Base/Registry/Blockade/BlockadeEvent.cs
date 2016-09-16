@@ -8,5 +8,7 @@
         sealed public class SceneChangeUnblocked : GameEvent {}
         sealed public class InputBlocked : GameEvent {}
         sealed public class InputUnblocked : GameEvent {}
+        sealed public class ReactionsBlocked : GameEvent {}
+        sealed public class ReactionsUnblocked: GameEvent {}
     }
 }

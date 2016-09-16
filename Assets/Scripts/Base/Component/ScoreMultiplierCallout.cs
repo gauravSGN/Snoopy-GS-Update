@@ -18,21 +18,27 @@ public class ScoreMultiplierCallout : MonoBehaviour
     private int counter;
     private Text textComponent;
 
-    public void Initialize()
+    private int multiplier;
+    private int score;
+
+    public void Initialize(int multiplier, int score)
     {
+        this.multiplier = multiplier;
+        this.score = score;
+
         GlobalState.EventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
         textComponent = GetComponent<Text>();
     }
 
-    public void Show(int multiplier, int score)
+    public void Show()
     {
         GlobalState.EventService.RemoveEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
-        StartCoroutine(DelayedShow(multiplier, score));
+        StartCoroutine(DelayedShow());
     }
 
-    private IEnumerator DelayedShow(int multiplier, int score)
+    private IEnumerator DelayedShow()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         transform.position = new Vector3(xAverage, yMin, transform.position.z);
 
