@@ -126,6 +126,8 @@ MonoBehaviour:
     remainingMovesValue: 100
     popToDropFactor: 0.75
     secondStarDivisor: 2
+    multiplierCalloutDelay: 0.5
+    multiplierCalloutFadeTime: 0.2
     goals:
     - goalType: 0
       score: 500

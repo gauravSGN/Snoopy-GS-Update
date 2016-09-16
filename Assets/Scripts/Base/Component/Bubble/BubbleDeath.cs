@@ -36,10 +36,10 @@ public class BubbleDeath : MonoBehaviour
     {
         dying = true;
 
-        gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+        GetComponent<Rigidbody2D>().isKinematic = true;
         GameObjectUtil.SetActive(deactivateOnDeath, false);
 
-        var sounds = gameObject.GetComponent<BubbleModelBehaviour>().Model.definition.Sounds;
+        var sounds = GetComponent<BubbleModelBehaviour>().Model.definition.Sounds;
         Sound.PlaySoundEvent.Dispatch((type == BubbleDeathType.Pop) ? sounds.match : sounds.cull);
 
         DeathSequence.Play(type);

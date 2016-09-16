@@ -38,7 +38,8 @@ public class ScoreMultiplierCallout : MonoBehaviour
 
     private IEnumerator DelayedShow()
     {
-        yield return new WaitForSeconds(0.5f);
+        var config = GlobalState.Instance.Config.scoring;
+        yield return new WaitForSeconds(config.multiplierCalloutDelay);
 
         transform.position = new Vector3(xAverage, yMin, transform.position.z);
 
@@ -53,7 +54,7 @@ public class ScoreMultiplierCallout : MonoBehaviour
 
         ClampToParent();
 
-        var fadeTime = 0.2f;
+        var fadeTime = config.multiplierCalloutFadeTime;
         var timer = 0f;
         while (timer <= fadeTime)
         {

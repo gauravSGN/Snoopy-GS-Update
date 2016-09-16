@@ -99,6 +99,8 @@ public class GameConfig : ScriptableObject
         public int remainingMovesValue;
         public float popToDropFactor;
         public float secondStarDivisor;
+        public float multiplierCalloutDelay;
+        public float multiplierCalloutFadeTime;
         public GoalScores[] goals;
     }
 
