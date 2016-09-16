@@ -18,5 +18,6 @@ namespace Animation
         ActivateStarBarStar,
         RainbowPop,
         StarOnMapNode,
+        RockDeathParticle,
     }
 }
