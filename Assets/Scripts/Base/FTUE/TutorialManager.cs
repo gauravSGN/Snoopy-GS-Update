@@ -27,6 +27,7 @@ namespace FTUE
 
         private void OnTutorialProgress(TutorialProgressEvent gameEvent)
         {
+//            Debug.Log(string.Format("TutorialManager.OnTutorialProgress: trigger={0}, level={1}", gameEvent.trigger, gameEvent.level));
             foreach (var tutorial in tutorials)
             {
                 if (IsTutorialApplicable(tutorial, gameEvent))
@@ -59,7 +60,7 @@ namespace FTUE
 
         private void ShowTutorial(TutorialConfig.TutorialData tutorial)
         {
-            GlobalState.User.tutorials.MarkCompleted(tutorial.id);
+//            GlobalState.User.tutorials.MarkCompleted(tutorial.id);
 
             GlobalState.EventService.Dispatch(new ShowTutorialEvent(tutorial.id));
         }
