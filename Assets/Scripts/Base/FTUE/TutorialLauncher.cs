@@ -29,7 +29,7 @@ namespace FTUE
         {
             if (prefab != null)
             {
-                Instantiate(prefab, transform);
+                Instantiate(prefab, transform, false);
             }
 
             overlay.SetActive(false);
