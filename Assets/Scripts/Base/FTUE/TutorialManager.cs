@@ -27,7 +27,6 @@ namespace FTUE
 
         private void OnTutorialProgress(TutorialProgressEvent gameEvent)
         {
-//            Debug.Log(string.Format("TutorialManager.OnTutorialProgress: trigger={0}, level={1}", gameEvent.trigger, gameEvent.level));
             foreach (var tutorial in tutorials)
             {
                 if (IsTutorialApplicable(tutorial, gameEvent))

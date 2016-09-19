@@ -39,6 +39,7 @@ GameObject:
   - 222: {fileID: 222000011587482812}
   - 114: {fileID: 114000013174228600}
   - 114: {fileID: 114000011256555618}
+  - 114: {fileID: 114000012263807968}
   m_Layer: 31
   m_Name: Next Button
   m_TagString: Untagged
@@ -2791,6 +2792,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0.7764706, g: 0.2509804, b: 0.07058824, a: 1}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!114 &114000012263807968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010093775820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6909c2982f5455eabec7ffd2ba985b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1000013521755320}
 --- !u!114 &114000012270420666
 MonoBehaviour:
   m_ObjectHideFlags: 1
