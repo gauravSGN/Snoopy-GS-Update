@@ -59,7 +59,7 @@ namespace FTUE
 
         private void ShowTutorial(TutorialConfig.TutorialData tutorial)
         {
-//            GlobalState.User.tutorials.MarkCompleted(tutorial.id);
+            GlobalState.User.tutorials.MarkCompleted(tutorial.id);
 
             GlobalState.EventService.Dispatch(new ShowTutorialEvent(tutorial.id));
         }
