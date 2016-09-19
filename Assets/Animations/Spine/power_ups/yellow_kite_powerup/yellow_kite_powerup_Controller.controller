@@ -80,7 +80,7 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 3.3333
+      - time: 2.8666
         value: 0
         inSlope: 0
         outSlope: 0
@@ -104,7 +104,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 1
-  - time: 1.5666
+  - time: 1.6
     functionName: FinishBlocking
     data: 
     objectReferenceParameter: {fileID: 0}
