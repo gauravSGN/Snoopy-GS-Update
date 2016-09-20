@@ -19,7 +19,7 @@ namespace Sequence
             base.Play(type);
         }
 
-        override protected void Complete(SequenceItemCompleteEvent gameEvent)
+        override protected void Complete()
         {
             GlobalState.Instance.RunCoroutine(ReduceWaitTime());
             GlobalState.EventService.AddEventHandler<BlockadeEvent.ReactionsUnblocked>(OnBlockingComplete);
@@ -30,21 +30,15 @@ namespace Sequence
             while (timeToWait > 0)
             {
                 yield return null;
-                timeToWait = timeToWait - Time.deltaTime;
+                timeToWait -= Time.deltaTime;
             }
         }
 
         private void OnBlockingComplete()
         {
             GlobalState.EventService.RemoveEventHandler<BlockadeEvent.ReactionsUnblocked>(OnBlockingComplete);
-            GlobalState.Instance.RunCoroutine(WaitAndComplete(timeToWait));
+            Util.FrameUtil.AfterDelay(timeToWait, base.Complete);
             timeToWait = -1;
-        }
-
-        private IEnumerator WaitAndComplete(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            Complete();
         }
     }
 }

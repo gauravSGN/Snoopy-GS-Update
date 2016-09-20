@@ -61,12 +61,7 @@ namespace Sequence
             EffectDictionary[deathType].Add(effect);
         }
 
-        override protected void Complete(SequenceItemCompleteEvent gameEvent)
-        {
-            Complete();
-        }
-
-        protected void Complete()
+        override protected void Complete()
         {
             if (gameObject.GetComponent<BubbleScore>().Score > 0)
             {

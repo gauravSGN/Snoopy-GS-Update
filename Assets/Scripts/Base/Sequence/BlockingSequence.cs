@@ -14,7 +14,7 @@ namespace Sequence
 
         abstract public BlockadeType BlockadeType { get; }
 
-        abstract protected void Complete(SequenceItemCompleteEvent gameEvent);
+        abstract protected void Complete();
 
         public BlockingSequence()
         {
@@ -33,7 +33,7 @@ namespace Sequence
             {
                 GlobalState.EventService.RemoveEventHandler<SequenceItemCompleteEvent>(OnItemComplete);
                 blockadeService.Remove(this);
-                Complete(gameEvent);
+                Complete();
             }
         }
     }
