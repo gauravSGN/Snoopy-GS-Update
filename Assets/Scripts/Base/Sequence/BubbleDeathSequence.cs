@@ -9,9 +9,10 @@ namespace Sequence
 {
     public class BubbleDeathSequence : BlockingSequence
     {
-        private GameObject gameObject;
-        private Dictionary<BubbleDeathType, List<IEnumerator>> effectDictionary;
-        private BubbleEffectController effectController;
+        protected BubbleEffectController effectController;
+        protected GameObject gameObject;
+
+        public Dictionary<BubbleDeathType, List<IEnumerator>> EffectDictionary { get; private set; }
 
         override public BlockadeType BlockadeType { get { return BlockadeType.Reactions; } }
 
@@ -19,14 +20,22 @@ namespace Sequence
         {
             this.gameObject = gameObject;
             effectController = gameObject.GetComponent<BubbleEffectController>();
-            effectDictionary = new Dictionary<BubbleDeathType, List<IEnumerator>>();
+            EffectDictionary = new Dictionary<BubbleDeathType, List<IEnumerator>>();
         }
 
-        public void Play(BubbleDeathType type)
+        public BubbleDeathSequence(GameObject gameObject, Dictionary<BubbleDeathType, List<IEnumerator>> effects)
+            : base()
+        {
+            this.gameObject = gameObject;
+            EffectDictionary = effects;
+            effectController = gameObject.GetComponent<BubbleEffectController>();
+        }
+
+        virtual public void Play(BubbleDeathType type)
         {
             Play();
 
-            var effects = effectDictionary.ContainsKey(type) ? effectDictionary[type] : GetDefaultEffects(type);
+            var effects = EffectDictionary.ContainsKey(type) ? EffectDictionary[type] : GetDefaultEffects(type);
 
             foreach (var effect in effects)
             {
@@ -41,18 +50,18 @@ namespace Sequence
 
         public void AddEffect(GameObject parent, AnimationType type, BubbleDeathType deathType, bool blocking)
         {
-            if (!effectDictionary.ContainsKey(deathType))
+            if (!EffectDictionary.ContainsKey(deathType))
             {
-                effectDictionary.Add(deathType, new List<IEnumerator>());
+                EffectDictionary.Add(deathType, new List<IEnumerator>());
             }
 
             var effect = blocking ? AnimationEffect.PlayAndRegister(parent, type, RegisterBlockers) :
                                     AnimationEffect.Play(parent, type);
 
-            effectDictionary[deathType].Add(effect);
+            EffectDictionary[deathType].Add(effect);
         }
 
-        override protected void Complete(SequenceItemCompleteEvent gameEvent)
+        override protected void Complete()
         {
             if (gameObject.GetComponent<BubbleScore>().Score > 0)
             {

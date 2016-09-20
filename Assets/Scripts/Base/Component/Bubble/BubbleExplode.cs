@@ -69,7 +69,7 @@ public class BubbleExplode : MonoBehaviour
         if (deathAnimationType != AnimationType.None)
         {
             var bubbleDeath = bubble.GetComponent<BubbleDeath>();
-            bubbleDeath.AddBlockingEffect(bubble, deathAnimationType, BubbleDeathType.Pop);
+            bubbleDeath.AddPowerUpEffect(bubble, deathAnimationType, BubbleDeathType.Pop);
         }
     }
 }
