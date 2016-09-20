@@ -40,7 +40,14 @@ namespace UI.Popup
         private void TransitionToLevel()
         {
             GlobalState.User.currentLevel = config.level;
+            GlobalState.SceneService.OnFinishedLoading += DispatchToTurnOffInput;
             GlobalState.SceneService.TransitionToScene(config.nextScene);
+        }
+
+        private void DispatchToTurnOffInput()
+        {
+            GlobalState.SceneService.OnFinishedLoading -= DispatchToTurnOffInput;
+            GlobalState.EventService.Dispatch(new InputToggleEvent(false));
         }
     }
 }
