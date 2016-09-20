@@ -66,5 +66,8 @@ public class LevelIntroScroll : MonoBehaviour
         powerUpController.ShowPowerUps();
 
         GlobalState.EventService.Dispatch(new IntroScrollCompleteEvent());
+
+        // Input starts disabled from a callback in the PreLevelPopup
+        GlobalState.EventService.Dispatch(new InputToggleEvent(true));
     }
 }
