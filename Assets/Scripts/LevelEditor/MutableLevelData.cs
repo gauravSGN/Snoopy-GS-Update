@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using Model;
+﻿using Model;
+using System.Linq;
 using Snoopy.Model;
+using System.Collections.Generic;
 
 namespace LevelEditor
 {

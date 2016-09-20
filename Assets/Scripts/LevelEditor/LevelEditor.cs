@@ -24,10 +24,21 @@ namespace LevelEditor
         private GameObject returnPrefab;
 
         private string filename;
+        private string basePath;
+
+        private string Filename
+        {
+            get { return filename; }
+            set
+            {
+                filename = value;
+                UpdateBasePath();
+            }
+        }
 
         public void Start()
         {
-            filename = LevelEditorState.Instance.LevelFilename;
+            Filename = LevelEditorState.Instance.LevelFilename;
 
             if (!string.IsNullOrEmpty(LevelEditorState.Instance.LevelData))
             {
@@ -39,7 +50,7 @@ namespace LevelEditor
         {
             ConfirmAction(delegate
             {
-                filename = null;
+                Filename = null;
                 ClearBoard();
                 GlobalState.EventService.Dispatch(new LevelEditorLoadEvent());
             });
@@ -49,16 +60,14 @@ namespace LevelEditor
         {
 #if UNITY_EDITOR
             var filters = new[] { "Level Data", LevelEditorConstants.LEVEL_EXTENSION };
-            var basePath = Path.Combine(Application.dataPath, LevelEditorConstants.LEVEL_BASE_PATH);
             var levelFilename = EditorUtility.OpenFilePanelWithFilters("Open Level", basePath, filters);
 
             if (!string.IsNullOrEmpty(levelFilename))
             {
                 ConfirmAction(delegate ()
                 {
-                    filename = levelFilename;
+                    Filename = levelFilename;
                     ClearBoard();
-
                     manipulator.LoadLevel(File.ReadAllText(levelFilename));
                 });
             }
@@ -67,20 +76,19 @@ namespace LevelEditor
 
         public void Save()
         {
-            if (string.IsNullOrEmpty(filename))
+            if (string.IsNullOrEmpty(Filename))
             {
                 SaveAs();
             }
             else
             {
-                File.WriteAllText(filename, manipulator.SaveLevel());
+                File.WriteAllText(Filename, manipulator.SaveLevel());
             }
         }
 
         public void SaveAs()
         {
 #if UNITY_EDITOR
-            var basePath = Path.Combine(Application.dataPath, LevelEditorConstants.LEVEL_BASE_PATH);
             var levelFilename = EditorUtility.SaveFilePanel(
                 "Save Level",
                 basePath,
@@ -90,7 +98,8 @@ namespace LevelEditor
 
             if (!string.IsNullOrEmpty(levelFilename))
             {
-                filename = levelFilename;
+                Filename = levelFilename;
+                UpdateBasePath();
                 Save();
             }
 #endif
@@ -103,7 +112,7 @@ namespace LevelEditor
 
         public void TestLevel()
         {
-            LevelEditorState.Instance.LevelFilename = filename;
+            LevelEditorState.Instance.LevelFilename = Filename;
             LevelEditorState.Instance.LevelData = manipulator.SaveLevel();
 
             GlobalState.SceneService.NextLevelData = LevelEditorState.Instance.LevelData;
@@ -129,6 +138,18 @@ namespace LevelEditor
             GlobalState.EventService.Dispatch(new ClearLevelEvent());
             var clearAction = manipulator.ActionFactory.Create(ManipulatorActionType.Clear);
             clearAction.Perform(manipulator, 0, 0);
+        }
+
+        private void UpdateBasePath()
+        {
+            if (!string.IsNullOrEmpty(Filename))
+            {
+                basePath = Path.GetDirectoryName(Filename);
+            }
+            else if (string.IsNullOrEmpty(basePath))
+            {
+                basePath = Path.Combine(Application.dataPath, LevelEditorConstants.LEVEL_BASE_PATH);
+            }
         }
     }
 }

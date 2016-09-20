@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-
-namespace LevelEditor
+﻿namespace LevelEditor
 {
     public class LevelEditorLoadEvent : GameEvent
     {

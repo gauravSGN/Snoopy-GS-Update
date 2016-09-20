@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-
-namespace LevelEditor
+﻿namespace LevelEditor
 {
     sealed public class LevelModifiedEvent : GameEvent
     {

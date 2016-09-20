@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace LevelEditor.Manipulator
+﻿namespace LevelEditor.Manipulator
 {
     public interface ManipulatorAction
     {

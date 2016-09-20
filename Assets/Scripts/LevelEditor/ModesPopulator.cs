@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using Model;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 using LevelEditor.Manipulator;
-using Model;
+using System.Collections.Generic;
 
 namespace LevelEditor
 {
@@ -31,7 +31,10 @@ namespace LevelEditor
 
             button.name = modifier.Type.ToString();
             button.GetComponent<Image>().sprite = modifier.Sprite;
+            button.transform.SetParent(transform, false);
+
             var toggle = button.GetComponent<Toggle>();
+
             toggle.group = GetComponent<ToggleGroup>();
             toggle.onValueChanged.AddListener((value) =>
             {
@@ -41,7 +44,6 @@ namespace LevelEditor
                     manipulator.SetActionType(ManipulatorActionType.PlaceModifier);
                 }
             });
-            button.transform.SetParent(transform, false);
         }
     }
 }
