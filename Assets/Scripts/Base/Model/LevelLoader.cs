@@ -67,7 +67,7 @@ public class LevelLoader : MonoBehaviour
         }
 
         AttachBubbles(bubbleMap);
-        ComputeRootDistances(bubbleMap);
+        ComputeRootDistances(bubbleMap.Values);
 
         foreach (var pair in bubbleMap)
         {
@@ -122,19 +122,14 @@ public class LevelLoader : MonoBehaviour
             }
         }
 
-        foreach (var pair in ceilingBubbleMap)
-        {
-            var model = pair.Value.GetComponent<BubbleModelBehaviour>().Model;
-            model.DistanceFromRoot = 0;
-            model.PropagateRootDistance();
-        }
+        ComputeRootDistances(ceilingBubbleMap.Values);
     }
 
-    private void ComputeRootDistances(Dictionary<int, GameObject> bubbleMap)
+    private void ComputeRootDistances(IEnumerable<GameObject> bubbles)
     {
-        foreach (var pair in bubbleMap)
+        foreach (var bubble in bubbles)
         {
-            var model = pair.Value.GetComponent<BubbleModelBehaviour>().Model;
+            var model = bubble.GetComponent<BubbleModelBehaviour>().Model;
 
             if (model.IsRoot)
             {

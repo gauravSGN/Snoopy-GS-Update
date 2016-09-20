@@ -17,7 +17,13 @@ public class LevelIntroScroll : MonoBehaviour
     private Transform scrollBound;
 
     [SerializeField]
+    private Transform gameView;
+
+    [SerializeField]
     private GameObject launcherGroup;
+
+    [SerializeField]
+    private PowerUpController powerUpController;
 
     [SerializeField]
     private List<GameObject> disableOnScroll;
@@ -43,13 +49,12 @@ public class LevelIntroScroll : MonoBehaviour
 
     private IEnumerator DoScroll(float targetY)
     {
-        PowerUpController powerUpController = GetComponentInChildren<PowerUpController>();
         powerUpController.HidePowerUps(0.01f);
 
         var finalLauncherPosition = launcherGroup.transform.localPosition + new Vector3(0f, targetY, 0f);
         launcherGroup.transform.position = finalLauncherPosition;
 
-        var position = transform.position;
+        var position = gameView.position;
         var y = position.y;
 
         yield return new WaitForSeconds(scrollDelay);
@@ -57,7 +62,7 @@ public class LevelIntroScroll : MonoBehaviour
         while (y > targetY)
         {
             y = Mathf.Max(targetY, y - scrollSpeed * Time.deltaTime);
-            transform.position = new Vector3(position.x, y, position.z);
+            gameView.position = new Vector3(position.x, y, position.z);
             launcherGroup.transform.position = finalLauncherPosition;
             yield return null;
         }
