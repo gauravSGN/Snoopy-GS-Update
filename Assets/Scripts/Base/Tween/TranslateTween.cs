@@ -20,13 +20,6 @@ namespace GameTween
         [SerializeField]
         private AnimationCurve easeFrom = AnimationCurve.Linear(0, 0, 1, 1);
 
-        private enum TweenMethod
-        {
-            PositionFrom,
-            PositionTo}
-
-        ;
-
         // Overloads with no args are so Unity button callbacks can show these functions in editor
         public void PlayTo()
         {
