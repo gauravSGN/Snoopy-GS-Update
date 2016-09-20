@@ -55,6 +55,16 @@ public class BubbleDeath : MonoBehaviour
         DeathSequence.AddEffect(parent, type, deathType, true);
     }
 
+    public void AddPowerUpEffect(GameObject parent, AnimationType type, BubbleDeathType deathType)
+    {
+        if (!(DeathSequence is PowerUpBubbleDeathSequence))
+        {
+            DeathSequence = new PowerUpBubbleDeathSequence(gameObject, DeathSequence.EffectDictionary);
+        }
+
+        AddBlockingEffect(parent, type, deathType);
+    }
+
     public void DeactivateObjectOnDeath(GameObject gameObject)
     {
         deactivateOnDeath.Add(gameObject);

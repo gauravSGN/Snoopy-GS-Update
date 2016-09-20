@@ -177,7 +177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startKiteSparkle01:
-  - {fileID: 0}
   - {fileID: 178174}
   returningItem: {fileID: 114000013966791310}
 --- !u!198 &19847580
