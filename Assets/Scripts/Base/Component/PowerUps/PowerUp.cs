@@ -2,6 +2,7 @@ using Sequence;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using GameTween;
 
 namespace PowerUps
 {
@@ -61,6 +62,7 @@ namespace PowerUps
         private PowerUpDefinition definition;
         private PowerUpController controller;
         private Animator ownAnimator;
+        private ScaleTween activeTween;
 
         public void Setup(float setMax, PowerUpController setController, Level setLevel, GameObject character)
         {
@@ -76,6 +78,8 @@ namespace PowerUps
             eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
             eventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
             eventService.AddEventHandler<PrepareForBubblePartyEvent>(OnPrepareForBubbleParty);
+
+            activeTween = GetComponent<ScaleTween>();
         }
 
         public void SetDefinition(PowerUpDefinition setDefinition)
@@ -155,6 +159,10 @@ namespace PowerUps
                     glow.SetActive(true);
                     filledBackground.SetActive(false);
                     Sound.PlaySoundEvent.Dispatch(Sound.SoundType.PowerUpFill);
+                    if (activeTween != null)
+                    {
+                        activeTween.ScaleTo();
+                    }
                 }
             }
         }

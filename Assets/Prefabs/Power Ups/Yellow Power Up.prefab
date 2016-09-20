@@ -46,6 +46,7 @@ GameObject:
   - 222: {fileID: 22281598}
   - 114: {fileID: 11424628}
   - 95: {fileID: 9569670}
+  - 114: {fileID: 114000014253109736}
   m_Layer: 0
   m_Name: Yellow Power Up
   m_TagString: Untagged
@@ -4307,3 +4308,59 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 109286}
   m_IsPrefabParent: 1
+--- !u!114 &114000014253109736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65e0f293b3db47f1b871b89a93334ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xScale: 1.15
+  yScale: 1.15
+  duration: 0.5
+  easeTo:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - time: 0.29972064
+      value: 2.0011935
+      inSlope: 0.0063072797
+      outSlope: 0.0063072797
+      tangentMode: 0
+    - time: 0.7024224
+      value: 0.61984944
+      inSlope: -0.053579453
+      outSlope: -0.053579453
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  easeFrom:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
