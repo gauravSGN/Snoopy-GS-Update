@@ -159,7 +159,10 @@ namespace PowerUps
                     glow.SetActive(true);
                     filledBackground.SetActive(false);
                     Sound.PlaySoundEvent.Dispatch(Sound.SoundType.PowerUpFill);
-                    activeTween.ScaleTo();
+                    if (activeTween != null)
+                    {
+                        activeTween.ScaleTo();
+                    }
                 }
             }
         }
