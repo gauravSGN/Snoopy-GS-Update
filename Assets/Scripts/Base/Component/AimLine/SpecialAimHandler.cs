@@ -7,11 +7,13 @@ using Slideout;
 public class SpecialAimHandler : MonoBehaviour 
 {
     private AimLineEventTrigger eventTrigger;
-    private PopupManager popupManager;
     private bool aiming;
+    private RectTransform rectTransform;
+    private Vector3[] corners = new Vector3[4];
 
     void Start()
     {
+        rectTransform = (transform as RectTransform);
         eventTrigger = GetComponent<AimLineEventTrigger>();
         var eventService = GlobalState.EventService;
         eventService.AddEventHandler<PopupDisplayedEvent>(Disable);
@@ -20,15 +22,22 @@ public class SpecialAimHandler : MonoBehaviour
         eventService.AddEventHandler<SlideoutCompleteEvent>(Enable);
     }
 
+    void OnDestroy()
+    {
+        var eventService = GlobalState.EventService;
+        eventService.RemoveEventHandler<PopupDisplayedEvent>(Disable);
+        eventService.RemoveEventHandler<PopupClosedEvent>(Enable);
+        eventService.RemoveEventHandler<SlideoutStartEvent>(Disable);
+        eventService.RemoveEventHandler<SlideoutCompleteEvent>(Enable);
+    }
+
     protected void LateUpdate()
     {
         bool touching = Input.GetKey(KeyCode.Mouse0);
         // Only do special aiming if standard aiming isn't active
         if (!eventTrigger.Aiming && touching)
         {
-            var rect = (transform as RectTransform);
-            Vector3[] corners = new Vector3[4];
-            rect.GetWorldCorners(corners);
+            rectTransform.GetWorldCorners(corners);
             var position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             // Check if point is inside the aim panel rect
