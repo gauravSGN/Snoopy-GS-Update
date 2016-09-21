@@ -1,5 +1,4 @@
 ﻿using Goal;
-using Util;
 using Model;
 using PowerUps;
 using UnityEngine;
@@ -17,11 +16,9 @@ public class LevelLoader : MonoBehaviour
     private BubbleQueueType bubbleQueueType;
 
     [SerializeField]
-    private GameObject levelContainer;
+    private BubblePlacer placer;
 
     private LevelConfiguration configuration;
-    private float rowDistance;
-    private float topEdge;
 
     public LevelData LevelData { get; private set; }
     public BubbleQueueType BubbleQueueType { get { return bubbleQueueType; } }
@@ -29,7 +26,6 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadLevel(string levelData)
     {
-        rowDistance = GlobalState.Instance.Config.bubbles.size * MathUtil.COS_30_DEGREES;
         LevelData = JsonUtility.FromJson<LevelData>(levelData);
 
         configuration = new LevelConfiguration(LevelData);
@@ -39,23 +35,13 @@ public class LevelLoader : MonoBehaviour
         powerUpController.Setup(LevelData.PowerUpFills);
     }
 
-    private Vector3 GetBubbleLocation(int x, int y)
-    {
-        var config = GlobalState.Instance.Config;
-        var offset = (y & 1) * config.bubbles.size / 2.0f;
-        var leftEdge = -(config.bubbles.numPerRow - 1) * config.bubbles.size / 2.0f;
-        return new Vector3(leftEdge + x * config.bubbles.size + offset, topEdge - y * rowDistance);
-    }
-
     private void CreateLevel(LevelData level)
     {
         var bubbleMap = new Dictionary<int, GameObject>();
 
-        topEdge = Camera.main.orthographicSize - (0.5f * rowDistance);
-
         foreach (var bubble in level.Bubbles)
         {
-            bubbleMap[bubble.Key] = CreateBubbleAndSetPosition(bubble);
+            bubbleMap[bubble.Key] = placer.PlaceBubble(bubble);
             bubble.model = bubbleMap[bubble.Key].GetComponent<BubbleModelBehaviour>().Model;
 
             if (!configuration.Counts.ContainsKey(bubble.model.type))
@@ -67,7 +53,7 @@ public class LevelLoader : MonoBehaviour
         }
 
         AttachBubbles(bubbleMap);
-        ComputeRootDistances(bubbleMap);
+        ComputeRootDistances(bubbleMap.Values);
 
         foreach (var pair in bubbleMap)
         {
@@ -96,7 +82,7 @@ public class LevelLoader : MonoBehaviour
         for (int ceilingX = 0; ceilingX < ceilingBubbleCount; ceilingX++)
         {
             var ceilingData = new BubbleData(ceilingX - 1, -1, BubbleType.Ceiling);
-            ceilingBubbleMap[ceilingX - 1] = CreateBubbleAndSetPosition(ceilingData);
+            ceilingBubbleMap[ceilingX - 1] = placer.PlaceBubble(ceilingData);
         }
 
         foreach (var pair in bubbleMap)
@@ -122,19 +108,14 @@ public class LevelLoader : MonoBehaviour
             }
         }
 
-        foreach (var pair in ceilingBubbleMap)
-        {
-            var model = pair.Value.GetComponent<BubbleModelBehaviour>().Model;
-            model.DistanceFromRoot = 0;
-            model.PropagateRootDistance();
-        }
+        ComputeRootDistances(ceilingBubbleMap.Values);
     }
 
-    private void ComputeRootDistances(Dictionary<int, GameObject> bubbleMap)
+    private void ComputeRootDistances(IEnumerable<GameObject> bubbles)
     {
-        foreach (var pair in bubbleMap)
+        foreach (var bubble in bubbles)
         {
-            var model = pair.Value.GetComponent<BubbleModelBehaviour>().Model;
+            var model = bubble.GetComponent<BubbleModelBehaviour>().Model;
 
             if (model.IsRoot)
             {
@@ -142,20 +123,6 @@ public class LevelLoader : MonoBehaviour
                 model.PropagateRootDistance();
             }
         }
-    }
-
-    private GameObject CreateBubbleAndSetPosition(BubbleData bubbleData)
-    {
-        var instance = bubbleFactory.Create(bubbleData);
-
-        if (levelContainer != null)
-        {
-            instance.transform.SetParent(levelContainer.transform, false);
-        }
-
-        instance.transform.localPosition = GetBubbleLocation(bubbleData.X, bubbleData.Y);
-
-        return instance;
     }
 
     private void GetNeighbors(int x, int y, int[] neighbors)
