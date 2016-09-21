@@ -44,7 +44,7 @@ public class LevelIntroScroll : MonoBehaviour
     private IEnumerator DoScroll(float targetY)
     {
         PowerUpController powerUpController = GetComponentInChildren<PowerUpController>();
-        powerUpController.HidePowerUps();
+        powerUpController.HidePowerUps(0.01f);
 
         var finalLauncherPosition = launcherGroup.transform.localPosition + new Vector3(0f, targetY, 0f);
         launcherGroup.transform.position = finalLauncherPosition;
@@ -63,7 +63,7 @@ public class LevelIntroScroll : MonoBehaviour
         }
 
         GameObjectUtil.SetActive(disableOnScroll, true);
-        powerUpController.ShowPowerUps();
+        powerUpController.ShowPowerUps(PowerUp.DEFAULT_TRANSITION_TIME);
 
         GlobalState.EventService.Dispatch(new IntroScrollCompleteEvent());
 

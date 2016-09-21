@@ -8,8 +8,8 @@ namespace PowerUps
 {
     public class PowerUp : MonoBehaviour
     {
+        public const float DEFAULT_TRANSITION_TIME = 0.2f;
         private const float FULL_SILHOUETTE = 1.0f;
-        private const float TRANSITION_TIME = 0.2f;
 
         // Magic numbers to fake the visual fill so it is more clear when the power up is not ready
         private const float MAGIC_LIMIT = 0.9999f;
@@ -110,21 +110,21 @@ namespace PowerUps
             }
         }
 
-        public void Hide()
+        public void Hide(float transitionTime)
         {
-            StartCoroutine(HideShow(hideCurve));
+            StartCoroutine(HideShow(hideCurve, transitionTime));
         }
 
-        public void Show()
+        public void Show(float transitionTime)
         {
-            StartCoroutine(HideShow(showCurve));
+            StartCoroutine(HideShow(showCurve, transitionTime));
         }
 
         private void OnItemReturn()
         {
             characterAnimator.SetTrigger("Finish");
             characterAnimator.ResetTrigger("AddPowerUp");
-            Show();
+            Show(DEFAULT_TRANSITION_TIME);
         }
 
         private void OnInputToggle(InputToggleEvent gameEvent)
@@ -193,17 +193,12 @@ namespace PowerUps
                 while (currentFillTime < secondsToFill)
                 {
                     currentFillTime += Time.deltaTime;
-                    if (progress <= MAGIC_LIMIT)
-                    {
-                        fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount,
-                                                      FULL_SILHOUETTE - (MAGIC_MAX * progress),
+
+                    var magicMultiplier = (progress <= MAGIC_LIMIT) ? MAGIC_MAX : 1.0f;
+
+                    fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount,
+                                                      FULL_SILHOUETTE - (magicMultiplier * progress),
                                                       (currentFillTime / secondsToFill));
-                    }
-                    else
-                    {
-                        fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount,
-                                                      (FULL_SILHOUETTE - progress), (currentFillTime / secondsToFill));
-                    }
 
                     var newY = (FULL_SILHOUETTE - fillImage.fillAmount) * fillLineTransform.rect.height;
                     fillLineTransform.localPosition = new Vector3(fillLineTransform.localPosition.x, newY);
@@ -220,15 +215,15 @@ namespace PowerUps
             }
         }
 
-        private IEnumerator HideShow(AnimationCurve curve)
+        private IEnumerator HideShow(AnimationCurve curve, float transitionTime)
         {
             float time = 0f;
             float newValue;
 
-            while (time <= TRANSITION_TIME)
+            while (time <= transitionTime)
             {
                 time += Time.deltaTime;
-                newValue = curve.Evaluate(time / TRANSITION_TIME);
+                newValue = curve.Evaluate(time / transitionTime);
                 transform.localScale = new Vector3(newValue, newValue, 1);
                 yield return null;
             }
@@ -239,13 +234,13 @@ namespace PowerUps
 
         private IEnumerator ShowCharacter()
         {
-            yield return StartCoroutine(HideShow(hideCurve));
+            yield return StartCoroutine(HideShow(hideCurve, DEFAULT_TRANSITION_TIME));
             characterAnimator.SetTrigger("AddPowerUp");
         }
 
         private void OnPrepareForBubbleParty()
         {
-            Hide();
+            Hide(DEFAULT_TRANSITION_TIME);
             ownAnimator.SetTrigger("Fired");
         }
     }

@@ -121,19 +121,19 @@ namespace PowerUps
         }
 
         // Just set objects active/inactive until we have an animation
-        public void HidePowerUps()
+        public void HidePowerUps(float transitionTime)
         {
             for (int i = 0, count = powerUps.Count; i < count; ++i)
             {
-                powerUps[i].Hide();
+                powerUps[i].Hide(transitionTime);
             }
         }
 
-        public void ShowPowerUps()
+        public void ShowPowerUps(float transitionTime)
         {
             for (int i = 0, count = powerUps.Count; i < count; ++i)
             {
-                powerUps[i].Show();
+                powerUps[i].Show(transitionTime);
             }
         }
 
