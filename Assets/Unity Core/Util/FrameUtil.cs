@@ -16,6 +16,11 @@ namespace Util
             GlobalState.Instance.RunCoroutine(RunOnNextFrame(action));
         }
 
+        static public void AfterFrames(int frames, Action action)
+        {
+            GlobalState.Instance.RunCoroutine(RunAfterFrames(frames, action));
+        }
+
         static public void AfterDelay(float delayInSeconds, Action action)
         {
             GlobalState.Instance.RunCoroutine(RunAfterDelay(delayInSeconds, action));
@@ -31,6 +36,16 @@ namespace Util
         static private IEnumerator RunOnNextFrame(Action action)
         {
             yield return null;
+
+            action();
+        }
+
+        static private IEnumerator RunAfterFrames(int frames, Action action)
+        {
+            for (var x = 0; x < frames; x++)
+            {
+                yield return null;
+            }
 
             action();
         }
