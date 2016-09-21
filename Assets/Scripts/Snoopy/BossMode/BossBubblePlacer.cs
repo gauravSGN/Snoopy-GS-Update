@@ -27,9 +27,11 @@ namespace Snoopy.BossMode
 
             container.transform.SetParent(bubbleContainer, false);
             container.SetActive(false);
+
             instance.transform.SetParent(container.transform, false);
 
             container.transform.localPosition = GetBubbleLocation(data.X, data.Y);
+            instance.transform.position = transform.position;
 
             bubbles.Add(instance.transform);
 
@@ -62,7 +64,6 @@ namespace Snoopy.BossMode
 
                 while (((active - complete) < bubbles.Count) && (timer >= (active * releaseRate)))
                 {
-                    bubbles[active - complete].position = transform.position;
                     bubbles[active - complete].parent.gameObject.SetActive(true);
                     active++;
                 }
@@ -87,7 +88,7 @@ namespace Snoopy.BossMode
                 yield return null;
             }
 
-            GlobalState.EventService.Dispatch(new IntroScrollCompleteEvent());
+            GlobalState.EventService.Dispatch(new LevelIntroCompleteEvent());
             GlobalState.EventService.Dispatch(new InputToggleEvent(true));
         }
     }

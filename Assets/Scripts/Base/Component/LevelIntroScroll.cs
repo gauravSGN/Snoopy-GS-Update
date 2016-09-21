@@ -70,7 +70,7 @@ public class LevelIntroScroll : MonoBehaviour
         GameObjectUtil.SetActive(disableOnScroll, true);
         powerUpController.ShowPowerUps(PowerUp.DEFAULT_TRANSITION_TIME);
 
-        GlobalState.EventService.Dispatch(new IntroScrollCompleteEvent());
+        GlobalState.EventService.Dispatch(new LevelIntroCompleteEvent());
 
         // Input starts disabled from a callback in the PreLevelPopup
         GlobalState.EventService.Dispatch(new InputToggleEvent(true));
