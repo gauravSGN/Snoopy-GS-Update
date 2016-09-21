@@ -8,6 +8,8 @@ public class AimLineEventTrigger : EventTrigger
     public event Action<Vector2> MoveTarget;
     public event Action Fire;
 
+    public bool Aiming { get { return aiming; } }
+
     private bool aiming;
     private bool hovering;
 
@@ -15,6 +17,32 @@ public class AimLineEventTrigger : EventTrigger
     {
         GlobalState.EventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
     }
+
+    #region Special Aiming Nonsense
+    public void StartAiming()
+    {
+        StartAimingEvent.Dispatch();
+    }
+
+    public void StopAiming()
+    {
+        StopAimingEvent.Dispatch();
+    }
+
+    public void DoFire()
+    {
+        Fire();
+        StopAimingEvent.Dispatch();
+        aiming = false;
+        hovering = false;
+    }
+
+    public void FakeDrag(Vector3 position)
+    {
+        Vector2 cursorPosition = new Vector2(position.x, position.y);
+        MoveTarget(cursorPosition);
+    }
+    #endregion
 
     override public void OnDrag(PointerEventData data)
     {
