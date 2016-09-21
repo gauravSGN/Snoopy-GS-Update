@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class SnoopySoundHandler : MonoBehaviour
 {
     [SerializeField]
@@ -15,14 +14,11 @@ public class SnoopySoundHandler : MonoBehaviour
     [SerializeField]
     private AudioClip[] launchSounds;
 
-    private AudioSource audioSource;
     private System.Random randomGenerator;
 
     public void Start()
     {
         randomGenerator = new System.Random();
-
-        audioSource = GetComponent<AudioSource>();
 
         var eventService = GlobalState.EventService;
         eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
@@ -32,23 +28,16 @@ public class SnoopySoundHandler : MonoBehaviour
 
     private void OnLevelComplete(LevelCompleteEvent gameEvent)
     {
-        PlaySound(gameEvent.Won ? winSound : loseSound);
+        Sound.PlaySoundEvent.Dispatch(gameEvent.Won ? winSound : loseSound);
     }
 
-    private void OnBubbleFired(BubbleFiredEvent firedEvent)
+    private void OnBubbleFired()
     {
-        int index = randomGenerator.Next(launchSounds.Length);
-        PlaySound(launchSounds[index]);
+        Sound.PlaySoundEvent.Dispatch(launchSounds[randomGenerator.Next(launchSounds.Length)]);
     }
 
-    private void OnLevelStart(IntroScrollCompleteEvent scrollEvent)
+    private void OnLevelStart()
     {
-        PlaySound(levelStartSound);
-    }
-
-    private void PlaySound(AudioClip clip)
-    {
-        audioSource.clip = clip;
-        audioSource.Play();
+        Sound.PlaySoundEvent.Dispatch(levelStartSound);
     }
 }

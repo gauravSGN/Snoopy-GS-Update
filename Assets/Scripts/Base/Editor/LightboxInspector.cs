@@ -23,7 +23,7 @@ public class LightboxInspector : Editor
                 {
                     Undo.RecordObject(lightbox, "Move");
                     polygon.vertices[vertIndex] = transform.InverseTransformPoint(result);
-                    lightbox.OnValidate();
+                    lightbox.Validate();
                 }
             }
         }

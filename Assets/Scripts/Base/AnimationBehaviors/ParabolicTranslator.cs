@@ -1,8 +1,6 @@
 ﻿using Service;
 using Registry;
 using UnityEngine;
-using System.Collections.Generic;
-using UnityEngine.Experimental.Director;
 
 public class ParabolicTranslator : StateMachineBehaviour
 {

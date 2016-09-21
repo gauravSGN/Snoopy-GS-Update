@@ -1,18 +1,14 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using Goal;
-using PowerUps;
+﻿using Goal;
 using Util;
 using Model;
-using System.Linq;
+using PowerUps;
+using UnityEngine;
+using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField]
     private BubbleFactory bubbleFactory;
-
-    [SerializeField]
-    private GameObject gameView;
 
     [SerializeField]
     private PowerUpController powerUpController;
@@ -41,15 +37,6 @@ public class LevelLoader : MonoBehaviour
 
         CreateLevel(LevelData);
         powerUpController.Setup(LevelData.PowerUpFills);
-        PositionCamera();
-    }
-
-    private void PositionCamera()
-    {
-        var scroll = gameView.GetComponent<LevelIntroScroll>();
-        var maxY = LevelData.Bubbles.Aggregate(1, (acc, b) => Mathf.Max(acc, b.Y));
-        var targetY = -(maxY - 11) * GlobalState.Instance.Config.bubbles.size * MathUtil.COS_30_DEGREES;
-        scroll.ScrollTo(targetY);
     }
 
     private Vector3 GetBubbleLocation(int x, int y)

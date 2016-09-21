@@ -1,13 +1,19 @@
+using Sequence;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using GameTween;
 
 namespace PowerUps
 {
     public class PowerUp : MonoBehaviour
     {
+        public const float DEFAULT_TRANSITION_TIME = 0.2f;
         private const float FULL_SILHOUETTE = 1.0f;
-        private const float TRANSITION_TIME = 0.2f;
+
+        // Magic numbers to fake the visual fill so it is more clear when the power up is not ready
+        private const float MAGIC_LIMIT = 0.9999f;
+        private const float MAGIC_MAX = 0.9f;
 
         [SerializeField]
         private Button button;
@@ -46,12 +52,6 @@ namespace PowerUps
         private int lastBubbleCount;
 
         [SerializeField]
-        private AudioSource filledSound;
-
-        [SerializeField]
-        private AudioSource castSound;
-
-        [SerializeField]
         private AnimationCurve hideCurve = AnimationCurve.Linear(0, 1, 1, 0);
 
         [SerializeField]
@@ -62,6 +62,7 @@ namespace PowerUps
         private PowerUpDefinition definition;
         private PowerUpController controller;
         private Animator ownAnimator;
+        private ScaleTween activeTween;
 
         public void Setup(float setMax, PowerUpController setController, Level setLevel, GameObject character)
         {
@@ -77,6 +78,8 @@ namespace PowerUps
             eventService.AddEventHandler<InputToggleEvent>(OnInputToggle);
             eventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
             eventService.AddEventHandler<PrepareForBubblePartyEvent>(OnPrepareForBubbleParty);
+
+            activeTween = GetComponent<ScaleTween>();
         }
 
         public void SetDefinition(PowerUpDefinition setDefinition)
@@ -91,36 +94,37 @@ namespace PowerUps
         {
             if (button.interactable && (progress >= 1.0f))
             {
-                castSound.Play();
+                Sound.PlaySoundEvent.Dispatch(Sound.SoundType.PowerUpCast);
                 GlobalState.EventService.Dispatch<InputToggleEvent>(new InputToggleEvent(false));
+                GlobalState.EventService.Dispatch(new FTUE.PowerUpUsedEvent(definition.Type));
 
                 if (definition.LaunchSound != null)
                 {
                     controller.OverrideLaunchSound(definition.LaunchSound);
                 }
+
                 controller.AddPowerUp(definition.Type);
-                GlobalState.EventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
+                GlobalState.EventService.AddEventHandler<PowerUpPrepareForReturnEvent>(OnItemReturn);
                 Reset();
                 StartCoroutine(ShowCharacter());
             }
         }
 
-        public void Hide()
+        public void Hide(float transitionTime)
         {
-            StartCoroutine(HideShow(hideCurve));
+            StartCoroutine(HideShow(hideCurve, transitionTime));
         }
 
-        public void Show()
+        public void Show(float transitionTime)
         {
-            StartCoroutine(HideShow(showCurve));
+            StartCoroutine(HideShow(showCurve, transitionTime));
         }
 
-        private void OnReadyForNextBubble(ReadyForNextBubbleEvent gameEvent)
+        private void OnItemReturn()
         {
             characterAnimator.SetTrigger("Finish");
             characterAnimator.ResetTrigger("AddPowerUp");
-            GlobalState.EventService.RemoveEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
-            Show();
+            Show(DEFAULT_TRANSITION_TIME);
         }
 
         private void OnInputToggle(InputToggleEvent gameEvent)
@@ -150,10 +154,15 @@ namespace PowerUps
 
                 if (!glow.activeSelf && (progress >= 1.0f))
                 {
+                    GlobalState.EventService.Dispatch(new FTUE.PowerUpFilledEvent(definition.Type));
                     ownAnimator.SetTrigger("Charged");
                     glow.SetActive(true);
                     filledBackground.SetActive(false);
-                    filledSound.Play();
+                    Sound.PlaySoundEvent.Dispatch(Sound.SoundType.PowerUpFill);
+                    if (activeTween != null)
+                    {
+                        activeTween.ScaleTo();
+                    }
                 }
             }
         }
@@ -184,8 +193,12 @@ namespace PowerUps
                 while (currentFillTime < secondsToFill)
                 {
                     currentFillTime += Time.deltaTime;
+
+                    var magicMultiplier = (progress <= MAGIC_LIMIT) ? MAGIC_MAX : 1.0f;
+
                     fillImage.fillAmount = Mathf.Lerp(fillImage.fillAmount,
-                                                      (FULL_SILHOUETTE - progress), (currentFillTime / secondsToFill));
+                                                      FULL_SILHOUETTE - (magicMultiplier * progress),
+                                                      (currentFillTime / secondsToFill));
 
                     var newY = (FULL_SILHOUETTE - fillImage.fillAmount) * fillLineTransform.rect.height;
                     fillLineTransform.localPosition = new Vector3(fillLineTransform.localPosition.x, newY);
@@ -202,15 +215,15 @@ namespace PowerUps
             }
         }
 
-        private IEnumerator HideShow(AnimationCurve curve)
+        private IEnumerator HideShow(AnimationCurve curve, float transitionTime)
         {
             float time = 0f;
             float newValue;
 
-            while (time <= TRANSITION_TIME)
+            while (time <= transitionTime)
             {
                 time += Time.deltaTime;
-                newValue = curve.Evaluate(time / TRANSITION_TIME);
+                newValue = curve.Evaluate(time / transitionTime);
                 transform.localScale = new Vector3(newValue, newValue, 1);
                 yield return null;
             }
@@ -221,13 +234,13 @@ namespace PowerUps
 
         private IEnumerator ShowCharacter()
         {
-            yield return StartCoroutine(HideShow(hideCurve));
+            yield return StartCoroutine(HideShow(hideCurve, DEFAULT_TRANSITION_TIME));
             characterAnimator.SetTrigger("AddPowerUp");
         }
 
-        private void OnPrepareForBubbleParty(PrepareForBubblePartyEvent partyEvent)
+        private void OnPrepareForBubbleParty()
         {
-            Hide();
+            Hide(DEFAULT_TRANSITION_TIME);
             ownAnimator.SetTrigger("Fired");
         }
     }

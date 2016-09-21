@@ -19,6 +19,11 @@ public class LevelState : Observable
     private GameObject slideout;
     private bool loadingSlideout;
 
+    private bool AtLowMovesThreshold
+    {
+        get { return remainingBubbles == GlobalState.Instance.Config.level.lowMovesThreshold; }
+    }
+
     public void UpdateTypeTotals(BubbleType type, int delta)
     {
         if (!initialTypeTotals.ContainsKey(type))
@@ -35,24 +40,28 @@ public class LevelState : Observable
         remainingBubbles--;
         NotifyListeners();
 
+        var eventService = GlobalState.EventService;
+
         // Need to start loading this early so it's ready when we need it.  It also needs to start loading at a point
         // where we can be sure that the asset service is available.
         if ((slideout == null) && !loadingSlideout)
         {
             loadingSlideout = true;
+
             GlobalState.AssetService.LoadAssetAsync<GameObject>(SLIDEOUT_PATH, (s) =>
-                {
-                    slideout = s;
-                    loadingSlideout = false;
-                });
+            {
+                slideout = s;
+                loadingSlideout = false;
+            });
+
+            eventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
         }
 
-        GlobalState.EventService.Dispatch(new ShotsRemainingEvent(remainingBubbles));
+        eventService.Dispatch(new ShotsRemainingEvent(remainingBubbles));
 
-        if (!preparedForBubbleParty && (remainingBubbles == GlobalState.Instance.Config.level.lowMovesThreshold))
+        if (!preparedForBubbleParty && AtLowMovesThreshold)
         {
-            GlobalState.EventService.Dispatch(new LowMovesEvent(remainingBubbles));
-            GlobalState.Instance.RunCoroutine(ShowLowMovesSlideout());
+            eventService.Dispatch(new LowMovesEvent(remainingBubbles));
         }
     }
 
@@ -70,5 +79,13 @@ public class LevelState : Observable
         }
 
         GlobalState.EventService.Dispatch(new Slideout.ShowSlideoutEvent(slideout));
+    }
+
+    private void OnReadyForNextBubble()
+    {
+        if (AtLowMovesThreshold)
+        {
+            GlobalState.Instance.RunCoroutine(ShowLowMovesSlideout());
+        }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using gs;
 using gs.persist;
 using Data = System.Collections.Generic.IDictionary<string, object>;
@@ -10,22 +9,20 @@ namespace State
     {
         public uint PersistableVersion { get { return 1; } }
 
-        public PersistableStateHandler(Data topLevelState) : this(topLevelState, null) {}
-
-        public PersistableStateHandler(Data topLevelState, Action<Observable> initialListener)
-            : base(topLevelState, initialListener)
+        override public void Initialize(Data topLevelState)
         {
-            state = new Dictionary<string, object>();
-            InitializeStateKeys();
-
-            GS.Api.Persistence.register(this);
+            if (!initialized)
+            {
+                state = new Dictionary<string, object>();
+                GS.Api.Persistence.register(this);
+                initialized = true;
+            }
         }
 
         // recover and persist implement the Persistable interface and thus will break our coding standard
         public void recover(string key, uint storedVersion, Data blob)
         {
             state = blob;
-            InitializeStateKeys();
             NotifyListeners();
         }
 

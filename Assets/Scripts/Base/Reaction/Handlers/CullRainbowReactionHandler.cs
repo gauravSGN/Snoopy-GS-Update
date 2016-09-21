@@ -6,7 +6,7 @@ namespace Reaction
     [ReactionHandlerAttribute(ReactionPriority.CullRainbow)]
     public class CullRainbowReactionHandler : BubbleReactionHandler
     {
-        public override IEnumerator HandleActions()
+        override protected IEnumerator Reaction()
         {
             var bubbles = scheduledBubbles;
             scheduledBubbles = new List<Bubble>();

@@ -7,18 +7,20 @@ namespace Effects
 {
     public static class AnimationEffect
     {
-        public static IEnumerator Play(GameObject bubble, AnimationType type)
+        public delegate void Register(GameObject gameObject);
+
+        public static IEnumerator Play(GameObject parent, AnimationType type)
         {
             yield return null;
 
-            CreateAnimation(bubble, type);
+            CreateAnimation(parent, type);
         }
 
-        public static IEnumerator PlayBlocking(GameObject bubble, AnimationType type)
+        public static IEnumerator PlayBlocking(GameObject parent, AnimationType type)
         {
             yield return null;
 
-            var animation = CreateAnimation(bubble, type);
+            var animation = CreateAnimation(parent, type);
             var animationEvents = animation.GetComponent<BlockingAnimationEvent>();
 
             if (animationEvents != null)
@@ -38,12 +40,19 @@ namespace Effects
             }
         }
 
-        private static GameObject CreateAnimation(GameObject bubble, AnimationType type)
+        public static IEnumerator PlayAndRegister(GameObject parent, AnimationType type, Register register)
+        {
+            yield return null;
+
+            register(CreateAnimation(parent, type));
+        }
+
+        private static GameObject CreateAnimation(GameObject parent, AnimationType type)
         {
             var animation = GlobalState.AnimationService.CreateByType(type);
             var transform = animation.transform;
 
-            transform.SetParent(bubble.transform);
+            transform.SetParent(parent.transform);
             transform.localPosition = Vector3.back;
 
             return animation;

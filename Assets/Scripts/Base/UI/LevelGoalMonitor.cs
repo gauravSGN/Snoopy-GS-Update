@@ -21,6 +21,8 @@ public class LevelGoalMonitor : MonoBehaviour
         {
             updater.Target = gameEvent.Goal;
             gameObject.SetActive(true);
+
+            GlobalState.EventService.RemoveEventHandler<GoalCreatedEvent>(GoalCreatedHandler);
         }
     }
 }

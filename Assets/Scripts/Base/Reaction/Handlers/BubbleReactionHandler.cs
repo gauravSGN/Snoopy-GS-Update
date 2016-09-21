@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Event;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Reaction
 {
@@ -14,6 +16,18 @@ namespace Reaction
             {
                 scheduledBubbles.Add(gameEvent.bubble);
             }
+        }
+
+        override protected IEnumerator PostReaction()
+        {
+            var baseReaction = base.PostReaction();
+
+            while (baseReaction.MoveNext())
+            {
+                yield return null;
+            }
+
+            GlobalState.EventService.Dispatch<ScoreMultiplierCalloutEvent>(new ScoreMultiplierCalloutEvent());
         }
     }
 }

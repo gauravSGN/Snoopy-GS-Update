@@ -11,7 +11,7 @@ namespace Modifiers
         public ExtendedAimlineModifier()
         {
             aimline = GameObject.FindObjectOfType<AimLine>();
-            OnReadyForNextBubble(null);
+            OnReadyForNextBubble();
 
             GlobalState.EventService.AddEventHandler<ReadyForNextBubbleEvent>(OnReadyForNextBubble);
         }
@@ -21,7 +21,7 @@ namespace Modifiers
             // This modifier doesn't take any additional data
         }
 
-        private void OnReadyForNextBubble(ReadyForNextBubbleEvent gameEvent)
+        private void OnReadyForNextBubble()
         {
             aimline.ModifyAimline(GlobalState.Instance.Config.aimline.extended);
         }

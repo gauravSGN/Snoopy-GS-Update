@@ -2,7 +2,6 @@ using Util;
 using System;
 using UnityEngine;
 using System.Collections;
-using Data = System.Collections.Generic.IDictionary<string, object>;
 
 namespace State
 {
@@ -12,6 +11,8 @@ namespace State
 
         private const string QUANTITY = "quantity";
         private const string LAST_TIME_HEART_AWARDED = "lastTimeHeartAwarded";
+
+        override public string Key { get { return "hearts"; } }
 
         public long quantity
         {
@@ -58,29 +59,6 @@ namespace State
             }
         }
 
-        public Hearts(Data topLevelState) : this(topLevelState, null) {}
-
-        public Hearts(Data topLevelState, Action<Observable> initialListener) : base(topLevelState, initialListener)
-        {
-        }
-
-        public IEnumerator ReplenishOverTime()
-        {
-            if (!replenishing && (quantity < GlobalState.Instance.Config.purchasables.maxHearts))
-            {
-                replenishing = true;
-
-                while (secondsUntilNextHeart > 0)
-                {
-                    yield return new WaitForSeconds(1);
-                    NotifyListeners();
-                }
-
-                replenishing = false;
-                quantity++;
-            }
-        }
-
         public void Replenish()
         {
             var secondsPerHeart = GlobalState.Instance.Config.purchasables.secondsPerHeart;
@@ -96,6 +74,23 @@ namespace State
             }
 
             GlobalState.Instance.RunCoroutine(ReplenishOverTime());
+        }
+
+        private IEnumerator ReplenishOverTime()
+        {
+            if (!replenishing && (quantity < GlobalState.Instance.Config.purchasables.maxHearts))
+            {
+                replenishing = true;
+
+                while (secondsUntilNextHeart > 0)
+                {
+                    yield return new WaitForSeconds(1);
+                    NotifyListeners();
+                }
+
+                replenishing = false;
+                quantity++;
+            }
         }
     }
 }

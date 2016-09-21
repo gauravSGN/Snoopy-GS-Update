@@ -42,7 +42,7 @@ public class BubbleAttachments : BubbleModelBehaviour
         RemoveListeners();
     }
 
-    private void OnCullAllBubbles(CullAllBubblesEvent gameEvent)
+    private void OnCullAllBubbles()
     {
         if (gameObject.layer == (int)Layers.GameObjects)
         {

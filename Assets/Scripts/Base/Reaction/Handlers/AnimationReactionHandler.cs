@@ -11,7 +11,7 @@ namespace Reaction
 
         override public int Count { get { return scheduledAnimations.Count; } }
 
-        override public IEnumerator HandleActions()
+        override protected IEnumerator Reaction()
         {
             var playingAnimations = scheduledAnimations;
             scheduledAnimations = new List<IEnumerator>();

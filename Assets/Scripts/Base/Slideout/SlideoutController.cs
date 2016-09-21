@@ -17,7 +17,7 @@ namespace Slideout
             eventService = GlobalState.EventService;
 
             eventService.AddEventHandler<ShowSlideoutEvent>(OnShowSlideout);
-            eventService.AddEventHandler<BlockadeEvent.PopupsUnblocked>(OnPopupsUnblocked);
+            eventService.AddEventHandler<BlockadeEvent.PopupsUnblocked>(ShowNextSlideout);
         }
 
         private void ShowNextSlideout()
@@ -52,11 +52,6 @@ namespace Slideout
 
             eventService.Dispatch(new SlideoutCompleteEvent(slideout.gameObject));
 
-            ShowNextSlideout();
-        }
-
-        private void OnPopupsUnblocked(BlockadeEvent.PopupsUnblocked gameEvent)
-        {
             ShowNextSlideout();
         }
     }

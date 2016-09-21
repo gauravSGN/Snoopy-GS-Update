@@ -1,9 +1,16 @@
 using UnityEngine;
+using System.Collections;
 
 public class OrphanObject : MonoBehaviour
 {
-    protected void Start()
+    protected void OnEnable()
     {
-        gameObject.transform.parent = null;
+        StartCoroutine(RemoveFromParent());
+    }
+
+    private IEnumerator RemoveFromParent()
+    {
+        yield return null;
+        transform.SetParent(null, true);
     }
 }

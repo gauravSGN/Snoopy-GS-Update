@@ -1,7 +1,8 @@
-using UnityEngine;
 using Spine;
-using Spine.Unity;
+using Aiming;
 using System;
+using UnityEngine;
+using Spine.Unity;
 
 public class LauncherCharacterController : MonoBehaviour
 {
@@ -32,9 +33,9 @@ public class LauncherCharacterController : MonoBehaviour
         }
     }
 
-    public void CycleQueueAnimation()
+    public void StartBubbleParty()
     {
-        launcherAnimator.SetTrigger(SWAP);
+        Sequence.StartBubblePartyEvent.Dispatch();
     }
 
     protected void Start()
@@ -43,25 +44,26 @@ public class LauncherCharacterController : MonoBehaviour
         skeleton = gameObject.GetComponent<SkeletonAnimator>().Skeleton;
 
         launcherAnimator.SetFloat(ANGLE, 90.0f);
-        eventTrigger.StartAiming += OnStartAiming;
-        eventTrigger.StopAiming += OnStopAiming;
         eventTrigger.MoveTarget += OnMoveTarget;
 
         var eventService = GlobalState.EventService;
+        eventService.AddEventHandler<StartAimingEvent>(OnStartAiming);
+        eventService.AddEventHandler<StopAimingEvent>(OnStopAiming);
         eventService.AddEventHandler<BubbleFiringEvent>(OnBubbleFiring);
         eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
         eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
         eventService.AddEventHandler<LowMovesEvent>(OnLowMoves);
         eventService.AddEventHandler<PurchasedExtraMovesEvent>(OnPurchasedExtraMoves);
+        eventService.AddEventHandler<SwapBubblesEvent>(OnSwapBubbles);
     }
 
-    private void OnBubbleFiring(BubbleFiringEvent bubbleFiringEvent)
+    private void OnBubbleFiring()
     {
         launcherAnimator.SetBool(AIMING, false);
         launcherAnimator.SetTrigger(FIRING);
     }
 
-    private void OnBubbleFired(BubbleFiredEvent bubbleFiredEvent)
+    private void OnBubbleFired()
     {
         launcherAnimator.SetFloat(ANGLE, 90f);
     }
@@ -85,7 +87,7 @@ public class LauncherCharacterController : MonoBehaviour
         launcherAnimator.SetFloat(ANGLE, angle);
     }
 
-    private void OnLowMoves(LowMovesEvent gameEvent)
+    private void OnLowMoves()
     {
         launcherAnimator.SetBool(LOSING_LEVEL, true);
     }
@@ -96,8 +98,13 @@ public class LauncherCharacterController : MonoBehaviour
         launcherAnimator.SetBool(LOST_LEVEL, !gameEvent.Won);
     }
 
-    private void OnPurchasedExtraMoves(PurchasedExtraMovesEvent gameEvent)
+    private void OnPurchasedExtraMoves()
     {
         launcherAnimator.SetBool(LOST_LEVEL, false);
+    }
+
+    private void OnSwapBubbles()
+    {
+        launcherAnimator.SetTrigger(SWAP);
     }
 }

@@ -5,16 +5,12 @@
             "className": "UpdateDispatcher, Assembly-CSharp"
         },
         {
-            "interfaceName": "Service.TopUIService, Assembly-CSharp",
-            "className": "TopUIManager, Assembly-CSharp"
-        },
-        {
             "interfaceName": "Service.EventService, Assembly-CSharp",
             "className": "Event.EventDispatcher, Assembly-CSharp"
         },
         {
             "interfaceName": "Service.SceneService, Assembly-CSharp",
-            "className": "Service.SceneHandler, Assembly-CSharp"
+            "className": "Loading.SceneHandler, Assembly-CSharp"
         },
         {
             "interfaceName": "Service.AnimationService, Assembly-CSharp",
@@ -35,6 +31,15 @@
         {
             "interfaceName": "Service.PopupService, Assembly-CSharp",
             "className": "UI.Popup.PopupManager, Assembly-CSharp"
+        },
+        {
+            "interfaceName": "Service.AssetService, Assembly-CSharp",
+            "className": "Asset.AssetManager, Assembly-CSharp"
+        },
+        {
+            "interfaceName": "Service.TutorialService, Assembly-CSharp",
+            "className": "FTUE.TutorialManager, Assembly-CSharp",
+            "instantiate": true
         }
     ]
 }

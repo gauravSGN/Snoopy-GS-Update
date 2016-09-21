@@ -3,12 +3,12 @@ using Geometry;
 using UnityEngine;
 using System.Linq;
 using Geometry.BSP;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 namespace FTUE
 {
-    [ExecuteInEditMode]
-    sealed public class Lightbox : MonoBehaviour
+    sealed public class Lightbox : Graphic, ICanvasRaycastFilter
     {
         [System.Serializable]
         public struct PolyInfo
@@ -17,46 +17,58 @@ namespace FTUE
         }
 
         [SerializeField]
-        private Color color;
-
-        [SerializeField]
-        private Material material;
-
-        [SerializeField]
         private List<PolyInfo> polygons = new List<PolyInfo>();
+
+        private readonly List<int> triangles = new List<int>();
+        private List<Vector2> vertices;
 
         public List<PolyInfo> Polygons { get { return polygons; } }
 
-        public void Start()
+        public void Validate()
         {
-            Rebuild();
-        }
-
-        public void OnValidate()
-        {
-            if (enabled)
-            {
-                Rebuild();
-            }
-        }
-
-        public void OnEnable()
-        {
-            OnValidate();
-        }
-
-        public void OnDisable()
-        {
-            GetComponent<CanvasRenderer>().Clear();
+            SetVerticesDirty();
         }
 
         public void AddCutout(PolyInfo polygon)
         {
             polygons.Add(polygon);
-            Rebuild();
+            Validate();
         }
 
-        private void Rebuild()
+        public bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera)
+        {
+            Vector2 localPoint;
+
+            var inside = RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                 transform as RectTransform,
+                 sp,
+                 eventCamera,
+                 out localPoint
+             );
+
+            if (inside)
+            {
+                for (int index = 0, count = triangles.Count; index < count; index += 3)
+                {
+                    var p0 = vertices[triangles[index]];
+                    var p1 = vertices[triangles[index + 1]];
+                    var p2 = vertices[triangles[index + 2]];
+
+                    var b0 = (localPoint.x - p1.x) * (p0.y - p1.y) - (p0.x - p1.x) * (localPoint.y - p1.y) < 0.0f;
+                    var b1 = (localPoint.x - p2.x) * (p1.y - p2.y) - (p1.x - p2.x) * (localPoint.y - p2.y) < 0.0f;
+                    var b2 = (localPoint.x - p0.x) * (p2.y - p0.y) - (p2.x - p0.x) * (localPoint.y - p0.y) < 0.0f;
+
+                    if ((b0 == b1) && (b1 == b2))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        override protected void OnPopulateMesh(VertexHelper vh)
         {
             var polyList = new List<Polygon> { GetStartingPolygon() };
 
@@ -71,7 +83,7 @@ namespace FTUE
                 }
             }
 
-            var triangles = new List<int>();
+            triangles.Clear();
 
             foreach (var polygon in polyList)
             {
@@ -83,19 +95,21 @@ namespace FTUE
                 }
             }
 
-            var canvasRenderer = GetComponent<CanvasRenderer>();
-
-            canvasRenderer.Clear();
+            vh.Clear();
 
             if (polyList.Count > 0)
             {
-                material.SetColor("_Color", color);
-                canvasRenderer.SetMaterial(material, null);
-                canvasRenderer.SetMesh(new Mesh
+                vertices = polyList[0].Vertices;
+
+                foreach (var vertex in vertices)
                 {
-                    vertices = polyList[0].Vertices.Select(v => (Vector3)v).ToArray(),
-                    triangles = triangles.ToArray(),
-                });
+                    vh.AddVert(new UIVertex { position = vertex });
+                }
+
+                for (int index = 0, count = triangles.Count; index < count; index += 3)
+                {
+                    vh.AddTriangle(triangles[index], triangles[index + 1], triangles[index + 2]);
+                }
             }
         }
 

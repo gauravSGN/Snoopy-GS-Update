@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: ScoreTextDefinition
   m_EditorClassIdentifier: 
   type: 0
-  prefab: {fileID: 162136, guid: 67b2362aedac24720a1836999d6c8eb5, type: 2}
+  prefab: {fileID: 1000012475378678, guid: b7a2593a59fb942f0a080b769f5c9bd7, type: 2}
   controller: {fileID: 22100000, guid: d961800c5fe034c8eb27061e66d796cc, type: 2}

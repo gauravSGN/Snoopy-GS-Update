@@ -7,28 +7,26 @@ namespace Reaction
     [ReactionHandlerAttribute(ReactionPriority.ChainPop)]
     public class ChainPopReactionHandler : BubbleReactionHandler
     {
-        public override IEnumerator HandleActions()
+        override protected IEnumerator Reaction()
         {
             var bubbles = scheduledBubbles;
             scheduledBubbles = new List<Bubble>();
 
             yield return null;
 
-            for (int index = 0, count = bubbles.Count; index < count; index++)
+            GraphUtil.RemoveNodes(bubbles);
+
+            for (int index = 0, length = bubbles.Count; index < length; index++)
             {
-                InitiateChainPop(bubbles[index]);
+                BubbleReactionEvent.Dispatch(ReactionPriority.GenericPop, bubbles[index]);
             }
         }
 
-        private void InitiateChainPop(Bubble initialBubble)
+        override protected void OnReactionEvent(BubbleReactionEvent gameEvent)
         {
-            var adjacentList = GetAdjacentBubbles(new List<Bubble>(), initialBubble);
-
-            GraphUtil.RemoveNodes(adjacentList);
-
-            for (int index = 0, length = adjacentList.Count; index < length; index++)
+            if (gameEvent.priority == priority)
             {
-                BubbleReactionEvent.Dispatch(ReactionPriority.GenericPop, adjacentList[index]);
+                GetAdjacentBubbles(scheduledBubbles, gameEvent.bubble);
             }
         }
 

@@ -22,7 +22,7 @@ MonoBehaviour:
   matchThreshold: 2
   defaultAnimations:
   - name: 0
-    list: 04000000
+    list: 0d000000
   - name: 1
     list: 04000000
   sounds:
