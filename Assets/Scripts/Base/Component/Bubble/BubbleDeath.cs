@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 public class BubbleDeath : MonoBehaviour
 {
+    // It is specifically 2 so death effects have a chance to get going
+    // 1 frame for animation effect delay + 1 to setup and start rendering
+    private const int DEACTIVATION_DELAY = 2;
+
     public bool dying = false;
 
     [SerializeField]
@@ -37,7 +41,7 @@ public class BubbleDeath : MonoBehaviour
         dying = true;
 
         GetComponent<Rigidbody2D>().isKinematic = true;
-        GameObjectUtil.SetActive(deactivateOnDeath, false);
+        Util.FrameUtil.AfterFrames(DEACTIVATION_DELAY, DeactivateObjects);
 
         var sounds = GetComponent<BubbleModelBehaviour>().Model.definition.Sounds;
         Sound.PlaySoundEvent.Dispatch((type == BubbleDeathType.Pop) ? sounds.match : sounds.cull);
@@ -73,5 +77,10 @@ public class BubbleDeath : MonoBehaviour
     protected void Awake()
     {
         DeathSequence = new BubbleDeathSequence(gameObject);
+    }
+
+    private void DeactivateObjects()
+    {
+        GameObjectUtil.SetActive(deactivateOnDeath, false);
     }
 }
