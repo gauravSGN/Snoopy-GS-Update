@@ -17,6 +17,12 @@ namespace Snoopy.Characters
         private GameObject celebration;
 
         [SerializeField]
+        private GameObject escapeEffects;
+
+        [SerializeField]
+        private float escapeEffectsDuration;
+
+        [SerializeField]
         private AudioClip escapeSound;
 
         [SerializeField]
@@ -26,8 +32,6 @@ namespace Snoopy.Characters
 
         public Bubble Model { get; set; }
         public Vector3 LandingSpot { get; set; }
-
-        private AudioSource audioSource;
 
         public void Start()
         {
@@ -39,8 +43,6 @@ namespace Snoopy.Characters
             var eventService = GlobalState.EventService;
             eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
             eventService.AddEventHandler<LowMovesEvent>(OnLowMoves);
-
-            audioSource = GetComponent<AudioSource>();
         }
 
         public void OnDestroy()
@@ -60,24 +62,32 @@ namespace Snoopy.Characters
             transform.SetParent(gameView, true);
             animator.SetBool("HasEscaped", true);
 
+            if (escapeEffects != null)
+            {
+                var effects = Instantiate(escapeEffects, transform.position, Quaternion.identity);
+                Destroy(effects, escapeEffectsDuration);
+            }
+
             if (celebration != null)
             {
                 Instantiate(celebration, transform.position, Quaternion.identity);
             }
-            PlaySound(escapeSound);
+
+            Sound.PlaySoundEvent.Dispatch(escapeSound);
         }
 
         private void OnLevelComplete(LevelCompleteEvent gameEvent)
         {
             animator.SetBool("WonLevel", gameEvent.Won);
             animator.SetBool("LostLevel", !gameEvent.Won);
+
             if (!gameEvent.Won)
             {
-                PlaySound(loseSound);
+                Sound.PlaySoundEvent.Dispatch(loseSound);
             }
         }
 
-        private void OnLowMoves(LowMovesEvent gameEvent)
+        private void OnLowMoves()
         {
             animator.SetBool("LosingLevel", true);
         }
@@ -96,12 +106,6 @@ namespace Snoopy.Characters
 
             animator.SetBool("OnGround", true);
             trail.SetActive(false);
-        }
-
-        private void PlaySound(AudioClip clip)
-        {
-            audioSource.clip = clip;
-            audioSource.Play();
         }
     }
 }

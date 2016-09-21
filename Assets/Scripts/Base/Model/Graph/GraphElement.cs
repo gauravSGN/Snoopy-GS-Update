@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 
 namespace Graph
 {
     abstract public class GraphElement<T> : GraphNode where T : GraphElement<T>
     {
+        public Action<T> OnRemoveNeighbor;
+
         protected readonly List<T> neighbors = new List<T>();
 
         [SerializeField]
@@ -58,6 +61,11 @@ namespace Graph
             {
                 neighbors.Remove(node);
                 node.Disconnect((T)this);
+
+                if (OnRemoveNeighbor != null)
+                {
+                    OnRemoveNeighbor(node);
+                }
             }
         }
 

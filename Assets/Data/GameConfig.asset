@@ -68,6 +68,22 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
+    distanceScaling:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 1
+        inSlope: -0.25
+        outSlope: -0.25
+        tangentMode: 10
+      - time: 1
+        value: 0.75
+        inSlope: -0.25
+        outSlope: -0.25
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
   aimline:
     length: 5
     lineWidth: 0.167
@@ -110,6 +126,8 @@ MonoBehaviour:
     remainingMovesValue: 100
     popToDropFactor: 0.75
     secondStarDivisor: 2
+    multiplierCalloutDelay: 0.5
+    multiplierCalloutFadeTime: 0.2
     goals:
     - goalType: 0
       score: 500
@@ -141,7 +159,9 @@ MonoBehaviour:
   winSequence:
     delayBeforeCullAll: 0.5
     delayBeforeWinTextAnimation: 1
-    delayBeforeCelebration: 0.1
-    delayBeforeBubbleParty: 0.5
+    delayBeforeCelebration: 0
+    delayBeforeBubbleParty: 0
     delayBeforeSlideOut: 1.5
     delayBeforePopup: 0.5
+  powerUp:
+    popOrderDelay: 0.15

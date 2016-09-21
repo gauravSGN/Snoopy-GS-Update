@@ -4,5 +4,6 @@
     {
         RescueGoalIcon,
         ScoreContainer,
+        YellowPowerUpReturnTarget,
     }
 }

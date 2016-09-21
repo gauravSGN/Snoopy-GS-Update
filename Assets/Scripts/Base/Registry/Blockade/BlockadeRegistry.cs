@@ -26,6 +26,10 @@ namespace Registry
                                                     Dispatch<BlockadeEvent.PopupsUnblocked>) },
             { BlockadeType.SceneChange, new EventMapping(Dispatch<BlockadeEvent.SceneChangeBlocked>,
                                                          Dispatch<BlockadeEvent.SceneChangeUnblocked>) },
+            { BlockadeType.Input, new EventMapping(Dispatch<BlockadeEvent.InputBlocked>,
+                                                   Dispatch<BlockadeEvent.InputUnblocked>) },
+            { BlockadeType.Reactions, new EventMapping(Dispatch<BlockadeEvent.ReactionsBlocked>,
+                                                       Dispatch<BlockadeEvent.ReactionsUnblocked>) },
         };
 
         public bool PopupsBlocked
@@ -36,6 +40,16 @@ namespace Registry
         public bool SceneChangeBlocked
         {
             get { return blockades.Any(b => (b.BlockadeType & BlockadeType.SceneChange) > 0); }
+        }
+
+        public bool InputBlocked
+        {
+            get { return blockades.Any(b => (b.BlockadeType & BlockadeType.Input) > 0); }
+        }
+
+        public bool ReactionsBlocked
+        {
+            get { return blockades.Any(b => (b.BlockadeType & BlockadeType.Reactions) > 0); }
         }
 
         public void Add(Blockade blockade)

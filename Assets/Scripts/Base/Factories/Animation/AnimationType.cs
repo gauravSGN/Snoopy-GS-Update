@@ -14,5 +14,10 @@ namespace Animation
         PinkPop,
         PurplePop,
         YellowShooter,
+        YellowPowerUpPop,
+        ActivateStarBarStar,
+        RainbowPop,
+        StarOnMapNode,
+        RockDeathParticle,
     }
 }

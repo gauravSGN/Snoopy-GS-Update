@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c497b31e3b8241cea4f374bac7dd388, type: 3}
+  m_Name: RockDeathParticleDefinition
+  m_EditorClassIdentifier: 
+  type: 15
+  prefab: {fileID: 1000012979342724, guid: a124678c9497c483cb98455637c2ebd8, type: 2}
+  controller: {fileID: 0}

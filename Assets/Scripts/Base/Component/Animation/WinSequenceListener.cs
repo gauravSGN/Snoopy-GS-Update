@@ -11,7 +11,7 @@ public class WinSequenceListener : MonoBehaviour
         GlobalState.EventService.AddEventHandler<StartWinAnimationsEvent>(OnStartWinAnimations);
     }
 
-    private void OnStartWinAnimations(StartWinAnimationsEvent gameEvent)
+    private void OnStartWinAnimations()
     {
         if (animator != null)
         {

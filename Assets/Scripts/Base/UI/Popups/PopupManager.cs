@@ -17,7 +17,7 @@ namespace UI.Popup
         private Color overlayColor;
 
         [SerializeField]
-        private Canvas parentCanvas;
+        private RectTransform popupParent;
 
         [SerializeField]
         private PopupFactory popupFactory;
@@ -63,9 +63,9 @@ namespace UI.Popup
         protected void Start()
         {
             var service = GlobalState.EventService;
-            service.AddEventHandler<PopupDisplayedEvent>(OnPopupDisplayed, Event.HandlerDictType.Persistent);
-            service.AddEventHandler<PopupClosedEvent>(OnPopupClosed, Event.HandlerDictType.Persistent);
-            service.AddEventHandler<BlockadeEvent.PopupsUnblocked>(OnPopupsUnblocked, Event.HandlerDictType.Persistent);
+            service.Persistent.AddEventHandler<PopupDisplayedEvent>(OnPopupDisplayed);
+            service.Persistent.AddEventHandler<PopupClosedEvent>(OnPopupClosed);
+            service.Persistent.AddEventHandler<BlockadeEvent.PopupsUnblocked>(ShowNextPopup);
 
             GlobalState.Instance.Services.SetInstance<PopupService>(this);
         }
@@ -81,7 +81,7 @@ namespace UI.Popup
                     popupQueue.Dequeue();
 
                     var popup = popupFactory.CreateByType(config.Type);
-                    popup.gameObject.transform.SetParent(parentCanvas.transform, false);
+                    popup.gameObject.transform.SetParent(popupParent, false);
 
                     UpdatePopupOverlay();
 
@@ -93,9 +93,7 @@ namespace UI.Popup
 
                     if (definition.DisplaySound != null)
                     {
-                        var soundSource = popup.gameObject.AddComponent<AudioSource>();
-                        soundSource.clip = definition.DisplaySound;
-                        soundSource.Play();
+                        Sound.PlaySoundEvent.Dispatch(definition.DisplaySound);
                     }
                 }
             }
@@ -120,14 +118,9 @@ namespace UI.Popup
             UpdatePopupOverlay();
         }
 
-        private void OnPopupsUnblocked(BlockadeEvent.PopupsUnblocked gameEvent)
-        {
-            ShowNextPopup();
-        }
-
         private void UpdatePopupOverlay()
         {
-            var maxSiblingIndex = parentCanvas.transform.childCount - 1;
+            var maxSiblingIndex = popupParent.childCount - 1;
             var overlayActive = (maxSiblingIndex > 0);
             var currentlyActive = popupOverlay.gameObject.activeInHierarchy;
 

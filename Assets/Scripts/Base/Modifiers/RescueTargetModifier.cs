@@ -78,7 +78,7 @@ namespace Modifiers
             }
         }
 
-        private void OnLevelLoaded(LevelLoadedEvent gameEvent)
+        private void OnLevelLoaded()
         {
             GlobalState.EventService.RemoveEventHandler<LevelLoadedEvent>(OnLevelLoaded);
 
@@ -112,7 +112,7 @@ namespace Modifiers
             }
         }
 
-        private void OnIntroScrollComplete(IntroScrollCompleteEvent gameEvent)
+        private void OnIntroScrollComplete()
         {
             GlobalState.EventService.RemoveEventHandler<IntroScrollCompleteEvent>(OnIntroScrollComplete);
 

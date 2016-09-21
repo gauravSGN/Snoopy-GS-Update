@@ -1,0 +1,167 @@
+
+Yellow_Bubble_Destroy.png
+size: 2048,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BubbleBurst/YellowBubbleDestroyPop_0001
+  rotate: false
+  xy: 2, 118
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0002
+  rotate: false
+  xy: 2, 2
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0003
+  rotate: false
+  xy: 118, 118
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0004
+  rotate: false
+  xy: 118, 2
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0005
+  rotate: false
+  xy: 234, 118
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0006
+  rotate: false
+  xy: 234, 2
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0007
+  rotate: false
+  xy: 350, 118
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0008
+  rotate: false
+  xy: 350, 2
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0009
+  rotate: false
+  xy: 466, 118
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0010
+  rotate: false
+  xy: 466, 2
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0011
+  rotate: false
+  xy: 582, 118
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0012
+  rotate: false
+  xy: 582, 2
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0013
+  rotate: false
+  xy: 698, 118
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+BubbleBurst/YellowBubbleDestroyPop_0014
+  rotate: false
+  xy: 698, 2
+  size: 114, 114
+  orig: 114, 114
+  offset: 0, 0
+  index: -1
+DestroyFX/YellowDestroySwirl_0001
+  rotate: false
+  xy: 814, 138
+  size: 94, 94
+  orig: 94, 94
+  offset: 0, 0
+  index: -1
+DestroyFX/YellowDestroySwirl_0002
+  rotate: false
+  xy: 814, 42
+  size: 94, 94
+  orig: 94, 94
+  offset: 0, 0
+  index: -1
+DestroyFX/YellowDestroySwirl_0003
+  rotate: false
+  xy: 910, 138
+  size: 94, 94
+  orig: 94, 94
+  offset: 0, 0
+  index: -1
+DestroyFX/YellowDestroySwirl_0004
+  rotate: false
+  xy: 910, 42
+  size: 94, 94
+  orig: 94, 94
+  offset: 0, 0
+  index: -1
+DestroyFX/YellowDestroySwirl_0005
+  rotate: false
+  xy: 1006, 138
+  size: 94, 94
+  orig: 94, 94
+  offset: 0, 0
+  index: -1
+DestroyFX/YellowDestroySwirl_0006
+  rotate: false
+  xy: 1006, 42
+  size: 94, 94
+  orig: 94, 94
+  offset: 0, 0
+  index: -1
+DestroyFX/YellowDestroySwirl_0007
+  rotate: false
+  xy: 1102, 138
+  size: 94, 94
+  orig: 94, 94
+  offset: 0, 0
+  index: -1
+DestroyFX/YellowDestroySwirl_0008
+  rotate: false
+  xy: 1102, 42
+  size: 94, 94
+  orig: 94, 94
+  offset: 0, 0
+  index: -1
+DestroyFX/YellowDestroySwirl_0009
+  rotate: false
+  xy: 1198, 138
+  size: 94, 94
+  orig: 94, 94
+  offset: 0, 0
+  index: -1

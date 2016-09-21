@@ -87,6 +87,12 @@ public static class CustomAssetCreator
         CreateAThing<MapChunkFactory>();
     }
 
+    [MenuItem("Assets/Create/Font/Bitmap Font")]
+    public static void CreateBitmapFont()
+    {
+        CreateAThing<BitmapFontDefinition>();
+    }
+
     private static void CreateAThing<T>() where T : ScriptableObject
     {
         var instance = ScriptableObject.CreateInstance<T>();

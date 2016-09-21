@@ -22,7 +22,7 @@ public class HeartsTextUpdater : UITextUpdater
         {
             var hearts = (Hearts)target;
 
-            if (hearts.quantity == GlobalState.Instance.Config.purchasables.maxHearts)
+            if ((textWhenFull != "") && (hearts.quantity == GlobalState.Instance.Config.purchasables.maxHearts))
             {
                 text.text = textWhenFull;
             }

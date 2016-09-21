@@ -1,27 +1,28 @@
+using Registry;
 using UnityEngine;
 
 namespace UI.Map
 {
-    public class MovePlayerAvatar : MonoBehaviour
+    public class MovePlayerAvatar : MonoBehaviour, Blockade
     {
-        [SerializeField]
-        private float yPadding;
-
         [SerializeField]
         private float travelTime;
 
         [SerializeField]
         private AnimationCurve easeCurve;
 
+        [SerializeField]
+        private GameObject unlockEffects;
+
         private Transform origin;
         private Transform destination;
-        private AudioSource levelUnlockSound;
+
+        public BlockadeType BlockadeType { get { return BlockadeType.All; } }
 
         protected void Start()
         {
             GlobalState.EventService.AddEventHandler<MovePlayerAvatarEvent>(OnMovePlayerAvatar);
             GlobalState.EventService.AddEventHandler<SetPlayerAvatarPositionEvent>(OnSetPlayerAvatarPosition);
-            levelUnlockSound = GetComponent<AudioSource>();
         }
 
         private void OnSetPlayerAvatarPosition(SetPlayerAvatarPositionEvent gameEvent)
@@ -29,16 +30,21 @@ namespace UI.Map
             origin = gameEvent.origin;
             destination = gameEvent.destination;
 
-            transform.SetParent(gameEvent.destination.parent, false);
-            transform.localPosition = new Vector3(destination.localPosition.x,
-                                                  destination.localPosition.y + yPadding);
+            transform.position = new Vector3(destination.position.x, destination.position.y);
         }
 
-        private void OnMovePlayerAvatar(MovePlayerAvatarEvent gameEvent)
+        private void OnMovePlayerAvatar()
         {
             if (origin != null)
             {
-                GoTween tween = transform.localPositionFrom(travelTime, origin.localPosition);
+                GlobalState.Instance.Services.Get<Service.BlockadeService>().Add(this);
+
+                var effectsInstance = Instantiate(unlockEffects);
+                effectsInstance.transform.SetParent(destination, false);
+
+                Sound.PlaySoundEvent.Dispatch(Sound.SoundType.UnlockLevel);
+
+                GoTween tween = transform.positionFrom(travelTime, origin.position);
                 tween.easeCurve = easeCurve;
                 tween.easeType = GoEaseType.AnimationCurve;
                 tween.setOnCompleteHandler(OnAvatarMoveComplete);
@@ -47,16 +53,17 @@ namespace UI.Map
 
         private void OnAvatarMoveComplete(AbstractGoTween tween)
         {
-            if(levelUnlockSound != null)
+            Util.FrameUtil.AfterDelay(0.5f, () =>
             {
-                levelUnlockSound.Play();
-            }
-            var mapButtonComponent = destination.GetComponent<MapButton>();
+                GlobalState.Instance.Services.Get<Service.BlockadeService>().Remove(this);
 
-            if (mapButtonComponent != null)
-            {
-                mapButtonComponent.Click(string.Empty);
-            }
+                var mapButtonComponent = destination.GetComponent<MapButton>();
+
+                if (mapButtonComponent != null)
+                {
+                    mapButtonComponent.Click(string.Empty);
+                }
+            });
         }
     }
 }

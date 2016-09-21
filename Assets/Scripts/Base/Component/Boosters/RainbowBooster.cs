@@ -11,7 +11,7 @@ namespace Booster
         private GameObject overlay;
 
         [SerializeField]
-        private BubbleLauncher launcher;
+        private BubbleModifierController modifiers;
 
         [SerializeField]
         private Level level;
@@ -26,7 +26,7 @@ namespace Booster
         private PurchaseBoosters purchaseBoosters;
 
         [SerializeField]
-        private AudioSource equipSound;
+        private AudioClip equipSound;
 
         private GameObject instantiatedOverlay;
 
@@ -34,6 +34,7 @@ namespace Booster
         {
             if (GlobalState.User.purchasables.boosters.rainbows == 0)
             {
+                Sound.PlaySoundEvent.Dispatch(Sound.SoundType.UIClick);
                 purchaseBoosters.BuyRainbows();
             }
             else if ((instantiatedOverlay == null) &&
@@ -41,13 +42,12 @@ namespace Booster
             {
                 instantiatedOverlay = Instantiate(overlay);
 
-                launcher.AddShotModifier(ConvertToRainbow, ShotModifierType.RainbowBooster);
-                launcher.SetModifierAnimation(instantiatedOverlay);
+                modifiers.Add(ConvertToRainbow, ShotModifierType.RainbowBooster);
+                modifiers.SetAnimation(instantiatedOverlay);
 
                 GlobalState.User.purchasables.boosters.rainbows--;
-                level.levelState.DecrementRemainingBubbles();
 
-                equipSound.Play();
+                Sound.PlaySoundEvent.Dispatch(equipSound);
             }
         }
 
@@ -56,7 +56,7 @@ namespace Booster
             GlobalState.EventService.AddEventHandler<AddShotModifierEvent>(OnAddShotModifier);
         }
 
-        private void OnAddShotModifier(AddShotModifierEvent gameEvent)
+        private void OnAddShotModifier()
         {
             boosterButton.interactable = false;
         }

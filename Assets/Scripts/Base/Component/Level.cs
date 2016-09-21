@@ -33,6 +33,8 @@ public class Level : MonoBehaviour
     private readonly ModifierFactory modifierFactory = new ModifierFactory();
     private string levelData;
 
+    public LevelLoader Loader { get { return loader; } }
+
     protected void Start()
     {
         var sceneData = GlobalState.SceneService;
@@ -47,12 +49,12 @@ public class Level : MonoBehaviour
         }
 
         levelState.levelNumber = sceneData.LevelNumber;
-        StartCoroutine(LoadingCoroutine());
+        GlobalState.SceneService.RunAtLoad(LoadingCoroutine());
     }
 
     private IEnumerator LoadingCoroutine()
     {
-        yield return new WaitForEndOfFrame();
+        yield return null;
 
         bubbleFactory.ResetModifiers();
         loader.LoadLevel(levelData);
@@ -82,6 +84,7 @@ public class Level : MonoBehaviour
 
         GlobalState.AssetService.OnComplete += OnAssetLoadingComplete;
 
+        GlobalState.SoundService.PreloadMusic(Sound.MusicType.RescueLevel);
         GlobalState.AssetService.LoadAssetAsync<Sprite>(loader.LevelData.Background, delegate(Sprite sprite)
             {
                 background.sprite = sprite;
@@ -91,6 +94,8 @@ public class Level : MonoBehaviour
     private void OnAssetLoadingComplete()
     {
         GlobalState.AssetService.OnComplete -= OnAssetLoadingComplete;
+
+        GlobalState.EventService.Dispatch(new Sound.PlayMusicEvent(Sound.MusicType.RescueLevel, true));
         GlobalState.EventService.Dispatch(new LevelLoadedEvent());
     }
 
@@ -106,7 +111,7 @@ public class Level : MonoBehaviour
         levelState.NotifyListeners();
     }
 
-    private void OnGoalComplete(GoalCompleteEvent gameEvent)
+    private void OnGoalComplete()
     {
         foreach (var goal in loader.LevelData.goals)
         {

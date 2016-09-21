@@ -1,7 +1,7 @@
 using Util;
 using Config;
-using UnityEngine;
 using Service;
+using UnityEngine;
 using System.Collections;
 
 // The GlobalState prefab needs to be in every scene that uses it for the
@@ -16,7 +16,7 @@ public class GlobalState : SingletonBehaviour<GlobalState>
     public static AssetService AssetService { get { return Instance.Services.Get<AssetService>(); } }
     public static AnimationService AnimationService { get { return Instance.Services.Get<AnimationService>(); } }
     public static InitializerService InitializerService { get { return Instance.Services.Get<InitializerService>(); } }
-    public static TopUIService TopUIService { get { return Instance.Services.Get<TopUIService>(); } }
+    public static SoundService SoundService { get { return Instance.Services.Get<SoundService>(); } }
 
     public GameConfig Config { get { return config; } }
     public ServiceRepository Services { get { return services; } }
@@ -43,6 +43,7 @@ public class GlobalState : SingletonBehaviour<GlobalState>
             GSDescriptorFactory.CreateByPlatform(Application.platform, gsDescriptorJSON).Initialize();
             Application.targetFrameRate = 60;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
+            Input.multiTouchEnabled = false;
         }
     }
 
@@ -51,15 +52,6 @@ public class GlobalState : SingletonBehaviour<GlobalState>
         if (Instance == this)
         {
             StartCoroutine(enumerator);
-        }
-    }
-
-    protected void OnLevelWasLoaded(int level)
-    {
-        if (this == Instance)
-        {
-            Services.Get<EventService>().Reset();
-            Services.Get<UpdateService>().Reset();
         }
     }
 }

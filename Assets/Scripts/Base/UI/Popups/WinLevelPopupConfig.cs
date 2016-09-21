@@ -5,6 +5,7 @@ namespace UI.Popup
         public long stars;
         public long score;
         public long topScore;
+        public int level;
 
         override public PopupType Type { get { return PopupType.WinLevel; } }
     }

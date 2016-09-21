@@ -7,16 +7,30 @@ namespace State
     public class StateHandler : Observable
     {
         protected Data state;
+        protected bool initialized;
 
-        public StateHandler(Data topLevelState) : this(topLevelState, null) {}
+        virtual public string Key { get; set; }
 
-        public StateHandler(Data topLevelState, Action<Observable> initialListener)
+        virtual public void Initialize(Data topLevelState)
         {
-            state = topLevelState;
-
-            if (initialListener != null)
+            if (!initialized)
             {
-                AddListener(initialListener);
+                if (topLevelState != null)
+                {
+                    state = topLevelState;
+
+                    if (Key != null)
+                    {
+                        if (!topLevelState.ContainsKey(Key))
+                        {
+                            topLevelState[Key] = new Dictionary<string, object>();
+                        }
+
+                        state = (Data)topLevelState[Key];
+                    }
+                }
+
+                initialized = true;
             }
         }
 
@@ -31,30 +45,35 @@ namespace State
             NotifyListeners();
         }
 
-        protected void InitializeChildObjectIfNecessary(string key, object value = null)
-        {
-            if (!state.ContainsKey(key))
-            {
-                state[key] = value ?? new Dictionary<string, object>();
-            }
-        }
-
         protected void NotifyListenersCallback(Observable target)
         {
             NotifyListeners();
         }
 
-        protected void InitializeStateKeys()
+        protected T BuildStateHandler<T>() where T : StateHandler
         {
-            foreach (var stateKey in GetStateKeys())
-            {
-                InitializeChildObjectIfNecessary(stateKey);
-            }
+            return BuildStateHandler<T>(null);
         }
 
-        virtual protected string[] GetStateKeys()
+        virtual protected T BuildStateHandler<T>(Data topLevelState) where T : StateHandler
         {
-            return new string[0];
+            return BuildStateHandlerWithCallback<T>(topLevelState, NotifyListenersCallback);
+        }
+
+        protected T BuildStateHandlerWithCallback<T>(Data topLevelState,
+                                                     Action<Observable> initialCallback) where T : StateHandler
+        {
+            var handlerType = typeof(T);
+            T stateHandler = (T)Activator.CreateInstance(handlerType);
+
+            stateHandler.Initialize(topLevelState);
+
+            if (initialCallback != null)
+            {
+                stateHandler.AddListener(initialCallback);
+            }
+
+            return stateHandler;
         }
     }
 }

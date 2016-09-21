@@ -18,21 +18,28 @@ public class ScoreMultiplierCallout : MonoBehaviour
     private int counter;
     private Text textComponent;
 
-    public void Initialize()
+    private int multiplier;
+    private int score;
+
+    public void Initialize(int multiplier, int score)
     {
+        this.multiplier = multiplier;
+        this.score = score;
+
         GlobalState.EventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
         textComponent = GetComponent<Text>();
     }
 
-    public void Show(int multiplier, int score)
+    public void Show()
     {
         GlobalState.EventService.RemoveEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
-        StartCoroutine(DelayedShow(multiplier, score));
+        StartCoroutine(DelayedShow());
     }
 
-    private IEnumerator DelayedShow(int multiplier, int score)
+    private IEnumerator DelayedShow()
     {
-        yield return new WaitForSeconds(1f);
+        var config = GlobalState.Instance.Config.scoring;
+        yield return new WaitForSeconds(config.multiplierCalloutDelay);
 
         transform.position = new Vector3(xAverage, yMin, transform.position.z);
 
@@ -40,7 +47,14 @@ public class ScoreMultiplierCallout : MonoBehaviour
 
         GetComponent<MoveToRegisteredCanvas>().MoveToCanvas();
 
-        var fadeTime = 0.2f;
+        while (transform.parent == null)
+        {
+            yield return null;
+        }
+
+        ClampToParent();
+
+        var fadeTime = config.multiplierCalloutFadeTime;
         var timer = 0f;
         while (timer <= fadeTime)
         {
@@ -76,5 +90,34 @@ public class ScoreMultiplierCallout : MonoBehaviour
         yMin = (counter == 1) ? position.y : Mathf.Min(yMin, position.y);
         // Hack for VS
         yMin += 1f;
+    }
+
+    private void ClampToParent()
+    {
+        var rectTransform = GetComponent<RectTransform>();
+        var parentRect = (rectTransform.parent as RectTransform).rect;
+        var myRect = rectTransform.rect;
+        var position = rectTransform.localPosition;
+
+        rectTransform.localPosition += new Vector3(
+            ComputeRectOffset(myRect.xMin + position.x, myRect.xMax + position.x, parentRect.xMin, parentRect.xMax),
+            ComputeRectOffset(myRect.yMin + position.y, myRect.yMax + position.y, parentRect.yMin, parentRect.yMax)
+        );
+    }
+
+    private float ComputeRectOffset(float min, float max, float minBounds, float maxBounds)
+    {
+        var offset = 0.0f;
+
+        if (min < minBounds)
+        {
+            offset = minBounds - min;
+        }
+        else if (max > maxBounds)
+        {
+            offset = maxBounds - max;
+        }
+
+        return offset;
     }
 }

@@ -8,7 +8,7 @@ namespace Reaction
     [ReactionHandlerAttribute(ReactionPriority.Pop)]
     public class PopReactionHandler : BubbleReactionHandler
     {
-        public override IEnumerator HandleActions()
+        override protected IEnumerator Reaction()
         {
             var bubbleList = new List<Bubble>(scheduledBubbles);
             var chains = BuildPopChains(scheduledBubbles);

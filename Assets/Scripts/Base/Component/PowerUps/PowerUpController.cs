@@ -20,6 +20,9 @@ namespace PowerUps
         private BubbleLauncher launcher;
 
         [SerializeField]
+        private BubbleModifierController modifiers;
+
+        [SerializeField]
         private AnimationType shooterType;
 
         [SerializeField]
@@ -88,11 +91,11 @@ namespace PowerUps
         {
             if (powerUpType == PowerUpType.Empty)
             {
-                launcher.AddShotModifier(AddScan, ShotModifierType.PowerUp);
+                modifiers.Add(AddScan, ShotModifierType.PowerUp);
                 aimline.ModifyAimline(GlobalState.Instance.Config.aimline.extended);
             }
 
-            launcher.SetModifierAnimation(animationService.CreateByType(shooterType));
+            modifiers.SetAnimation(animationService.CreateByType(shooterType));
 
             powerUpType |= type;
             totalPowerUpsInUse += 1;
@@ -118,19 +121,19 @@ namespace PowerUps
         }
 
         // Just set objects active/inactive until we have an animation
-        public void HidePowerUps()
+        public void HidePowerUps(float transitionTime)
         {
             for (int i = 0, count = powerUps.Count; i < count; ++i)
             {
-                powerUps[i].Hide();
+                powerUps[i].Hide(transitionTime);
             }
         }
 
-        public void ShowPowerUps()
+        public void ShowPowerUps(float transitionTime)
         {
             for (int i = 0, count = powerUps.Count; i < count; ++i)
             {
-                powerUps[i].Show();
+                powerUps[i].Show(transitionTime);
             }
         }
 
