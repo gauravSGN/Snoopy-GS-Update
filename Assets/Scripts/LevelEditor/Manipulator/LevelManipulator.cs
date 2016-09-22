@@ -30,6 +30,7 @@ namespace LevelEditor
         [SerializeField]
         private BubbleFactory bubbleFactory;
 
+        private readonly List<PuzzleData> puzzles = new List<PuzzleData>() { new PuzzleData() };
         private readonly Dictionary<int, BubbleData> models = new Dictionary<int, BubbleData>();
         private readonly Dictionary<int, GameObject> views = new Dictionary<int, GameObject>();
         private readonly ManipulatorActionFactory actionFactory = new ManipulatorActionFactory();
@@ -74,13 +75,16 @@ namespace LevelEditor
             randoms = new List<RandomBubbleDefinition>(levelData.Randoms ?? new RandomBubbleDefinition[0]);
             GlobalState.EventService.Dispatch(new RandomBubblesChangedEvent());
 
-            foreach (var bubble in levelData.Bubbles)
+            foreach (var puzzle in levelData.Puzzles)
             {
-                state.BubbleType = bubble.Type;
+                foreach (var bubble in puzzle.Bubbles)
+                {
+                    state.BubbleType = bubble.Type;
 
-                placer.Perform(this, bubble.X, bubble.Y);
-                bubbleFactory.ApplyEditorModifiers(views[BubbleData.GetKey(bubble.X, bubble.Y)], bubble);
-                models[BubbleData.GetKey(bubble.X, bubble.Y)].modifiers = bubble.modifiers;
+                    placer.Perform(this, bubble.X, bubble.Y);
+                    bubbleFactory.ApplyEditorModifiers(views[BubbleData.GetKey(bubble.X, bubble.Y)], bubble);
+                    models[BubbleData.GetKey(bubble.X, bubble.Y)].modifiers = bubble.modifiers;
+                }
             }
 
             LevelProperties.FromLevelData(levelData);
@@ -99,14 +103,7 @@ namespace LevelEditor
 
         public string SaveLevel()
         {
-            var data = new MutableLevelData
-            {
-                Background = Background,
-                Bubbles = models.Values,
-                Queue = queue,
-                Randoms = randoms.ToArray(),
-                ShotCount = queue.ShotCount,
-            };
+            var data = CreateMutableLevelData();
 
             LevelProperties.StarValues = ScoreUtil.ComputeStarsForLevel(data, BubbleFactory);
             LevelProperties.NotifyListeners();
@@ -225,14 +222,7 @@ namespace LevelEditor
         {
             yield return null;
 
-            var data = new MutableLevelData
-            {
-                Background = Background,
-                Bubbles = models.Values,
-                Queue = queue,
-                Randoms = randoms.ToArray(),
-                ShotCount = queue.ShotCount,
-            };
+            var data = CreateMutableLevelData();
 
             var newValues = ScoreUtil.ComputeStarsForLevel(data, BubbleFactory);
             for (int index = 0, count = newValues.Length; index < count; index++)
@@ -244,6 +234,17 @@ namespace LevelEditor
             LevelProperties.NotifyListeners();
 
             scoreCoroutine = null;
+        }
+
+        private MutableLevelData CreateMutableLevelData()
+        {
+            return new MutableLevelData {
+                Background = Background,
+                Puzzles = new MutablePuzzleData[1] { new MutablePuzzleData { Bubbles = models.Values } },
+                Queue = queue,
+                Randoms = randoms.ToArray(),
+                ShotCount = queue.ShotCount,
+            };
         }
     }
 }

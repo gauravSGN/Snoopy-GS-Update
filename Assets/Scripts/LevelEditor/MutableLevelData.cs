@@ -25,10 +25,10 @@ namespace LevelEditor
             set { powerUpFills = value; }
         }
 
-        public new IEnumerable<BubbleData> Bubbles
+        public new IEnumerable<PuzzleData> Puzzles
         {
-            get { return base.Bubbles; }
-            set { bubbles = value.ToArray(); }
+            get { return base.Puzzles; }
+            set { puzzles = value.ToArray(); }
         }
 
         public new int[] StarValues

@@ -80,6 +80,8 @@ GameObject:
   - 114: {fileID: 11467980}
   - 114: {fileID: 11489826}
   - 114: {fileID: 11439542}
+  - 114: {fileID: 114000013009062830}
+  - 114: {fileID: 114000013904216578}
   m_Layer: 0
   m_Name: GlobalState
   m_TagString: Untagged
@@ -551,7 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9045977e322fc4adc8c71bc79a4eeb17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillImage: {fileID: 114000013733294740}
+  fillImage: {fileID: 0}
 --- !u!114 &114000012996374552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -563,7 +565,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119c1b18b37484cc1812e69f395772a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlay: {fileID: 1000010515155050}
+  overlay: {fileID: 0}
+--- !u!114 &114000013009062830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dedd082d270734722aebe95623f919ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013058909990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -645,6 +658,17 @@ MonoBehaviour:
   m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000013904216578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72cb55dc46a6c477c91cda041818b25c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000014073887032
 MonoBehaviour:
   m_ObjectHideFlags: 1
