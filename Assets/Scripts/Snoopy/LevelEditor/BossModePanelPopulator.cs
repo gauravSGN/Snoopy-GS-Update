@@ -1,3 +1,4 @@
+using LevelEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,9 @@ namespace Snoopy.LevelEditor
     public class BossModePanelPopulator : MonoBehaviour
     {
         private const int MAX_PUZZLES = 7;
+
+        [SerializeField]
+        private LevelManipulator manipulator;
 
         [SerializeField]
         private Transform puzzleToggleContainer;
@@ -22,8 +26,18 @@ namespace Snoopy.LevelEditor
         private int numberOfPuzzles = 1;
         private readonly Toggle[] puzzleToggles = new Toggle[MAX_PUZZLES];
 
+        protected void OnEnable()
+        {
+            Util.FrameUtil.AtEndOfFrame(() => {
+                UpdatePuzzleToggleContainer(manipulator.NumberOfPuzzles.ToString());
+                puzzleToggles[0].isOn = true;
+            });
+        }
+
         protected void Start()
         {
+            GlobalState.EventService.AddEventHandler<LevelEditorLoadEvent>(OnLevelEditorLoadEvent);
+
             numberOfPuzzlesInput.onEndEdit.AddListener(UpdatePuzzleToggleContainer);
 
             for (var i = 0; i < MAX_PUZZLES; i++)
@@ -37,9 +51,11 @@ namespace Snoopy.LevelEditor
                 var label = puzzleToggles[i].gameObject.GetComponentInChildren<Text>();
                 label.text += (i + 1);
             }
+        }
 
-            UpdatePuzzleToggleContainer("1");
-            puzzleToggles[0].isOn = true;
+        private void OnLevelEditorLoadEvent(LevelEditorLoadEvent gameEvent)
+        {
+            UpdatePuzzleToggleContainer(manipulator.NumberOfPuzzles.ToString());
         }
 
         private void UpdatePuzzleToggleContainer(string valueAsString)
@@ -53,19 +69,18 @@ namespace Snoopy.LevelEditor
                 for (var i = 0; i < MAX_PUZZLES; i++)
                 {
                     var enabled = (i < numberOfPuzzles);
-                    puzzleToggles[i].gameObject.SetActive(enabled);
 
-                    // This puzzle is no longer valid, so load the first puzzle which must exist
+                    // If this puzzle is no longer valid then load the first puzzle which must exist
                     if (!enabled && puzzleToggles[i].isOn)
                     {
                         puzzleToggles[0].isOn = true;
                     }
+
+                    puzzleToggles[i].gameObject.SetActive(enabled);
                 }
             }
-            else
-            {
-                numberOfPuzzlesInput.text = numberOfPuzzles.ToString();
-            }
+
+            numberOfPuzzlesInput.text = numberOfPuzzles.ToString();
         }
 
         private void OnPuzzleToggle(bool value)
@@ -76,7 +91,7 @@ namespace Snoopy.LevelEditor
                 {
                     if (puzzleToggles[i].isOn)
                     {
-                        Debug.Log("load puzzle " + (i + 1));
+                        GlobalState.EventService.Dispatch(new LoadPuzzleEvent { puzzleIndex = i });
                     }
                 }
             }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using UnityEngine;
-using LevelEditor.Manipulator;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -135,9 +134,7 @@ namespace LevelEditor
 
         private void ClearBoard()
         {
-            GlobalState.EventService.Dispatch(new ClearLevelEvent());
-            var clearAction = manipulator.ActionFactory.Create(ManipulatorActionType.Clear);
-            clearAction.Perform(manipulator, 0, 0);
+            manipulator.ClearBoard();
         }
 
         private void UpdateBasePath()
