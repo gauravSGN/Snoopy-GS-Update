@@ -30,7 +30,6 @@ namespace LevelEditor
         [SerializeField]
         private BubbleFactory bubbleFactory;
 
-        private readonly List<PuzzleData> puzzles = new List<PuzzleData>() { new PuzzleData() };
         private readonly Dictionary<int, BubbleData> models = new Dictionary<int, BubbleData>();
         private readonly Dictionary<int, GameObject> views = new Dictionary<int, GameObject>();
         private readonly ManipulatorActionFactory actionFactory = new ManipulatorActionFactory();

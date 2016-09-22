@@ -35,11 +35,16 @@ namespace LevelEditor
         [SerializeField]
         private GameObject modesPanel;
 
+        [SerializeField]
+        private GameObject bossModePanel;
+
         private TabSwitcher tabSwitcher;
 
         private void Start()
         {
             tabSwitcher = GetComponent<TabSwitcher>();
+
+            CreateToggleButton("Boss Mode", bossModePanel);
 
             SetupCategoryList();
             CreateButtonPanels();
