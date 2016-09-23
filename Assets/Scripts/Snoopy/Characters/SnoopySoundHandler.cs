@@ -23,7 +23,7 @@ public class SnoopySoundHandler : MonoBehaviour
         var eventService = GlobalState.EventService;
         eventService.AddEventHandler<LevelCompleteEvent>(OnLevelComplete);
         eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
-        eventService.AddEventHandler<IntroScrollCompleteEvent>(OnLevelStart);
+        eventService.AddEventHandler<LevelIntroCompleteEvent>(OnLevelStart);
     }
 
     private void OnLevelComplete(LevelCompleteEvent gameEvent)

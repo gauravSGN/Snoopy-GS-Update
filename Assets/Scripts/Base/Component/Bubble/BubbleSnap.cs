@@ -9,6 +9,26 @@ public class BubbleSnap : MonoBehaviour
     private new CircleCollider2D collider;
     private BubbleAttachments attachments;
 
+    public void CompleteSnap()
+    {
+        rigidBody.velocity = Vector2.zero;
+        rigidBody.gravityScale = 1.0f;
+        rigidBody.isKinematic = true;
+
+        collider.radius /= GlobalState.Instance.Config.bubbles.shotColliderScale;
+        gameObject.layer = (int)Layers.GameObjects;
+
+        GlobalState.EventService.Dispatch(new BubbleSettlingEvent());
+        Destroy(this);
+
+        if (!attachments.Model.CheckForMatches())
+        {
+            Sound.PlaySoundEvent.Dispatch(attachments.Model.definition.Sounds.impact);
+        }
+
+        GlobalState.EventService.Dispatch(new BubbleSettledEvent { shooter = gameObject });
+    }
+
     protected void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -71,22 +91,7 @@ public class BubbleSnap : MonoBehaviour
             }
         }
 
-        rigidBody.velocity = Vector2.zero;
-        rigidBody.gravityScale = 1.0f;
-        rigidBody.isKinematic = true;
-
-        collider.radius /= GlobalState.Instance.Config.bubbles.shotColliderScale;
-        gameObject.layer = (int)Layers.GameObjects;
-
-        GlobalState.EventService.Dispatch(new BubbleSettlingEvent());
-        Destroy(this);
-
-        if (!attachments.Model.CheckForMatches())
-        {
-            Sound.PlaySoundEvent.Dispatch(attachments.Model.definition.Sounds.impact);
-        }
-
-        GlobalState.EventService.Dispatch(new BubbleSettledEvent { shooter = gameObject });
+        CompleteSnap();
     }
 
     private void AdjustToGrid()

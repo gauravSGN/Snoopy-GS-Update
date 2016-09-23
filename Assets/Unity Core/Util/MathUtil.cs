@@ -8,7 +8,7 @@ namespace Util
 
         public static int CompareInts(int val1, int val2)
         {
-            return (val1 - val2) - (val2 - val1);
+            return val1 - val2;
         }
 
         public static IEnumerable<int> Range(int maxValue)
