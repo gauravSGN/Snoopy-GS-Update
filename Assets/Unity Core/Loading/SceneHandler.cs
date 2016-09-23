@@ -57,7 +57,14 @@ namespace Loading
 
         public void RunAtLoad(IEnumerator coroutine)
         {
-            loadingRoutines.Add(coroutine);
+            if (asyncOp != null)
+            {
+                loadingRoutines.Add(coroutine);
+            }
+            else
+            {
+                GlobalState.Instance.RunCoroutine(coroutine);
+            }
         }
 
         private void OnTransitionToReturnScene()

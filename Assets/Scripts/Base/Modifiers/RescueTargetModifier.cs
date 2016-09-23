@@ -74,7 +74,7 @@ namespace Modifiers
                 GlobalState.AssetService.LoadAssetAsync<GameObject>(SLIDEOUT_PATH, OnSlideoutLoaded);
 
                 GlobalState.EventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
-                GlobalState.EventService.AddEventHandler<IntroScrollCompleteEvent>(OnIntroScrollComplete);
+                GlobalState.EventService.AddEventHandler<LevelIntroCompleteEvent>(OnIntroScrollComplete);
             }
         }
 
@@ -114,7 +114,7 @@ namespace Modifiers
 
         private void OnIntroScrollComplete()
         {
-            GlobalState.EventService.RemoveEventHandler<IntroScrollCompleteEvent>(OnIntroScrollComplete);
+            GlobalState.EventService.RemoveEventHandler<LevelIntroCompleteEvent>(OnIntroScrollComplete);
 
             introComplete = true;
 

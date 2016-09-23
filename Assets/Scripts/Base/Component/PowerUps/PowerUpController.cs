@@ -111,6 +111,8 @@ namespace PowerUps
             var explosion = bubble.AddComponent<BubbleExplode>();
             explosion.Setup(GetScanFunction(bubble), deathEffectType, explosionEffectType);
 
+            bubble.AddComponent<BreakOnDeactivate>();
+
             powerUpType = 0;
             totalPowerUpsInUse = 0;
         }
