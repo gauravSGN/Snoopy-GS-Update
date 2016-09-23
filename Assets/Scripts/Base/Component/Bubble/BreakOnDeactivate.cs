@@ -11,7 +11,6 @@ sealed public class BreakOnDeactivate : MonoBehaviour
 
     private void OnActivationChanged(Bubble model, bool active)
     {
-        Debug.Log(active);
         if (active == false)
         {
             model.OnActivationChanged -= OnActivationChanged;
@@ -42,6 +41,5 @@ sealed public class BreakOnDeactivate : MonoBehaviour
         var x = Mathf.RoundToInt((position.x - leftEdge - offset) / config.bubbles.size);
 
         transform.position = new Vector3(leftEdge + x * config.bubbles.size + offset, topEdge - y * rowDistance);
-        Debug.Log(transform.position);
     }
 }
