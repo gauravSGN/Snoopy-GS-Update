@@ -8,6 +8,24 @@
       "config": "Aim_match_config",
       "reward": null,
       "text": "t_aimmatch"
+    },
+    {
+      "id": "Swap",
+      "trigger": 0,
+      "level": 2,
+      "skippable": false,
+      "config": "Swap_config",
+      "reward": null,
+      "text": "t_aimmatch"
+    },
+    {
+      "id": "Rock_intro",
+      "trigger": 0,
+      "level": 7,
+      "skippable": false,
+      "config": "Rock_intro_config",
+      "reward": null,
+      "text": "t_aimmatch"
     }
   ],
   "rewardLists": [
