@@ -9,6 +9,7 @@ public class Bubble : GraphElement<Bubble>
     public event Action<Bubble> OnSnap;
     public event Action<Bubble> OnPopped;
     public event Action<Bubble> OnDisconnected;
+    public event Action<Bubble, bool> OnActivationChanged;
 
     public BubbleType type;
     public BubbleDefinition definition;
@@ -23,7 +24,13 @@ public class Bubble : GraphElement<Bubble>
         }
         set
         {
+            var previousValue = active;
             active = definition.Activatible && value;
+
+            if ((active != previousValue) && (OnActivationChanged != null))
+            {
+                OnActivationChanged(this, active);
+            }
         }
     }
 
