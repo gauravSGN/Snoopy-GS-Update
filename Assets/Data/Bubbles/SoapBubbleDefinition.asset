@@ -20,7 +20,11 @@ MonoBehaviour:
   activatible: 1
   score: 50
   matchThreshold: 2
-  defaultAnimations: []
+  defaultAnimations:
+  - name: 0
+    list: 01000000
+  - name: 1
+    list: 
   sounds:
     impact: {fileID: 0}
     match: {fileID: 0}
