@@ -19,7 +19,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012878943324}
+  - 114: {fileID: 114000013209712478}
   - 114: {fileID: 114000011498109014}
+  - 58: {fileID: 58000012902631852}
   m_Layer: 0
   m_Name: Red Baron
   m_TagString: Untagged
@@ -109,6 +111,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013107580574}
   m_Mesh: {fileID: 0}
+--- !u!58 &58000012902631852
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012167683246}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.375
 --- !u!95 &95000011707785676
 Animator:
   serializedVersion: 3
@@ -139,6 +155,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubbleFactory: {fileID: 11400000, guid: 8485ebde8c9ee4569bd1cf809eb2b68e, type: 2}
   bubbleContainer: {fileID: 0}
+--- !u!114 &114000013209712478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012167683246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7bf6a211534743e694dc8c5cbf9d105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 7
+  health: 7
+  damageSkins:
+  - RedBaron_Default
+  - RedBaron_Damage01
 --- !u!114 &114000013286956390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,4 +193,4 @@ MonoBehaviour:
   calculateTangents: 0
   logErrors: 0
   disableRenderingOnOverride: 1
-  layerMixModes: 
+  layerMixModes: 00000000
