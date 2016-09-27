@@ -1,7 +1,6 @@
 using Util;
 using Aiming;
 using UnityEngine;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace PowerUps
@@ -20,24 +19,70 @@ namespace PowerUps
         private List<SpriteRenderer> overlays = new List<SpriteRenderer>();
         private List<GameObject> positioned = new List<GameObject>();
         private List<GameObject> waitingForPosition = new List<GameObject>();
+        private bool assistActive = false;
 
         public void Start()
         {
-            SetShape(PowerUpType.Yellow);
-
-            var eventService = GlobalState.EventService;
-            eventService.AddEventHandler<StartAimingEvent>(Activate);
-            eventService.AddEventHandler<StopAimingEvent>(Deactivate);
-            eventService.AddEventHandler<BubbleSettledEvent>(Deactivate);
-
-            eventTrigger.MoveTarget += OnMoveTarget;
+            GlobalState.EventService.AddEventHandler<PowerUpAppliedEvent>(OnApplied);
         }
 
-        public void SetShape(PowerUpType type)
+        private void Activate()
+        {
+            EnableOverlays(true);
+        }
+
+        private void Deactivate()
+        {
+            EnableOverlays(false);
+        }
+
+        private void OnApplied(PowerUpAppliedEvent gameEvent)
+        {
+            if (!assistActive)
+            {
+                var eventService = GlobalState.EventService;
+                eventService.AddEventHandler<BubbleSettledEvent>(OnSettled);
+                eventService.AddEventHandler<StartAimingEvent>(Activate);
+                eventService.AddEventHandler<StopAimingEvent>(Deactivate);
+                eventService.AddEventHandler<AimPositionEvent>(OnPosition);
+
+                assistActive = true;
+            }
+
+            SetShape(gameEvent.type);
+        }
+
+        private void OnSettled()
+        {
+            assistActive = false;
+
+            var eventService = GlobalState.EventService;
+            eventService.RemoveEventHandler<BubbleSettledEvent>(OnSettled);
+            eventService.RemoveEventHandler<StartAimingEvent>(Activate);
+            eventService.RemoveEventHandler<StopAimingEvent>(Deactivate);
+            eventService.RemoveEventHandler<AimPositionEvent>(OnPosition);
+
+            Deactivate();
+        }
+
+        private void OnPosition(AimPositionEvent gameEvent)
+        {
+            transform.position = gameEvent.position;
+            transform.position += Vector3.back;
+        }
+
+        private void EnableOverlays(bool enabled)
+        {
+            foreach (var overlay in overlays)
+            {
+                overlay.enabled = enabled;
+            }
+        }
+
+        private void SetShape(PowerUpType type)
         {
             Deactivate();
             var definition = scanMap.Map[type];
-
 
             waitingForPosition.AddRange(positioned);
             positioned = new List<GameObject>();
@@ -59,34 +104,19 @@ namespace PowerUps
             }
         }
 
-        public void Activate()
-        {
-            Debug.Log("Activate");
-            EnableOverlays(true);
-        }
-
-        public void Deactivate()
-        {
-            Debug.Log("Deactivate");
-            EnableOverlays(false);
-        }
-
-        private void OnMoveTarget(Vector2 target)
-        {
-            transform.position = (Vector3)target;
-            transform.position += Vector3.back;
-        }
-
-        private void EnableOverlays(bool enabled)
-        {
-            foreach (var overlay in overlays)
-            {
-                overlay.enabled = enabled;
-            }
-            // overlays.Select(overlay => overlay.enabled = enabled);
-        }
-
         private void PositionOverlay(Vector3 position)
+        {
+            GameObject overlay = GetOverlay();
+
+            overlay.transform.position = position;
+            positioned.Add(overlay);
+
+            var renderer = overlay.GetComponent<SpriteRenderer>();
+            renderer.enabled = false;
+            overlays.Add(renderer);
+        }
+
+        private GameObject GetOverlay()
         {
             GameObject overlay;
 
@@ -101,12 +131,7 @@ namespace PowerUps
                 overlay.transform.parent = transform;
             }
 
-            overlay.transform.position = position;
-            positioned.Add(overlay);
-
-            var renderer = overlay.GetComponent<SpriteRenderer>();
-            renderer.enabled = false;
-            overlays.Add(renderer);
+            return overlay;
         }
     }
 }

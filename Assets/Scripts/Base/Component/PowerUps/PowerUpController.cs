@@ -99,6 +99,8 @@ namespace PowerUps
 
             powerUpType |= type;
             totalPowerUpsInUse += 1;
+
+            GlobalState.EventService.Dispatch<PowerUpAppliedEvent>(new PowerUpAppliedEvent(type));
         }
 
         public void AddScan(GameObject bubble)

@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using UI.Popup;
-using UI;
 using Slideout;
 
 [RequireComponent(typeof(AimLineEventTrigger))]
-public class SpecialAimHandler : MonoBehaviour 
+public class SpecialAimHandler : MonoBehaviour
 {
     private AimLineEventTrigger eventTrigger;
     private bool aiming;
@@ -15,11 +13,13 @@ public class SpecialAimHandler : MonoBehaviour
     {
         rectTransform = (transform as RectTransform);
         eventTrigger = GetComponent<AimLineEventTrigger>();
+
         var eventService = GlobalState.EventService;
         eventService.AddEventHandler<PopupDisplayedEvent>(Disable);
         eventService.AddEventHandler<PopupClosedEvent>(Enable);
         eventService.AddEventHandler<SlideoutStartEvent>(Disable);
         eventService.AddEventHandler<SlideoutCompleteEvent>(Enable);
+        eventService.AddEventHandler<InputToggleEvent>(StopAiming);
     }
 
     void OnDestroy()
@@ -34,6 +34,7 @@ public class SpecialAimHandler : MonoBehaviour
     protected void LateUpdate()
     {
         bool touching = Input.GetKey(KeyCode.Mouse0);
+
         // Only do special aiming if standard aiming isn't active
         if (!eventTrigger.Aiming && touching)
         {
@@ -41,13 +42,14 @@ public class SpecialAimHandler : MonoBehaviour
             var position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             // Check if point is inside the aim panel rect
-            if (position.x >= corners[0].x && position.x <= corners[2].x && 
-                position.y >= corners[0].y && position.y <= corners[2].y)
+            if ((position.x >= corners[0].x) && (position.x <= corners[2].x) &&
+                (position.y >= corners[0].y) && (position.y <= corners[2].y))
             {
                 if (!aiming)
                 {
                     StartAiming();
                 }
+
                 eventTrigger.FakeDrag(position);
             }
             else if (aiming)
