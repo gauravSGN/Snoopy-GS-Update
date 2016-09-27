@@ -1,0 +1,3093 @@
+{
+"skeleton": { "hash": "fKJuX1PXfjLpbInIZuocFfGw2D8", "spine": "3.4.02", "width": 196.08, "height": 88 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "MAIN_CTRL", "parent": "root", "rotation": -0.14 },
+	{ "name": "Top_angle_Bars_CTRL", "parent": "MAIN_CTRL", "y": 15.33 },
+	{ "name": "WING_bottom_CTRL", "parent": "MAIN_CTRL", "y": -10 },
+	{ "name": "WING_middle_CTRL", "parent": "MAIN_CTRL", "y": 12 },
+	{ "name": "WING_top_CTRL", "parent": "MAIN_CTRL", "y": 32 },
+	{ "name": "bottom_foil_ctrl", "parent": "WING_bottom_CTRL", "x": -87.47, "y": -2.2 },
+	{ "name": "fuselage_MAIN_CTRL", "parent": "MAIN_CTRL" },
+	{ "name": "front_circle_big_CTRL", "parent": "fuselage_MAIN_CTRL" },
+	{ "name": "front_circle_med_CTRL", "parent": "front_circle_big_CTRL" },
+	{ "name": "fuselage_SCAL_POS_CTRL", "parent": "fuselage_MAIN_CTRL", "y": -15.2 },
+	{ "name": "low_wing_bar_L_CTRL", "parent": "MAIN_CTRL", "length": 15.64, "rotation": 105.47, "x": -49.64, "y": -7.39 },
+	{ "name": "low_wing_bar_R_CTRL", "parent": "MAIN_CTRL", "length": 15.81, "rotation": 75.55, "x": 50.57, "y": -7.16 },
+	{ "name": "middle_foil_ctrl", "parent": "WING_middle_CTRL", "x": 96.23, "y": -3.34 },
+	{ "name": "propeller_main_CTRL_SCAL/POS", "parent": "front_circle_med_CTRL", "inheritScale": false },
+	{ "name": "nose_CTRL", "parent": "propeller_main_CTRL_SCAL/POS", "inheritScale": false },
+	{ "name": "propeller_blur_ctrl", "parent": "propeller_main_CTRL_SCAL/POS" },
+	{ "name": "propellers_CTRL_SPIN", "parent": "propeller_main_CTRL_SCAL/POS" },
+	{ "name": "tail", "parent": "fuselage_MAIN_CTRL", "length": 10.67, "rotation": 91.24, "x": -0.04, "y": 19.05 },
+	{ "name": "top_angle bar", "parent": "Top_angle_Bars_CTRL", "length": 15.99, "rotation": 60.46, "x": 7.65, "y": 0.69 },
+	{ "name": "top_angle bar2", "parent": "Top_angle_Bars_CTRL", "length": 15.99, "rotation": 121.9, "x": -7.42, "y": 0.69 },
+	{ "name": "top_foil_ctrl", "parent": "WING_top_CTRL", "x": -109.87, "y": -1.9 },
+	{ "name": "top_wing_bar_L_CTRL", "parent": "MAIN_CTRL", "length": 17.11, "rotation": 105.73, "x": -55.21, "y": 13.48 },
+	{ "name": "top_wing_bar_R_CTRL", "parent": "MAIN_CTRL", "length": 16.48, "rotation": 76.15, "x": 55.21, "y": 13.71 },
+	{ "name": "wheel_Struts_CTRL", "parent": "MAIN_CTRL", "y": -15 },
+	{ "name": "wheel_L", "parent": "wheel_Struts_CTRL", "length": 7.42, "rotation": 91.78, "x": -23.42, "y": -13.74 },
+	{ "name": "wheel_R", "parent": "wheel_Struts_CTRL", "length": 7.42, "rotation": 90, "x": 24.13, "y": -13.74, "scaleY": -1 }
+],
+"slots": [
+	{ "name": "tail wing L", "bone": "tail" },
+	{ "name": "tail wing_R", "bone": "tail" },
+	{ "name": "tail", "bone": "tail", "attachment": "Attachment_1" },
+	{ "name": "top_foil", "bone": "top_foil_ctrl", "attachment": "Attachment_1" },
+	{ "name": "WING_top_edge", "bone": "WING_top_CTRL", "attachment": "Attachment_1" },
+	{ "name": "low_wing_bar_R", "bone": "low_wing_bar_R_CTRL", "attachment": "Default/low_wing_bar_R" },
+	{ "name": "low_wing_bar_L", "bone": "low_wing_bar_L_CTRL", "attachment": "Default/low_wing_bar_L" },
+	{ "name": "bottom foil", "bone": "bottom_foil_ctrl", "attachment": "Attachment_1" },
+	{ "name": "wing_bottom_edge", "bone": "WING_bottom_CTRL", "attachment": "Attachment_1" },
+	{ "name": "top_wing_bar_R", "bone": "top_wing_bar_R_CTRL", "attachment": "Default/top_wing_bar_R" },
+	{ "name": "top_wing_bar_L", "bone": "top_wing_bar_L_CTRL", "attachment": "Default/top_wing_bar_L" },
+	{ "name": "middle foil", "bone": "middle_foil_ctrl", "attachment": "Attachment_1" },
+	{ "name": "wing_middle_edge", "bone": "WING_middle_CTRL", "attachment": "Attachment_1" },
+	{ "name": "wheel_arm_L", "bone": "wheel_Struts_CTRL", "attachment": "Default/wheel_arm_L" },
+	{ "name": "wheel_arm_R", "bone": "wheel_Struts_CTRL", "attachment": "Default/wheel_arm_R" },
+	{ "name": "wheel_axle", "bone": "wheel_Struts_CTRL", "attachment": "Default/wheel_axle" },
+	{ "name": "Bolt", "bone": "wheel_L", "attachment": "Default/Bolt" },
+	{ "name": "Bolt2", "bone": "wheel_R", "attachment": "Default/Bolt" },
+	{ "name": "Rim", "bone": "wheel_L", "attachment": "Default/Rim" },
+	{ "name": "Rim2", "bone": "wheel_R", "attachment": "Default/Rim" },
+	{ "name": "wheel", "bone": "wheel_L", "attachment": "Default/wheel" },
+	{ "name": "wheel2", "bone": "wheel_R", "attachment": "Default/wheel" },
+	{ "name": "top_angle bar", "bone": "top_angle bar", "attachment": "Default/top_angle bar" },
+	{ "name": "top_angle bar2", "bone": "top_angle bar2", "attachment": "Default/top_angle bar" },
+	{ "name": "imagesDown/fuselage", "bone": "fuselage_SCAL_POS_CTRL" },
+	{ "name": "front circle_big", "bone": "front_circle_big_CTRL", "attachment": "Attachment_1" },
+	{ "name": "front circle_medium", "bone": "front_circle_med_CTRL", "attachment": "Default/front_circle_medium" },
+	{ "name": "propeller blur", "bone": "propeller_blur_ctrl", "color": "ffffff94", "attachment": "Default/propeller_blur" },
+	{ "name": "propeller_move lines_2", "bone": "propellers_CTRL_SPIN", "attachment": "Default/propeller_move_lines_2" },
+	{ "name": "propeller_move lines_1", "bone": "propellers_CTRL_SPIN", "attachment": "Default/propeller_move_lines_1" },
+	{ "name": "single_Propeller_2", "bone": "propellers_CTRL_SPIN", "attachment": "Default/single_propeller_2" },
+	{ "name": "single Propeller_1", "bone": "propellers_CTRL_SPIN", "attachment": "Default/single_propeller_1" },
+	{ "name": "nose_cone", "bone": "nose_CTRL", "attachment": "Default/nose_cone" }
+],
+"skins": {
+	"default": {
+		"Bolt": {
+			"Default/Bolt": { "x": 4.17, "y": 4.45, "rotation": -91.64, "width": 4, "height": 5 }
+		},
+		"Bolt2": {
+			"Default/Bolt": { "x": 3.53, "y": 4.39, "rotation": 90.14, "width": 4, "height": 5 }
+		},
+		"Rim": {
+			"Default/Rim": { "x": 2.89, "y": 2.91, "scaleX": -1, "rotation": -91.64, "width": 5, "height": 11 }
+		},
+		"Rim2": {
+			"Default/Rim": { "x": 4.05, "y": 2.62, "rotation": 90.14, "width": 5, "height": 11 }
+		},
+		"front circle_medium": {
+			"Default/front_circle_medium": { "rotation": 0.14, "width": 32, "height": 32 }
+		},
+		"low_wing_bar_L": {
+			"Default/low_wing_bar_L": { "x": 6.29, "y": -0.08, "rotation": -105.32, "width": 9, "height": 16 }
+		},
+		"low_wing_bar_R": {
+			"Default/low_wing_bar_R": { "x": 6.23, "y": -0.19, "rotation": -75.4, "width": 9, "height": 16 }
+		},
+		"nose_cone": {
+			"Default/Nose cone 2": { "rotation": 0.14, "width": 16, "height": 16 },
+			"Default/nose_cone": { "rotation": 0.14, "width": 17, "height": 17 }
+		},
+		"propeller blur": {
+			"Default/propeller_blur": { "rotation": 0.14, "width": 88, "height": 88 }
+		},
+		"propeller_move lines_1": {
+			"Default/propeller_move_lines_1": { "x": 18.84, "y": -20.52, "rotation": 0.14, "width": 40, "height": 42 }
+		},
+		"propeller_move lines_2": {
+			"Default/propeller_move_lines_2": { "x": -16.81, "y": 19.51, "rotation": 0.14, "width": 39, "height": 43 }
+		},
+		"single Propeller_1": {
+			"Default/single_propeller_1": { "x": 18.33, "y": -16.71, "rotation": 0.14, "width": 36, "height": 33 }
+		},
+		"single_Propeller_2": {
+			"Default/single_propeller_2": { "x": -19.09, "y": 15.69, "rotation": 0.14, "width": 35, "height": 34 }
+		},
+		"top_angle bar": {
+			"Default/top_angle bar": { "x": 8.73, "y": 0.31, "rotation": -60.46, "width": 13, "height": 17 }
+		},
+		"top_angle bar2": {
+			"Default/top_angle bar": { "x": 8, "y": 0.22, "rotation": -61.86, "width": 13, "height": 17 }
+		},
+		"top_wing_bar_L": {
+			"Default/top_wing_bar_L": { "x": 8.07, "y": 0.12, "rotation": -105.58, "width": 9, "height": 17 }
+		},
+		"top_wing_bar_R": {
+			"Default/top_wing_bar_R": { "x": 8.49, "y": 0.12, "rotation": -76, "width": 9, "height": 17 }
+		},
+		"wheel": {
+			"Default/wheel": { "x": 3.17, "y": 0.26, "rotation": -91.64, "width": 7, "height": 17 }
+		},
+		"wheel2": {
+			"Default/wheel": { "x": 3.34, "y": -0.18, "rotation": 90.14, "width": 7, "height": 17 }
+		},
+		"wheel_arm_L": {
+			"Default/wheel_arm_L": { "x": -10.9, "y": -3.19, "rotation": 0.14, "width": 13, "height": 16 }
+		},
+		"wheel_arm_R": {
+			"Default/wheel_arm_R": { "x": 9.68, "y": -3.49, "rotation": 0.14, "width": 13, "height": 16 }
+		},
+		"wheel_axle": {
+			"Default/wheel_axle": { "x": 0.02, "y": -10.2, "rotation": 0.14, "width": 49, "height": 6 }
+		}
+	},
+	"RedBaron_Damage01": {
+		"WING_top_edge": {
+			"Attachment_1": { "name": "Damage01/wing_top_edge", "y": 2.53, "rotation": 0.14, "width": 196, "height": 12 },
+			"Attachment_2": { "name": "Damage01/wing_top_edge_Up", "y": 2.28, "rotation": 0.14, "width": 193, "height": 11 },
+			"Attachment_3": { "name": "Damage01/wing_top_edge_down", "rotation": 0.14, "width": 195, "height": 13 }
+		},
+		"bottom foil": {
+			"Attachment_1": { "name": "Damage01/wing_bottom_foil", "x": 87.5, "y": -1.04, "rotation": 0.14, "width": 137, "height": 6 },
+			"Attachment_2": { "name": "Damage01/wing_bottom_foil_Up", "x": 87.53, "y": -9.67, "rotation": 0.14, "width": 139, "height": 31 },
+			"Attachment_3": { "name": "Damage01/wing_bottom_foil_down", "x": 87.48, "y": 6.32, "rotation": 0.14, "width": 138, "height": 19 }
+		},
+		"front circle_big": {
+			"Attachment_1": { "name": "Damage01/front_circle_big", "rotation": 0.14, "width": 43, "height": 43 }
+		},
+		"imagesDown/fuselage": {
+			"Attachment_1": { "name": "Damage01/fuselage", "x": -0.05, "y": 36.32, "rotation": 0.14, "width": 38, "height": 80 }
+		},
+		"middle foil": {
+			"Attachment_1": { "name": "Damage01/wing_mid_foil", "x": -96.25, "y": -0.25, "rotation": 0.14, "width": 165, "height": 6 },
+			"Attachment_2": { "name": "Damage01/wing_mid_foil_Up", "x": -96.23, "y": -9.14, "rotation": 0.14, "width": 168, "height": 32 },
+			"Attachment_3": { "name": "Damage01/wing_mid_foil_down", "x": -96.28, "y": 8.38, "rotation": 0.14, "width": 167, "height": 24 }
+		},
+		"tail": {
+			"Attachment_1": { "name": "Damage01/tail", "x": 1.51, "y": -0.67, "rotation": -91.09, "width": 6, "height": 13 },
+			"Attachment_2": { "name": "Damage01/tail_dorsal_wing", "x": 6.54, "y": -0.76, "rotation": -91.09, "width": 8, "height": 27 }
+		},
+		"tail wing L": {
+			"Attachment_1": { "name": "Damage01/tail_wing L", "x": 0.2, "y": 10.9, "rotation": -91.09, "width": 21, "height": 18 }
+		},
+		"tail wing_R": {
+			"Attachment_1": { "name": "Damage01/tail_wing R", "x": -0.22, "y": -11.61, "rotation": -91.09, "width": 21, "height": 18 }
+		},
+		"top_foil": {
+			"Attachment_1": { "name": "Damage01/wing_top_foil", "x": 109.79, "y": -1.99, "rotation": 0.14, "width": 196, "height": 8 },
+			"Attachment_2": { "name": "Damage01/wing_top_foil_Up", "x": 109.81, "y": -8.6, "rotation": 0.14, "width": 194, "height": 36 },
+			"Attachment_3": { "name": "Damage01/wing_top_foil_down", "x": 109.76, "y": 10.19, "rotation": 0.14, "width": 195, "height": 29 }
+		},
+		"wing_bottom_edge": {
+			"Attachment_1": { "name": "Damage01/wing_bottom_edge", "rotation": 0.14, "width": 137, "height": 10 },
+			"Attachment_2": { "name": "Damage01/wing_bottom_edge_Up", "rotation": 0.14, "width": 138, "height": 10 },
+			"Attachment_3": { "name": "Damage01/wing_bottom_edge_down", "rotation": 0.14, "width": 138, "height": 9 }
+		},
+		"wing_middle_edge": {
+			"Attachment_1": { "name": "Damage01/wing_mid_edge", "rotation": 0.14, "width": 165, "height": 12 },
+			"Attachment_2": { "name": "Damage01/wing_mid_edge_Up", "rotation": 0.14, "width": 167, "height": 10 },
+			"Attachment_3": { "name": "Damage01/wing_mid_edge_down", "rotation": 0.14, "width": 167, "height": 11 }
+		}
+	},
+	"RedBaron_Default": {
+		"WING_top_edge": {
+			"Attachment_1": { "name": "Default/wing_top_edge", "y": 2.53, "rotation": 0.14, "width": 196, "height": 12 },
+			"Attachment_2": { "name": "Default/wing_top_edge_Up", "y": 2.28, "rotation": 0.14, "width": 193, "height": 11 },
+			"Attachment_3": { "name": "Default/wing_top_edge_down", "rotation": 0.14, "width": 195, "height": 13 }
+		},
+		"bottom foil": {
+			"Attachment_1": { "name": "Default/wing_bottom_foil", "x": 87.5, "y": -1.04, "rotation": 0.14, "width": 137, "height": 6 },
+			"Attachment_2": { "name": "Default/wing_bottom_foil_Up", "x": 87.53, "y": -9.67, "rotation": 0.14, "width": 139, "height": 31 },
+			"Attachment_3": { "name": "Default/wing_bottom_foil_down", "x": 87.48, "y": 6.32, "rotation": 0.14, "width": 138, "height": 19 }
+		},
+		"front circle_big": {
+			"Attachment_1": { "name": "Default/front_circle_big", "rotation": 0.14, "width": 43, "height": 43 }
+		},
+		"imagesDown/fuselage": {
+			"Attachment_1": { "name": "Default/fuselage", "x": -0.05, "y": 36.32, "rotation": 0.14, "width": 38, "height": 80 }
+		},
+		"middle foil": {
+			"Attachment_1": { "name": "Default/wing_mid_foil", "x": -96.25, "y": -0.25, "rotation": 0.14, "width": 165, "height": 6 },
+			"Attachment_2": { "name": "Default/wing_mid_foil_Up", "x": -96.23, "y": -9.14, "rotation": 0.14, "width": 168, "height": 32 },
+			"Attachment_3": { "name": "Default/wing_mid_foil_down", "x": -96.28, "y": 8.38, "rotation": 0.14, "width": 167, "height": 24 }
+		},
+		"tail": {
+			"Attachment_1": { "name": "Default/tail", "x": 1.51, "y": -0.67, "rotation": -91.09, "width": 6, "height": 13 },
+			"Attachment_2": { "name": "Default/tail_dorsal_wing", "x": 6.54, "y": -0.76, "rotation": -91.09, "width": 8, "height": 27 }
+		},
+		"tail wing L": {
+			"Attachment_1": { "name": "Default/tail_wing L", "x": 0.2, "y": 10.9, "rotation": -91.09, "width": 21, "height": 18 }
+		},
+		"tail wing_R": {
+			"Attachment_1": { "name": "Default/tail_wing R", "x": -0.22, "y": -11.61, "rotation": -91.09, "width": 21, "height": 18 }
+		},
+		"top_foil": {
+			"Attachment_1": { "name": "Default/wing_top_foil", "x": 109.79, "y": -1.99, "rotation": 0.14, "width": 196, "height": 8 },
+			"Attachment_2": { "name": "Default/wing_top_foil_Up", "x": 109.81, "y": -8.6, "rotation": 0.14, "width": 194, "height": 36 },
+			"Attachment_3": { "name": "Default/wing_top_foil_down", "x": 109.76, "y": 10.19, "rotation": 0.14, "width": 195, "height": 29 }
+		},
+		"wing_bottom_edge": {
+			"Attachment_1": { "name": "Default/wing_bottom_edge", "rotation": 0.14, "width": 137, "height": 10 },
+			"Attachment_2": { "name": "Default/wing_bottom_edge_Up", "rotation": 0.14, "width": 138, "height": 10 },
+			"Attachment_3": { "name": "Default/wing_bottom_edge_down", "rotation": 0.14, "width": 138, "height": 9 }
+		},
+		"wing_middle_edge": {
+			"Attachment_1": { "name": "Default/wing_mid_edge", "rotation": 0.14, "width": 165, "height": 12 },
+			"Attachment_2": { "name": "Default/wing_mid_edge_Up", "rotation": 0.14, "width": 167, "height": 10 },
+			"Attachment_3": { "name": "Default/wing_mid_edge_down", "rotation": 0.14, "width": 167, "height": 11 }
+		}
+	}
+},
+"animations": {
+	"front_fly_down_end": {
+		"slots": {
+			"WING_top_edge": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_3" },
+					{ "time": 0.2333, "name": "Attachment_1" }
+				]
+			},
+			"bottom foil": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_3" },
+					{ "time": 0.2333, "name": "Attachment_1" }
+				]
+			},
+			"imagesDown/fuselage": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_1" },
+					{ "time": 0.3, "name": null }
+				]
+			},
+			"middle foil": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_3" },
+					{ "time": 0.2333, "name": "Attachment_1" }
+				]
+			},
+			"nose_cone": {
+				"attachment": [
+					{ "time": 0, "name": "Default/Nose cone 2" },
+					{ "time": 0.2, "name": "Default/nose_cone" }
+				]
+			},
+			"propeller blur": {
+				"color": [
+					{ "time": 0, "color": "a6a6a694" },
+					{ "time": 0.3, "color": "ffffff94" }
+				]
+			},
+			"propeller_move lines_1": {
+				"color": [
+					{ "time": 0, "color": "b3b3b3ff" },
+					{ "time": 0.3, "color": "ffffffff" }
+				]
+			},
+			"propeller_move lines_2": {
+				"color": [
+					{ "time": 0, "color": "b3b3b3ff" },
+					{ "time": 0.3, "color": "ffffffff" }
+				]
+			},
+			"single Propeller_1": {
+				"color": [
+					{ "time": 0, "color": "b3b3b3ff" },
+					{ "time": 0.3, "color": "ffffffff" }
+				]
+			},
+			"single_Propeller_2": {
+				"color": [
+					{ "time": 0, "color": "b3b3b3ff" },
+					{ "time": 0.3, "color": "ffffffff" }
+				]
+			},
+			"tail": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" },
+					{ "time": 0.2333, "name": "Attachment_2" },
+					{ "time": 0.3, "name": "Attachment_1" }
+				]
+			},
+			"tail wing L": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_1" },
+					{ "time": 0.3, "name": null }
+				]
+			},
+			"tail wing_R": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_1" },
+					{ "time": 0.3, "name": null }
+				]
+			},
+			"top_foil": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_3" },
+					{ "time": 0.2333, "name": "Attachment_1" }
+				]
+			},
+			"wing_bottom_edge": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_3" },
+					{ "time": 0.2333, "name": "Attachment_1" }
+				]
+			},
+			"wing_middle_edge": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_3" },
+					{ "time": 0.2333, "name": "Attachment_1" }
+				]
+			}
+		},
+		"bones": {
+			"fuselage_SCAL_POS_CTRL": {
+				"translate": [
+					{ "time": 0, "x": -0.36, "y": -16.82 },
+					{ "time": 0.2333, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.025, "y": 1 },
+					{ "time": 0.2333, "x": 1.068, "y": 0.561 }
+				]
+			},
+			"propeller_main_CTRL_SCAL/POS": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -5.78 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.017, "y": 0.805 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"Top_angle_Bars_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -12.91 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"propeller_blur_ctrl": {
+				"translate": [
+					{ "time": 0, "x": 1.86, "y": 3.92 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.074, "y": 0.932 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"top_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.2, "x": 1, "y": 0.394, "curve": "stepped" },
+					{ "time": 0.2333, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"low_wing_bar_R_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -8.89 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"propellers_CTRL_SPIN": {
+				"rotate": [
+					{ "time": 0, "angle": 27.59 },
+					{ "time": 0.0333, "angle": 0 },
+					{ "time": 0.0666, "angle": 27.59 },
+					{ "time": 0.1, "angle": 0 },
+					{ "time": 0.1333, "angle": 27.59 },
+					{ "time": 0.1666, "angle": 0 },
+					{ "time": 0.2, "angle": 27.59 },
+					{ "time": 0.2333, "angle": 0 },
+					{ "time": 0.2666, "angle": 27.59 },
+					{ "time": 0.3, "angle": 0 }
+				]
+			},
+			"middle_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.2333, "x": 1, "y": 0.364 }
+				]
+			},
+			"WING_middle_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -18.86 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"front_circle_big_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -24.91 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.964, "y": 0.845 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"tail": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 18.04 },
+					{ "time": 0.2333, "x": -0.02, "y": 2.49 }
+				],
+				"scale": [
+					{ "time": 0.1, "x": 1, "y": 1 },
+					{ "time": 0.2333, "x": 0.657, "y": 1 }
+				]
+			},
+			"wheel_Struts_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 13.46 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"WING_bottom_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -11.89 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"bottom_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.2333, "x": 1, "y": 0.348 }
+				]
+			},
+			"top_wing_bar_L_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -12.34 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"nose_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"top_angle bar": {
+				"translate": [
+					{ "time": 0, "x": 1.15, "y": -1.44 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"low_wing_bar_L_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -8.89 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"front_circle_med_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -7.77 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.056, "y": 0.882 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"fuselage_MAIN_CTRL": {
+				"translate": [
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"top_wing_bar_R_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -12.34 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"top_angle bar2": {
+				"translate": [
+					{ "time": 0, "x": -0.86, "y": 0 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"WING_top_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -22.42 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"time": 0,
+				"offsets": [
+					{ "slot": "tail", "offset": 20 },
+					{ "slot": "top_foil", "offset": 20 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 7 },
+					{ "slot": "low_wing_bar_L", "offset": 7 },
+					{ "slot": "bottom foil", "offset": 4 },
+					{ "slot": "wing_bottom_edge", "offset": 6 },
+					{ "slot": "top_wing_bar_R", "offset": 7 },
+					{ "slot": "top_wing_bar_L", "offset": 7 },
+					{ "slot": "middle foil", "offset": 4 },
+					{ "slot": "wing_middle_edge", "offset": 6 },
+					{ "slot": "imagesDown/fuselage", "offset": -5 }
+				]
+			}
+		]
+	},
+	"front_fly_down_start": {
+		"slots": {
+			"WING_top_edge": {
+				"attachment": [
+					{ "time": 0.0666, "name": "Attachment_3" }
+				]
+			},
+			"bottom foil": {
+				"attachment": [
+					{ "time": 0.0666, "name": "Attachment_3" }
+				]
+			},
+			"imagesDown/fuselage": {
+				"attachment": [
+					{ "time": 0.0666, "name": "Attachment_1" }
+				]
+			},
+			"middle foil": {
+				"attachment": [
+					{ "time": 0.0666, "name": "Attachment_3" }
+				]
+			},
+			"nose_cone": {
+				"attachment": [
+					{ "time": 0.2333, "name": "Default/Nose cone 2" }
+				]
+			},
+			"propeller blur": {
+				"color": [
+					{
+						"time": 0,
+						"color": "ffffff94",
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "color": "a6a6a694" }
+				]
+			},
+			"propeller_move lines_1": {
+				"color": [
+					{
+						"time": 0,
+						"color": "ffffffff",
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "color": "b3b3b3ff" }
+				]
+			},
+			"propeller_move lines_2": {
+				"color": [
+					{
+						"time": 0,
+						"color": "ffffffff",
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "color": "b3b3b3ff" }
+				]
+			},
+			"single Propeller_1": {
+				"color": [
+					{
+						"time": 0,
+						"color": "ffffffff",
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "color": "b3b3b3ff" }
+				]
+			},
+			"single_Propeller_2": {
+				"color": [
+					{
+						"time": 0,
+						"color": "ffffffff",
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "color": "b3b3b3ff" }
+				]
+			},
+			"tail": {
+				"attachment": [
+					{ "time": 0.1, "name": "Attachment_2" }
+				]
+			},
+			"tail wing L": {
+				"attachment": [
+					{ "time": 0.1, "name": "Attachment_1" }
+				]
+			},
+			"tail wing_R": {
+				"attachment": [
+					{ "time": 0.1, "name": "Attachment_1" }
+				]
+			},
+			"top_foil": {
+				"attachment": [
+					{ "time": 0.0666, "name": "Attachment_3" }
+				]
+			},
+			"wing_bottom_edge": {
+				"attachment": [
+					{ "time": 0.0666, "name": "Attachment_3" }
+				]
+			},
+			"wing_middle_edge": {
+				"attachment": [
+					{ "time": 0.0666, "name": "Attachment_3" }
+				]
+			}
+		},
+		"bones": {
+			"fuselage_SCAL_POS_CTRL": {
+				"translate": [
+					{ "time": 0.0666, "x": 0, "y": 0 },
+					{ "time": 0.4, "x": -0.36, "y": -16.82 }
+				],
+				"scale": [
+					{ "time": 0.0666, "x": 1.068, "y": 0.473 },
+					{ "time": 0.4, "x": 1.025, "y": 1 }
+				]
+			},
+			"propeller_main_CTRL_SCAL/POS": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0, "y": -5.78 }
+				],
+				"scale": [
+					{
+						"time": 0,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 1.017, "y": 0.805 }
+				]
+			},
+			"Top_angle_Bars_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0, "y": -12.91 }
+				]
+			},
+			"nose_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.4, "x": 0, "y": 0 }
+				]
+			},
+			"top_angle bar2": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": -0.86, "y": 0 }
+				]
+			},
+			"top_foil_ctrl": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"scale": [
+					{
+						"time": 0.0666,
+						"x": 1,
+						"y": 0.294,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 1, "y": 1 }
+				]
+			},
+			"propeller_blur_ctrl": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 1.86, "y": 3.92 }
+				],
+				"scale": [
+					{
+						"time": 0,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 1.074, "y": 0.932 }
+				]
+			},
+			"MAIN_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				]
+			},
+			"middle_foil_ctrl": {
+				"scale": [
+					{
+						"time": 0.0666,
+						"x": 1,
+						"y": 0.364,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 1, "y": 1 }
+				]
+			},
+			"WING_middle_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0, "y": -18.86 }
+				]
+			},
+			"propellers_CTRL_SPIN": {
+				"rotate": [
+					{ "time": 0, "angle": 27.59 },
+					{ "time": 0.0333, "angle": 0 },
+					{ "time": 0.0666, "angle": 27.59 },
+					{ "time": 0.1, "angle": 0 },
+					{ "time": 0.1333, "angle": 27.59 },
+					{ "time": 0.1666, "angle": 0 },
+					{ "time": 0.2, "angle": 27.59 },
+					{ "time": 0.2333, "angle": 0 },
+					{ "time": 0.2666, "angle": 27.59 },
+					{ "time": 0.3, "angle": 0 },
+					{ "time": 0.3333, "angle": 27.59 },
+					{ "time": 0.3666, "angle": 0 },
+					{ "time": 0.4, "angle": 27.59 }
+				]
+			},
+			"front_circle_big_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0, "y": -24.91 }
+				],
+				"scale": [
+					{
+						"time": 0,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0.964, "y": 0.845 }
+				]
+			},
+			"tail": {
+				"translate": [
+					{ "time": 0.0666, "x": 0, "y": 0 },
+					{ "time": 0.1, "x": 0, "y": 1.8 },
+					{ "time": 0.4, "x": 0, "y": 18.04 }
+				],
+				"scale": [
+					{ "time": 0.0666, "x": 1, "y": 1 }
+				]
+			},
+			"wheel_Struts_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0, "y": 13.46 }
+				]
+			},
+			"WING_bottom_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0, "y": -11.89 }
+				]
+			},
+			"top_angle bar": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 1.15, "y": -1.44 }
+				]
+			},
+			"top_wing_bar_L_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0, "y": -12.34 }
+				]
+			},
+			"low_wing_bar_R_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0, "y": -8.89 }
+				]
+			},
+			"bottom_foil_ctrl": {
+				"scale": [
+					{
+						"time": 0.0666,
+						"x": 1,
+						"y": 0.348,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 1, "y": 1 }
+				]
+			},
+			"low_wing_bar_L_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0, "y": -8.89 }
+				]
+			},
+			"front_circle_med_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0, "y": -7.77 }
+				],
+				"scale": [
+					{
+						"time": 0,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 1.056, "y": 0.882 }
+				]
+			},
+			"top_wing_bar_R_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0, "y": -12.34 }
+				]
+			},
+			"WING_top_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.4, "x": 0, "y": -22.42 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"time": 0,
+				"offsets": [
+					{ "slot": "tail", "offset": 9 },
+					{ "slot": "top_foil", "offset": 20 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 7 },
+					{ "slot": "low_wing_bar_L", "offset": 7 },
+					{ "slot": "bottom foil", "offset": 7 },
+					{ "slot": "wing_bottom_edge", "offset": 7 },
+					{ "slot": "top_wing_bar_R", "offset": 7 },
+					{ "slot": "top_wing_bar_L", "offset": 7 },
+					{ "slot": "middle foil", "offset": 7 },
+					{ "slot": "wing_middle_edge", "offset": 7 }
+				]
+			},
+			{
+				"time": 0.0666,
+				"offsets": [
+					{ "slot": "tail", "offset": 20 },
+					{ "slot": "top_foil", "offset": 20 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 7 },
+					{ "slot": "low_wing_bar_L", "offset": 7 },
+					{ "slot": "bottom foil", "offset": 4 },
+					{ "slot": "wing_bottom_edge", "offset": 6 },
+					{ "slot": "top_wing_bar_R", "offset": 7 },
+					{ "slot": "top_wing_bar_L", "offset": 7 },
+					{ "slot": "middle foil", "offset": 4 },
+					{ "slot": "wing_middle_edge", "offset": 6 },
+					{ "slot": "imagesDown/fuselage", "offset": -5 }
+				]
+			}
+		]
+	},
+	"front_fly_up_end": {
+		"slots": {
+			"WING_top_edge": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" },
+					{ "time": 0.3, "name": "Attachment_1" }
+				]
+			},
+			"bottom foil": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" },
+					{ "time": 0.3, "name": "Attachment_1" }
+				]
+			},
+			"imagesDown/fuselage": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_1" },
+					{ "time": 0.3, "name": null }
+				]
+			},
+			"middle foil": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" },
+					{ "time": 0.3, "name": "Attachment_1" }
+				]
+			},
+			"nose_cone": {
+				"attachment": [
+					{ "time": 0, "name": "Default/Nose cone 2" },
+					{ "time": 0.2, "name": "Default/nose_cone" }
+				]
+			},
+			"propeller blur": {
+				"color": [
+					{ "time": 0, "color": "ffffff94", "curve": "stepped" },
+					{ "time": 0.3, "color": "ffffff94" }
+				]
+			},
+			"propeller_move lines_1": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.3, "color": "ffffffff" }
+				]
+			},
+			"propeller_move lines_2": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.3, "color": "ffffffff" }
+				]
+			},
+			"single Propeller_1": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.3, "color": "ffffffff" }
+				]
+			},
+			"single_Propeller_2": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.3, "color": "ffffffff" }
+				]
+			},
+			"tail": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3, "name": "Attachment_1" }
+				]
+			},
+			"tail wing L": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_1" },
+					{ "time": 0.3, "name": null }
+				]
+			},
+			"tail wing_R": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_1" },
+					{ "time": 0.3, "name": null }
+				]
+			},
+			"top_foil": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" },
+					{ "time": 0.3, "name": "Attachment_1" }
+				]
+			},
+			"wing_bottom_edge": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" },
+					{ "time": 0.3, "name": "Attachment_1" }
+				]
+			},
+			"wing_middle_edge": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" },
+					{ "time": 0.3, "name": "Attachment_1" }
+				]
+			}
+		},
+		"bones": {
+			"wheel_Struts_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 20.41 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"tail": {
+				"rotate": [
+					{ "time": 0, "angle": -179.22, "curve": "stepped" },
+					{ "time": 0.2666, "angle": -179.22 },
+					{ "time": 0.3, "angle": -1.09 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0.1, "y": -47.39 },
+					{ "time": 0.2666, "x": 0.06, "y": -27.7 },
+					{ "time": 0.3, "x": -0.01, "y": 2.09 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.657, "y": 1 }
+				]
+			},
+			"propellers_CTRL_SPIN": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.0333, "angle": 27.59 },
+					{ "time": 0.0666, "angle": 0 },
+					{ "time": 0.1, "angle": 27.59 },
+					{ "time": 0.1333, "angle": 0 },
+					{ "time": 0.1666, "angle": 27.59 },
+					{ "time": 0.2, "angle": 0 },
+					{ "time": 0.2333, "angle": 27.59 },
+					{ "time": 0.2666, "angle": 0 },
+					{ "time": 0.3, "angle": 27.59 }
+				]
+			},
+			"low_wing_bar_L_CTRL": {
+				"translate": [
+					{ "time": 0, "x": -0.02, "y": 10.29 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"nose_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 2.26 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": -1, "curve": "stepped" },
+					{ "time": 0.2, "x": 1, "y": -1 }
+				]
+			},
+			"WING_bottom_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 19.89 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"WING_top_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 16.64 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"middle_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.2666, "x": 1, "y": 0.154, "curve": "stepped" },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"propeller_main_CTRL_SCAL/POS": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 5.61 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.017, "y": 0.805 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"fuselage_SCAL_POS_CTRL": {
+				"translate": [
+					{ "time": 0, "x": -0.02, "y": 60.29 },
+					{ "time": 0.2666, "x": -0.03, "y": 15.21 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.068, "y": -1.085 },
+					{ "time": 0.2666, "x": 1.081, "y": -0.223 }
+				]
+			},
+			"bottom_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.2666, "x": 1, "y": 0.155 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"top_angle bar2": {
+				"translate": [
+					{ "time": 0, "x": -0.03, "y": 13.86 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.764, "y": 1 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"propeller_blur_ctrl": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 1.15 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.025, "y": 0.932 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"front_circle_med_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 4.67 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.056, "y": 0.882 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"WING_middle_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 16.64 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"top_angle bar": {
+				"translate": [
+					{ "time": 0, "x": -0.03, "y": 13.86 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.764, "y": 1 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"front_circle_big_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 34.65 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.964, "y": 0.845 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"top_wing_bar_L_CTRL": {
+				"translate": [
+					{ "time": 0, "x": -0.02, "y": 10.29 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"Top_angle_Bars_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"low_wing_bar_R_CTRL": {
+				"translate": [
+					{ "time": 0, "x": -0.02, "y": 10.29 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"top_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.2666, "x": 1, "y": 0.174, "curve": "stepped" },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"fuselage_MAIN_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 7.3 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			},
+			"top_wing_bar_R_CTRL": {
+				"translate": [
+					{ "time": 0, "x": -0.02, "y": 10.29 },
+					{ "time": 0.3, "x": 0, "y": 0 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"time": 0,
+				"offsets": [
+					{ "slot": "top_foil", "offset": -3 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 2 },
+					{ "slot": "low_wing_bar_L", "offset": 2 },
+					{ "slot": "bottom foil", "offset": 6 },
+					{ "slot": "wing_bottom_edge", "offset": 6 },
+					{ "slot": "top_angle bar", "offset": -12 },
+					{ "slot": "top_angle bar2", "offset": -12 },
+					{ "slot": "imagesDown/fuselage", "offset": -12 }
+				]
+			},
+			{
+				"time": 0.3,
+				"offsets": [
+					{ "slot": "top_foil", "offset": -3 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 2 },
+					{ "slot": "low_wing_bar_L", "offset": 2 },
+					{ "slot": "bottom foil", "offset": 6 },
+					{ "slot": "wing_bottom_edge", "offset": 6 },
+					{ "slot": "top_angle bar", "offset": -12 },
+					{ "slot": "top_angle bar2", "offset": -12 },
+					{ "slot": "imagesDown/fuselage", "offset": -12 }
+				]
+			}
+		]
+	},
+	"front_fly_up_start": {
+		"slots": {
+			"WING_top_edge": {
+				"attachment": [
+					{ "time": 0.0333, "name": "Attachment_2" }
+				]
+			},
+			"bottom foil": {
+				"attachment": [
+					{ "time": 0.0333, "name": "Attachment_2" }
+				]
+			},
+			"imagesDown/fuselage": {
+				"attachment": [
+					{ "time": 0.0333, "name": "Attachment_1" }
+				]
+			},
+			"middle foil": {
+				"attachment": [
+					{ "time": 0.0333, "name": "Attachment_2" }
+				]
+			},
+			"nose_cone": {
+				"attachment": [
+					{ "time": 0.2, "name": "Default/Nose cone 2" }
+				]
+			},
+			"propeller blur": {
+				"color": [
+					{ "time": 0, "color": "ffffff94" }
+				]
+			},
+			"propeller_move lines_1": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"propeller_move lines_2": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"single Propeller_1": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"single_Propeller_2": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"tail": {
+				"attachment": [
+					{ "time": 0.0666, "name": null }
+				]
+			},
+			"tail wing L": {
+				"attachment": [
+					{ "time": 0.0666, "name": "Attachment_1" }
+				]
+			},
+			"tail wing_R": {
+				"attachment": [
+					{ "time": 0.0666, "name": "Attachment_1" }
+				]
+			},
+			"top_foil": {
+				"attachment": [
+					{ "time": 0.0333, "name": "Attachment_2" }
+				]
+			},
+			"wing_bottom_edge": {
+				"attachment": [
+					{ "time": 0.0333, "name": "Attachment_2" }
+				]
+			},
+			"wing_middle_edge": {
+				"attachment": [
+					{ "time": 0.0333, "name": "Attachment_2" }
+				]
+			}
+		},
+		"bones": {
+			"fuselage_SCAL_POS_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.359, 0.28, 0.69, 0.62 ]
+					},
+					{ "time": 0.0333, "x": 0, "y": 30.7 },
+					{ "time": 0.3, "x": -0.02, "y": 60.29 }
+				],
+				"scale": [
+					{ "time": 0.0333, "x": 1.081, "y": -0.464 },
+					{ "time": 0.3, "x": 1.068, "y": -1.085 }
+				]
+			},
+			"propeller_main_CTRL_SCAL/POS": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": 0, "y": 5.61 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.3, "x": 1.017, "y": 0.805 }
+				]
+			},
+			"Top_angle_Bars_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				]
+			},
+			"nose_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": 0, "y": 2.26 }
+				],
+				"scale": [
+					{ "time": 0.2, "x": 1, "y": -1 }
+				]
+			},
+			"top_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.0333, "x": 1, "y": 0.174 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"low_wing_bar_R_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": -0.02, "y": 10.29 }
+				]
+			},
+			"propellers_CTRL_SPIN": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.0333, "angle": 27.59 },
+					{ "time": 0.0666, "angle": 0 },
+					{ "time": 0.1, "angle": 27.59 },
+					{ "time": 0.1333, "angle": 0 },
+					{ "time": 0.1666, "angle": 27.59 },
+					{ "time": 0.2, "angle": 0 },
+					{ "time": 0.2333, "angle": 27.59 },
+					{ "time": 0.2666, "angle": 0 },
+					{ "time": 0.3, "angle": 27.59 },
+					{ "time": 0.3333, "angle": 0 }
+				]
+			},
+			"middle_foil_ctrl": {
+				"scale": [
+					{ "time": 0.0333, "x": 1, "y": 0.154 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"WING_middle_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": 0, "y": 16.64 }
+				]
+			},
+			"front_circle_big_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": 0, "y": 34.65 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.3, "x": 0.964, "y": 0.845 }
+				]
+			},
+			"propeller_blur_ctrl": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.3, "x": 0, "y": 1.15 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.3, "x": 1.025, "y": 0.932 }
+				]
+			},
+			"tail": {
+				"rotate": [
+					{ "time": 0.1, "angle": -179.22, "curve": "stepped" },
+					{ "time": 0.3, "angle": -179.22 }
+				],
+				"translate": [
+					{ "time": 0.1, "x": 0.08, "y": -34.67 },
+					{ "time": 0.3, "x": 0.1, "y": -47.39 }
+				],
+				"scale": [
+					{ "time": 0.0333, "x": 0.657, "y": 1 }
+				]
+			},
+			"wheel_Struts_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": 0, "y": 20.41 }
+				]
+			},
+			"WING_bottom_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": 0, "y": 19.89 }
+				]
+			},
+			"bottom_foil_ctrl": {
+				"scale": [
+					{ "time": 0.0333, "x": 1, "y": 0.155 },
+					{ "time": 0.3, "x": 1, "y": 1 }
+				]
+			},
+			"top_wing_bar_L_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": -0.02, "y": 10.29 }
+				]
+			},
+			"top_angle bar": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.3, "x": -0.03, "y": 13.86 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.3, "x": 0.764, "y": 1 }
+				]
+			},
+			"front_circle_med_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": 0, "y": 4.67 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.3, "x": 1.056, "y": 0.882 }
+				]
+			},
+			"fuselage_MAIN_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": 0, "y": 7.3 }
+				]
+			},
+			"top_wing_bar_R_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": -0.02, "y": 10.29 }
+				]
+			},
+			"top_angle bar2": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.3, "x": -0.03, "y": 13.86 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.3, "x": 0.764, "y": 1 }
+				]
+			},
+			"WING_top_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": 0, "y": 16.64 }
+				]
+			},
+			"low_wing_bar_L_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3, "x": -0.02, "y": 10.29 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"time": 0,
+				"offsets": [
+					{ "slot": "top_foil", "offset": -3 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 2 },
+					{ "slot": "low_wing_bar_L", "offset": 2 },
+					{ "slot": "bottom foil", "offset": 6 },
+					{ "slot": "wing_bottom_edge", "offset": 6 },
+					{ "slot": "top_angle bar", "offset": -12 },
+					{ "slot": "top_angle bar2", "offset": -12 },
+					{ "slot": "imagesDown/fuselage", "offset": -12 }
+				]
+			},
+			{
+				"time": 0.0333,
+				"offsets": [
+					{ "slot": "top_foil", "offset": -3 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 2 },
+					{ "slot": "low_wing_bar_L", "offset": 2 },
+					{ "slot": "bottom foil", "offset": 6 },
+					{ "slot": "wing_bottom_edge", "offset": 6 },
+					{ "slot": "top_angle bar", "offset": -12 },
+					{ "slot": "top_angle bar2", "offset": -12 },
+					{ "slot": "imagesDown/fuselage", "offset": -12 }
+				]
+			},
+			{
+				"time": 0.1333,
+				"offsets": [
+					{ "slot": "top_foil", "offset": -3 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 2 },
+					{ "slot": "low_wing_bar_L", "offset": 2 },
+					{ "slot": "bottom foil", "offset": 6 },
+					{ "slot": "wing_bottom_edge", "offset": 6 },
+					{ "slot": "top_angle bar", "offset": -12 },
+					{ "slot": "top_angle bar2", "offset": -12 },
+					{ "slot": "imagesDown/fuselage", "offset": -12 }
+				]
+			}
+		]
+	},
+	"front_flying": {
+		"slots": {
+			"WING_top_edge": {
+				"attachment": [
+					{ "time": 0.9333, "name": "Attachment_3" }
+				]
+			},
+			"bottom foil": {
+				"attachment": [
+					{ "time": 0.9333, "name": "Attachment_3" }
+				]
+			},
+			"imagesDown/fuselage": {
+				"attachment": [
+					{ "time": 0.9333, "name": "Attachment_1" }
+				]
+			},
+			"middle foil": {
+				"attachment": [
+					{ "time": 0.9333, "name": "Attachment_3" }
+				]
+			},
+			"propeller blur": {
+				"color": [
+					{ "time": 0.7, "color": "ffffff94" }
+				]
+			},
+			"top_foil": {
+				"attachment": [
+					{ "time": 0.9333, "name": "Attachment_3" }
+				]
+			},
+			"wing_bottom_edge": {
+				"attachment": [
+					{ "time": 0.9333, "name": "Attachment_3" }
+				]
+			},
+			"wing_middle_edge": {
+				"attachment": [
+					{ "time": 0.9333, "name": "Attachment_3" }
+				]
+			}
+		},
+		"bones": {
+			"fuselage_SCAL_POS_CTRL": {
+				"translate": [
+					{ "time": 0.9333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0.9333, "x": 1.068, "y": 0.473 }
+				]
+			},
+			"propeller_main_CTRL_SCAL/POS": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.7, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0.7, "x": 1, "y": 1 }
+				]
+			},
+			"Top_angle_Bars_CTRL": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				]
+			},
+			"tail": {
+				"translate": [
+					{ "time": 0.9333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0.9333, "x": 1, "y": 1 }
+				]
+			},
+			"MAIN_CTRL": {
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.4666,
+						"x": 0,
+						"y": 3.31,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.9333, "x": 0, "y": 0 }
+				]
+			},
+			"top_foil_ctrl": {
+				"scale": [
+					{ "time": 0.9333, "x": 1, "y": 0.294 }
+				]
+			},
+			"propellers_CTRL_SPIN": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.0333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.0666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.1, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.1333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.1666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.2, "angle": 0, "curve": "stepped" },
+					{ "time": 0.2333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.2666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.3, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.3333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.3666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.4, "angle": 0, "curve": "stepped" },
+					{ "time": 0.4333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.4666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.5, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.5333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.5666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.6, "angle": 0, "curve": "stepped" },
+					{ "time": 0.6333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.6666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.7, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.7333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.7666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.8, "angle": 0, "curve": "stepped" },
+					{ "time": 0.8333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.8666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.9, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.9333, "angle": 0 }
+				]
+			},
+			"middle_foil_ctrl": {
+				"scale": [
+					{ "time": 0.9333, "x": 1, "y": 0.364 }
+				]
+			},
+			"WING_middle_CTRL": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				]
+			},
+			"front_circle_big_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.7, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0.7, "x": 1, "y": 1 }
+				]
+			},
+			"nose_CTRL": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				]
+			},
+			"propeller_blur_ctrl": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0.7, "x": 1, "y": 1 }
+				]
+			},
+			"wheel_Struts_CTRL": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				]
+			},
+			"WING_bottom_CTRL": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				]
+			},
+			"top_angle bar": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				]
+			},
+			"top_wing_bar_L_CTRL": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				]
+			},
+			"low_wing_bar_R_CTRL": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				]
+			},
+			"bottom_foil_ctrl": {
+				"scale": [
+					{ "time": 0.9333, "x": 1, "y": 0.348 }
+				]
+			},
+			"low_wing_bar_L_CTRL": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				]
+			},
+			"front_circle_med_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.7, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0.7, "x": 1, "y": 1 }
+				]
+			},
+			"top_wing_bar_R_CTRL": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				]
+			},
+			"top_angle bar2": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				]
+			},
+			"WING_top_CTRL": {
+				"translate": [
+					{ "time": 0.7, "x": 0, "y": 0 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"time": 0,
+				"offsets": [
+					{ "slot": "tail", "offset": 9 },
+					{ "slot": "top_foil", "offset": 20 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 7 },
+					{ "slot": "low_wing_bar_L", "offset": 7 },
+					{ "slot": "bottom foil", "offset": 7 },
+					{ "slot": "wing_bottom_edge", "offset": 7 },
+					{ "slot": "top_wing_bar_R", "offset": 7 },
+					{ "slot": "top_wing_bar_L", "offset": 7 },
+					{ "slot": "middle foil", "offset": 7 },
+					{ "slot": "wing_middle_edge", "offset": 7 }
+				]
+			}
+		]
+	},
+	"front_flying_down": {
+		"slots": {
+			"WING_top_edge": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_3" }
+				]
+			},
+			"bottom foil": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_3" }
+				]
+			},
+			"imagesDown/fuselage": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_1" }
+				]
+			},
+			"middle foil": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_3" }
+				]
+			},
+			"nose_cone": {
+				"attachment": [
+					{ "time": 0, "name": "Default/Nose cone 2" }
+				]
+			},
+			"propeller blur": {
+				"color": [
+					{ "time": 0, "color": "a6a6a694" }
+				]
+			},
+			"propeller_move lines_1": {
+				"color": [
+					{ "time": 0, "color": "b3b3b3ff" }
+				]
+			},
+			"propeller_move lines_2": {
+				"color": [
+					{ "time": 0, "color": "b3b3b3ff" }
+				]
+			},
+			"single Propeller_1": {
+				"color": [
+					{ "time": 0, "color": "b3b3b3ff" }
+				]
+			},
+			"single_Propeller_2": {
+				"color": [
+					{ "time": 0, "color": "b3b3b3ff" }
+				]
+			},
+			"tail": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" }
+				]
+			},
+			"tail wing L": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_1" }
+				]
+			},
+			"tail wing_R": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_1" }
+				]
+			},
+			"top_foil": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_3" }
+				]
+			},
+			"wing_bottom_edge": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_3" }
+				]
+			},
+			"wing_middle_edge": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_3" }
+				]
+			}
+		},
+		"bones": {
+			"fuselage_SCAL_POS_CTRL": {
+				"translate": [
+					{ "time": 0, "x": -0.36, "y": -16.82 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.025, "y": 1 }
+				]
+			},
+			"propeller_main_CTRL_SCAL/POS": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -5.78 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.017, "y": 0.805 }
+				]
+			},
+			"Top_angle_Bars_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -12.91 }
+				]
+			},
+			"nose_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				]
+			},
+			"top_angle bar2": {
+				"translate": [
+					{ "time": 0, "x": -0.86, "y": 0 }
+				]
+			},
+			"top_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"propeller_blur_ctrl": {
+				"translate": [
+					{ "time": 0, "x": 1.86, "y": 3.92 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.074, "y": 0.932 }
+				]
+			},
+			"middle_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"WING_middle_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -18.86 }
+				]
+			},
+			"propellers_CTRL_SPIN": {
+				"rotate": [
+					{ "time": 0, "angle": 27.59 },
+					{ "time": 0.0333, "angle": 0 },
+					{ "time": 0.0666, "angle": 27.59 },
+					{ "time": 0.1, "angle": 0 },
+					{ "time": 0.1333, "angle": 27.59 },
+					{ "time": 0.1666, "angle": 0 },
+					{ "time": 0.2, "angle": 27.59 },
+					{ "time": 0.2333, "angle": 0 },
+					{ "time": 0.2666, "angle": 27.59 },
+					{ "time": 0.3, "angle": 0 },
+					{ "time": 0.3333, "angle": 27.59 },
+					{ "time": 0.3666, "angle": 0 }
+				]
+			},
+			"front_circle_big_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -24.91 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.964, "y": 0.845 }
+				]
+			},
+			"tail": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 18.04 }
+				]
+			},
+			"wheel_Struts_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 13.46 }
+				]
+			},
+			"WING_bottom_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -11.89 }
+				]
+			},
+			"top_angle bar": {
+				"translate": [
+					{ "time": 0, "x": 1.15, "y": -1.44 }
+				]
+			},
+			"top_wing_bar_L_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -12.34 }
+				]
+			},
+			"low_wing_bar_R_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -8.89 }
+				]
+			},
+			"bottom_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"low_wing_bar_L_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -8.89 }
+				]
+			},
+			"front_circle_med_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -7.77 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.056, "y": 0.882 }
+				]
+			},
+			"top_wing_bar_R_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -12.34 }
+				]
+			},
+			"WING_top_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": -22.42 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"time": 0,
+				"offsets": [
+					{ "slot": "tail", "offset": 20 },
+					{ "slot": "top_foil", "offset": 20 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 7 },
+					{ "slot": "low_wing_bar_L", "offset": 7 },
+					{ "slot": "bottom foil", "offset": 4 },
+					{ "slot": "wing_bottom_edge", "offset": 6 },
+					{ "slot": "top_wing_bar_R", "offset": 7 },
+					{ "slot": "top_wing_bar_L", "offset": 7 },
+					{ "slot": "middle foil", "offset": 4 },
+					{ "slot": "wing_middle_edge", "offset": 6 },
+					{ "slot": "imagesDown/fuselage", "offset": -5 }
+				]
+			}
+		]
+	},
+	"front_flying_up": {
+		"slots": {
+			"WING_top_edge": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" }
+				]
+			},
+			"bottom foil": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" }
+				]
+			},
+			"imagesDown/fuselage": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_1" }
+				]
+			},
+			"middle foil": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" }
+				]
+			},
+			"nose_cone": {
+				"attachment": [
+					{ "time": 0, "name": "Default/Nose cone 2" }
+				]
+			},
+			"propeller blur": {
+				"color": [
+					{ "time": 0, "color": "ffffff94" }
+				]
+			},
+			"propeller_move lines_1": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"propeller_move lines_2": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"single Propeller_1": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"single_Propeller_2": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"tail": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"tail wing L": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_1" }
+				]
+			},
+			"tail wing_R": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_1" }
+				]
+			},
+			"top_foil": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" }
+				]
+			},
+			"wing_bottom_edge": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" }
+				]
+			},
+			"wing_middle_edge": {
+				"attachment": [
+					{ "time": 0, "name": "Attachment_2" }
+				]
+			}
+		},
+		"bones": {
+			"wheel_Struts_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 20.41 }
+				]
+			},
+			"tail": {
+				"rotate": [
+					{ "time": 0, "angle": -179.22 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0.1, "y": -47.39 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.657, "y": 1 }
+				]
+			},
+			"propellers_CTRL_SPIN": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.0333, "angle": 27.59 },
+					{ "time": 0.0666, "angle": 0 },
+					{ "time": 0.1, "angle": 27.59 },
+					{ "time": 0.1333, "angle": 0 },
+					{ "time": 0.1666, "angle": 27.59 },
+					{ "time": 0.2, "angle": 0 },
+					{ "time": 0.2333, "angle": 27.59 },
+					{ "time": 0.2666, "angle": 0 },
+					{ "time": 0.3, "angle": 27.59 },
+					{ "time": 0.3333, "angle": 0 }
+				]
+			},
+			"low_wing_bar_L_CTRL": {
+				"translate": [
+					{ "time": 0, "x": -0.02, "y": 10.29 }
+				]
+			},
+			"nose_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 2.26 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": -1 }
+				]
+			},
+			"WING_bottom_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 19.89 }
+				]
+			},
+			"WING_top_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 16.64 }
+				]
+			},
+			"middle_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"propeller_main_CTRL_SCAL/POS": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 5.61 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.017, "y": 0.805 }
+				]
+			},
+			"fuselage_SCAL_POS_CTRL": {
+				"translate": [
+					{ "time": 0, "x": -0.02, "y": 60.29 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.068, "y": -1.085 }
+				]
+			},
+			"bottom_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"top_angle bar2": {
+				"translate": [
+					{ "time": 0, "x": -0.03, "y": 13.86 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.764, "y": 1 }
+				]
+			},
+			"propeller_blur_ctrl": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 1.15 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.025, "y": 0.932 }
+				]
+			},
+			"front_circle_med_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 4.67 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1.056, "y": 0.882 }
+				]
+			},
+			"WING_middle_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 16.64 }
+				]
+			},
+			"top_angle bar": {
+				"translate": [
+					{ "time": 0, "x": -0.03, "y": 13.86 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.764, "y": 1 }
+				]
+			},
+			"front_circle_big_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 34.65 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.964, "y": 0.845 }
+				]
+			},
+			"top_wing_bar_L_CTRL": {
+				"translate": [
+					{ "time": 0, "x": -0.02, "y": 10.29 }
+				]
+			},
+			"Top_angle_Bars_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				]
+			},
+			"low_wing_bar_R_CTRL": {
+				"translate": [
+					{ "time": 0, "x": -0.02, "y": 10.29 }
+				]
+			},
+			"top_foil_ctrl": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"fuselage_MAIN_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 7.3 }
+				]
+			},
+			"top_wing_bar_R_CTRL": {
+				"translate": [
+					{ "time": 0, "x": -0.02, "y": 10.29 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"time": 0,
+				"offsets": [
+					{ "slot": "top_foil", "offset": -3 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 2 },
+					{ "slot": "low_wing_bar_L", "offset": 2 },
+					{ "slot": "bottom foil", "offset": 6 },
+					{ "slot": "wing_bottom_edge", "offset": 6 },
+					{ "slot": "top_angle bar", "offset": -12 },
+					{ "slot": "top_angle bar2", "offset": -12 },
+					{ "slot": "imagesDown/fuselage", "offset": -12 }
+				]
+			}
+		]
+	},
+	"test": {
+		"slots": {
+			"WING_top_edge": {
+				"attachment": [
+					{ "time": 0.5666, "name": "Attachment_3" },
+					{ "time": 1.6, "name": "Attachment_1" },
+					{ "time": 1.7, "name": "Attachment_2" }
+				]
+			},
+			"bottom foil": {
+				"attachment": [
+					{ "time": 0.5666, "name": "Attachment_3" },
+					{ "time": 1.6, "name": "Attachment_1" },
+					{ "time": 1.7, "name": "Attachment_2" }
+				]
+			},
+			"imagesDown/fuselage": {
+				"attachment": [
+					{ "time": 0.5666, "name": "Attachment_1" }
+				]
+			},
+			"middle foil": {
+				"attachment": [
+					{ "time": 0.5666, "name": "Attachment_3" },
+					{ "time": 1.6, "name": "Attachment_1" },
+					{ "time": 1.7, "name": "Attachment_2" }
+				]
+			},
+			"propeller blur": {
+				"color": [
+					{
+						"time": 0.5,
+						"color": "ffffff94",
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "color": "a6a6a694", "curve": "stepped" },
+					{ "time": 1.3666, "color": "a6a6a694" },
+					{ "time": 1.6666, "color": "ffffff94" }
+				]
+			},
+			"propeller_move lines_1": {
+				"color": [
+					{
+						"time": 0.5,
+						"color": "ffffffff",
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "color": "b3b3b3ff", "curve": "stepped" },
+					{ "time": 1.3666, "color": "b3b3b3ff" },
+					{ "time": 1.6666, "color": "ffffffff" }
+				]
+			},
+			"propeller_move lines_2": {
+				"color": [
+					{
+						"time": 0.5,
+						"color": "ffffffff",
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "color": "b3b3b3ff", "curve": "stepped" },
+					{ "time": 1.3666, "color": "b3b3b3ff" },
+					{ "time": 1.6666, "color": "ffffffff" }
+				]
+			},
+			"single Propeller_1": {
+				"color": [
+					{
+						"time": 0.5,
+						"color": "ffffffff",
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "color": "b3b3b3ff", "curve": "stepped" },
+					{ "time": 1.3666, "color": "b3b3b3ff" },
+					{ "time": 1.6666, "color": "ffffffff" }
+				]
+			},
+			"single_Propeller_2": {
+				"color": [
+					{
+						"time": 0.5,
+						"color": "ffffffff",
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "color": "b3b3b3ff", "curve": "stepped" },
+					{ "time": 1.3666, "color": "b3b3b3ff" },
+					{ "time": 1.6666, "color": "ffffffff" }
+				]
+			},
+			"tail": {
+				"attachment": [
+					{ "time": 0.6, "name": "Attachment_2" },
+					{ "time": 1.6, "name": "Attachment_2" },
+					{ "time": 1.7333, "name": null }
+				]
+			},
+			"tail wing L": {
+				"attachment": [
+					{ "time": 0.6, "name": "Attachment_1" }
+				]
+			},
+			"tail wing_R": {
+				"attachment": [
+					{ "time": 0.6, "name": "Attachment_1" }
+				]
+			},
+			"top_foil": {
+				"attachment": [
+					{ "time": 0.5666, "name": "Attachment_3" },
+					{ "time": 1.6, "name": "Attachment_1" },
+					{ "time": 1.7, "name": "Attachment_2" }
+				]
+			},
+			"wing_bottom_edge": {
+				"attachment": [
+					{ "time": 0.5666, "name": "Attachment_3" },
+					{ "time": 1.6, "name": "Attachment_1" },
+					{ "time": 1.7, "name": "Attachment_2" }
+				]
+			},
+			"wing_middle_edge": {
+				"attachment": [
+					{ "time": 0.5666, "name": "Attachment_3" },
+					{ "time": 1.6, "name": "Attachment_1" },
+					{ "time": 1.7, "name": "Attachment_2" }
+				]
+			}
+		},
+		"bones": {
+			"propeller_main_CTRL_SCAL/POS": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0, "y": -5.78, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": -5.78 },
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": 0, "y": 5.61 }
+				],
+				"scale": [
+					{
+						"time": 0.5,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 1.017, "y": 0.805, "curve": "stepped" },
+					{ "time": 1.3666, "x": 1.017, "y": 0.805 },
+					{ "time": 1.6666, "x": 1, "y": 1 },
+					{ "time": 1.9666, "x": 1.017, "y": 0.805 }
+				]
+			},
+			"front_circle_med_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0, "y": -7.77, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": -7.77 },
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": 0, "y": 4.67 }
+				],
+				"scale": [
+					{
+						"time": 0.5,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 1.056, "y": 0.882, "curve": "stepped" },
+					{ "time": 1.3666, "x": 1.056, "y": 0.882 },
+					{ "time": 1.6666, "x": 1, "y": 1 },
+					{ "time": 1.9666, "x": 1.056, "y": 0.882 }
+				]
+			},
+			"front_circle_big_CTRL": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0, "y": -24.91, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": -24.91 },
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": 0, "y": 34.65 }
+				],
+				"scale": [
+					{
+						"time": 0.5,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0.964, "y": 0.845, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0.964, "y": 0.845 },
+					{ "time": 1.6666, "x": 1, "y": 1 },
+					{ "time": 1.9666, "x": 0.964, "y": 0.845 }
+				]
+			},
+			"wheel_Struts_CTRL": {
+				"translate": [
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0, "y": 13.46, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": 13.46 },
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": 0, "y": 20.41 }
+				]
+			},
+			"propellers_CTRL_SPIN": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.0333, "angle": 27.59 },
+					{ "time": 0.0666, "angle": 0 },
+					{ "time": 0.1, "angle": 27.59 },
+					{ "time": 0.1333, "angle": 0 },
+					{ "time": 0.1666, "angle": 27.59 },
+					{ "time": 0.2, "angle": 0 },
+					{ "time": 0.2333, "angle": 27.59 },
+					{ "time": 0.2666, "angle": 0 },
+					{ "time": 0.3, "angle": 27.59 },
+					{ "time": 0.3333, "angle": 0 },
+					{ "time": 0.3666, "angle": 27.59 },
+					{ "time": 0.4, "angle": 0 },
+					{ "time": 0.4333, "angle": 27.59 },
+					{ "time": 0.4666, "angle": 0 },
+					{ "time": 0.5, "angle": 27.59 },
+					{ "time": 0.5333, "angle": 0 },
+					{ "time": 0.5666, "angle": 27.59 },
+					{ "time": 0.6, "angle": 0 },
+					{ "time": 0.6333, "angle": 27.59 },
+					{ "time": 0.6666, "angle": 0 },
+					{ "time": 0.7, "angle": 27.59 },
+					{ "time": 0.7333, "angle": 0 },
+					{ "time": 0.7666, "angle": 27.59 },
+					{ "time": 0.8, "angle": 0 },
+					{ "time": 0.8333, "angle": 27.59 },
+					{ "time": 0.8666, "angle": 0 },
+					{ "time": 0.9, "angle": 27.59 },
+					{ "time": 0.9333, "angle": 0 },
+					{ "time": 0.9666, "angle": 27.59 },
+					{ "time": 1, "angle": 0 },
+					{ "time": 1.0333, "angle": 27.59 },
+					{ "time": 1.0666, "angle": 0 },
+					{ "time": 1.1, "angle": 27.59 },
+					{ "time": 1.1333, "angle": 0 },
+					{ "time": 1.1666, "angle": 27.59 },
+					{ "time": 1.2, "angle": 0 },
+					{ "time": 1.2333, "angle": 27.59 },
+					{ "time": 1.2666, "angle": 0 },
+					{ "time": 1.3, "angle": 27.59 },
+					{ "time": 1.3333, "angle": 0 },
+					{ "time": 1.3666, "angle": 27.59 },
+					{ "time": 1.4, "angle": 0 },
+					{ "time": 1.4333, "angle": 27.59 },
+					{ "time": 1.4666, "angle": 0 },
+					{ "time": 1.5, "angle": 27.59 },
+					{ "time": 1.5333, "angle": 0 },
+					{ "time": 1.5666, "angle": 27.59 },
+					{ "time": 1.6, "angle": 0 },
+					{ "time": 1.6333, "angle": 27.59 },
+					{ "time": 1.6666, "angle": 0 },
+					{ "time": 1.7, "angle": 27.59 },
+					{ "time": 1.7333, "angle": 0 },
+					{ "time": 1.7666, "angle": 27.59 },
+					{ "time": 1.8, "angle": 0 },
+					{ "time": 1.8333, "angle": 27.59 },
+					{ "time": 1.8666, "angle": 0 },
+					{ "time": 1.9, "angle": 27.59 },
+					{ "time": 1.9333, "angle": 0 },
+					{ "time": 1.9666, "angle": 27.59 },
+					{ "time": 2, "angle": 0 },
+					{ "time": 2.0333, "angle": 27.59 },
+					{ "time": 2.0666, "angle": 0 },
+					{ "time": 2.1, "angle": 27.59 },
+					{ "time": 2.1333, "angle": 0 },
+					{ "time": 2.1666, "angle": 27.59 },
+					{ "time": 2.2, "angle": 0 },
+					{ "time": 2.2333, "angle": 27.59 },
+					{ "time": 2.2666, "angle": 0 },
+					{ "time": 2.3, "angle": 27.59 },
+					{ "time": 2.3333, "angle": 0 },
+					{ "time": 2.3666, "angle": 27.59 },
+					{ "time": 2.4, "angle": 0 },
+					{ "time": 2.4333, "angle": 27.59 },
+					{ "time": 2.4666, "angle": 0 },
+					{ "time": 2.5, "angle": 27.59 },
+					{ "time": 2.5333, "angle": 0 },
+					{ "time": 2.5666, "angle": 27.59 },
+					{ "time": 2.6, "angle": 0 },
+					{ "time": 2.6333, "angle": 27.59 },
+					{ "time": 2.6666, "angle": 0 }
+				]
+			},
+			"nose_CTRL": {
+				"translate": [
+					{ "time": 0.5, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.9, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": 0, "y": 2.26 }
+				],
+				"scale": [
+					{ "time": 1.8666, "x": 1, "y": -1 }
+				]
+			},
+			"fuselage_SCAL_POS_CTRL": {
+				"translate": [
+					{ "time": 0.5666, "x": 0, "y": 0 },
+					{ "time": 0.9, "x": -0.36, "y": -16.82, "curve": "stepped" },
+					{ "time": 1.3666, "x": -0.36, "y": -16.82 },
+					{ "time": 1.6, "x": 0, "y": 0, "curve": "stepped" },
+					{
+						"time": 1.6666,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.359, 0.28, 0.69, 0.62 ]
+					},
+					{ "time": 1.7, "x": 0, "y": 30.7 },
+					{ "time": 1.9666, "x": -0.02, "y": 60.29 }
+				],
+				"scale": [
+					{ "time": 0.5666, "x": 1.068, "y": 0.473 },
+					{ "time": 0.9, "x": 1.025, "y": 1, "curve": "stepped" },
+					{ "time": 1.3666, "x": 1.025, "y": 1 },
+					{
+						"time": 1.6,
+						"x": 1.068,
+						"y": 0.561,
+						"curve": [ 0.397, 0, 0.721, 0.38 ]
+					},
+					{ "time": 1.7, "x": 1.081, "y": -0.464 },
+					{ "time": 1.9666, "x": 1.068, "y": -1.085 }
+				]
+			},
+			"WING_top_CTRL": {
+				"translate": [
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0, "y": -22.42, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": -22.42 },
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": 0, "y": 16.64 }
+				]
+			},
+			"top_foil_ctrl": {
+				"scale": [
+					{
+						"time": 0.5666,
+						"x": 1,
+						"y": 0.294,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 1.3666, "x": 1, "y": 1 },
+					{ "time": 1.5666, "x": 1, "y": 0.394, "curve": "stepped" },
+					{ "time": 1.6, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 1.6666, "x": 1, "y": 1 },
+					{ "time": 1.7, "x": 1, "y": 0.174 },
+					{ "time": 1.9666, "x": 1, "y": 1 }
+				]
+			},
+			"propeller_blur_ctrl": {
+				"translate": [
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 1.86, "y": 3.92, "curve": "stepped" },
+					{ "time": 1.3666, "x": 1.86, "y": 3.92 },
+					{
+						"time": 1.6666,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 1.9666, "x": 0, "y": 1.15 }
+				],
+				"scale": [
+					{
+						"time": 0.5,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 1.074, "y": 0.932, "curve": "stepped" },
+					{ "time": 1.3666, "x": 1.074, "y": 0.932 },
+					{ "time": 1.6666, "x": 1, "y": 1 },
+					{ "time": 1.9666, "x": 1.025, "y": 0.932 }
+				]
+			},
+			"WING_middle_CTRL": {
+				"translate": [
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0, "y": -18.86, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": -18.86 },
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": 0, "y": 16.64 }
+				]
+			},
+			"middle_foil_ctrl": {
+				"scale": [
+					{
+						"time": 0.5666,
+						"x": 1,
+						"y": 0.364,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 1.3666, "x": 1, "y": 1 },
+					{
+						"time": 1.6,
+						"x": 1,
+						"y": 0.364,
+						"curve": [ 0.397, 0, 0.721, 0.38 ]
+					},
+					{ "time": 1.7, "x": 1, "y": 0.154 },
+					{ "time": 1.9666, "x": 1, "y": 1 }
+				]
+			},
+			"WING_bottom_CTRL": {
+				"translate": [
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0, "y": -11.89, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": -11.89 },
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": 0, "y": 19.89 }
+				]
+			},
+			"bottom_foil_ctrl": {
+				"scale": [
+					{
+						"time": 0.5666,
+						"x": 1,
+						"y": 0.348,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 1.3666, "x": 1, "y": 1 },
+					{
+						"time": 1.6,
+						"x": 1,
+						"y": 0.348,
+						"curve": [ 0.397, 0, 0.721, 0.38 ]
+					},
+					{ "time": 1.7, "x": 1, "y": 0.155 },
+					{ "time": 1.9666, "x": 1, "y": 1 }
+				]
+			},
+			"tail": {
+				"rotate": [
+					{ "time": 1.7666, "angle": -179.22, "curve": "stepped" },
+					{ "time": 1.9666, "angle": -179.22 }
+				],
+				"translate": [
+					{ "time": 0.5666, "x": 0, "y": 0 },
+					{ "time": 0.6, "x": 0, "y": 1.8 },
+					{ "time": 0.9, "x": 0, "y": 18.04, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": 18.04 },
+					{
+						"time": 1.6,
+						"x": -0.02,
+						"y": 2.49,
+						"curve": [ 0.507, 0, 0.732, 0.51 ]
+					},
+					{ "time": 1.7666, "x": 0.08, "y": -34.67 },
+					{ "time": 1.9666, "x": 0.1, "y": -47.39 }
+				],
+				"scale": [
+					{ "time": 0.5666, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 1.4666, "x": 1, "y": 1 },
+					{ "time": 1.6, "x": 0.657, "y": 1 }
+				]
+			},
+			"low_wing_bar_L_CTRL": {
+				"translate": [
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0, "y": -8.89, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": -8.89 },
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": -0.02, "y": 10.29 }
+				]
+			},
+			"low_wing_bar_R_CTRL": {
+				"translate": [
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0, "y": -8.89, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": -8.89 },
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": -0.02, "y": 10.29 }
+				]
+			},
+			"top_wing_bar_L_CTRL": {
+				"translate": [
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0, "y": -12.34, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": -12.34 },
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": -0.02, "y": 10.29 }
+				]
+			},
+			"top_wing_bar_R_CTRL": {
+				"translate": [
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0, "y": -12.34, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": -12.34 },
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": -0.02, "y": 10.29 }
+				]
+			},
+			"Top_angle_Bars_CTRL": {
+				"translate": [
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 0, "y": -12.91, "curve": "stepped" },
+					{ "time": 1.3666, "x": 0, "y": -12.91 },
+					{ "time": 1.6666, "x": 0, "y": 0 }
+				]
+			},
+			"top_angle bar": {
+				"translate": [
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": 1.15, "y": -1.44, "curve": "stepped" },
+					{ "time": 1.3666, "x": 1.15, "y": -1.44 },
+					{
+						"time": 1.6666,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 1.9666, "x": -0.03, "y": 13.86 }
+				],
+				"scale": [
+					{ "time": 1.6666, "x": 1, "y": 1 },
+					{ "time": 1.9666, "x": 0.764, "y": 1 }
+				]
+			},
+			"top_angle bar2": {
+				"translate": [
+					{
+						"time": 0.5,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 0.9, "x": -0.86, "y": 0, "curve": "stepped" },
+					{ "time": 1.3666, "x": -0.86, "y": 0 },
+					{
+						"time": 1.6666,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.478, 0, 0.468, 0.91 ]
+					},
+					{ "time": 1.9666, "x": -0.03, "y": 13.86 }
+				],
+				"scale": [
+					{ "time": 1.6666, "x": 1, "y": 1 },
+					{ "time": 1.9666, "x": 0.764, "y": 1 }
+				]
+			},
+			"fuselage_MAIN_CTRL": {
+				"translate": [
+					{ "time": 1.6666, "x": 0, "y": 0 },
+					{ "time": 1.9666, "x": 0, "y": 7.3 }
+				]
+			},
+			"MAIN_CTRL": {
+				"rotate": [
+					{ "time": 0.5333, "angle": 0 },
+					{
+						"time": 1.1666,
+						"angle": -11.74,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 2, "angle": 6.83 }
+				],
+				"translate": [
+					{
+						"time": 0,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.2666,
+						"x": 0,
+						"y": 5.73,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.5333,
+						"x": 0,
+						"y": 0,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.6,
+						"x": 0,
+						"y": -237.27,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 2.5333, "x": 0, "y": -2.02 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"time": 0,
+				"offsets": [
+					{ "slot": "tail", "offset": 9 },
+					{ "slot": "top_foil", "offset": 20 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 7 },
+					{ "slot": "low_wing_bar_L", "offset": 7 },
+					{ "slot": "bottom foil", "offset": 7 },
+					{ "slot": "wing_bottom_edge", "offset": 7 },
+					{ "slot": "top_wing_bar_R", "offset": 7 },
+					{ "slot": "top_wing_bar_L", "offset": 7 },
+					{ "slot": "middle foil", "offset": 7 },
+					{ "slot": "wing_middle_edge", "offset": 7 }
+				]
+			},
+			{
+				"time": 0.5666,
+				"offsets": [
+					{ "slot": "tail", "offset": 20 },
+					{ "slot": "top_foil", "offset": 20 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 7 },
+					{ "slot": "low_wing_bar_L", "offset": 7 },
+					{ "slot": "bottom foil", "offset": 4 },
+					{ "slot": "wing_bottom_edge", "offset": 6 },
+					{ "slot": "top_wing_bar_R", "offset": 7 },
+					{ "slot": "top_wing_bar_L", "offset": 7 },
+					{ "slot": "middle foil", "offset": 4 },
+					{ "slot": "wing_middle_edge", "offset": 6 },
+					{ "slot": "imagesDown/fuselage", "offset": -5 }
+				]
+			},
+			{
+				"time": 1.6666,
+				"offsets": [
+					{ "slot": "tail", "offset": 9 },
+					{ "slot": "top_foil", "offset": 20 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 7 },
+					{ "slot": "low_wing_bar_L", "offset": 7 },
+					{ "slot": "bottom foil", "offset": 7 },
+					{ "slot": "wing_bottom_edge", "offset": 7 },
+					{ "slot": "top_wing_bar_R", "offset": 7 },
+					{ "slot": "top_wing_bar_L", "offset": 7 },
+					{ "slot": "middle foil", "offset": 7 },
+					{ "slot": "wing_middle_edge", "offset": 7 }
+				]
+			},
+			{
+				"time": 1.7,
+				"offsets": [
+					{ "slot": "top_foil", "offset": -3 },
+					{ "slot": "WING_top_edge", "offset": 20 },
+					{ "slot": "low_wing_bar_R", "offset": 2 },
+					{ "slot": "low_wing_bar_L", "offset": 2 },
+					{ "slot": "bottom foil", "offset": 6 },
+					{ "slot": "wing_bottom_edge", "offset": 6 },
+					{ "slot": "top_angle bar", "offset": -12 },
+					{ "slot": "top_angle bar2", "offset": -12 },
+					{ "slot": "imagesDown/fuselage", "offset": -12 }
+				]
+			}
+		]
+	}
+}
+}
