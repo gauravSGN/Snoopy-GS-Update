@@ -10,7 +10,7 @@ public class SwapActiveSprite : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-    void Start()
+    public void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }

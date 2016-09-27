@@ -29,28 +29,7 @@ public class BubbleExplode : MonoBehaviour
 
         foreach (var hits in hitGroups)
         {
-            var bubbles = new List<Bubble>();
-
-            foreach (var hit in hits)
-            {
-                var bubble = hit.collider.gameObject;
-
-                if (bubble.tag == StringConstants.Tags.BUBBLES)
-                {
-                    var model = bubble.GetComponent<BubbleModelBehaviour>().Model;
-
-                    if (model.Active || (bubble == gameObject))
-                    {
-                        bubbles.Add(model);
-                        AddDeathAnimation(bubble, model);
-                    }
-                }
-            }
-
-            if (bubbles.Count > 0)
-            {
-                BubbleGroupReactionEvent.Dispatch(ReactionPriority.PowerUp, bubbles, delay);
-            }
+            ProcessHitGroup(hits, delay);
         }
     }
 
@@ -64,12 +43,39 @@ public class BubbleExplode : MonoBehaviour
         GlobalState.EventService.RemoveEventHandler<BubbleSettlingEvent>(OnSettling);
     }
 
-    private void AddDeathAnimation(GameObject bubble, Bubble model)
+    private void AddDeathAnimation(GameObject bubble)
     {
         if (deathAnimationType != AnimationType.None)
         {
             var bubbleDeath = bubble.GetComponent<BubbleDeath>();
             bubbleDeath.AddPowerUpEffect(bubble, deathAnimationType, BubbleDeathType.Pop);
+        }
+    }
+
+    private void ProcessHitGroup(RaycastHit2D[] hits, float delay)
+    {
+        List<Bubble> bubbles = null;
+
+        foreach (var hit in hits)
+        {
+            var bubble = hit.collider.gameObject;
+
+            if (bubble.tag == StringConstants.Tags.BUBBLES)
+            {
+                var model = bubble.GetComponent<BubbleModelBehaviour>().Model;
+
+                if (model.Active || (bubble == gameObject))
+                {
+                    bubbles = bubbles ?? new List<Bubble>();
+                    bubbles.Add(model);
+                    AddDeathAnimation(bubble);
+                }
+            }
+        }
+
+        if (bubbles != null)
+        {
+            BubbleGroupReactionEvent.Dispatch(ReactionPriority.PowerUp, bubbles, delay);
         }
     }
 }
