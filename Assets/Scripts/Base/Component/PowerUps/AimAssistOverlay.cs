@@ -16,6 +16,9 @@ namespace PowerUps
         [SerializeField]
         private PowerUpScanMap scanMap;
 
+        [SerializeField]
+        private SnapToGrid snapToGrid;
+
         private List<SpriteRenderer> overlays = new List<SpriteRenderer>();
         private List<GameObject> positioned = new List<GameObject>();
         private List<GameObject> waitingForPosition = new List<GameObject>();
@@ -68,6 +71,7 @@ namespace PowerUps
         private void OnPosition(AimPositionEvent gameEvent)
         {
             transform.position = gameEvent.position;
+            snapToGrid.Snap();
             transform.position += Vector3.back;
         }
 
