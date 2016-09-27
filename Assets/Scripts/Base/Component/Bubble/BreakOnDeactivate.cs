@@ -7,6 +7,14 @@ sealed public class BreakOnDeactivate : MonoBehaviour
     {
         var model = GetComponent<BubbleModelBehaviour>().Model;
         model.OnActivationChanged += OnActivationChanged;
+
+        GlobalState.EventService.AddEventHandler<BubbleSettledEvent>(OnSettled);
+    }
+
+    private void OnSettled()
+    {
+        GetComponent<BubbleModelBehaviour>().Model.OnActivationChanged -= OnActivationChanged;
+        GlobalState.EventService.RemoveEventHandler<BubbleSettledEvent>(OnSettled);
     }
 
     private void OnActivationChanged(Bubble model, bool active)
