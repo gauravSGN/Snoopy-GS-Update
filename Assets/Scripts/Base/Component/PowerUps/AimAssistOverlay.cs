@@ -20,24 +20,16 @@ namespace PowerUps
         private SnapToGrid snapToGrid;
 
         private List<SpriteRenderer> overlays = new List<SpriteRenderer>();
-        private List<GameObject> positioned = new List<GameObject>();
-        private List<GameObject> waitingForPosition = new List<GameObject>();
+        private GameObjectPool overlayPool = new GameObjectPool();
         private bool assistActive = false;
 
         public void Start()
         {
             GlobalState.EventService.AddEventHandler<PowerUpAppliedEvent>(OnApplied);
-        }
 
-        private void Activate()
-        {
-            EnableOverlays(true);
-        }
-
-        private void Deactivate()
-        {
-            transform.position = new Vector3(-100, -100, 0);
-            EnableOverlays(false);
+            var overlay = overlayPool.DefaultAllocator(overlayPrefab);;
+            var renderer = overlay.GetComponent<SpriteRenderer>().enabled = false;
+            overlayPool.Release(overlay);
         }
 
         private void OnApplied(PowerUpAppliedEvent gameEvent)
@@ -67,12 +59,34 @@ namespace PowerUps
             eventService.RemoveEventHandler<AimPositionEvent>(OnPosition);
 
             Deactivate();
+            Clear();
+        }
+
+        private void Activate()
+        {
+            EnableOverlays(true);
+        }
+
+        private void Deactivate()
+        {
+            transform.position = new Vector3(-100, -100, 0);
+            EnableOverlays(false);
         }
 
         private void OnPosition(AimPositionEvent gameEvent)
         {
             transform.position = gameEvent.position;
             snapToGrid.Snap();
+        }
+
+        private void Clear()
+        {
+            foreach (var overlay in overlays)
+            {
+                overlayPool.Release(overlay.gameObject);
+            }
+
+            overlays.Clear();
         }
 
         private void EnableOverlays(bool enabled)
@@ -86,11 +100,9 @@ namespace PowerUps
         private void SetShape(PowerUpType type)
         {
             Deactivate();
-            var shape = GetShapeData(type);
+            Clear();
 
-            waitingForPosition.AddRange(positioned);
-            positioned = new List<GameObject>();
-            overlays.Clear();
+            var shape = GetShapeData(type);
 
             var bubbleSize = GlobalState.Instance.Config.bubbles.size;
             var yBubbleSize = bubbleSize * MathUtil.COS_30_DEGREES;
@@ -149,32 +161,13 @@ namespace PowerUps
 
         private void PositionOverlay(Vector3 position)
         {
-            GameObject overlay = GetOverlay();
-
+            GameObject overlay = overlayPool.Get(overlayPrefab);
+            overlay.transform.parent = transform;
             overlay.transform.position = position;
-            positioned.Add(overlay);
 
             var renderer = overlay.GetComponent<SpriteRenderer>();
             renderer.enabled = false;
             overlays.Add(renderer);
-        }
-
-        private GameObject GetOverlay()
-        {
-            GameObject overlay;
-
-            if (waitingForPosition.Count > 0)
-            {
-                overlay = waitingForPosition[0];
-                waitingForPosition.RemoveAt(0);
-            }
-            else
-            {
-                overlay = Instantiate(overlayPrefab);
-                overlay.transform.parent = transform;
-            }
-
-            return overlay;
         }
     }
 }

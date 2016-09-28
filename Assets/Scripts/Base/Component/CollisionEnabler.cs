@@ -7,7 +7,7 @@ public class CollisionEnabler : MonoBehaviour
     private Layers layer;
 
     [SerializeField]
-    private List<MonoBehaviour> disableOnCollision;
+    private List<Renderer> disableOnCollision;
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
