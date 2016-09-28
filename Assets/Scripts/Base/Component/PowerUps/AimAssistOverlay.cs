@@ -36,6 +36,7 @@ namespace PowerUps
 
         private void Deactivate()
         {
+            transform.position = new Vector3(-100, -100, 0);
             EnableOverlays(false);
         }
 
@@ -72,7 +73,6 @@ namespace PowerUps
         {
             transform.position = gameEvent.position;
             snapToGrid.Snap();
-            transform.position += Vector3.back;
         }
 
         private void EnableOverlays(bool enabled)
@@ -86,7 +86,7 @@ namespace PowerUps
         private void SetShape(PowerUpType type)
         {
             Deactivate();
-            var definition = scanMap.Map[type];
+            var shape = GetShapeData(type);
 
             waitingForPosition.AddRange(positioned);
             positioned = new List<GameObject>();
@@ -96,16 +96,55 @@ namespace PowerUps
             var yBubbleSize = bubbleSize * MathUtil.COS_30_DEGREES;
             var basePosition = transform.position;
 
-            foreach (var locations in definition.locations)
+            foreach (var locations in shape)
             {
                 foreach (var location in locations)
                 {
                     var origin = new Vector2(basePosition.x + (location.x * bubbleSize),
-                                             basePosition.y + (location.y * yBubbleSize));
+                                            basePosition.y + (location.y * yBubbleSize));
 
                     PositionOverlay(origin);
                 }
             }
+        }
+
+        private Vector2[][] GetShapeData(PowerUpType type)
+        {
+            Vector2[][] shape;
+
+            if (type == PowerUpType.ThreeCombo)
+            {
+                shape = GetBigCombo(PowerUpController.THREE_COMBO_ROWS);
+            }
+            else if (type == PowerUpType.FourCombo)
+            {
+                shape = GetBigCombo(PowerUpController.FOUR_COMBO_ROWS);
+            }
+            else
+            {
+                shape = scanMap.Map[type].locations;
+            }
+
+            return shape;
+        }
+
+        private Vector2[][] GetBigCombo(int rows)
+        {
+            var locations = new List<Vector2>();
+            var numPerRow = GlobalState.Instance.Config.bubbles.numPerRow;
+
+            for (int row = -rows; row <= rows; row++)
+            {
+                for (int column = -numPerRow; column < numPerRow; column++)
+                {
+                    locations.Add(new Vector2(column - (0.5f * (row % 2)), row));
+                }
+            }
+
+            var returnArray = new Vector2[1][];
+            returnArray[0] = locations.ToArray();
+
+            return returnArray;
         }
 
         private void PositionOverlay(Vector3 position)

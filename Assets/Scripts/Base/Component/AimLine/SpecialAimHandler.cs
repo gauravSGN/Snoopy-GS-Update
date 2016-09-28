@@ -29,6 +29,7 @@ public class SpecialAimHandler : MonoBehaviour
         eventService.RemoveEventHandler<PopupClosedEvent>(Enable);
         eventService.RemoveEventHandler<SlideoutStartEvent>(Disable);
         eventService.RemoveEventHandler<SlideoutCompleteEvent>(Enable);
+        eventService.RemoveEventHandler<InputToggleEvent>(StopAiming);
     }
 
     protected void LateUpdate()
