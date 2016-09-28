@@ -74,6 +74,7 @@ namespace PowerUps
         {
             transform.position = gameEvent.position;
             snapToGrid.AdjustToGrid();
+            transform.position += Vector3.back;
         }
 
         private void Clear()

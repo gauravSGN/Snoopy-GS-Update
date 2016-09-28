@@ -29,7 +29,7 @@ public class SpecialAimHandler : MonoBehaviour
         eventService.RemoveEventHandler<PopupClosedEvent>(Enable);
         eventService.RemoveEventHandler<SlideoutStartEvent>(Disable);
         eventService.RemoveEventHandler<SlideoutCompleteEvent>(Enable);
-        eventService.RemoveEventHandler<InputToggleEvent>(StopAiming);
+        eventService.RemoveEventHandler<InputToggleEvent>(OnInputToggle);
     }
 
     protected void LateUpdate()
@@ -96,5 +96,17 @@ public class SpecialAimHandler : MonoBehaviour
     private void Enable()
     {
         enabled = true;
+    }
+
+    private void OnInputToggle(InputToggleEvent gameEvent)
+    {
+        if (gameEvent.enabled)
+        {
+            Enable();
+        }
+        else
+        {
+            Disable();
+        }
     }
 }
