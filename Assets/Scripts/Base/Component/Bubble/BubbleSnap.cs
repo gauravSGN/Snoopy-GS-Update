@@ -11,22 +11,26 @@ public class BubbleSnap : MonoBehaviour
 
     public void CompleteSnap()
     {
-        rigidBody.velocity = Vector2.zero;
-        rigidBody.gravityScale = 1.0f;
-        rigidBody.isKinematic = true;
-
-        collider.radius /= GlobalState.Instance.Config.bubbles.shotColliderScale;
-        gameObject.layer = (int)Layers.GameObjects;
-
-        GlobalState.EventService.Dispatch(new BubbleSettlingEvent());
-        Destroy(this);
-
-        if (!attachments.Model.CheckForMatches())
+        if (enabled)
         {
-            Sound.PlaySoundEvent.Dispatch(attachments.Model.definition.Sounds.impact);
-        }
+            rigidBody.velocity = Vector2.zero;
+            rigidBody.gravityScale = 1.0f;
+            rigidBody.isKinematic = true;
 
-        GlobalState.EventService.Dispatch(new BubbleSettledEvent { shooter = gameObject });
+            collider.radius /= GlobalState.Instance.Config.bubbles.shotColliderScale;
+            gameObject.layer = (int)Layers.GameObjects;
+
+            GlobalState.EventService.Dispatch(new BubbleSettlingEvent());
+            Destroy(this);
+            enabled = false;
+
+            if (!attachments.Model.CheckForMatches())
+            {
+                Sound.PlaySoundEvent.Dispatch(attachments.Model.definition.Sounds.impact);
+            }
+
+            GlobalState.EventService.Dispatch(new BubbleSettledEvent { shooter = gameObject });
+        }
     }
 
     protected void Start()
