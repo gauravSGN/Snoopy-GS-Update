@@ -30,8 +30,7 @@ public class StageLayout : InitializableBehaviour
         float x = direction * ((config.bubbles.numPerRow / 2 * config.bubbles.size) + wall.size.x / 2.0f);
         float y = (ySize / 2) - (gameCamera.orthographicSize);
 
-        wall.transform.position = new Vector3(x, y);
-        wall.transform.localPosition += Vector3.back;
+        wall.transform.position = new Vector3(x, y, -2.0f);
         wall.size = new Vector2(wall.size.x, ySize);
     }
 }
