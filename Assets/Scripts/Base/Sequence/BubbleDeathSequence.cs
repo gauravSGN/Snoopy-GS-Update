@@ -16,7 +16,7 @@ namespace Sequence
 
         override public BlockadeType BlockadeType { get { return BlockadeType.Reactions; } }
 
-        public BubbleDeathSequence(GameObject gameObject) : base()
+        public BubbleDeathSequence(GameObject gameObject)
         {
             this.gameObject = gameObject;
             effectController = gameObject.GetComponent<BubbleEffectController>();
@@ -24,7 +24,6 @@ namespace Sequence
         }
 
         public BubbleDeathSequence(GameObject gameObject, Dictionary<BubbleDeathType, List<IEnumerator>> effects)
-            : base()
         {
             this.gameObject = gameObject;
             EffectDictionary = effects;

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Slideout;
 
 [RequireComponent(typeof(AimLineEventTrigger))]
@@ -7,9 +7,9 @@ public class SpecialAimHandler : MonoBehaviour
     private AimLineEventTrigger eventTrigger;
     private bool aiming;
     private RectTransform rectTransform;
-    private Vector3[] corners = new Vector3[4];
+    private readonly Vector3[] corners = new Vector3[4];
 
-    void Start()
+    protected void Start()
     {
         rectTransform = (transform as RectTransform);
         eventTrigger = GetComponent<AimLineEventTrigger>();
@@ -22,7 +22,7 @@ public class SpecialAimHandler : MonoBehaviour
         eventService.AddEventHandler<InputToggleEvent>(StopAiming);
     }
 
-    void OnDestroy()
+    protected void OnDestroy()
     {
         var eventService = GlobalState.EventService;
         eventService.RemoveEventHandler<PopupDisplayedEvent>(Disable);
@@ -39,12 +39,9 @@ public class SpecialAimHandler : MonoBehaviour
         // Only do special aiming if standard aiming isn't active
         if (!eventTrigger.Aiming && touching)
         {
-            rectTransform.GetWorldCorners(corners);
-            var position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 position;
 
-            // Check if point is inside the aim panel rect
-            if ((position.x >= corners[0].x) && (position.x <= corners[2].x) &&
-                (position.y >= corners[0].y) && (position.y <= corners[2].y))
+            if (PointInsideAimPanel(out position))
             {
                 if (!aiming)
                 {
@@ -65,6 +62,18 @@ public class SpecialAimHandler : MonoBehaviour
             aiming = false;
         }
     }
+
+    private bool PointInsideAimPanel(out Vector3 position)
+    {
+        rectTransform.GetWorldCorners(corners);
+        position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // Check if point is inside the aim panel rect
+        return (position.x >= corners[0].x) &&
+               (position.x <= corners[2].x) &&
+               (position.y >= corners[0].y) &&
+               (position.y <= corners[2].y);
+        }
 
     private void StartAiming()
     {
