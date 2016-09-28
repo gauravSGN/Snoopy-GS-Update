@@ -4,12 +4,7 @@ using System.Linq;
 
 public class SnapToGrid : MonoBehaviour
 {
-    public void Snap()
-    {
-        AdjustToGrid();
-    }
-
-    protected void AdjustToGrid()
+    public void AdjustToGrid()
     {
         var myPosition = (Vector2)transform.position;
         var nearbyBubbles = NearbyBubbles(transform.position).Select(b => b.gameObject).ToArray();

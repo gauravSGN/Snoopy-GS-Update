@@ -8,9 +8,6 @@ namespace PowerUps
     sealed public class AimAssistOverlay : MonoBehaviour
     {
         [SerializeField]
-        private AimLineEventTrigger eventTrigger;
-
-        [SerializeField]
         private GameObject overlayPrefab;
 
         [SerializeField]
@@ -19,9 +16,10 @@ namespace PowerUps
         [SerializeField]
         private SnapToGrid snapToGrid;
 
-        private List<SpriteRenderer> overlays = new List<SpriteRenderer>();
-        private GameObjectPool overlayPool = new GameObjectPool();
         private bool assistActive = false;
+        private GameObjectPool overlayPool = new GameObjectPool();
+        private List<SpriteRenderer> overlays = new List<SpriteRenderer>();
+
 
         public void Start()
         {
@@ -69,14 +67,15 @@ namespace PowerUps
 
         private void Deactivate()
         {
-            transform.position = new Vector3(-100, -100, 0);
+            // Important in case the shape gets resized and collides with a wall turning on some overlays
+            transform.position = new Vector3(-1000, -1000, 0);
             EnableOverlays(false);
         }
 
         private void OnPosition(AimPositionEvent gameEvent)
         {
             transform.position = gameEvent.position;
-            snapToGrid.Snap();
+            snapToGrid.AdjustToGrid();
         }
 
         private void Clear()
@@ -103,7 +102,6 @@ namespace PowerUps
             Clear();
 
             var shape = GetShapeData(type);
-
             var bubbleSize = GlobalState.Instance.Config.bubbles.size;
             var yBubbleSize = bubbleSize * MathUtil.COS_30_DEGREES;
             var basePosition = transform.position;
@@ -113,7 +111,7 @@ namespace PowerUps
                 foreach (var location in locations)
                 {
                     var origin = new Vector2(basePosition.x + (location.x * bubbleSize),
-                                            basePosition.y + (location.y * yBubbleSize));
+                                             basePosition.y + (location.y * yBubbleSize));
 
                     PositionOverlay(origin);
                 }
