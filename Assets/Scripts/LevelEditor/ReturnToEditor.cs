@@ -17,7 +17,7 @@ namespace LevelEditor
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (SceneManager.GetActiveScene().name == LevelEditorConstants.SCENE_NAME)
+            if (SceneManager.GetActiveScene().name == LevelEditorConstants.SCENE_NAME && gameObject != null)
             {
                 Destroy(gameObject);
             }
