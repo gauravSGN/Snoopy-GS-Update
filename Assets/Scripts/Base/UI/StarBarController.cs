@@ -92,37 +92,39 @@ public class StarBarController : MonoBehaviour
 
     private IEnumerator UpdateFillImage()
     {
-        if (currentFillTime <= 0.01f)
+        if (currentFillTime > 0.01f)
         {
-            var timeToFill = scoreBarIncreaseVFX.duration;
-            var vfxTransform = scoreBarIncreaseVFX.transform;
-            var fillImageWidth = fillImage.rectTransform.rect.width;
+            yield break;
+        }
 
-            while (currentFillTime < timeToFill)
+        var timeToFill = scoreBarIncreaseVFX.duration;
+        var vfxTransform = scoreBarIncreaseVFX.transform;
+        var fillImageWidth = fillImage.rectTransform.rect.width;
+
+        while (currentFillTime < timeToFill)
+        {
+            currentFillTime += Time.deltaTime;
+
+            var lastFillAmount = fillImage.fillAmount;
+            var endFillAmount = Mathf.Clamp01((float)lastScore / (float)scores[starCount - 1]);
+            var newFillAmount = Mathf.Lerp(lastFillAmount, endFillAmount, (currentFillTime / timeToFill));
+
+            fillImage.fillAmount = newFillAmount;
+
+            if (newFillAmount > lastFillAmount)
             {
-                currentFillTime += Time.deltaTime;
+                vfxTransform.localPosition = new Vector3((newFillAmount * fillImageWidth),
+                                                         vfxTransform.localPosition.y);
 
-                var lastFillAmount = fillImage.fillAmount;
-                var endFillAmount = Mathf.Clamp01((float)lastScore / (float)scores[starCount - 1]);
-                var newFillAmount = Mathf.Lerp(lastFillAmount, endFillAmount, (currentFillTime / timeToFill));
-
-                fillImage.fillAmount = newFillAmount;
-
-                if (newFillAmount > lastFillAmount)
+                if (!scoreBarIncreaseVFX.isPlaying)
                 {
-                    vfxTransform.localPosition = new Vector3((newFillAmount * fillImageWidth),
-                                                             vfxTransform.localPosition.y);
-
-                    if (!scoreBarIncreaseVFX.isPlaying)
-                    {
-                        scoreBarIncreaseVFX.Play();
-                    }
+                    scoreBarIncreaseVFX.Play();
                 }
-
-                yield return null;
             }
 
-            currentFillTime = 0.0f;
+            yield return null;
         }
+
+        currentFillTime = 0.0f;
     }
 }

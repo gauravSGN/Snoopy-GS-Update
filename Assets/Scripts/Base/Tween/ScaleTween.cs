@@ -23,7 +23,7 @@ namespace GameTween
         private Vector3 originalScale;
         private Vector3 newScale;
 
-        void Start()
+        public void Start()
         {
             originalScale = transform.localScale;
             newScale = new Vector3(xScale, yScale, 1f);

@@ -20,7 +20,7 @@ namespace Scoring
             var popScore = ComputePopScore(data, factory);
             var dropScore = popScore * GlobalState.Instance.Config.scoring.dropMultiplier;
             var obstacleScore = ComputeObstacleScore(data, factory);
-            var goalScore = ComputeGoalScore(data, factory);
+            var goalScore = ComputeGoalScore(data);
             var clusterMultiplier = ComputeMeanClusterMultiplier(data, factory);
 
             var baseScore = (int)Mathf.Round(popScore * config.popToDropFactor +
@@ -32,7 +32,7 @@ namespace Scoring
 
             return new[]
             {
-                (int)(popScore + obstacleScore + goalScore),
+                popScore + obstacleScore + goalScore,
                 (int)Mathf.Round(baseScore + (clusterBonus / config.secondStarDivisor)),
                 (int)Mathf.Round(baseScore + clusterBonus),
             };
@@ -71,7 +71,7 @@ namespace Scoring
                 .Sum(b => factory.GetDefinitionByType(b.Type).Score);
         }
 
-        static private int ComputeGoalScore(LevelData data, BubbleFactory factory)
+        static private int ComputeGoalScore(LevelData data)
         {
             var rescueTargets = data.Bubbles
                 .Where(b => (b.modifiers != null) && (b.modifiers.Length > 0))
@@ -160,32 +160,40 @@ namespace Scoring
 
         static private void PopulateBubbleMap(Dictionary<int, float> bubbleMap, LevelData data, BubbleType type)
         {
+            float weight;
             bubbleMap.Clear();
 
             foreach (var bubble in data.Bubbles)
             {
-                if ((bubble.modifiers != null) && (bubble.modifiers.Length > 0))
+                weight = GetTypeWeight(bubble, type);
+
+                if (weight > 0.0f)
                 {
-                    var modifier = bubble.modifiers.FirstOrDefault(m => m.type == BubbleModifierType.Random);
-
-                    if (modifier != null)
-                    {
-                        var weight = randomWeights[int.Parse(modifier.data)][(int)type];
-
-                        if (weight > 0.0f)
-                        {
-                            bubbleMap.Add(bubble.Key, weight);
-                        }
-
-                        continue;
-                    }
-                }
-
-                if (bubble.Type == type)
-                {
-                    bubbleMap.Add(bubble.Key, 1.0f);
+                    bubbleMap.Add(bubble.Key, weight);
                 }
             }
+        }
+
+        static private float GetTypeWeight(BubbleData bubble, BubbleType type)
+        {
+            if (bubble.Type == type)
+            {
+                return 1.0f;
+            }
+
+            var weight = 0.0f;
+
+            if ((bubble.modifiers != null) && (bubble.modifiers.Length > 0))
+            {
+                var modifier = bubble.modifiers.FirstOrDefault(m => m.type == BubbleModifierType.Random);
+
+                if (modifier != null)
+                {
+                    weight = randomWeights[int.Parse(modifier.data)][(int)type];
+                }
+            }
+
+            return weight;
         }
 
         static private void ComputeRandomWeights(LevelData data)

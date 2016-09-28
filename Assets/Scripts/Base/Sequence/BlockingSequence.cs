@@ -8,7 +8,7 @@ namespace Sequence
     abstract public class BlockingSequence : Blockade
     {
         protected readonly List<GameObject> pending = new List<GameObject>();
-        private BlockadeService blockadeService;
+        private readonly BlockadeService blockadeService;
 
         public bool Blocking { get { return pending.Count > 0; } }
 

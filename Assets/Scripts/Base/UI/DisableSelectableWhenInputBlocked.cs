@@ -22,12 +22,12 @@ namespace UI
             element.interactable = gameEvent.enabled;
         }
 
-        private void OnInputBlocked(BlockadeEvent.InputBlocked gameEvent)
+        private void OnInputBlocked()
         {
             element.interactable = false;
         }
 
-        private void OnInputUnblocked(BlockadeEvent.InputUnblocked gameEvent)
+        private void OnInputUnblocked()
         {
             element.interactable = true;
         }

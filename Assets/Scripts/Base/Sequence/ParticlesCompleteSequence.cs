@@ -15,7 +15,10 @@ namespace Sequence
 
         public IEnumerator CheckForComplete()
         {
-            for (var index = 0; index >= particleSystems.Length;)
+            int index = 0;
+            int count = particleSystems.Length;
+
+            while (index < count)
             {
                 if (particleSystems[index].IsAlive())
                 {

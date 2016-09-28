@@ -24,7 +24,8 @@ public class PowerUpDeathEvents : MonoBehaviour
     public void EndBubbleTint()
     {
         keepTinting = false;
-        additiveRenderer.sprite = background.sprite = null;
+        additiveRenderer.sprite = null;
+        background.sprite = null;
     }
 
     public IEnumerator Tint()

@@ -17,12 +17,27 @@ namespace Reaction
 
             foreach (var reaction in groups)
             {
-                GraphUtil.RemoveNodes(reaction.bubbles);
-
                 foreach (var bubble in reaction.bubbles)
                 {
                     bubble.PopBubble();
+
                 }
+                // HACK: this is temporary just to unblock designers until I can figure out a true fix
+                List<Bubble> toRemove = new List<Bubble>(reaction.bubbles);
+                int idx = 0;
+                while (idx < toRemove.Count)
+                {
+                    var bubble = toRemove[idx];
+                    if (bubble.type == BubbleType.Cloud || bubble.type == BubbleType.Soap)
+                    {
+                        toRemove.RemoveAt(idx);
+                    }
+                    else
+                    {
+                        idx++;
+                    }
+                }
+                GraphUtil.RemoveNodes(toRemove);
 
                 yield return new WaitForSeconds(reaction.delay);
             }

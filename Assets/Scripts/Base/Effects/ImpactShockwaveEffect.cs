@@ -11,11 +11,13 @@ namespace Effects
             var config = GlobalState.Instance.Config.impactEffect;
             var ease = config.easing;
             var delta = bubble.transform.position - origin;
-            var direction = delta.normalized;
+            var magnitude = delta.magnitude;
+            var direction = delta / magnitude;
             var startPosition = bubble.transform.position;
-            var distanceScale = config.distanceScaling.Evaluate((delta.magnitude - bubbleSize) / (config.radius - bubbleSize));
-            var distance = config.distance * distanceScale;
+            var distance = config.distance;
             var runTime = 0f;
+
+            distance *= config.distanceScaling.Evaluate((magnitude - bubbleSize) / (config.radius - bubbleSize));
 
             while (runTime <= config.duration)
             {
