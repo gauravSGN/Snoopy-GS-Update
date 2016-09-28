@@ -192,6 +192,8 @@ public class AimLine : InitializableBehaviour, UpdateReceiver
         }
 
         points[0] = origin;
+
+        AimPositionEvent.Dispatch(points[points.Count - 1]);
     }
 
     private Vector3 CalculateReflectionPoint(Vector3 origin, Vector3 direction, float distance)

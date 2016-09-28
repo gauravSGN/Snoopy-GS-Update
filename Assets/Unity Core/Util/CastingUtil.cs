@@ -34,7 +34,7 @@ namespace Util
                 foreach (var location in scanGroup)
                 {
                     var origin = new Vector2(basePosition.x + (location.x * bubbleSize),
-                                            basePosition.y + (location.y * yBubbleSize));
+                                             basePosition.y + (location.y * yBubbleSize));
 
                     scan.Add(Physics2D.CircleCastAll(origin, baseSize, Vector2.zero, 0.0f));
                 }

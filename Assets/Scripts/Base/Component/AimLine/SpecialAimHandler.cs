@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using UI.Popup;
-using UI;
+using UnityEngine;
 using Slideout;
 
 [RequireComponent(typeof(AimLineEventTrigger))]
@@ -15,11 +13,13 @@ public class SpecialAimHandler : MonoBehaviour
     {
         rectTransform = (transform as RectTransform);
         eventTrigger = GetComponent<AimLineEventTrigger>();
+
         var eventService = GlobalState.EventService;
         eventService.AddEventHandler<PopupDisplayedEvent>(Disable);
         eventService.AddEventHandler<PopupClosedEvent>(Enable);
         eventService.AddEventHandler<SlideoutStartEvent>(Disable);
         eventService.AddEventHandler<SlideoutCompleteEvent>(Enable);
+        eventService.AddEventHandler<InputToggleEvent>(StopAiming);
     }
 
     protected void OnDestroy()
@@ -29,11 +29,13 @@ public class SpecialAimHandler : MonoBehaviour
         eventService.RemoveEventHandler<PopupClosedEvent>(Enable);
         eventService.RemoveEventHandler<SlideoutStartEvent>(Disable);
         eventService.RemoveEventHandler<SlideoutCompleteEvent>(Enable);
+        eventService.RemoveEventHandler<InputToggleEvent>(StopAiming);
     }
 
     protected void LateUpdate()
     {
         bool touching = Input.GetKey(KeyCode.Mouse0);
+
         // Only do special aiming if standard aiming isn't active
         if (!eventTrigger.Aiming && touching)
         {
