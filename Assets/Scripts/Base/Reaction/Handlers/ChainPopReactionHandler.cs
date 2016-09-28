@@ -32,7 +32,10 @@ namespace Reaction
 
         private List<Bubble> GetAdjacentBubbles(List<Bubble> adjacentList, Bubble current)
         {
-            adjacentList.Add(current);
+            if (!adjacentList.Contains(current))
+            {
+                adjacentList.Add(current);
+            }
 
             foreach (Bubble neighbor in current.Neighbors)
             {
