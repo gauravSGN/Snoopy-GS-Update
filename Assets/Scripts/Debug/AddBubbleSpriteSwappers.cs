@@ -27,9 +27,9 @@ public class AddBubbleSpriteSwappers : MonoBehaviour
     private float startupDelay = 0.5f;
 
     private BubbleType currentType;
-    private List<Tuple<BubbleType, GameObject>> typePrefabCombos = new List<Tuple<BubbleType, GameObject>>(6);
+    private readonly List<Tuple<BubbleType, GameObject>> typePrefabCombos = new List<Tuple<BubbleType, GameObject>>(6);
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(DelayStart(startupDelay));
         typePrefabCombos.Add(new Tuple<BubbleType, GameObject>(BubbleType.Blue, blueSwapper));

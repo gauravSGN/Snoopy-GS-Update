@@ -12,17 +12,9 @@ public class CopySprite : MonoBehaviour
     {
         if (transform.parent != null)
         {
-            var spriteRenderers = transform.parent.GetComponentsInChildren<SpriteRenderer>(true);
-
-            foreach (var renderer in spriteRenderers)
+            foreach (var renderer in transform.parent.GetComponentsInChildren<SpriteRenderer>(true))
             {
-                if (renderer.sprite != null && renderer.sprite.name.Contains(spriteName))
-                {
-                    foreach (var targetRenderer in targetRenderers)
-                    {
-                        targetRenderer.sprite = renderer.sprite;
-                    }
-                }
+                UpdateSpriteRenderer(renderer);
             }
         }
     }
@@ -30,5 +22,16 @@ public class CopySprite : MonoBehaviour
     protected void Start()
     {
         OnEnable();
+    }
+
+    private void UpdateSpriteRenderer(SpriteRenderer renderer)
+    {
+        if ((renderer.sprite != null) && renderer.sprite.name.Contains(spriteName))
+        {
+            foreach (var targetRenderer in targetRenderers)
+            {
+                targetRenderer.sprite = renderer.sprite;
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ sealed public class BreakOnDeactivate : MonoBehaviour
 
     private void OnActivationChanged(Bubble model, bool active)
     {
-        if (active == false)
+        if (!active)
         {
             model.OnActivationChanged -= OnActivationChanged;
             MoveToValidLocation();

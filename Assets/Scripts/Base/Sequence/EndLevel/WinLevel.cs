@@ -83,7 +83,7 @@ namespace Sequence
             }
         }
 
-        private void OnStartBubbleParty(StartBubblePartyEvent gameEvent)
+        private void OnStartBubbleParty()
         {
             eventService.RemoveEventHandler<StartBubblePartyEvent>(OnStartBubbleParty);
             GlobalState.Instance.RunCoroutine(BubbleParty());
