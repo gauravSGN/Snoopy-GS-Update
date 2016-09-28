@@ -1,0 +1,475 @@
+
+Red Baron.png
+size: 2048,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Damage01/front_circle_big
+  rotate: false
+  xy: 1048, 71
+  size: 43, 43
+  orig: 43, 43
+  offset: 0, 0
+  index: -1
+Damage01/fuselage
+  rotate: true
+  xy: 197, 2
+  size: 38, 80
+  orig: 38, 80
+  offset: 0, 0
+  index: -1
+Damage01/tail
+  rotate: true
+  xy: 172, 2
+  size: 6, 13
+  orig: 6, 13
+  offset: 0, 0
+  index: -1
+Damage01/tail_dorsal_wing
+  rotate: true
+  xy: 1999, 118
+  size: 8, 27
+  orig: 8, 27
+  offset: 0, 0
+  index: -1
+Damage01/tail_wing L
+  rotate: true
+  xy: 1138, 93
+  size: 21, 18
+  orig: 21, 18
+  offset: 0, 0
+  index: -1
+Damage01/tail_wing R
+  rotate: false
+  xy: 762, 84
+  size: 21, 18
+  orig: 21, 18
+  offset: 0, 0
+  index: -1
+Damage01/wing_bottom_edge
+  rotate: false
+  xy: 533, 46
+  size: 137, 10
+  orig: 137, 10
+  offset: 0, 0
+  index: -1
+Damage01/wing_bottom_edge_Up
+  rotate: false
+  xy: 393, 46
+  size: 138, 10
+  orig: 138, 10
+  offset: 0, 0
+  index: -1
+Damage01/wing_bottom_edge_down
+  rotate: false
+  xy: 198, 42
+  size: 138, 9
+  orig: 138, 9
+  offset: 0, 0
+  index: -1
+Damage01/wing_bottom_foil
+  rotate: false
+  xy: 501, 15
+  size: 137, 6
+  orig: 137, 6
+  offset: 0, 0
+  index: -1
+Damage01/wing_bottom_foil_Up
+  rotate: false
+  xy: 790, 77
+  size: 139, 31
+  orig: 139, 31
+  offset: 0, 0
+  index: -1
+Damage01/wing_bottom_foil_down
+  rotate: false
+  xy: 361, 25
+  size: 138, 19
+  orig: 138, 19
+  offset: 0, 0
+  index: -1
+Damage01/wing_mid_edge
+  rotate: false
+  xy: 1665, 114
+  size: 165, 12
+  orig: 165, 12
+  offset: 0, 0
+  index: -1
+Damage01/wing_mid_edge_Up
+  rotate: false
+  xy: 989, 116
+  size: 167, 10
+  orig: 167, 10
+  offset: 0, 0
+  index: -1
+Damage01/wing_mid_edge_down
+  rotate: false
+  xy: 1158, 115
+  size: 167, 11
+  orig: 167, 11
+  offset: 0, 0
+  index: -1
+Damage01/wing_mid_foil
+  rotate: false
+  xy: 1834, 106
+  size: 165, 6
+  orig: 165, 6
+  offset: 0, 0
+  index: -1
+Damage01/wing_mid_foil_Up
+  rotate: false
+  xy: 2, 5
+  size: 168, 32
+  orig: 168, 32
+  offset: 0, 0
+  index: -1
+Damage01/wing_mid_foil_down
+  rotate: false
+  xy: 395, 58
+  size: 167, 24
+  orig: 167, 24
+  offset: 0, 0
+  index: -1
+Damage01/wing_top_edge
+  rotate: false
+  xy: 395, 114
+  size: 196, 12
+  orig: 196, 12
+  offset: 0, 0
+  index: -1
+Damage01/wing_top_edge_Up
+  rotate: false
+  xy: 2, 39
+  size: 193, 11
+  orig: 193, 11
+  offset: 0, 0
+  index: -1
+Damage01/wing_top_edge_down
+  rotate: false
+  xy: 395, 99
+  size: 195, 13
+  orig: 195, 13
+  offset: 0, 0
+  index: -1
+Damage01/wing_top_foil
+  rotate: false
+  xy: 592, 104
+  size: 196, 8
+  orig: 196, 8
+  offset: 0, 0
+  index: -1
+Damage01/wing_top_foil_Up
+  rotate: false
+  xy: 2, 90
+  size: 194, 36
+  orig: 194, 36
+  offset: 0, 0
+  index: -1
+Damage01/wing_top_foil_down
+  rotate: false
+  xy: 198, 97
+  size: 195, 29
+  orig: 195, 29
+  offset: 0, 0
+  index: -1
+Default/Bolt
+  rotate: false
+  xy: 370, 46
+  size: 4, 5
+  orig: 4, 5
+  offset: 0, 0
+  index: -1
+Default/Nose cone 2
+  rotate: false
+  xy: 1138, 75
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+Default/Rim
+  rotate: true
+  xy: 357, 46
+  size: 5, 11
+  orig: 5, 11
+  offset: 0, 0
+  index: -1
+Default/front_circle_big
+  rotate: false
+  xy: 1093, 71
+  size: 43, 43
+  orig: 43, 43
+  offset: 0, 0
+  index: -1
+Default/front_circle_medium
+  rotate: false
+  xy: 1089, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Default/fuselage
+  rotate: true
+  xy: 279, 2
+  size: 38, 80
+  orig: 38, 80
+  offset: 0, 0
+  index: -1
+Default/low_wing_bar_L
+  rotate: false
+  xy: 1127, 53
+  size: 9, 16
+  orig: 9, 16
+  offset: 0, 0
+  index: -1
+Default/low_wing_bar_R
+  rotate: true
+  xy: 762, 73
+  size: 9, 16
+  orig: 9, 16
+  offset: 0, 0
+  index: -1
+Default/nose_cone
+  rotate: false
+  xy: 1158, 96
+  size: 17, 17
+  orig: 17, 17
+  offset: 0, 0
+  index: -1
+Default/propeller_blur
+  rotate: false
+  xy: 958, 26
+  size: 88, 88
+  orig: 88, 88
+  offset: 0, 0
+  index: -1
+Default/propeller_move_lines_1
+  rotate: false
+  xy: 641, 2
+  size: 40, 42
+  orig: 40, 42
+  offset: 0, 0
+  index: -1
+Default/propeller_move_lines_2
+  rotate: false
+  xy: 1048, 26
+  size: 39, 43
+  orig: 39, 43
+  offset: 0, 0
+  index: -1
+Default/single_propeller_1
+  rotate: false
+  xy: 1089, 36
+  size: 36, 33
+  orig: 36, 33
+  offset: 0, 0
+  index: -1
+Default/single_propeller_2
+  rotate: false
+  xy: 1975, 70
+  size: 35, 34
+  orig: 35, 34
+  offset: 0, 0
+  index: -1
+Default/tail
+  rotate: true
+  xy: 931, 82
+  size: 6, 13
+  orig: 6, 13
+  offset: 0, 0
+  index: -1
+Default/tail_dorsal_wing
+  rotate: true
+  xy: 672, 48
+  size: 8, 27
+  orig: 8, 27
+  offset: 0, 0
+  index: -1
+Default/tail_wing L
+  rotate: false
+  xy: 172, 19
+  size: 21, 18
+  orig: 21, 18
+  offset: 0, 0
+  index: -1
+Default/tail_wing R
+  rotate: false
+  xy: 931, 90
+  size: 21, 18
+  orig: 21, 18
+  offset: 0, 0
+  index: -1
+Default/top_angle bar
+  rotate: false
+  xy: 1177, 96
+  size: 13, 17
+  orig: 13, 17
+  offset: 0, 0
+  index: -1
+Default/top_wing_bar_L
+  rotate: true
+  xy: 338, 42
+  size: 9, 17
+  orig: 9, 17
+  offset: 0, 0
+  index: -1
+Default/top_wing_bar_R
+  rotate: true
+  xy: 564, 73
+  size: 9, 17
+  orig: 9, 17
+  offset: 0, 0
+  index: -1
+Default/wheel
+  rotate: true
+  xy: 172, 10
+  size: 7, 17
+  orig: 7, 17
+  offset: 0, 0
+  index: -1
+Default/wheel_arm_L
+  rotate: false
+  xy: 1192, 97
+  size: 13, 16
+  orig: 13, 16
+  offset: 0, 0
+  index: -1
+Default/wheel_arm_R
+  rotate: false
+  xy: 1207, 97
+  size: 13, 16
+  orig: 13, 16
+  offset: 0, 0
+  index: -1
+Default/wheel_axle
+  rotate: false
+  xy: 704, 62
+  size: 49, 6
+  orig: 49, 6
+  offset: 0, 0
+  index: -1
+Default/wing_bottom_edge
+  rotate: false
+  xy: 501, 34
+  size: 137, 10
+  orig: 137, 10
+  offset: 0, 0
+  index: -1
+Default/wing_bottom_edge_Up
+  rotate: false
+  xy: 564, 58
+  size: 138, 10
+  orig: 138, 10
+  offset: 0, 0
+  index: -1
+Default/wing_bottom_edge_down
+  rotate: false
+  xy: 501, 23
+  size: 138, 9
+  orig: 138, 9
+  offset: 0, 0
+  index: -1
+Default/wing_bottom_foil
+  rotate: false
+  xy: 501, 7
+  size: 137, 6
+  orig: 137, 6
+  offset: 0, 0
+  index: -1
+Default/wing_bottom_foil_Up
+  rotate: false
+  xy: 1834, 73
+  size: 139, 31
+  orig: 139, 31
+  offset: 0, 0
+  index: -1
+Default/wing_bottom_foil_down
+  rotate: false
+  xy: 361, 4
+  size: 138, 19
+  orig: 138, 19
+  offset: 0, 0
+  index: -1
+Default/wing_mid_edge
+  rotate: false
+  xy: 1832, 114
+  size: 165, 12
+  orig: 165, 12
+  offset: 0, 0
+  index: -1
+Default/wing_mid_edge_Up
+  rotate: false
+  xy: 1665, 102
+  size: 167, 10
+  orig: 167, 10
+  offset: 0, 0
+  index: -1
+Default/wing_mid_edge_down
+  rotate: false
+  xy: 1327, 115
+  size: 167, 11
+  orig: 167, 11
+  offset: 0, 0
+  index: -1
+Default/wing_mid_foil
+  rotate: false
+  xy: 791, 110
+  size: 165, 6
+  orig: 165, 6
+  offset: 0, 0
+  index: -1
+Default/wing_mid_foil_Up
+  rotate: false
+  xy: 592, 70
+  size: 168, 32
+  orig: 168, 32
+  offset: 0, 0
+  index: -1
+Default/wing_mid_foil_down
+  rotate: false
+  xy: 1496, 102
+  size: 167, 24
+  orig: 167, 24
+  offset: 0, 0
+  index: -1
+Default/wing_top_edge
+  rotate: false
+  xy: 593, 114
+  size: 196, 12
+  orig: 196, 12
+  offset: 0, 0
+  index: -1
+Default/wing_top_edge_Up
+  rotate: false
+  xy: 198, 53
+  size: 193, 11
+  orig: 193, 11
+  offset: 0, 0
+  index: -1
+Default/wing_top_edge_down
+  rotate: false
+  xy: 395, 84
+  size: 195, 13
+  orig: 195, 13
+  offset: 0, 0
+  index: -1
+Default/wing_top_foil
+  rotate: false
+  xy: 791, 118
+  size: 196, 8
+  orig: 196, 8
+  offset: 0, 0
+  index: -1
+Default/wing_top_foil_Up
+  rotate: false
+  xy: 2, 52
+  size: 194, 36
+  orig: 194, 36
+  offset: 0, 0
+  index: -1
+Default/wing_top_foil_down
+  rotate: false
+  xy: 198, 66
+  size: 195, 29
+  orig: 195, 29
+  offset: 0, 0
+  index: -1

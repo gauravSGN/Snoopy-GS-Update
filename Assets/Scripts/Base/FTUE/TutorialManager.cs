@@ -10,8 +10,8 @@ namespace FTUE
     {
         private const string CONFIG_PATH = "Tutorials/config";
 
-        private List<TutorialConfig.TutorialData> tutorials;
-        private Dictionary<string, TutorialConfig.RewardList> rewards;
+        private readonly List<TutorialConfig.TutorialData> tutorials;
+        private readonly Dictionary<string, TutorialConfig.RewardList> rewards;
         private readonly TutorialRewardFactory rewardFactory = new TutorialRewardFactory();
 
         public TutorialManager()
