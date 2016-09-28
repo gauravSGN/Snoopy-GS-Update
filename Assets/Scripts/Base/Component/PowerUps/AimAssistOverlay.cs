@@ -25,9 +25,7 @@ namespace PowerUps
         {
             GlobalState.EventService.AddEventHandler<PowerUpAppliedEvent>(OnApplied);
 
-            var overlay = overlayPool.DefaultAllocator(overlayPrefab);;
-            var renderer = overlay.GetComponent<SpriteRenderer>().enabled = false;
-            overlayPool.Release(overlay);
+            overlayPool.Allocate(overlayPrefab, 7);
         }
 
         private void OnApplied(PowerUpAppliedEvent gameEvent)

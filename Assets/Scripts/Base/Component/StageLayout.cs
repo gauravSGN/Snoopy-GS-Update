@@ -31,6 +31,7 @@ public class StageLayout : InitializableBehaviour
         float y = (ySize / 2) - (gameCamera.orthographicSize);
 
         wall.transform.position = new Vector3(x, y);
+        wall.transform.localPosition += Vector3.back;
         wall.size = new Vector2(wall.size.x, ySize);
     }
 }
