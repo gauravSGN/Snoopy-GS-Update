@@ -193,6 +193,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 224000011686882224}
+  - 114: {fileID: 114000013712838300}
   m_Layer: 31
   m_Name: Rock_intro
   m_TagString: Untagged
@@ -2695,6 +2696,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114000013712838300
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010638271502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25820f74c010f4bed8c1f59825af7187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013730549142
 MonoBehaviour:
   m_ObjectHideFlags: 1
