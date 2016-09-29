@@ -16,6 +16,7 @@ namespace PowerUps
         [SerializeField]
         private SnapToGrid snapToGrid;
 
+        private float screenXBound;
         private bool assistActive = false;
         private GameObjectPool overlayPool = new GameObjectPool();
         private List<SpriteRenderer> overlays = new List<SpriteRenderer>();
@@ -24,6 +25,9 @@ namespace PowerUps
         public void Start()
         {
             GlobalState.EventService.AddEventHandler<PowerUpAppliedEvent>(OnApplied);
+
+            var config = GlobalState.Instance.Config.bubbles;
+            screenXBound = (config.numPerRow / 2) * config.size;
 
             overlayPool.Allocate(overlayPrefab, 7);
         }
@@ -34,7 +38,6 @@ namespace PowerUps
             {
                 var eventService = GlobalState.EventService;
                 eventService.AddEventHandler<BubbleSettledEvent>(OnSettled);
-                eventService.AddEventHandler<StartAimingEvent>(Activate);
                 eventService.AddEventHandler<StopAimingEvent>(Deactivate);
                 eventService.AddEventHandler<AimPositionEvent>(OnPosition);
 
@@ -50,17 +53,11 @@ namespace PowerUps
 
             var eventService = GlobalState.EventService;
             eventService.RemoveEventHandler<BubbleSettledEvent>(OnSettled);
-            eventService.RemoveEventHandler<StartAimingEvent>(Activate);
             eventService.RemoveEventHandler<StopAimingEvent>(Deactivate);
             eventService.RemoveEventHandler<AimPositionEvent>(OnPosition);
 
             Deactivate();
             Clear();
-        }
-
-        private void Activate()
-        {
-            EnableOverlays(true);
         }
 
         private void Deactivate()
@@ -75,6 +72,7 @@ namespace PowerUps
             transform.position = gameEvent.position;
             snapToGrid.AdjustToGrid();
             transform.position += Vector3.back;
+            EnableOverlays(true);
         }
 
         private void Clear()
@@ -91,8 +89,13 @@ namespace PowerUps
         {
             foreach (var overlay in overlays)
             {
-                overlay.enabled = enabled;
+                overlay.enabled = enabled && InBounds(overlay.transform.position);
             }
+        }
+
+        private bool InBounds(Vector3 position)
+        {
+            return (position.x > -screenXBound) && (position.x < screenXBound);
         }
 
         private void SetShape(PowerUpType type)
