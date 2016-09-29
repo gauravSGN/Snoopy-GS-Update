@@ -1,5 +1,6 @@
 using UnityEngine;
 using Slideout;
+using FTUE;
 
 [RequireComponent(typeof(AimLineEventTrigger))]
 public class SpecialAimHandler : MonoBehaviour
@@ -8,6 +9,7 @@ public class SpecialAimHandler : MonoBehaviour
     private bool aiming;
     private RectTransform rectTransform;
     private readonly Vector3[] corners = new Vector3[4];
+    private uint blockers;
 
     protected void Start()
     {
@@ -20,6 +22,8 @@ public class SpecialAimHandler : MonoBehaviour
         eventService.AddEventHandler<SlideoutStartEvent>(Disable);
         eventService.AddEventHandler<SlideoutCompleteEvent>(Enable);
         eventService.AddEventHandler<InputToggleEvent>(StopAiming);
+        eventService.AddEventHandler<TutorialActiveEvent>(TutorialActive);
+        blockers = 0;
     }
 
     protected void OnDestroy()
@@ -30,6 +34,7 @@ public class SpecialAimHandler : MonoBehaviour
         eventService.RemoveEventHandler<SlideoutStartEvent>(Disable);
         eventService.RemoveEventHandler<SlideoutCompleteEvent>(Enable);
         eventService.RemoveEventHandler<InputToggleEvent>(OnInputToggle);
+        eventService.RemoveEventHandler<TutorialActiveEvent>(TutorialActive);
     }
 
     protected void LateUpdate()
@@ -89,13 +94,27 @@ public class SpecialAimHandler : MonoBehaviour
 
     private void Disable()
     {
+        blockers++;
         enabled = false;
         StopAiming();
     }
 
     private void Enable()
     {
-        enabled = true;
+        blockers--;
+        enabled = (blockers <= 0);
+    }
+
+    private void TutorialActive(TutorialActiveEvent activeEvent)
+    {
+        if (activeEvent.active)
+        {
+            Disable();
+        }
+        else
+        {
+            Enable();
+        }
     }
 
     private void OnInputToggle(InputToggleEvent gameEvent)

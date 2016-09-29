@@ -19,6 +19,7 @@ namespace LevelEditor
         {
             if (SceneManager.GetActiveScene().name == LevelEditorConstants.SCENE_NAME)
             {
+                SceneManager.sceneLoaded -= OnSceneLoaded;
                 Destroy(gameObject);
             }
         }
