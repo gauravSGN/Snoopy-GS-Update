@@ -9,7 +9,7 @@ namespace LevelEditor
         public new IEnumerable<BubbleData> Bubbles
         {
             get { return base.Bubbles; }
-            set { bubbles = (value != null) ? value.ToArray() : null; }
+            set { bubbles = (value != null) ? value.ToList() : null; }
         }
     }
 }

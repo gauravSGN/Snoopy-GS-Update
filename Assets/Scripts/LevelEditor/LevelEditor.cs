@@ -50,7 +50,7 @@ namespace LevelEditor
             ConfirmAction(delegate
             {
                 Filename = null;
-                ClearBoard();
+                manipulator.ClearAllPuzzles();
                 GlobalState.EventService.Dispatch(new LevelEditorLoadEvent());
             });
         }
@@ -63,10 +63,10 @@ namespace LevelEditor
 
             if (!string.IsNullOrEmpty(levelFilename))
             {
-                ConfirmAction(delegate ()
+                ConfirmAction(delegate
                 {
                     Filename = levelFilename;
-                    ClearBoard();
+                    manipulator.ClearAllPuzzles();
                     manipulator.LoadLevel(File.ReadAllText(levelFilename));
                 });
             }
@@ -106,7 +106,7 @@ namespace LevelEditor
 
         public void Clear()
         {
-            ConfirmAction(ClearBoard);
+            ConfirmAction(manipulator.ClearPuzzle);
         }
 
         public void TestLevel()
@@ -130,11 +130,6 @@ namespace LevelEditor
             dialog.Title = "Destructive Command";
             dialog.Body = "This action will modify the current working level data.  Are you sure you want to proceed?";
             dialog.OnConfirm = action;
-        }
-
-        private void ClearBoard()
-        {
-            manipulator.ClearBoard();
         }
 
         private void UpdateBasePath()

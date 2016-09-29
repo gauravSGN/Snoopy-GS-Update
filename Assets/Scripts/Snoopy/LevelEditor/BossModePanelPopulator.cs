@@ -30,7 +30,6 @@ namespace Snoopy.LevelEditor
         {
             Util.FrameUtil.AtEndOfFrame(() => {
                 UpdatePuzzleToggleContainer(manipulator.NumberOfPuzzles.ToString());
-                puzzleToggles[0].isOn = true;
             });
         }
 
@@ -50,12 +49,15 @@ namespace Snoopy.LevelEditor
 
                 var label = puzzleToggles[i].gameObject.GetComponentInChildren<Text>();
                 label.text += (i + 1);
+
+                puzzleToggles[i].gameObject.SetActive(false);
             }
         }
 
         private void OnLevelEditorLoadEvent(LevelEditorLoadEvent gameEvent)
         {
             UpdatePuzzleToggleContainer(manipulator.NumberOfPuzzles.ToString());
+            EnableFirstPuzzle();
         }
 
         private void UpdatePuzzleToggleContainer(string valueAsString)
@@ -70,10 +72,9 @@ namespace Snoopy.LevelEditor
                 {
                     var enabled = (i < numberOfPuzzles);
 
-                    // If this puzzle is no longer valid then load the first puzzle which must exist
                     if (!enabled && puzzleToggles[i].isOn)
                     {
-                        puzzleToggles[0].isOn = true;
+                        EnableFirstPuzzle();
                     }
 
                     puzzleToggles[i].gameObject.SetActive(enabled);
@@ -81,6 +82,11 @@ namespace Snoopy.LevelEditor
             }
 
             numberOfPuzzlesInput.text = numberOfPuzzles.ToString();
+
+            if (!puzzleToggleGroup.AnyTogglesOn())
+            {
+                EnableFirstPuzzle();
+            }
         }
 
         private void OnPuzzleToggle(bool value)
@@ -95,6 +101,11 @@ namespace Snoopy.LevelEditor
                     }
                 }
             }
+        }
+
+        private void EnableFirstPuzzle()
+        {
+            puzzleToggles[0].isOn = true;
         }
     }
 }

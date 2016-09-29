@@ -79,7 +79,7 @@ namespace LevelEditor
 
             puzzles.Clear();
             puzzles.AddRange(levelData.Puzzles);
-            GlobalState.EventService.Dispatch(new LoadPuzzleEvent { puzzleIndex = 0 });
+            LoadPuzzle(0);
 
             LevelProperties.FromLevelData(levelData);
             LevelProperties.StarValues = ScoreUtil.ComputeStarsForLevel(levelData, BubbleFactory);
@@ -107,11 +107,20 @@ namespace LevelEditor
             return JsonUtility.ToJson(data);
         }
 
-        public void ClearBoard()
+        public void ClearAllPuzzles()
         {
-            GlobalState.EventService.Dispatch(new ClearLevelEvent());
-            var clearAction = ActionFactory.Create(ManipulatorActionType.Clear);
-            clearAction.Perform(this, 0, 0);
+            puzzles.Clear();
+            LoadPuzzle(0);
+        }
+
+        public void ClearPuzzle()
+        {
+            ClearBoard();
+
+            if (puzzles.Count > CurrentPuzzleIndex)
+            {
+                puzzles[CurrentPuzzleIndex] = new PuzzleData();
+            }
         }
 
         public void SetActionType(ManipulatorActionType type)
@@ -266,10 +275,28 @@ namespace LevelEditor
             return data;
         }
 
+        private void ClearBoard()
+        {
+            GlobalState.EventService.Dispatch(new ClearLevelEvent());
+
+            var clearAction = ActionFactory.Create(ManipulatorActionType.Clear);
+            clearAction.Perform(this, 0, 0);
+        }
+
+
         private void OnLoadPuzzleEvent(LoadPuzzleEvent gameEvent)
         {
-            CurrentPuzzleIndex = gameEvent.puzzleIndex;
-            var placer = new PlaceBubbleAction();
+            if (puzzles.Count > CurrentPuzzleIndex)
+            {
+                puzzles[CurrentPuzzleIndex] = new MutablePuzzleData { Bubbles = models.Values };
+            }
+
+            LoadPuzzle(gameEvent.puzzleIndex);
+        }
+
+        private void LoadPuzzle(int puzzleIndex)
+        {
+            CurrentPuzzleIndex = puzzleIndex;
 
             ClearBoard();
 
@@ -280,6 +307,8 @@ namespace LevelEditor
 
             if (puzzles[CurrentPuzzleIndex].Bubbles != null)
             {
+                var placer = new PlaceBubbleAction();
+
                 foreach (var bubble in puzzles[CurrentPuzzleIndex].Bubbles)
                 {
                     state.BubbleType = bubble.Type;
@@ -289,6 +318,9 @@ namespace LevelEditor
                     models[BubbleData.GetKey(bubble.X, bubble.Y)].modifiers = bubble.modifiers;
                 }
             }
+
+            undoBuffer.Clear();
+            redoBuffer.Clear();
         }
     }
 }

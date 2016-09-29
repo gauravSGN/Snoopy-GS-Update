@@ -10,6 +10,6 @@ namespace Model
         virtual public IEnumerable<BubbleData> Bubbles { get { return bubbles; } }
 
         [SerializeField]
-        protected BubbleData[] bubbles;
+        protected List<BubbleData> bubbles = new List<BubbleData>();
     }
 }
