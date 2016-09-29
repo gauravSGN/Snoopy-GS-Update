@@ -24,7 +24,7 @@ MonoBehaviour:
   - name: 0
     list: 01000000
   - name: 1
-    list: 
+    list: 04000000
   sounds:
     impact: {fileID: 0}
     match: {fileID: 0}
