@@ -102,10 +102,7 @@ public class SpecialAimHandler : MonoBehaviour
     private void Enable()
     {
         blockers--;
-        if (blockers <= 0)
-        {
-            enabled = true;
-        }
+        enabled = (blockers <= 0);
     }
 
     private void TutorialActive(TutorialActiveEvent activeEvent)
