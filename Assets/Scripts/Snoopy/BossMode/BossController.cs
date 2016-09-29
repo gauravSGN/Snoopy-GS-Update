@@ -1,4 +1,5 @@
 ﻿using Spine;
+using Model;
 using Spine.Unity;
 using UnityEngine;
 using System.Collections.Generic;
@@ -16,12 +17,10 @@ namespace Snoopy.BossMode
         [SerializeField]
         private string[] damageSkins;
 
-        private Animator animator;
         private Skeleton skeleton;
 
         public void Start()
         {
-            animator = GetComponentInChildren<Animator>();
             skeleton = GetComponentInChildren<SkeletonAnimator>().skeleton;
 
             SetCurrentSkin();
