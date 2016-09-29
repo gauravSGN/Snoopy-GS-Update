@@ -108,7 +108,6 @@ public class Level : MonoBehaviour
     private void OnBubbleDestroyed(BubbleDestroyedEvent gameEvent)
     {
         levelState.UpdateTypeTotals(gameEvent.bubble.GetComponent<BubbleModelBehaviour>().Model.type, -1);
-        levelState.NotifyListeners();
     }
 
     private void OnGoalComplete()

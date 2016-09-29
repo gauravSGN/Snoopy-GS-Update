@@ -33,13 +33,28 @@ namespace LevelEditor
             new[] { KeyCode.LeftAlt, KeyCode.RightAlt },
         };
 
+        private bool inputEnabled = true;
+
+        public void Start()
+        {
+            GlobalState.EventService.Persistent.AddEventHandler<InputToggleEvent>(OnInputToggle);
+        }
+
+        public void OnDestroy()
+        {
+            GlobalState.EventService.RemoveEventHandler<InputToggleEvent>(OnInputToggle);
+        }
+
         public void Update()
         {
-            foreach (var mapping in mappings)
+            if (inputEnabled)
             {
-                if (Input.GetKeyUp(mapping.keyCode) && CheckModifiers(mapping))
+                foreach (var mapping in mappings)
                 {
-                    mapping.action.Invoke();
+                    if (Input.GetKeyUp(mapping.keyCode) && CheckModifiers(mapping))
+                    {
+                        mapping.action.Invoke();
+                    }
                 }
             }
         }
@@ -63,6 +78,11 @@ namespace LevelEditor
             }
 
             return result;
+        }
+
+        private void OnInputToggle(InputToggleEvent gameEvent)
+        {
+            inputEnabled = gameEvent.enabled;
         }
     }
 }
