@@ -36,7 +36,7 @@ namespace Modifiers
 
         }
 
-        // Is there a better home for these two methods?
+        // Is there a better home for this method?
         protected static GameObject CreateSprite(GameObject parent, string name)
         {
             var sprite = new GameObject();

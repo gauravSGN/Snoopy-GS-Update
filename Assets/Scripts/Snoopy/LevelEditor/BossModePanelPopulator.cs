@@ -29,7 +29,7 @@ namespace Snoopy.LevelEditor
         protected void OnEnable()
         {
             Util.FrameUtil.AtEndOfFrame(() => {
-                UpdatePuzzleToggleContainer(manipulator.NumberOfPuzzles.ToString());
+                ForceUpdatePuzzleToggleContainer();
             });
         }
 
@@ -53,12 +53,12 @@ namespace Snoopy.LevelEditor
                 puzzleToggles[i].gameObject.SetActive(false);
             }
 
-            UpdatePuzzleToggleContainer(manipulator.NumberOfPuzzles.ToString());
+            ForceUpdatePuzzleToggleContainer();
         }
 
         private void OnLevelEditorLoadEvent(LevelEditorLoadEvent gameEvent)
         {
-            UpdatePuzzleToggleContainer(manipulator.NumberOfPuzzles.ToString());
+            ForceUpdatePuzzleToggleContainer();
             EnableFirstPuzzle();
         }
 
@@ -93,14 +93,12 @@ namespace Snoopy.LevelEditor
 
         private void OnPuzzleToggle(bool value)
         {
-            if (value)
+            for (var i = 0; value && (i < MAX_PUZZLES); i++)
             {
-                for (var i = 0; i < MAX_PUZZLES; i++)
+                if (puzzleToggles[i].isOn)
                 {
-                    if (puzzleToggles[i].isOn)
-                    {
-                        GlobalState.EventService.Dispatch(new LoadPuzzleEvent { puzzleIndex = i });
-                    }
+                    GlobalState.EventService.Dispatch(new LoadPuzzleEvent { puzzleIndex = i });
+                    break;
                 }
             }
         }
@@ -108,6 +106,11 @@ namespace Snoopy.LevelEditor
         private void EnableFirstPuzzle()
         {
             puzzleToggles[0].isOn = true;
+        }
+
+        private void ForceUpdatePuzzleToggleContainer()
+        {
+            UpdatePuzzleToggleContainer(manipulator.NumberOfPuzzles.ToString());
         }
     }
 }

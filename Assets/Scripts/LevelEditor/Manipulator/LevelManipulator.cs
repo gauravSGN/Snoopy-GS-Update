@@ -283,7 +283,6 @@ namespace LevelEditor
             clearAction.Perform(this, 0, 0);
         }
 
-
         private void OnLoadPuzzleEvent(LoadPuzzleEvent gameEvent)
         {
             if (puzzles.Count > CurrentPuzzleIndex)
