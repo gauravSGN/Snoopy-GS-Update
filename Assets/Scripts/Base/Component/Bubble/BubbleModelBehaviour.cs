@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 abstract public class BubbleModelBehaviour : MonoBehaviour
 {

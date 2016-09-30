@@ -5,5 +5,6 @@
         RescueTarget = 0,
         Random = 1,
         BossStartPosition = 2,
+        Anchor = 3,
     }
 }
