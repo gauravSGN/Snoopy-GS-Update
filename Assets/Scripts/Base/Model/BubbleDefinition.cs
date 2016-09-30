@@ -12,6 +12,7 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
     public Color BaseColor { get { return baseColor; } }
     public bool ActsAsRoot { get { return actsAsRoot; } }
     public bool Activatible { get { return activatible; } }
+    public bool EditorOnly { get { return editorOnly; } }
     public int Score { get { return score; } }
     public int MatchThreshold { get { return matchThreshold; } }
     public BubbleSounds Sounds { get { return sounds; } }
@@ -70,6 +71,9 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
 
     [SerializeField]
     private bool activatible;
+
+    [SerializeField]
+    private bool editorOnly;
 
     [SerializeField]
     private int score;

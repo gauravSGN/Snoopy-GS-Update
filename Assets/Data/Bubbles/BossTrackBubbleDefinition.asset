@@ -18,6 +18,7 @@ MonoBehaviour:
   prefab: {fileID: 145018, guid: 3faa861016d2640a18b339674b62f337, type: 2}
   actsAsRoot: 0
   activatible: 0
+  editorOnly: 1
   score: 0
   matchThreshold: 0
   defaultAnimations: []
