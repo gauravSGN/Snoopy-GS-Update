@@ -28,9 +28,14 @@ namespace Paths
             this.direction = direction;
         }
 
+        public Vector3 Peek()
+        {
+            return nodeMap[ComputeNodeKey(currentX, currentY)];
+        }
+
         public Vector3 Advance(float distance)
         {
-            var currentPosition = nodeMap[ComputeNodeKey(currentX, currentY)];
+            var currentPosition = Peek();
 
             FindNextValidNode();
 

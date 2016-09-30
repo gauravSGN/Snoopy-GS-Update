@@ -18,11 +18,10 @@ namespace Snoopy.Model.Goal
             if (trackBubbles.Count > 0)
             {
                 var path = new NodeTrackPath();
-                var offset = Vector3.down * 0.196f;
 
                 foreach (var bubble in trackBubbles)
                 {
-                    path.AddNode(bubble.X, bubble.Y, bubble.WorldPosition + offset);
+                    path.AddNode(bubble.X, bubble.Y, bubble.WorldPosition);
                 }
 
                 var start = GetStartModifier(trackBubbles);

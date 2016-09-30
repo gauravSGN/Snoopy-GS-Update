@@ -135,6 +135,13 @@ public class GameConfig : ScriptableObject
         public float popOrderDelay;
     }
 
+    [Serializable]
+    public class BossConfig
+    {
+        public float flightSpeed;
+        public float bankAngle;
+    }
+
     public BubbleConfig bubbles;
     public ReactionConfig reactions;
     public ImpactEffectConfig impactEffect;
@@ -147,4 +154,5 @@ public class GameConfig : ScriptableObject
     public BubblePartyConfig bubbleParty;
     public WinSequenceConfig winSequence;
     public PowerUpConfig powerUp;
+    public BossConfig boss;
 }
