@@ -98,7 +98,6 @@ namespace LevelEditor
             if (!string.IsNullOrEmpty(levelFilename))
             {
                 Filename = levelFilename;
-                UpdateBasePath();
                 Save();
             }
 #endif

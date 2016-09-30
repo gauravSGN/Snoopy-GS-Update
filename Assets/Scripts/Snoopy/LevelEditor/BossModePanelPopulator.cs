@@ -28,9 +28,7 @@ namespace Snoopy.LevelEditor
 
         protected void OnEnable()
         {
-            Util.FrameUtil.AtEndOfFrame(() => {
-                ForceUpdatePuzzleToggleContainer();
-            });
+            Util.FrameUtil.AtEndOfFrame(ForceUpdatePuzzleToggleContainer);
         }
 
         protected void Start()
