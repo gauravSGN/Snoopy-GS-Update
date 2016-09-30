@@ -39,11 +39,15 @@ namespace LevelEditor
         private ManipulatorState state = new ManipulatorState();
         private readonly Stack<ManipulatorState> stateStack = new Stack<ManipulatorState>();
 
+        private readonly List<PuzzleData> puzzles = new List<PuzzleData>();
         private readonly LevelProperties levelProperties = new LevelProperties();
         private readonly BubbleQueueDefinition queue = new BubbleQueueDefinition();
         private List<RandomBubbleDefinition> randoms = new List<RandomBubbleDefinition>();
         private string background = LevelEditorConstants.DEFAULT_BACKGROUND;
         private IEnumerator scoreCoroutine;
+
+        public int CurrentPuzzleIndex { get; private set; }
+        public int NumberOfPuzzles { get { return puzzles.Count; } }
 
         public Dictionary<int, BubbleData> Models { get { return models; } }
         public Dictionary<int, GameObject> Views { get { return views; } }
@@ -69,19 +73,13 @@ namespace LevelEditor
         public void LoadLevel(string jsonText)
         {
             var levelData = JsonUtility.FromJson<LevelData>(jsonText);
-            var placer = new PlaceBubbleAction();
 
             randoms = new List<RandomBubbleDefinition>(levelData.Randoms ?? new RandomBubbleDefinition[0]);
             GlobalState.EventService.Dispatch(new RandomBubblesChangedEvent());
 
-            foreach (var bubble in levelData.Bubbles)
-            {
-                state.BubbleType = bubble.Type;
-
-                placer.Perform(this, bubble.X, bubble.Y);
-                bubbleFactory.ApplyEditorModifiers(views[BubbleData.GetKey(bubble.X, bubble.Y)], bubble);
-                models[BubbleData.GetKey(bubble.X, bubble.Y)].modifiers = bubble.modifiers;
-            }
+            puzzles.Clear();
+            puzzles.AddRange(levelData.Puzzles);
+            LoadPuzzle(0);
 
             LevelProperties.FromLevelData(levelData);
             LevelProperties.StarValues = ScoreUtil.ComputeStarsForLevel(levelData, BubbleFactory);
@@ -99,14 +97,7 @@ namespace LevelEditor
 
         public string SaveLevel()
         {
-            var data = new MutableLevelData
-            {
-                Background = Background,
-                Bubbles = models.Values,
-                Queue = queue,
-                Randoms = randoms.ToArray(),
-                ShotCount = queue.ShotCount,
-            };
+            var data = CreateMutableLevelData();
 
             LevelProperties.StarValues = ScoreUtil.ComputeStarsForLevel(data, BubbleFactory);
             LevelProperties.NotifyListeners();
@@ -114,6 +105,22 @@ namespace LevelEditor
             LevelProperties.ToLevelData(data);
 
             return JsonUtility.ToJson(data);
+        }
+
+        public void ClearAllPuzzles()
+        {
+            puzzles.Clear();
+            LoadPuzzle(0);
+        }
+
+        public void ClearPuzzle()
+        {
+            ClearBoard();
+
+            if (puzzles.Count > CurrentPuzzleIndex)
+            {
+                puzzles[CurrentPuzzleIndex] = new PuzzleData();
+            }
         }
 
         public void SetActionType(ManipulatorActionType type)
@@ -209,6 +216,11 @@ namespace LevelEditor
             }
         }
 
+        protected void Start()
+        {
+            GlobalState.EventService.AddEventHandler<LoadPuzzleEvent>(OnLoadPuzzleEvent);
+        }
+
         private void RestoreState(string state)
         {
             PushState();
@@ -225,14 +237,7 @@ namespace LevelEditor
         {
             yield return null;
 
-            var data = new MutableLevelData
-            {
-                Background = Background,
-                Bubbles = models.Values,
-                Queue = queue,
-                Randoms = randoms.ToArray(),
-                ShotCount = queue.ShotCount,
-            };
+            var data = CreateMutableLevelData();
 
             var newValues = ScoreUtil.ComputeStarsForLevel(data, BubbleFactory);
             for (int index = 0, count = newValues.Length; index < count; index++)
@@ -244,6 +249,77 @@ namespace LevelEditor
             LevelProperties.NotifyListeners();
 
             scoreCoroutine = null;
+        }
+
+        private MutableLevelData CreateMutableLevelData()
+        {
+            return new MutableLevelData {
+                Background = Background,
+                Puzzles = CreateMutablePuzzleData(),
+                Queue = queue,
+                Randoms = randoms.ToArray(),
+                ShotCount = queue.ShotCount,
+            };
+        }
+
+        private MutablePuzzleData[] CreateMutablePuzzleData()
+        {
+            var data = new MutablePuzzleData[puzzles.Count];
+
+            for (int i = 0, puzzleCount = puzzles.Count; i < puzzleCount; i++)
+            {
+                var bubbles = (i == CurrentPuzzleIndex) ? models.Values : puzzles[i].Bubbles;
+                data[i] = new MutablePuzzleData { Bubbles = bubbles };
+            }
+
+            return data;
+        }
+
+        private void ClearBoard()
+        {
+            GlobalState.EventService.Dispatch(new ClearLevelEvent());
+
+            var clearAction = ActionFactory.Create(ManipulatorActionType.Clear);
+            clearAction.Perform(this, 0, 0);
+        }
+
+        private void OnLoadPuzzleEvent(LoadPuzzleEvent gameEvent)
+        {
+            if (puzzles.Count > CurrentPuzzleIndex)
+            {
+                puzzles[CurrentPuzzleIndex] = new MutablePuzzleData { Bubbles = models.Values };
+            }
+
+            LoadPuzzle(gameEvent.puzzleIndex);
+        }
+
+        private void LoadPuzzle(int puzzleIndex)
+        {
+            CurrentPuzzleIndex = puzzleIndex;
+
+            ClearBoard();
+
+            while (CurrentPuzzleIndex >= puzzles.Count)
+            {
+                puzzles.Add(new PuzzleData());
+            }
+
+            if (puzzles[CurrentPuzzleIndex].Bubbles != null)
+            {
+                var placer = new PlaceBubbleAction();
+
+                foreach (var bubble in puzzles[CurrentPuzzleIndex].Bubbles)
+                {
+                    state.BubbleType = bubble.Type;
+
+                    placer.Perform(this, bubble.X, bubble.Y);
+                    bubbleFactory.ApplyEditorModifiers(views[BubbleData.GetKey(bubble.X, bubble.Y)], bubble);
+                    models[BubbleData.GetKey(bubble.X, bubble.Y)].modifiers = bubble.modifiers;
+                }
+            }
+
+            undoBuffer.Clear();
+            redoBuffer.Clear();
         }
     }
 }

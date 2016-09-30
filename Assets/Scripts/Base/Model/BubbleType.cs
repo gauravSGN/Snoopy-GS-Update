@@ -14,5 +14,7 @@
 
     Rock = 1000,
     Cloud = 1001,
-    Soap = 1002
+    Soap = 1002,
+
+    BossTrack = 10000,
 }

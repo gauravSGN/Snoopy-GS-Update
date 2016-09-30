@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-
-namespace LevelEditor.Manipulator
+﻿namespace LevelEditor.Manipulator
 {
     [ManipulatorAction(ManipulatorActionType.PlaceBubbleAndModifier)]
     public class PlaceBubbleAndModifierAction : ManipulatorAction

@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using Model;
+﻿using Model;
+using System.Linq;
 using Snoopy.Model;
+using System.Collections.Generic;
 
 namespace LevelEditor
 {
@@ -25,10 +25,10 @@ namespace LevelEditor
             set { powerUpFills = value; }
         }
 
-        public new IEnumerable<BubbleData> Bubbles
+        public new IEnumerable<PuzzleData> Puzzles
         {
-            get { return base.Bubbles; }
-            set { bubbles = value.ToArray(); }
+            get { return base.Puzzles; }
+            set { puzzles = value.ToArray(); }
         }
 
         public new int[] StarValues

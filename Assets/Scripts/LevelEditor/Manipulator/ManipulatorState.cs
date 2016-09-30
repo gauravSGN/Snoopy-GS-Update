@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using Model;
+﻿using Model;
 using LevelEditor.Manipulator;
 
 namespace LevelEditor

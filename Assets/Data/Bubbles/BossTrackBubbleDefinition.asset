@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1d598c8f1285471d9ba9720ea457449, type: 3}
+  m_Name: BossTrackBubbleDefinition
+  m_EditorClassIdentifier: 
+  category: 1
+  type: 10000
+  color: 0
+  baseColor: {r: 0.75, g: 0.16544116, b: 0.16544116, a: 0.578}
+  prefab: {fileID: 145018, guid: 3faa861016d2640a18b339674b62f337, type: 2}
+  actsAsRoot: 0
+  activatible: 0
+  score: 0
+  matchThreshold: 0
+  defaultAnimations: []
+  sounds:
+    impact: {fileID: 0}
+    match: {fileID: 0}
+    cull: {fileID: 0}
+    bounce: {fileID: 0}

@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using Snoopy.Model;
 
 namespace LevelEditor
 {

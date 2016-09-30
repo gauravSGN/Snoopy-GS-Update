@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Model;
 using UnityEngine;
 
 namespace LevelEditor.Manipulator

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Model;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Model;
 using LevelEditor.Manipulator;
+using System.Collections.Generic;
 
 namespace LevelEditor
 {
@@ -34,6 +34,9 @@ namespace LevelEditor
 
         [SerializeField]
         private GameObject modesPanel;
+
+        [SerializeField]
+        private GameObject bossModePanel;
 
         private TabSwitcher tabSwitcher;
 

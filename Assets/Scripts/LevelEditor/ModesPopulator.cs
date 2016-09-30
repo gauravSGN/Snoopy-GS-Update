@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using Model;
+using Modifiers;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 using LevelEditor.Manipulator;
-using Model;
 
 namespace LevelEditor
 {
@@ -15,11 +15,11 @@ namespace LevelEditor
         private LevelManipulator manipulator;
 
         [SerializeField]
-        private List<BubbleModifierDefinition> modifiers;
+        private BubbleModifierList modifierList;
 
         public void Start()
         {
-            foreach (var modifier in modifiers)
+            foreach (var modifier in modifierList.Items)
             {
                 CreateModifierButton(modifier);
             }
@@ -31,7 +31,10 @@ namespace LevelEditor
 
             button.name = modifier.Type.ToString();
             button.GetComponent<Image>().sprite = modifier.Sprite;
+            button.transform.SetParent(transform, false);
+
             var toggle = button.GetComponent<Toggle>();
+
             toggle.group = GetComponent<ToggleGroup>();
             toggle.onValueChanged.AddListener((value) =>
             {
@@ -41,7 +44,6 @@ namespace LevelEditor
                     manipulator.SetActionType(ManipulatorActionType.PlaceModifier);
                 }
             });
-            button.transform.SetParent(transform, false);
         }
     }
 }

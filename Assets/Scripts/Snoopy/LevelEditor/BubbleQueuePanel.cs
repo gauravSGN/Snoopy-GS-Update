@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using Snoopy.Model;
 using LevelEditor;
-using System.Linq;
 
 namespace Snoopy.LevelEditor
 {

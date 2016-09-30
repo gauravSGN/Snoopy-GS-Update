@@ -1,6 +1,4 @@
-﻿using Loading;
-using Service;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 sealed public class LoadingScreen : MonoBehaviour, UpdateReceiver
