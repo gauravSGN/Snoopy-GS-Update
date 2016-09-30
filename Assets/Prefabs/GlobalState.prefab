@@ -553,7 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9045977e322fc4adc8c71bc79a4eeb17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillImage: {fileID: 0}
+  fillImage: {fileID: 114000013733294740}
 --- !u!114 &114000012996374552
 MonoBehaviour:
   m_ObjectHideFlags: 1
