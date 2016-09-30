@@ -4,14 +4,12 @@ using UnityEngine.UI;
 
 namespace Modifiers
 {
-    [BubbleModifierAttribute(BubbleModifierType.BossStartPosition)]
-    public class EditorBubbleModifier : BubbleModifier
+    abstract public class EditorBubbleModifier : BubbleModifier
     {
         private const string LIST_PATH = "LevelEditor/BubbleModifierList";
 
         private BubbleModifierList modifierList;
 
-        override public BubbleModifierType ModifierType { get { return BubbleModifierType.BossStartPosition; } }
         virtual public string SpriteName { get { return "Editor Bubble Modifier"; } }
 
         override protected void ModifyBubbleData(BubbleData bubbleData, BubbleData.ModifierData data)
