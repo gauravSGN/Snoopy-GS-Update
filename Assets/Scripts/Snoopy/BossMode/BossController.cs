@@ -1,4 +1,6 @@
 ﻿using Spine;
+using Model;
+using Actions;
 using Spine.Unity;
 using UnityEngine;
 using System.Collections.Generic;
@@ -16,13 +18,13 @@ namespace Snoopy.BossMode
         [SerializeField]
         private string[] damageSkins;
 
-        private Animator animator;
         private Skeleton skeleton;
 
         public void Start()
         {
-            animator = GetComponentInChildren<Animator>();
             skeleton = GetComponentInChildren<SkeletonAnimator>().skeleton;
+
+            GlobalState.EventService.AddEventHandler<Snoopy.BossMode.SetBossPathEvent>(OnSetBossPath);
 
             SetCurrentSkin();
         }
@@ -41,11 +43,22 @@ namespace Snoopy.BossMode
             {
                 health -= 1;
 
-                BubbleReactionEvent.Dispatch(Reaction.ReactionPriority.Cull, bubbleSnap.GetComponent<BubbleModelBehaviour>().Model);
+                BubbleReactionEvent.Dispatch(Reaction.ReactionPriority.Cull,
+                                             bubbleSnap.GetComponent<BubbleModelBehaviour>().Model);
 
                 bubbleSnap.CompleteSnap();
                 SetCurrentSkin();
             }
+        }
+
+        private void OnSetBossPath(Snoopy.BossMode.SetBossPathEvent gameEvent)
+        {
+            var follower = new BossTrackFollowAction();
+
+            follower.Path = gameEvent.path;
+            follower.Start();
+
+            GetComponent<ActionQueue>().AddGameAction(follower);
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Model;
+using System;
 using System.Linq;
-using Model;
+using System.Collections.Generic;
 
 namespace Goal
 {
@@ -10,6 +10,7 @@ namespace Goal
         private static Dictionary<Func<LevelData, bool>, Type> goalDeterminers = new Dictionary<Func<LevelData, bool>, Type>
         {
             { RescueTargetDeterminer, typeof(RescueTargetGoal) },
+            { BossModeDeterminer, typeof(Snoopy.Model.Goal.BossModeGoal) },
         };
 
         public static List<LevelGoal> GetGoalsForLevel(LevelData levelData)
@@ -31,7 +32,14 @@ namespace Goal
 
         private static bool RescueTargetDeterminer(LevelData levelData)
         {
-            return levelData.Bubbles.Where(b => b.modifiers != null).SelectMany(b => b.modifiers).Any(m => m.type == BubbleModifierType.RescueTarget);
+            return levelData.Bubbles.Where(b => b.modifiers != null)
+                                    .SelectMany(b => b.modifiers)
+                                    .Any(m => m.type == BubbleModifierType.RescueTarget);
+        }
+
+        private static bool BossModeDeterminer(LevelData levelData)
+        {
+            return levelData.Bubbles.Any(b => b.Type == BubbleType.BossTrack);
         }
     }
 }

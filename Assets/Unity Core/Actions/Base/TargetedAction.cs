@@ -2,7 +2,7 @@
 
 namespace Actions.Base
 {
-    abstract public class TargettedAction : UntargettedAction
+    abstract public class TargetedAction : UntargetedAction
     {
         protected GameObject target;
 

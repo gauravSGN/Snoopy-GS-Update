@@ -2,7 +2,7 @@
 
 namespace Actions.Base
 {
-    abstract public class UntargettedAction : GameAction
+    abstract public class UntargetedAction : GameAction
     {
         abstract public bool Done { get; }
 

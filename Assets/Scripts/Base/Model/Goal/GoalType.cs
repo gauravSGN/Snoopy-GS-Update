@@ -3,5 +3,6 @@
     public enum GoalType
     {
         RescueBabies,
+        BossMode,
     }
 }

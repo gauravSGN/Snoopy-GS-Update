@@ -2,7 +2,7 @@
 
 namespace Actions.Basic
 {
-    sealed public class DelayAction : Actions.Base.UntargettedAction
+    sealed public class DelayAction : Actions.Base.UntargetedAction
     {
         private float duration;
         private float timer;

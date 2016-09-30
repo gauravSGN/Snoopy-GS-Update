@@ -13,10 +13,8 @@ namespace Snoopy.BossMode
 
         private readonly List<Transform> bubbles = new List<Transform>();
 
-        override public void Start()
+        public void Start()
         {
-            base.Start();
-
             GlobalState.EventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
         }
 
@@ -30,7 +28,7 @@ namespace Snoopy.BossMode
 
             instance.transform.SetParent(container.transform, false);
 
-            container.transform.localPosition = GetBubbleLocation(data.X, data.Y);
+            container.transform.localPosition = data.WorldPosition;
             instance.transform.position = transform.position;
 
             bubbles.Add(instance.transform);

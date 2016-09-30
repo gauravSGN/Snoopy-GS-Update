@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Paths
 {
-    sealed public class WindingPath
+    sealed public class WindingPath : Path
     {
         private class ControlPoint
         {

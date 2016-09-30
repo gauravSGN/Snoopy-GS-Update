@@ -165,3 +165,6 @@ MonoBehaviour:
     delayBeforePopup: 0.5
   powerUp:
     popOrderDelay: 0.15
+  boss:
+    flightSpeed: 4
+    bankAngle: 25

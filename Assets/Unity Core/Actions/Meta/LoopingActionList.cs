@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Actions.Meta
 {
-    sealed public class LoopingActionList : Actions.Base.TargettedAction
+    sealed public class LoopingActionList : Actions.Base.TargetedAction
     {
         override public bool Done { get { return true; } }
 

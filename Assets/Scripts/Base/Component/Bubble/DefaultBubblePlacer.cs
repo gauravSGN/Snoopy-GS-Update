@@ -15,7 +15,7 @@ sealed public class DefaultBubblePlacer : BubblePlacer
             instance.transform.SetParent(bubbleContainer, false);
         }
 
-        instance.transform.localPosition = GetBubbleLocation(data.X, data.Y);
+        instance.transform.localPosition = data.WorldPosition;
 
         return instance;
     }
