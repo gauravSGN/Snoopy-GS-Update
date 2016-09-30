@@ -18,7 +18,7 @@ namespace Paths
 
         public void AddNode(int x, int y, Vector3 position)
         {
-            nodeMap[ComputeNodeKey(x, y)] = position + (Vector3.down * 0.196f);
+            nodeMap[ComputeNodeKey(x, y)] = position;
         }
 
         public void Start(int x, int y, int direction)

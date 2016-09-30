@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Snoopy.BossMode
 {
-    sealed public class BossTrackFollowAction : TargettedAction
+    sealed public class BossTrackFollowAction : TargetedAction
     {
         override public bool Done { get { return done; } }
         public NodeTrackPath Path
