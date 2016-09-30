@@ -9,7 +9,7 @@ namespace Modifiers
 {
     abstract public class BubbleModifier
     {
-        public abstract BubbleModifierType ModifierType { get; }
+        abstract public BubbleModifierType ModifierType { get; }
         public LevelConfiguration Configuration { get; set; }
 
         abstract protected void ModifyBubbleData(BubbleData bubbleData, BubbleData.ModifierData data);

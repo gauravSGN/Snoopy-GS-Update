@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ba61cd58e2914d13a9523174eba22f6, type: 3}
-  m_Name: RescueTarget
+  m_Name: BossStartPosition_East
   m_EditorClassIdentifier: 
-  type: 0
-  data: 
-  sprite: {fileID: 21300000, guid: 280c188e0a654438898499ee043aaedb, type: 3}
-  prefab: {fileID: 1000012799202796, guid: 7772f672e0c614427a88f8bc4224ebeb, type: 2}
+  type: 2
+  data: 0
+  sprite: {fileID: 21300000, guid: c1ef60fecfb2f4fbf98aba52ce9e3f19, type: 3}
+  prefab: {fileID: 1000012799202796, guid: c487dc7937f8e45f8940a025288493c7, type: 2}

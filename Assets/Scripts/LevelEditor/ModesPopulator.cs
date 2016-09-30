@@ -1,8 +1,8 @@
 ﻿using Model;
+using Modifiers;
 using UnityEngine;
 using UnityEngine.UI;
 using LevelEditor.Manipulator;
-using System.Collections.Generic;
 
 namespace LevelEditor
 {
@@ -15,11 +15,11 @@ namespace LevelEditor
         private LevelManipulator manipulator;
 
         [SerializeField]
-        private List<BubbleModifierDefinition> modifiers;
+        private BubbleModifierList modifierList;
 
         public void Start()
         {
-            foreach (var modifier in modifiers)
+            foreach (var modifier in modifierList.Items)
             {
                 CreateModifierButton(modifier);
             }

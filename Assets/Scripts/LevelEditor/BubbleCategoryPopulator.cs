@@ -44,8 +44,6 @@ namespace LevelEditor
         {
             tabSwitcher = GetComponent<TabSwitcher>();
 
-            CreateToggleButton("Boss Mode", bossModePanel);
-
             SetupCategoryList();
             CreateButtonPanels();
 

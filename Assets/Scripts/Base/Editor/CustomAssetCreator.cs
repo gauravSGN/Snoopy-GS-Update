@@ -2,6 +2,7 @@
 using UI.Map;
 using UI.Popup;
 using PowerUps;
+using Modifiers;
 using Animation;
 using System.IO;
 using UnityEditor;
@@ -13,6 +14,12 @@ public static class CustomAssetCreator
     public static void CreateBubbleFactory()
     {
         CreateAThing<BubbleFactory>();
+    }
+
+    [MenuItem("Assets/Create/Bubbles/Bubble Modifier List")]
+    public static void CreateBubbleModifierList()
+    {
+        CreateAThing<BubbleModifierList>();
     }
 
     [MenuItem("Assets/Create/Bubbles/Bubble Definition")]

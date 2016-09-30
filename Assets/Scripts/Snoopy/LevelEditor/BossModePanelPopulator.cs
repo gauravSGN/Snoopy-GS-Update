@@ -52,6 +52,8 @@ namespace Snoopy.LevelEditor
 
                 puzzleToggles[i].gameObject.SetActive(false);
             }
+
+            UpdatePuzzleToggleContainer(manipulator.NumberOfPuzzles.ToString());
         }
 
         private void OnLevelEditorLoadEvent(LevelEditorLoadEvent gameEvent)
