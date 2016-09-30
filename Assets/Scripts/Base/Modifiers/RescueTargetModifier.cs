@@ -1,19 +1,16 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using Model;
+﻿using Model;
+using UnityEngine;
 using Snoopy.Characters;
 using System.Collections.Generic;
 
 namespace Modifiers
 {
     [BubbleModifierAttribute(BubbleModifierType.RescueTarget)]
-    public class RescueTargetModifier : BubbleModifier
+    public class RescueTargetModifier : EditorBubbleModifier
     {
-        private const string SPRITE_PATH = "Textures/Modifiers/woodstock";
         private const string PREFAB_PATH = "Characters/Woodstock";
         private const string SLIDEOUT_PATH = "Slideouts/SaveBirdsObjectiveSlideout";
 
-        private Sprite sprite;
         private GameObject prefab;
         private GameObject slideout;
         private bool introComplete;
@@ -21,39 +18,11 @@ namespace Modifiers
         private readonly List<WoodstockEventHandler> targets = new List<WoodstockEventHandler>();
 
         override public BubbleModifierType ModifierType { get { return BubbleModifierType.RescueTarget; } }
-
-        override protected void ModifyBubbleData(BubbleData bubbleData, BubbleData.ModifierData data)
-        {
-            // This modifier makes no changes to the bubble data.
-        }
+        override public string SpriteName { get { return "RescueTarget"; } }
 
         override protected void ModifyGameObject(GameObject target, BubbleData.ModifierData data)
         {
             CreateInstance(target);
-        }
-
-        override protected void ModifyEditorObject(GameObject target, BubbleData.ModifierData data)
-        {
-            sprite = sprite ?? GlobalState.AssetService.LoadAsset<Sprite>(SPRITE_PATH);
-
-            var rescueSprite = CreateRescueSprite(target);
-            var image = rescueSprite.AddComponent<Image>();
-
-            image.sprite = sprite;
-
-            var rectTransform = rescueSprite.GetComponent<RectTransform>();
-            rectTransform.sizeDelta = target.GetComponent<RectTransform>().sizeDelta;
-        }
-
-        private GameObject CreateRescueSprite(GameObject parent)
-        {
-            var rescueSprite = new GameObject();
-            rescueSprite.name = "RescueTarget";
-
-            rescueSprite.transform.SetParent(parent.transform, false);
-            rescueSprite.transform.localPosition = Vector3.back;
-
-            return rescueSprite;
         }
 
         private void CreateInstance(GameObject parent)
