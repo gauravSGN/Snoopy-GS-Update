@@ -18,6 +18,7 @@ MonoBehaviour:
   prefab: {fileID: 117630, guid: 445ee84116cae4e6c8e8178026b76454, type: 2}
   actsAsRoot: 0
   activatible: 1
+  editorOnly: 0
   score: 50
   matchThreshold: 2
   defaultAnimations:
@@ -27,6 +28,6 @@ MonoBehaviour:
     list: 04000000
   sounds:
     impact: {fileID: 0}
-    match: {fileID: 0}
-    cull: {fileID: 0}
+    match: {fileID: 8300000, guid: 41b424de7dea646f3b9e08feca3e63c3, type: 3}
+    cull: {fileID: 8300000, guid: fd86216e4e27d466ba5267b69d216944, type: 3}
     bounce: {fileID: 0}
