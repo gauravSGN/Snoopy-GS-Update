@@ -9,30 +9,27 @@ namespace Snoopy.BossMode
 {
     sealed public class BossController : MonoBehaviour
     {
-        [SerializeField]
-        private int maxHealth;
-
-        [SerializeField]
-        private int health;
+        public Paths.NodeTrackPath Path { get; private set; }
 
         [SerializeField]
         private string[] damageSkins;
 
+        private Animator animator;
         private Skeleton skeleton;
-        private BossTrackFollowAction follower = new BossTrackFollowAction();
+        private int maxHealth;
 
         public void Start()
         {
+            animator = GetComponent<Animator>();
             skeleton = GetComponentInChildren<SkeletonAnimator>().skeleton;
 
             GlobalState.EventService.AddEventHandler<SetBossHealthEvent>(OnSetBossHealth);
             GlobalState.EventService.AddEventHandler<SetBossPathEvent>(OnSetBossPath);
-
-            SetCurrentSkin();
         }
 
         private void SetCurrentSkin()
         {
+            var health = animator.GetInteger("Health");
             var skinIndex = Mathf.RoundToInt((1.0f - (float)health / (float)maxHealth) * (damageSkins.Length - 1.0f));
             skeleton.SetSkin(damageSkins[skinIndex]);
         }
@@ -43,9 +40,7 @@ namespace Snoopy.BossMode
 
             if (bubbleSnap != null)
             {
-                follower.Stop();
-                transform.rotation = Quaternion.identity;
-                health -= 1;
+                animator.SetTrigger("Hit");
 
                 GlobalState.EventService.Dispatch(new CullAllBubblesEvent());
                 BubbleReactionEvent.Dispatch(Reaction.ReactionPriority.Cull,
@@ -53,23 +48,18 @@ namespace Snoopy.BossMode
 
                 bubbleSnap.CompleteSnap();
                 SetCurrentSkin();
-
-                GlobalState.EventService.Dispatch(new DamageBossEvent());
             }
         }
 
         private void OnSetBossHealth(SetBossHealthEvent gameEvent)
         {
             maxHealth = gameEvent.health;
-            health = Mathf.Min(health, maxHealth);
+            animator.SetInteger("Health", maxHealth);
         }
 
         private void OnSetBossPath(SetBossPathEvent gameEvent)
         {
-            follower.Path = gameEvent.path;
-            follower.Start();
-
-            GetComponent<ActionQueue>().AddGameAction(follower);
+            Path = gameEvent.path;
         }
     }
 }
