@@ -4,9 +4,100 @@ size: 2048,128
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+3_quarter/Front_bar
+  rotate: true
+  xy: 762, 77
+  size: 25, 24
+  orig: 25, 24
+  offset: 0, 0
+  index: -1
+3_quarter/back_bar
+  rotate: false
+  xy: 1483, 82
+  size: 11, 31
+  orig: 11, 31
+  offset: 0, 0
+  index: -1
+3_quarter/back_wheel
+  rotate: false
+  xy: 1359, 47
+  size: 18, 21
+  orig: 18, 21
+  offset: 0, 0
+  index: -1
+3_quarter/engine_cover
+  rotate: false
+  xy: 1283, 25
+  size: 37, 43
+  orig: 37, 43
+  offset: 0, 0
+  index: -1
+3_quarter/front_wheel
+  rotate: false
+  xy: 931, 86
+  size: 18, 22
+  orig: 18, 22
+  offset: 0, 0
+  index: -1
+3_quarter/fuselage
+  rotate: false
+  xy: 1238, 70
+  size: 85, 43
+  orig: 85, 43
+  offset: 0, 0
+  index: -1
+3_quarter/horiz_bar
+  rotate: false
+  xy: 888, 2
+  size: 37, 23
+  orig: 37, 23
+  offset: 0, 0
+  index: -1
+3_quarter/nose_cone_3qtr
+  rotate: false
+  xy: 1519, 82
+  size: 19, 18
+  orig: 19, 18
+  offset: 0, 0
+  index: -1
+3_quarter/tail_dorsal_wing
+  rotate: true
+  xy: 172, 7
+  size: 30, 23
+  orig: 30, 23
+  offset: 0, 0
+  index: -1
+3_quarter/tail_side_wing
+  rotate: true
+  xy: 1975, 74
+  size: 30, 17
+  orig: 30, 17
+  offset: 0, 0
+  index: -1
+3_quarter/wing_bottom
+  rotate: true
+  xy: 1094, 26
+  size: 88, 52
+  orig: 88, 52
+  offset: 0, 0
+  index: -1
+3_quarter/wing_mid
+  rotate: false
+  xy: 762, 2
+  size: 124, 73
+  orig: 124, 73
+  offset: 0, 0
+  index: -1
+3_quarter/wing_top
+  rotate: false
+  xy: 958, 27
+  size: 134, 87
+  orig: 134, 87
+  offset: 0, 0
+  index: -1
 Damage01/front_circle_big
   rotate: false
-  xy: 1048, 71
+  xy: 1325, 70
   size: 43, 43
   orig: 43, 43
   offset: 0, 0
@@ -20,7 +111,7 @@ Damage01/fuselage
   index: -1
 Damage01/tail
   rotate: true
-  xy: 172, 2
+  xy: 1322, 26
   size: 6, 13
   orig: 6, 13
   offset: 0, 0
@@ -34,14 +125,14 @@ Damage01/tail_dorsal_wing
   index: -1
 Damage01/tail_wing L
   rotate: true
-  xy: 1138, 93
+  xy: 927, 2
   size: 21, 18
   orig: 21, 18
   offset: 0, 0
   index: -1
 Damage01/tail_wing R
   rotate: false
-  xy: 762, 84
+  xy: 1496, 82
   size: 21, 18
   orig: 21, 18
   offset: 0, 0
@@ -173,36 +264,36 @@ Damage01/wing_top_foil_down
   offset: 0, 0
   index: -1
 Default/Bolt
-  rotate: false
-  xy: 370, 46
+  rotate: true
+  xy: 888, 27
   size: 4, 5
   orig: 4, 5
   offset: 0, 0
   index: -1
 Default/Nose cone 2
   rotate: false
-  xy: 1138, 75
+  xy: 1559, 84
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 Default/Rim
-  rotate: true
-  xy: 357, 46
+  rotate: false
+  xy: 951, 97
   size: 5, 11
   orig: 5, 11
   offset: 0, 0
   index: -1
 Default/front_circle_big
   rotate: false
-  xy: 1093, 71
+  xy: 1238, 25
   size: 43, 43
   orig: 43, 43
   offset: 0, 0
   index: -1
 Default/front_circle_medium
   rotate: false
-  xy: 1089, 2
+  xy: 1449, 81
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -215,64 +306,64 @@ Default/fuselage
   offset: 0, 0
   index: -1
 Default/low_wing_bar_L
-  rotate: false
-  xy: 1127, 53
+  rotate: true
+  xy: 640, 35
   size: 9, 16
   orig: 9, 16
   offset: 0, 0
   index: -1
 Default/low_wing_bar_R
   rotate: true
-  xy: 762, 73
+  xy: 1359, 36
   size: 9, 16
   orig: 9, 16
   offset: 0, 0
   index: -1
 Default/nose_cone
   rotate: false
-  xy: 1158, 96
+  xy: 1540, 83
   size: 17, 17
   orig: 17, 17
   offset: 0, 0
   index: -1
 Default/propeller_blur
   rotate: false
-  xy: 958, 26
+  xy: 1148, 25
   size: 88, 88
   orig: 88, 88
   offset: 0, 0
   index: -1
 Default/propeller_move_lines_1
   rotate: false
-  xy: 641, 2
+  xy: 888, 33
   size: 40, 42
   orig: 40, 42
   offset: 0, 0
   index: -1
 Default/propeller_move_lines_2
   rotate: false
-  xy: 1048, 26
+  xy: 1370, 70
   size: 39, 43
   orig: 39, 43
   offset: 0, 0
   index: -1
 Default/single_propeller_1
   rotate: false
-  xy: 1089, 36
+  xy: 1411, 80
   size: 36, 33
   orig: 36, 33
   offset: 0, 0
   index: -1
 Default/single_propeller_2
   rotate: false
-  xy: 1975, 70
+  xy: 1322, 34
   size: 35, 34
   orig: 35, 34
   offset: 0, 0
   index: -1
 Default/tail
   rotate: true
-  xy: 931, 82
+  xy: 931, 78
   size: 6, 13
   orig: 6, 13
   offset: 0, 0
@@ -286,21 +377,21 @@ Default/tail_dorsal_wing
   index: -1
 Default/tail_wing L
   rotate: false
-  xy: 172, 19
+  xy: 1379, 50
   size: 21, 18
   orig: 21, 18
   offset: 0, 0
   index: -1
 Default/tail_wing R
-  rotate: false
-  xy: 931, 90
+  rotate: true
+  xy: 947, 2
   size: 21, 18
   orig: 21, 18
   offset: 0, 0
   index: -1
 Default/top_angle bar
-  rotate: false
-  xy: 1177, 96
+  rotate: true
+  xy: 1577, 87
   size: 13, 17
   orig: 13, 17
   offset: 0, 0
@@ -321,21 +412,21 @@ Default/top_wing_bar_R
   index: -1
 Default/wheel
   rotate: true
-  xy: 172, 10
+  xy: 1411, 71
   size: 7, 17
   orig: 7, 17
   offset: 0, 0
   index: -1
 Default/wheel_arm_L
-  rotate: false
-  xy: 1192, 97
+  rotate: true
+  xy: 1596, 87
   size: 13, 16
   orig: 13, 16
   offset: 0, 0
   index: -1
 Default/wheel_arm_R
-  rotate: false
-  xy: 1207, 97
+  rotate: true
+  xy: 1614, 87
   size: 13, 16
   orig: 13, 16
   offset: 0, 0
