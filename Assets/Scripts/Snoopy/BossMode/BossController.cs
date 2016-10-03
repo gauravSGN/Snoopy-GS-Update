@@ -19,12 +19,14 @@ namespace Snoopy.BossMode
         private string[] damageSkins;
 
         private Skeleton skeleton;
+        private BossTrackFollowAction follower = new BossTrackFollowAction();
 
         public void Start()
         {
             skeleton = GetComponentInChildren<SkeletonAnimator>().skeleton;
 
-            GlobalState.EventService.AddEventHandler<Snoopy.BossMode.SetBossPathEvent>(OnSetBossPath);
+            GlobalState.EventService.AddEventHandler<SetBossHealthEvent>(OnSetBossHealth);
+            GlobalState.EventService.AddEventHandler<SetBossPathEvent>(OnSetBossPath);
 
             SetCurrentSkin();
         }
@@ -41,20 +43,29 @@ namespace Snoopy.BossMode
 
             if (bubbleSnap != null)
             {
+                follower.Stop();
+                transform.rotation = Quaternion.identity;
                 health -= 1;
 
+                GlobalState.EventService.Dispatch(new CullAllBubblesEvent());
                 BubbleReactionEvent.Dispatch(Reaction.ReactionPriority.Cull,
                                              bubbleSnap.GetComponent<BubbleModelBehaviour>().Model);
 
                 bubbleSnap.CompleteSnap();
                 SetCurrentSkin();
+
+                GlobalState.EventService.Dispatch(new DamageBossEvent());
             }
         }
 
-        private void OnSetBossPath(Snoopy.BossMode.SetBossPathEvent gameEvent)
+        private void OnSetBossHealth(SetBossHealthEvent gameEvent)
         {
-            var follower = new BossTrackFollowAction();
+            maxHealth = gameEvent.health;
+            health = Mathf.Min(health, maxHealth);
+        }
 
+        private void OnSetBossPath(SetBossPathEvent gameEvent)
+        {
             follower.Path = gameEvent.path;
             follower.Start();
 

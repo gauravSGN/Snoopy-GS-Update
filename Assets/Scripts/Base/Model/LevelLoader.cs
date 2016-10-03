@@ -31,15 +31,23 @@ public class LevelLoader : MonoBehaviour
         configuration = new LevelConfiguration(LevelData);
         bubbleFactory.Configuration = configuration;
 
-        CreateLevel(LevelData);
+        CreateLevel();
+        CreateGoals();
+
         powerUpController.Setup(LevelData.PowerUpFills);
     }
 
-    private void CreateLevel(LevelData level)
+    public void LoadNextPuzzle()
+    {
+        LevelData.currentPuzzle++;
+        CreateLevel();
+    }
+
+    public void CreateLevel()
     {
         var bubbleMap = new Dictionary<int, GameObject>();
 
-        foreach (var bubble in level.Bubbles)
+        foreach (var bubble in LevelData.Bubbles)
         {
             if (!bubbleFactory.GetDefinitionByType(bubble.Type).EditorOnly)
             {
@@ -62,15 +70,13 @@ public class LevelLoader : MonoBehaviour
         {
             pair.Value.GetComponent<BubbleModelBehaviour>().Model.SortNeighbors();
         }
-
-        CreateGoals(level);
     }
 
-    private static void CreateGoals(LevelData level)
+    private void CreateGoals()
     {
-        level.goals = LevelGoalFactory.GetGoalsForLevel(level);
+        LevelData.goals = LevelGoalFactory.GetGoalsForLevel(LevelData);
 
-        foreach (var goal in level.goals)
+        foreach (var goal in LevelData.goals)
         {
             GlobalState.EventService.Dispatch(new GoalCreatedEvent(goal));
         }

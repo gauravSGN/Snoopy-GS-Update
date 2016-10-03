@@ -356,7 +356,25 @@ Prefab:
       propertyPath: loader
       value: 
       objectReference: {fileID: 1499581533}
-    m_RemovedComponents: []
+    - target: {fileID: 11450880, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: levelAssetPath
+      value: Levels/Testing/BossTest3
+      objectReference: {fileID: 0}
+    - target: {fileID: 191534, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11490304, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11475368, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11490304, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
+    - {fileID: 11475368, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 020adabb2fd5f4910bc30f78699e9379, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1197956594 stripped

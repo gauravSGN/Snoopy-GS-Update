@@ -38,7 +38,6 @@ namespace Snoopy.BossMode
 
         private void OnLevelLoaded()
         {
-            GlobalState.EventService.RemoveEventHandler<LevelLoadedEvent>(OnLevelLoaded);
             GlobalState.EventService.Dispatch(new InputToggleEvent(false));
 
             StartCoroutine(MoveBubbles());
