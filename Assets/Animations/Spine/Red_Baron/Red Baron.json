@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "TQrdTYmMmd9Ttlu7cUPNZj6N2jw", "spine": "3.4.02", "width": 196.08, "height": 88 },
+"skeleton": { "hash": "ZXQBri5fAYEYZ6mn3O01cEXU88Q", "spine": "3.4.02", "width": 196.08, "height": 88 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "BG_REFERENCE_BONE", "parent": "root" },
@@ -6820,7 +6820,342 @@
 			}
 		]
 	},
-	"retreat": {},
+	"retreat01": {
+		"bones": {
+			"propellers_CTRL_SPIN": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.0333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.0666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.1, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.1333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.1666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.2, "angle": 0, "curve": "stepped" },
+					{ "time": 0.2333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.2666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.3, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.3333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.3666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.4, "angle": 0, "curve": "stepped" },
+					{ "time": 0.4333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.4666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.5, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.5333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.5666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.6, "angle": 0, "curve": "stepped" },
+					{ "time": 0.6333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.6666, "angle": 0 }
+				]
+			},
+			"MAIN_CTRL": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": 6.14,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.1666,
+						"angle": -9.67,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.3333,
+						"angle": 3.67,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.5,
+						"angle": -9.44,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.6666, "angle": 6.14 }
+				]
+			}
+		}
+	},
+	"retreat02_front_flying": {
+		"slots": {
+			"propeller blur": {
+				"color": [
+					{ "time": 0, "color": "9e9e9e94" }
+				]
+			},
+			"propeller_move lines_1": {
+				"color": [
+					{ "time": 0, "color": "9e9e9e94" }
+				]
+			},
+			"propeller_move lines_2": {
+				"color": [
+					{ "time": 0, "color": "9e9e9e94" }
+				]
+			},
+			"single Propeller_1": {
+				"color": [
+					{ "time": 0, "color": "9e9e9eff" }
+				]
+			},
+			"single_Propeller_2": {
+				"color": [
+					{ "time": 0, "color": "9e9e9eff" }
+				]
+			}
+		},
+		"bones": {
+			"propellers_CTRL_SPIN": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.0333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.0666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.1, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.1333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.1666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.2, "angle": 0, "curve": "stepped" },
+					{ "time": 0.2333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.2666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.3, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.3333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.3666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.4, "angle": 0, "curve": "stepped" },
+					{ "time": 0.4333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.4666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.5, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.5333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.5666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.6, "angle": 0, "curve": "stepped" },
+					{ "time": 0.6333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.6666, "angle": 0 }
+				]
+			},
+			"MAIN_CTRL": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": 6.14,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.1666,
+						"angle": -4.49,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.3333,
+						"angle": 1.43,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.5,
+						"angle": -4.5,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.6666, "angle": 6.14 }
+				]
+			}
+		}
+	},
+	"retreat03_front_flying": {
+		"slots": {
+			"Bolt": {
+				"color": [
+					{ "time": 0, "color": "262626ff" }
+				]
+			},
+			"Bolt2": {
+				"color": [
+					{ "time": 0, "color": "262626ff" }
+				]
+			},
+			"Rim": {
+				"color": [
+					{ "time": 0, "color": "262626ff" }
+				]
+			},
+			"Rim2": {
+				"color": [
+					{ "time": 0, "color": "262626ff" }
+				]
+			},
+			"nose_cone": {
+				"color": [
+					{ "time": 0, "color": "787878ff" }
+				]
+			},
+			"propeller blur": {
+				"color": [
+					{ "time": 0, "color": "40404094" }
+				]
+			},
+			"propeller_move lines_1": {
+				"color": [
+					{ "time": 0, "color": "40404094" }
+				]
+			},
+			"propeller_move lines_2": {
+				"color": [
+					{ "time": 0, "color": "40404094" }
+				]
+			},
+			"single Propeller_1": {
+				"color": [
+					{ "time": 0, "color": "404040ff" }
+				]
+			},
+			"single_Propeller_2": {
+				"color": [
+					{ "time": 0, "color": "404040ff" }
+				]
+			},
+			"wheel": {
+				"color": [
+					{ "time": 0, "color": "262626ff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "Default/wheel" }
+				]
+			},
+			"wheel2": {
+				"color": [
+					{ "time": 0, "color": "262626ff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "Default/wheel" }
+				]
+			},
+			"wheel_arm_L": {
+				"color": [
+					{ "time": 0, "color": "262626ff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "Default/wheel_arm_L" }
+				]
+			},
+			"wheel_arm_R": {
+				"color": [
+					{ "time": 0, "color": "262626ff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "Default/wheel_arm_R" }
+				]
+			},
+			"wheel_axle": {
+				"color": [
+					{ "time": 0, "color": "262626ff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "Default/wheel_axle" }
+				]
+			}
+		},
+		"bones": {
+			"propellers_CTRL_SPIN": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.0333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.0666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.1, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.1333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.1666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.2, "angle": 0, "curve": "stepped" },
+					{ "time": 0.2333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.2666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.3, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.3333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.3666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.4, "angle": 0, "curve": "stepped" },
+					{ "time": 0.4333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.4666, "angle": 0, "curve": "stepped" },
+					{ "time": 0.5, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.5333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.5666, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.6, "angle": 0, "curve": "stepped" },
+					{ "time": 0.6333, "angle": 27.59, "curve": "stepped" },
+					{ "time": 0.6666, "angle": 0 }
+				]
+			},
+			"MAIN_CTRL": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": 6.14,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.1666,
+						"angle": -9.67,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.3333,
+						"angle": 3.67,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.5,
+						"angle": -9.44,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 0.6666, "angle": 6.14 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.1666, "x": 0, "y": -4.39 },
+					{ "time": 0.3333, "x": 0, "y": 2.01 },
+					{ "time": 0.5, "x": 0, "y": -0.09 },
+					{ "time": 0.6666, "x": 0, "y": 0 }
+				]
+			},
+			"wheel_axle_CTRL": {
+				"rotate": [
+					{ "time": 0, "angle": 8.7 }
+				],
+				"translate": [
+					{ "time": 0, "x": -0.81, "y": -2.25 }
+				]
+			},
+			"wheel_L": {
+				"rotate": [
+					{ "time": 0, "angle": -14.62 }
+				],
+				"translate": [
+					{ "time": 0, "x": -1.41, "y": -6.15 }
+				]
+			},
+			"wheel_R": {
+				"rotate": [
+					{ "time": 0, "angle": 32.45 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0.61, "y": 1.84 }
+				]
+			},
+			"wheel_arm_L_CTRL": {
+				"rotate": [
+					{ "time": 0, "angle": 15.77 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0.78, "y": -1.29 }
+				]
+			}
+		},
+		"drawOrder": [
+			{
+				"time": 0,
+				"offsets": [
+					{ "slot": "WING_top_edge", "offset": 9 },
+					{ "slot": "low_wing_bar_R", "offset": 9 },
+					{ "slot": "low_wing_bar_L", "offset": 9 },
+					{ "slot": "bottom foil", "offset": 16 },
+					{ "slot": "wing_bottom_edge", "offset": 16 },
+					{ "slot": "top_wing_bar_R", "offset": 7 },
+					{ "slot": "top_wing_bar_L", "offset": 7 },
+					{ "slot": "middle foil", "offset": 7 },
+					{ "slot": "wing_middle_edge", "offset": 7 }
+				]
+			}
+		]
+	},
 	"sandbox_NotGamePlay": {
 		"slots": {
 			"WING_top_edge": {
