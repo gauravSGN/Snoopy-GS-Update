@@ -139,6 +139,11 @@ Prefab:
       propertyPath: bubbleContainer
       value: 
       objectReference: {fileID: 1611852004}
+    - target: {fileID: 114000013286956390, guid: a9849b75ebe8e411c890fc091ce43075,
+        type: 2}
+      propertyPath: initialSkinName
+      value: RedBaron_Default
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9849b75ebe8e411c890fc091ce43075, type: 2}
   m_IsPrefabParent: 0
