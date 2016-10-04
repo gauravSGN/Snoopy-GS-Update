@@ -8,14 +8,18 @@ namespace Snoopy.BossMode
 {
     sealed public class BossBubblePlacer : BubblePlacer
     {
+        public event System.Action OnComplete;
+
         [SerializeField]
         private Transform bubbleContainer;
 
         private readonly List<Transform> bubbles = new List<Transform>();
 
-        public void Start()
+        public void SpawnPuzzle()
         {
-            GlobalState.EventService.AddEventHandler<LevelLoadedEvent>(OnLevelLoaded);
+            GlobalState.EventService.Dispatch(new InputToggleEvent(false));
+
+            StartCoroutine(MoveBubbles());
         }
 
         override public GameObject PlaceBubble(BubbleData data)
@@ -36,20 +40,18 @@ namespace Snoopy.BossMode
             return instance;
         }
 
-        private void OnLevelLoaded()
-        {
-            GlobalState.EventService.RemoveEventHandler<LevelLoadedEvent>(OnLevelLoaded);
-            GlobalState.EventService.Dispatch(new InputToggleEvent(false));
-
-            StartCoroutine(MoveBubbles());
-        }
-
         private IEnumerator MoveBubbles()
         {
             var releaseRate = 3.0f / bubbles.Count;
             var timer = 0.0f;
             var active = 0;
             var complete = 0;
+            var position = transform.position;
+
+            foreach (var bubble in bubbles)
+            {
+                bubble.position = position;
+            }
 
             bubbles.Sort((a, b) => b.localPosition.sqrMagnitude.CompareTo(a.localPosition.sqrMagnitude));
 
@@ -84,6 +86,11 @@ namespace Snoopy.BossMode
                 }
 
                 yield return null;
+            }
+
+            if (OnComplete != null)
+            {
+                OnComplete();
             }
 
             GlobalState.EventService.Dispatch(new LevelIntroCompleteEvent());

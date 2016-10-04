@@ -77,10 +77,12 @@ public class Level : MonoBehaviour
             }
         }
 
-        GlobalState.EventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
-        GlobalState.EventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
-        GlobalState.EventService.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
-        GlobalState.EventService.AddEventHandler<AddLevelModifierEvent>(e => AddModifier(e.type, e.data));
+        var eventService = GlobalState.EventService;
+        eventService.AddEventHandler<BubbleFiredEvent>(OnBubbleFired);
+        eventService.AddEventHandler<BubbleDestroyedEvent>(OnBubbleDestroyed);
+        eventService.AddEventHandler<GoalCompleteEvent>(OnGoalComplete);
+        eventService.AddEventHandler<AddLevelModifierEvent>(e => AddModifier(e.type, e.data));
+        eventService.AddEventHandler<Snoopy.BossMode.StartNextPuzzleEvent>(OnStartNextPuzzle);
 
         GlobalState.AssetService.OnComplete += OnAssetLoadingComplete;
 
@@ -121,6 +123,12 @@ public class Level : MonoBehaviour
         }
 
         AllGoalsCompleted = true;
+    }
+
+    private void OnStartNextPuzzle()
+    {
+        loader.LoadNextPuzzle();
+        GlobalState.EventService.Dispatch(new LevelLoadedEvent());
     }
 
     private void AddModifier(LevelModifierType type, string data)
