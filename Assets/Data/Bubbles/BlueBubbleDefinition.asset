@@ -18,6 +18,7 @@ MonoBehaviour:
   prefab: {fileID: 152662, guid: 73a2070f6e6234e77a1b8d4e1a66e674, type: 2}
   actsAsRoot: 0
   activatible: 1
+  editorOnly: 0
   score: 10
   matchThreshold: 3
   defaultAnimations:
@@ -30,3 +31,5 @@ MonoBehaviour:
     match: {fileID: 8300000, guid: 90cd326fee7c14d079de04ee1a608787, type: 3}
     cull: {fileID: 8300000, guid: fd86216e4e27d466ba5267b69d216944, type: 3}
     bounce: {fileID: 8300000, guid: 083fdf7d2aabf40299e7650194c08ee5, type: 3}
+  anchorOverlayPrefab: {fileID: 1000012680095546, guid: a6db6557e5fba42a4a4b9586918af220,
+    type: 2}

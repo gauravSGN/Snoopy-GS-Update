@@ -18,7 +18,7 @@ namespace Modifiers
         private readonly List<WoodstockEventHandler> targets = new List<WoodstockEventHandler>();
 
         override public BubbleModifierType ModifierType { get { return BubbleModifierType.RescueTarget; } }
-        override public string SpriteName { get { return "RescueTarget"; } }
+        override public string SpriteName { get { return "RescueTarget Modifier"; } }
 
         override protected void ModifyGameObject(GameObject target, BubbleData.ModifierData data)
         {
