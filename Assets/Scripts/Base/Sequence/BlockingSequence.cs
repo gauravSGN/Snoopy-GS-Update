@@ -32,8 +32,8 @@ namespace Sequence
             if (pending.Remove(gameEvent.item) && (pending.Count == 0))
             {
                 GlobalState.EventService.RemoveEventHandler<SequenceItemCompleteEvent>(OnItemComplete);
-                blockadeService.Remove(this);
                 Complete();
+                blockadeService.Remove(this);
             }
         }
     }
