@@ -64,6 +64,7 @@ public class BubbleExplode : MonoBehaviour
             {
                 var model = bubble.GetComponent<BubbleModelBehaviour>().Model;
 
+                // Check against gameObject is to ensure power ups can explode even when they exit the active area
                 if (model.Active || (bubble == gameObject))
                 {
                     bubbles = bubbles ?? new List<Bubble>();
