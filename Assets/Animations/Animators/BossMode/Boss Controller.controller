@@ -32,7 +32,19 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: MaxHealth
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: Health
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: DamageLevel
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -62,6 +74,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a50b58effe404d5da7f7f5fccba6d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageSkins:
+  - RedBaron_Default
+  - RedBaron_Damage01
+  - RedBaron_Damage02
+  - RedBaron_Damage03
+  - RedBaron_Defeat
 --- !u!114 &114000010243689866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,17 +111,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 129a98584df1e4618ae6399b044c20af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114000013451053690
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ec3e3733954a480eb61a2597de8ac28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1101 &1101000010126118822
@@ -196,8 +203,8 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.9
-  m_HasExitTime: 0
+  m_ExitTime: 1.033
+  m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -261,8 +268,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101000010126118822}
-  m_StateMachineBehaviours:
-  - {fileID: 114000013451053690}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -281,7 +287,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Die
+  m_Name: Halt
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -424,7 +430,7 @@ AnimatorStateMachine:
     m_Position: {x: 492, y: 288, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102000010567427228}
-    m_Position: {x: 744, y: 168, z: 0}
+    m_Position: {x: 492, y: 372, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

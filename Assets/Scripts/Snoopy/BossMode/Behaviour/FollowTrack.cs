@@ -19,6 +19,14 @@ namespace Snoopy.BossMode.Behaviour
             timer = 0.0f;
         }
 
+        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            animator.transform.rotation = Quaternion.identity;
+
+            bankAngle = 0.0f;
+            bankTarget = 0.0f;
+        }
+
         public override void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             var config = GlobalState.Instance.Config.boss;
