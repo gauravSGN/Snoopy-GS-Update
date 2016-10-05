@@ -55,7 +55,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   skeletonDataAsset: {fileID: 11400000, guid: 6f140cfddda8f4ffea4919252a1a28d4, type: 2}
-  initialSkinName: default
+  initialSkinName: Snoopy_Default
   startingAnimation: snoopy_map_idle
   startingLoop: 1
   timeScale: 1
@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd40bb1d7cb844a49ac5bb8d2fbdb44b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yPadding: 4
   travelTime: 1.5
   easeCurve:
     serializedVersion: 2
