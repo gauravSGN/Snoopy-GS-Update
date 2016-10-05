@@ -20,7 +20,7 @@ namespace Modifiers
             if (overlayPrefab != null)
             {
                 var overlay = GameObject.Instantiate(overlayPrefab, target.transform) as GameObject;
-                overlay.transform.parent.GetComponent<BubbleDeath>().DeactivateObjectOnDeath(overlay);
+                target.GetComponent<BubbleDeath>().DeactivateObjectOnDeath(overlay);
             }
         }
     }
