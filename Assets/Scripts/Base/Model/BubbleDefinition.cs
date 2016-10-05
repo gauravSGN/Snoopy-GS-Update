@@ -16,6 +16,7 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
     public int Score { get { return score; } }
     public int MatchThreshold { get { return matchThreshold; } }
     public BubbleSounds Sounds { get { return sounds; } }
+    public GameObject AnchorOverlayPrefab { get { return anchorOverlayPrefab; } }
 
     public Dictionary<BubbleDeathType, List<AnimationType>> AnimationMap
     {
@@ -86,6 +87,9 @@ public class BubbleDefinition : ScriptableObject, GameObjectDefinition<BubbleTyp
 
     [SerializeField]
     private BubbleSounds sounds;
+
+    [SerializeField]
+    private GameObject anchorOverlayPrefab;
 
     private Dictionary<BubbleDeathType, List<AnimationType>> animationMap;
 }

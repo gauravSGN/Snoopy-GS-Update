@@ -32,7 +32,6 @@ namespace Modifiers
 
             var rectTransform = sprite.GetComponent<RectTransform>();
             rectTransform.sizeDelta = target.GetComponent<RectTransform>().sizeDelta;
-
         }
 
         // Is there a better home for this method?
