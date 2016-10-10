@@ -8,3 +8,4 @@ obj
 *build*
 *.vscode/*
 gsFileStore.json
+.DS_Store
