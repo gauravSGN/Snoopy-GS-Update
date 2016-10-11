@@ -15,17 +15,15 @@ namespace Config
 
         public static GSDescriptor CreateByPlatform(RuntimePlatform platform, TextAsset source)
         {
-			// We need to override our platform if we are using the editor
+            // We need to override our platform if we are using the editor
 #if UNITY_EDITOR && UNITY_ANDROID
-                platform = RuntimePlatform.Android;
+            platform = RuntimePlatform.Android;
 #elif UNITY_EDITOR && UNITY_IOS
-                platform = RuntimePlatform.IPhonePlayer;
-#elif UNITY_EDITOR && UNITY_STANDALONE_WIN
-				platform = RuntimePlatform.WindowsPlayer;
+            platform = RuntimePlatform.IPhonePlayer;
 #elif UNITY_STANDALONE_WIN
-				platform = RuntimePlatform.WindowsPlayer;
+            platform = RuntimePlatform.WindowsPlayer;
 #endif
-			return (GSDescriptor)Activator.CreateInstance(platformClassMap[platform], new System.Object[] { source });
+            return (GSDescriptor)Activator.CreateInstance(platformClassMap[platform], new System.Object[] { source });
         }
     }
 }
